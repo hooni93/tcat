@@ -44,96 +44,108 @@ public class HostDAOImp implements HostDAO {
 	}
 	//////////////////////////////////////18.01.11 명훈//////////////////////////////////////////////////
 	
-	/////////////////////////////////// 태성 1/9 start /////////////////////////////////////////
-	// 카테고리별 상품개수
-	@Override
-	public int getCate(String category) {
-	
-	int cnt = 0;
-	System.out.println("ServiceImpl - category:" + category);
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	cnt = dao.getCate(category);
-	
-	return cnt;
-	}
-	
-	// 스토어 상품 개수
-	@Override
-	public int getStore(String category) {
-	
-	int cnt = 0;
-	System.out.println("ServiceImpl - category:" + category);
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	cnt = dao.getStore(category);
-	
-	return cnt;
-	}
-	
-	@Override
-	public int getArticleCnt(String Hcnt) {
-	int cnt = 0;
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	cnt = dao.getStore(Hcnt);
-	return cnt;
-	}
-	
-	// 카테고리별 출력문
-	public ArrayList<TcatPerformanceVO> musiList(Map<String, Object> map) {
-	ArrayList<TcatPerformanceVO> dtos = null; // 큰 바구니
-	
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	dtos = dao.musiList(map);
-	
-	return dtos;
-	}
-	
-	// 스토어 출력문
-	public ArrayList<TcatPerformanceVO> storeList(Map<String, Object> map) {
-	ArrayList<TcatPerformanceVO> dtos = null; // 큰 바구니
-	
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	dtos = dao.storeList(map);
-	
-	return dtos;
-	}
-	
-	// 상품 진열
-	@Override
-	public ArrayList<TcatPerformanceVO> getArticleList(Map<String, Object> map) {
-	ArrayList<TcatPerformanceVO> dtos = null; // 큰 바구니
-	String Hcnt =(String)map.get("Hcnt");
-	map.put("s", Hcnt);
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	dtos = dao.storeList(map);
-	return dtos;
-	}
-	/////////////////////////////////// 태성 1/9 end /////////////////////////////////////////
-	
-	/////////////////////////////////// 태성 1/10 start /////////////////////////////////////////
-	// 우선순위 수정(스토어제외)
-	@Override
-	public int Cfirst_grade(Map<String, String > map) {
-	int cnt=0;
-	
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	cnt = dao.Cfirst_grade(map);
-	
-	return cnt;
-	}
-	// 우선순위 수정(스토어만)
-	@Override
-	public int Sfirst_grade(Map<String, String > map) {
-	int scnt = 0;
-	
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	scnt = dao.Sfirst_grade(map);
-	
-	return scnt;
-	}
-	/////////////////////////////////// 태성 1/10 end /////////////////////////////////////////
-	
-	////////////////////////////////////현석 1/11  //////////////////////////////////////////
+/////////////////////////////////// 태성 1/9 start /////////////////////////////////////////
+// 카테고리별 상품개수
+@Override
+public int getCate(String category) {
 
+int cnt = 0;
+System.out.println("ServiceImpl - category:" + category);
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.getCate(category);
+
+return cnt;
+}
+
+// 스토어 상품 개수
+@Override
+public int getStore(String category) {
+
+int cnt = 0;
+System.out.println("ServiceImpl - category:" + category);
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.getStore(category);
+
+return cnt;
+}
+
+@Override
+public int getArticleCnt(String Hcnt) {
+int cnt = 0;
+System.out.println("!!Hcnt --->"+Hcnt);
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+if(Hcnt.equals("store")) {
+System.out.println("!!Hcnt222 --->"+Hcnt);
+cnt = dao.getStore(Hcnt);	
+
+}else {
+System.out.println("!!Hcnt --->"+Hcnt);
+cnt = dao.getCate(Hcnt);
+}	
+return cnt;
+}
+
+// 카테고리별 출력문
+public ArrayList<TcatPerformanceVO> musiList(Map<String, Object> map) {
+ArrayList<TcatPerformanceVO> dtos = null; // 큰 바구니
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+dtos = dao.musiList(map);
+
+return dtos;
+}
+
+// 스토어 출력문
+public ArrayList<TcatPerformanceVO> storeList(Map<String, Object> map) {
+ArrayList<TcatPerformanceVO> dtos = null; // 큰 바구니
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+dtos = dao.storeList(map);
+
+return dtos;
+}
+
+// 상품 진열
+@Override
+public ArrayList<TcatPerformanceVO> getArticleList(Map<String, Object> map) {
+ArrayList<TcatPerformanceVO> dtos = null; // 큰 바구니
+String Hcnt =(String)map.get("Hcnt");
+System.out.println("Hcnt : _____"+Hcnt);
+map.put("s", Hcnt);
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+if(Hcnt.equals("store")) {
+dtos = dao.storeList(map);	
+}else {
+dtos = dao.musiList(map);
+}	
+return dtos;
+}
+/////////////////////////////////// 태성 1/9 end /////////////////////////////////////////
+
+/////////////////////////////////// 태성 1/10 start /////////////////////////////////////////
+// 우선순위 수정(스토어제외)
+@Override
+public int Cfirst_grade(Map<String, String > map) {
+int cnt=0;
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.Cfirst_grade(map);
+
+return cnt;
+}
+// 우선순위 수정(스토어만)
+@Override
+public int Sfirst_grade(Map<String, String > map) {
+
+int scnt = 0;
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+scnt = dao.Sfirst_grade(map);
+
+return scnt;
+}
+/////////////////////////////////// 태성 1/10 end /////////////////////////////////////////
+
+	////////////////////////////////////현석 1/11  //////////////////////////////////////////
+	
 	@Override
 	public int performanceCnt() {
 		int cnt=0;
@@ -143,7 +155,7 @@ public class HostDAOImp implements HostDAO {
 		
 		return cnt;
 	}
-
+	
 	@Override
 	public ArrayList<TcatPerformanceVO> performanceList(Map<String, Integer> map) {
 		ArrayList<TcatPerformanceVO> dtos=null;
@@ -151,19 +163,19 @@ public class HostDAOImp implements HostDAO {
 		dtos=dao.performanceList(map);
 		return dtos;
 	}
-
+	
 	@Override
 	public void insertPerformance(Map<String,Object> map) {
 		HostDAO dao=Configuration.getMapper(HostDAO.class);
 		dao.insertPerformance(map);
 	}
-
+	
 	@Override
 	public void insertRemainingSeat(Map<String,Object> map) {
 		HostDAO dao=Configuration.getMapper(HostDAO.class);
 		dao.insertRemainingSeat(map);
 	}
-
+	
 	@Override
 	public int selectPer_id() {
 		int per_id=0;
@@ -171,7 +183,7 @@ public class HostDAOImp implements HostDAO {
 		per_id=dao.selectPer_id();
 		return per_id;
 	}
-
+	
 	@Override
 	public int perDiscCnt() {
 		int cnt=-0;
@@ -179,7 +191,7 @@ public class HostDAOImp implements HostDAO {
 		cnt=dao.perDiscCnt();
 		return cnt;
 	}
-
+	
 	@Override
 	public ArrayList<TcatPerDiscVO> perDiscList(Map<String,Object> map) {
 		ArrayList<TcatPerDiscVO> desc=null;
@@ -187,7 +199,7 @@ public class HostDAOImp implements HostDAO {
 		desc=dao.perDiscList(map);
 		return desc;
 	}
-
+	
 	@Override
 	public void insertStore(TcatPerDiscVO dto) {
 		HostDAO dao=Configuration.getMapper(HostDAO.class);

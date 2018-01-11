@@ -78,14 +78,14 @@
    <!-- 18.01.11 명훈 수정끝 -->
    
    
-      <!-- 18.01.11 태성 수정  -->
+<!-- 18.01.11 태성 수정  -->
    
    <!-- 상품 개수(스토어 제외) -->
 	 <select id="getCate" resultType="int" parameterType="String">
 		select count(*) from
 		performanceInfo per,category ca
 		where per.CATENUM=ca.CATENUM and
-		MDEV=#{category}
+		MDEV=#{Hcnt}
 	</select>
 	
 	<!-- 상품 개수(스토어만) -->
@@ -93,7 +93,7 @@
 		select count(*)
 		from perDisc perdi, category ca
 		where perdi.CATENUM=ca.CATENUM and 
-		category=#{category}
+		category=#{Hcnt}
 	</select>
 	
 	<!-- 상품 진열(스토어제외) -->
@@ -136,7 +136,7 @@
    
     <!-- 18.01.11 태성 수정끝  -->
    
-      <!-- 18.01.11 현석 수정  -->
+ <!-- 18.01.11 현석 수정  -->
       <select id="performanceCnt" resultType="int">
 			select count(*) 
 			from
@@ -158,7 +158,8 @@
 			           s.SALE_RATE,pe.DETAIL_NUM,pe.STARTDATE,pe.ENDDATE,pe.place_num,pla.PROVINCE,pla.CITY,
 			           pla.gu,pla.address,pe.first_grade,pe.per_step,rownum rNum
 			    from performanceInfo pe, place pla, category ca,sale s
-			    where pe.place_num = pla.place_num and pe.CATENUM = ca.CATENUM and pe.sale_div=s.SALE_DIV
+			    where pe.place_num = pla.place_num and pe.CATENUM = ca.CATENUM and pe.sale_div=s.SALE_DIV and pe.per_step!='3' and  pe.per_step!='4'
+                order by pe.per_id desc
 			)
 			where rNum>=#{start} and rNum <=#{end}
 		]]>
@@ -170,7 +171,7 @@
 		</insert>
 		
 		<insert id="insertRemainingSeat" parameterType="java.util.Map">
-			insert into RemainingSeatInfo(remain_num,per_id,remain_seat,perDate)
+			insert into RemainingSeatInfo(remain_num,per_id,remain_round,remain_seat,perDate)
 			values(RemainingSeatInfo_SEQ.NEXTVAL,#{per_id},#{remain_round},#{remain_seat},#{date})
 		</insert>
 		
@@ -179,7 +180,13 @@
 		</select>
 		
 		<select id="perDiscCnt" resultType="int">
-			select count(*) from perDisc
+			select count(*) 
+			from(
+				select p.disc_code,p.disc_title,p.disc_price,p.disc_image,p.disc_con,s.sale_div,s.sale_rate,
+						c.cateNum,c.category,c.mDev,c.sDev,p.first_grade,p.disc_step
+				from perDisc p,sale s,category c
+				where p.sale_div=s.sale_div and p.cateNum=c.cateNum and p.disc_step!='3' and p.disc_step!='4'
+			)
 		</select>
 		
 		<select id="perDiscList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerDiscVO">
@@ -189,7 +196,7 @@
 				select p.disc_code,p.disc_title,p.disc_price,p.disc_image,p.disc_con,s.sale_div,s.sale_rate,
 						c.cateNum,c.category,c.mDev,c.sDev,p.first_grade,p.disc_step,rownum rNum
 				from perDisc p,sale s,category c
-				where p.sale_div=s.sale_div and p.cateNum=c.cateNum
+				where p.sale_div=s.sale_div and p.cateNum=c.cateNum and p.disc_step!='3' and p.disc_step!='4'
 			)
 			where rNum>=#{start} and rNum <=#{end}
 			]]>

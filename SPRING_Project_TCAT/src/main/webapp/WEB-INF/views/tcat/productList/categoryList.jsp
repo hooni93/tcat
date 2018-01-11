@@ -24,7 +24,7 @@
 			onclick="productGet('categoryList','콘서트');">콘서트</button>
 		
 		<button type="button" class="btn btn-warning"
-			onclick="productGet('categoryList','스토어');">스토어</button>
+			onclick="productGet('categoryList','store');">스토어</button>
 		
 	</div>
 <br>
@@ -34,7 +34,7 @@
 	class="warning" --연노란색
 	class="danger" --빨간색(다홍색) -->
 
-	<c:if test="${Hcnt==1}">
+	<c:if test="${category=='뮤지컬'}">
 		<!-- 뮤지컬 -->
 		   <div class="row">
       <div class="col-md-1"></div>
@@ -59,12 +59,13 @@
 							<td>${dto.enddate}</td>
 							<td>${dto.place_num}</td>
 							<td>${dto.category}</td>
-							<td><select class="input" name="first_grade" onchange="Cfirst_grade('Cfirst_grade','${Hcnt}','${dto.per_id}',this.value)">
+							<td><select class="input" name="first_grade" onchange="Cfirst_grade('Cfirst_grade','${category}','${dto.per_id}',this.value)">
 								<option value="0">${dto.first_grade}</option>
 								<option value="first_grade 01">first_grade 01</option>
 								<option value="first_grade 02">first_grade 02</option>
 								<option value="first_grade 03">first_grade 03</option>
 								<option value="first_grade 04">first_grade 04</option>
+								<option value="first_grade 05">first_grade 05</option>
 							</select>
 							
 					</td>
@@ -75,6 +76,7 @@
       </div>
       <div class="col-md-1"></div>
    </div>
+   
    <!-- 페이지 컨트롤 -->
 		<table style="width: 1000px" align="center">
 			<tr>
@@ -110,7 +112,7 @@
 	class="success" --풀색(연두색)
 	class="warning" --연노란색
 	class="danger" --빨간색(다홍색) -->
-	<c:if test="${Hcnt==2}">
+	<c:if test="${category=='연극'}">
 		<!-- 연극 -->
 		   <div class="row">
       <div class="col-md-1"></div>
@@ -136,12 +138,13 @@
 							<td>${dto.enddate}</td>
 							<td>${dto.place_num}</td>
 							<td>${dto.category}</td>
-							<td><select class="input" name="first_grade" onchange="Cfirst_grade('Cfirst_grade','${Hcnt}','${dto.per_id}',this.value)">
+							<td><select class="input" name="first_grade" onchange="Cfirst_grade('Cfirst_grade','${category}','${dto.per_id}',this.value)">
 								<option value="0">${dto.first_grade}</option>
 								<option value="first_grade 01">first_grade 01</option>
 								<option value="first_grade 02">first_grade 02</option>
 								<option value="first_grade 03">first_grade 03</option>
 								<option value="first_grade 04">first_grade 04</option>
+								<option value="first_grade 05">first_grade 05</option>
 							</select>
 					</td>
 					</tr>     
@@ -185,7 +188,7 @@
 	class="success" --풀색(연두색)
 	class="warning" --연노란색
 	class="danger" --빨간색(다홍색) -->
-	<c:if test="${Hcnt==3}">
+	<c:if test="${category=='콘서트'}">
 		<!-- 콘서트 -->
 		   <div class="row">
       <div class="col-md-1"></div>
@@ -210,12 +213,13 @@
 							<td>${dto.enddate}</td>
 							<td>${dto.place_num}</td>
 							<td>${dto.category}</td>
-							<td><select class="input" name="first_grade" onchange="Cfirst_grade('Cfirst_grade','${Hcnt}','${dto.per_id}',this.value)">
+							<td><select class="input" name="first_grade" onchange="Cfirst_grade('Cfirst_grade','${category}','${dto.per_id}',this.value)">
 								<option value="0">${dto.first_grade}</option>
 								<option value="first_grade 01">first_grade 01</option>
 								<option value="first_grade 02">first_grade 02</option>
 								<option value="first_grade 03">first_grade 03</option>
 								<option value="first_grade 04">first_grade 04</option>
+								<option value="first_grade 05">first_grade 05</option>
 							</select>
 					</td>
 					</tr>     
@@ -259,7 +263,7 @@
 	class="success" --풀색(연두색)
 	class="warning" --연노란색
 	class="danger" --빨간색(다홍색) -->
-	<c:if test="${Hcnt==4}">
+	<c:if test="${category=='store'}">
 		<!-- 스토어 -->
 	   <div class="row">
       <div class="col-md-1"></div>
@@ -280,12 +284,13 @@
 							<td>${dto.disc_title}</td>
 							<td>${dto.disc_price}</td>
 							<td>${dto.cateNum}</td>
-							<td><select class="input" name="first_grade" onchange="Sfirst_grade('Sfirst_grade','${Hcnt}','${dto.disc_code}',this.value)">
+							<td><select class="input" name="first_grade" onchange="Sfirst_grade('Sfirst_grade','${category}','${dto.disc_code}',this.value)">
 								<option value="0">${dto.first_grade}</option>
 								<option value="first_grade 01">first_grade 01</option>
 								<option value="first_grade 02">first_grade 02</option>
 								<option value="first_grade 03">first_grade 03</option>
 								<option value="first_grade 04">first_grade 04</option>
+								<option value="first_grade 05">first_grade 05</option>
 							</select>
 					</td>
 					</tr>     

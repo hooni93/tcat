@@ -128,58 +128,58 @@ return "tcat/productList/productList_side";
 	}
 	//////////////////////////////////// 태성 1/10 end/ /////////////////////////////////////////
 	
-	////////////////////////////////////현석 1/11 / /////////////////////////////////////////
+////////////////////////////////////현석 1/11 / /////////////////////////////////////////
 	
-	@RequestMapping("registItem")
-	public String registItem(HttpServletRequest req,Model model) {
-		System.out.println("registItem");
-		
-		//공연정보 목록 가져오기
-		hService.performanceList(req, model);
-		
-		return "tcat/registItem/registItem";
-	}
-	
-	@RequestMapping("insertPerformance")
-	public String insertPerformance(MultipartHttpServletRequest req,Model model) {
-		System.out.println("insertPerformance");
-		
-		hService.performanceInsert(req,model);
-		//공연정보 목록 가져오기
-		hService.performanceList(req, model);
-		
-		return "tcat/registItem/registItem";
-	}
-	
-	@RequestMapping("remain_round")
-	public String remain_round(HttpServletRequest req,Model model) {
-		System.out.println("remain_round");
-		
-		return "tcat/registItem/remain_round";
-	}
-	
-	@RequestMapping("storeItem")
-	public String storeItem(HttpServletRequest req,Model model) {
-		System.out.println("storeItem");
-		
-		req.setAttribute("item", 1);
-		hService.storeList(req,model);
-		
-		return "tcat/registItem/registItem";
-	}
-	
-	@RequestMapping("insertStore")
-	public String insertStore(MultipartHttpServletRequest req,Model model) {
-		System.out.println("insertStore");
-		
-		req.setAttribute("item", 1);
-		hService.insertStore(req,model);
-		hService.storeList(req,model);
-		
-		return "tcat/registItem/registItem";
-	}
-	
-	
+@RequestMapping("registItem")
+public String registItem(HttpServletRequest req,Model model) {
+System.out.println("registItem");
+
+//공연정보 목록 가져오기
+hService.performanceList(req, model);
+
+return "tcat/registItem/registItem";
+}
+
+@RequestMapping("insertPerformance")
+public String insertPerformance(MultipartHttpServletRequest req,Model model) {
+System.out.println("insertPerformance");
+
+hService.performanceInsert(req,model);
+//공연정보 목록 가져오기
+hService.performanceList(req, model);
+
+return "tcat/registItem/registItem";
+}
+
+@RequestMapping("remain_round")
+public String remain_round(HttpServletRequest req,Model model) {
+System.out.println("remain_round");
+
+return "tcat/registItem/remain_round";
+}
+
+@RequestMapping("storeItem")
+public String storeItem(HttpServletRequest req,Model model) {
+System.out.println("storeItem");
+
+req.setAttribute("item", 1);
+hService.storeList(req,model);
+
+return "tcat/registItem/registItem";
+}
+
+@RequestMapping("insertStore")
+public String insertStore(MultipartHttpServletRequest req,Model model) {
+System.out.println("insertStore");
+
+req.setAttribute("item", 1);
+hService.insertStore(req,model);
+hService.storeList(req,model);
+
+return "tcat/registItem/registItem";
+}
+
+
 ////////////////////////////////////현석 1/11  end/ /////////////////////////////////////////
 	
 ////////////////////// HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민 ////////////////////////

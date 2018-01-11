@@ -11,11 +11,11 @@
 <link href="${css}style.css" rel="stylesheet" type="text/css">
  <link href="${css}bootstrap_tcatMain.css" rel="stylesheet">
 <script src="${script}ajax/request.js"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="${script}jquery-3.1.1.min.js"></script>
 <script src="${script}bootstrap.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="${script}jquery-1.12.4.js"></script>
+<script src="${script}jquery-ui.js"></script>
+<link rel="stylesheet" href="${css}jquery-ui.css">
 <script>
 /* 0111 현석 */
 $( function() {
@@ -31,6 +31,9 @@ function round(){
  }
 /* 0111 현석끝 */
 <!-------------------------------------180111 장명훈-------------------------------------------------------->
+
+
+
 function productGet(url,category,search,mDev,sDev,pageNum){
 	var param="category="+category;
 	if(search){
@@ -49,21 +52,20 @@ function productGet(url,category,search,mDev,sDev,pageNum){
 }
 
 //ajax
-function ajaxSubmit(){	/*AJAX submit  */
-	
-	var result = document.getElementById("result");
-	var formData = $("#ajaxSubmitForm").serialize();
-	$.ajax({
-					type : "POST",
-					url : "productList",
-					cache : false,
-					data : formData,
-					success :  function(msg) {
-						$('#result').html(msg);  
-					}, 
-					error : onError
-	});
-	function onError(data, status){alert("error");}
+function ajaxSubmit(url){   /*AJAX submit  */
+   var result = document.getElementById("result");
+   var formData = $("#ajaxSubmitForm").serialize();
+   $.ajax({
+               type : "POST",
+               url : url,
+               cache : false,
+               data : formData,
+               success :  function(msg) {
+                  $('#result').html(msg);  
+               }, 
+               error : onError
+   });
+   function onError(data, status){alert("error");}
 }
 
 /*동적 리스트  */
@@ -118,7 +120,6 @@ function categoryload(url,Hcnt){
 	var params="Hcnt="+Hcnt;
  	sendRequest(category_callback,url,"GET",params); 
 }
-
 function categoryload0(url,Hcnt,pageNum){
 	var params="Hcnt="+Hcnt+"&pageNum="+pageNum;
  	sendRequest(category_callback,url,"GET",params); 
@@ -126,12 +127,12 @@ function categoryload0(url,Hcnt,pageNum){
 /////////////////////////////////// 태성 1/09 end /////////////////////////////////////////
 
 /////////////////////////////////// 태성 1/10 start /////////////////////////////////////////
-function Cfirst_grade(url,Hcnt,id,first_grade){
-	var params="id="+id+"&Hcnt="+Hcnt+"&first_grade="+first_grade;
+function Cfirst_grade(url,category,id,first_grade){
+	var params="id="+id+"&category="+category+"&first_grade="+first_grade;
  	sendRequest(category_callback,url,"GET",params);
  }
-function Sfirst_grade(url,Hcnt,disc_code,first_grade){
-	var params="disc_code="+disc_code+"&Hcnt="+Hcnt+"&first_grade="+first_grade;
+function Sfirst_grade(url,category,disc_code,first_grade){
+	var params="disc_code="+disc_code+"&category="+category+"&first_grade="+first_grade;
  	sendRequest(category_callback,url,"GET",params);  
 }
 function category_callback(){
