@@ -255,6 +255,13 @@ function productGet(url,category,search,mDev,sDev,pageNum){
           </ul>
         </li>
         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">공연/지역 관리<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">공연장 관리</a></li>
+            <li><a href="#">지역 관리</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">게시판관리<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">공지사항 게시판관리</a></li>
