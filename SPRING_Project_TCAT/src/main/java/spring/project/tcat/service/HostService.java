@@ -27,10 +27,10 @@ public interface HostService {
 	public void performanceList(HttpServletRequest req,Model model);
 	//공연정보 추가
 	public void performanceInsert(MultipartHttpServletRequest req,Model model);
-	/*//스토어 리스트 가져오기
+	//스토어 리스트 가져오기
 	public void storeList(HttpServletRequest req,Model model);
 	//스토어 재고 추가
-	public void insertStore (MultipartHttpServletRequest req,Model model);*/
+	public void insertStore (MultipartHttpServletRequest req,Model model);
 	////////////////////////////////////현석 1/11 end //////////////////////////////////////////
 	
 	/*  HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  */

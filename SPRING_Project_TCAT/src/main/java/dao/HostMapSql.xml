@@ -138,7 +138,15 @@
    
       <!-- 18.01.11 현석 수정  -->
       <select id="performanceCnt" resultType="int">
-			select count(*) from performanceInfo
+			select count(*) 
+			from
+			(
+			    select pe.PER_ID,pe.PERF_TITLE,ca.CATENUM,ca.CATEGORY,ca.mDev,ca.sdev,pe.perf_image,s.sale_div,
+			           s.SALE_RATE,pe.DETAIL_NUM,pe.STARTDATE,pe.ENDDATE,pe.place_num,pla.PROVINCE,pla.CITY,
+			           pla.gu,pla.address,pe.first_grade,pe.per_step,rownum rNum
+			    from performanceInfo pe, place pla, category ca,sale s
+			    where pe.place_num = pla.place_num and pe.CATENUM = ca.CATENUM and pe.sale_div=s.SALE_DIV
+			)
 		</select>
 	
 		<select id="performanceList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerformanceVO">
@@ -158,7 +166,7 @@
 		
 		<insert id="insertPerformance" parameterType="java.util.Map">
 			insert into performanceInfo(per_id,perf_title,catenum,perf_image,sale_div,detail_num,startdate,enddate,place_num,first_grade,per_step)
-			values(performanceInfo_SEQ.NEXTVAL,#{perf_title},#{category},#{perf_Image},${sale},DetailPage_SEQ.NEXTVAL,#{startDate},#{endDate},#{place},#{first_grade},#{per_step})
+			values(performanceInfo_SEQ.NEXTVAL,#{perf_title},#{category},#{perf_Image},#{sale},DetailPage_SEQ.NEXTVAL,#{startDate},#{endDate},#{place},#{first_grade},#{per_step})
 		</insert>
 		
 		<insert id="insertRemainingSeat" parameterType="java.util.Map">
@@ -170,7 +178,7 @@
 			select max(per_id) from performanceInfo
 		</select>
 		
-		<!-- <select id="perDiscCnt" resultType="int">
+		<select id="perDiscCnt" resultType="int">
 			select count(*) from perDisc
 		</select>
 		
@@ -190,11 +198,11 @@
 		<insert id="insertStore" parameterType="spring.project.tcat.VO.TcatPerDiscVO">
 			insert into perDisc(disc_code,disc_title,disc_price,disc_image,disc_con,sale_div,cateNum,first_grade,disc_step)
 			values(#{disc_code},#{disc_title},#{disc_price},#{disc_image},#{disc_con},#{sale_div},#{cateNum},#{first_grade},#{disc_step})
-		</insert> -->
+		</insert>
       <!-- 18.01.11 현석 수정 끝  -->
       
          <!-- 18.01.11 영민 수정  -->
- 	 <resultMap id="1234" type="spring.project.tcat.VO.TcatPerformanceVO">						
+ 	 <resultMap id="hotListMap" type="spring.project.tcat.VO.TcatPerformanceVO">						
 	   	<id property="per_id" column="per_id"/>
 	   	<result property="perf_title" column="perf_title"/>
 	   	<result property="perf_Image" column="perf_Image"/>
@@ -203,22 +211,38 @@
   	 </resultMap>
    
 	   <!-- hot메뉴 -->
-	  <select id="hotList" resultMap="1234">
-	   	<![CDATA[
-	   		select * from
+	  <select id="hotList" resultMap="hotListMap">
+	   	<![CDATA[ select
+			f.per_id as per_id,
+			f.perf_title as perf_title,
+			f.perf_image as perf_Image,
+			c.mdev as mdev,
+			c.sdev as sdev
+			from
 			category c join
-				(select * from 
-				performanceInfo p join (
-	    		select per_id
-	    		from(
-	    			select per_id, count(ticket_num)
-	    			from Ticketing
-	    			group by per_id
-	    			order by count(ticket_num) desc
-	        			)
-	    				where rownum<=5) s 
-	    				on p.per_id=s.per_id ) h
-	    				on c.cateNum=h.cateNum
+			 (select
+			 p.per_id,
+			 p.perf_title,
+			 p.perf_image,
+			 p.cateNum,
+			 s.num
+			 from
+			 performanceInfo p join 
+			  (select
+			    per_id,
+			    num
+			    from
+			    (
+			        select per_id, count(ticket_num) as num
+			        from Ticketing
+			        group by per_id
+			        order by count(ticket_num) desc
+			    )
+			        where rownum<=5) s
+			    on
+			    p.per_id=s.per_id) f
+			    on 
+			    c.cateNum=f.cateNum
 	   	]]>
 	   </select>
      <!-- 18.01.11 영민 수정끝  -->

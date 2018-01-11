@@ -70,31 +70,10 @@ public class HostDAOImp implements HostDAO {
 	}
 	
 	@Override
-	public int getArticleCnt(int Hcnt) {
+	public int getArticleCnt(String Hcnt) {
 	int cnt = 0;
-	String category = "";
-	
-	if (Hcnt == 1) {
-	category = "뮤지컬";
 	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	cnt = dao.getCate(category);
-	}
-	if (Hcnt == 2) {
-	category = "연극";
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	cnt = dao.getCate(category);
-	}
-	if (Hcnt == 3) {
-	category = "콘서트";
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	cnt = dao.getCate(category);
-	}
-	if (Hcnt == 4) {
-	category = "store";
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	cnt = dao.getStore(category);
-	}
-	
+	cnt = dao.getStore(Hcnt);
 	return cnt;
 	}
 	
@@ -122,30 +101,10 @@ public class HostDAOImp implements HostDAO {
 	@Override
 	public ArrayList<TcatPerformanceVO> getArticleList(Map<String, Object> map) {
 	ArrayList<TcatPerformanceVO> dtos = null; // 큰 바구니
-	int Hcnt = (Integer) map.get("Hcnt");
-	
-	if (Hcnt == 1) {
-	String s = "뮤지컬";
-	map.put("s", s);
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	dtos = dao.musiList(map);
-	} else if (Hcnt == 2) {
-	String s = "연극";
-	map.put("s", s);
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	dtos = dao.musiList(map);
-	} else if (Hcnt == 3) {
-	String s = "콘서트";
-	map.put("s", s);
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	dtos = dao.musiList(map);
-	} else if (Hcnt == 4) {
-	String s = "store";
-	map.put("s", s);
+	String Hcnt =(String)map.get("Hcnt");
+	map.put("s", Hcnt);
 	HostDAO dao = Configuration.getMapper(HostDAO.class);
 	dtos = dao.storeList(map);
-	}
-	
 	return dtos;
 	}
 	/////////////////////////////////// 태성 1/9 end /////////////////////////////////////////
@@ -213,7 +172,7 @@ public class HostDAOImp implements HostDAO {
 		return per_id;
 	}
 
-	/*@Override
+	@Override
 	public int perDiscCnt() {
 		int cnt=-0;
 		HostDAO dao=Configuration.getMapper(HostDAO.class);
@@ -222,7 +181,7 @@ public class HostDAOImp implements HostDAO {
 	}
 
 	@Override
-	public ArrayList<TcatPerDiscVO> perDiscList(Map map) {
+	public ArrayList<TcatPerDiscVO> perDiscList(Map<String,Object> map) {
 		ArrayList<TcatPerDiscVO> desc=null;
 		HostDAO dao=Configuration.getMapper(HostDAO.class);
 		desc=dao.perDiscList(map);
@@ -233,10 +192,10 @@ public class HostDAOImp implements HostDAO {
 	public void insertStore(TcatPerDiscVO dto) {
 		HostDAO dao=Configuration.getMapper(HostDAO.class);
 		dao.insertStore(dto);		
-	}*/
+	}
 	////////////////////////////////////현석 1/11  end//////////////////////////////////////////
 	
-	/*  HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  */
+	////////////////  HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  ///////////////
 	//hotlist
 		@Override
 		public ArrayList<TcatPerformanceVO> hotList() {
@@ -247,7 +206,7 @@ public class HostDAOImp implements HostDAO {
 			dtos=dao.hotList();
 			return dtos;
 		}
-	/*  HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  */
+	//////////////// HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  //////////////
 	
 		///////////////////////  동금 1/9  ///////////////////////////
 		//상품갯수 불러오기

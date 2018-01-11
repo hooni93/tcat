@@ -25,7 +25,11 @@ $( function() {
 /* 0111 현석끝 */
 </script>
 <script type="text/javascript">
-
+/* 0111 현석 */
+function round(){
+    window.open("remain_round", "confirm", "menubar=no, width=500, height=330");
+ }
+/* 0111 현석끝 */
 <!-------------------------------------180111 장명훈-------------------------------------------------------->
 function productGet(url,category,search,mDev,sDev,pageNum){
 	var param="category="+category;
@@ -109,25 +113,6 @@ function select_sDev(){
 /////////////////////////////////180111 장명훈 끝 ///////////////////////////////////////////
 
 /////////////////////////////////// 태성 1/9 start /////////////////////////////////////////
-function categoryload1(url){
-	var params="Hcnt="+document.all.cnt1.value;
- 	sendRequest(category_callback,url,"GET",params);
-}
-
-function categoryload2(url){
-	var params="Hcnt="+document.all.cnt2.value;
-	sendRequest(category_callback,url,"GET",params); 
-}
-
-function categoryload3(url){
-	var params="Hcnt="+document.all.cnt3.value;
- 	sendRequest(category_callback,url,"GET",params); 
-}
-
-function categoryload4(url){
-	var params="Hcnt="+document.all.cnt4.value;
- 	sendRequest(category_callback,url,"GET",params); 
-}
 
 function categoryload(url,Hcnt){
 	var params="Hcnt="+Hcnt;
@@ -149,6 +134,21 @@ function Sfirst_grade(url,Hcnt,disc_code,first_grade){
 	var params="disc_code="+disc_code+"&Hcnt="+Hcnt+"&first_grade="+first_grade;
  	sendRequest(category_callback,url,"GET",params);  
 }
+function category_callback(){
+	   var result = document.getElementById("result");
+	   
+	   if(httpRequest.readyState==4){
+	      if(httpRequest.status==200){
+	         
+	         result.innerHTML=httpRequest.responseText;
+	         
+	      }else{
+	         result.innerHTML="에러발생";
+	      }
+	   }else{
+	      result.innerHTML="상태 : "+ httpRequest.readyState;
+	   } 
+	 }
 /////////////////////////////////// 태성 1/10 end /////////////////////////////////////////
 
 function load(url){
@@ -215,14 +215,14 @@ function productGet(url,category,search,mDev,sDev,pageNum){
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">상품관리<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">상품목록</a></li>
+            <li><a href="productList_side">상품목록</a></li>
             <li class="divider"></li>
-            <li><a href="#">카테고리별 상품진열관리</a></li>
-            <li><a href="#">핫카테고리 상품진열관리</a></li>
+            <li><a href="categoryList_side">카테고리별 상품진열관리</a></li>
+            <li><a href="hotMenu_side">핫카테고리 상품진열관리</a></li>
             <li class="divider"></li>
-            <li><a href="#">상품등록</a></li>
+            <li><a href="registItem">상품등록</a></li>
             <li><a href="#">상품등록수정</a></li>
-            <li><a href="#">상품삭제</a></li>
+            <li><a href="stockDelete_side">상품삭제</a></li>
             <li class="divider"></li>
             <li><a href="#">상품재고관리</a></li>
             <li><a href="#">품절상품관리</a></li>

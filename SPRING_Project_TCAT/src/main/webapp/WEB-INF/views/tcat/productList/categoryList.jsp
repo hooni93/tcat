@@ -10,27 +10,24 @@
 <body>
 <!--  18.01.11 태성!!  -->
 <!-- 	<h3 align="center">카테고리별 상품 나열 및 우선순위</h3> -->
+<br>
 	<hr>
 	<div class="catagory" align="center">
 
 		<button type="button" class="btn btn-primary"
-			onclick="categoryload1('categoryList');">뮤지컬</button>
-		<input type="hidden" name="cnt1" value="1">
+			onclick="productGet('categoryList','뮤지컬');">뮤지컬</button>
 		
 		<button type="button" class="btn btn-success"
-			onclick="categoryload2('categoryList')">연극</button>
-		<input type="hidden" name="cnt2" value="2">
+			onclick="productGet('categoryList','연극');">연극</button>
 		
 		<button type="button" class="btn btn-info"
-			onclick="categoryload3('categoryList')">콘서트</button>
-		<input type="hidden" name="cnt3" value="3">
+			onclick="productGet('categoryList','콘서트');">콘서트</button>
 		
 		<button type="button" class="btn btn-warning"
-			onclick="categoryload4('categoryList')">스토어</button>
-		<input type="hidden" name="cnt4" value="4">
+			onclick="productGet('categoryList','스토어');">스토어</button>
 		
 	</div>
-
+<br>
 	<!-- class="active" --회색
 	class="info" --파란색
 	class="success" --풀색(연두색)

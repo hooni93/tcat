@@ -22,7 +22,7 @@ public interface HostDAO {
 	
 	/////////////////////////////////// 태성 1/9 start /////////////////////////////////////////
 	//상품 개수 구하기
-	public int getArticleCnt(int Hcnt);
+	public int getArticleCnt(String Hcnt);
 	//상품 목록 출력 진열
 	public ArrayList<TcatPerformanceVO> getArticleList(Map<String, Object> map);
 	//카테고리 상품 개수
@@ -53,12 +53,12 @@ public interface HostDAO {
 	public void insertRemainingSeat(Map<String,Object> map);
 	//최근 insert한 per_id가져오기
 	public int selectPer_id();
-	/*//스토어 갯수 구하기
+	//스토어 갯수 구하기
 	public int perDiscCnt();
 	//스토어 리스트 가져오기
-	public ArrayList<TcatPerDiscVO> perDiscList(Map map);
+	public ArrayList<TcatPerDiscVO> perDiscList(Map<String,Object> map);
 	//스토어 재고 추가
-	public void insertStore(TcatPerDiscVO dto);*/
+	public void insertStore(TcatPerDiscVO dto);
 	////////////////////////////////////현석 1/11 end //////////////////////////////////////////
 	
 	/*  HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  */

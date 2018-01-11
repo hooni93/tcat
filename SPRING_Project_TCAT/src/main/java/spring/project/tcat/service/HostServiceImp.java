@@ -193,15 +193,16 @@ public class HostServiceImp implements HostService {
 			int startPage = 0; // 시작 페이지
 			int endPage = 0; // 마지막 페이지
 			int Hcnt = 0;
+			String category="";
 			try {
-				Hcnt = Integer.parseInt(req.getParameter("Hcnt"));
+				category = req.getParameter("category");
 			} catch (Exception e) {
 
 			}
 			System.out.println("Host 서비스 첫번째 출입니다. ");
 			HostDAO hDao = new HostDAOImp();
 			System.out.println("Hcnt:" + Hcnt);
-			cnt = hDao.getArticleCnt(Hcnt);
+			cnt = hDao.getArticleCnt(category);
 			System.out.println("cnt :" + cnt);
 			pageNum = req.getParameter("pageNum");
 			System.out.println("pageNum" + pageNum);
@@ -258,7 +259,18 @@ public class HostServiceImp implements HostService {
 			endPage = startPage + pageBlock - 1;// 4+3-1=6
 			if (endPage > pageCount)
 				endPage = pageCount;
-
+			if(category.equals("뮤지컬")) {
+				Hcnt=1;
+			}
+			else if(category.equals("연극")) {
+				Hcnt=2;
+			}
+			else if(category.equals("콘서트")) {
+				Hcnt=3;
+			}
+			else if(category.equals("스토어")) {
+				Hcnt=4;
+			}
 			model.addAttribute("Hcnt", Hcnt); // cnt == 글 개수
 			model.addAttribute("cnt", cnt); // cnt == 글 개수
 			model.addAttribute("number", number); // number == 글번호
@@ -494,7 +506,7 @@ public class HostServiceImp implements HostService {
 			}
 		}
 
-		/*@Override
+		@Override
 		public void storeList(HttpServletRequest req, Model model) {
 			int pageSize  = 10;	//한 페이지당 출력한 글 갯수
 			int pageBlock = 5;	//한 블럭당 페이지 갯수
@@ -550,7 +562,7 @@ public class HostServiceImp implements HostService {
 			
 			if(cnt>0) {
 				//게시글 목록 조회
-				Map<String,Integer> map=new HashMap<String, Integer>();
+				Map<String,Object> map=new HashMap<String, Object>();
 				map.put("start", start);
 				map.put("end", end);
 				ArrayList<TcatPerDiscVO> dtos=hDao.perDiscList(map);
@@ -630,15 +642,15 @@ public class HostServiceImp implements HostService {
 			}
 			
 		}
-		*/
 		
-		/*  HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  */
+		
+		////////////  HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  ////////
 		@Override
 		public void hotMenu(HttpServletRequest req, Model model) {
 			ArrayList <TcatPerformanceVO> dtos= hDao.hotList();
 			model.addAttribute("dtos", dtos);
 		}
-		/*  HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  */
+		/////////////  HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  ///////////////
 		
 		///////////////////////  동금 1/9 start  //////////////////////// 
 		// HOST/상품관리/상품삭제  
