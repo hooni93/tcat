@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE mapper
+             PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+             
+   <mapper namespace="spring.project.tcat.persistence.HostDAO">
+   
+ 		 <!-- 18.01.11 명훈 수정  -->
+
+	<!--출력할 공연상품 갯수 가져오기 -->
+	<select id="perProductCnt" resultType="int">
+		
+		SELECT COUNT(*) 
+		FROM(
+			SELECT  cat.category, cat.mDev, cat.sDev, per.perf_title
+			FROM performanceInfo per, category cat
+			WHERE per.cateNum = cat.cateNum
+			AND cat.category=#{category}
+			<if test="mDev!=null">AND cat.mDev=#{mDev}</if>
+			<if test="sDev!=null">AND cat.sDev=#{sDev}</if>
+		)
+		<if test="keyword != null">WHERE perf_title  LIKE '%'||#{keyword}||'%' </if>
+		
+	</select>
+	
+	<!--출력할 스토어상품 갯수 가져오기 -->
+	<select id="storeProductCnt" resultType="int">
+		SELECT COUNT(*) 
+		FROM(
+			SELECT  cat.category, cat.mDev, per.disc_title
+			FROM perDisc per, category cat
+			WHERE per.cateNum = cat.cateNum
+			AND cat.category=#{category}
+			<if test="mDev!=null">AND cat.mDev=#{mDev}</if>
+		)
+		<if test="keyword != null">WHERE perf_title  LIKE '%'||#{keyword}||'%' </if>
+	</select>
+	
+	<!--공연상품 출력 -->
+	<select id="perProduct" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+		SELECT PER_ID,PERF_TITLE,CATENUM,CATEGORY,mDev,sDev,perf_image,sale_div,SALE_RATE,DETAIL_NUM,
+				STARTDATE, ENDDATE, PROVINCE, CITY, gu, address, first_grade
+		FROM(
+		SELECT per.PER_ID, per.PERF_TITLE, per.CATENUM, cat.CATEGORY, cat.mDev, cat.sdev, per.perf_image, per.sale_div,
+           s.SALE_RATE, per.DETAIL_NUM, per.STARTDATE, per.ENDDATE, pla.PROVINCE, pla.CITY, pla.gu, pla.address,
+           per.first_grade, rownum rNum
+		FROM performanceInfo per, category cat, place pla, sale s
+		<where>	
+			per.place_num = pla.place_num AND per.CATENUM = cat.CATENUM AND per.sale_div=s.SALE_DIV 
+			<if test="category!=null">AND cat.category=#{category}</if>
+			<if test="mDev!=null">AND cat.mDev=#{mDev}</if>
+			<if test="sDev!=null">AND cat.sDev=#{sDev}</if>
+			<if test="keyword!=null">
+			AND per.perf_title LIKE '%'||#{keyword}||'%'
+			</if>
+		</where>
+		)WHERE rNum &gt;= #{start} AND rNum &lt;=#{end}	
+	</select>
+	
+	<!--스토어 상품 출력  수정필요-->
+	 <select id="storeProduct" resultType="spring.project.tcat.VO.TcatPerDiscVO">
+		SELECT disc_code,disc_price,disc_image,disc_con,disc_title,cateNum,category,mDev,first_grade,disc_step
+		FROM(
+			SELECT 	per.disc_code, per.disc_price, per.disc_image, per.disc_con, per.disc_title,
+					per.cateNum, cat.category,cat.mDev, per.first_grade, per.disc_step, rownum rNum
+			FROM perDisc per, category cat
+			<where>
+				per.cateNum = cat.cateNum
+				<if test="category!=null">AND cat.category=#{category}</if>
+				<if test="mDev!=null">AND cat.mDev=#{mDev}</if>
+				<if test="keyword!=null">
+				AND per.disc_title LIKE '%'||#{keyword}||'%'
+				</if>
+			</where>
+		)WHERE rNum &gt;= #{start} AND rNum &lt;=#{end}	
+	</select>
+	
+   <!-- 18.01.11 명훈 수정끝 -->
+   
+   
+      <!-- 18.01.11 태성 수정  -->
+   
+   <!-- 상품 개수(스토어 제외) -->
+	 <select id="getCate" resultType="int" parameterType="String">
+		select count(*) from
+		performanceInfo per,category ca
+		where per.CATENUM=ca.CATENUM and
+		MDEV=#{category}
+	</select>
+	
+	<!-- 상품 개수(스토어만) -->
+	<select id="getStore" resultType="int" parameterType="String">
+		select count(*)
+		from perDisc perdi, category ca
+		where perdi.CATENUM=ca.CATENUM and 
+		category=#{category}
+	</select>
+	
+	<!-- 상품 진열(스토어제외) -->
+	<select id="musiList" resultType="spring.project.tcat.VO.TcatPerformanceVO" >
+		  <![CDATA[
+        SELECT *                
+        FROM (select per.per_id, per.perf_title, per.startDate, per.endDate,per.place_num, per.first_grade ,ca.CATEGORY,ROWNUM rnum
+			from performanceInfo per,category ca
+			where per.CATENUM=ca.CATENUM and  mdev=#{s}
+			order by first_grade desc
+			)
+		
+    	]]>
+	</select>
+	
+	<!-- 상품 진열(스토어만) -->
+	<select id="storeList" resultType="spring.project.tcat.VO.TcatPerDiscVO" >
+		  <![CDATA[
+		   SELECT *           
+       FROM (select perD.disc_code, perD.disc_title, perD.disc_price, perD.cateNum, perD.first_grade ,ca.CATEGORY,ROWNUM rnum
+			from perDisc perD,category ca
+			where perD.CATENUM=ca.CATENUM and category=#{s}
+			order by first_grade desc
+			)
+		WHERE rnum >= #{start} AND rnum <= #{end}
+    	]]>
+	</select>
+
+
+
+	<!-- 우선순위 변경(스토어 제외) -->
+	<update id="Cfirst_grade" parameterType="java.util.Map">
+		update performanceInfo set first_grade=#{first_grade} where per_id=#{id}
+	</update>
+	
+	<!-- 우선순위 변경(스토어만) -->
+	<update id="Sfirst_grade" parameterType="java.util.Map">
+		update perDisc set first_grade=#{first_grade} where disc_code=#{disc_code}
+	</update> 
+   
+    <!-- 18.01.11 태성 수정끝  -->
+   
+      <!-- 18.01.11 현석 수정  -->
+      <select id="performanceCnt" resultType="int">
+			select count(*) from performanceInfo
+		</select>
+	
+		<select id="performanceList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+		<![CDATA[
+			select * 
+			from
+			(
+			    select pe.PER_ID,pe.PERF_TITLE,ca.CATENUM,ca.CATEGORY,ca.mDev,ca.sdev,pe.perf_image,s.sale_div,
+			           s.SALE_RATE,pe.DETAIL_NUM,pe.STARTDATE,pe.ENDDATE,pe.place_num,pla.PROVINCE,pla.CITY,
+			           pla.gu,pla.address,pe.first_grade,pe.per_step,rownum rNum
+			    from performanceInfo pe, place pla, category ca,sale s
+			    where pe.place_num = pla.place_num and pe.CATENUM = ca.CATENUM and pe.sale_div=s.SALE_DIV
+			)
+			where rNum>=#{start} and rNum <=#{end}
+		]]>
+		</select>
+		
+		<insert id="insertPerformance" parameterType="java.util.Map">
+			insert into performanceInfo(per_id,perf_title,catenum,perf_image,sale_div,detail_num,startdate,enddate,place_num,first_grade,per_step)
+			values(performanceInfo_SEQ.NEXTVAL,#{perf_title},#{category},#{perf_Image},${sale},DetailPage_SEQ.NEXTVAL,#{startDate},#{endDate},#{place},#{first_grade},#{per_step})
+		</insert>
+		
+		<insert id="insertRemainingSeat" parameterType="java.util.Map">
+			insert into RemainingSeatInfo(remain_num,per_id,remain_seat,perDate)
+			values(RemainingSeatInfo_SEQ.NEXTVAL,#{per_id},#{remain_round},#{remain_seat},#{date})
+		</insert>
+		
+		<select id="selectPer_id" resultType="int">
+			select max(per_id) from performanceInfo
+		</select>
+		
+		<!-- <select id="perDiscCnt" resultType="int">
+			select count(*) from perDisc
+		</select>
+		
+		<select id="perDiscList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerDiscVO">
+			<![CDATA[
+			select * 
+			from(
+				select p.disc_code,p.disc_title,p.disc_price,p.disc_image,p.disc_con,s.sale_div,s.sale_rate,
+						c.cateNum,c.category,c.mDev,c.sDev,p.first_grade,p.disc_step,rownum rNum
+				from perDisc p,sale s,category c
+				where p.sale_div=s.sale_div and p.cateNum=c.cateNum
+			)
+			where rNum>=#{start} and rNum <=#{end}
+			]]>
+		</select>
+		
+		<insert id="insertStore" parameterType="spring.project.tcat.VO.TcatPerDiscVO">
+			insert into perDisc(disc_code,disc_title,disc_price,disc_image,disc_con,sale_div,cateNum,first_grade,disc_step)
+			values(#{disc_code},#{disc_title},#{disc_price},#{disc_image},#{disc_con},#{sale_div},#{cateNum},#{first_grade},#{disc_step})
+		</insert> -->
+      <!-- 18.01.11 현석 수정 끝  -->
+      
+         <!-- 18.01.11 영민 수정  -->
+ 	 <resultMap id="1234" type="spring.project.tcat.VO.TcatPerformanceVO">						
+	   	<id property="per_id" column="per_id"/>
+	   	<result property="perf_title" column="perf_title"/>
+	   	<result property="perf_Image" column="perf_Image"/>
+	   	<result property="mdev" column="mdev"/>
+	   	<result property="sdev" column="sdev"/>
+  	 </resultMap>
+   
+	   <!-- hot메뉴 -->
+	  <select id="hotList" resultMap="1234">
+	   	<![CDATA[
+	   		select * from
+			category c join
+				(select * from 
+				performanceInfo p join (
+	    		select per_id
+	    		from(
+	    			select per_id, count(ticket_num)
+	    			from Ticketing
+	    			group by per_id
+	    			order by count(ticket_num) desc
+	        			)
+	    				where rownum<=5) s 
+	    				on p.per_id=s.per_id ) h
+	    				on c.cateNum=h.cateNum
+	   	]]>
+	   </select>
+     <!-- 18.01.11 영민 수정끝  -->
+     
+     <!-- 18.01.11 동금 수정  -->
+     
+	<!-- 상품갯수구하기 -->
+	<select id="getPerfoCnt" resultType="int">
+		SELECT COUNT(*) FROM performanceInfo
+	</select>
+	
+	
+	<!-- 상품리스트 불러오기 -->
+	<!-- <select id="getPerfo"  resultType="spring.project.tcat.VO.TcatPerformanceVO">
+		SELECT
+				per_id, perf_image, perf_title, category, startDate, place_num, place,
+				city, gu, address
+		FROM(
+				SELECT 
+					p.per_id, p.perf_image, p.perf_title, p.category, p.startDate, p.place_num
+					d.place, pla.city, pla.gu, pla.address, rownum rNum
+				FROM performanceInfo p, DetailPage d, place pla
+		<where>
+			p.detail_num = d.detail_num AND pla.place_num = p.place_num AND c.cateNum = p.cateNum  		 	  
+			<if test="category != null">AND c.category=#{category}</if>
+			<if test="mDev != null">AND c.mDev=#{mDev}</if>
+			<if test="sDev != null">AND c.sDev=#{sDev}</if>
+			<if test="keyword != null">
+				AND p.perf_title LIKE '%'||#{keyword}||'%'
+			</if>
+		</where>
+		)WHERE rNum %gt;=#{start} AND rNum %lt;=#{end}	
+	</select> -->
+     
+     
+     <!-- 18.01.11 동금 수정끝  -->
+     
+     
+   
+   </mapper>

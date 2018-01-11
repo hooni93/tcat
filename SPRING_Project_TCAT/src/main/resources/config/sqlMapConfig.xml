@@ -32,7 +32,7 @@
 	</environments>
 	
 	<mappers>
-		<mapper resource=""/>
+		<mapper resource="dao/HostMapSql.xml"/>
 
 	</mappers>
 	

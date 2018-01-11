@@ -4,16 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>관리자페이지</title>
-
+<title>Insert title here</title>
 </head>
-<body onload="load('hostMain');">
-<%@include file="HostTop.jsp" %>
-
-	<div id="result">
-		
-	</div>
-	
-<%@include file="HostFooter.jsp" %>
+<body>
+<br>
+joinMemberDetail.jsp
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 </body>
 </html>

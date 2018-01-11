@@ -9,16 +9,173 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link href="${css}style.css" rel="stylesheet" type="text/css">
-<link href="${css}bootstrap.min.css" rel="stylesheet">
-<link href="${css}bootstrap_tcatMain.css" rel="stylesheet">
+ <link href="${css}bootstrap_tcatMain.css" rel="stylesheet">
 <script src="${script}ajax/request.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="${script}bootstrap.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script>
+/* 0111 현석 */
+$( function() {
+    $( "#d1" ).datepicker();
+    $( "#d2" ).datepicker();
+  } );
+/* 0111 현석끝 */
+</script>
 <script type="text/javascript">
-function load(url){
- 	sendRequest(loadHost_callback,url,"post"); 
-	
+
+<!-------------------------------------180111 장명훈-------------------------------------------------------->
+function productGet(url,category,search,mDev,sDev,pageNum){
+	var param="category="+category;
+	if(search){
+		param += "&search="+search;
+	}
+	if(mDev){
+		param += "&mDev="+mDev;
+	}
+	if(sDev){
+		param += "&sDev="+sDev;
+	}
+	if(pageNum){
+		param += "&pageNum="+pageNum;
+	}
+	sendRequest(loadHost_callback,url,"get",param);
 }
+
+//ajax
+function ajaxSubmit(){	/*AJAX submit  */
+	
+	var result = document.getElementById("result");
+	var formData = $("#ajaxSubmitForm").serialize();
+	$.ajax({
+					type : "POST",
+					url : "productList",
+					cache : false,
+					data : formData,
+					success :  function(msg) {
+						$('#result').html(msg);  
+					}, 
+					error : onError
+	});
+	function onError(data, status){alert("error");}
+}
+
+/*동적 리스트  */
+function select_sDev(){
+	/*중분류 = 소분류 배열  */
+	var musical=new Array("라이선스","오리지날","창작","넌버벌 퍼포먼스");//0 1 2 3 4 5 //6
+	var concert = new Array("국내뮤지션","해외뮤지션","페스티벌");
+	var drama=new Array("대학로","기타");
+	var classic = new Array("클래식","발레/무용","국악");
+ 	
+	//#sDev: 소분류 셀렉트 id
+	//#mDev: 중분류 셀렉트 id, onchange="select_sDev()" 추가
+	//기존의 구의 값을 초기화 한다.
+	$('#sDev option').remove();	//목록제거
+	
+	$('#sDev').append("<option value=''>전체보기</option>");//전체보기
+	/*뮤지컬  */
+	if($('#mDev option:selected').text()=="뮤지컬"){
+		for(var i=0;i<musical.length;i++){
+			$('#sDev').append("<option value="+musical[i]+">"+musical[i]+"</option>");
+		}
+	}
+	//콘서트
+	else if($('#mDev option:selected').text()=="콘서트"){
+		for(var i=0;i<concert.length;i++){
+			$('#sDev').append("<option value="+concert[i]+">"+concert[i]+"</option>");
+		}
+	} 
+	//연극
+	else if($('#mDev option:selected').text()=="연극"){
+		for(var i=0;i<drama.length;i++){
+			$('#sDev').append("<option value="+drama[i]+">"+drama[i]+"</option>");
+		}
+	} 
+	//클래식
+	else if($('#mDev option:selected').text()=="클래식"){
+		for(var i=0;i<classic.length;i++){
+			$('#sDev').append("<option value="+classic[i]+">"+classic[i]+"</option>");
+		}
+	} 
+	//중분류
+	else{
+		$('#sDev option').remove();	
+		$('#sDev').append("<option value=''>소분류</option>");
+	}
+ }
+/////////////////////////////////180111 장명훈 끝 ///////////////////////////////////////////
+
+/////////////////////////////////// 태성 1/9 start /////////////////////////////////////////
+function categoryload1(url){
+	var params="Hcnt="+document.all.cnt1.value;
+ 	sendRequest(category_callback,url,"GET",params);
+}
+
+function categoryload2(url){
+	var params="Hcnt="+document.all.cnt2.value;
+	sendRequest(category_callback,url,"GET",params); 
+}
+
+function categoryload3(url){
+	var params="Hcnt="+document.all.cnt3.value;
+ 	sendRequest(category_callback,url,"GET",params); 
+}
+
+function categoryload4(url){
+	var params="Hcnt="+document.all.cnt4.value;
+ 	sendRequest(category_callback,url,"GET",params); 
+}
+
+function categoryload(url,Hcnt){
+	var params="Hcnt="+Hcnt;
+ 	sendRequest(category_callback,url,"GET",params); 
+}
+
+function categoryload0(url,Hcnt,pageNum){
+	var params="Hcnt="+Hcnt+"&pageNum="+pageNum;
+ 	sendRequest(category_callback,url,"GET",params); 
+}
+/////////////////////////////////// 태성 1/09 end /////////////////////////////////////////
+
+/////////////////////////////////// 태성 1/10 start /////////////////////////////////////////
+function Cfirst_grade(url,Hcnt,id,first_grade){
+	var params="id="+id+"&Hcnt="+Hcnt+"&first_grade="+first_grade;
+ 	sendRequest(category_callback,url,"GET",params);
+ }
+function Sfirst_grade(url,Hcnt,disc_code,first_grade){
+	var params="disc_code="+disc_code+"&Hcnt="+Hcnt+"&first_grade="+first_grade;
+ 	sendRequest(category_callback,url,"GET",params);  
+}
+/////////////////////////////////// 태성 1/10 end /////////////////////////////////////////
+
+function load(url){
+
+	sendRequest(loadHost_callback,url,"POST"); 
+
+}
+
+function productGet(url,category,search,mDev,sDev,pageNum){
+	   var param="category="+category;
+	   
+	   if(search){
+	      param += "&search="+search;
+	   }
+	   if(mDev){
+	      param += "&mDev="+mDev;
+	   }
+	   if(sDev){
+	      param += "&sDev="+sDev;
+	   }
+	   if(pageNum){
+	      param += "&pageNum="+pageNum;
+	   }
+	   sendRequest(loadHost_callback,url,"get",param);
+	}
+	
+
  function loadHost_callback(){
 	var result = document.getElementById("result");
 	
@@ -34,7 +191,9 @@ function load(url){
 		result.innerHTML="상태 : "+ httpRequest.readyState;
 	} 
  }
+ 
 </script>
+
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -47,7 +206,7 @@ function load(url){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" onclick="load('hostMain');"><b>TCAT 관리자센터</b></a>
+      <a class="navbar-brand" href="hostMain_side"><b>TCAT 관리자센터</b></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -89,18 +248,28 @@ function load(url){
             <li><a href="#">회원등급관리</a></li>
             <li><a href="#">회원혜택관리</a></li>
             <li class="divider"></li>
-            <li><a href="#">회원가입/탈퇴관리</a></li>
+            <li><a href="join_retireMember_side">회원가입/탈퇴관리</a></li>
             <li class="divider"></li>
             <li><a href="#">휴면회원관리</a></li>
           </ul>
         </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">게시판관리<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">공지사항 게시판관리</a></li>
+            <li><a href="#">SNS후기 게시판관리</a></li>
+            <li class="divider"></li>
+            <li><a href="#">QnA 게시판관리</a></li>
+            <li><a href="#">1 : 1 게시판관리</a></li>
+            <li class="divider"></li>
+            <li><a href="#">관람/상품후기 게시판관리</a></li>
+            <li class="divider"></li>
+            <li><a href="#">영상 게시판관리</a></li>
+            <li><a href="#">사진 게시판관리</a></li>
+          </ul>
+        </li>
       </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">검색</button>
-      </form>
+
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">매출분석 <span class="caret"></span></a>
