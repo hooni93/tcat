@@ -20,6 +20,7 @@ public class TcatHostController {
 	@RequestMapping("hostPage")
 	public String hostPage(HttpServletRequest req,Model model) {
 		System.out.println("hostPage");
+		
 		return "tcat/hostMain/hostPage";
 	}
 	//호스트 메인화면 호출
