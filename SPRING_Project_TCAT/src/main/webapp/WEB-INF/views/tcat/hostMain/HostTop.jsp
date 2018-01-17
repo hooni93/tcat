@@ -13,7 +13,6 @@
 <script src="${script}ajax/request.js"></script>
 <script src="${script}jquery-3.1.1.min.js"></script>
 <script src="${script}bootstrap.js"></script>
-<script src="${script}jquery-1.12.4.js"></script>
 <script src="${script}jquery-ui.js"></script>
 <link rel="stylesheet" href="${css}jquery-ui.css">
 <script>
@@ -22,37 +21,18 @@ $( function() {
     $( "#d1" ).datepicker();
     $( "#d2" ).datepicker();
   } );
-/* 0111 현석끝 */
 </script>
+
 <script type="text/javascript">
 /* 0111 현석 */
-function round(){
+  function round(){
     window.open("remain_round", "confirm", "menubar=no, width=500, height=330");
- }
-/* 0111 현석끝 */
-<!-------------------------------------180111 장명훈-------------------------------------------------------->
+ } 
 
 
-
-function productGet(url,category,search,mDev,sDev,pageNum){
-	var param="category="+category;
-	if(search){
-		param += "&search="+search;
-	}
-	if(mDev){
-		param += "&mDev="+mDev;
-	}
-	if(sDev){
-		param += "&sDev="+sDev;
-	}
-	if(pageNum){
-		param += "&pageNum="+pageNum;
-	}
-	sendRequest(loadHost_callback,url,"get",param);
-}
 
 //ajax
-function ajaxSubmit(url){   /*AJAX submit  */
+function ajaxSubmit(url){   /* AJAX submit */  
    var result = document.getElementById("result");
    var formData = $("#ajaxSubmitForm").serialize();
    $.ajax({
@@ -67,43 +47,58 @@ function ajaxSubmit(url){   /*AJAX submit  */
    });
    function onError(data, status){alert("error");}
 }
-
-/*동적 리스트  */
+ 
+/*동적 리스트  */	///////////////////////////////수정요망***************************************
 function select_sDev(){
 	/*중분류 = 소분류 배열  */
-	var musical=new Array("라이선스","오리지날","창작","넌버벌 퍼포먼스");//0 1 2 3 4 5 //6
+	//공연 소분류
+	var musical=new Array("라이선스","오리지널","창작","넌버벌 퍼포먼스")
 	var concert = new Array("국내뮤지션","해외뮤지션","페스티벌");
 	var drama=new Array("대학로","기타");
-	var classic = new Array("클래식","발레/무용","국악");
- 	
+	var classic = new Array("클래식","무용","국악");
+	//스토어 소분류
+	var	music = new Array("뮤지컬OST","콘서트LIVE","클래식LIVE");
+	var collection =new Array("전시컬렉션");
 	//#sDev: 소분류 셀렉트 id
 	//#mDev: 중분류 셀렉트 id, onchange="select_sDev()" 추가
 	//기존의 구의 값을 초기화 한다.
 	$('#sDev option').remove();	//목록제거
-	
 	$('#sDev').append("<option value=''>전체보기</option>");//전체보기
 	/*뮤지컬  */
 	if($('#mDev option:selected').text()=="뮤지컬"){
 		for(var i=0;i<musical.length;i++){
-			$('#sDev').append("<option value="+musical[i]+">"+musical[i]+"</option>");
+			$('#sDev').append(	"<option value='"+musical[i]+"'>"+musical[i]+"</option>");
 		}
 	}
 	//콘서트
 	else if($('#mDev option:selected').text()=="콘서트"){
 		for(var i=0;i<concert.length;i++){
-			$('#sDev').append("<option value="+concert[i]+">"+concert[i]+"</option>");
+			$('#sDev').append("<option value='"+concert[i]+"'>"+concert[i]+"</option>");
 		}
 	} 
 	//연극
 	else if($('#mDev option:selected').text()=="연극"){
 		for(var i=0;i<drama.length;i++){
-			$('#sDev').append("<option value="+drama[i]+">"+drama[i]+"</option>");
+			$('#sDev').append("<option value='"+drama[i]+"'>"+drama[i]+"</option>");
 		}
 	} 
 	//클래식
 	else if($('#mDev option:selected').text()=="클래식"){
 		for(var i=0;i<classic.length;i++){
-			$('#sDev').append("<option value="+classic[i]+">"+classic[i]+"</option>");
+			$('#sDev').append("<option value='"+classic[i]+"'>"+classic[i]+"</option>");
+		}
+	} 
+	//스토어
+	//음반
+	else if($('#mDev option:selected').text()=="음반"){
+		for(var i=0;i<music.length;i++){
+			$('#sDev').append("<option value='"+music[i]+"'>"+music[i]+"</option>");
+		}
+	} 
+	//컬렉션
+	else if($('#mDev option:selected').text()=="컬렉션"){
+		for(var i=0;i<collection.length;i++){
+			$('#sDev').append("<option value='"+collection[i]+"'>"+collection[i]+"</option>");
 		}
 	} 
 	//중분류
@@ -112,87 +107,132 @@ function select_sDev(){
 		$('#sDev').append("<option value=''>소분류</option>");
 	}
  }
-/////////////////////////////////180111 장명훈 끝 ///////////////////////////////////////////
-
-/////////////////////////////////// 태성 1/9 start /////////////////////////////////////////
-
-function categoryload(url,Hcnt){
-	var params="Hcnt="+Hcnt;
- 	sendRequest(category_callback,url,"GET",params); 
+ //상세페이지 오픈
+function detailOpen(category,id){
+	if(category == 'performance'){//공연
+		window.open('productDetail_perf?per_id='+id,'상세페이지','menubar=no,width=600px,height=600px');
+	}
+	if(category == 'store'){		//스토어
+		window.open('productDetail_store?disc_code='+id,'상세페이지','menubar=no,width=600px,height=600px');
+	}
 }
-function categoryload0(url,Hcnt,pageNum){
-	var params="Hcnt="+Hcnt+"&pageNum="+pageNum;
- 	sendRequest(category_callback,url,"GET",params); 
-}
-/////////////////////////////////// 태성 1/09 end /////////////////////////////////////////
+/////////////////////////////////180115 장명훈 끝 ///////////////////////////////////////////
 
-/////////////////////////////////// 태성 1/10 start /////////////////////////////////////////
-function Cfirst_grade(url,category,id,first_grade){
+ 
+ function load(url){
+	 
+	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );	
+	 
+	 if(url=="hostMain" || url=="join_retireMember" || url=="hotMusical" || url=="sleepMember" || url=="stockDelete_musical" || url=="stockOutOf_musical"
+		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" || url=="stockManagement" || url=="googleMap" || url=="registItem" || url=="memberModified"){
+	 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side" );	
+	 }
+ }
+ 
+/* 동금이 제작 */
+ //공연상품삭제alert
+ function stock_Delete(per_id, url){
+	if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+		load("stockDelete_Pro?per_id="+per_id+"&url="+url);
+	}else{   //취소
+	    return;
+	}		
+ }
+ //스토어상품삭제alert
+ function store_Delete(disc_code, url){
+	if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+		load("storeDelete_Pro?disc_code="+disc_code+"&url="+url);
+	}else{   //취소
+	    return;
+	}		
+ }
+ //판매중단
+ function sale_stop(disc_code, url){
+	 if(confirm("판매중단을 하시겠습니까?")==true){
+		 load("storeSale_stop?disc_code="+disc_code+"&url="+url);
+	 }else{
+		 return;
+	 }
+ }
+ //판매중단해제
+ function sale_stopRelease(disc_code, url){
+	 if(confirm("중단을 해제겠습니까?")==true){
+		 load("storeSale_Release?disc_code="+disc_code+"&url="+url);
+	 }else{
+		 return;
+	 }
+ }
+ /* 동금이 제작 */
+ 
+ 
+ /* 영민이 제작 */
+	//핫리스트 조건
+	 function hotDelete(hotListSize, per_id){
+		 
+		 if(hotListSize>1){
+			 load('hotMenuDelete?Hcnt='+per_id);
+		 }else{
+			 alert("핫리스트가 1건 입니다.");
+			 alert("삭제할 수 없습니다.");
+			 return false;
+		 } 
+	 }
+	
+	 function hotUpdate(hotListSize, per_id){
+		 
+		 if(hotListSize<4){
+			 load('hotMenuUpdate?Hcnt='+per_id);
+		 }else{
+			 alert("핫리스트가 꽉 찾습니다.");
+			 alert("추가할 수 없습니다.");
+			 return false;
+		 } 
+	 }
+	 /* 영민이 제작 */
+	 /* 태성이 제작 */
+	 function Cfirst_grade(url,category,id,first_grade){
 	var params="id="+id+"&category="+category+"&first_grade="+first_grade;
- 	sendRequest(category_callback,url,"GET",params);
+ 	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
  }
 function Sfirst_grade(url,category,disc_code,first_grade){
 	var params="disc_code="+disc_code+"&category="+category+"&first_grade="+first_grade;
- 	sendRequest(category_callback,url,"GET",params);  
+ 	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
 }
-function category_callback(){
-	   var result = document.getElementById("result");
-	   
-	   if(httpRequest.readyState==4){
-	      if(httpRequest.status==200){
-	         
-	         result.innerHTML=httpRequest.responseText;
-	         
-	      }else{
-	         result.innerHTML="에러발생";
-	      }
-	   }else{
-	      result.innerHTML="상태 : "+ httpRequest.readyState;
-	   } 
-	 }
-/////////////////////////////////// 태성 1/10 end /////////////////////////////////////////
-
-function load(url){
-
-	sendRequest(loadHost_callback,url,"POST"); 
-
-}
-
-function productGet(url,category,search,mDev,sDev,pageNum){
-	   var param="category="+category;
-	   
-	   if(search){
-	      param += "&search="+search;
-	   }
-	   if(mDev){
-	      param += "&mDev="+mDev;
-	   }
-	   if(sDev){
-	      param += "&sDev="+sDev;
-	   }
-	   if(pageNum){
-	      param += "&pageNum="+pageNum;
-	   }
-	   sendRequest(loadHost_callback,url,"get",param);
-	}
-	
-
- function loadHost_callback(){
-	var result = document.getElementById("result");
-	
-	if(httpRequest.readyState==4){
-		if(httpRequest.status==200){
-			
-			result.innerHTML=httpRequest.responseText;
-			
-		}else{
-			result.innerHTML="에러발생";
-		}
-	}else{
-		result.innerHTML="상태 : "+ httpRequest.readyState;
-	} 
+function Cstep(url,category,id,per_step){
+	var params="id="+id+"&category="+category+"&per_step="+per_step;
+ 	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
  }
+function Sstep(url,category,disc_code,disc_step){
+	var params="disc_code="+disc_code+"&category="+category+"&disc_step="+disc_step;
+ 	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
+}
+
+function categoryload(url,category){
+	var params="category="+category;
  
+ 	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
+}
+
+function categoryload0(url,category,pageNum){
+	var params="category="+category+"&pageNum="+pageNum;
+	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
+ 
+}
+function categoryload(url,category,sDev,keyword){
+	var params="category="+category+"&sDev="+sDev+"&keyword="+keyword;
+ 
+ 	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
+}
+
+function categoryload0(url,category,pageNum,sDev,keyword){
+	var params="category="+category+"&pageNum="+pageNum+"&sDev="+sDev+"&keyword="+keyword;
+	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
+ 
+}
+/* 태성이 제작 */ 
+ 
+	 
+	 
 </script>
 
 </head>
@@ -207,7 +247,7 @@ function productGet(url,category,search,mDev,sDev,pageNum){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="hostMain_side"><b>TCAT 관리자센터</b></a>
+      <a class="navbar-brand" onclick="load('hostMain');"><b>TCAT 관리자센터</b></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -216,23 +256,23 @@ function productGet(url,category,search,mDev,sDev,pageNum){
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">상품관리<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="productList_side">상품목록</a></li>
+            <li><a onclick="load('productList')">상품목록</a></li>
             <li class="divider"></li>
-            <li><a href="categoryList_side">카테고리별 상품진열관리</a></li>
-            <li><a href="hotMenu_side">핫카테고리 상품진열관리</a></li>
+           <li><a onclick="load('categoryList');">카테고리별 상품진열관리</a></li>
+            <li><a onclick="load('hotMusical');">핫카테고리 상품진열관리</a></li>
             <li class="divider"></li>
-            <li><a href="registItem">상품등록</a></li>
+            <li><a onclick="load('registItem');">상품등록</a></li>
             <li><a href="#">상품등록수정</a></li>
-            <li><a href="stockDelete_side">상품삭제</a></li>
+            <li><a onclick="load('stockDelete_musical');">상품삭제</a></li>
             <li class="divider"></li>
-            <li><a href="#">상품재고관리</a></li>
-            <li><a href="#">품절상품관리</a></li>
+            <li><a onclick="load('stockManagement');">상품재고관리</a></li>
+             <li><a onclick="load('stockOutOf_musical');">품절상품관리</a></li>
           </ul>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">주문관리<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">전체 주문 목록조회</a></li>
+           <li><a onclick="load('orderList')">전체 주문 목록조회</a></li>
             <li><a href="#">주문승인관리</a></li>
             <li><a href="#">배송관리</a></li>
             <li class="divider"></li>
@@ -244,14 +284,14 @@ function productGet(url,category,search,mDev,sDev,pageNum){
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">고객관리<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">회원정보조회/수정</a></li>
+            <li><a onclick="load('memberModified');">회원정보조회/수정</a></li>
             <li class="divider"></li>
             <li><a href="#">회원등급관리</a></li>
             <li><a href="#">회원혜택관리</a></li>
             <li class="divider"></li>
-            <li><a href="join_retireMember_side">회원가입/탈퇴관리</a></li>
+            <li><a onclick="load('join_retireMember');">회원가입/탈퇴관리</a></li>
             <li class="divider"></li>
-            <li><a href="#">휴면회원관리</a></li>
+            <li><a onclick="load('sleepMember');">휴면회원관리</a></li>
           </ul>
         </li>
         <li class="dropdown">
@@ -290,16 +330,8 @@ function productGet(url,category,search,mDev,sDev,pageNum){
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">상품분석 <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">판매상품순위</a></li>
-            <li><a href="#">판매카테고리순위</a></li>
-            <li class="divider"></li>
-            <li><a href="#">취소/반품 순위</a></li>
-            <li class="divider"></li>
-            <li><a href="#">장바구니상품분석</a></li>
-            <li><a href="#">위시리스트분석</a></li>
-          </ul>
+          <a onclick="load('productRank')" class="" role="button" aria-expanded="false">상품분석 </span></a>
+         
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">고객분석 <span class="caret"></span></a>

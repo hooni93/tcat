@@ -1,41 +1,53 @@
 package spring.project.tcat.VO;
 
 public class TcatPerDiscVO {
+	/*
+		<perDisc>
+			disc_code      NUMBER(20)       NOT NULL, 
+		    disc_title     VARCHAR2(100)    DEFAULT '0', 
+		    disc_price     NUMBER(20)       DEFAULT 0, 
+		    disc_image     VARCHAR2(150)    DEFAULT '0', 
+		    disc_con       VARCHAR2(255)    DEFAULT '0', 
+		    cateNum        NUMBER(20)       DEFAULT 0, 
+		    first_grade    VARCHAR2(100)    DEFAULT '0', 
+		    disc_step      VARCHAR2(20)     DEFAULT '0', 
+		    disc_count     NUMBER(20)       DEFAULT 0,
+		    
+		 <category>   
+		    cateNum     NUMBER(20)       NOT NULL, 
+		    category    VARCHAR2(20)     DEFAULT '0', 
+		    mDev        VARCHAR2(150)    DEFAULT '0', 
+		    sDev        VARCHAR2(150)    DEFAULT '0',
+	*/
 	
-	//////////////////////////////////////18.01.11 명훈//////////////////////////////////////////////////
+	//perDisc
+	int disc_code;			//상품코드
+    String disc_title;		//상품명
+    int disc_price;			//상품가격
+    String disc_image;		//상품이미지
+    String disc_con;		//상품 상세내용
+    int cateNum; 			//카테고리구분번호
+    String first_grade;		//우선순위
+    String disc_step; 		//상품 스텝
+    int disc_count;			//상품수량
+    //category
+    String category;		//카테고리(스토어,공연)
+    String mDev;			//중분류
+    String sDev;			//소분류
+    
 
-	int disc_code; 			//상품코드
-	String disc_title;		//상품이름
-	int disc_price; 		//가격
-	String disc_image;		//이미지
-	String disc_con;		//상품설명
-	String sale_div;		//할인조건
-	int sale_rate; 			//할인율
-	int cateNum; 			//카테고리 넘버
-	String category; 		//카테고리
-	String mDev;			//중분류
-	String sDev;			//소분류
-	String first_grade;		//우선순위
-	String disc_step;		//상품스텝
-	
-	
-	public String getDisc_step() {
-		return disc_step;
+    //getter setter
+	public int getDisc_code() {
+		return disc_code;
 	}
-	public void setDisc_step(String disc_step) {
-		this.disc_step = disc_step;
+	public void setDisc_code(int disc_code) {
+		this.disc_code = disc_code;
 	}
 	public String getDisc_title() {
 		return disc_title;
 	}
 	public void setDisc_title(String disc_title) {
 		this.disc_title = disc_title;
-	}
-	public int getDisc_code() {
-		return disc_code;
-	}
-	public void setDisc_code(int disc_code) {
-		this.disc_code = disc_code;
 	}
 	public int getDisc_price() {
 		return disc_price;
@@ -55,23 +67,29 @@ public class TcatPerDiscVO {
 	public void setDisc_con(String disc_con) {
 		this.disc_con = disc_con;
 	}
-	public String getSale_div() {
-		return sale_div;
-	}
-	public void setSale_div(String sale_div) {
-		this.sale_div = sale_div;
-	}
-	public int getSale_rate() {
-		return sale_rate;
-	}
-	public void setSale_rate(int sale_rate) {
-		this.sale_rate = sale_rate;
-	}
 	public int getCateNum() {
 		return cateNum;
 	}
 	public void setCateNum(int cateNum) {
 		this.cateNum = cateNum;
+	}
+	public String getFirst_grade() {
+		return first_grade;
+	}
+	public void setFirst_grade(String first_grade) {
+		this.first_grade = first_grade;
+	}
+	public String getDisc_step() {
+		return disc_step;
+	}
+	public void setDisc_step(String disc_step) {
+		this.disc_step = disc_step;
+	}
+	public int getDisc_count() {
+		return disc_count;
+	}
+	public void setDisc_count(int disc_count) {
+		this.disc_count = disc_count;
 	}
 	public String getCategory() {
 		return category;
@@ -91,13 +109,8 @@ public class TcatPerDiscVO {
 	public void setsDev(String sDev) {
 		this.sDev = sDev;
 	}
-	public String getFirst_grade() {
-		return first_grade;
-	}
-	public void setFirst_grade(String first_grade) {
-		this.first_grade = first_grade;
-	}
-	
-	//////////////////////////////////////18.01.11 명훈//////////////////////////////////////////////////
-	
+    
+    
+    
+
 }

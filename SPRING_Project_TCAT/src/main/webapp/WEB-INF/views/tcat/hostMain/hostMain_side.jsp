@@ -6,13 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>관리자페이지</title>
 </head>
-<body onload="load('hostMain');"  class="b400040">
+<body>
 
-<%@include file="HostTop.jsp" %>
-	
-	
- 	<div class="row">
-		<div class="col-md-2" >
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h50"></li>
 				<li class="b400040"><a href="#">상품목록</a></li>
@@ -25,12 +20,6 @@
 	            <li class="b400040"><a href="#">품절상품관리</a></li>
 	            
 			</ul>
-		</div>
-			<div class="col-md-10 bffffff" id="result"></div>
-			
-		</div>
-
-<%@include file="HostFooter.jsp" %>
 
 </body>
 </html>

@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
    /*탭 스크립트  */
    $('#myTab a[href="#performance"]').tab('show') // 공연상품 탭 클릭시 #myTab a[href="#performance"] 보여줌
@@ -18,6 +19,7 @@
 
 	<div class="row">
 		<div class="col-md-1"></div>
+		
 		<div class="col-md-6">
 		<hr>
 			<h4><b>주문 관리</b></h4>
@@ -36,6 +38,7 @@
 				</tr>
 			</table>
 		</div>
+		
 		<div class="col-md-4">
 			<hr>
 			<h4><b>문의/답변관리</b></h4>
@@ -46,11 +49,13 @@
 			  <a href="#" class="list-group-item">1 : 1 게시판 <span class="badge">42</span></a>
 			</div>
 		</div>		
+		
 		<div class="col-md-1"></div>
 	</div>
 	
    <div class="row mt50">
       <div class="col-md-1"></div>
+      
       <div class="col-md-10">
       <hr>
       <h4><b>주요 현황</b></h4><p class="fs8">최근 7일간 자료</p>
@@ -60,17 +65,17 @@
                <li role="presentation" class="active"><a
                   href="#performance" aria-controls="home" role="tab"
                   data-toggle="tab"
-                  onclick="< productGet('productList','performance');">최근매출 <span class="badge">42</span></a></li>
+                  onclick="#">최근매출 <span class="badge">42</span></a></li>
                <li role="presentation" class="${storeActive}"><a
                   href="#store" aria-controls="profile" role="tab" data-toggle="tab"
-                  onclick="productGet('productList','store')">최근주문 <span class="badge">42</span></a></li>
+                  onclick="#">최근주문 <span class="badge">42</span></a></li>
                <li role="presentation" class="${perActive}"><a
                   href="#performance" aria-controls="home" role="tab"
                   data-toggle="tab"
-                  onclick="< productGet('productList','performance');">최근방문자 <span class="badge">42</span></a></li>
+                  onclick="#">최근방문자 <span class="badge">42</span></a></li>
                <li role="presentation" class="${storeActive}"><a
                   href="#store" aria-controls="profile" role="tab" data-toggle="tab"
-                  onclick="productGet('productList','store')">최근신규회원 <span class="badge">42</span></a></li>
+                  onclick="#">최근신규회원 <span class="badge">42</span></a></li>
             </ul>
 
             <!-- 탭시 출력 -->

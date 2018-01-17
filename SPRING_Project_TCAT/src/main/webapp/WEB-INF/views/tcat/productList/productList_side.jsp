@@ -5,26 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+
+</script>
 </head>
-<body onload="productGet('productList_perf');" class="b400040">
-
-	<%@include file="../hostMain/HostTop.jsp"%>
-
-
-	<div class="row">
-		<div class="col-md-2">
-			<ul class="nav nav-pills nav-stacked">
-				<li class="b400040 h50"></li>
-				<li class="b400040"><a onclick="productGet('productList_perf');">연극 상품</a></li>
-				<li class="b400040"><a onclick="productGet('productList_store');">스토어 상품</a></li>
-			</ul>
-		</div>
-		<div class="col-md-10 bffffff" id="result"></div>
-
-	</div>
-
-	<%@include file="../hostMain/HostFooter.jsp"%>
-
-
+<body>
+	<ul class="nav nav-pills nav-stacked">
+		<li class="b400040 h20"></li>
+		<li class="b400040 h50 c"><span class="fs15 aaaaaa">전체 상품 목록</span></li>
+		<li class="b400040"><a onclick="load('productList');">공연 상품</a></li>
+		<li class="b400040"><a onclick="load('productList_store?category=스토어');">스토어 상품</a></li>
+	</ul>
 </body>
 </html>

@@ -1,61 +1,104 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+function deleteHost(url,value){
+	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?host_id="+value);
+}
+
+function page(url) {
+	$("#result").load("${pageContext.request.contextPath}/" + url);
+}
+function page(url, pageNum) {
+	$("#result").load(
+			"${pageContext.request.contextPath}/" + url + "?pageNum="+ pageNum);
+}
+</script>
 </head>
 <body>
+<c:if test="${deleteHost==1}">
+	<script type="text/javascript">
+		alert("삭제되었습니다.");
+	</script>
+</c:if>
+<c:if test="${deleteHost==0}">
+	<script type="text/javascript">
+		alert("삭제에 실패하였습니다.");
+	</script>
+</c:if>
 <div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
-					<br>
-					<h4><b>호스트 멤버탈퇴 관리</b></h4>
-					<hr>
-			           <table class="table table-hover table-bordered table-condensed c fs10">
-                           <tr class="bg-primary">
-                              <td><b>상품코드</b></td>
-                              <td><b>상품명</b></td>
-                              <td><b>카테고리</b></td>
-                              <td><b>이미지 유,무</b></td>
-                              <td><b>가격</b></td>
-                              <td><b>할인조건</b></td>
-                           </tr>
-                           <c:forEach var="performance" items="performances">
-                              <tr>
-                                 <td>afasdsa</td>
-                                 <td>2</td>
-                                 <td>3</td>
-                                 <td>4</td>
-                                 <td>5</td>
-                                 <td>6</td>
-                              </tr>
-                           </c:forEach>
-                        </table>
-                          <!--검색  -->
-							
-                         
-                           <form class="navbar-form navbar-right" role="search">
-                             <select class="m10 p5">
-                            	 <option value="">아이디</option>
-                            	 <option value="">이름</option>
-                          	</select>
-                            <div class="form-group">
-                                 <input type="text" class="form-control" placeholder="Search" name="keyword">
-                             </div>
-                              <button type="button" class="btn btn-default" onclick="">검색</button>
-                           </form>
-                             
-                           <!--카테고리  -->
-		
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		
-		
+					<h3 align="center">호스트 멤버 탈퇴</h3>
+					<!-- 페이지 컨트롤 -->
+					<table style="width: 1000px" align="center">
+						<th align="center"><c:if test="${cnt>0}">
+								<!-- 처음[◀◀]/이전블록[◀] 특수문자 :ㅁ한자키 -->
+								<c:if test="${startPage>pageBlock}">
+									<a onclick="page('hostMemberRetire')">[◀◀]</a>
+									<a onclick="page('hostMemberRetire','${startPage-pageBlock}')">[◀]</a>
+								</c:if>
+
+								<c:forEach var="i" begin="${startPage}" end="${endPage}">
+									<c:if test="${i==currentPage}">
+										<span><b>[${i}]</b></span>
+									</c:if>
+									<c:if test="${i!=currentPage}">
+										<a onclick="page('hostMemberRetire','${i}')">[${i}]</a>
+									</c:if>
+								</c:forEach>
+
+								<!-- 다음블록[▶]/끝[▶▶] -->
+								<c:if test="${pageCount > endPage}">
+									<a onclick="page('hostMemberRetire','${startPage+pageBlock}')">[▶]</a>
+									<a onclick="page('hostMemberRetire','${pageCount}')">[▶▶]</a>
+								</c:if>
+							</c:if></th>
+					</table>
+					<table
+						class="table table-hover table-bordered table-condensed c fs10">
+						<tr class="bg-primary">
+							<td><b>번호</b></td>
+							<td><b>아이디</b></td>
+							<td><b>비밀번호</b></td>
+							<td><b>이름</b></td>
+							<td><b>부서</b></td>
+							<td><b>직급</b></td>
+							<td><b>이메일</b></td>
+							<td><b>연락처</b></td>
+							<td><b>권한</b></td>
+							<td></td>
+						</tr>
+						<c:if test="${cnt>0}">
+							<c:forEach var="dto" items="${dtos}">
+								<!-- items : dtos(ArrayList)의 배열만큼 반복된다. -->
+								<tr>
+									<td>${number}<c:set var="number" value="${number-1}" />
+									</td>
+									<td>${dto.host_id}</td>
+									<td>${dto.host_pwd}</td>
+									<td>${dto.host_name}</td>
+									<td>${dto.host_Department}</td>
+									<td>${dto.host_grade}</td>
+									<td>${dto.host_email}</td>
+									<td>${dto.host_phone}</td>
+									<td>${dto.host_authority}</td>
+									<td><input type="button" value="삭제" onclick="deleteHost('deleteHost','${dto.host_id}');"></td>
+								</tr>
+							</c:forEach>
+						</c:if>
+						<!-- 회원이 없으면 -->
+						<c:if test="${cnt==0}">
+							<tr>
+								<td colspan="9" align="center">회원이 없습니다.</td>
+							</tr>
+						</c:if>
+					</table>
 		</div>
 		<div class="col-md-1"></div>
 

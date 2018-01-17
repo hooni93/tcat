@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+		<%@ include file="../setting.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="${css}style.css" rel="stylesheet" type="text/css">
+<link href="${css}bootstrap_tcatMain.css" rel="stylesheet">
+<script src="${script}ajax/request.js"></script>
+<script src="${script}jquery-3.1.1.min.js"></script>
+<script src="${script}bootstrap.js"></script>
 <title>Insert title here</title>
 <script type="text/javascript">
 /* 0111 현석 */
@@ -66,42 +72,45 @@ function load(){
 </script>
 </head>
 <body>
+<div class="col-md-1"></div>
+	<div class="col-md-10">
+		<div class="container" style="margin-top: 20px;">
+			<div class="row">
+				<div class="span12">
+					<div class="thumbnail center well well-small text-center">
+						<h2>공연회차</h2>
 
-	<div class="row">
+						<p><b>회차[하루간공연회차]</b></p>
 
-		<div class="col-md-1"></div>
-		<div class="col-md-10">
-			<h3>공연회차</h3>
-			<table
-				class="table table-hover table-bordered table-condensed c fs10">
-				<tr class="bg-primary">
-					<td><b>회차[하루간공연회차]</b></td>
-					<td><b>공연시간</b></td>
-				</tr>
-				<tr>
-					<td>
-						<select name="remain_round" onchange="load()">
-							<option value="0">하루간 공연회차</option>
-							<option value="1">1회차</option>
-							<option value="2">2회차</option>
-							<option value="3">3회차</option>
-							<option value="4">4회차</option>
-							<option value="5">5회차</option>
-							<option value="6">6회차</option>
-						</select>
-					</td>
-					<td>
-						<div id="result">
+						<form action="" method="post">
+							<div class="input-prepend">
+								<span class="add-on"><i class="icon-envelope"></i></span> 
+								<ul>
+									<li><select name="remain_round" onchange="load()">
+											<option value="0">하루간 공연회차</option>
+											<option value="1">1회차</option>
+											<option value="2">2회차</option>
+											<option value="3">3회차</option>
+											<option value="4">4회차</option>
+											<option value="5">5회차</option>
+											<option value="6">6회차</option>
+										</select>
+									</li>
+									<li>
+										<div id="result">
 						
-						</div>
-					</td>
-					<td>
-						<input type="button" onclick="goBack();">
-					</td>
-				</tr>
-			</table>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<br/> 
+							<input type="button" onclick="goBack();" value="Subscribe Now!" class="btn btn-large" />
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="col-md-1"></div>
 	</div>
+	<div class="col-md-1"></div>
 </body>
 </html>

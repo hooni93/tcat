@@ -19,6 +19,7 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		
 		<!-- 멀티 파트 설정 -->
 	</beans:bean>
 		<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -28,6 +29,23 @@
 	
 	<context:component-scan base-package="spring.project.tcat" />
 	
+	 <!-- jackson을 위한 bean 추가 -->
+    <beans:bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 	
+	 <!--mail bean  -->
+   <beans:bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+      <beans:property name="host" value="smtp.gmail.com"/>
+      <beans:property name="port" value="587"/>
+      <beans:property name="username" value="jangget@gmail.com"/>
+      <beans:property name="password" value="clsrn123"/>
+      <beans:property name="javaMailProperties">
+         <beans:props>
+            <beans:prop key="mail.smtp.ssl.trust">smtp.gmail.com</beans:prop>
+            <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+            <beans:prop key="mail.smtp.auth">true</beans:prop>
+         </beans:props>
+      </beans:property>
+   </beans:bean>
+   <!-- mail 끝  -->
 	
 </beans:beans>

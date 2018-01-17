@@ -10,6 +10,7 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-<a href="hostMain_side">hostMain_side</a>
+<a href="hostPage">hostPage</a>
+<a href="guestPage">guestPage</a>
 </body>
 </html>
