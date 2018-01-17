@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import spring.project.tcat.config.Configuration;
 
 @Repository
-public class MhDAOImp implements MhDAO{
+public class JMHGuestDAOImp implements JMHGuestDAO{
 	
 	@Autowired
 	private JavaMailSender mailSender;
@@ -32,7 +32,7 @@ public class MhDAOImp implements MhDAO{
 	}
 	//아이디 이메일 유효성
 	public int  id_emailChk(Map<String,Object> map) {
-		MhDAO dao = Configuration.getMapper(MhDAO.class);
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
 		int cnt = dao.id_emailChk(map);
 		return cnt;
 	}

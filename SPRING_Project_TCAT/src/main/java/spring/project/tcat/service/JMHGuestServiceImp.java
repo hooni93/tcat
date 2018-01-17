@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import spring.project.tcat.persistence.MhDAO;
+import spring.project.tcat.persistence.JMHGuestDAO;
 
 @Service
-public class MhServiceImp implements MhService{
+public class JMHGuestServiceImp implements JMHGuestService{
 	@Autowired
-	MhDAO mhDAO;
+	JMHGuestDAO mhDAO;
 	
 	
 	//아이디,비밀번호 찾기

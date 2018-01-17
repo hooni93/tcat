@@ -7,12 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import spring.project.tcat.service.MhService;
+import spring.project.tcat.service.JMHGuestService;
 
 @Controller
-public class MhController {
+public class JMHGuestController {
 	@Autowired
-	MhService mhService;
+	JMHGuestService mhService;
 	
 	//////// 보류단계
 	//memberFind

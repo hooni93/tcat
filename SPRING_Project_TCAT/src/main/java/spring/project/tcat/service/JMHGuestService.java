@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
 
-public interface MhService {
+public interface JMHGuestService {
 	
 	//아이디,비밀번호 찾기
 	public void findIdPwd(HttpServletRequest req,Model model);
