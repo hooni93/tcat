@@ -1,16 +1,17 @@
 @charset "UTF-8";
-@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
-* {
- font-family: 'Nanum Gothic';
-	}
-@font-face {
-  font-family: achive;
-  src: url(../font/archive.otf);
-}
 @font-face {
   font-family: trgothic;
   src: url(../font/trgothic.otf);
 }
+@font-face {
+  font-family: achive;
+  src: url(../font/archive.otf);
+}
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+* {
+ font-family: 'Nanum Gothic';
+	}
+
 
    /* 초기화 */
    html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, input,
@@ -119,7 +120,9 @@
 	 text-docoration: none; 
 	 cursor: pointer; /* 현재 커서가 링크*/
 	}
-
+	.btn-product{
+	width: 130px;
+}
 
 	
 	

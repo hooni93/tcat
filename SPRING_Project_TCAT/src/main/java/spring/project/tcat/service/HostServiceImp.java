@@ -2044,161 +2044,156 @@ public class HostServiceImp implements HostService {
 
 
 
-	////////////  HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  ////////
-	@Override
-	public void hotMenu(HttpServletRequest req, Model model) {
-		int step=0;//조건비교
-	int hotCnt=0; //핫리스트 5개 출력
-	int cnt=0; //글 갯수
-	
-	int pageSize=5; //한 페이지당 출력할 글 갯수
-	int pageBlock= 2; //한 블럭당 페이지 갯수
-	
-	int start=0; //현재 페이지 글시작번호
-	int end=0; //현재 페이지 글 마지막번호
-	String pageNum=null; //페이지 번호
-	int currentPage = 0; //현재 페이지
-	
-	int pageCount = 0; //페이지 갯수
-	int startPage= 0;	//시작 페이지
-	int endPage=0;	//마지막 페이지
-	
-	String url=(String)req.getAttribute("url"); //사이드바 구분
-	String mDev="";
-	String sDev=req.getParameter("sDev");
-	String keyword = req.getParameter("keyword");
-	
-	if(sDev==null) {
-	    sDev="0";
-	 }
-	
-	 if(keyword==null) {
-	    keyword="";
-	 }
-	 if(url==null) {
-		 url="hotMusical";
-	 }
-	 
-	 if(url.equals("hotMusical")) {
-		 mDev="뮤지컬";
-	 }else if(url.equals("hotConcert")) {
-		 mDev="콘서트";
-	 }else if(url.equals("hotDrama")) {
-		 mDev="연극";
-	 }else if(url.equals("hotClassic")) {
-		 mDev="클래식";
-	 }else if(url.equals("hotStore")) {
-		 mDev="스토어";
-	 }
-	
-	cnt=hDao.hotNoArticleCnt();
-	pageNum=req.getParameter("pageNum");
-	if(pageNum == null) {
-		pageNum ="1";
-	}
-	currentPage=(Integer.parseInt(pageNum));
-	pageCount = (cnt/ pageSize)+(cnt% pageSize > 0 ? 1: 0);  //페이지 갯수 + 나머지
-		start=(currentPage -1)* pageSize+1;
-		end= start + pageSize -1;
-		if(end > cnt) end=cnt;
-	
-	Map<String,Object> map=new HashMap<String, Object>();
-	
-	//listCnt=hDao.hotNoArticleCnt();
-	//hotArticleCnt 공연정보에 스텝 이 2 인 값 출력
-	
-	hotCnt=hDao.hotArticleCnt();
-	System.out.println("goCnt:"+hotCnt);
-	if(hotCnt==0) {
-		ArrayList <TcatPerformanceVO> dtos= null;
-		dtos=hDao.hotList();
-			for(int i =0; i<dtos.size(); i++) {
-				int per_id=dtos.get(i).getPer_id();
-				step= hDao.hotUpdate(per_id);
-			}
-		}else if(hotCnt>0) {
-		//goCnt가 1이상이면 아래 문장 실행
-			
-			map.put("step", step);
-			map.put("mDev", mDev);
-			ArrayList <TcatPerformanceVO> vo= hDao.hotLast(map);
-			for(int i=0;i<vo.size();i++) {
-				System.out.println("Per_id:"+vo.get(i).getPer_id());
-				System.out.println("Per_id:"+vo.get(i).getPerf_title());
-				
-			}
-			model.addAttribute("vo", vo);
-		
-			if(cnt > 0) {
-			step=1;
-			map.put("step", step);
-			map.put("start", start);
-			map.put("end", end);
-			map.put("mDev", mDev);
-			map.put("sDev",sDev);
-			map.put("keyword", keyword);
-			
-			System.out.println("여기 후에cnt:"+step);
-			ArrayList <TcatPerformanceVO> full= hDao.hotLast(map);
-			System.out.println("1여기 후에cnt:"+step);
-			model.addAttribute("full", full);
-		}
-	}
-	startPage=(currentPage/pageBlock)* pageBlock +1; // (5/3)* 3+ 1= 4
-		if(currentPage % pageBlock ==0) startPage -= pageBlock; // (5%3)==0
-		endPage = startPage + pageBlock -1; // 4+3 -1 =6
-		if(endPage> pageCount) endPage = pageCount;
-		
-		
-		model.addAttribute("cnt",cnt);
-		model.addAttribute("pageNum",pageNum);
-		
-		if(cnt>0) {
-			model.addAttribute("startPage",startPage);
-			model.addAttribute("endPage",endPage);
-			model.addAttribute("pageBlock",pageBlock);
-			model.addAttribute("pageCount",pageCount);
-			model.addAttribute("currentPage",currentPage);
-			}
-	
-	}
-	//hot 메뉴 내리기
-	@Override
-	public void hotMenuDelete(HttpServletRequest req, Model model) {
-		int deleteCnt=0;
-		//파라미터값에 Hcnt는 넘길땐 per_id로 넘기고 get방식에서 만들어논 키값으로 넘겨서 Hcnt에 
-	//per_id가 들어있다
-	
-	/*ArrayList <TcatPerformanceVO> dtos= null;
-	dtos=hDao.hotList();
-	dtos.size();
-	System.out.println("dtos:"+dtos.size());*/
-	
-	 int strPer_id=Integer.parseInt(req.getParameter("Hcnt")); 
-	 deleteCnt=hDao.hotDeleteList(strPer_id);
-	 System.out.println("deleteCnt:"+deleteCnt);
-	model.addAttribute("deleteCnt", deleteCnt);
-	}
-	//hot 메뉴 올리기
+////////////HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  ////////
 		@Override
-		public void hotMenuUpdate(HttpServletRequest req, Model model) {
-			int updateCnt=0;
+		public void hotMenu(HttpServletRequest req, Model model) {
+			int step=0;//조건비교
+			int hotCnt=0; //핫리스트 5개 출력
+			int cnt=0; //글 갯수
+			
+			int pageSize=5; //한 페이지당 출력할 글 갯수
+			int pageBlock= 2; //한 블럭당 페이지 갯수
+			
+			int start=0; //현재 페이지 글시작번호
+			int end=0; //현재 페이지 글 마지막번호
+			String pageNum=null; //페이지 번호
+			int currentPage = 0; //현재 페이지
+			
+			int pageCount = 0; //페이지 갯수
+			int startPage= 0;	//시작 페이지
+			int endPage=0;	//마지막 페이지
+			
+			String url=(String)req.getAttribute("url"); //사이드바 구분
+			System.out.println("url:$$$$$$$$$"+url);
+			String mDev="";
+			String sDev=req.getParameter("sDev");
+			String keyword = req.getParameter("keyword");
+			
+			if(sDev==null) {
+	            sDev="0";
+	         }
+
+	         if(keyword==null) {
+	            keyword="";
+	         }
+	         if(url==null) {
+	        	 url="hotMusical";
+	         }
+	         
+	         if(url.equals("hotMusical")) {
+	        	 mDev="뮤지컬";
+	         }else if(url.equals("hotConcert")) {
+	        	 mDev="콘서트";
+	         }else if(url.equals("hotDrama")) {
+	        	 mDev="연극";
+	         }else if(url.equals("hotClassic")) {
+	        	 mDev="클래식";
+	         }else if(url.equals("hotStore")) {
+	        	 mDev="스토어";
+	         }
+			
+			cnt=hDao.hotNoArticleCnt();
+			pageNum=req.getParameter("pageNum");
+			if(pageNum == null) {
+				pageNum ="1";
+			}
+			currentPage=(Integer.parseInt(pageNum));
+			pageCount = (cnt/ pageSize)+(cnt% pageSize > 0 ? 1: 0);  //페이지 갯수 + 나머지
+	 		start=(currentPage -1)* pageSize+1;
+	 		end= start + pageSize -1;
+	 		if(end > cnt) end=cnt;
+			
+			Map<String,Object> map=new HashMap<String, Object>();
+			
+			hotCnt=hDao.hotArticleCnt();
+			System.out.println("goCnt:"+hotCnt);
+			if(hotCnt==0) {
+				ArrayList <TcatPerformanceVO> dtos= null;
+				dtos=hDao.hotList();
+					for(int i =0; i<dtos.size(); i++) {
+						int per_id=dtos.get(i).getPer_id();
+						step= hDao.hotUpdate(per_id);
+					}
+				}else if(hotCnt>0) {
+				//goCnt가 1이상이면 아래 문장 실행
+					
+					map.put("step", step);
+					map.put("mDev", mDev);
+					ArrayList <TcatPerformanceVO> vo= hDao.hotLast(map);
+					model.addAttribute("vo", vo);
+				
+					if(cnt > 0) {
+					step=1;
+					map.put("step", step);
+					map.put("start", start);
+		 			map.put("end", end);
+		 			map.put("mDev", mDev);
+					map.put("sDev",sDev);
+					map.put("keyword", keyword);
+		 			
+					System.out.println("여기 후에cnt:"+step);
+					ArrayList <TcatPerformanceVO> full= hDao.hotLast(map);
+					System.out.println("1여기 후에cnt:"+step);
+					model.addAttribute("full", full);
+				}
+			}
+			startPage=(currentPage/pageBlock)* pageBlock +1; // (5/3)* 3+ 1= 4
+	 		if(currentPage % pageBlock ==0) startPage -= pageBlock; // (5%3)==0
+	 		endPage = startPage + pageBlock -1; // 4+3 -1 =6
+	 		if(endPage> pageCount) endPage = pageCount;
+	 		
+	 		
+	 		model.addAttribute("cnt",cnt);
+	 		model.addAttribute("pageNum",pageNum);
+	 		
+	 		if(cnt>0) {
+	 			model.addAttribute("startPage",startPage);
+	 			model.addAttribute("endPage",endPage);
+	 			model.addAttribute("pageBlock",pageBlock);
+	 			model.addAttribute("pageCount",pageCount);
+	 			model.addAttribute("currentPage",currentPage);
+	 		}
+	 		
+	 			req.setAttribute("url", url);
+	 			System.out.println("url:-------"+url);
+		}
+		//hot 메뉴 내리기
+		@Override
+		public void hotMenuDelete(HttpServletRequest req, Model model) {
+			int deleteCnt=0;
+			//파라미터값에 Hcnt는 넘길땐 per_id로 넘기고 get방식에서 만들어논 키값으로 넘겨서 Hcnt에 
+			//per_id가 들어있다
 			
 			/*ArrayList <TcatPerformanceVO> dtos= null;
 			dtos=hDao.hotList();
 			dtos.size();
-			System.out.println("dtos1:"+dtos.size());
+			System.out.println("dtos:"+dtos.size());*/
 			
-			if(dtos.size() < 5) {
-				
-			}*/
-			 int strPer_id=Integer.parseInt(req.getParameter("Hcnt"));
-			 updateCnt=hDao.hotUpdateList(strPer_id);
-			 System.out.println("updateCnt:"+updateCnt);
-			model.addAttribute("updateCnt", updateCnt);
-			/*}*/
+			 int strPer_id=Integer.parseInt(req.getParameter("Hcnt")); 
+			 deleteCnt=hDao.hotDeleteList(strPer_id);
+			 System.out.println("deleteCnt:"+deleteCnt);
+			model.addAttribute("deleteCnt", deleteCnt);
 		}
-	/////////////  HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  ///////////////
+		//hot 메뉴 올리기
+				@Override
+				public void hotMenuUpdate(HttpServletRequest req, Model model) {
+					int updateCnt=0;
+					
+					/*ArrayList <TcatPerformanceVO> dtos= null;
+					dtos=hDao.hotList();
+					dtos.size();
+					System.out.println("dtos1:"+dtos.size());
+					
+					if(dtos.size() < 5) {
+						
+					}*/
+					 int strPer_id=Integer.parseInt(req.getParameter("Hcnt"));
+					 updateCnt=hDao.hotUpdateList(strPer_id);
+					 System.out.println("updateCnt:"+updateCnt);
+					model.addAttribute("updateCnt", updateCnt);
+					/*}*/
+				}
+		/////////////  HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  ///////////////
 		
 	///////////////////////  동금 1/9 start  //////////////////////// 
 	// HOST/상품관리/상품삭제  

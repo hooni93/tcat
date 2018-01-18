@@ -2,6 +2,7 @@ package spring.project.tcat.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -18,7 +19,13 @@ public class YMGuestServiceImp implements YMGuestService {
 	@Override
 	public void memberRating(HttpServletRequest req, Model model) {
 		int cnt=0;
-		String strId= req.getParameter("member_id");
-		//cnt=mRating(strId);
+		String strId = (String) req.getSession().getAttribute("member_id");
+		//멤버아이디의 구매 갯수 출력
+		cnt=YMDao.mRating(strId);
+		
+		if(cnt<=1) {
+			
+		}
+		
 	}
 }

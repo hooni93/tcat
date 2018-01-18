@@ -85,7 +85,7 @@ function load(url){
 			  	  <li class="active"><a href="#">로그인</a></li>
 				  <li><a href="#">회원가입</a></li>
 				  <li><a href="#">예매확인/취소</a></li>
-				  <li><a href="#">마이페이지</a></li>
+				  <li><a onclick="load('myPage');">마이페이지</a></li>
 				  <li><a href="#">위시리스트</a></li>
 				  <li><a href="#">고객센터</a></li>
 				  <li><a href="#">모바일APP</a></li>  
