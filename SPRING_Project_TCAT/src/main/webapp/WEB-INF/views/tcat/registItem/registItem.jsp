@@ -48,9 +48,6 @@
 
 	$(function() {
 		$("#store").click(function() {
-			
-			
-			
 			var formData = new FormData();
 			formData.append("disc_title", $(
 					"input[name=disc_title]").val());
