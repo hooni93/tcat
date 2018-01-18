@@ -19,9 +19,9 @@ public class DKGuestController {
 	public String qnaBoardList(HttpServletRequest req,Model model) {
 		System.out.println("qnaBoardList");
 		
+		dkService.qnaBoardList(req, model);
 		
-		
-		return "qna";
+		return "tcat/serviceCenter/qnaBoardList";
 	}
 	
 }
