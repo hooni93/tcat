@@ -82,10 +82,23 @@ function load(url){
 			<div class="col-md-1"></div>
 			<div class="col-md-8 ">
  			<ol class="breadcrumb floatR fs12px h18 pt10">
-			  	  <li class="active"><a data-toggle="modal" data-target="#login-modal">로그인</a></li>
-				  <li><a href="#">회원가입</a></li>
+			  	  <li class="active">
+			  	  	<c:if test="${login_id==null }">
+			  	  		<a data-toggle="modal" data-target="#login-modal">로그인</a>
+			  	  	</c:if>
+			  	  	<c:if test="${login_id!=null }">
+			  	  		<a href="logout">로그아웃</a>
+			  	  	</c:if>
+			  	  </li>
+				  <li>
+				  	<c:if test="${login_id==null }">
+			  	  		<a href="#">회원가입</a>
+			  	  	</c:if>
+			  	  	<c:if test="${login_id!=null }">
+			  	  		<a onclick="load('myPage');">마이페이지</a>
+			  	  	</c:if>
+				  </li>
 				  <li><a href="#">예매확인/취소</a></li>
-				  <li><a onclick="load('myPage');">마이페이지</a></li>
 				  <li><a href="#">위시리스트</a></li>
 				  <li><a href="#">고객센터</a></li>
 				  <li><a href="#">모바일APP</a></li>  
@@ -161,12 +174,11 @@ function load(url){
  	  <div class="modal-dialog">
 		<div class="loginmodal-container">
 			<h1>로그인하세요</h1><br>
-			<form>
-				<input type="text" name="user" placeholder="아이디">
-				<input type="password" name="pass" placeholder="비밀번호">
+			<form action="loginPro" method="Post">
+				<input type="text" name="member_id" placeholder="아이디">
+				<input type="password" name="member_pwd" placeholder="비밀번호">
 				<input type="submit" name="login" class="login loginmodal-submit" value="로그인">
 			</form>
-			
 			<div class="login-help">
 				<a href="#">회원가입</a> - <a href="memberFind">아이디/비밀번호 찾기</a>
 			</div>

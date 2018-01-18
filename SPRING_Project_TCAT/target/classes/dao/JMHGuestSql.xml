@@ -3,7 +3,7 @@
              PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="spring.project.tcat.persistence.MhDAO">
+<mapper namespace="spring.project.tcat.persistence.JMHGuestDAO">
 
 	<select id="id_emailChk" resultType="int">
 		SELECT 	COUNT(*)
@@ -11,4 +11,17 @@
 		WHERE	member_name LIKE '${member_name}'
 		AND		member_email = '${member_email}'
 	</select>
+	
+	<select id="loginPro" resultType="int">
+		SELECT 	COUNT(*)
+		FROM	member
+		WHERE	member_id = #{member_id}
+		AND		member_pwd = #{member_pwd}
+	</select>
+	
+	<update id="updateLastDate">
+		UPDATE	member
+		SET		lastDate = SYSDATE
+		WHERE 	member_id = #{member_id}
+	</update>
 </mapper>
