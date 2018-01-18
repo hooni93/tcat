@@ -1,11 +1,11 @@
 @charset "UTF-8";
 @font-face {
   font-family: trgothic;
-  src: url(../font/trgothic.otf);
+  src: url(../fonts/trgothic.ttf);
 }
 @font-face {
   font-family: achive;
-  src: url(../font/archive.otf);
+  src: url(../fonts/archive.ttf);
 }
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 * {
