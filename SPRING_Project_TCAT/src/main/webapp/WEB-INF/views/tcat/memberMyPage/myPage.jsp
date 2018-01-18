@@ -18,28 +18,37 @@
 		border:3px solid #f2ecdc;
 	}
 </style>
-
+<script type="text/javascript">
+	$(document).ready(function(){
+		myPageLoad('myPageMain');
+	})
+	
+	function myPageLoad(url){
+		$("#myPageResult").load(url);
+	}
+</script>
 
 </head>
 <!--마이페이지 메인  -->
 
 
 <!--메뉴  -->
-<div class="col-md-4">
+<div class="col-md-12">
 
-	<div class="sidebar-nav " >
-		<div class="well borderMenu" style="background-color:white; width: 300px; padding: 8px 0;">
-			<ul class="nav nav-list  ">
-				<li class="nav-header">마이페이지</li>
-				<li><a href="#"><i class="icon-edit"></i>회원정보수정</a></li>
-				<li><a href="#"><i class="icon-calendar"></i>회원등급포인트관리</a></li>
+
+<div class="col-md-3 ">
+	<div class="sidebar-nav disInline w70p" >
+		<div class="well borderMenu disInline w100p" style="background-color:white; padding: 8px 0;">
+			<ul class="nav nav-list  w100p ">
+				<li><a href="#" class="000000"><b>마이페이지</b></a><hr class="w90p" style="margin:0 auto;"></li>
+				<li><a href="#" class="000000">회원정보수정</a></li>
+				<li><a href="#" class="000000">회원등급포인트관리</a></li>
 			</ul>
 		</div>
 	</div>
-
-
 </div>
-<!--뿌려주는 div-->
-<div class="col-md-8"></div>
 
+<!--뿌려주는 div-->
+<div class="col-md-9" id="myPageResult"></div>
+</div>
 </html>
