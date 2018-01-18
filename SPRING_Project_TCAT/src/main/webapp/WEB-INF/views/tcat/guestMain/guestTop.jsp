@@ -160,15 +160,15 @@ function load(url){
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
  	  <div class="modal-dialog">
 		<div class="loginmodal-container">
-			<h1>Login to Your Account</h1><br>
+			<h1>로그인하세요</h1><br>
 			<form>
-				<input type="text" name="user" placeholder="Username">
-				<input type="password" name="pass" placeholder="Password">
-				<input type="submit" name="login" class="login loginmodal-submit" value="Login">
+				<input type="text" name="user" placeholder="아이디">
+				<input type="password" name="pass" placeholder="비밀번호">
+				<input type="submit" name="login" class="login loginmodal-submit" value="로그인">
 			</form>
 			
 			<div class="login-help">
-				<a href="#">Register</a> - <a href="#">Forgot Password</a>
+				<a href="#">회원가입</a> - <a href="memberFind">아이디/비밀번호 찾기</a>
 			</div>
 		</div>
 	</div>
