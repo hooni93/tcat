@@ -81,21 +81,21 @@ $(function() {
 	});
 });
 $(document).ready(function () {
+	
+    var navListItems = $('div.setup-panel div a'),//메인 스텝 1,2,3의 a태그 정보
+            allWells = $('.setup-content'), //밑에 뿌려줄 1,2,3의 정보
+            allNextBtn = $('.nextBtn'); //밑의 뿌려주는 부분의 다음 버튼 1,2
 
-    var navListItems = $('div.setup-panel div a'),
-            allWells = $('.setup-content'),
-            allNextBtn = $('.nextBtn');
+    allWells.hide(); //밑의 정보들을 숨겨놓기
 
-    allWells.hide();
+    navListItems.click(function (e) { //메인 스텝 1,2,3a태그가 클릭되면
+        e.preventDefault();//a태그의 이벤트를 정지시킨다
+        var $target = $($(this).attr('href')), //클릭된  a태그 버튼의 href의 정보를 가져와서 target에 저장
+                $item = $(this);//클릭된 a태그버튼정보 저장
 
-    navListItems.click(function (e) {
-        e.preventDefault();
-        var $target = $($(this).attr('href')),
-                $item = $(this);
-
-        if (!$item.hasClass('disabled')) {
-            navListItems.removeClass('btn-primary').addClass('btn-default');
-            $item.addClass('btn-primary');
+        if (!$item.hasClass('disabled')) {//클릭된 a태그버튼정보가 활성화되어있지 않으면
+            navListItems.removeClass('btn-primary').addClass('btn-default'); //모든 a태그 버튼을 btn-primary 클래스를 지우고 btn-default 클래스를 추가한다
+            $item.addClass('btn-primary'); //클릭한 a태그 버튼의 클래스에 btn-primary를 추가한다.
             allWells.hide();
             $target.show();
             $target.find('input:eq(0)').focus();
@@ -127,20 +127,27 @@ $(document).ready(function () {
 </head>
 <body>
 <div class="container">
+
 <div class="stepwizard">
     <div class="stepwizard-row setup-panel">
-        <div class="stepwizard-step">
-            <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
-            <p>Step 1</p>
-        </div>
-        <div class="stepwizard-step">
-            <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
-            <p>Step 2</p>
-        </div>
-        <div class="stepwizard-step">
-            <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-            <p>Step 3</p>
-        </div>
+	
+		        <div class="stepwizard-step">
+		            <a href="#step-1" type="button" class="btn btn-primary ">1</a>
+		            <p>Step 1</p>
+		        </div>
+
+
+		        <div class="stepwizard-step">
+		            <a href="#step-2" type="button" class="btn btn-default " disabled="disabled">2</a>
+		            <p>Step 2</p>
+		        </div>
+
+
+		        <div class="stepwizard-step">
+		            <a href="#step-3" type="button" class="btn btn-default " disabled="disabled">3</a>
+		            <p>Step 3</p>
+		        </div>
+
     </div>
 </div>
 <form role="form">
