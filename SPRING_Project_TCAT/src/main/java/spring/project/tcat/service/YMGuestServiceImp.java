@@ -3,12 +3,10 @@ package spring.project.tcat.service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
-
-import spring.project.tcat.persistence.MoGuestDAOImp;
-
+import spring.project.tcat.persistence.YMGuestDAOImpl;
 @Service
-public class MoGuestServiceImp implements MoGuestService {
+public class YMGuestServiceImp implements YMGuestService {
 
 	@Autowired
-	MoGuestDAOImp MGDao;
+	YMGuestDAOImpl YMDao;
 }
