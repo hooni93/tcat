@@ -47,10 +47,32 @@ public class JMHGuestController {
 	
 	/////////////////////////////////////////////////////////////
 	
-	//마이페이지 폼 myPage
+	//
 	@RequestMapping("myPage")
 	public String myPage(HttpServletRequest req, Model model) {
 		System.out.println("myPage");
 		return "tcat/memberMyPage/myPage";
 	}
+	//마이페이지 메인
+	@RequestMapping("myPageMain")
+	public String myPageMain(HttpServletRequest req, Model model) {
+		System.out.println("myPageMain");
+		return "tcat/memberMyPage/myPageMain";
+	}
+	//////////////////////////////////////////////////////////////
+	//로그인 처리 loginPro
+	@RequestMapping("loginPro")
+	public String loginPro(HttpServletRequest req, Model model) {
+		System.out.println("loginPro");
+		mhService.loginPro(req,model);
+		return "tcat/memberLogin/loginPro";
+	}
+	//로그아웃
+	@RequestMapping("logout")
+	public String logout(HttpServletRequest req, Model model) {
+		System.out.println("logout");
+		req.getSession().removeAttribute("login_id");
+		return "tcat/guestMain/guestPage";
+	}
+	
 }

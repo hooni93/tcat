@@ -1,11 +1,11 @@
 @charset "UTF-8";
 @font-face {
   font-family: trgothic;
-  src: url(../font/trgothic.otf);
+  src: url(../fonts/trgothic.ttf);
 }
 @font-face {
   font-family: achive;
-  src: url(../font/archive.otf);
+  src: url(../fonts/archive.ttf);
 }
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 * {
@@ -53,7 +53,7 @@
    .macenter{magin:0 auto;} .mauto {margin-left: auto; margin-right: auto;} .mhauto {margin-top: auto; margin-bottom: auto;} 
    .fs8{font-size:8px} .fs10{font-size:10px}  .fs11{font-size:11px}   .fs12px{font-size:12px} .fs12{font-size:12pt}   .fs15{font-size:15pt} .fs18{font-size:18pt}   .fs20{font-size:20pt}   .fs25{font-size:25pt}  .fs14px{font-size:14px;}
   	.m5{margin:5px;} .m10{margin:10px;}   .m20{margin:20px;}   .m30{margin:30px;}   .m40{margin:40px;}
-   .mt50{margin-top:100px;} .mr10{margin-right:10px;} .mr20{margin-right:50px;} 
+   .mt50{margin-top:100px;} .mr10{margin-right:10px;} .mr20{margin-right:50px;}
    .p10{padding:10px;}   .p20{padding:20px;}   .p30{padding:30px;}   .p40{padding:40px;}  .p5{padding:5px;} 
 	.pt3{padding-top:3px;} .pt30{padding-top:30px;} .pt18{padding-top:26px;}  .pt15{padding-top:15px;} .pt11{padding-top:11px;} .pt17{padding-top:16px;} .pt20{padding-top:20px;} .pt5{padding-top:5px;} .pt10{padding-top:10px;} 
    .pl10{padding-left:10px;}   .pl20{padding-left:20px;}   .pl30{padding-left:30px;}   .pl40{padding-left:40px;} .plA{padding-left: auto}
@@ -175,3 +175,103 @@
 		background:#f2f2f2;
 	}
 }
+
+
+/* 메인화면 로그인 모달 */
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+
+/****** LOGIN MODAL ******/
+.loginmodal-container {
+  padding: 30px;
+  max-width: 350px;
+  width: 100% !important;
+  background-color: #F7F7F7;
+  margin: 0 auto;
+  border-radius: 2px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  font-family: roboto;
+}
+
+.loginmodal-container h1 {
+  text-align: center;
+  font-size: 1.8em;
+  font-family: roboto;
+}
+
+.loginmodal-container input[type=submit] {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.loginmodal-container input[type=text], input[type=password] {
+  height: 44px;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  /* border-radius: 2px; */
+  padding: 0 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.loginmodal-container input[type=text]:hover, input[type=password]:hover {
+  border: 1px solid #b9b9b9;
+  border-top: 1px solid #a0a0a0;
+  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.loginmodal {
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  height: 36px;
+  padding: 0 8px;
+/* border-radius: 3px; */
+/* -webkit-user-select: none;
+  user-select: none; */
+}
+
+.loginmodal-submit {
+  /* border: 1px solid #3079ed; */
+  border: 0px;
+  color: #fff;
+  text-shadow: 0 1px rgba(0,0,0,0.1); 
+  background-color: #4d90fe;
+  padding: 17px 0px;
+  font-family: roboto;
+  font-size: 14px;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
+}
+
+.loginmodal-submit:hover {
+  /* border: 1px solid #2f5bb7; */
+  border: 0px;
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #357ae8;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
+}
+
+.loginmodal-container a {
+  text-decoration: none;
+  color: #666;
+  font-weight: 400;
+  text-align: center;
+  display: inline-block;
+  opacity: 0.6;
+  transition: opacity ease 0.5s;
+} 
+
+.login-help{
+  font-size: 12px;
+}
+/* 메인화면 로그인 모달  끝*/
