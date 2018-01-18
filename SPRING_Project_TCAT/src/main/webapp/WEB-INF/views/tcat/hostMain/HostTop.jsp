@@ -41,7 +41,7 @@ function ajaxSubmit(url){   /* AJAX submit */
                cache : false,
                data : formData,
                success :  function(msg) {
-                  $('#result').html(msg);  
+                  $('#result').html(msg);
                }, 
                error : onError
    });
@@ -118,14 +118,16 @@ function detailOpen(category,id){
 }
 /////////////////////////////////180115 장명훈 끝 ///////////////////////////////////////////
 
+ //모든 결과를 콜백되는 load쪽으로 뿌려준다.
+ //첫 페이지 hostMain [그후부터 들어오는 url에따라 result와 side_result를 바꿔준다.]
  
  function load(url){
 	 
-	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );	
+	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );	//hostPage의 오른쪽 result에 결과를 뿌려준다.
 	 
 	 if(url=="hostMain" || url=="join_retireMember" || url=="hotMusical" || url=="sleepMember" || url=="stockDelete_musical" || url=="stockOutOf_musical"
 		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" || url=="stockManagement" || url=="googleMap" || url=="registItem" || url=="memberModified"){
-	 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side" );	
+	 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side" );	//들어오는 url이 if조건에 만족할때 그에맞는 사이드페이지를 hostPage의 왼쪽 side_result쪽에 뿌려준다.
 	 }
  }
  
