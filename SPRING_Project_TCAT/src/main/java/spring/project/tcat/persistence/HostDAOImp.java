@@ -418,11 +418,9 @@ public class HostDAOImp implements HostDAO {
 		@Override
 		public int stockStore(Map<String, Object> map) {
 			int cnt = 0;
-			
 			System.out.println("ServiceImpl - category:" + map);
 			HostDAO dao = Configuration.getMapper(HostDAO.class);
 			cnt = dao.stockStore(map);
-			
 			return cnt;
 		}
 		//수정재고관리 카테고리별 출력(스토어만)

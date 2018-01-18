@@ -24,6 +24,7 @@ public class MoGuestContoroller {
 	@RequestMapping("guestMain")
 	public String guestMain(HttpServletRequest req,Model model) {
 		System.out.println("guestMain");
+		MGService.hotList(req, model);
 		return "tcat/guestMain/guestMain";
 	}
 	
