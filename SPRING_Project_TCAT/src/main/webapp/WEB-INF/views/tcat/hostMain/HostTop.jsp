@@ -209,7 +209,7 @@ function Sstep(url,category,disc_code,disc_step){
  	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
 }
 
-function categoryload(url,category){
+/* function categoryload(url,category){
 	var params="category="+category;
  
  	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
@@ -230,7 +230,7 @@ function categoryload0(url,category,pageNum,sDev,keyword){
 	var params="category="+category+"&pageNum="+pageNum+"&sDev="+sDev+"&keyword="+keyword;
 	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
  
-}
+} */
 /* 태성이 제작 */ 
  
 	 

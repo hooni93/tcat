@@ -111,14 +111,15 @@
 			</div>
 			<div class="col-md-1"></div>
 		</div>
-		<!-- 페이지 컨트롤 -->
+	<!-- 페이지 컨트롤 -->
 		<table style="width: 1000px" align="center">
 			<tr>
 				<th align="center"><c:if test="${cnt > 0}">
-						<!-- 처음[◀◀] / 이전 블록[◀] -->
-						<c:if test="${startPage > pageBlock}">
-							<a onclick="categoryload('categoryList','${category}','${sDev}','${keyword}');">[◀◀]</a>
-							<a onclick="categoryload0('categoryList','${category}','${startPage - pageBlock}','${sDev}','${keyword}');">[◀]</a>
+				<c:if test="${startPage > pageBlock}">
+						  <%--   <a onclick="categoryload('categoryList','${category}','${sDev}','${keyword}');">[◀◀]</a> --%>
+							<a onclick="load('categoryList?category=${category}&sDev=${sDev}&keyword=${keyword}');">[◀◀]</a>
+							<a onclick="load('categoryList?category=${category}&pageNum=${startPage - pageBlock}&sDev=${sDev}&keyword=${keyword}');">[◀]</a>
+							<%-- <a onclick="categoryload0('categoryList','${category}','${startPage - pageBlock}','${sDev}','${keyword}');">[◀]</a> --%>
 						</c:if>
 
 						<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -127,16 +128,15 @@
 							</c:if>
 
 							<c:if test="${i != currentPage}">
-								<a onclick="categoryload0('categoryList','${category}','${i}','${sDev}','${keyword}');">[${i}]</a>
+								<a onclick="load('categoryList?category=${category}&pageNum=${i}&sDev=${sDev}&keyword=${keyword}');">[${i}]</a>
+								
 							</c:if>
 						</c:forEach>
 
 						<!-- 다음[▶] / 끝[▶▶] -->
 						<c:if test="${pageCount > endPage}">
-							<a
-								onclick="categoryload0('categoryList','${category}','${startPage + pageBlock}','${sDev}','${keyword}');">[▶]</a>
-							<a
-								onclick="categoryload0('categoryList','${category}','${pageCount}','${sDev}','${keyword}');">[▶▶]</a>
+							<a onclick="load('categoryList?category=${category}&pageNum=${startPage + pageBlock}&sDev=${sDev}&keyword=${keyword}');">[▶]</a>
+							<a onclick="load('categoryList?category=${category}&pageCount=${pageCount}&sDev=${sDev}&keyword=${keyword}');">[▶▶]</a>
 						</c:if>
 					</c:if></th>
 			</tr>
@@ -225,15 +225,15 @@
 			</div>
 			<div class="col-md-1"></div>
 		</div>
-		<!-- 페이지 컨트롤 -->
+	<!-- 페이지 컨트롤 -->
 		<table style="width: 1000px" align="center">
 			<tr>
 				<th align="center"><c:if test="${cnt > 0}">
-						<!-- 처음[◀◀] / 이전 블록[◀] -->
-						<c:if test="${startPage > pageBlock}">
-							<a onclick="categoryload('categoryList','${category}','${sDev}','${keyword}');">[◀◀]</a>
-							<a
-								onclick="categoryload0('categoryList','${category}','${startPage - pageBlock}','${sDev}','${keyword}');">[◀]</a>
+				<c:if test="${startPage > pageBlock}">
+						  <%--   <a onclick="categoryload('categoryList','${category}','${sDev}','${keyword}');">[◀◀]</a> --%>
+							<a onclick="load('categoryList?category=${category}&sDev=${sDev}&keyword=${keyword}');">[◀◀]</a>
+							<a onclick="load('categoryList?category=${category}&pageNum=${startPage - pageBlock}&sDev=${sDev}&keyword=${keyword}');">[◀]</a>
+							<%-- <a onclick="categoryload0('categoryList','${category}','${startPage - pageBlock}','${sDev}','${keyword}');">[◀]</a> --%>
 						</c:if>
 
 						<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -242,16 +242,15 @@
 							</c:if>
 
 							<c:if test="${i != currentPage}">
-								<a onclick="categoryload0('categoryList','${category}','${i}','${sDev}','${keyword}');">[${i}]</a>
+								<a onclick="load('categoryList?category=${category}&pageNum=${i}&sDev=${sDev}&keyword=${keyword}');">[${i}]</a>
+								
 							</c:if>
 						</c:forEach>
 
 						<!-- 다음[▶] / 끝[▶▶] -->
 						<c:if test="${pageCount > endPage}">
-							<a
-								onclick="categoryload0('categoryList','${category}','${startPage + pageBlock}','${sDev}','${keyword}');">[▶]</a>
-							<a
-								onclick="categoryload0('categoryList','${category}','${pageCount}','${sDev}','${keyword}');">[▶▶]</a>
+							<a onclick="load('categoryList?category=${category}&pageNum=${startPage + pageBlock}&sDev=${sDev}&keyword=${keyword}');">[▶]</a>
+							<a onclick="load('categoryList?category=${category}&pageCount=${pageCount}&sDev=${sDev}&keyword=${keyword}');">[▶▶]</a>
 						</c:if>
 					</c:if></th>
 			</tr>
@@ -333,15 +332,15 @@
 			</div>
 			<div class="col-md-1"></div>
 		</div>
-		<!-- 페이지 컨트롤 -->
+<!-- 페이지 컨트롤 -->
 		<table style="width: 1000px" align="center">
 			<tr>
 				<th align="center"><c:if test="${cnt > 0}">
-						<!-- 처음[◀◀] / 이전 블록[◀] -->
-						<c:if test="${startPage > pageBlock}">
-							<a onclick="categoryload('categoryList','${category}','${sDev}','${keyword}');">[◀◀]</a>
-							<a
-								onclick="categoryload0('categoryList','${category}','${startPage - pageBlock}','${sDev}','${keyword}');">[◀]</a>
+				<c:if test="${startPage > pageBlock}">
+						  <%--   <a onclick="categoryload('categoryList','${category}','${sDev}','${keyword}');">[◀◀]</a> --%>
+							<a onclick="load('categoryList?category=${category}&sDev=${sDev}&keyword=${keyword}');">[◀◀]</a>
+							<a onclick="load('categoryList?category=${category}&pageNum=${startPage - pageBlock}&sDev=${sDev}&keyword=${keyword}');">[◀]</a>
+							<%-- <a onclick="categoryload0('categoryList','${category}','${startPage - pageBlock}','${sDev}','${keyword}');">[◀]</a> --%>
 						</c:if>
 
 						<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -350,16 +349,15 @@
 							</c:if>
 
 							<c:if test="${i != currentPage}">
-								<a onclick="categoryload0('categoryList','${category}','${i}','${sDev}','${keyword}');">[${i}]</a>
+								<a onclick="load('categoryList?category=${category}&pageNum=${i}&sDev=${sDev}&keyword=${keyword}');">[${i}]</a>
+								
 							</c:if>
 						</c:forEach>
 
 						<!-- 다음[▶] / 끝[▶▶] -->
 						<c:if test="${pageCount > endPage}">
-							<a
-								onclick="categoryload0('categoryList','${category}','${startPage + pageBlock}','${sDev}','${keyword}');">[▶]</a>
-							<a
-								onclick="categoryload0('categoryList','${category}','${pageCount}','${sDev}','${keyword}');">[▶▶]</a>
+							<a onclick="load('categoryList?category=${category}&pageNum=${startPage + pageBlock}&sDev=${sDev}&keyword=${keyword}');">[▶]</a>
+							<a onclick="load('categoryList?category=${category}&pageCount=${pageCount}&sDev=${sDev}&keyword=${keyword}');">[▶▶]</a>
 						</c:if>
 					</c:if></th>
 			</tr>
@@ -445,11 +443,12 @@
 		<table style="width: 1000px" align="center">
 			<tr>
 				<th align="center"><c:if test="${cnt > 0}">
-						<!-- 처음[◀◀] / 이전 블록[◀] -->
-						<c:if test="${startPage > pageBlock}">
-							<a onclick="categoryload('categoryList','${category}','${sDev}','${keyword}');">[◀◀]</a>
-							<a
-								onclick="categoryload0('categoryList','${category}','${startPage - pageBlock}','${sDev}','${keyword}');">[◀]</a>
+				<!-- 처음[◀◀] / 이전 블록[◀] -->
+				<c:if test="${startPage > pageBlock}">
+						  <%--   <a onclick="categoryload('categoryList','${category}','${sDev}','${keyword}');">[◀◀]</a> --%>
+							<a onclick="load('categoryList?category=${category}&sDev=${sDev}&keyword=${keyword}');">[◀◀]</a>
+							<a onclick="load('categoryList?category=${category}&pageNum=${startPage - pageBlock}&sDev=${sDev}&keyword=${keyword}');">[◀]</a>
+							<%-- <a onclick="categoryload0('categoryList','${category}','${startPage - pageBlock}','${sDev}','${keyword}');">[◀]</a> --%>
 						</c:if>
 
 						<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -458,15 +457,15 @@
 							</c:if>
 
 							<c:if test="${i != currentPage}">
-								<a onclick="categoryload0('categoryList','${category}','${i}','${sDev}','${keyword}');">[${i}]</a>
+								<a onclick="load('categoryList?category=${category}&pageNum=${i}&sDev=${sDev}&keyword=${keyword}');">[${i}]</a>
+								
 							</c:if>
 						</c:forEach>
 
 						<!-- 다음[▶] / 끝[▶▶] -->
-						
 						<c:if test="${pageCount > endPage}">
-							<a onclick="categoryload0('categoryList','${category}','${startPage + pageBlock}','${sDev}','${keyword}');">[▶]</a>
-							<a onclick="categoryload0('categoryList','${category}','${pageCount}','${sDev}','${keyword}');">[▶▶]</a>
+							<a onclick="load('categoryList?category=${category}&pageNum=${startPage + pageBlock}&sDev=${sDev}&keyword=${keyword}');">[▶]</a>
+							<a onclick="load('categoryList?category=${category}&pageCount=${pageCount}&sDev=${sDev}&keyword=${keyword}');">[▶▶]</a>
 						</c:if>
 					</c:if></th>
 			</tr>

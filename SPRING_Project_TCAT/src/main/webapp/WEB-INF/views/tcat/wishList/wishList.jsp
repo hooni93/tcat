@@ -7,15 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="row">
-	
-
-
-
-
-
-</div><!-- row end -->
-
 
 </body>
 </html>
