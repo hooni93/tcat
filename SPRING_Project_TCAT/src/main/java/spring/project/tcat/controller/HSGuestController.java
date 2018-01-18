@@ -25,7 +25,7 @@ public class HSGuestController {
 	@RequestMapping("chooseDay")
 	public String chooseDay(HttpServletRequest req, Model model) {
 		System.out.println("chooseDay");
-		
+		System.out.println("guest 회원가입 시작!!!");
 		return "tcat/Ticketing/chooseDay";
 	}
 	//확인용%%%%
