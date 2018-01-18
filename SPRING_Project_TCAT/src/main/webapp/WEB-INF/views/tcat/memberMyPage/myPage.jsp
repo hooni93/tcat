@@ -73,7 +73,7 @@ a:hover {
 			<li><a href="#"><span
 					class="glyphicon glyphicon-chevron-right"></span> Option 4</a></li>
 			<li><a href="#"><span
-					class="glyphicon glyphicon-chevron-right"></span> Option 5</a></li>
+					class="glyphicon glyphicon-chevron-right"></span> memberPoint</a></li>
 		</ul>
 	</div>
 

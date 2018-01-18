@@ -33,7 +33,7 @@
 	
 	<mappers>
 		<mapper resource="dao/HostMapSql.xml"/>
-		<mapper resource="dao/HSGuestMapSql.xml"/>
+		 <mapper resource="dao/HSGuestMapSql.xml"/>
 	    <mapper resource="dao/MoGuestMapSql.xml"/> 
 	    <mapper resource="dao/JMHGuestSql.xml"/> 
 	    <mapper resource="dao/YMGuestMapSql.xml"/>
