@@ -648,10 +648,10 @@ public class HostDAOImp implements HostDAO {
 	}
 	//예매 갯수 출력
 	@Override
-	public int hotNoArticleCnt() {
+	public int hotNoArticleCnt(Map<String,Object> map2) {
 		int cnt=0;
 		HostDAO dao= Configuration.getMapper(HostDAO.class);
-		cnt=dao.hotNoArticleCnt();
+		cnt=dao.hotNoArticleCnt(map2);
 		return cnt;
 	}
 	//hotlist
