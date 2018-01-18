@@ -169,10 +169,10 @@ function detailOpen(category,id){
  
  /* 영민이 제작 */
 	//핫리스트 조건
-	 function hotDelete(hotListSize, per_id){
-		 
+	 function hotDelete(hotListSize, per_id,url){
+		 alert(url);
 		 if(hotListSize>1){
-			 load('hotMenuDelete?Hcnt='+per_id);
+			 load('hotMenuDelete?Hcnt='+per_id+'&url='+url);
 		 }else{
 			 alert("핫리스트가 1건 입니다.");
 			 alert("삭제할 수 없습니다.");
@@ -180,10 +180,10 @@ function detailOpen(category,id){
 		 } 
 	 }
 	
-	 function hotUpdate(hotListSize, per_id){
-		 
+	 function hotUpdate(hotListSize, per_id,url){
+		 alert(url);
 		 if(hotListSize<4){
-			 load('hotMenuUpdate?Hcnt='+per_id);
+			 load('hotMenuUpdate?Hcnt='+per_id+'&url='+url);
 		 }else{
 			 alert("핫리스트가 꽉 찾습니다.");
 			 alert("추가할 수 없습니다.");
@@ -208,32 +208,7 @@ function Sstep(url,category,disc_code,disc_step){
 	var params="disc_code="+disc_code+"&category="+category+"&disc_step="+disc_step;
  	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
 }
-
-/* function categoryload(url,category){
-	var params="category="+category;
  
- 	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
-}
-
-function categoryload0(url,category,pageNum){
-	var params="category="+category+"&pageNum="+pageNum;
-	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
- 
-}
-function categoryload(url,category,sDev,keyword){
-	var params="category="+category+"&sDev="+sDev+"&keyword="+keyword;
- 
- 	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
-}
-
-function categoryload0(url,category,pageNum,sDev,keyword){
-	var params="category="+category+"&pageNum="+pageNum+"&sDev="+sDev+"&keyword="+keyword;
-	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
- 
-} */
-/* 태성이 제작 */ 
- 
-	 
 	 
 </script>
 

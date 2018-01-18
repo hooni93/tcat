@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 </head>
 
 <body>
@@ -69,81 +69,29 @@
     <div class="row">
     	<div class="col-md-12">
     	<div class="col-md-1"></div>
+    	<c:forEach var="vo" items="${dtos}" >
 			<div class="col-sm-3 col-md-2">
 				<div class="thumbnail" >
-					<img src="${image}performance/.jpg" class="img-responsive">
+					<img src="${image}performance/${vo.perf_Image}" class="img-responsive">
 					<div class="caption">
-						<h5 class="c">Galaxy S5awefaw</h5>
-						<h6 class="c"><label>$649.99</label></h6>
+						<h6 class="c"><label>${vo.perf_title}</label></h6>
+						<h6 class="c">${vo.hall_name}</h6>
+						<h6 class="c">
+							<c:set var="startdate" value="${fn:split(vo.startDate,' ')}"/>
+							${startdate[0]}
+						</h6>
+						<h6 class="c">
+							<c:set var="enddate" value="${fn:split(vo.endDate,' ')}"/>
+							<span> ~ </span> ${enddate[0]}
+						</h6>
 					</div>
-					<div class="c">
+					<div class="c m5">
 						<a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a> 
-					</div>
-					<div class="c">
 						<a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> 예매</a>
-						</div>
+					</div>
 					</div><!-- outline -->
 				</div><!-- md2 -->
-			<div class="col-sm-3 col-md-2">
-				<div class="thumbnail" >
-					<img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive">
-					<div class="caption">
-						<h5 class="c">Galaxy S5awefaw</h5>
-						<h6 class="c"><label>$649.99</label></h6>
-					</div>
-					<div class="c">
-						<a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a> 
-					</div>
-					<div class="c">
-						<a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> 예매</a>
-					</div>	
-				</div><!-- outline -->
-			</div><!-- md2 -->
-			<div class="col-sm-3 col-md-2">
-				<div class="thumbnail" >
-					<img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive">
-					<div class="caption">
-						<h5 class="c">Galaxy S5awefaw</h5>
-						<h6 class="c"><label>$649.99</label></h6>
-					</div>
-					<div class="c">
-						<a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a> 
-					</div>
-					<div class="c">
-						<a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> 예매</a>
-					</div>
-				</div><!-- outline -->
-			</div><!-- md2 -->
-			<div class="col-sm-3 col-md-2">
-				<div class="thumbnail" >
-					<img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive">
-					<div class="caption">
-						<h5 class="c">Galaxy S5awefaw</h5>
-						<h6 class="c"><label>$649.99</label></h6>
-					</div>
-					<div class="c">
-						<a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a> 
-					</div>
-					<div class="c">
-						<a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> 예매</a>
-					</div>
-				</div><!-- outline -->
-			</div><!-- md2 -->
-			<div class="col-sm-3 col-md-2">
-				<div class="thumbnail" >
-					<img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive">
-					<div class="caption">
-						<h5 class="c">Galaxy S5awefaw</h5>
-						<h6 class="c"><label>$649.99</label></h6>
-					</div>
-					<div class="c">
-						<a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a> 
-					</div>
-					<div class="c">
-						<a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> 예매</a>
-					</div>
-				</div><!-- outline -->
-			</div><!-- md2 -->
+		</c:forEach>
 		</div><!-- md12 -->
 
         <div class="col-md-1"></div>

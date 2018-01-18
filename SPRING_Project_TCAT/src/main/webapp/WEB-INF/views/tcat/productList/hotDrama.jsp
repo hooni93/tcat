@@ -48,7 +48,7 @@
 										<td>${v.per_step}</td>
 										<td><c:if test="${vo.size()!=null}">
 												<button type="button" class="btn btn-primary"
-													onclick="return hotDelete(${vo.size()},${v.per_id})">삭제</button>
+													onclick="return hotDelete('${vo.size()}','${v.per_id}','hotDrama')">삭제</button>
 											</c:if></td>
 
 									</tr>
@@ -86,7 +86,7 @@
 													onclick="return hotUpdate(1,${full.per_id})">추가</button>
 											</c:if> <c:if test="${vo.size()!=null}">
 												<button type="button" class="btn btn-primary"
-													onclick="return hotUpdate(${vo.size()},${full.per_id})">추가</button>
+													onclick="return hotUpdate('${vo.size()}','${full.per_id}','hotDrama')">추가</button>
 											</c:if></td>
 									</tr>
 								</c:forEach>
@@ -102,9 +102,9 @@
 								<th align="center"><c:if test="${cnt > 0}">
 										<!-- 처음[◀◀] / 이전 블록[◀] -->
 										<c:if test="${startPage > pageBlock}">
-											<%-- <a onclick="categoryload('categoryList','${category}');">[◀◀]</a> --%>
+				
 											<a
-												onclick="categoryload0('hotDrama','${category}','${startPage - pageBlock}');">[◀]</a>
+												onclick="load('hotDrama?pageNum=${startPage - pageBlock}');">[◀]</a>
 										</c:if>
 
 										<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -114,24 +114,24 @@
 
 											<c:if test="${i != currentPage}">
 												<a
-													onclick="categoryload0('hotDrama','${category}','${i}');">[${i}]</a>
+													onclick="load('hotDrama?pageNum=${i}');">[${i}]</a>
 											</c:if>
 										</c:forEach>
 
 										<!-- 다음[▶] / 끝[▶▶] -->
 										<c:if test="${pageCount > endPage}">
 											<a
-												onclick="categoryload0('hotDrama','${category}','${startPage + pageBlock}');">[▶]</a>
+												onclick="load('hotDrama?pageNum=${startPage + pageBlock}');">[▶]</a>
 											<a
-												onclick="categoryload0('hotDrama','${category}','${pageCount}');">[▶▶]</a>
+												onclick="load('hotDrama?pageNum=${pageCount}');">[▶▶]</a>
 										</c:if>
 									</c:if></th>
 							</tr>
 						</table>
 
-						<form class="navbar-form navbar-right" role="search"
+						<!-- <form class="navbar-form navbar-right" role="search"
 							id="ajaxSubmitForm" onsubmit="return false">
-							<!--카테고리  -->
+							카테고리 
 							<select id="sDev" name="sDev" class="m10 p5">
 								<option value="0">분류</option>
 								<option value="1">공연번호</option>
@@ -145,7 +145,7 @@
 							<button type="button" class="btn btn-default"
 								onclick="ajaxSubmit('hotDrama')">검색</button>
 				
-						</form>
+						</form> -->
 
 					</div>
 				</div>
