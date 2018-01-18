@@ -96,14 +96,14 @@ $(document).ready(function () {
         if (!$item.hasClass('disabled')) {//클릭된 a태그버튼정보가 활성화되어있지 않으면
             navListItems.removeClass('btn-primary').addClass('btn-default'); //모든 a태그 버튼을 btn-primary 클래스를 지우고 btn-default 클래스를 추가한다
             $item.addClass('btn-primary'); //클릭한 a태그 버튼의 클래스에 btn-primary를 추가한다.
-            allWells.hide();
-            $target.show();
-            $target.find('input:eq(0)').focus();
+            allWells.hide(); //모든 밑의 정보를 숨기기
+            $target.show(); //a태그에 저장되있는 href연결되있는 부분을 보여준다.
+            $target.find('input:eq(0)').focus(); //a태그에 저장되있는 href연결되있는 부분의 첫번째 input에 focus를 준다.
         }
     });
 
-    allNextBtn.click(function(){
-        var curStep = $(this).closest(".setup-content"),
+    allNextBtn.click(function(){ //다음 버튼이 클릭되었을때
+        var curStep = $(this).closest(".setup-content"),// carStep에 지금있는 정
             curStepBtn = curStep.attr("id"),
             nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
             curInputs = curStep.find("input[type='text'],input[type='url']"),
@@ -147,6 +147,16 @@ $(document).ready(function () {
 		            <a href="#step-3" type="button" class="btn btn-default " disabled="disabled">3</a>
 		            <p>Step 3</p>
 		        </div>
+		        
+		        <div class="stepwizard-step">
+		            <a href="#step-3" type="button" class="btn btn-default " disabled="disabled">4</a>
+		            <p>Step 4</p>
+		        </div>
+		        
+		        <div class="stepwizard-step">
+		            <a href="#step-3" type="button" class="btn btn-default " disabled="disabled">5</a>
+		            <p>Step 5</p>
+		        </div>
 
     </div>
 </div>
@@ -183,7 +193,39 @@ $(document).ready(function () {
             </div>
         </div>
     </div>
-    <div class="row setup-content" id="step-3">
+    <div class="row setup-content" id="step-4">
+        <div class="col-xs-12">
+            <div class="col-md-12">
+                <h3> Step 2</h3>
+                <div class="form-group">
+                    <label class="control-label">aaae</label>
+                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">sss</label>
+                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address"  />
+                </div>
+                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+            </div>
+        </div>
+    </div>
+    <div class="row setup-content" id="step-5">
+        <div class="col-xs-12">
+            <div class="col-md-12">
+                <h3> Step 2</h3>
+                <div class="form-group">
+                    <label class="control-label">Company Name</label>
+                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Company Address</label>
+                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address"  />
+                </div>
+                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+            </div>
+        </div>
+    </div>
+       <div class="row setup-content" id="step-5">
         <div class="col-xs-12">
             <div class="col-md-12">
                 <h3> Step 3</h3>
