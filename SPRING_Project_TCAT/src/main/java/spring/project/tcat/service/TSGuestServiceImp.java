@@ -11,7 +11,7 @@ import spring.project.tcat.persistence.TSGuestDAOImp;
 @Service
 public class TSGuestServiceImp implements TSGuestService{
 	@Autowired
-	TSGuestDAOImp tsDAO;
+	TSGuestDAOImp tsGDAO;
 	
 	//회원정보 수정
 	@Override
