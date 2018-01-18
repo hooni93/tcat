@@ -141,12 +141,12 @@ function load(url){
 			          
 			          
 			          <ul class=" navbar-nav navbar-right">
-			            <li> <a class="trgothic ffffff fs14px b mr20 guestMenuHover" href="#">뮤지컬</a></li>
-			            <li><a class="trgothic ffffff fs14px b mr20 guestMenuHover" href="#">콘서트</a></li>
-			            <li><a class="trgothic ffffff fs14px b mr20 guestMenuHover" href="#">연극</a></li>
-			            <li><a class="trgothic ffffff fs14px b mr20 guestMenuHover" href="#">클래식</a></li>
-			            <li><a class="trgothic ffffff fs14px b mr20 guestMenuHover" href="#">무용/발레</a></li>
-			            <li><a class="trgothic ffffff fs14px b mr20 guestMenuHover" href="#">스토어</a></li>
+			            <li> <a class="trgothic ffffff fs14px b mr20 guestMenuHover" onclick="load('musicalMain');">뮤지컬</a></li>
+			            <li><a class="trgothic ffffff fs14px b mr20 guestMenuHover" onclick="load('concertMain');">콘서트</a></li>
+			            <li><a class="trgothic ffffff fs14px b mr20 guestMenuHover" onclick="load('dramaMain');">연극</a></li>
+			            <li><a class="trgothic ffffff fs14px b mr20 guestMenuHover" onclick="load('classicMain');">클래식</a></li>
+			            <li><a class="trgothic ffffff fs14px b mr20 guestMenuHover" onclick="load('danceMain');">무용/발레</a></li>
+			            <li><a class="trgothic ffffff fs14px b mr20 guestMenuHover" onclick="load('storeMain');">스토어</a></li>
 			          </ul>
 			    </div><!-- /.navbar-collapse -->
 			 </div>   
