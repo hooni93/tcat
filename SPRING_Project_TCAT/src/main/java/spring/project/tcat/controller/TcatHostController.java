@@ -643,8 +643,9 @@ public class TcatHostController {
 	public String hotDelete(HttpServletRequest req, Model model) {
 		System.out.println("hotMenuDelete");
 		String url = "";
-		url = (String) req.getAttribute("url");
-		System.out.println("2222url" + url);
+		url = req.getParameter("url");
+		
+		System.out.println("222url" + url);
 		req.setAttribute("url", url);
 		hService.hotMenuDelete(req, model);
 		hService.hotMenu(req, model);
@@ -659,9 +660,11 @@ public class TcatHostController {
 	public String hotUpdate(HttpServletRequest req, Model model) {
 		System.out.println("hotMenuUpdate");
 		String url = "";
-		url = (String) req.getAttribute("url");
-		req.setAttribute("url", url);
+		url = req.getParameter("url");
 		System.out.println("1111url" + url);
+		
+		req.setAttribute("url", url);
+		
 		hService.hotMenuUpdate(req, model);
 		hService.hotMenu(req, model);
 		System.out.println("url" + url);

@@ -60,7 +60,7 @@
 				<ul class="nav nav-list  w100p ">
 					<li><a href="#" class="000000"><b>마이페이지</b></a>
 					<hr class="w90p" style="margin: 0 auto;"></li>
-					<li><a href="#" class="000000">회원정보수정</a></li>
+					<li><a onclick="load('myModifyForm');" class="000000">회원정보수정</a></li>
 					<li><a href="#" class="000000">회원등급포인트관리</a></li>
 				</ul>
 			</div>

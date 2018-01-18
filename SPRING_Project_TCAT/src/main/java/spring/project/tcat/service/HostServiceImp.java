@@ -2051,7 +2051,7 @@ public class HostServiceImp implements HostService {
 			int hotCnt=0; //핫리스트 5개 출력
 			int cnt=0; //글 갯수
 			
-			int pageSize=5; //한 페이지당 출력할 글 갯수
+			int pageSize=3; //한 페이지당 출력할 글 갯수
 			int pageBlock= 2; //한 블럭당 페이지 갯수
 			
 			int start=0; //현재 페이지 글시작번호
@@ -2091,8 +2091,12 @@ public class HostServiceImp implements HostService {
 	         }else if(url.equals("hotStore")) {
 	        	 mDev="스토어";
 	         }
-			
-			cnt=hDao.hotNoArticleCnt();
+	        Map<String,Object> map2 = new HashMap<String,Object>();
+	        map2.put("step", 1);
+			map2.put("mDev", mDev);
+	         
+			cnt=hDao.hotNoArticleCnt(map2);
+			System.out.println("cnt====="+cnt);
 			pageNum=req.getParameter("pageNum");
 			if(pageNum == null) {
 				pageNum ="1";
@@ -2103,7 +2107,7 @@ public class HostServiceImp implements HostService {
 	 		end= start + pageSize -1;
 	 		if(end > cnt) end=cnt;
 			
-			Map<String,Object> map=new HashMap<String, Object>();
+			
 			
 			hotCnt=hDao.hotArticleCnt();
 			System.out.println("goCnt:"+hotCnt);
@@ -2112,11 +2116,11 @@ public class HostServiceImp implements HostService {
 				dtos=hDao.hotList();
 					for(int i =0; i<dtos.size(); i++) {
 						int per_id=dtos.get(i).getPer_id();
-						step= hDao.hotUpdate(per_id);
+						hotCnt= hDao.hotUpdate(per_id);
 					}
 				}else if(hotCnt>0) {
 				//goCnt가 1이상이면 아래 문장 실행
-					
+					Map<String,Object> map=new HashMap<String, Object>();
 					map.put("step", step);
 					map.put("mDev", mDev);
 					ArrayList <TcatPerformanceVO> vo= hDao.hotLast(map);
@@ -2154,7 +2158,7 @@ public class HostServiceImp implements HostService {
 	 			model.addAttribute("currentPage",currentPage);
 	 		}
 	 		
-	 			req.setAttribute("url", url);
+	 			req.setAttribute("url1", url);
 	 			System.out.println("url:-------"+url);
 		}
 		//hot 메뉴 내리기
