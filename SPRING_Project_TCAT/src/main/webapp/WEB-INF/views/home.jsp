@@ -6,11 +6,12 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	Hello world!
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
 <a href="hostPage">hostPage</a>
 <a href="guestPage">guestPage</a>
+<a href="myPage">myPage</a>
 </body>
 </html>
