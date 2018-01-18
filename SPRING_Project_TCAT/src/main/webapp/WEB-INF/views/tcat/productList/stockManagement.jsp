@@ -87,8 +87,8 @@ function stockManagement_modify(code){
 				<th align="center"><c:if test="${cnt > 0}">
 						<!-- 처음[◀◀] / 이전 블록[◀] -->
 						<c:if test="${startPage > pageBlock}">
-							<a onclick="categoryload('stockManagement','${category}','${sDev}','${keyword}';">[◀◀]</a>
-							<a onclick="categoryload0('stockManagement','${category}','${startPage - pageBlock}','${sDev}','${keyword}');">[◀]</a>
+							<a onclick="load('stockManagement?category=${category}&sDev=${sDev}&keyword=${keyword}');">[◀◀]</a>
+							<a onclick="load('stockManagement?category=${category}&pageNum=${startPage - pageBlock}&sDev=${sDev}&keyword=${keyword}');">[◀]</a>
 						</c:if>
 
 						<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -97,14 +97,14 @@ function stockManagement_modify(code){
 							</c:if>
 
 							<c:if test="${i != currentPage}">
-								<a onclick="categoryload0('stockManagement','${category}','${i}','${sDev}','${keyword}');">[${i}]</a>
+								<a onclick="load('stockManagement?category=${category}&pageNum=${i}&sDev=${sDev}&keyword=${keyword}');">[${i}]</a>
 							</c:if>
 						</c:forEach>
 
 						<!-- 다음[▶] / 끝[▶▶] -->
 						<c:if test="${pageCount > endPage}">
-							<a onclick="categoryload0('stockManagement','${category}','${startPage + pageBlock}','${sDev}','${keyword}');">[▶]</a>
-							<a onclick="categoryload0('stockManagement','${category}','${pageCount}','${sDev}','${keyword}');">[▶▶]</a>
+							<a onclick="load('stockManagement?category=${category}&pageNum=${startPage + pageBlock}&sDev=${sDev}&keyword=${keyword}');">[▶]</a>
+							<a onclick="load('stockManagement?category=${category}&pageCount=${pageCount}&sDev=${sDev}&keyword=${keyword}');">[▶▶]</a>
 						</c:if>
 					</c:if></th>
 			</tr>
