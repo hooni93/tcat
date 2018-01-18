@@ -4,4 +4,4 @@
 <c:set var="css" value="/tcat/resources/css/"/>
 <c:set var="image" value="/tcat/resources/image/"/>
 <c:set var="script" value="/tcat/resources/script/"/>
-<c:set var="font" value="/tcat/resources/font/"/>
+<c:set var="font" value="/tcat/resources/fonts/"/>
