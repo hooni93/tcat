@@ -26,6 +26,5 @@ public class MoGuestContoroller {
 		System.out.println("guestMain");
 		return "tcat/guestMain/guestMain";
 	}
-	//현석이컴 고물
 	
 }
