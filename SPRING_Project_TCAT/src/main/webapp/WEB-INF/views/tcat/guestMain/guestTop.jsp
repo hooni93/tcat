@@ -82,7 +82,7 @@ function load(url){
 			<div class="col-md-1"></div>
 			<div class="col-md-8 ">
  			<ol class="breadcrumb floatR fs12px h18 pt10">
-			  	  <li class="active"><a href="#">로그인</a></li>
+			  	  <li class="active"><a data-toggle="modal" data-target="#login-modal">로그인</a></li>
 				  <li><a href="#">회원가입</a></li>
 				  <li><a href="#">예매확인/취소</a></li>
 				  <li><a onclick="load('myPage');">마이페이지</a></li>
@@ -156,6 +156,25 @@ function load(url){
 
 
 
+<!--로그인 창 MODAL  -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+ 	  <div class="modal-dialog">
+		<div class="loginmodal-container">
+			<h1>로그인하세요</h1><br>
+			<form>
+				<input type="text" name="user" placeholder="아이디">
+				<input type="password" name="pass" placeholder="비밀번호">
+				<input type="submit" name="login" class="login loginmodal-submit" value="로그인">
+			</form>
+			
+			<div class="login-help">
+				<a href="#">회원가입</a> - <a href="memberFind">아이디/비밀번호 찾기</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--로그인창 끝  -->
 
 
 </body>

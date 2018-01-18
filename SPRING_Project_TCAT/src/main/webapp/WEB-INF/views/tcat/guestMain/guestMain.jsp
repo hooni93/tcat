@@ -63,33 +63,18 @@
 				<div class="thumbnail" >
 					<img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive">
 					<div class="caption">
-						<div class="row">
-						<div class="col-md-1 col-xs-1"></div>
-							<div class="col-md-10 col-xs-10">
-								<h5 class="c">Galaxy S5awefaw</h5>
-							</div>	
-						<div class="col-md-1 col-xs-1"></div>
-						</div>
-						<div class="col-md-1 col-xs-1"></div>
-						<div class="col-md-10 col-xs-10 price">
-								<h6><label>$649.99</label></h6>
-							</div>
-						<div class="col-md-1 col-xs-1"></div>
-						<div class="row">
-						<div class="col-md-1"></div>
-							<div class="col-md-10">
-								<a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span>Like</a> 
-							</div>
-						<div class="col-md-1"></div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-							<a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> 예매</a></div>
-
-						</div>
+						<h5 class="c">Galaxy S5awefaw</h5>
+						<h6 class="c"><label>$649.99</label></h6>
 					</div>
-				</div>
-			</div>
+					<div class="c">
+						<a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a> 
+					</div>
+					<div class="c">
+						<a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> 예매</a></div>
+					</div>
+				</div><!-- outline -->
+			</div><!-- md2 -->
+		</div><!-- md12 -->
 		<!-- 	<div class="col-sm-6 col-md-4">
 				<div class="thumbnail" >
 					<h4 class="text-center"><span class="label label-info">Apple</span></h4>
@@ -147,8 +132,6 @@
             
             
         <div class="col-md-1"></div>
-        </div> <!-- md12 -->
-
 	</div><!--row 끝  -->
 </div><!-- 컨테이너 끝 -->
 <!-- 핫리스트 끝 -->
