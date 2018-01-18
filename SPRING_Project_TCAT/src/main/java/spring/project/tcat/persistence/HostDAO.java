@@ -192,7 +192,7 @@ public interface HostDAO {
 	//핫리스트 갯수
 	public int hotArticleCnt();
 	//핫리스트 아닌 갯수
-	public int hotNoArticleCnt();
+	public int hotNoArticleCnt(Map<String,Object> map);
 	//업데이트
 	public int hotUpdate(int per_id);
 	//전체 리스트

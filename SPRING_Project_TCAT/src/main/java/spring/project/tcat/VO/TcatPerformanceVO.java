@@ -302,8 +302,7 @@ public class TcatPerformanceVO {
 		Detail_Image = detail_Image;
 	}
     
-    
-    
+	
     
     
 }

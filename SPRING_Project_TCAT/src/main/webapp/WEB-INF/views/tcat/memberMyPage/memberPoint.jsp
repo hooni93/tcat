@@ -24,7 +24,7 @@
 					</div>
 
 					<div>
-					<h4>member_id의 등급은</h4>
+					<h4><%=request.getSession().getAttribute("login_id") %>의 등급은</h4>
 					<h4>Rating 입니다</h4>
 					<h4>총 구매횟수</h4>
 					<h4>buy</h4>
