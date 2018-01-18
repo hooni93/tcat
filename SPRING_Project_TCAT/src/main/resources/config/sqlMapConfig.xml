@@ -36,7 +36,9 @@
 		<mapper resource="dao/HSGuestMapSql.xml"/>
 	    <mapper resource="dao/MoGuestMapSql.xml"/> 
 	    <mapper resource="dao/JMHGuestSql.xml"/> 
-	    <mapper resource="dao/YMGuestMapSql.xml"/> 
+	    <mapper resource="dao/YMGuestMapSql.xml"/>
+	    <mapper resource="dao/DKGuestMapSql.xml"/>
+	    <mapper resource="dao/TSGuestMapSql.xml"/>
 	</mappers>
 	
 	
