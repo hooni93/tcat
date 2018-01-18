@@ -13,53 +13,29 @@
 <script src="${script}jquery-ui.js"></script>
 <link rel="stylesheet" href="${css}jquery-ui.css">
 
-
 <style type="text/css">
-.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus
-{
-	color: #fff;
-	background-color: #428bca;
-}
-
-.margintop20 {
-	margin-top: 20px;
-}
-
-.nav-pills>li>a {
-	border-radius: 0px;
-}
-
-a {
-	color: #000;
-	text-decoration: none;
-}
-
-a:hover {
-	color: #000;
-	text-decoration: none;
-}
-
-.nav-stacked>li+li {
-	margin-top: 0px;
-	margin-left: 0;
-	border-bottom: 1px solid #dadada;
-	border-left: 1px solid #dadada;
-	border-right: 1px solid #dadada;
-}
-
-.active2 {
-	border-right: 4px solid #428bca;
+.borderMenu {
+	border: 3px solid #f2ecdc;
 }
 </style>
+<script type="text/javascript">
+	$(document).ready(function() {
+		myPageLoad('myPageMain');
+	})
 
+	function myPageLoad(url) {
+		$("#myPageResult").load(url);
+	}
+</script>
 
 </head>
 <!--마이페이지 메인  -->
-
+<div class="row h25"></div>
 
 <!--메뉴  -->
-<div class="col-md-4">
+<div class="col-md-12">
 
+<<<<<<< HEAD
 	<div class="col-md-3 column margintop20">
 		<ul class="nav nav-pills nav-stacked">
 			<li><a href="#"><span
@@ -75,11 +51,25 @@ a:hover {
 			<li><a href="#"><span
 					class="glyphicon glyphicon-chevron-right"></span> memberPoint</a></li>
 		</ul>
+=======
+
+	<div class="col-md-3 ">
+		<div class="sidebar-nav disInline w70p">
+			<div class="well borderMenu disInline w100p"
+				style="background-color: white; padding: 8px 0;">
+				<ul class="nav nav-list  w100p ">
+					<li><a href="#" class="000000"><b>마이페이지</b></a>
+					<hr class="w90p" style="margin: 0 auto;"></li>
+					<li><a href="#" class="000000">회원정보수정</a></li>
+					<li><a href="#" class="000000">회원등급포인트관리</a></li>
+				</ul>
+			</div>
+		</div>
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 	</div>
 
+	<!--뿌려주는 div-->
+	<div class="col-md-8" id="myPageResult"></div>
 
 </div>
-<!--뿌려주는 div-->
-<div class="col-md-8"></div>
-
 </html>
