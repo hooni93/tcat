@@ -31,10 +31,25 @@ public class JMHGuestDAOImp implements JMHGuestDAO{
 		}
 	}
 	//아이디 이메일 유효성
+	@Override
 	public int  id_emailChk(Map<String,Object> map) {
 		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
 		int cnt = dao.id_emailChk(map);
 		return cnt;
+	}
+	
+	//로그인 처리
+	@Override
+	public int loginPro(Map<String,String> map) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		int cnt = dao.loginPro(map);
+		return cnt;
+	}
+	//접속일 갱신
+	@Override
+	public void updateLastDate(Map<String,String> map) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		dao.updateLastDate(map);
 	}
 
 }

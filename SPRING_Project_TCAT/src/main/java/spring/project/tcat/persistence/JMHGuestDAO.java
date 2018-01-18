@@ -8,4 +8,8 @@ public interface JMHGuestDAO {
 	public void sendIdMail(String member_email, String admit_num);
 	//아이디 이메일 유효성
 	public int  id_emailChk(Map<String,Object> map);
+	//로그인 처리
+	public int loginPro(Map<String,String> map);
+	//접속일 갱신
+	public void updateLastDate(Map<String,String> map);
 }

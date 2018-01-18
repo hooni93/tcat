@@ -63,4 +63,26 @@ public class JMHGuestServiceImp implements JMHGuestService{
 	public void findResult(HttpServletRequest req,Model model) {
 		
 	}
+	@Override
+	//로그인 처리
+	public void loginPro(HttpServletRequest req,Model model) {
+		//값 받기
+		String member_id = req.getParameter("member_id");
+		String member_pwd = req.getParameter("member_pwd");
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("member_id", member_id);
+		map.put("member_pwd", member_pwd);
+		//로그인 확인
+		int loginRs = mhDAO.loginPro(map);
+		if(loginRs==1) {
+			//접속일 갱신
+			mhDAO.updateLastDate(map);
+			//세션 태우기
+			//로그인 상태 아이디
+			req.getSession().setAttribute("login_id", member_id);
+		}
+		
+		//로그인 결과값
+		model.addAttribute("loginRs", loginRs);
+	}
 }

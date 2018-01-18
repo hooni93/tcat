@@ -35,6 +35,23 @@
 <!--메뉴  -->
 <div class="col-md-12">
 
+<<<<<<< HEAD
+	<div class="col-md-3 column margintop20">
+		<ul class="nav nav-pills nav-stacked">
+			<li><a href="#"><span
+					class="glyphicon glyphicon-chevron-right"></span> Home</a></li>
+			<li><a href="#"><span
+					class="glyphicon glyphicon-chevron-right"></span> Option 1</a></li>
+			<li><a href="#" ><span
+					class="glyphicon glyphicon-chevron-right"></span> Option 2 (active)</a></li>
+			<li><a href="#"><span
+					class="glyphicon glyphicon-chevron-right"></span> Option 3</a></li>
+			<li><a href="#"><span
+					class="glyphicon glyphicon-chevron-right"></span> Option 4</a></li>
+			<li><a href="#"><span
+					class="glyphicon glyphicon-chevron-right"></span> memberPoint</a></li>
+		</ul>
+=======
 
 	<div class="col-md-3 ">
 		<div class="sidebar-nav disInline w70p">
@@ -48,6 +65,7 @@
 				</ul>
 			</div>
 		</div>
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 	</div>
 
 	<!--뿌려주는 div-->
