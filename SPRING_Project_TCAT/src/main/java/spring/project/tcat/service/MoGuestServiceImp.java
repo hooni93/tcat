@@ -28,8 +28,7 @@ public class MoGuestServiceImp implements MoGuestService {
 		}
 		ArrayList<TcatPerformanceVO> dtos=null;
 		dtos=MGDao.hotList(category);
-		
-		
+		model.addAttribute("dtos", dtos);
 	}
 	
 	
