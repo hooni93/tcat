@@ -44,4 +44,13 @@ public class JMHGuestController {
 		mhService.findResult(req,model);
 		return "tcat/memberFind/findResult";
 	}
+	
+	/////////////////////////////////////////////////////////////
+	
+	//마이페이지 폼 myPage
+	@RequestMapping("myPage")
+	public String myPage(HttpServletRequest req, Model model) {
+		System.out.println("myPage");
+		return "tcat/memberMyPage/myPage";
+	}
 }
