@@ -32,7 +32,7 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
 		String formattedDate = dateFormat.format(date);
-		
+		/*112*/
 		model.addAttribute("serverTime", formattedDate );
 		req.getSession().setAttribute("page", "hostMain");
 		//ass
