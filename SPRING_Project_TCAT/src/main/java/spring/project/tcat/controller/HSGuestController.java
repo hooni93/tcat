@@ -28,5 +28,5 @@ public class HSGuestController {
 		
 		return "tcat/Ticketing/chooseDay";
 	}
-	
+	//확인용%%%%
 }
