@@ -1,54 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../setting.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
-<link href="${css}style.css" rel="stylesheet" type="text/css">
-<link href="${css}bootstrap_tcatMain.css" rel="stylesheet">
-<script src="${script}ajax/request.js"></script>
-<script src="${script}jquery-3.1.1.min.js"></script>
-<script src="${script}bootstrap.js"></script>
-<script src="${script}jquery-ui.js"></script>
-<link rel="stylesheet" href="${css}jquery-ui.css">
-
-
 <script type="text/javascript">
+	$(function() {
+		$('#login-form-link').click(function(e) {
+			$("#login-form").delay(100).fadeIn(100);
+			$("#register-form").fadeOut(100);
+			$('#register-form-link').removeClass('active');
+			$(this).addClass('active');
+			//e.preventDefault();
+		});
+		$('#register-form-link').click(function(e) {
+			$("#register-form").delay(100).fadeIn(100);
+			$("#login-form").fadeOut(100);
+			$('#login-form-link').removeClass('active');
+			$(this).addClass('active');
+			//e.preventDefault();
+		});
+	});
 	//emailSubmit(보낼 url, form아이디, 결과 뿌려줄 div아이디)
 	function emailSubmit(url, form, result) { /*AJAX submit  */
 		var formData = $(form).serialize();
 		var member_name = $(form + " input[name='member_name']");
 		var member_email = $(form + " input[name='member_email']");
-		var admit_num = $(form + " input[name='admit_num']");
-		var admit_num_submit = $(form + " input[name='admit_num_submit']").val();
-		var admit_num_res =	<%=request.getSession().getAttribute("admit_num")   %>;
-		
-		//뇌정지
-		alert(admit_num_res);
-		alert(url);
-		if(url=="findResult"){
-			if(admit_num_submit!=1){
+		var admit_code = $(form + " input[name='admit_code']");
+		var admit_code_submit = $("#admit_code_submit").val();
+		alert(admit_code_submit);
+		if (url == "findResult") {
+			if (admit_code_submit != 1) {
 				alert("인증번호 전송을 해주세요.");
 				return false;
 			}
-			if(!admit_num.val()){
+			if (!admit_code.val()) {
 				alert("인증번호를 입력해주세요.");
-				admit_num.focus();
+				admit_code.focus();
 				return false;
 			}
-			if(admit_num.val().length!=6){
+			if (admit_code.val().length != 6) {
 				alert("인증번호는 6자리 입니다.");
-				admit_num.focus();
+				admit_code.focus();
 				return false;
 			}
-			//세션의 인증번호 확인
-			
-				
 		}
+		
 		if (!member_name.val()) {
 			alert("이름을 입력해주세요.");
 			member_name.focus();
@@ -73,10 +72,6 @@
 			alert("error");
 		}
 	}
-	//result div에 뿌리기
-	function load(url){
-		 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );	
-	 }
 </script>
 <style type="text/css">
 .panel-login {
@@ -188,29 +183,125 @@
 	border-color: #1CA347;
 }
 </style>
-
-
-<title>TCAT: 아이디/비밀번호찾기</title>
 </head>
-
-<body style="background-color: #d0d0d0" onload="load('findForm')">
-	<!--상단  -->
-	<div class="container-fluid" style="background-color: #ff3333">
-		<div class="navbar-header">
-			<a class="navbar-brand"><b>TCAT</b></a>
+<!--  -->
+<div class="panel panel-login">
+	<!--탭  -->
+	<div class="row ">
+		<div class="col-xs-12" style="padding-right: 20px;">
+			<a data-dismiss="modal" class="00ffff fs20 floatR">X</a>
 		</div>
 	</div>
-	
-	<div class="row h100"></div>
-	<div class="row">
-				<div class="col-md-3"></div>
-				<!--결과 뿌려지는곳  -->
-				<div class="col-md-6" id="result"></div>
-				<div class="col-md-3"></div>
+	<div class="panel-heading">
+		<div class="row">
+			<div class="col-xs-6">
+				<a class="active" id="login-form-link">아이디 찾기</a>
+			</div>
+			<div class="col-xs-6">
+				<a id="register-form-link">비밀번호 찾기</a>
+			</div>
+		</div>
+		<hr>
 	</div>
-	<div class="row h100"></div>
-	
-	<%@include file="../hostMain/HostFooter.jsp"%>
+	<!--탭시 보여주는 패널  -->
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-lg-12">
 
-</body>
+
+				<form id="login-form" action="" method="post" role="form"
+					style="display: block;">
+
+					<!--회원 이름 입력  -->
+					<div class="form-group">
+						<input type="text" name="member_name" tabindex="1"
+							class="form-control" placeholder="이름" value="${member_name}">
+					</div>
+
+					<div class="form-group fs10">본인확인 이메일 주소와 입력한 이메일 주소가 같아야,
+						인증번호를 받을 수 있습니다.</div>
+						
+					<!--이메일 입력  -->
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-8">
+								<input type="text" name="member_email" tabindex="3"
+									class="form-control" placeholder="E-mail" value="${member_email }">
+							</div>
+							<div class="col-md-4">
+								<input type="button" tabindex="3"
+									onclick="return emailSubmit('findId','#login-form','#idResult')"
+									class="form-control btn btn-login" value="인증번호 전송">
+							</div>
+						</div>
+					</div>
+					<!--	아이디, 이메일 매치시: 인증번호가 전송되었습니다
+							 비매치: 등록된 아이디가 아니거나 이메일주소가 아닙니다.  -->
+					<div id="idResult"></div>
+
+					<!--이메일 인증번호입력  -->
+					<div class="form-group text-center">
+						<input type="text" name="admit_code" tabindex="4" maxlength="6"
+							class="form-control" placeholder="인증번호 입력(6자리)">
+					</div>
+					<!--아이디찾기  -->
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm-6 col-sm-offset-3">
+								<input type="button" name="login-submit" id="login-submit"
+									tabindex="5" class="form-control btn btn-login" value="아이디 찾기"
+									onclick="return emailSubmit('findResult','#login-form','#idResult')">
+							</div>
+						</div>
+					</div>
+				</form>
+
+				<!--비밀번호 찾기  -->
+				<form id="register-form"
+					action="https://phpoll.com/register/process" method="post"
+					role="form" style="display: none;">
+					<!--회원 아이디 입력  -->
+					<div class="form-group">
+						<input type="text" name="member_id" tabindex="1"
+							class="form-control" placeholder="아이디" value="">
+					</div>
+					<div class="form-group fs10">본인확인 이메일 주소와 입력한 이메일 주소가 같아야,
+						인증번호를 받을 수 있습니다.</div>
+					<!--이메일 입력  -->
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-8">
+								<input type="text" name="member_email" tabindex="3"
+									class="form-control" placeholder="E-mail">
+							</div>
+							<div class="col-md-4">
+								<input type="button" tabindex="3"
+									class="form-control btn btn-login" value="인증번호 전송">
+							</div>
+						</div>
+					</div>
+					<!--이메일 인증번호입력  -->
+					<div class="form-group text-center">
+						<input type="text" name="admit_code" tabindex="4"
+							class="form-control" placeholder="인증번호 입력">
+
+					</div>
+
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm-6 col-sm-offset-3">
+								<input type="submit" name="login-submit" id="login-submit"
+									tabindex="5" class="form-control btn btn-login" value="비밀번호 찾기">
+							</div>
+						</div>
+					</div>
+				</form>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+<!--  -->
+
 </html>

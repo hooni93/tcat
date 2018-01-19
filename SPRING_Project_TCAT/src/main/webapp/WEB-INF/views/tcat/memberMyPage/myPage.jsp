@@ -22,7 +22,7 @@
 	$(document).ready(function() {
 		myPageLoad('myPageMain');
 	})
-
+	//화면 뿌리기
 	function myPageLoad(url) {
 		$("#myPageResult").load(url);
 	}
