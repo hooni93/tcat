@@ -24,7 +24,44 @@ public class MoGuestContoroller {
 	@RequestMapping("guestMain")
 	public String guestMain(HttpServletRequest req,Model model) {
 		System.out.println("guestMain");
+		MGService.hotList(req, model);
 		return "tcat/guestMain/guestMain";
+	}
+	//뮤지컬 전체 메인 리스트 페이지 
+	@RequestMapping("musicalMain")
+	public String musicalMain(HttpServletRequest req,Model model) {
+		System.out.println("musicalMain");
+		return "tcat/musical/musicalMain";
+	}
+	//콘서트 전체 메인 리스트 페이지 
+	@RequestMapping("concertMain")
+	public String concertMain(HttpServletRequest req,Model model) {
+		System.out.println("concertMain");
+		return "tcat/concert/concertMain";
+	}
+	//연극 전체 메인 리스트 페이지 
+	@RequestMapping("dramaMain")
+	public String dramaMain(HttpServletRequest req,Model model) {
+		System.out.println("dramaMain");
+		return "tcat/drama/dramaMain";
+	}
+	//클래식 전체 메인 리스트 페이지 
+	@RequestMapping("classicMain")
+	public String classicMain(HttpServletRequest req,Model model) {
+		System.out.println("classicMain");
+		return "tcat/classic/classicMain";
+	}
+	//무용 전체 메인 리스트 페이지 
+	@RequestMapping("danceMain")
+	public String danceMain(HttpServletRequest req,Model model) {
+		System.out.println("danceMain");
+		return "tcat/dance/danceMain";
+	}
+	//스토어 전체 메인 리스트 페이지 
+	@RequestMapping("storeMain")
+	public String storeMain(HttpServletRequest req,Model model) {
+		System.out.println("storeMain");
+		return "tcat/store/storeMain";
 	}
 	
 }

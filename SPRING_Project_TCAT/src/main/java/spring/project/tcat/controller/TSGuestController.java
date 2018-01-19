@@ -12,8 +12,16 @@ import spring.project.tcat.service.TSGuestService;
 @Controller
 public class TSGuestController {
 	@Autowired
-	TSGuestService HTGService;
+	TSGuestService TSGService;
 	
+	//게스트 정보수정 비밀번호 체크
+		@RequestMapping("myModifyForm")
+		public String myModifyForm(HttpServletRequest req, Model model) {
+			System.out.println("myModifyForm");
+			
+			return "tcat/memberMyPage/myModifyForm";
+		}
+		
 	//게스트 정보수정
 	@RequestMapping("myModify")
 	public String myModify(HttpServletRequest req, Model model) {
@@ -21,4 +29,5 @@ public class TSGuestController {
 		
 		return "tcat/memberMyPage/myModify";
 	}
+	
 }

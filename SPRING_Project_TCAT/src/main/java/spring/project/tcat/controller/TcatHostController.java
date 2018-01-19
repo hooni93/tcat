@@ -622,44 +622,87 @@ public class TcatHostController {
 	//////////////////////////////////// /////////////////////////////////////////
 
 	
-////////////////////// HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민 ////////////////////////
+//////////////////////HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민 ////////////////////////
 	@RequestMapping("hotMusical_side")
-	public String hotMusical_side(HttpServletRequest req,Model model) {
+	public String hotMusical_side(HttpServletRequest req, Model model) {
 		System.out.println("hotMusical_side");
 		return "tcat/productList/hotMusical_side";
 	}
-	
+
+	// 뮤지컬 핫카테고리 5개 출력 전체 출력
 	@RequestMapping("hotMusical")
-	public String hotMusical(HttpServletRequest req,Model model) {
-		System.out.println("hotMusical");
+	public String hotMusical(HttpServletRequest req, Model model) {
+		req.setAttribute("url", "hotMusical");
 		hService.hotMenu(req, model);
+		System.out.println("2");
 		return "tcat/productList/hotMusical";
 	}
+
+	// 핫리스트 제거
+	@RequestMapping("hotMenuDelete")
+	public String hotDelete(HttpServletRequest req, Model model) {
+		System.out.println("hotMenuDelete");
+		String url = "";
+		url = req.getParameter("url");
+		
+		System.out.println("222url" + url);
+		req.setAttribute("url", url);
+		hService.hotMenuDelete(req, model);
+		hService.hotMenu(req, model);
+
+		System.out.println("url" + url);
+
+		return "tcat/productList/" + url;
+	}
+
+	// 핫리스트 추가
+	@RequestMapping("hotMenuUpdate")
+	public String hotUpdate(HttpServletRequest req, Model model) {
+		System.out.println("hotMenuUpdate");
+		String url = "";
+		url = req.getParameter("url");
+		System.out.println("1111url" + url);
+		
+		req.setAttribute("url", url);
+		
+		hService.hotMenuUpdate(req, model);
+		hService.hotMenu(req, model);
+		System.out.println("url" + url);
+		return "tcat/productList/" + url;
+	}
+
 	@RequestMapping("hotConcert")
-	public String hotConcert(HttpServletRequest req,Model model) {
+	public String hotConcert(HttpServletRequest req, Model model) {
 		System.out.println("hotConcert");
+		req.setAttribute("url", "hotConcert");
+		hService.hotMenu(req, model);
 
 		return "tcat/productList/hotConcert";
 	}
-	@RequestMapping("hotDrama")
-	public String hotDrama(HttpServletRequest req,Model model) {
-		System.out.println("hotDrama");
 
+	@RequestMapping("hotDrama")
+	public String hotDrama(HttpServletRequest req, Model model) {
+		System.out.println("hotDrama");
+		req.setAttribute("url", "hotDrama");
+		hService.hotMenu(req, model);
 		return "tcat/productList/hotDrama";
 	}
-	@RequestMapping("hotClassic")
-	public String hotClassic(HttpServletRequest req,Model model) {
-		System.out.println("hotClassic");
 
+	@RequestMapping("hotClassic")
+	public String hotClassic(HttpServletRequest req, Model model) {
+		System.out.println("hotClassic");
+		req.setAttribute("url", "hotClassic");
+		hService.hotMenu(req, model);
 		return "tcat/productList/hotClassic";
 	}
+
 	@RequestMapping("hotStore")
-	public String hotStore(HttpServletRequest req,Model model) {
+	public String hotStore(HttpServletRequest req, Model model) {
 		System.out.println("hotStore");
-		
+
 		return "tcat/productList/hotStore";
 	}
-	
+
 /////////////////// HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  /////////////////////////
 	
 

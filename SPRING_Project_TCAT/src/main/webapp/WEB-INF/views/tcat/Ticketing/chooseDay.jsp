@@ -149,18 +149,20 @@ $(document).ready(function () {
 		        </div>
 		        
 		        <div class="stepwizard-step">
-		            <a href="#step-3" type="button" class="btn btn-default " disabled="disabled">4</a>
+		            <a href="#step-4" type="button" class="btn btn-default " disabled="disabled">4</a>
 		            <p>Step 4</p>
 		        </div>
 		        
 		        <div class="stepwizard-step">
-		            <a href="#step-3" type="button" class="btn btn-default " disabled="disabled">5</a>
+		            <a href="#step-5" type="button" class="btn btn-default " disabled="disabled">5</a>
 		            <p>Step 5</p>
 		        </div>
 
     </div>
 </div>
 <form role="form">
+
+	<!-- 관람일 회차선택 -->
     <div class="row setup-content" id="step-1">
         <div class="col-xs-12">
             <div class="col-md-12">
@@ -177,6 +179,8 @@ $(document).ready(function () {
             </div>
         </div>
     </div>
+    
+    
     <div class="row setup-content" id="step-2">
         <div class="col-xs-12">
             <div class="col-md-12">
@@ -193,10 +197,12 @@ $(document).ready(function () {
             </div>
         </div>
     </div>
-    <div class="row setup-content" id="step-4">
+    
+    
+    <div class="row setup-content" id="step-3">
         <div class="col-xs-12">
             <div class="col-md-12">
-                <h3> Step 2</h3>
+                <h3> Step 3</h3>
                 <div class="form-group">
                     <label class="control-label">aaae</label>
                     <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
@@ -209,26 +215,30 @@ $(document).ready(function () {
             </div>
         </div>
     </div>
-    <div class="row setup-content" id="step-5">
+    
+    
+    <div class="row setup-content" id="step-4">
         <div class="col-xs-12">
             <div class="col-md-12">
-                <h3> Step 2</h3>
+                <h3> Step 4</h3>
                 <div class="form-group">
-                    <label class="control-label">Company Name</label>
+                    <label class="control-label">adfs</label>
                     <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Company Address</label>
+                    <label class="control-label">asdf</label>
                     <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address"  />
                 </div>
                 <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
             </div>
         </div>
     </div>
+    
+    
        <div class="row setup-content" id="step-5">
         <div class="col-xs-12">
             <div class="col-md-12">
-                <h3> Step 3</h3>
+                <h3> Step 5</h3>
                 <button class="btn btn-success btn-lg pull-right" type="submit">Finish!</button>
             </div>
         </div>
