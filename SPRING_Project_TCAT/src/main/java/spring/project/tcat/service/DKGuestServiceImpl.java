@@ -1,19 +1,22 @@
 package spring.project.tcat.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import spring.project.tcat.VO.TcatBoardVO;
 import spring.project.tcat.persistence.DKGuestDAO;
-
+@Service
 public class DKGuestServiceImpl implements DKGuestService{
 	
-	/*@Autowired
-	DKGuestDAO dao;*/
+	@Autowired
+	DKGuestDAO dao;
 	
 	//글목록불러오기
 	@Override
@@ -34,13 +37,10 @@ public class DKGuestServiceImpl implements DKGuestService{
 		int startPage = 0; 		//시작페이지
 		int endPage=0;  		//마지막 페이지	
 		
-		
-		//dao 객체생성(싱글톤, 다형성)
-		//gBoardDAO dao = gBoardDAOImpl.getInstance();
-		
+		Map<String, Object> map = new HashMap<String, Object>();
 		//글갯수 구하기
 		//cnt = 0;
-		//cnt = dao.getArticleCnt();
+		cnt = dao.getQnaBoardCnt();
 		
 		//req.setAttribute("cnt", cnt);
 		model.addAttribute("cnt", cnt);
@@ -76,14 +76,12 @@ public class DKGuestServiceImpl implements DKGuestService{
 		System.out.println("pageSize : " + pageSize);
 		
 		if(cnt > 0) {
-			//ArrayList<gBoardVO> dtos = dao.getArticleList(start, end);
-			//req.setAttribute("dtos", dtos);
-			Map<String, Integer> map = new HashMap<String, Integer>();
 			map.put("start", start);
 			map.put("end", end);
-			//ArrayList<gBoardVO> dtos = dao.getArticleList(map);
 			
-			//model.addAttribute("dtos", dtos);
+			ArrayList<TcatBoardVO> dtos = dao.getQnaBoardList(map);
+		
+			model.addAttribute("dtos", dtos);
 			
 		}
 		
