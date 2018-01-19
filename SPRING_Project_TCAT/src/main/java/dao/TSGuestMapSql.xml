@@ -12,9 +12,11 @@
 		update member set member_pwd=#{member_pwd}, member_addr=#{member_addr}, member_hp=#{member_hp}, member_email=#{member_email} where member_id=#{member_id}
 	</update>
 	
+	<!-- 비밀번호확인  -->
 	<select id="pwdCheck" resultType="int">
 	SELECT count(*) FROM member WHERE member_id=#{strId} AND member_pwd=#{strPwd}
 	</select>
+	<!-- 아이디 확인 -->
 	<select id="memberSelect" parameterType="String" resultType="spring.project.tcat.VO.MemberVO">
 		select * from member where member_id=#{id}
 	</select>

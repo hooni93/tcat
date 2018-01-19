@@ -38,7 +38,7 @@ function emailCheck(form){
 	
 }
 function emailCheack() {
-	var email = document.memberForm.member_email.value;
+	var email = document.myModifyForm.member_email.value;
 	if (!email) {
 		alert("이메일을 입력한뒤 인증해주세요!");
 	} else {
@@ -46,6 +46,95 @@ function emailCheack() {
 				"menubar=no, width=500, height=255");
 	}
 }
+</script>
+<script>
+$(function() {
+	var member_id=$('#member_id');
+	var pwd = $('#member_pwd');
+	var repwd = $('#member_pwdRe');
+	var member_name=$('#member_name');
+	var member_hp=$('#member_hp');
+	var postNum=$('#postNum');
+	var addr=$('#addr');
+	var detailAddr=$('#detailAddr');
+	var member_email=$('#member_email');
+	var member_gender=$('#member_gender');
+	var member_birth=$('#member_birth');
+	
+	repwd.blur(function() {
+		var R = repwd.val();
+		var P = pwd.val();
+		if (R == P) {
+			$("#errorPwd").css('display', 'none');
+		} else {
+			$("#errorPwd").css('display', 'inline');
+		}
+	});
+	member_id.blur(function() {
+		if (!member_id.val()) {
+			$("#idError").css('display', 'inline');
+		}else{
+			$("#idError").css('display', 'none');
+		}
+	});
+	pwd.blur(function() {
+		if (!pwd.val()) {
+			$("#pwdError").css('display', 'inline');
+		}else{
+			$("#pwdError").css('display', 'none');
+		}
+	});
+	member_name.blur(function() {
+		if (!member_name.val()) {
+			$("#nameError").css('display', 'inline');
+		}else{
+			$("#nameError").css('display', 'none');
+		}
+	});
+	member_email.blur(function() {
+		if (!member_email.val()) {
+			$("#emailError").css('display', 'inline');
+		} else{
+			$("#emailError").css('display', 'none');
+		}
+	});
+	member_hp.blur(function() {
+		if (!member_hp.val()) {
+			$("#hpError").css('display', 'inline');
+		} else{
+			$("#hpError").css('display', 'none');
+		}
+	});
+	member_birth.blur(function() {
+		if (!member_birth.val()) {
+			$("#birthError").css('display', 'inline');
+		} else{
+			$("#birthError").css('display', 'none');
+		}
+	});
+	postNum.blur(function() {
+		if (!postNum.val()) {
+			$("#addrError").css('display', 'inline');
+		} else{
+			$("#addrError").css('display', 'none');
+		}
+	});
+	addr.blur(function() {
+		if (!addr.val()) {
+			$("#addrError").css('display', 'inline');
+		} else{
+			$("#addrError").css('display', 'none');
+		}
+	});		
+	detailAddr.blur(function() {
+		if (!detailAddr.val()) {
+			$("#addrError").css('display', 'inline');
+		} else{
+			$("#addrError").css('display', 'none');
+		}
+	});		
+});
+</script>
 </script>
 </head>
 	<!-- class="active" --회색
@@ -90,6 +179,7 @@ function emailCheack() {
 			<div class="form-group">
 				<label><span style="color:red;">*</span>연락처 </label>
 				<input type="text" class="form-control" name="member_hp" id="member_hp"	value="${vo.member_hp}">
+				<span style="display: none; color: red;" id="hpError">필수입력입니다.</span>
 			</div>
 			<!-- 연락처 -------------------------------------------------------------------------------- -->
 			<!-- 주소검색 -------------------------------------------------------------------------------- -->
@@ -102,7 +192,7 @@ function emailCheack() {
 					</span>
 					</div>
 					<input type="text" class="form-control" name="addr" id="sample6_address" >
-					<input type="text" class="form-control" name="detailAddr" id="sample6_address2" placeholder="상세주소">
+					<input type="text" class="form-control" name="detailAddr" id="sample6_address2" placeholder="상세주소" value="${vo.member_addr}">
 
 				<span style="display: none; color: red;" id="addrError">필수입력입니다.</span>
 			</div>	

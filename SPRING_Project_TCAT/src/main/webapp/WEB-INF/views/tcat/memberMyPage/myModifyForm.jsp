@@ -45,8 +45,15 @@ function pwdCheck(pwd){
 
 				<tr>
 					<td style="font-size: 12pt">
-						<input type="button" value="정보수정" onclick ="pwdCheck(document.modifyForm.member_pwd.value);">
-						<input type="reset" value="취소" onclick="window.history.back();">
+					<button type="button" class="btn btn-info"  onclick ="pwdCheck(document.modifyForm.member_pwd.value);">
+					정보수정<i class="fa fa-check spaceLeft"></i>
+				</button>
+					<button type="submit" class="btn btn-warning" value="취소" onclick="window.history.back();">
+					취소<i class="fa fa-times spaceLeft"></i>
+				</button>
+				
+					<!-- 	<input type="button" value="정보수정" onclick ="pwdCheck(document.modifyForm.member_pwd.value);">
+						<input type="reset" value="취소" onclick="window.history.back();"> -->
 					</td>
 				</tr>
 			</table>

@@ -59,6 +59,7 @@ public class TSGuestServiceImp implements TSGuestService{
 			String postNum=req.getParameter("postNum");
 			String detailAddr=req.getParameter("detailAddr");
 			String addr=req.getParameter("addr");//주소-daum주소검색
+			
 			String member_addr="["+postNum+"]"+addr+" "+detailAddr;
 			
 			String member_email=req.getParameter("member_email");//이메일
@@ -75,7 +76,7 @@ public class TSGuestServiceImp implements TSGuestService{
 				member_hp = hp1 + "-" + hp2 + "-" + hp3;
 			}*/
 			vo.setMember_hp(member_hp);
-			vo.setMember_addr(req.getParameter("member_addr"));
+			vo.setMember_addr(member_addr);
 			System.out.println("주소나와라~~~ 서비스다 여기!!! ---> :"+member_addr);
 			vo.setMember_email(member_email);
 			/*String email1 = req.getParameter("email1");
