@@ -18,7 +18,7 @@
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
     <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
   </ol>
 
   <!-- Wrapper for slides -->
@@ -54,14 +54,15 @@
     <span class="sr-only">Next</span>
   </a>
 </div><!-- 슬라이드 끝 -->
+
 <div class="thumbnail">
 <div class="c m10">
-	<a class="btn btn-default" href="#" role="button">뮤지컬</a>
-	<a class="btn btn-default" href="#" role="button">콘서트</a>
-	<a class="btn btn-default" href="#" role="button">연극</a>
-	<a class="btn btn-default" href="#" role="button">클래식</a>
-	<a class="btn btn-default" href="#" role="button">무용/발레</a>
-	<a class="btn btn-default" href="#" role="button">스토어</a>
+	<a class="btn btn-default" onclick="load('guestMain?category=뮤지컬');" role="button">뮤지컬</a>
+	<a class="btn btn-default" onclick="load('guestMain?category=콘서트');" role="button">콘서트</a>
+	<a class="btn btn-default" onclick="load('guestMain?category=연극');" role="button">연극</a>
+	<a class="btn btn-default" onclick="load('guestMain?category=클래식');" role="button">클래식</a>
+	<a class="btn btn-default" onclick="load('guestMain?category=무용');" role="button">무용/발레</a>
+	<a class="btn btn-default" onclick="#" role="button">스토어</a>
 </div>
 
 <!-- 핫리스트 -->

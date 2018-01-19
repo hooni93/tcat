@@ -9,7 +9,13 @@
 		select count(*) as buy
 		from
 		Ticketing
-		where member_id=#{strId};
+		where member_id=#{strId}
 	</select>
-   
+	
+	<update id="mRatingUpdate" parameterType="String">
+	update member set Rating='C' where member_id=#{strId}
+	</update>
+	<update id="mRatingUpdate1" parameterType="String">
+	update member set Rating='B' where member_id=#{strId}
+	</update>
    </mapper>

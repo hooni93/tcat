@@ -9,11 +9,11 @@ public class DKGuestDAOImpl implements DKGuestDAO{
 	
 	//글갯수구하기
 	@Override
-	public int qnaBoardCnt() {
+	public int getQnaBoardCnt() {
 		int cnt=0;
 		
 		DKGuestDAO dao = Configuration.getMapper(DKGuestDAO.class);
-		cnt = dao.qnaBoardCnt();
+		cnt = dao.getQnaBoardCnt();
 		
 		return cnt;
 	}

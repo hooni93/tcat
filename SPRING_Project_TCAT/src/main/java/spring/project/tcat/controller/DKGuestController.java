@@ -12,14 +12,14 @@ import spring.project.tcat.service.DKGuestService;
 @Controller
 public class DKGuestController {
 	
-	@Autowired
-	DKGuestService dkService;
+	/*@Autowired
+	DKGuestService dkService;*/
 	
 	@RequestMapping("qnaBoardList")
 	public String qnaBoardList(HttpServletRequest req,Model model) {
 		System.out.println("qnaBoardList");
 		
-		dkService.qnaBoardList(req, model);
+		//dkService.qnaBoardList(req, model);
 		
 		return "tcat/serviceCenter/qnaBoardList";
 	}

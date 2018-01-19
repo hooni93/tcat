@@ -25,7 +25,7 @@
 			            c.cateNum cateNum,
 			            c.sDev sDev,
 			            p.per_step per_step
-			            from performanceInfo p join category c ON p.cateNum = c.cateNum WHERE mDev=#{_parameter} AND per_step=1) ps JOIN performanceHall ph 
+			            from performanceInfo p join category c ON p.cateNum = c.cateNum WHERE mDev=#{_parameter} AND per_step=2) ps JOIN performanceHall ph 
 			            ON ps.per_id=ph.per_id)  pb JOIN hallInfo h ON pb.hall_id=h.hall_id
    		</select>
    

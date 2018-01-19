@@ -3,9 +3,11 @@ package spring.project.tcat.persistence;
 public interface DKGuestDAO {
 	
 	//글갯수구하기
-	public int qnaBoardCnt(); 
+	public int getQnaBoardCnt(); 
 	
 	//게시글 목록 조회
+	//public 
+	
 	
 	//상세페이지
 	
@@ -13,6 +15,7 @@ public interface DKGuestDAO {
 	
 	//비밀번호 확인
 	
+	//게시글 수정
 	
 	
 }
