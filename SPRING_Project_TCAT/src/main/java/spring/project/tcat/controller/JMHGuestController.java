@@ -22,13 +22,6 @@ public class JMHGuestController {
 		return "tcat/memberFind/memberFind";
 	}
 	
-	//아이디,비밀번호 찾기 폼
-	@RequestMapping("findForm")
-	public String findForm(HttpServletRequest req, Model model) {
-		System.out.println("findForm");
-		return "tcat/memberFind/findForm";
-	}
-	
 	// 아이디 비밀번호 찾지 이메일인증 코드 보내기
 	@RequestMapping("findId")
 	public String findIdPwd(HttpServletRequest req, Model model) {
@@ -41,13 +34,21 @@ public class JMHGuestController {
 	@RequestMapping("findResult")
 	public String findResult(HttpServletRequest req, Model model) {
 		System.out.println("findResult");
+		//결과에 따라 주소값결정
 		mhService.findResult(req,model);
-		return "tcat/memberFind/findResult";
+		return "tcat/memberFind/findId";
+	}
+	@RequestMapping("findResultPage")
+	public String findResultPage(HttpServletRequest req, Model model) {
+		System.out.println("findResultPage");
+		System.out.println(req.getAttribute("member_find"));
+		model.addAttribute("member_find", req.getAttribute("member_find"));
+		return "tcat/memberFind/findResultPage";
 	}
 	
 	/////////////////////////////////////////////////////////////
 	
-	//
+	//서브메뉴 및 ajax div
 	@RequestMapping("myPage")
 	public String myPage(HttpServletRequest req, Model model) {
 		System.out.println("myPage");
@@ -57,9 +58,17 @@ public class JMHGuestController {
 	@RequestMapping("myPageMain")
 	public String myPageMain(HttpServletRequest req, Model model) {
 		System.out.println("myPageMain");
+		//해당 아이디 정보 가져오기
+		mhService.myPageInfo(req,model);
 		return "tcat/memberMyPage/myPageMain";
 	}
 	//////////////////////////////////////////////////////////////
+	//memberLogin 모달 로그인 창
+	@RequestMapping("memberLogin")
+	public String memberLogin(HttpServletRequest req, Model model) {
+		System.out.println("memberLogin");
+		return "tcat/memberLogin/memberLogin";
+	}
 	//로그인 처리 loginPro
 	@RequestMapping("loginPro")
 	public String loginPro(HttpServletRequest req, Model model) {

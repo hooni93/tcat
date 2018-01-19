@@ -17,13 +17,13 @@ public class JMHGuestDAOImp implements JMHGuestDAO{
 
 	//아이디 찾기 이메일 전송
 	@Override
-	public void sendIdMail(String member_email, String admit_num) {
+	public void sendIdMail(String member_email, String admit_code) {
 		try {
 			SimpleMailMessage msg = new SimpleMailMessage();
 			msg.setFrom("admin@Tcat.com");
 			msg.setTo(member_email);
 			msg.setSubject("아이디찾기 인증번호");
-			msg.setText("인증번호 6자리: "+admit_num);
+			msg.setText("인증번호 6자리:  "+ admit_code);
 			
 			mailSender.send(msg);
 		}catch (Exception e) {
@@ -37,6 +37,15 @@ public class JMHGuestDAOImp implements JMHGuestDAO{
 		int cnt = dao.id_emailChk(map);
 		return cnt;
 	}
+	
+	//아이디 찾기
+	@Override
+	public String  findIdPwd(Map<String,Object> map) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		String member = dao.findIdPwd(map);
+		return member;
+	}
+	
 	
 	//로그인 처리
 	@Override
