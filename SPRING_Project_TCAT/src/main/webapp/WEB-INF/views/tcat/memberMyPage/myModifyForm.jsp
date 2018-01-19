@@ -17,7 +17,7 @@ function pwdCheck(pwd){
 <body>
 	<c:if test="${pwdCheck==1}">
 		<script type="text/javascript">
-			$( "#myPageResult" ).load( "${pageContext.request.contextPath}/myModifyPro" );
+			$( "#myPageResult" ).load( "${pageContext.request.contextPath}/myModifyPro");
 		</script>
 	</c:if>
 	<c:if test="${pwdCheck==0}">
@@ -32,7 +32,7 @@ function pwdCheck(pwd){
 		<div class="col-md-3">
 		<form action="" name="modifyForm">
 			<table align="center" 
-				class="table table-hover table-bordered table-condensed c fs10" style="width:400px; height:150px; margin:auto; ">
+				class="table table-hover table-bordered table-condensed c fs10" style="width:400px; height:150px; margin:left; ">
 				<tr class="bg-primary">
 					<td style="font-size: 15pt"><strong>비밀번호</strong></td>
 				</tr>
@@ -54,6 +54,6 @@ function pwdCheck(pwd){
 		</div>
 		<div class="col-md-3"></div>
 	</div>
-	
+	<hr>
 </body>
 </html>

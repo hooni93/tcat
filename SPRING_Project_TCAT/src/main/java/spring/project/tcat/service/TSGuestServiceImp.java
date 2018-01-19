@@ -52,39 +52,47 @@ public class TSGuestServiceImp implements TSGuestService{
 		@Override
 		public void myModifyUpdate(HttpServletRequest req, Model model) {
 			String id = (String) req.getSession().getAttribute("login_id");
+			String member_name = req.getParameter("member_name");
 			
-			System.out.println("name"+req.getParameter("name"));
+			String member_hp = req.getParameter("member_hp");
+			
+			String postNum=req.getParameter("postNum");
+			String detailAddr=req.getParameter("detailAddr");
+			String addr=req.getParameter("addr");//주소-daum주소검색
+			String member_addr="["+postNum+"]"+addr+" "+detailAddr;
+			
+			String member_email=req.getParameter("member_email");//이메일
+			
 			MemberVO vo = new MemberVO();
 			vo.setMember_id(id);
 			vo.setMember_pwd(req.getParameter("member_pwd"));
-			vo.setMember_name(req.getParameter("member_name"));
-			String member_hp = "";
-			String hp1 = req.getParameter("hp1");
+			/*vo.setMember_name(req.getParameter("member_name"));*/
+			
+			/*String hp1 = req.getParameter("hp1");
 			String hp2 = req.getParameter("hp2");
 			String hp3 = req.getParameter("hp3");
-
 			if (!hp1.equals("") && !hp2.equals("") && !hp3.equals("")) {
 				member_hp = hp1 + "-" + hp2 + "-" + hp3;
-			}
+			}*/
 			vo.setMember_hp(member_hp);
-			
 			vo.setMember_addr(req.getParameter("member_addr"));
-			
-			String member_email = "";
-			String email1 = req.getParameter("email1");
-			String email2 = req.getParameter("email2");
-			member_email = email1 + "@" + email2;
+			System.out.println("주소나와라~~~ 서비스다 여기!!! ---> :"+member_addr);
 			vo.setMember_email(member_email);
+			/*String email1 = req.getParameter("email1");
+			String email2 = req.getParameter("email2");
+			member_email = email1 + "@" + email2;*/
+			
+			
 			
 			/*vo.setMember_gender(req.getParameter("member_gender"));
 			vo.setMember_birth(req.getParameter("member_birth"));*/
 		
 			System.out.println(
-						"member_pwd"+vo.getMember_pwd()+"\n"+
-						"member_name"+vo.getMember_name()+"\n"+
-						"member_hp"+vo.getMember_hp()+"\n"+
+						"member_pwd--->"+vo.getMember_pwd()+"\n"+
+						/*"member_name"+vo.getMember_name()+"\n"+*/
+						"member_hp--->"+vo.getMember_hp()+"\n"+
 						/*"member_addr"+vo.getMember_addr()+"\n"+*/
-						"member_email"+vo.getMember_email()+"\n"
+						"member_email--->"+vo.getMember_email()+"\n"
 			);
 			int cnt = tsGDAO.updateMember(vo);
 			model.addAttribute("cnt",cnt);

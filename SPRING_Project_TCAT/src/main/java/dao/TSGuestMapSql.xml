@@ -9,7 +9,7 @@
 	
 	<!-- 회원 정보 수정 -->
 	<update id="updateMember" parameterType="spring.project.tcat.VO.MemberVO">
-		update member set member_pwd=#{member_pwd},member_addr=#{member_addr}, member_name=#{member_name}, member_hp=#{member_hp}, member_email=#{member_email} where member_id=#{member_id}
+		update member set member_pwd=#{member_pwd}, member_addr=#{member_addr}, member_hp=#{member_hp}, member_email=#{member_email} where member_id=#{member_id}
 	</update>
 	
 	<select id="pwdCheck" resultType="int">
