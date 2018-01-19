@@ -13,65 +13,50 @@
 <script src="${script}jquery-ui.js"></script>
 <link rel="stylesheet" href="${css}jquery-ui.css">
 
-1<style type="text/css">
+<style type="text/css">
 .borderMenu {
 	border: 3px solid #f2ecdc;
 }
 </style>
+
 <script type="text/javascript">
 	$(document).ready(function() {
-		myPageLoad('myPageMain');
+		introLoad('introCompany');
 	})
 	//화면 뿌리기
-	function myPageLoad(url) {
-		$("#myPageResult").load(url);
+	function introLoad(url) {
+		$("#introResult").load(url);
 	}
 </script>
 
 </head>
-<!--마이페이지 메인  -->
-<div class="row h25"></div>
+<!--회사소개 메인  -->
 
 <!--메뉴  -->
 <div class="col-md-12">
 
-
-	<div class="col-md-1"></div>
 	<div class="col-md-3 ">
 		<div class="sidebar-nav disInline w70p">
 			<div class="well borderMenu disInline w100p"
 				style="background-color: white; padding: 8px 0;">
 				<ul class="nav nav-list  w100p ">
-					<li><a href="#" class="000000"><b>마이페이지</b></a>
+				
+					<li><a onclick="introLoad('introCompany');" class="000000">Tcat소개<b></b></a>
 					<hr class="w90p" style="margin: 0 auto;"></li>
-
-
-					<li><a onclick="myPageLoad('myModifyForm');" class="000000">회원정보수정</a></li>
-					<li><a onclick="myPageLoad('memberPoint');" class="000000">회원등급포인트관리</a></li>
+					<li><a href="#" class="000000">Tcat직원소개</a></li>
+					<li><a onclick="introLoad('introPath')" class="000000">Tcat오시는길</a></li>
+					<li><a href="#" class="000000">Tcat전화번호</a></li>
 
 				</ul>
 			</div>
-<<<<<<< HEAD
-		</div>
-		<div class="col-md-1"></div>
-=======
 
 		</div>
 
 
 		</div>
 <!--뿌려주는 div-->
-	<div class="col-md-8" id="myPageResult"></div>
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
+	<div class="col-md-8" id="introResult"></div>
 	</div>
-<<<<<<< HEAD
-	
-	<!--뿌려주는 div-->
-	<div class="col-md-8" id="myPageResult"></div>
-=======
-
-	
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 
 
 </html>
