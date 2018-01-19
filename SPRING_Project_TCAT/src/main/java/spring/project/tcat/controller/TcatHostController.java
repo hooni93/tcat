@@ -467,7 +467,6 @@ public class TcatHostController {
 	public String registItem(HttpServletRequest req, Model model) {
 	System.out.println("registItem");
 	
-	
 	// 공연정보 목록 가져오기
 	hService.performanceList(req, model);
 	
@@ -480,6 +479,38 @@ public class TcatHostController {
 	
 	return "tcat/registItem/registItem_side";
 	}
+	
+	
+	@RequestMapping("seatPrice")
+	public String seatPrice(HttpServletRequest req, Model model) {
+	System.out.println("seatPrice");
+	
+	String title=req.getParameter("title");
+	String hall_name=req.getParameter("hall_name");
+	int vip=Integer.parseInt(req.getParameter("vip"));
+	int r=Integer.parseInt(req.getParameter("r"));
+	int s=Integer.parseInt(req.getParameter("s"));
+	int a=Integer.parseInt(req.getParameter("a"));
+	int b=Integer.parseInt(req.getParameter("b"));
+	
+	req.setAttribute("title", title);
+	req.setAttribute("hall_name",hall_name);
+	req.setAttribute("vip",vip);
+	req.setAttribute("r",r);
+	req.setAttribute("s",s);
+	req.setAttribute("a",a);
+	req.setAttribute("b",b);
+	
+	return "tcat/registItem/seatPrice";
+	}
+	@RequestMapping("cheackSeatPrice")
+	public String cheackSeatPrice(HttpServletRequest req, Model model) {
+	System.out.println("cheackSeatPrice");
+	
+
+	return "tcat/registItem/cheackSeatPrice";
+	}
+	
 	
 	// 공연정보 추가
 	@RequestMapping("insertPerformance")
