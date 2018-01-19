@@ -15,64 +15,110 @@
 	$(function() {
 		$("#perfomence").click(function() {
 			var formData = new FormData();
-			formData.append("perf_title", $(
-					"input[name=perf_title]").val());
-			formData.append("cateNum",
-					$("select[name=cateNum]").val());
-			formData.append("perf_Image",
-					$("input[name=perf_Image]")[0].files[0]);
-			formData.append("startDate", $(
-					"input[name=startDate]").val());
-			formData.append("endDate", $("input[name=endDate]")
-					.val());
-			formData.append("hall_id",
-					$("select[name=hall_id]").val());
-			formData.append("first_grade", $(
-					"select[name=first_grade]").val());
-			formData.append("remain_round", $(
-					"input[name=remain_round]").val());
-			formData.append("possible_age", $(
-					"input[name=possible_age]").val());
-			$.ajax({
-				url : 'insertPerformance',
-				data : formData,
-				processData : false,
-				contentType : false,
-				type : 'POST',
-				success : function(data) {
-					$('#result').html(data);
-				}
-			});
+			if(!$("input[name=perf_title]").val()){
+				alert("공연제목을 입력해주세요!");
+				$("input[name=perf_title]").focus();
+			}else if($("select[name=cateNum]").val()==0){
+				alert("카테고리를 선택해주세요!");
+				$("select[name=cateNum]").focus();
+			}else if(!$("input[name=perf_Image]")[0].files[0]){			
+				alert("공연이미지를 입력해주세요!");
+				$("input[name=perf_Image]").focus();
+			}else if(!$("input[name=startDate]").val()){			
+				alert("공연시작일자를 선택해주세요!");
+				$("input[name=startDate]").focus();
+			}else if(!$("input[name=endDate]").val()){			
+				alert("공연종료일자를 선택해주세요!");
+				$("input[name=endDate]").focus();
+			}else if($("select[name=hall_id]").val()==0){			
+				alert("공연장을 선택해주세요!");
+				$("select[name=hall_id]").focus();
+			}else if($("select[name=first_grade]").val()==0){			
+				alert("우선순위를 선택해주세요!");
+				$("select[name=first_grade]").focus();
+			}else if(!$("input[name=remain_round]").val()){			
+				alert("회차를 선택해주세요!");
+				$("input[name=remain_round]").focus();
+			}else if(!$("input[name=possible_age]").val()){			
+				alert("관람가능 연령을 선택해주세요!");
+				$("input[name=possible_age]").focus();
+			}else if(!$("input[name=seatPrice]").val()){			
+				alert("좌석정보를 선택해주세요!");
+				$("input[name=seatPrice]").focus();
+			}else{
+				formData.append("perf_title", $("input[name=perf_title]").val());
+				formData.append("cateNum",$("select[name=cateNum]").val());
+				formData.append("perf_Image",$("input[name=perf_Image]")[0].files[0]);
+				formData.append("startDate", $("input[name=startDate]").val());
+				formData.append("endDate", $("input[name=endDate]").val());
+				formData.append("hall_id",$("select[name=hall_id]").val());
+				formData.append("first_grade", $("select[name=first_grade]").val());
+				formData.append("remain_round", $("input[name=remain_round]").val());
+				formData.append("possible_age", $("input[name=possible_age]").val());
+				formData.append("VIP_seatPrice", $("input[name=VIP_seatPrice]").val());
+				formData.append("R_seatPrice", $("input[name=R_seatPrice]").val());
+				formData.append("S_seatPrice", $("input[name=S_seatPrice]").val());
+				formData.append("A_seatPrice", $("input[name=A_seatPrice]").val());
+				formData.append("B_seatPrice", $("input[name=B_seatPrice]").val());
+				$.ajax({
+					url : 'insertPerformance',
+					data : formData,
+					processData : false,
+					contentType : false,
+					type : 'POST',
+					success : function(data) {
+						$('#result').html(data);
+					}
+				});	
+			}
+			
 		});
 	});
 
 	$(function() {
 		$("#store").click(function() {
 			var formData = new FormData();
-			formData.append("disc_title", $(
-					"input[name=disc_title]").val());
-			formData.append("disc_price", $(
-					"input[name=disc_price]").val());
-			formData.append("disc_image",
-					$("input[name=disc_image]")[0].files[0]);
-			formData.append("disc_con", $(
-					"input[name=disc_con]").val());
-			formData.append("cateNum",
-					$("select[name=cateNum]").val());
-			formData.append("first_grade", $(
-					"select[name=first_grade]").val());
-			formData.append("disc_count", $(
-					"input[name=disc_count]").val());
-			$.ajax({
-				url : 'insertStore',
-				data : formData,
-				processData : false,
-				contentType : false,
-				type : 'POST',
-				success : function(data) {
-					$('#result').html(data);
-				}
-			});
+			if(!$("input[name=disc_title]").val()){
+				alert("상품이름을 입력해주세요!");		
+				$("input[name=disc_title]").focus();
+			}else if(!$("input[name=disc_price]").val()){
+				alert("상품가격을 입력해주세요!");
+				$("input[name=disc_price]").focus();
+			}else if(!$("input[name=disc_image]")[0].files[0]){
+				alert("상품이미지를 넣어주세요!");				
+				$("input[name=disc_image]").focus();
+			}else if(!$("input[name=disc_con]").val()){
+				alert("상품설명을 입력해주세요!");			
+				$("input[name=disc_con]").focus();
+			}else if($("select[name=cateNum]").val()==0){
+				alert("카테고리를 선택해주세요!");	
+				$("select[name=cateNum]").focus();
+			}else if($("select[name=first_grade]").val()==0){
+				alert("상품 우선순위를 선택해주세요!");	
+				$("select[name=first_grade]").focus();
+			}else if(!$("input[name=disc_count]").val()){
+				alert("상품수량을 입력해주세요!");				
+				$("input[name=disc_count]").focus();
+			}else{
+				formData.append("disc_title", $("input[name=disc_title]").val());
+				formData.append("disc_price", $("input[name=disc_price]").val());
+				formData.append("disc_image", $("input[name=disc_image]")[0].files[0]);
+				formData.append("disc_con", $("input[name=disc_con]").val());
+				formData.append("cateNum",$("select[name=cateNum]").val());
+				formData.append("first_grade", $("select[name=first_grade]").val());
+				formData.append("disc_count", $("input[name=disc_count]").val());
+				$.ajax({
+					url : 'insertStore',
+					data : formData,
+					processData : false,
+					contentType : false,
+					type : 'POST',
+					success : function(data) {
+						$('#result').html(data);
+					}
+				});	
+			}
+			
 		});
 	});
 
@@ -83,6 +129,14 @@
 		$("#result").load(
 				"${pageContext.request.contextPath}/" + url + "?pageNum="
 						+ pageNum);
+	}
+	function seatPrice(title,hall_name,vip,r,s,a,b){
+		var url="seatPrice?title="+title+"&hall_name="+hall_name+"&vip="+vip+"&r="+r+"&s="+s+"&a="+a+"&b="+b;
+		window.open(url, "confirm", "menubar=no, width=500, height=330");
+	}
+	
+	function cheackSeatPrice(){
+		window.open("cheackSeatPrice", "confirm", "menubar=no, width=500, height=330");
 	}
 </script>
 </head>
@@ -125,6 +179,7 @@
 								<th style="width: 10%">시작날짜</th>
 								<th style="width: 10%">종료날짜</th>
 								<th>공연장</th>
+								<th>좌석별 가격 설정</th>
 								<th>우선순위</th>
 								<th>회차(하루간 공연회차)</th>
 								<th style="width: 8%">관람가능연령</th>
@@ -171,6 +226,13 @@
 											}
 										%>
 								</select></td>
+								<td><input type="text" name="seatPrice" onclick="cheackSeatPrice();">
+									<input type="hidden" name="VIP_seatPrice" value="0">
+									<input type="hidden" name="R_seatPrice" value="0">
+									<input type="hidden" name="S_seatPrice" value="0">
+									<input type="hidden" name="A_seatPrice" value="0">
+									<input type="hidden" name="B_seatPrice" value="0">
+								</td>
 								<td><select name="first_grade" style="width: 100%">
 										<option value="0"></option>
 										<option value="A">A</option>
@@ -199,6 +261,7 @@
 							<td><b>공연이미지</b></td>
 							<td><b>공연날짜</b></td>
 							<td><b>공연장</b></td>
+							<td><b>좌석별 가격확인</b></td>
 							<td><b>우선순위</b></td>
 							<td><b>공연스텝</b></td>
 							<td><b>회차(하루간 공연회차)</b></td>
@@ -217,6 +280,7 @@
 										style="width: 50px; height: 50px;"></td>
 									<td>${dto.startDate}~${dto.endDate}</td>
 									<td>${dto.hall_name}</td>
+									<td><input type="button" class="btn" value="가격" onclick="seatPrice('${dto.perf_title}','${dto.hall_name}','${dto.getVIP_seatPrice()}','${dto.getR_seatPrice()}','${dto.getS_seatPrice()}','${dto.getA_seatPrice()}','${dto.getB_seatPrice()}');"></td>
 									<td>${dto.first_grade}</td>
 									<td>${dto.per_step}</td>
 									<td>${dto.remain_round}</td>
@@ -324,8 +388,7 @@
 										<option value="E">E</option>
 								</select></td>
 								<td><input type="text" name="disc_count"></td>
-								<td><button type="button" id="store" onclick="click();"
-										style="border: 2px solid #cccccc;">추가</button></td>
+								<td><button type="button" id="store" style="border: 2px solid #cccccc;">추가</button></td>
 							</tr>
 						</table>
 
