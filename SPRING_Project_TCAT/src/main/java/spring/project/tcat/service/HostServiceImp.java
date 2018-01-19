@@ -51,8 +51,8 @@ public class HostServiceImp implements HostService {
 		SimpleDateFormat date=new SimpleDateFormat("yy/MM/dd");
 		 Date today=new Date();
 		 Date yesterDay=new Date();
-		 today.setTime(today.getTime()+((long) 1000*60*60*24));
-		 yesterDay.setTime(today.getTime()-((long) 1000*60*60*24*7));
+		 today.setTime(today.getTime()+((long) 1000*60*60*24)); //365 년
+		 yesterDay.setTime(today.getTime()-((long) 1000*60*60*24*7)); //작년 365
 		 String todayStr=date.format(today);
 		 String yesterDayStr=date.format(yesterDay);
 		 Map<String,Object> map=new HashMap<String,Object>();
