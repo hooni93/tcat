@@ -22,7 +22,7 @@
 	$(document).ready(function() {
 		myPageLoad('myPageMain');
 	})
-
+	//화면 뿌리기
 	function myPageLoad(url) {
 		$("#myPageResult").load(url);
 	}
@@ -44,14 +44,21 @@
 				<ul class="nav nav-list  w100p ">
 					<li><a href="#" class="000000"><b>마이페이지</b></a>
 					<hr class="w90p" style="margin: 0 auto;"></li>
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 					<li><a onclick="myPageLoad('myModifyForm');" class="000000">회원정보수정</a></li>
 					<li><a onclick="myPageLoad('memberPoint');" class="000000">회원등급포인트관리</a></li>
 
 				</ul>
 			</div>
+<<<<<<< HEAD
 		</div>
 
+=======
+		</div>
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 	</div>
 
 	<!--뿌려주는 div-->
