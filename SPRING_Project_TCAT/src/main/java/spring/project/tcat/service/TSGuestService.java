@@ -13,4 +13,6 @@ public interface TSGuestService {
 	public void myModifyPro(HttpServletRequest req,Model model);
 	
 	public void myModifyUpdate(HttpServletRequest req,Model model);
+	
+	
 }

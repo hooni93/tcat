@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 function pwdCheck(pwd){
-
 	var url= "pwdCheck?member_pwd="+pwd;
 	 $( "#myPageResult" ).load( "${pageContext.request.contextPath}/"+url );
 }
@@ -31,36 +30,37 @@ function pwdCheck(pwd){
 		<div class="col-md-5"></div>
 		<div class="col-md-3">
 		<form action="" name="modifyForm">
-			<table align="center" 
-				class="table table-hover table-bordered table-condensed c fs10" style="width:400px; height:150px; margin:left; ">
-				<tr class="bg-primary">
-					<td style="font-size: 15pt"><strong>비밀번호</strong></td>
-				</tr>
+				<table align="center"
+					class="table table-hover table-bordered table-condensed c fs10"
+					style="width: 400px; height: 150px;">
+					<tr class="bg-primary">
+						<td style="font-size: 15pt"><strong>비밀번호</strong></td>
+					</tr>
 
-				<tr>
-					<td>
-						<input class="input" type="password" name="member_pwd" maxlength="50" style="width: 150px; height: 30px">
-					</td>
-				</tr>
+					<tr>
+						<td><input class="input" type="password" name="member_pwd"
+							maxlength="50" style="width: 150px; height: 30px"></td>
+					</tr>
 
-				<tr>
-					<td style="font-size: 12pt">
-					<button type="button" class="btn btn-info"  onclick ="pwdCheck(document.modifyForm.member_pwd.value);">
-					정보수정<i class="fa fa-check spaceLeft"></i>
-				</button>
-					<button type="submit" class="btn btn-warning" value="취소" onclick="window.history.back();">
-					취소<i class="fa fa-times spaceLeft"></i>
-				</button>
-				
-					<!-- 	<input type="button" value="정보수정" onclick ="pwdCheck(document.modifyForm.member_pwd.value);">
-						<input type="reset" value="취소" onclick="window.history.back();"> -->
-					</td>
-				</tr>
-			</table>
+					<tr>
+						<td style="font-size: 12pt">
+							<button type="button" class="btn btn-info"
+								onclick="pwdCheck(document.modifyForm.member_pwd.value);">
+								정보수정<i class="fa fa-check spaceLeft"></i>
+							</button>
+							<button type="submit" class="btn btn-warning" value="취소"
+								onclick="window.history.back();">
+								취소<i class="fa fa-times spaceLeft"></i>
+							</button>
+
+						</td>
+					</tr>
+				</table>
 			</form>
 		</div>
 		<div class="col-md-3"></div>
 	</div>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<hr>
 </body>
 </html>

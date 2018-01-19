@@ -46,6 +46,26 @@ function emailCheack() {
 				"menubar=no, width=500, height=255");
 	}
 }
+function addrModify(){
+	var addrModify = document.getElementById("addrModify");
+
+	var msg ="";
+	
+		
+	   	msg +=" <div class='form-group'>"+
+			  "<label for='username'><span style='color:red;'>*</span> 주소수정 </label>"+
+				"<div class='input-group'>"+
+				"<input type='text' class='form-control'  id='sample6_postcode' name='postNum' placeholder='우편번호'>"+
+				"<span class='input-group-btn'>"+
+					"<input type='button'  class='btn btn-success' onclick='sample6_execDaumPostcode();' value='우편번호 찾기'><br>"+
+				"</span>"+
+				"</div>"+
+				"<input type='text' class='form-control' name='addr' id='sample6_address' >"+
+				"<input type='text' class='form-control' name='detailAddr' id='sample6_address2' placeholder='상세주소' >"+
+					"<span style='display: none; color: red;' id='addrError'>필수입력입니다.</span>"+
+				"</div>";
+			addrModify.innerHTML=msg;
+}
 </script>
 <script>
 $(function() {
@@ -155,9 +175,11 @@ $(function() {
 					<form action="" name="myModifyForm" id="myModifyForm">
 					
 			<!-- 이름 -------------------------------------------------------------------------------- -->
-			<div class="form-group">
-				<label><span style="color:red;"></span>이름 </label>
-				<h2>${vo.member_name}</h2>
+			<div class="form-group">     
+				<label><span style="color:red;"></span>이름 :</label>
+			
+				<Strong>${vo.member_name}</Strong>
+				
 			</div>
 			<!-- 연락처 -------------------------------------------------------------------------------- -->	
 			<!-- 비밀번호 -------------------------------------------------------------------------------- -->
@@ -184,6 +206,12 @@ $(function() {
 			<!-- 연락처 -------------------------------------------------------------------------------- -->
 			<!-- 주소검색 -------------------------------------------------------------------------------- -->
 			<div class="form-group">
+				<label for="username"><span style="color:red;">*</span> 주소 </label></label>  ${vo.member_addr} <input class="btn btn-success" type="button" value="주소수정" onclick="addrModify();">
+			</div>
+			<div id="addrModify">
+				
+			</div>
+			<%-- <div class="form-group">
 				<label for="username"><span style="color:red;">*</span> 주소 </label>
 					<div class="input-group">
 					<input type="text" class="form-control"  id="sample6_postcode" name="postNum" placeholder="우편번호">
@@ -195,7 +223,7 @@ $(function() {
 					<input type="text" class="form-control" name="detailAddr" id="sample6_address2" placeholder="상세주소" value="${vo.member_addr}">
 
 				<span style="display: none; color: red;" id="addrError">필수입력입니다.</span>
-			</div>	
+			</div>	 --%>
 			<!-- 주소검색 -------------------------------------------------------------------------------- -->
 			<!-- 이메일 -------------------------------------------------------------------------------- -->
 			<div class="form-group">

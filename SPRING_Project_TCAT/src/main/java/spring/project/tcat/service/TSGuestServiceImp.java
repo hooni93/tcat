@@ -2,6 +2,7 @@ package spring.project.tcat.service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -57,7 +58,7 @@ public class TSGuestServiceImp implements TSGuestService{
 			String member_hp = req.getParameter("member_hp");
 			
 			String postNum=req.getParameter("postNum");
-			String detailAddr=req.getParameter("detailAddr");
+			String detailAddr=req.getParameter("detailAddr");    
 			String addr=req.getParameter("addr");//주소-daum주소검색
 			
 			String member_addr="["+postNum+"]"+addr+" "+detailAddr;
@@ -99,5 +100,6 @@ public class TSGuestServiceImp implements TSGuestService{
 			model.addAttribute("cnt",cnt);
 			
 		}
+		
 
 }
