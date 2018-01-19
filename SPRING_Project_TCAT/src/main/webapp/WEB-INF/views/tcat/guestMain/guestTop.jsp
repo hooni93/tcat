@@ -39,9 +39,17 @@ $( function() {
 		$("#inMenu").slideUp("slow");
 		$("#inMenu").hide("slow");
 	}
-
+	
+	//로그인 모달
+	$("#login").click(function(){
+		$("#modal_result").load("${pageContext.request.contextPath}/memberLogin");
+	});
+	
 });
   
+function findId(){
+	$("#modal_result").load("${pageContext.request.contextPath}/memberFind");
+}
 </script>
 <script type="text/javascript">
 
@@ -72,6 +80,8 @@ function load(url){
 }
 
 
+
+
 </script>
 </head>
 <body>
@@ -84,7 +94,7 @@ function load(url){
  			<ol class="breadcrumb floatR fs12px h18 pt10">
 			  	  <li class="active">
 			  	  	<c:if test="${login_id==null }">
-			  	  		<a data-toggle="modal" data-target="#login-modal">로그인</a>
+			  	  		<a data-toggle="modal" data-target="#login-modal" id="login">로그인</a>
 			  	  	</c:if>
 			  	  	<c:if test="${login_id!=null }">
 			  	  		<a href="logout">로그아웃</a>
@@ -170,19 +180,9 @@ function load(url){
 
 
 <!--로그인 창 MODAL  -->
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
- 	  <div class="modal-dialog">
-		<div class="loginmodal-container">
-			<h1>로그인하세요</h1><br>
-			<form action="loginPro" method="Post">
-				<input type="text" name="member_id" placeholder="아이디">
-				<input type="password" name="member_pwd" placeholder="비밀번호">
-				<input type="submit" name="login" class="login loginmodal-submit" value="로그인">
-			</form>
-			<div class="login-help">
-				<a href="#">회원가입</a> - <a href="memberFind">아이디/비밀번호 찾기</a>
-			</div>
-		</div>
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog"  data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+	<!--모달 결과창  -->
+	<div class="modal-dialog" id="modal_result">
 	</div>
 </div>
 
