@@ -26,12 +26,13 @@ public class TSGuestController {
 		public String pwdCheck(HttpServletRequest req, Model model) {
 			System.out.println("pwdCheck");
 			
+			System.out.println("ssssssssssssssssss"+req.getParameter("member_pwd"));
 			TSGService.pwdCheck(req, model);
 			
 			return "tcat/memberMyPage/myModifyForm";
 		}
 		
-	//게스트 정보수정
+	//게스트 정보가져오기
 	@RequestMapping("myModifyPro")
 	public String myModifyPro(HttpServletRequest req, Model model) {
 		System.out.println("myModify");
@@ -40,5 +41,14 @@ public class TSGuestController {
 		
 		return "tcat/memberMyPage/myModify";
 	}
+	//게스트 정보수정
+		@RequestMapping("myModifyUpdate")
+		public String myModifyUpdate(HttpServletRequest req, Model model) {
+			System.out.println("myModifyUpdate");
+			
+			TSGService.myModifyUpdate(req, model);
+			
+			return "tcat/memberMyPage/myModifyForm";
+		}
 	
 }

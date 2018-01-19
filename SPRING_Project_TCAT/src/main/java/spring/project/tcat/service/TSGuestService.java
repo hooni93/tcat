@@ -12,5 +12,5 @@ public interface TSGuestService {
 	//회원정보 상세페이지
 	public void myModifyPro(HttpServletRequest req,Model model);
 	
-	
+	public void myModifyUpdate(HttpServletRequest req,Model model);
 }
