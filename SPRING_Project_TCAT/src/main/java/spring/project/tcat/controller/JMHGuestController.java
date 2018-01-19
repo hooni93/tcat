@@ -41,13 +41,13 @@ public class JMHGuestController {
 	@RequestMapping("findResultPage")
 	public String findResultPage(HttpServletRequest req, Model model) {
 		System.out.println("findResultPage");
-		System.out.println(req.getAttribute("member_find"));
-		model.addAttribute("member_find", req.getAttribute("member_find"));
+		System.out.println(req.getParameter("member_id")+"/"+req.getParameter("member_pwd"));
+		model.addAttribute("member_id", req.getParameter("member_id"));
+		model.addAttribute("member_pwd", req.getParameter("member_pwd"));
 		return "tcat/memberFind/findResultPage";
 	}
 	
 	/////////////////////////////////////////////////////////////
-	
 	//서브메뉴 및 ajax div
 	@RequestMapping("myPage")
 	public String myPage(HttpServletRequest req, Model model) {
@@ -62,6 +62,8 @@ public class JMHGuestController {
 		mhService.myPageInfo(req,model);
 		return "tcat/memberMyPage/myPageMain";
 	}
+	
+	
 	//////////////////////////////////////////////////////////////
 	//memberLogin 모달 로그인 창
 	@RequestMapping("memberLogin")

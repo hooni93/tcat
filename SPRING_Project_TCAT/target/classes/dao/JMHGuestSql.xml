@@ -8,8 +8,14 @@
 	<select id="id_emailChk" resultType="int">
 		SELECT 	COUNT(*)
 		FROM	member
-		WHERE	member_name LIKE '${member_name}'
-		AND		member_email = '${member_email}'
+		WHERE
+				<if test="member_id==null">
+				member_name LIKE '${member_name}'
+				</if>
+				<if test="member_id!=null">
+				member_id LIKE '${member_id}'
+				</if>	
+		AND		member_email LIKE '${member_email}'
 	</select>
 	<!--로그인 확인  -->
 	<select id="loginPro" resultType="int">
@@ -17,11 +23,12 @@
 		FROM	member
 		WHERE	member_id = #{member_id}
 		AND		member_pwd = #{member_pwd}
+		AND		NOT( member_step = 3)
 	</select>
 	<!-- 접속일 변경 -->
 	<update id="updateLastDate">
 		UPDATE	member
-		SET		lastDate = SYSDATE
+		SET		lastDate = SYSDATE, member_step = 1	<!--접속일갱신, 휴면계정 풀어주기  -->
 		WHERE 	member_id = #{member_id}
 	</update>
 	<!--아이디 찾기  -->
@@ -43,4 +50,11 @@
 				member_id = #{member_id}
 			</if>
 	</select>
+	
+	<!--회원 정보 가져오기  -->
+	<select id="myPageInfo" resultType="spring.project.tcat.VO.MemberVO">
+	
+	</select>
+	<!--해당 회원 스토어 구매 정보  -->
+	<select id="memDiscBuy" resultType="spring.project.tcat.VO.TcatDiscBuyVO"></select>
 </mapper>

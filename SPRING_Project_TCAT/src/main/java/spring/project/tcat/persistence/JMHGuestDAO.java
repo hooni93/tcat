@@ -1,6 +1,10 @@
 package spring.project.tcat.persistence;
 
+import java.util.ArrayList;
 import java.util.Map;
+
+import spring.project.tcat.VO.MemberVO;
+import spring.project.tcat.VO.TcatDiscBuyVO;
 
 public interface JMHGuestDAO {
 	
@@ -17,4 +21,10 @@ public interface JMHGuestDAO {
 	public int loginPro(Map<String,String> map);
 	//접속일 갱신
 	public void updateLastDate(Map<String,String> map);
+	
+	
+	//회원정보 가져오기
+	public MemberVO myPageInfo(Map<String,Object> map);
+	//해당회원의 구매정보
+	public ArrayList<TcatDiscBuyVO> memDiscBuy(Map<String,Object> map);
 }

@@ -1,5 +1,6 @@
 package spring.project.tcat.persistence;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Repository;
 
+import spring.project.tcat.VO.MemberVO;
+import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.config.Configuration;
 
 @Repository
@@ -61,4 +64,20 @@ public class JMHGuestDAOImp implements JMHGuestDAO{
 		dao.updateLastDate(map);
 	}
 
+	
+	//회원정보 가져오기
+	@Override
+	public MemberVO myPageInfo(Map<String,Object> map){
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		MemberVO memInfo = dao.myPageInfo(map);
+		return memInfo;
+	}
+	
+	//해당회원의 구매정보
+	@Override
+	public ArrayList<TcatDiscBuyVO> memDiscBuy(Map<String,Object> map){
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<TcatDiscBuyVO> memDiscBuyList = dao.memDiscBuy(map);
+		return memDiscBuyList;
+	}
 }

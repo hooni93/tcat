@@ -19,7 +19,7 @@
 	<!--로그인 실패 -->
 	<c:if test="${loginRs==0 }">
 		<script type="text/javascript">
-			alert("로그인 실패하셨습니다.");
+			alert("탈퇴한 회원이거나 아이디 혹은 비밀번호가 틀렸습니다.");
 			window.location = "guestPage";
 		</script>
 	</c:if>

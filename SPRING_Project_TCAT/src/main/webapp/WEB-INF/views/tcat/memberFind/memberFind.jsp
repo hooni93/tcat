@@ -26,11 +26,10 @@
 	//emailSubmit(보낼 url, form아이디, 결과 뿌려줄 div아이디)
 	function emailSubmit(url, form, result) { /*AJAX submit  */
 		var formData = $(form).serialize();
-		var member_name = $(form + " input[name='member_name']");
+		var member_ = $(form + " input[class='form-control member_']");
 		var member_email = $(form + " input[name='member_email']");
 		var admit_code = $(form + " input[name='admit_code']");
 		var admit_code_submit = $("#admit_code_submit").val();
-		alert(admit_code_submit);
 		if (url == "findResult") {
 			if (admit_code_submit != 1) {
 				alert("인증번호 전송을 해주세요.");
@@ -48,9 +47,9 @@
 			}
 		}
 		
-		if (!member_name.val()) {
+		if (!member_.val()) {
 			alert("이름을 입력해주세요.");
-			member_name.focus();
+			member_.focus();
 			return false;
 		}
 		if (!member_email.val()) {
@@ -214,8 +213,8 @@
 
 					<!--회원 이름 입력  -->
 					<div class="form-group">
-						<input type="text" name="member_name" tabindex="1"
-							class="form-control" placeholder="이름" value="${member_name}">
+						<input type="text" name="member_name" id="member_" tabindex="1"
+							class="form-control member_" placeholder="이름">
 					</div>
 
 					<div class="form-group fs10">본인확인 이메일 주소와 입력한 이메일 주소가 같아야,
@@ -226,7 +225,7 @@
 						<div class="row">
 							<div class="col-md-8">
 								<input type="text" name="member_email" tabindex="3"
-									class="form-control" placeholder="E-mail" value="${member_email }">
+									class="form-control" placeholder="E-mail">
 							</div>
 							<div class="col-md-4">
 								<input type="button" tabindex="3"
@@ -242,7 +241,7 @@
 					<!--이메일 인증번호입력  -->
 					<div class="form-group text-center">
 						<input type="text" name="admit_code" tabindex="4" maxlength="6"
-							class="form-control" placeholder="인증번호 입력(6자리)">
+							class="form-control" placeholder="인증코드 입력(6자리)">
 					</div>
 					<!--아이디찾기  -->
 					<div class="form-group">
@@ -257,13 +256,10 @@
 				</form>
 
 				<!--비밀번호 찾기  -->
-				<form id="register-form"
-					action="https://phpoll.com/register/process" method="post"
-					role="form" style="display: none;">
+				<form id="register-form" action="https://phpoll.com/register/process" method="post" role="form" style="display: none;">
 					<!--회원 아이디 입력  -->
 					<div class="form-group">
-						<input type="text" name="member_id" tabindex="1"
-							class="form-control" placeholder="아이디" value="">
+						<input type="text" name="member_id" tabindex="1" class="form-control member_" placeholder="아이디">
 					</div>
 					<div class="form-group fs10">본인확인 이메일 주소와 입력한 이메일 주소가 같아야,
 						인증번호를 받을 수 있습니다.</div>
@@ -276,22 +272,27 @@
 							</div>
 							<div class="col-md-4">
 								<input type="button" tabindex="3"
+									onclick="return emailSubmit('findId','#register-form','#pwdResult')"
 									class="form-control btn btn-login" value="인증번호 전송">
 							</div>
 						</div>
 					</div>
+					<div id="pwdResult"></div>
 					<!--이메일 인증번호입력  -->
 					<div class="form-group text-center">
-						<input type="text" name="admit_code" tabindex="4"
-							class="form-control" placeholder="인증번호 입력">
-
+						<input type="text" name="admit_code" tabindex="4" maxlength="6"
+							class="form-control" placeholder="인증코드 입력(6자리)">
 					</div>
-
+					<!--	아이디, 이메일 매치시: 인증번호가 전송되었습니다
+							 비매치: 등록된 아이디가 아니거나 이메일주소가 아닙니다.  -->
+					
+					
 					<div class="form-group">
 						<div class="row">
 							<div class="col-sm-6 col-sm-offset-3">
-								<input type="submit" name="login-submit" id="login-submit"
-									tabindex="5" class="form-control btn btn-login" value="비밀번호 찾기">
+								<input type="button" name="login-submit" id="login-submit"
+									tabindex="5" class="form-control btn btn-login" value="비밀번호 찾기"
+									onclick="return emailSubmit('findResult','#register-form','#pwdResult')">
 							</div>
 						</div>
 					</div>
