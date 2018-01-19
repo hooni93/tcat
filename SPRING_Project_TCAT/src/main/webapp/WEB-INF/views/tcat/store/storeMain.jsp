@@ -5,7 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-</head>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 </head>
@@ -18,10 +17,12 @@
 			<div class="col-md-2 thumbnail mr15 h300">
 				<div class="list-group pt20">
 				  <a href="#" class="list-group-item disabled">
-				    <span class="text-warning">클래식</span>
+				    <span class="text-warning">스토어</span>
 				  </a>
-				  <a href="#" class="list-group-item">클래식</a>
-				  <a href="#" class="list-group-item">국악</a>
+				  <a href="#" class="list-group-item">뮤지컬OST</a>
+				  <a href="#" class="list-group-item">콘서트LIVE</a>
+				  <a href="#" class="list-group-item">클래식LIVE</a>
+				  <a href="#" class="list-group-item">전시컬렉션</a>
 				</div>
 			</div>
 			<div class="col-md-7 thumbnail mr15 h300">
@@ -37,19 +38,19 @@
 				  <!-- Wrapper for slides -->
 				  <div class="carousel-inner" role="listbox">
 				    <div class="item active">
-				      <img src="${image}classic/A_1.jpg"  width="100%" height="300px" alt="A_1">
+				      <img src="${image}store/A_1.jpg"  width="100%" height="300px" alt="A_1">
 				      <div class="carousel-caption">
 				
 				      </div>
 				    </div>
 				    <div class="item">
-				      <img src="${image}classic/A_2.jpg" width="100%" height="300px" alt="A_2">
+				      <img src="${image}store/A_2.jpg" width="100%" height="300px" alt="A_2">
 				      <div class="carousel-caption">
 				
 				      </div>
 				    </div>
 				    <div class="item">
-				      <img src="${image}classic/A_3.jpg" width="100%" height="300px" alt="A_3">
+				      <img src="${image}store/A_3.jpg" width="100%" height="300px" alt="A_3">
 				      <div class="carousel-caption">
 				
 				      </div>
@@ -73,11 +74,11 @@
 			<div class="col-md-2 thumbnail">
 				<div class="list-group pt11">
 				  <div class="pt11"><p class="686868 b m10"><span class="glyphicon glyphicon-star"></span> 랭킹</p></div>
-				  <a href="#" class="list-group-item">1. 빌하모니</a>
-				  <a href="#" class="list-group-item">2. 아리랑</a>
-				  <a href="#" class="list-group-item">3. 모스크바심포지움</a>
-				  <a href="#" class="list-group-item">4. 클래식시리즈</a>
-				  <a href="#" class="list-group-item">5. 김영임공연</a>
+				  <a href="#" class="list-group-item">1. 신년음악회음반</a>
+				  <a href="#" class="list-group-item">2. 필하모니공연음반</a>
+				  <a href="#" class="list-group-item">3. 싸이콘서트실황</a>
+				  <a href="#" class="list-group-item">4. 아이유공연음반</a>
+				  <a href="#" class="list-group-item">5. 빌하모니</a>
 				</div>
 			</div>	
 			
