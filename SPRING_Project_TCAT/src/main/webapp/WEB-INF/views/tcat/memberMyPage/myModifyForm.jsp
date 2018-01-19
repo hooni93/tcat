@@ -32,19 +32,19 @@ function pwdCheck(pwd){
 		<div class="col-md-3">
 		<form action="" name="modifyForm">
 			<table align="center" 
-				class="table table-hover table-bordered table-condensed c fs10">
+				class="table table-hover table-bordered table-condensed c fs10" style="width:400px; height:150px; margin:auto; ">
 				<tr class="bg-primary">
-					<td><strong>비밀번호</strong></td>
+					<td style="font-size: 15pt"><strong>비밀번호</strong></td>
 				</tr>
 
 				<tr>
 					<td>
-						<input class="input" type="password" name="member_pwd" maxlength="50" style="width: 100px; height: 30px">
+						<input class="input" type="password" name="member_pwd" maxlength="50" style="width: 150px; height: 30px">
 					</td>
 				</tr>
 
 				<tr>
-					<td>
+					<td style="font-size: 12pt">
 						<input type="button" value="정보수정" onclick ="pwdCheck(document.modifyForm.member_pwd.value);">
 						<input type="reset" value="취소" onclick="window.history.back();">
 					</td>

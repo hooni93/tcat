@@ -68,7 +68,7 @@ public class TSGuestServiceImp implements TSGuestService{
 			}
 			vo.setMember_hp(member_hp);
 			
-			/*vo.setMember_addr(req.getParameter("member_addr"));*/
+			vo.setMember_addr(req.getParameter("member_addr"));
 			
 			String member_email = "";
 			String email1 = req.getParameter("email1");
