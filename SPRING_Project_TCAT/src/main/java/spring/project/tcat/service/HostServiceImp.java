@@ -42,7 +42,7 @@ public class HostServiceImp implements HostService {
 	private JavaMailSender mailSender;
 	
 	
-	//최근회원가입 화면 
+	//최근가입회원 화면 
 	@Override
 	public void join_retireMember(HttpServletRequest req, Model model) {
 		// TODO Auto-generated method stub
