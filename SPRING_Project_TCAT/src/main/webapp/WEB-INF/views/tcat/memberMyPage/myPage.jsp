@@ -36,7 +36,7 @@
 <div class="col-md-12">
 
 
-
+	<div class="col-md-1"></div>
 	<div class="col-md-3 ">
 		<div class="sidebar-nav disInline w70p">
 			<div class="well borderMenu disInline w100p"
@@ -49,8 +49,9 @@
 				</ul>
 			</div>
 		</div>
+		<div class="col-md-1"></div>
 	</div>
-
+	
 	<!--뿌려주는 div-->
 	<div class="col-md-8" id="myPageResult"></div>
 
