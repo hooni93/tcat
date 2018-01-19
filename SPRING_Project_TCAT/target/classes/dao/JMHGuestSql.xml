@@ -4,24 +4,43 @@
              "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="spring.project.tcat.persistence.JMHGuestDAO">
-
+	<!-- 이름,이메일 매칭 -->
 	<select id="id_emailChk" resultType="int">
 		SELECT 	COUNT(*)
 		FROM	member
 		WHERE	member_name LIKE '${member_name}'
 		AND		member_email = '${member_email}'
 	</select>
-	
+	<!--로그인 확인  -->
 	<select id="loginPro" resultType="int">
 		SELECT 	COUNT(*)
 		FROM	member
 		WHERE	member_id = #{member_id}
 		AND		member_pwd = #{member_pwd}
 	</select>
-	
+	<!-- 접속일 변경 -->
 	<update id="updateLastDate">
 		UPDATE	member
 		SET		lastDate = SYSDATE
 		WHERE 	member_id = #{member_id}
 	</update>
+	<!--아이디 찾기  -->
+	<select id="findIdPwd" resultType="String">
+		SELECT 	
+			<if test="member_id==null">
+				member_id
+			</if>
+			<if test="member_id!=null">
+				member_pwd
+			</if>
+		FROM	member
+		WHERE	
+			<if test="member_id==null">
+				member_name = #{member_name}
+				AND member_email = #{member_email}
+			</if>
+			<if test="member_id!=null">
+				member_id = #{member_id}
+			</if>
+	</select>
 </mapper>
