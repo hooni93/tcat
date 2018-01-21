@@ -43,7 +43,7 @@
 				style="background-color: white; padding: 8px 0;">
 				<ul class="nav nav-list  w100p ">
 					<li><a href="#" class="000000"><b>마이페이지</b></a>
-					<hr class="w90p" style="margin: 0 auto;"></li>
+						<hr class="w90p" style="margin: 0 auto;"></li>
 
 
 					<li><a onclick="myPageLoad('myModifyForm');" class="000000">회원정보수정</a></li>
@@ -51,27 +51,16 @@
 
 				</ul>
 			</div>
-<<<<<<< HEAD
 		</div>
-		<div class="col-md-1"></div>
-=======
-
-		</div>
-
-
-		</div>
-<!--뿌려주는 div-->
-	<div class="col-md-8" id="myPageResult"></div>
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 	</div>
-<<<<<<< HEAD
-	
 	<!--뿌려주는 div-->
 	<div class="col-md-8" id="myPageResult"></div>
-=======
+	<div class="col-md-1"></div>
 
-	
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
+
+</div>
+
+
 
 
 </html>
