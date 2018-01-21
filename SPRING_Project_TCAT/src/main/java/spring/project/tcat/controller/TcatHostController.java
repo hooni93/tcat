@@ -150,8 +150,47 @@ public class TcatHostController {
 		return "tcat/memberManage/"+reUrl;
 	}
 
-
+	//공연장등록
+	@RequestMapping("hallAdd")
+	public String hallAdd(HttpServletRequest req,Model model) {
+		System.out.println("hallAdd");
+		return "tcat/locationManager/hallAdd";
+	}
+	//공연장등록
+	@RequestMapping("hallSeatMake")
+	public String hallSeatMake(HttpServletRequest req,Model model) {
+		System.out.println("hallSeatMake");
+		return "tcat/locationManager/hallSeatMake";
+	}
+	//공연장 인서트
+	@RequestMapping("insertHall")
+	public String insertHall(HttpServletRequest req,Model model) {
+		System.out.println("insertHall");
+		hService.insertHall(req, model);
+		return "tcat/locationManager/hallAdd";
+	}
 	
+	
+	
+	
+	//공연장등록사이드
+	@RequestMapping("hallAdd_side")
+	public String hallAdd_side(HttpServletRequest req,Model model) {
+		System.out.println("hallAdd_side");
+		return "tcat/locationManager/hallAdd_side";
+	}
+	//공연장 수정
+	@RequestMapping("hallModify")
+	public String hallModify(HttpServletRequest req,Model model) {
+		System.out.println("hallModify");
+		return "tcat/locationManager/hallModify";
+	}
+	//공연장 삭제
+	@RequestMapping("hallDelete")
+	public String hallDelete(HttpServletRequest req,Model model) {
+		System.out.println("hallDelete");
+		return "tcat/locationManager/hallDelete";
+	}
 
 
 
