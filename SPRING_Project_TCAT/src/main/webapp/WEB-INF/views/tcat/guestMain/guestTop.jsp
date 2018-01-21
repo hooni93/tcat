@@ -253,8 +253,8 @@ function load(url){
 			         <div class="collapse navbar-collapse" id="navbar-collapse-1">
     
 			          <ul class="nav navbar-nav">
-			            <li><a class="trgothic ffffff fs14px b mr20 guestMenuHover" href="#">날짜</a></li>
-			            <li><a class="trgothic ffffff fs14px b mr20 guestMenuHover" href="#">지역</a></li>
+			            <li><a class="trgothic ffffff fs14px b mr20 guestMenuHover" onclick="load('dayList')">날짜</a></li>
+			            <li><a class="trgothic ffffff fs14px b mr20 guestMenuHover" onclick="load('placeList')">지역</a></li>
 
 			          </ul>
 
