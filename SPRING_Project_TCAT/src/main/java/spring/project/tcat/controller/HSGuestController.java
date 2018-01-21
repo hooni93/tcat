@@ -69,7 +69,49 @@ public class HSGuestController {
 	public String NewFile(HttpServletRequest req, Model model) {
 		System.out.println("NewFile");
 		
-		return "tcat/signUp/NewFile";
+		
+		return "tcat/registItem/NewFile";
 	}
+
+	//날짜별 공연일자 가져오기
+	@RequestMapping("daySearch")
+	public String daySearch(HttpServletRequest req, Model model) {
+		System.out.println("daySearch");
+		
+		HSGservice.daySearch(req,model);
+		
+		return "tcat/dayList/dayList";
+	}
+	
+	//날짜별 공연일자 가져오기
+	@RequestMapping("dayList")
+	public String dayList(HttpServletRequest req, Model model) {
+		System.out.println("dayList");
+		
+		HSGservice.daySearch(req,model);
+		
+		return "tcat/dayList/dayList";
+	}
+
+	//장소별 공연 가져오기
+	@RequestMapping("placeList")
+	public String placeList(HttpServletRequest req, Model model) {
+		System.out.println("placeList");
+		
+		HSGservice.placeList(req,model);
+		
+		return "tcat/placeList/placeList";
+	}
+	//스토어 장바구니 추가
+		@RequestMapping("insertCart")
+		public String insertCart(HttpServletRequest req, Model model) {
+			System.out.println("insertCart");
+			
+			HSGservice.insertCart(req,model);
+			
+			return "tcat/store/storeMain";
+		}
+		
+	
 
 }

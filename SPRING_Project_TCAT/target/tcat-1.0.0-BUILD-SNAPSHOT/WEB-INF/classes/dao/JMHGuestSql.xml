@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE mapper
+             PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="spring.project.tcat.persistence.JMHGuestDAO">
+	<!-- 이름,이메일 매칭 -->
+	<select id="id_emailChk" resultType="int">
+		SELECT 	COUNT(*)
+		FROM	member
+		WHERE
+				<if test="member_id==null">
+				member_name LIKE '${member_name}'
+				</if>
+				<if test="member_id!=null">
+				member_id LIKE '${member_id}'
+				</if>	
+		AND		member_email LIKE '${member_email}'
+	</select>
+	<!--로그인 확인  -->
+	<select id="loginPro" resultType="int">
+		SELECT 	COUNT(*)
+		FROM	member
+		WHERE	member_id = #{member_id}
+		AND		member_pwd = #{member_pwd}
+		AND		NOT( member_step = 3)
+	</select>
+	<!-- 접속일 변경 -->
+	<update id="updateLastDate">
+		UPDATE	member
+		SET		lastDate = SYSDATE, member_step = 1	<!--접속일갱신, 휴면계정 풀어주기  -->
+		WHERE 	member_id = #{member_id}
+	</update>
+	<!--아이디 찾기  -->
+	<select id="findIdPwd" resultType="String">
+		SELECT 	
+			<if test="member_id==null">
+				member_id
+			</if>
+			<if test="member_id!=null">
+				member_pwd
+			</if>
+		FROM	member
+		WHERE	
+			<if test="member_id==null">
+				member_name = #{member_name}
+				AND member_email = #{member_email}
+			</if>
+			<if test="member_id!=null">
+				member_id = #{member_id}
+			</if>
+	</select>
+	
+	<!--회원 정보 가져오기  -->
+	<select id="myPageInfo" resultType="spring.project.tcat.VO.MemberVO">
+		SELECT
+				member_id, member_pwd, member_name, member_hp, member_addr, member_email,
+				member_gender, member_birth, point, lastDate, Rating, member_step,
+				member_joindate
+		FROM	member
+		WHERE 	member_id=#{member_id}
+	</select>
+	<!--해당 회원 스토어 구매 정보  -->
+	<select id="memDiscBuy" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
+		SELECT
+				dis.disc_num, dis.del_num, dis.disc_buyDate, dis.disc_code,
+   				dis.member_id, dis.disc_buyStep, dis.sale_div, s.sale_rate,
+ 				del.del_name, del.del_addr, del.del_hp,
+ 				cat.category, cat.mDev, cat.sDev, per.disc_title,
+ 				per.disc_image, per.disc_con, per.cateNum, per.first_grade,
+ 				per.disc_step, per.disc_count
+		FROM	DiscBuy 	 dis
+		JOIN	sale 		 s 		ON	dis.sale_div = s.sale_div
+		JOIN	delevaryInfo del	ON	dis.del_num = del.del_num
+		JOIN	perDisc		 per	ON	dis.disc_code = per.disc_code
+		JOIN	category	 cat	ON	per.cateNum = cat.cateNum
+		<trim prefix="where" prefixOverrides="AND">
+			member_id LIKE '${member_id}'
+			<if test="disc_buyStep!=null">AND disc_buyStep LIKE '${disc_buyStep}'</if>
+			<if test="disc_buyDate!=null"><!--일단 보류  구입날짜별 검색 --></if>
+			<!--검색어  보류-->	
+		</trim>
+	</select>
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE mapper
+             PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+             
+   <mapper namespace="spring.project.tcat.persistence.HSGuestDAO">
+   		<select id="MemberIdCheack" parameterType="String" resultType="int">
+   			select count(*) from member
+   		</select>
+   		
+   		<insert id="insertMember" parameterType="spring.project.tcat.VO.MemberVO">
+   			insert into member(member_id,member_pwd,member_name,member_hp,member_addr,member_email,member_gender,member_birth,point,lastDate,Rating,member_step,member_joindate)
+   						values(#{member_id},#{member_pwd},#{member_name},#{member_hp},#{member_addr},#{member_email},#{member_gender},#{member_birth},0,sysdate,'D','1',sysdate)
+   		</insert>
+   </mapper>

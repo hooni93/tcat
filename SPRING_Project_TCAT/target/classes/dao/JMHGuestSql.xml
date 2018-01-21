@@ -6,41 +6,135 @@
 <mapper namespace="spring.project.tcat.persistence.JMHGuestDAO">
 	<!-- 이름,이메일 매칭 -->
 	<select id="id_emailChk" resultType="int">
-		SELECT 	COUNT(*)
-		FROM	member
-		WHERE	member_name LIKE '${member_name}'
-		AND		member_email = '${member_email}'
+		SELECT COUNT(*)
+		FROM member
+		WHERE
+		<if test="member_id==null">
+			member_name LIKE '${member_name}'
+		</if>
+		<if test="member_id!=null">
+			member_id LIKE '${member_id}'
+		</if>
+		AND member_email LIKE '${member_email}'
 	</select>
-	<!--로그인 확인  -->
+	<!--로그인 확인 -->
 	<select id="loginPro" resultType="int">
-		SELECT 	COUNT(*)
-		FROM	member
-		WHERE	member_id = #{member_id}
-		AND		member_pwd = #{member_pwd}
+		SELECT COUNT(*)
+		FROM member
+		WHERE member_id = #{member_id}
+		AND member_pwd = #{member_pwd}
+		AND NOT(
+		member_step = 3)
 	</select>
 	<!-- 접속일 변경 -->
 	<update id="updateLastDate">
-		UPDATE	member
-		SET		lastDate = SYSDATE
-		WHERE 	member_id = #{member_id}
+		UPDATE member
+		SET lastDate = SYSDATE, member_step = 1	<!--접속일갱신, 휴면계정 풀어주기 -->
+		WHERE member_id = #{member_id}
 	</update>
-	<!--아이디 찾기  -->
+	<!--아이디 찾기 -->
 	<select id="findIdPwd" resultType="String">
-		SELECT 	
-			<if test="member_id==null">
-				member_id
-			</if>
-			<if test="member_id!=null">
-				member_pwd
-			</if>
-		FROM	member
-		WHERE	
-			<if test="member_id==null">
-				member_name = #{member_name}
-				AND member_email = #{member_email}
-			</if>
-			<if test="member_id!=null">
-				member_id = #{member_id}
-			</if>
+		SELECT
+		<if test="member_id==null">
+			member_id
+		</if>
+		<if test="member_id!=null">
+			member_pwd
+		</if>
+		FROM member
+		WHERE
+		<if test="member_id==null">
+			member_name = #{member_name}
+			AND member_email = #{member_email}
+		</if>
+		<if test="member_id!=null">
+			member_id = #{member_id}
+		</if>
 	</select>
+
+	<!--회원 정보 가져오기 -->
+	<select id="myPageInfo" resultType="spring.project.tcat.VO.MemberVO">
+		SELECT
+		member_id, member_pwd, member_name, member_hp, member_addr, member_email,
+		member_gender, member_birth, point, lastDate, Rating, member_step,
+		member_joindate
+		FROM member
+		WHERE member_id=#{member_id}
+	</select>
+	<!--해당 회원 스토어 구매 정보 -->
+	<select id="memDiscBuy" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
+		SELECT
+		dis.disc_num, dis.del_num, dis.disc_buyDate, dis.disc_code,
+		dis.member_id, dis.disc_buyStep, dis.sale_div, s.sale_rate,
+		del.del_name, del.del_addr, del.del_hp,
+		cat.category, cat.mDev, cat.sDev, per.disc_title,
+		per.disc_image, per.disc_con, per.cateNum, per.first_grade,
+		per.disc_step, per.disc_count
+		FROM DiscBuy dis
+		JOIN sale s ON dis.sale_div =
+		s.sale_div
+		JOIN delevaryInfo del ON dis.del_num = del.del_num
+		JOIN
+		perDisc per ON dis.disc_code = per.disc_code
+		JOIN category cat ON
+		per.cateNum = cat.cateNum
+		<trim prefix="where" prefixOverrides="AND">
+			member_id LIKE '${member_id}'
+			<if test="disc_buyStep!=null">AND disc_buyStep LIKE '${disc_buyStep}'</if>
+			<if test="disc_buyDate!=null"><!--일단 보류 구입날짜별 검색 -->
+			</if>
+			<!--검색어 보류 -->
+		</trim>
+	</select>
+
+	<!--공연 상품 갯수 -->
+	<select id="getPerfListCnt" resultType="int">
+		SELECT COUNT(*)
+		FROM performanceInfo per
+		JOIN 	category cat 	ON per.cateNum = cat.cateNum
+		JOIN 	hallInfo hal 	ON per.hall_id = hal.hall_id
+		JOIN 	place    pla 	ON hal.place_num = pla.place_num
+		WHERE 	NOT(per.per_step LIKE 4)<!--판매중지 제외  -->
+		AND 	sDev LIKE '${sDev}'
+		<if test="place !=null">
+			AND 	pla.province LIKE '${place}'
+		</if>
+		ORDER BY
+		<choose>
+			<!-- <when test="order=종료임박순">per.endDate</when>
+			<when test="order=상품명">per.perf_title</when> -->
+			<otherwise>per.startDate</otherwise>
+		</choose>
+	</select>
+	<!--공연상품 리스트  -->
+	<select id="getPerfList" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+	SELECT 	*
+	FROM	(
+				SELECT 	per.per_id, per.perf_title, per.cateNum, 
+						per.perf_Image, per.startDate, per.endDate, per.hall_id, 
+						cat.category, cat.mDev, cat.sDev, 
+						hal.hall_name, hal.place_num, hal.VIP_seatPrice, 
+						hal.R_seatPrice, hal.S_seatPrice, hal.A_seatPrice, hal.B_seatPrice, 
+						hal.VIP_seat, hal.R_seat, hal.S_seat, hal.A_seat, hal.B_seat, hal.seat_line, 
+						pla.province, pla.city, pla.postNum, pla.address, rownum row
+				FROM 	performanceInfo per
+				JOIN 	category cat 	ON per.cateNum = cat.cateNum
+				JOIN 	hallInfo hal 	ON per.hall_id = hal.hall_id
+				JOIN 	place    pla 	ON hal.place_num = pla.place_num
+				WHERE 	NOT(per.per_step LIKE 4)<!--판매중지 제외  -->
+				AND 	sDev LIKE '${sDev}'
+				<if test="place !=null">
+					AND 	pla.province LIKE '${place}'
+				</if>
+				<!-- ORDER BY
+				<choose>
+					<when test="order=종료임박순">per.endDate</when>
+					<when test="order=상품명">per.perf_title</when>
+					<otherwise>per.startDate</otherwise>
+				</choose> -->
+			)WHERE row &gt;= #{start} AND row &lt;=#{end}
+	</select>
+	
+
+
 </mapper>

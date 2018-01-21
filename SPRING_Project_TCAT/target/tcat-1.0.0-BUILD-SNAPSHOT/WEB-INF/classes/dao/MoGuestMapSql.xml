@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE mapper
+             PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+             
+   <mapper namespace="spring.project.tcat.persistence.MoGuestDAO">
+   		<select id="hotList" parameterType="String" resultType="spring.project.tcat.VO.TcatPerformanceVO">   			
+			SELECT pb.per_id per_id,
+			            pb.perf_title perf_title,
+			            pb.perf_Image perf_Image,
+			            pb.startDate startDate,
+			            pb.endDate endDate,
+			            h.hall_name hall_name 
+			FROM  (select p.per_id per_id,
+			            p.perf_title perf_title,
+			            p.perf_Image perf_Image,
+			            p.startDate startDate,
+			            p.endDate endDate,
+			            c.cateNum cateNum,
+			            c.sDev sDev,
+                        p.hall_id hall_id,
+			            p.per_step per_step
+			            from performanceInfo p join category c ON p.cateNum = c.cateNum WHERE mDev=#{_parameter} AND per_step=2) pb JOIN hallInfo h ON pb.hall_id=h.hall_id
+   		</select>
+   
+   
+   </mapper>
+   

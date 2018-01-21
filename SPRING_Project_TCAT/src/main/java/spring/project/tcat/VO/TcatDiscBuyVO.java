@@ -43,7 +43,63 @@ public class TcatDiscBuyVO {
  	String 		sDev;
  	//perDisc
  	String 		perf_title;
- 	String disc_title;		//상품명
+ 	String 		disc_title;		//상품명
+ 	
+ 	
+ 	//perDisc
+    int disc_price;			//상품가격
+    
+	
+	String disc_image;		//상품이미지
+    String disc_con;		//상품 상세내용
+    int cateNum; 			//카테고리구분번호
+    String first_grade;		//우선순위
+    String disc_step; 		//상품 스텝
+    int disc_count;			//상품수량
+    
+    public int getDisc_price() {
+		return disc_price;
+	}
+	public void setDisc_price(int disc_price) {
+		this.disc_price = disc_price;
+	}
+	public String getDisc_image() {
+		return disc_image;
+	}
+	public void setDisc_image(String disc_image) {
+		this.disc_image = disc_image;
+	}
+	public String getDisc_con() {
+		return disc_con;
+	}
+	public void setDisc_con(String disc_con) {
+		this.disc_con = disc_con;
+	}
+	public int getCateNum() {
+		return cateNum;
+	}
+	public void setCateNum(int cateNum) {
+		this.cateNum = cateNum;
+	}
+	public String getFirst_grade() {
+		return first_grade;
+	}
+	public void setFirst_grade(String first_grade) {
+		this.first_grade = first_grade;
+	}
+	public String getDisc_step() {
+		return disc_step;
+	}
+	public void setDisc_step(String disc_step) {
+		this.disc_step = disc_step;
+	}
+	public int getDisc_count() {
+		return disc_count;
+	}
+	public void setDisc_count(int disc_count) {
+		this.disc_count = disc_count;
+	}
+	
 	public int getDisc_num() {
 		return disc_num;
 	}

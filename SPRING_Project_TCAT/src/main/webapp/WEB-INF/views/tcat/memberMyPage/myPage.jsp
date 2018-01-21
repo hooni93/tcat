@@ -32,11 +32,20 @@
 <!--마이페이지 메인  -->
 <div class="row h25"></div>
 
+<<<<<<< HEAD
 <!--메뉴  -->
 <div class="col-md-12">
 	<div class="col-md-3 ">
 		<div class="sidebar-nav disInline w70p">
+=======
+<div class="row">
+	<div class="col-md-1"></div>
+	<!--사이드 메뉴  -->
+	<div class="col-md-2 ">
+		<div class="sidebar-nav disInline w100p floatR">
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 			<div class="well borderMenu disInline w100p"
+<<<<<<< HEAD
 					style="background-color: white; padding: 8px 0;">
 					<ul class="nav nav-list  w100p ">
 						<li><a href="#" class="000000"><b>마이페이지</b></a>
@@ -44,9 +53,19 @@
 						<li><a onclick="myPageLoad('myModifyForm');" class="000000">회원정보수정</a></li>
 						<li><a onclick="myPageLoad('memberPoint');" class="000000">회원등급포인트관리</a></li>
 					</ul>
+=======
+				style="background-color: white; padding: 8px 0;">
+				<ul class="nav nav-list  w100p ">
+					<li><a onclick="myPageLoad('myPageMain');" class="000000"><b>마이페이지</b></a>
+						<hr class="w90p" style="margin: 0 auto;"></li>
+					<li><a onclick="myPageLoad('myModifyForm');" class="000000">회원정보수정</a></li>
+					<li><a onclick="myPageLoad('memberPoint');" class="000000">회원등급포인트관리</a></li>
+				</ul>
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 			</div>
 		</div>
 	</div>
+<<<<<<< HEAD
 
 <!--뿌려주는 div-->
 <div class="col-md-8" id="myPageResult"></div>
@@ -55,6 +74,11 @@
 <div class="col-md-3"></div>
 
 
+=======
+	<!--  뿌리는 div  -->
+	<div class="col-md-7" id="myPageResult"></div>
+	<div class="col-md-2"></div>
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 </div>
 
 </html>
