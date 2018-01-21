@@ -97,18 +97,44 @@
 		WHERE 	NOT(per.per_step LIKE 4)<!--판매중지 제외  -->
 		AND 	sDev LIKE '${sDev}'
 		<if test="place !=null">
-			AND 	(
-						pla.province LIKE '${place}'
-						OR pla.city LIKE '${place}'
-					)
+			AND 	pla.province LIKE '${place}'
 		</if>
 		ORDER BY
 		<choose>
-			<when test="order==종료임박순"></when>
-			<when test="order==등록일"></when>
-			<otherwise>endDate</otherwise>
+			<!-- <when test="order=종료임박순">per.endDate</when>
+			<when test="order=상품명">per.perf_title</when> -->
+			<otherwise>per.startDate</otherwise>
 		</choose>
 	</select>
+	<!--공연상품 리스트  -->
+	<select id="getPerfList" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+	SELECT 	*
+	FROM	(
+				SELECT 	per.per_id, per.perf_title, per.cateNum, 
+						per.perf_Image, per.startDate, per.endDate, per.hall_id, 
+						cat.category, cat.mDev, cat.sDev, 
+						hal.hall_name, hal.place_num, hal.VIP_seatPrice, 
+						hal.R_seatPrice, hal.S_seatPrice, hal.A_seatPrice, hal.B_seatPrice, 
+						hal.VIP_seat, hal.R_seat, hal.S_seat, hal.A_seat, hal.B_seat, hal.seat_line, 
+						pla.province, pla.city, pla.postNum, pla.address, rownum row
+				FROM 	performanceInfo per
+				JOIN 	category cat 	ON per.cateNum = cat.cateNum
+				JOIN 	hallInfo hal 	ON per.hall_id = hal.hall_id
+				JOIN 	place    pla 	ON hal.place_num = pla.place_num
+				WHERE 	NOT(per.per_step LIKE 4)<!--판매중지 제외  -->
+				AND 	sDev LIKE '${sDev}'
+				<if test="place !=null">
+					AND 	pla.province LIKE '${place}'
+				</if>
+				<!-- ORDER BY
+				<choose>
+					<when test="order=종료임박순">per.endDate</when>
+					<when test="order=상품명">per.perf_title</when>
+					<otherwise>per.startDate</otherwise>
+				</choose> -->
+			)WHERE row &gt;= #{start} AND row &lt;=#{end}
+	</select>
+	
 
 
 </mapper>
