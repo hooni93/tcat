@@ -12,10 +12,48 @@
 		where member_id=#{strId}
 	</select>
 	
-	<update id="mRatingUpdate" parameterType="String">
-	update member set Rating='C' where member_id=#{strId}
+	<update id="mRatingUpdate" parameterType="java.util.Map">
+	update member
+	<if test="compare ==0">
+    	set Rating='D'			
+    </if>
+	<if test="compare ==1">
+    	set Rating='C'			
+    </if>
+    <if test="compare ==2">
+    	set Rating='B'			
+    </if>
+    <if test="compare ==3">
+    	set Rating='A'			
+    </if>
+    <if test="compare ==4">
+    	set Rating='S'			
+    </if>
+    <if test="compare ==5">
+    	set Rating='VIP'			
+    </if> 
+	 	where member_id=#{strId}
 	</update>
-	<update id="mRatingUpdate1" parameterType="String">
-	update member set Rating='B' where member_id=#{strId}
-	</update>
+	<!-- S랭크 -->
+	<select id="dayCnt" parameterType="java.util.Map" resultType="int">
+		SELECT count(*)
+		FROM 
+		member m join Ticketing t
+		on
+		m.member_id=t.member_id
+		WHERE
+		Rating='A'
+		AND ticet_date BETWEEN #{yesterday} AND #{today}
+	</select>
+	<!-- vip -->
+	<select id="dayCnt1" parameterType="java.util.Map" resultType="int">
+		SELECT count(*)
+		FROM 
+		member m join Ticketing t
+		on
+		m.member_id=t.member_id
+		WHERE
+		Rating='S'
+		AND ticet_date BETWEEN #{yesterday} AND #{today}
+	</select>
    </mapper>

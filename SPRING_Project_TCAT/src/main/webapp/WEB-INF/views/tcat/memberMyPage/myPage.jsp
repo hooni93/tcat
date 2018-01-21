@@ -36,7 +36,7 @@
 <div class="col-md-12">
 
 
-
+	<div class="col-md-1"></div>
 	<div class="col-md-3 ">
 		<div class="sidebar-nav disInline w70p">
 			<div class="well borderMenu disInline w100p"
@@ -51,6 +51,10 @@
 
 				</ul>
 			</div>
+<<<<<<< HEAD
+		</div>
+		<div class="col-md-1"></div>
+=======
 
 		</div>
 
@@ -58,9 +62,16 @@
 		</div>
 <!--뿌려주는 div-->
 	<div class="col-md-8" id="myPageResult"></div>
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 	</div>
+<<<<<<< HEAD
+	
+	<!--뿌려주는 div-->
+	<div class="col-md-8" id="myPageResult"></div>
+=======
 
 	
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 
 
 </html>

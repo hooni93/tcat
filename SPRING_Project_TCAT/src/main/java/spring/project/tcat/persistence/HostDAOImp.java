@@ -95,11 +95,33 @@ public class HostDAOImp implements HostDAO {
 		dtos=dao.memberManagerSerchList(map);
 		return dtos;
 	}
-	
-	
-	
+	//지역인서트 넘버키 가져오기
+	@Override
+	public int placeNum() {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.placeNum();
+		return cnt;
+	}
+	//지역정보 인서트
+	@Override
+	public int placeInsert(TcatPerformanceVO vo) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.placeInsert(vo);
+		return cnt;
+	}
 
-	
+	@Override
+	public int insertHall(TcatPerformanceVO vo) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.insertHall(vo);
+		return cnt;
+	}
 	//////////////////////////////////////18.01.16 명훈//////////////////////////////////////////////////
 	//출력할 공연상품 갯수 가져오기
 	@Override

@@ -2,6 +2,8 @@ package spring.project.tcat.persistence;
 
 
 
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 
@@ -20,20 +22,26 @@ public class YMGuestDAOImpl implements YMGuestDAO{
 	}
 	//등급 업데이트
 	@Override
-	public int mRatingUpdate(String strId) {
+	public int mRatingUpdate(Map<String,Object> map) {
 		int upCnt=0;
 		YMGuestDAO dao= Configuration.getMapper(YMGuestDAO.class);
-		upCnt=dao.mRatingUpdate(strId);
+		upCnt=dao.mRatingUpdate(map);
 		return upCnt;
 	}
+	//A등급 1년 구매
 	@Override
-	public int mRatingUpdate1(String strId) {
-		int upCnt=0;
+	public int dayCnt(Map<String, Object> map) {
+		int sRank=0;
 		YMGuestDAO dao= Configuration.getMapper(YMGuestDAO.class);
-		upCnt=dao.mRatingUpdate(strId);
-		return upCnt;
+		sRank=dao.dayCnt(map);
+		return sRank;
 	}
-
-	
-
+	//S등급 1년 구매
+		@Override
+		public int dayCnt1(Map<String, Object> map) {
+			int vRank=0;
+			YMGuestDAO dao= Configuration.getMapper(YMGuestDAO.class);
+			vRank=dao.dayCnt1(map);
+			return vRank;
+		}
 }

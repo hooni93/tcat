@@ -3,8 +3,8 @@ package spring.project.tcat.VO;
 import java.sql.Timestamp;
 
 public class TcatPerformanceVO {
-	//ver2 by mh
-	
+//ver2 by mh
+
 	/*
 		<performanceInfo>
 			per_id          NUMBER(20)       NOT NULL, 
@@ -84,10 +84,11 @@ public class TcatPerformanceVO {
     String S_seat;			//S물리번호
     String A_seat;			//A물리번호
     String B_seat;			//B물리번호
+    String seat_line;
     //place
     String province ;		//도
     String city;			//시
-    String gu ;				//구
+    String postNum ;				//우편번호
     String address; 		//세부주소
     //DetailPage
     int detail_num;			//상세페이지 코드
@@ -96,7 +97,15 @@ public class TcatPerformanceVO {
     String Detail_Image; 	//추가 이미지
    
     
+    
+    
     //get,setter
+    public String getSeat_line() {
+		return seat_line;
+	}
+	public void setSeat_line(String seat_line) {
+		this.seat_line = seat_line;
+	}
 	public int getPer_id() {
 		return per_id;
 	}
@@ -265,11 +274,11 @@ public class TcatPerformanceVO {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public String getGu() {
-		return gu;
+	public String getPostNum() {
+		return postNum;
 	}
-	public void setGu(String gu) {
-		this.gu = gu;
+	public void setPostNum(String postNum) {
+		this.postNum = postNum;
 	}
 	public String getAddress() {
 		return address;
@@ -301,8 +310,11 @@ public class TcatPerformanceVO {
 	public void setDetail_Image(String detail_Image) {
 		Detail_Image = detail_Image;
 	}
-    
-	
-    
+ 
     
 }
+
+
+
+
+

@@ -15,7 +15,8 @@ public interface HostService {
 	public void sleepMemberPro(HttpServletRequest req,Model model);
 	//회원검색리스트
 	public void memberManagerSerchList(HttpServletRequest req,Model model);
-
+	//공연장 인서트
+	public void insertHall(HttpServletRequest req,Model model);
 
 	//////////////////////////////////////18.01.16 명훈//////////////////////////////////////////////////
 	//상품목록 나열

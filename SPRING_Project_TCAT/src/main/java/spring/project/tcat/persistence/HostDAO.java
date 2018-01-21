@@ -29,8 +29,12 @@ public interface HostDAO {
 	public int memberManagerSerchListCnt(Map<String,Object> map);
 	//검색정보
 	public ArrayList<MemberVO> memberManagerSerchList(Map<String,Object> map);
-	
-	
+	//지역인서트 넘버키 가져오기
+	public int placeNum();
+	//지역정보 인서트
+	public int placeInsert(TcatPerformanceVO vo);
+	//hall 인서트
+	public int insertHall(TcatPerformanceVO vo);
 
 
 	//////////////////////////////////////18.01.16 명훈//////////////////////////////////////////////////
