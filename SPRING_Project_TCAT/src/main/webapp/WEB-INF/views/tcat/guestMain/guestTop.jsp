@@ -127,13 +127,13 @@ $( function() {
 		$("#inMenu").hide("slow");
 	}
 	
-	//로그인 모달
+	//로그인 모달 by명훈
 	$("#login").click(function(){
 		$("#modal_result").load("${pageContext.request.contextPath}/memberLogin");
 	});
 	
 });
-  
+ //by명훈
 function findId(){
 	$("#modal_result").load("${pageContext.request.contextPath}/memberFind");
 }

@@ -1,30 +1,488 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="../setting.jsp"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<style type="text/css">
+/* USER PROFILE PAGE */
+.card {
+	padding: 30px;
+	background-color: rgba(214, 224, 226, 0.2);
+	-webkit-border-top-left-radius: 5px;
+	-moz-border-top-left-radius: 5px;
+	border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-top-right-radius: 5px;
+	border-top-right-radius: 5px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.card.hovercard {
+	position: relative;
+	padding-top: 0;
+	overflow: hidden;
+	text-align: center;
+	background-color: #fff;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.card.hovercard .card-background {
+	height: 130px;
+}
+
+.card-background img {
+	-webkit-filter: blur(25px);
+	-moz-filter: blur(25px);
+	-o-filter: blur(25px);
+	-ms-filter: blur(25px);
+	filter: blur(25px);
+	margin-left: -100px;
+	margin-top: -200px;
+	min-width: 130%;
+}
+
+.card.hovercard .useravatar {
+	position: absolute;
+	top: 15px;
+	left: 0;
+	right: 0;
+}
+
+.card.hovercard .useravatar img {
+	width: 100px;
+	height: 100px;
+	max-width: 100px;
+	max-height: 100px;
+}
+
+.card.hovercard .card-info {
+	position: absolute;
+	bottom: 14px;
+	left: 0;
+	right: 0;
+}
+
+.card.hovercard .card-info .card-title {
+	padding: 0 5px;
+	font-size: 20px;
+	line-height: 1;
+	color: #262626;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.card.hovercard .card-info {
+	overflow: hidden;
+	font-size: 12px;
+	line-height: 20px;
+	color: #737373;
+	text-overflow: ellipsis;
+}
+
+.card.hovercard .bottom {
+	padding: 0 20px;
+	margin-bottom: 17px;
+}
+
+/* 배송조회  */
+.btn-default.active {
+	background-color: #ff3333;
+	color: white;
+}
+
+.stepwizard-step p {
+	margin-top: 10px;
+}
+
+.stepwizard-row {
+	display: table-row;
+}
+
+.stepwizard {
+	display: table;
+	width: 100%;
+	position: relative;
+}
+
+.stepwizard-step button[disabled] {
+	opacity: 1 !important;
+	filter: alpha(opacity = 100) !important;
+}
+
+.stepwizard-step {
+	display: table-cell;
+	text-align: center;
+	position: relative;
+}
+</style>
+
+
+<script type="text/javascript">
+	$(function() {
+		$("a[href='#step1']").click(function(e) {
+			for (var i = 1; i <= 5; i++) {
+				$("a[href='#step" + i + "']").removeClass('active');
+			}
+			$(this).addClass('active');
+		});
+		$("a[href='#step2']").click(function(e) {
+			for (var i = 1; i <= 5; i++) {
+				$("a[href='#step" + i + "']").removeClass('active');
+			}
+			$(this).addClass('active');
+		});
+		$("a[href='#step3']").click(function(e) {
+			for (var i = 1; i <= 5; i++) {
+				$("a[href='#step" + i + "']").removeClass('active');
+			}
+			$(this).addClass('active');
+		});
+		$("a[href='#step4']").click(function(e) {
+			for (var i = 1; i <= 5; i++) {
+				$("a[href='#step" + i + "']").removeClass('active');
+			}
+			$(this).addClass('active');
+		});
+		$("a[href='#step5']").click(function(e) {
+			for (var i = 1; i <= 5; i++) {
+				$("a[href='#step" + i + "']").removeClass('active');
+			}
+			$(this).addClass('active');
+		});
+
+	});
+</script>
 </head>
 
-
+<!--/////////////////////////////////////////// 각 구매내역 상태에따른 갯수 랑 회원 정보 보냄  -->
 <!--  회원등급  -->
-<div>
-	<div id="ranking" class="row baaaaaa h300">
-		
+<div class="row">
+	<!--  -->
+	<div class="col-lg-12 col-sm-12" style="padding: 0;">
+		<div class="card hovercard">
+			<div class="row h25"></div>
+			<div class="card-background">
+				<img class="card-bkimg" alt=""
+					src="${image}memberRatingIcon/${myPageInfo.getRating()}.png">
+			</div>
+			<div class="useravatar">
+				<img alt=""
+					src="${image}memberRatingIcon/${myPageInfo.getRating()}.png">
+			</div>
+			<div class="card-info">
+				<span class="card-title">${myPageInfo.member_id}님의 회원등급</span> <br>
+			</div>
+		</div>
+
+		<div class=" btn-group btn-group-justified btn-group-lg" role="group">
+			<div class="btn-group" role="group">
+				<div class="w100p c pt3" style="border: solid 1px #d0d0d0">
+					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					<div class="hidden-xs">포인트: ${myPageInfo.point }p</div>
+				</div>
+			</div>
+			<div class="btn-group" role="group">
+				<div class="w100p c pt3" style="border: solid 1px #d0d0d0">
+					<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+					<div class="hidden-xs">${myPageInfo.member_email }</div>
+				</div>
+			</div>
+			<div class="btn-group" role="group">
+				<div class="w100p c pt3" style="border: solid 1px #d0d0d0;">
+					<span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+					<div class="hidden-xs">${myPageInfo.member_hp }</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
+	<!--  -->
 </div>
+
+
+
+
+
+
 <br>
 <!--  배송정보  -->
-<div>
-	<div class="row baaaaaa h300">
-		
+<div class="row" style="border: 1px solid #d0d0d0">
+	<div class="col-sm-12 c">
+		<h2>배송정보</h2>
+	</div>
+	<div class="stepwizard">
+		<div class="stepwizard-row">
+			<div class="stepwizard-step w18p">
+				<a class="btn btn-default btn-circle " data-toggle="tab"
+					href="#step1">${step1}</a>
+				<p>결제</p>
+			</div>
+
+			<div class="stepwizard-step">
+				<h3>></h3>
+			</div>
+
+			<div class="stepwizard-step w18p">
+				<a class="btn btn-default btn-circle" data-toggle="tab"
+					href="#step2">${step2}</a>
+				<p>구매승인</p>
+			</div>
+
+			<div class="stepwizard-step">
+				<h3>></h3>
+			</div>
+
+			<div class="stepwizard-step w18p">
+				<a class="btn btn-default btn-circle" data-toggle="tab"
+					href="#step3">${step3}</a>
+				<p>배송시작</p>
+			</div>
+
+			<div class="stepwizard-step">
+				<h3>></h3>
+			</div>
+
+			<div class="stepwizard-step w18p">
+				<a class="btn btn-default btn-circle" data-toggle="tab"
+					href="#step4">${step4}</a>
+				<p>배송 중</p>
+			</div>
+
+			<div class="stepwizard-step">
+				<h3>></h3>
+			</div>
+
+			<div class="stepwizard-step w18p">
+				<a class="btn btn-default btn-circle" data-toggle="tab"
+					href="#step5">${step5}</a>
+				<p>배송완료</p>
+			</div>
+		</div>
 	</div>
 </div>
-<br>
-<!--  회원정보  -->
-<div class="row"></div>
-	<div class="row baaaaaa h300">
-		
+<!--배송정보 ajax-->
+<div class="row" style="border: 1px solid #d0d0d0">
+
+
+
+
+
+	<div class="tab-content">
+		<div class="tab-pane fade in active c"
+			style="background-color: #f0f0f0">
+			<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+			클릭하시면 상세내역이 나옵니다.
+		</div>
+
+
+		<!--결제 탭 노출  -->
+		<div class="tab-pane fade in" id="step1">
+			<!--  리스트 시작 -->
+			<div class="list-group">
+				<c:if test="${listStep1.size()==0}">
+				<div class="c h70 pt30">결제완료인 상품이 없습니다.</div>	
+				</c:if>
+				<c:forEach var="list" items="${listStep1 }">
+					<div class="media col-md-3 ">
+						<div>주문번호: ${list.del_num}</div>
+						<figure class="pull-left"> <img
+							class="media-object img-rounded img-responsive"
+							src="${image }store/${list.disc_image}"> </figure>
+					</div>
+					<div class="col-md-6">
+						<h4 class="list-group-item-heading">${list.disc_title}</h4>
+						<p class="list-group-item-text">
+							구입날짜: <fmt:formatDate value="${list.disc_buyDate}" pattern="yyyy년 MM월 dd일"/>
+						</p>
+						<p class="list-group-item-text" style="color: red;">결제완료</p>
+					</div>
+					<div class="col-md-3 text-center">
+						<h2>
+							${list.disc_price }<small> 원 </small>
+						</h2>
+					</div>
+				</c:forEach>
+			</div>
+			<!--리스트 끝  -->
+		</div>
+
+
+		<div class="tab-pane fade" id="step2">
+			<!--  리스트 시작 -->
+			<div class="list-group">
+				<c:if test="${listStep2.size()==0}">
+				<div class="c h70 pt30">구매승인 중인 상품이 없습니다.</div>	
+				</c:if>
+				<c:forEach var="list" items="${listStep2 }">
+					<div class="media col-md-3 ">
+						<div>주문번호: ${list.del_num}</div>
+						<figure class="pull-left"> <img
+							class="media-object img-rounded img-responsive"
+							src="${image }store/${list.disc_image}"> </figure>
+					</div>
+					<div class="col-md-6">
+						<h4 class="list-group-item-heading">${list.disc_title}</h4>
+						<p class="list-group-item-text">
+							구입날짜: <fmt:formatDate value="${list.disc_buyDate}" pattern="yyyy년 MM월 dd일"/>
+						</p>
+						<p class="list-group-item-text" style="color: red;">결제완료</p>
+					</div>
+					<div class="col-md-3 text-center">
+						<h2>
+							${list.disc_price }<small> 원 </small>
+						</h2>
+					</div>
+				</c:forEach>
+			</div>
+			<!--리스트 끝  -->
+		</div>
+		<div class="tab-pane fade" id="step3">
+			<!--  리스트 시작 -->
+			<div class="list-group">
+				<c:if test="${listStep3.size()==0}">
+				<div class="c h70 pt30">배송시작 중인 상품이 없습니다.</div>	
+				</c:if>
+				<c:forEach var="list" items="${listStep3 }">
+					<div class="media col-md-3 ">
+						<div>주문번호: ${list.del_num}</div>
+						<figure class="pull-left"> <img
+							class="media-object img-rounded img-responsive"
+							src="${image }store/${list.disc_image}"> </figure>
+					</div>
+					<div class="col-md-6">
+						<h4 class="list-group-item-heading">${list.disc_title}</h4>
+						<p class="list-group-item-text">
+							구입날짜: <fmt:formatDate value="${list.disc_buyDate}" pattern="yyyy년 MM월 dd일"/>
+						</p>
+						<p class="list-group-item-text" style="color: red;">결제완료</p>
+					</div>
+					<div class="col-md-3 text-center">
+						<h2>
+							${list.disc_price }<small> 원 </small>
+						</h2>
+					</div>
+				</c:forEach>
+			</div>
+			<!--리스트 끝  -->
+		</div>
+		<div class="tab-pane fade" id="step4">
+			<!--  리스트 시작 -->
+			<div class="list-group">
+				<c:if test="${listStep4.size()==0}">
+				<div class="c h70 pt30">배송 중인 상품이 없습니다.</div>	
+				</c:if>
+				<c:forEach var="list" items="${listStep4 }">
+					<div class="media col-md-3 ">
+						<div>주문번호: ${list.del_num}</div>
+						<figure class="pull-left"> <img
+							class="media-object img-rounded img-responsive"
+							src="${image }store/${list.disc_image}"> </figure>
+					</div>
+					<div class="col-md-6">
+						<h4 class="list-group-item-heading">${list.disc_title}</h4>
+						<p class="list-group-item-text">
+							구입날짜: <fmt:formatDate value="${list.disc_buyDate}" pattern="yyyy년 MM월 dd일"/>
+						</p>
+						<p class="list-group-item-text" style="color: red;">결제완료</p>
+					</div>
+					<div class="col-md-3 text-center">
+						<h2>
+							${list.disc_price }<small> 원 </small>
+						</h2>
+					</div>
+				</c:forEach>
+			</div>
+			<!--리스트 끝  -->
+		</div>
+		<div class="tab-pane fade" id="step5">
+			<!--  리스트 시작 -->
+			<div class="list-group">
+				<c:if test="${listStep5.size()==0}">
+				<div class="c h70 pt30">배송완료인 상품이 없습니다.</div>	
+				</c:if>
+				<c:forEach var="list" items="${listStep5 }">
+					<div class="media col-md-3 ">
+						<div>주문번호: ${list.del_num}</div>
+						<figure class="pull-left"> <img
+							class="media-object img-rounded img-responsive"
+							src="${image }store/${list.disc_image}"> </figure>
+					</div>
+					<div class="col-md-6">
+						<h4 class="list-group-item-heading">${list.disc_title}</h4>
+						<p class="list-group-item-text">
+							구입날짜: <fmt:formatDate value="${list.disc_buyDate}" pattern="yyyy년 MM월 dd일"/>
+						</p>
+						<p class="list-group-item-text" style="color: red;">결제완료</p>
+					</div>
+					<div class="col-md-3 text-center">
+						<h2>
+							${list.disc_price }<small> 원 </small>
+						</h2>
+					</div>
+				</c:forEach>
+			</div>
+			<!--리스트 끝  -->
+		</div>
 	</div>
+</div>
+
+
+
+<br>
+
+
+<!--환불 정보  -->
+<div class="row" style="border: 1px solid #d0d0d0">
+
+	<div>
+		<div class="col-sm-12 c">
+			<div class="col-sm-6">
+			현재 예매 가능한 뮤지컬이 총 00개 있습니다.
+			</div>	
+			<div class="col-sm-5">
+			등록순 종료임박순 상품명순 주간랭킹순
+			</div>
+			<div class="col-sm-1">
+			<input>
+			</div>
+		</div>
+		<div class="col-sm-12 c h25 bf0f0f0 tm" style="border:1px solid #d0d0d0; border-top: 2px solid blue;">
+			<div class="col-sm-8">
+				<b>공연명</b>
+			</div>
+			<div class="col-sm-2">
+				<b>일시</b>
+			</div>
+			<div class="col-sm-2">
+				<b>장소</b>
+			</div>
+		</div>
+		<div class="col-sm-12 c" style="border-bottom: 1px solid #d0d0d0">
+			<div class="col-sm-8">
+				공연명
+			</div>
+			<div class="col-sm-2">
+				0000.00.00~
+					0000.00.00
+			</div>
+			<div class="col-sm-2">
+				성남아트센터 오페라 하우스
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+<br>
+<br>
+<br>
 </html>

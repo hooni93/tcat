@@ -85,5 +85,12 @@ public class JMHGuestController {
 		req.getSession().removeAttribute("login_id");
 		return "tcat/guestMain/guestPage";
 	}
-	
+	////////////////////////////////////////////////////////////////////
+	//licenseMusical 뮤지컬-라이센스
+	@RequestMapping("licenseMusical")
+	public String licenseMusical(HttpServletRequest req, Model model) {
+		System.out.println("licenseMusical");
+		mhService.getPerfList(req,model);
+		return "tcat/musical/licenseMusical";
+	}
 }
