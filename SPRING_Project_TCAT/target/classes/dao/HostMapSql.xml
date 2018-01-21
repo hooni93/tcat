@@ -857,7 +857,7 @@
 			select * 
 			from
 			(
-			    select p.per_id,p.perf_title,p.cateNum,c.category,c.mDev,c.sDev,p.perf_Image,p.startdate,p.enddate,p.hall_id,h.hall_name,p.first_grade,p.per_step,p.remain_round,p.possible_age,rownum rNum
+			    select p.per_id,p.perf_title,p.cateNum,p.R_seatPrice,p.VIP_seatPrice,p.S_seatPrice,p.A_seatPrice,p.B_seatPrice,c.category,c.mDev,c.sDev,p.perf_Image,p.startdate,p.enddate,p.hall_id,h.hall_name,p.first_grade,p.per_step,p.remain_round,p.possible_age,rownum rNum
 			    from (select * from performanceInfo order by per_id desc) p,category c,hallInfo h
 			    where p.cateNum=c.cateNum and p.hall_id = h.hall_id and c.category='공연'
 			)
@@ -866,8 +866,8 @@
 		</select>
 		
 		<insert id="insertPerformance" parameterType="java.util.Map">
-			insert into performanceInfo(per_id, perf_title, cateNum, perf_Image, startDate, endDate, hall_id, first_grade, per_step, remain_round, possible_age,detail_num)
-			values(performanceInfo_SEQ.NEXTVAL,#{perf_title},#{cateNum},#{perf_Image},#{startDate},#{endDate},#{hall_id},#{first_grade},1,#{remain_round},#{possible_age},DetailPage_SEQ.NEXTVAL)
+			insert into performanceInfo(per_id, perf_title, cateNum, perf_Image, startDate, endDate, hall_id, first_grade, per_step, remain_round, possible_age,detail_num,VIP_seatPrice,R_seatPrice,S_seatPrice,A_seatPrice,B_seatPrice)
+			values(performanceInfo_SEQ.NEXTVAL,#{perf_title},#{cateNum},#{perf_Image},#{startDate},#{endDate},#{hall_id},#{first_grade},1,#{remain_round},#{possible_age},DetailPage_SEQ.NEXTVAL,#{VIP_seatPrice},#{R_seatPrice},#{S_seatPrice},#{A_seatPrice},#{B_seatPrice})
 			
 		</insert>
 		

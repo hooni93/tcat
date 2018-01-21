@@ -498,10 +498,8 @@ public class HostDAOImp implements HostDAO {
 		@Override
 		public int performanceCnt() {
 			int cnt=0;
-			System.out.println("123567");
 			HostDAO dao=Configuration.getMapper(HostDAO.class);
 			cnt=dao.performanceCnt();
-			System.out.println("9479384983");
 			
 			return cnt;
 		}
@@ -510,9 +508,7 @@ public class HostDAOImp implements HostDAO {
 		public ArrayList<TcatPerformanceVO> performanceList(Map<String, Integer> map) {
 			ArrayList<TcatPerformanceVO> dtos=null;
 			HostDAO dao=Configuration.getMapper(HostDAO.class);
-			System.out.println("111111111111111111111");
 			dtos=dao.performanceList(map);
-			System.out.println("111111111111111111111");
 			return dtos;
 		}
 		

@@ -51,8 +51,8 @@ public class HostServiceImp implements HostService {
 		SimpleDateFormat date=new SimpleDateFormat("yy/MM/dd");
 		 Date today=new Date();
 		 Date yesterDay=new Date();
-		 today.setTime(today.getTime()+((long) 1000*60*60*24));
-		 yesterDay.setTime(today.getTime()-((long) 1000*60*60*24*7));
+		 today.setTime(today.getTime()+((long) 1000*60*60*24)); //365 년
+		 yesterDay.setTime(today.getTime()-((long) 1000*60*60*24*7)); //작년 365
 		 String todayStr=date.format(today);
 		 String yesterDayStr=date.format(yesterDay);
 		 Map<String,Object> map=new HashMap<String,Object>();
@@ -1551,6 +1551,7 @@ public class HostServiceImp implements HostService {
 					map.put("start", start);
 					map.put("end", end);
 					ArrayList<TcatPerformanceVO> dtos = hDao.performanceList(map);
+					System.out.println("R_seatPrice------------"+dtos.get(0).getR_seatPrice());
 					req.setAttribute("dtos", dtos);
 
 				}
@@ -1576,6 +1577,8 @@ public class HostServiceImp implements HostService {
 				}
 				// 카테고리 목록 가져오기
 				ArrayList<CategoryVO> SDtos = hDao.cateList();
+				
+				
 				// 공연지역 가져오기
 				ArrayList<SelectHellInfoVO> HDtos = hDao.HellList();
 
@@ -1589,7 +1592,7 @@ public class HostServiceImp implements HostService {
 				
 				MultipartFile file = req.getFile("perf_Image");
 
-				String realDir = "C:\\Dev\\TCATworkspace\\git\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\performance\\";
+				String realDir = "E:\\Team_project\\projectGit\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\performance\\";
 				String saveDir = req.getRealPath("/resources/image/performance/");
 				try {
 
@@ -1614,7 +1617,12 @@ public class HostServiceImp implements HostService {
 					String first_grade = req.getParameter("first_grade");
 					String remain_round = req.getParameter("remain_round");
 					int possible_age = Integer.parseInt(req.getParameter("possible_age"));
-
+					int VIP_seatPrice=Integer.parseInt(req.getParameter("VIP_seatPrice"));
+					int R_seatPrice=Integer.parseInt(req.getParameter("R_seatPrice"));
+					int S_seatPrice=Integer.parseInt(req.getParameter("S_seatPrice"));
+					int A_seatPrice=Integer.parseInt(req.getParameter("A_seatPrice"));
+					int B_seatPrice=Integer.parseInt(req.getParameter("B_seatPrice"));
+					
 					String sDate[] = startDate.split("/");
 					startDate = sDate[2] + "/" + sDate[0] + "/" + sDate[1];
 					String eDate[] = endDate.split("/");
@@ -1630,6 +1638,12 @@ public class HostServiceImp implements HostService {
 					map.put("first_grade", first_grade);
 					map.put("remain_round", remain_round);
 					map.put("possible_age", possible_age);
+					map.put("VIP_seatPrice", VIP_seatPrice);
+					map.put("R_seatPrice", R_seatPrice);
+					map.put("S_seatPrice", S_seatPrice);
+					map.put("A_seatPrice", A_seatPrice);
+					map.put("B_seatPrice", B_seatPrice);
+					
 					System.out.println("=======================================\n" + "perf_title=" + map.get("perf_title")
 							+ "\n" + "cateNum=" + map.get("cateNum") + "\n" + "perf_Image=" + map.get("perf_Image") + "\n"
 							+ "startDate=" + map.get("startDate") + "\n" + "endDate=" + map.get("endDate") + "\n" + "hall_id="
@@ -1744,7 +1758,7 @@ public class HostServiceImp implements HostService {
 			public void insertStore(MultipartHttpServletRequest req, Model model) {
 				MultipartFile file = req.getFile("disc_image");
 
-				String realDir = "C:\\Dev\\TCATworkspace\\git\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\store\\";
+				String realDir = "E:\\Team_project\\projectGit\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\store\\";
 				String saveDir = req.getRealPath("/resources/image/store/");
 				try {
 
