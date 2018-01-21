@@ -103,14 +103,23 @@ public class HSGuestController {
 		return "tcat/placeList/placeList";
 	}
 	//스토어 장바구니 추가
-		@RequestMapping("insertCart")
-		public String insertCart(HttpServletRequest req, Model model) {
-			System.out.println("insertCart");
-			
-			HSGservice.insertCart(req,model);
-			
-			return "tcat/store/storeMain";
-		}
+	@RequestMapping("insertCart")
+	public String insertCart(HttpServletRequest req, Model model) {
+		System.out.println("insertCart");
+		
+		HSGservice.insertCart(req,model);
+		
+		return "tcat/store/storeMain";
+	}
+	//장바구니 리스트 가져오기
+	@RequestMapping("cartList")
+	public String cart(HttpServletRequest req, Model model) {
+		System.out.println("cartList");
+		
+		HSGservice.cartList(req,model);
+		
+		return "tcat/purchase/cart";
+	}
 		
 	
 

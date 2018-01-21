@@ -3,6 +3,7 @@ package spring.project.tcat.persistence;
 import java.util.ArrayList;
 import java.util.Map;
 
+import spring.project.tcat.VO.CartVO;
 import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 
@@ -29,4 +30,8 @@ public interface HSGuestDAO {
 	public ArrayList<TcatPerformanceVO> placeList(Map<String,Object> map);
 	//장바구니에 담기
 	public int insertCart(Map<String,Object> map);
+	//장바구니 리스트 갯수 가져오기
+	public int cartCnt();
+	//장바구니 리스트 가져오기
+	public ArrayList<CartVO> cartList(Map<String,Object> map);
 }

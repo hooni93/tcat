@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import spring.project.tcat.VO.CartVO;
 import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 import spring.project.tcat.config.Configuration;
@@ -111,8 +112,26 @@ public class HSGuestDAOImpl implements HSGuestDAO{
 
 	@Override
 	public int insertCart(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		int cnt=0;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		cnt=dao.insertCart(map);
+		return cnt;
+	}
+
+	@Override
+	public int cartCnt() {
+		int cnt=0;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		cnt =dao.cartCnt();
+		return cnt;
+	}
+
+	@Override
+	public ArrayList<CartVO> cartList(Map<String, Object> map) {
+		ArrayList<CartVO> dtos=null;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dtos=dao.cartList(map);
+		return dtos;
 	}
 
 

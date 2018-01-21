@@ -15,5 +15,6 @@ public interface HSGuestService {
 	public void placeList(HttpServletRequest req,Model model);
 	//장바구니에 담기
 	public void insertCart(HttpServletRequest req,Model model);
-	
+	//장바구니 리스트 가져오기
+	public void cartList(HttpServletRequest req,Model model);
 }
