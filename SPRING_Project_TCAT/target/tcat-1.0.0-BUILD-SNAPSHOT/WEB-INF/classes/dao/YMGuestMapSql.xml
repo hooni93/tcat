@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE mapper
+             PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+             
+   <mapper namespace="spring.project.tcat.persistence.YMGuestDAO">
+   <!-- 등급관리 -->
+   <select id="mRating" resultType="int">
+		select count(*) as buy
+		from
+		Ticketing
+		where member_id=#{strId}
+	</select>
+	
+	<update id="mRatingUpdate" parameterType="String">
+	update member set Rating='C' where member_id=#{strId}
+	</update>
+	<update id="mRatingUpdate1" parameterType="String">
+	update member set Rating='B' where member_id=#{strId}
+	</update>
+   </mapper>

@@ -14,4 +14,7 @@ public interface JMHGuestService {
 	public void loginPro(HttpServletRequest req,Model model);
 	//마이페이지 정보가져오기
 	public void myPageInfo(HttpServletRequest req,Model model);
+	
+	//공연정보 리스트 가져오기
+	public void  getPerfList(HttpServletRequest req,Model model);
 }
