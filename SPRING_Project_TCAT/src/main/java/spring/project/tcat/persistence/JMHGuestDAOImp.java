@@ -84,11 +84,15 @@ public class JMHGuestDAOImp implements JMHGuestDAO {
 
 	// getPerfList 공연 리스트
 	public ArrayList<TcatPerformanceVO> getPerfList(Map<String, Object> map) {
-		return null;
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<TcatPerformanceVO> perfs = dao.getPerfList(map);
+		return perfs;
 	}
 
 	// getPerfListCnt 공연 갯수
 	public int getPerfListCnt(Map<String, Object> map) {
-		return 1;
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		int cnt = dao.getPerfListCnt(map);
+		return cnt;
 	}
 }
