@@ -43,10 +43,7 @@
 				
 					<li><a onclick="introLoad('introCompany');" class="000000">Tcat소개<b></b></a>
 					<hr class="w90p" style="margin: 0 auto;"></li>
-					<li><a href="#" class="000000">Tcat직원소개</a></li>
 					<li><a onclick="introLoad('introPath')" class="000000">Tcat오시는길</a></li>
-					<li><a href="#" class="000000">Tcat전화번호</a></li>
-
 				</ul>
 			</div>
 

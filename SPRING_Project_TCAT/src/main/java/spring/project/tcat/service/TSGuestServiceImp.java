@@ -100,6 +100,11 @@ public class TSGuestServiceImp implements TSGuestService{
 			model.addAttribute("cnt",cnt);
 			
 		}
+		@Override
+		public void CommentList(HttpServletRequest req, Model model) {
+			// TODO Auto-generated method stub
+			
+		}
 		
 
 }

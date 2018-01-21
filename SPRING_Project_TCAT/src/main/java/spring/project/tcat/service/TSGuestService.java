@@ -12,7 +12,9 @@ public interface TSGuestService {
 	//회원정보 상세페이지
 	public void myModifyPro(HttpServletRequest req,Model model);
 	
+	//회원정보 수정
 	public void myModifyUpdate(HttpServletRequest req,Model model);
 	
-	
+	//관람후기 목록
+	public void CommentList(HttpServletRequest req,Model model);
 }

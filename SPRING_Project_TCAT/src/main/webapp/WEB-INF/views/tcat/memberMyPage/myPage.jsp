@@ -13,7 +13,7 @@
 <script src="${script}jquery-ui.js"></script>
 <link rel="stylesheet" href="${css}jquery-ui.css">
 
-1<style type="text/css">
+<style type="text/css">
 .borderMenu {
 	border: 3px solid #f2ecdc;
 }

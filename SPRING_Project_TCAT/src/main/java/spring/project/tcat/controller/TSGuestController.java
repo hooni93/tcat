@@ -89,4 +89,15 @@ public class TSGuestController {
 		
 		return "tcat/memberMyPage/GuestEmailCheck";
 	}
+	// 후기 게시판
+	@RequestMapping("commentBoard")
+	public String commentBoard(HttpServletRequest req, Model model) {
+		System.out.println("commentBoard");
+		
+		
+		return "tcat/commentBoard/commentBoard";
+	}
+	
+	
+	
 }
