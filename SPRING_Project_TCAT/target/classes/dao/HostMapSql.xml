@@ -93,9 +93,22 @@
        )
    </select>
    
+   <select id="placeNum" resultType="int">
+   	select place_seq.nextval from dual
+   </select>
+   
+   
+   <insert id="placeInsert" parameterType="spring.project.tcat.VO.TcatPerformanceVO">
+		<![CDATA[INSERT INTO place (place_num,province,city,postNum,address)values(#{place_num},#{province},#{city},#{postNum},#{address})]]>
+   </insert>
+   
+ 
+   <insert id="insertHall" parameterType="spring.project.tcat.VO.TcatPerformanceVO">
+		<![CDATA[INSERT INTO hallInfo (hall_id,hall_name,place_num,VIP_seat,R_seat,S_seat,A_seat,B_seat,seat_line)
+		values( hallInfo_SEQ.nextval,#{hall_name},#{place_num},#{VIP_seat},#{R_seat},#{S_seat},#{A_seat},#{B_seat},#{seat_line})]]>
+   </insert>
    
   
-
 <!--/////////////////////////////// 18.01.16 명훈 시작/////////////////////////////////////////////////-->
 	<!--출력할 공연상품 갯수 가져오기 -->
 	<select id="perProductCnt" resultType="int">

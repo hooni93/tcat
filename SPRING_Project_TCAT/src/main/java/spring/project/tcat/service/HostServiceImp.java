@@ -51,8 +51,8 @@ public class HostServiceImp implements HostService {
 		SimpleDateFormat date=new SimpleDateFormat("yy/MM/dd");
 		 Date today=new Date();
 		 Date yesterDay=new Date();
-		 today.setTime(today.getTime()+((long) 1000*60*60*24));
-		 yesterDay.setTime(today.getTime()-((long) 1000*60*60*24*7));
+		 today.setTime(today.getTime()+((long) 1000*60*60*24)); //365 년
+		 yesterDay.setTime(today.getTime()-((long) 1000*60*60*24*7)); //작년 365
 		 String todayStr=date.format(today);
 		 String yesterDayStr=date.format(yesterDay);
 		 Map<String,Object> map=new HashMap<String,Object>();
@@ -269,7 +269,64 @@ public class HostServiceImp implements HostService {
 				}
 			
 		}
-
+		//hall정보 인서트
+		@Override
+		public void insertHall(HttpServletRequest req, Model model) {
+			// TODO Auto-generated method stub
+			int cnt=0;
+			String hall_name=req.getParameter("hall_name"); //홀이름
+			String postNum=req.getParameter("postNum"); //우편번호
+			String addr=req.getParameter("addr"); //주소
+			String detailAddr=req.getParameter("detailAddr"); //상세주소
+			String vipSeat=req.getParameter("VIPseat"); //시트
+			String rSeat=req.getParameter("Rseat"); //시트
+			String sSeat=req.getParameter("Sseat"); //시트
+			String aSeat=req.getParameter("Aseat"); //시트
+			String bSeat=req.getParameter("Bseat"); //시트
+			String seatrow=req.getParameter("seatrow");
+			String seatcolumn=req.getParameter("seatcolumn");
+			
+			String province="";
+			String city="";
+			String address="";
+			String seat_line=seatrow+"_"+seatcolumn;
+			String[] addArr=addr.split(" ");
+			for(int i=0;i<addArr.length;i++) {
+				if(i==0) {
+					province=addArr[0];
+				}else if(i==1){
+					city=addArr[1];
+				
+			}else {
+				address+= i==3 ? addArr[i] : " "+ addArr[i] ;
+			}	
+		}
+		address=address+" "+detailAddr ;
+		TcatPerformanceVO vo=new TcatPerformanceVO();
+		vo.setProvince(province);
+		vo.setCity(city);
+		vo.setPostNum(postNum);
+		vo.setAddress(address);
+		int okCnt=0;
+		int place_num=hDao.placeNum();
+		vo.setPlace_num(place_num);
+		okCnt=hDao.placeInsert(vo);
+		if(okCnt==1) {
+		vo.setHall_name(hall_name);
+		vo.setPlace_num(place_num);
+		vo.setVIP_seat(vipSeat);
+		vo.setR_seat(rSeat);
+		vo.setS_seat(sSeat);
+		vo.setA_seat(aSeat);
+		vo.setB_seat(bSeat);
+		vo.setSeat_line(seat_line);
+		
+		cnt=hDao.insertHall(vo);
+		}
+		
+			model.addAttribute("cnt",cnt);
+			
+		}
 
 
 
