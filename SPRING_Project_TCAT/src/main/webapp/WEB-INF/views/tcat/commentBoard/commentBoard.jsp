@@ -8,6 +8,8 @@
 <title>후기 게시판</title>
 </head>
 <body>
+<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;후기 게시판</h2>
+<hr>
  <form class="navbar-form navbar-center" role="search"
                id="ajaxSubmitForm" onsubmit="return false">
                <input type="hidden" name="category" value=${category}>
@@ -15,9 +17,10 @@
                <!--카테고리  -->
                <select id="sDev" name="sDev" class="m10 p5">
                   <option value="0">분류</option>
-                  <option value="1">작성자</option>
-                  <option value="2">제목</option>
-                  <option value="3">내용</option>
+                  <option value="1">후기번호</option>
+                  <option value="2">작성자</option>
+                  <option value="3">제목</option>
+                  <option value="4">내용</option>
                </select>
 
                <div class="form-group">
@@ -25,7 +28,7 @@
                      name="keyword">
                </div>
                <button type="button" class="btn btn-default"
-                  onclick="ajaxSubmit('categoryList')">검색</button>
+                  onclick="ajaxSubmit('commentBoard')">검색</button>
                <!-- stocksearch(); -->
             </form>
 		<div class="row">
@@ -33,22 +36,21 @@
 
 			<div class="col-md-10">
 				<table
-					class="table table-hover table-bordered table-condensed c fs10">
-					<tr class="bg-primary">
+					class="table table-hover table-bordered table-condensed c fs15">
+					<tr class="danger">
 						<td><b>후기번호</b></td>
-						<td><b>작성자</b></td>
 						<td><b>제목</b></td>
 						<td><b>내용</b></td>
+						<td><b>작성자</b></td>
 						<td><b>작성일</b></td>
 					</tr>
 					<c:forEach var="dto" items="${dtos}">
 						<tr>
 							<td>${dto.notice_num}</td>
-							<td>${dto.member_id}</td>
-							<td>${dto.notice_num}</td>
 							<td>${dto.notice_title}</td>
 						    <td>${dto.contents}</td>	
-							<td><fmt:formatDate value="${dto.wirte_Date}" pattern="yyyy-MM-dd"/></td>						
+						    <td>${dto.member_id}</td>
+							<td><fmt:formatDate value="${dto.writeDate}" pattern="yyyy-MM-dd"/></td>						
 						</tr>
 					</c:forEach>
 				</table>
@@ -60,10 +62,8 @@
 			<tr>
 				<th align="center"><c:if test="${cnt > 0}">
 				<c:if test="${startPage > pageBlock}">
-						  <%--   <a onclick="categoryload('categoryList','${category}','${sDev}','${keyword}');">[◀◀]</a> --%>
-							<a onclick="load('commentBoard?&sDev=${sDev}&keyword=${keyword}'');">[◀◀]</a>
-							<a onclick="load('commentBoard?&pageNum=${startPage - pageBlock}&sDev=${sDev}&keyword=${keyword}');">[◀]</a>
-							<%-- <a onclick="categoryload0('categoryList','${category}','${startPage - pageBlock}','${sDev}','${keyword}');">[◀]</a> --%>
+							<a onclick="load('commentBoard?&sDev=${sDev}&keyword=${keyword}');">[◀◀]</a>
+							<a onclick="load('commentBoard?&pageNum=${startPage - pageBlock}&sDev=${sDev}&keyword=${keyword}');">[◀]</a>				
 						</c:if>
 
 						<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -72,7 +72,7 @@
 							</c:if>
 
 							<c:if test="${i != currentPage}">
-								<a onclick="load('commentBoard?&pageNum=${i}&sDev=${sDev}&keyword=${keyword});">[${i}]</a>
+								<a onclick="load('commentBoard?&pageNum=${i}&sDev=${sDev}&keyword=${keyword}');">[${i}]</a>
 								
 							</c:if>
 						</c:forEach>

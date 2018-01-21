@@ -21,4 +21,49 @@
 		select * from member where member_id=#{id}
 	</select>
 	
+	<!-- 관람후기 갯수  -->
+	<select id="comment" resultType="int">
+	 select count(*) from notice where notice_div = 4
+	 	<choose>
+	 		<when test="sDev==1">
+				AND notice_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND notice_title LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND contents LIKE '%${keyword}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	<!-- 관람후기 출력 -->
+	<select id="commentBoard" resultType="spring.project.tcat.VO.TcatBoardVO">
+	  SELECT *                
+        FROM (select notice_num, member_id, notice_title, contents, writeDate, ROWNUM rnum
+	 from notice where notice_div = 4
+	<choose>
+			<when test="sDev==1">
+				AND notice_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND notice_title LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND contents LIKE '%${keyword}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		order by writedate desc 
+		)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+		</select>
    </mapper>

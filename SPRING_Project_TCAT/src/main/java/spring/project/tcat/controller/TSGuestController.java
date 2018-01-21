@@ -94,6 +94,7 @@ public class TSGuestController {
 	public String commentBoard(HttpServletRequest req, Model model) {
 		System.out.println("commentBoard");
 		
+		TSGService.CommentList(req,model);
 		
 		return "tcat/commentBoard/commentBoard";
 	}

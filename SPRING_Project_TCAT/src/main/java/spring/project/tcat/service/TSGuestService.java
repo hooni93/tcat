@@ -16,5 +16,5 @@ public interface TSGuestService {
 	public void myModifyUpdate(HttpServletRequest req,Model model);
 	
 	//관람후기 목록
-	public void CommentList(HttpServletRequest req,Model model);
+	public void CommentList(HttpServletRequest req, Model model);
 }
