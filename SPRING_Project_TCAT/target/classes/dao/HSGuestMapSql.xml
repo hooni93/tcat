@@ -12,4 +12,75 @@
    			insert into member(member_id,member_pwd,member_name,member_hp,member_addr,member_email,member_gender,member_birth,point,lastDate,Rating,member_step,member_joindate)
    						values(#{member_id},#{member_pwd},#{member_name},#{member_hp},#{member_addr},#{member_email},#{member_gender},#{member_birth},0,sysdate,'D','1',sysdate)
    		</insert>
+   		
+   		<select id="daySearchCnt" parameterType="String" resultType="int">
+   			select count(*) from performanceInfo
+   			<if test="searchDate!=null">
+   				where #{searchDate} BETWEEN startDate and enddate
+   			</if>
+   		</select>
+   		<select id="searchDate" parameterType="String" resultType="int">
+   			select count(*) from performanceInfo
+   			where #{searchDate} BETWEEN startDate and enddate
+   		</select>
+   		
+   		<select id="daySearchList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+   			<![CDATA[
+   			select * from (
+				select per_id,perf_title,cateNum,perf_image,startdate,enddate,first_grade,per_step,remain_round,possible_age,
+				        detail_num,hall_id,vip_seatPrice,R_seatPRice,s_seatprice,a_seatprice,b_seatprice,rownum rNum
+				from performanceInfo)
+				where rNum>=#{start} and rNum<=#{end}
+   			]]>
+   			<if test="searchDate!=null">
+   				and #{searchDate} BETWEEN startDate and enddate
+   			</if>
+   			
+   		</select>
+   			<select id="searchList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+   			<![CDATA[
+   			select * from (
+				select per_id,perf_title,cateNum,perf_image,startdate,enddate,first_grade,per_step,remain_round,possible_age,
+				        detail_num,hall_id,vip_seatPrice,R_seatPRice,s_seatprice,a_seatprice,b_seatprice,rownum rNum
+				from performanceInfo
+				where  #{searchDate} BETWEEN startDate and enddate
+				)
+				where rNum>=#{start} and rNum<=#{end}
+   			]]>
+   			
+   		</select>
+   		
+   		
+   		<select id="placeCnt" parameterType="java.util.Map" resultType="int">
+   			select count(*) from(
+			select p.per_id,p.perf_title,p.cateNum,p.perf_Image,p.startDate,p.endDate,p.first_grade,p.per_step,p.remain_round,p.possible_age,p.detail_num,p.hall_id,h.hall_name,h.place_num,p.province,p.city
+			from performanceInfo p,hallInfo h,place p
+			where p.hall_id=h.hall_id and h.place_num=p.place_num)
+   			where province like '%${place}%' or city like '%${place}%'
+   		</select>
+   		
+   		<select id="placeNullCnt" resultType="int">
+   			select count(*) from performanceInfo
+   		</select>
+   		
+   		<select id="placeNullList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+   			<![CDATA[
+   			select * from(
+			select p.per_id,p.perf_title,p.cateNum,p.perf_Image,p.startDate,p.endDate,p.first_grade,p.per_step,p.remain_round,p.possible_age,p.detail_num,p.hall_id,h.hall_name,h.place_num,p.province,p.city,rownum rNum
+			from performanceInfo p,hallInfo h,place p
+			where p.hall_id=h.hall_id and h.place_num=p.place_num)
+			where rNum>=#{start} and rNum<=#{end}
+			]]>
+   		</select>
+   		<select id="placeList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+   			<![CDATA[
+   			select * from(
+			select p.per_id,p.perf_title,p.cateNum,p.perf_Image,p.startDate,p.endDate,p.first_grade,p.per_step,p.remain_round,p.possible_age,p.detail_num,p.hall_id,h.hall_name,h.place_num,p.province,p.city,rownum rNum
+			from performanceInfo p,hallInfo h,place p
+			where p.hall_id=h.hall_id and h.place_num=p.place_num and province like '%${place}%' or city like '%${place}%')
+			where rNum>=#{start} and rNum<=#{end}
+			]]>
+   		
+   		</select>
+   		
    </mapper>
