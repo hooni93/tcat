@@ -5,6 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+$("#login2").click(function(){
+	$("#modal_result").load("${pageContext.request.contextPath}/memberLogin");
+});
+function payPerformence(url){
+	alert("url:"+url);
+    window.open(url, "confirm", "menubar=no, width=500, height=330");
+} 
+</script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 </head>
@@ -62,7 +71,7 @@
 	<a class="btn btn-default" onclick="load('guestMain?category=연극');" role="button">연극</a>
 	<a class="btn btn-default" onclick="load('guestMain?category=클래식');" role="button">클래식</a>
 	<a class="btn btn-default" onclick="load('guestMain?category=무용');" role="button">무용/발레</a>
-	<a class="btn btn-default" onclick="#" role="button">스토어</a>
+	<a class="btn btn-default" onclick="" role="button">스토어</a>
 </div>
 
 <!-- 핫리스트 -->
@@ -88,7 +97,12 @@
 					</div>
 					<div class="c m5">
 						<a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a> 
-						<a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> 예매</a>
+						<c:if test="${sessionScope.login_id!=null}">
+							<a onclick="payPerformence('chooseDay?per_id=${vo.per_id}')" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> 예매</a>
+						</c:if>
+						<c:if test="${sessionScope.login_id==null}">
+							<a data-toggle="modal" data-target="#login-modal" id="login2" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> 예매</a>
+						</c:if>
 					</div>
 					</div><!-- outline -->
 				</div><!-- md2 -->

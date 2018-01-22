@@ -10,6 +10,7 @@ public interface DKGuestService {
 	public void qnaBoardList(HttpServletRequest req,  Model model);
 	
 	//상세페이지
+	public void qnaContent(HttpServletRequest req,  Model model);
 	
 	//글수정 상세페이지
 	

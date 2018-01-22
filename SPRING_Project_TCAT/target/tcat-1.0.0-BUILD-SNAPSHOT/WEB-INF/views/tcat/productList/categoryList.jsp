@@ -470,8 +470,6 @@
 					</c:if></th>
 			</tr>
 		</table>
-		
 	</c:if>
-
 </body>
 </html>

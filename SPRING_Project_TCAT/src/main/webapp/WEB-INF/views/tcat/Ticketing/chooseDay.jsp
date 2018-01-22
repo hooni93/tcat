@@ -14,58 +14,6 @@
 <link rel="stylesheet" href="${css}jquery-ui.css">
 
 <title>Insert title here</title>
-<style type="text/css">
-body{ 
-    margin-top:40px; 
-}
-
-.stepwizard-step p {
-    margin-top: 10px;
-}
-
-.stepwizard-row {
-    display: table-row;
-}
-
-.stepwizard {
-    display: table;
-    width: 100%;
-    position: relative;
-}
-
-.stepwizard-step button[disabled] {
-    opacity: 1 !important;
-    filter: alpha(opacity=100) !important;
-}
-
-.stepwizard-row:before {
-    top: 14px;
-    bottom: 0;
-    position: absolute;
-    content: " ";
-    width: 100%;
-    height: 1px;
-    background-color: #ccc;
-    z-order: 0;
-
-}
-
-.stepwizard-step {
-    display: table-cell;
-    text-align: center;
-    position: relative;
-}
-
-.btn-circle {
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 12px;
-  line-height: 1.428571429;
-  border-radius: 15px;
-}
-</style>
 <script type="text/javascript">
 $(function() {
 
@@ -79,187 +27,77 @@ $(function() {
 	      $("input[name='something']").val(dateText);
 	    }
 	});
-});
-$(document).ready(function () {
-	
-    var navListItems = $('div.setup-panel div a'),//메인 스텝 1,2,3의 a태그 정보
-            allWells = $('.setup-content'), //밑에 뿌려줄 1,2,3의 정보
-            allNextBtn = $('.nextBtn'); //밑의 뿌려주는 부분의 다음 버튼 1,2
+	 $('#date2').datepicker({
+		 showOn: 'both',buttonText: "달력",changeMonth: true,changeYear: true,
+		 showButtonPanel:true,yearRange: 'c-99:c+99',constrainInput: true,maxDate: 
+			 '+1y',beforeShowDay: noBefore  });
+	 function noBefore(date){
+		    if (date < startdate)
+		        return [false];
+		    if (date > enddate)
+		    	return [false];
+		    return [true];
+		}
 
-    allWells.hide(); //밑의 정보들을 숨겨놓기
-
-    navListItems.click(function (e) { //메인 스텝 1,2,3a태그가 클릭되면
-        e.preventDefault();//a태그의 이벤트를 정지시킨다
-        var $target = $($(this).attr('href')), //클릭된  a태그 버튼의 href의 정보를 가져와서 target에 저장
-                $item = $(this);//클릭된 a태그버튼정보 저장
-
-        if (!$item.hasClass('disabled')) {//클릭된 a태그버튼정보가 활성화되어있지 않으면
-            navListItems.removeClass('btn-primary').addClass('btn-default'); //모든 a태그 버튼을 btn-primary 클래스를 지우고 btn-default 클래스를 추가한다
-            $item.addClass('btn-primary'); //클릭한 a태그 버튼의 클래스에 btn-primary를 추가한다.
-            allWells.hide(); //모든 밑의 정보를 숨기기
-            $target.show(); //a태그에 저장되있는 href연결되있는 부분을 보여준다.
-            $target.find('input:eq(0)').focus(); //a태그에 저장되있는 href연결되있는 부분의 첫번째 input에 focus를 준다.
-        }
-    });
-
-    allNextBtn.click(function(){ //다음 버튼이 클릭되었을때
-        var curStep = $(this).closest(".setup-content"),// carStep에 지금있는 정
-            curStepBtn = curStep.attr("id"),
-            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-            curInputs = curStep.find("input[type='text'],input[type='url']"),
-            isValid = true;
-
-        $(".form-group").removeClass("has-error");
-        for(var i=0; i<curInputs.length; i++){
-            if (!curInputs[i].validity.valid){
-                isValid = false;
-                $(curInputs[i]).closest(".form-group").addClass("has-error");
-            }
-        }
-
-        if (isValid)
-            nextStepWizard.removeAttr('disabled').trigger('click');
-    });
-
-    $('div.setup-panel div a.btn-primary').trigger('click');
-});
+}); 
+/* jQuery(function($){
+		    $.datepicker.regional['ko'] = {closeText: '닫기',prevText: '이전달',nextText: '다음달',currentText: '오늘',monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)','7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],dayNames: ['일','월','화','수','목','금','토'],dayNamesShort: ['일','월','화','수','목','금','토'],dayNamesMin: ['일','월','화','수','목','금','토'],weekHeader: 'Wk',dateFormat: 'yy-mm-dd',firstDay: 0,isRTL: false,showMonthAfterYear: true,yearSuffix: ''};
+		    $.datepicker.setDefaults($.datepicker.regional['ko']);
+		    $('#date1').datepicker({showOn: 'both',buttonText: "달력",changeMonth: true,changeYear: true,showButtonPanel:true,yearRange: 'c-99:c+99',constrainInput: true,maxDate: '+1y',beforeShowDay: disableAllTheseDays   });
+		    $('#date2').datepicker({showOn: 'both',buttonText: "달력",changeMonth: true,changeYear: true,showButtonPanel:true,yearRange: 'c-99:c+99',constrainInput: true,maxDate: '+1y',beforeShowDay: noBefore  });
+		    $('#date3').datepicker({showOn: 'both',buttonText: "달력",changeMonth: true,changeYear: true,showButtonPanel:true,yearRange: 'c-99:c+99',constrainInput: true,maxDate: '+1y',beforeShowDay: noWeekendsOrHolidays  });
+		    $('#date4').datepicker({showOn: 'both',buttonText: "달력",changeMonth: true,changeYear: true,showButtonPanel:true,yearRange: 'c-99:c+99',constrainInput: true,maxDate: '+1y',beforeShowDay: noSundays });
+		});
+		 
+		// 특정날짜들 배열
+		var disabledDays = ["2013-7-9","2013-7-24","2013-7-26"];
+		 
+		// 주말(토, 일요일) 선택 막기
+		function noWeekendsOrHolidays(date) {
+		    var noWeekend = jQuery.datepicker.noWeekends(date);
+		    return noWeekend[0] ? [true] : noWeekend;
+		}
+		 
+		// 일요일만 선택 막기
+		function noSundays(date) {
+		  return [date.getDay() != 0, ''];
+		}
+		 
+		// 이전 날짜들은 선택막기
+		function noBefore(date){
+		    if (date < new Date())
+		        return [false];
+		    return [true];
+		}
+		 
+		// 특정일 선택막기
+		function disableAllTheseDays(date) {
+		    var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+		    for (i = 0; i < disabledDays.length; i++) {
+		        if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) {
+		            return [false];
+	        }
+		    }
+		    return [true];
+		}
+ */
 </script>
 </head>
 <body>
-<div class="container">
-
-<div class="stepwizard">
-    <div class="stepwizard-row setup-panel">
-	
-		        <div class="stepwizard-step">
-		            <a href="#step-1" type="button" class="btn btn-primary ">1</a>
-		            <p>Step 1</p>
-		        </div>
-
-
-		        <div class="stepwizard-step">
-		            <a href="#step-2" type="button" class="btn btn-default " disabled="disabled">2</a>
-		            <p>Step 2</p>
-		        </div>
-
-
-		        <div class="stepwizard-step">
-		            <a href="#step-3" type="button" class="btn btn-default " disabled="disabled">3</a>
-		            <p>Step 3</p>
-		        </div>
-		        
-		        <div class="stepwizard-step">
-		            <a href="#step-4" type="button" class="btn btn-default " disabled="disabled">4</a>
-		            <p>Step 4</p>
-		        </div>
-		        
-		        <div class="stepwizard-step">
-		            <a href="#step-5" type="button" class="btn btn-default " disabled="disabled">5</a>
-		            <p>Step 5</p>
-		        </div>
-
-    </div>
-</div>
-<form role="form">
-
-	<!-- 관람일 회차선택 -->
-    <div class="row setup-content" id="step-1">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <h3> Step 1</h3>
-                <div class="form-group">
-                    <label class="control-label">First Name</label>
-                    <input  maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name"  />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Last Name</label>
-                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" />
-                </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="row setup-content" id="step-2">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <h3> Step 2</h3>
-                <div class="form-group">
-                    <label class="control-label">Company Name</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Company Address</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address"  />
-                </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="row setup-content" id="step-3">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <h3> Step 3</h3>
-                <div class="form-group">
-                    <label class="control-label">aaae</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">sss</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address"  />
-                </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="row setup-content" id="step-4">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <h3> Step 4</h3>
-                <div class="form-group">
-                    <label class="control-label">adfs</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">asdf</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address"  />
-                </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
-            </div>
-        </div>
-    </div>
-    
-    
-       <div class="row setup-content" id="step-5">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <h3> Step 5</h3>
-                <button class="btn btn-success btn-lg pull-right" type="submit">Finish!</button>
-            </div>
-        </div>
-    </div>
-</form>
-</div>
-
 <div>
 	<ul class="nav nav-tabs">
-	  <li role="presentation" class="active"><a href="#">Home</a></li>
-	  <li role="presentation"><a href="#">Profile</a></li>
-	  <li role="presentation"><a href="#">Messages</a></li>
+	  <li role="presentation" class="active"><a href="#">관람일/회차</a></li>
+	  <li role="presentation"><a href="#">좌석선택</a></li>
+	  <li role="presentation"><a href="#">할인/쿠폰</a></li>
+	  <li role="presentation"><a href="#">수령방법</a></li>
+	  <li role="presentation"><a href="#">결제방법</a></li>
 	</ul>
 </div>
 
 <!-- 이거바꾸면 됩니까? -->
-
 <div id="datepicker"></div>
 <input type="text" name="something">
-
-
+<input type="text" id="date1">
 
 </body>
 </html>

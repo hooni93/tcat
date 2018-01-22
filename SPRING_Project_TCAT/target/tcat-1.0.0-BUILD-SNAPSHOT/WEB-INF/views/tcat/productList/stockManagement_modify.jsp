@@ -24,8 +24,7 @@
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
 
-			<table
-				class="table table-hover table-bordered table-condensed c fs10">
+			<table class="table table-hover table-bordered table-condensed c fs10">
 				<tr class="warning">
 					<td><b>상품번호</b></td>
 					<td><b>상품이름</b></td>

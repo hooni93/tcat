@@ -19,7 +19,7 @@
 				  <a href="#" class="list-group-item disabled">
 				    <span class="text-warning">뮤지컬</span>
 				  </a>
-				  <a href="#" class="list-group-item">라이선스</a>
+				  <a onclick="load('licenseMusical?sDev=라이선스')" class="list-group-item">라이선스</a>
 				  <a href="#" class="list-group-item">오리지널</a>
 				  <a href="#" class="list-group-item">창작</a>
 				  <a href="#" class="list-group-item">넌버벌</a>

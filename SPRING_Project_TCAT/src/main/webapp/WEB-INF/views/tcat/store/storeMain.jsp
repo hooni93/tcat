@@ -19,10 +19,10 @@
 				  <a href="#" class="list-group-item disabled">
 				    <span class="text-warning">스토어</span>
 				  </a>
-				  <a href="#" class="list-group-item">뮤지컬OST</a>
-				  <a href="#" class="list-group-item">콘서트LIVE</a>
-				  <a href="#" class="list-group-item">클래식LIVE</a>
-				  <a href="#" class="list-group-item">전시컬렉션</a>
+				  <a onclick="load('storeList?sDev=뮤지컬OST&order=disc_title');" class="list-group-item">뮤지컬OST</a>
+				  <a onclick="load('storeList?sDev=콘서트LIVE&order=disc_title');" class="list-group-item">콘서트LIVE</a>
+				  <a onclick="load('storeList?sDev=클래식LIVE&order=disc_title');" class="list-group-item">클래식LIVE</a>
+				  <a onclick="load('storeList?sDev=전시컬렉션&order=disc_title');" class="list-group-item">전시컬렉션</a>
 				</div>
 			</div>
 			<div class="col-md-7 thumbnail mr15 h100p">

@@ -20,8 +20,8 @@
 				  <a href="#" class="list-group-item disabled">
 				    <span class="text-warning">연극</span>
 				  </a>
-				  <a href="#" class="list-group-item">대학로</a>
-				  <a href="#" class="list-group-item">기타지역</a>
+				  <a onclick="load('dramaList?sDev=대학로&order=startDate');" class="list-group-item">대학로</a>
+				  <a onclick="load('dramaList?sDev=기타지역&order=startDate');" class="list-group-item">기타지역</a>
 				</div>
 			</div>
 			<div class="col-md-7 thumbnail mr15 h100p">

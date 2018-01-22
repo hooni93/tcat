@@ -55,6 +55,8 @@ public class HSGuestController {
 	public String Ticketing(HttpServletRequest req, Model model) {
 		System.out.println("Ticketing");
 		
+		/*HSGservice.Ticketing(req,model);*/
+		
 		return "tcat/Ticketing/Ticketing";
 	}
 
@@ -62,6 +64,8 @@ public class HSGuestController {
 	@RequestMapping("chooseDay")
 	public String chooseDay(HttpServletRequest req, Model model) {
 		System.out.println("chooseDay");
+		
+		HSGservice.payList(req,model);
 		
 		return "tcat/Ticketing/chooseDay";
 	}
@@ -103,15 +107,44 @@ public class HSGuestController {
 		return "tcat/placeList/placeList";
 	}
 	//스토어 장바구니 추가
-		@RequestMapping("insertCart")
-		public String insertCart(HttpServletRequest req, Model model) {
-			System.out.println("insertCart");
-			
-			HSGservice.insertCart(req,model);
-			
-			return "tcat/store/storeMain";
-		}
+	@RequestMapping("insertCart")
+	public String insertCart(HttpServletRequest req, Model model) {
+		System.out.println("insertCart");
 		
+		HSGservice.insertCart(req,model);
+		
+		return "tcat/store/storeMain";
+	}
+	//장바구니 리스트 가져오기
+	@RequestMapping("cartList")
+	public String cart(HttpServletRequest req, Model model) {
+		System.out.println("cartList");
+		
+		HSGservice.cartList(req,model);
+		
+		return "tcat/purchase/cart";
+	}
 	
+	//장바구니 리스트 가져오기
+	@RequestMapping("storePay")
+	public String storePay(HttpServletRequest req, Model model) {
+		System.out.println("storePay");
+		
+		HSGservice.cartList(req,model);
+		String addr=req.getParameter("addr");
+		req.setAttribute("addr", addr);
+		
+		return "tcat/purchase/storePay";
+	}
+	
+	//장바구니 리스트 가져오기
+	@RequestMapping("sussessPay")
+	public String sussessPay(HttpServletRequest req, Model model) {
+		System.out.println("sussessPay");
+		
+		HSGservice.sussessPay(req,model);
+		
+		return "tcat/purchase/payList";
+	}
 
 }

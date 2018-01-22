@@ -127,13 +127,13 @@ $( function() {
 		$("#inMenu").hide("slow");
 	}
 	
-	//로그인 모달
+	//로그인 모달 by명훈
 	$("#login").click(function(){
 		$("#modal_result").load("${pageContext.request.contextPath}/memberLogin");
 	});
 	
 });
-  
+ //by명훈
 function findId(){
 	$("#modal_result").load("${pageContext.request.contextPath}/memberFind");
 }
@@ -197,8 +197,10 @@ function load(url){
 				  </li>
 				  <li><a href="#">예매확인/취소</a></li>
 				  <li><a href="#">위시리스트</a></li>
-				  <li><a href="#">고객센터</a></li>
+				  <li><a onclick="load('qnaBoardList');">고객센터</a></li>
 				  <li><a href="#">모바일APP</a></li>  
+				  <li><a onclick="load('commentBoard');">후기</a></li>  
+				  <li><a onclick="load('intro');">회사</a></li>  
 				</ol> 
 			</div>
 			<div class="col-md-2">
@@ -251,8 +253,8 @@ function load(url){
 			         <div class="collapse navbar-collapse" id="navbar-collapse-1">
     
 			          <ul class="nav navbar-nav">
-			            <li><a class="trgothic ffffff fs14px b mr20 guestMenuHover" href="#">날짜</a></li>
-			            <li><a class="trgothic ffffff fs14px b mr20 guestMenuHover" href="#">지역</a></li>
+			            <li><a class="trgothic ffffff fs14px b mr20 guestMenuHover" onclick="load('dayList')">날짜</a></li>
+			            <li><a class="trgothic ffffff fs14px b mr20 guestMenuHover" onclick="load('placeList')">지역</a></li>
 
 			          </ul>
 
