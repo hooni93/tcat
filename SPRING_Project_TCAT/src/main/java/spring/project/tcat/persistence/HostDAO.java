@@ -35,7 +35,28 @@ public interface HostDAO {
 	public int placeInsert(TcatPerformanceVO vo);
 	//hall 인서트
 	public int insertHall(TcatPerformanceVO vo);
-
+	//공연장 삭제 리스트 숫자
+	public int hallDeleteCnt();
+	//공연장 삭제 리스트
+	public ArrayList<TcatPerformanceVO> hallDelete(Map<String,Object> map);
+	//공연장서치
+	public ArrayList<TcatPerformanceVO> hallSerchList(Map<String,Object> map);
+	//공연장 서치 숫자
+	public int hallSerchListCnt(Map<String,Object> map);
+	//플레이스 삭제
+	public int placeDeletePro(Map<String,Object> map);
+	//공연장 삭제
+	public int hallDeletePro(Map<String,Object> map);
+	//공연장 수정 데이터 가져오기
+	public TcatPerformanceVO hallModifyDB(String hall_id);
+	//플레이스 업데이트
+	public int placeUpdate(TcatPerformanceVO vo);
+	//공연장 업데이트
+	public int hallModifyUpdate(TcatPerformanceVO vo);
+	
+	
+	
+	
 
 	//////////////////////////////////////18.01.16 명훈//////////////////////////////////////////////////
 	//출력할 공연상품 갯수 가져오기

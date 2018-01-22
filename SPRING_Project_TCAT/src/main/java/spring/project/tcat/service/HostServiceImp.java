@@ -328,6 +328,187 @@ public class HostServiceImp implements HostService {
 			
 		}
 
+		@Override
+		public void hallDelete(HttpServletRequest req, Model model) {
+			// TODO Auto-generated method stub
+			System.out.println("HostServiceImp - hallDelete");
+			int cnt=0; 
+		 //게시판구조
+			int pageSize = 10; // 한 페이지당 출력할 글 갯수
+			int pageBlock = 3; // 한 블럭당 페이지 갯수
+			int start = 0; // 현재 페이지 글시작번호
+			int end = 0; // 현재 페이지 글마지막번호
+			int number = 0; // 출력할 글번호
+			String pageNum = null; // 페이지번호
+			int currentPage = 0; // 현재페이지
+			int pageCount = 0; // 페이지 갯수
+			int startPage = 0; // 시작페이지
+			int endPage = 0; // 마지막 페이지
+			
+			cnt=hDao.hallDeleteCnt();
+			System.out.println(cnt);
+			model.addAttribute("cnt", cnt);
+			pageNum = req.getParameter("pageNum");
+			
+			if (pageNum == null) {
+			pageNum = "1"; // 첫페이지 1페이지로 설정
+			}
+			currentPage = (Integer.parseInt(pageNum)); // 현재페이지
+			pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+			start = (currentPage - 1) * pageSize + 1; // 현재페이지 시작번호
+			end = start + pageSize - 1; // 현재페이지 끝번호
+			if (end > cnt) {
+			end = cnt;
+			}
+			number = cnt - (currentPage - 1) * pageSize;
+			if (cnt > 0) {
+			// 게시글 목록 조회
+			Map<String,Object> map=new HashMap<String,Object>();
+			map.put("start", start);
+			map.put("end", end);
+			System.out.println(start);
+			System.out.println(end);
+			ArrayList<TcatPerformanceVO> dtos=hDao.hallDelete(map);
+			model.addAttribute("dtos", dtos);
+			System.out.println("=================================");
+			}
+			startPage = (currentPage / pageBlock) * pageBlock + 1; // (5/3) * 3 + 1 = 4
+			if (currentPage % pageBlock == 0) {
+			startPage -= pageBlock; // (5%3) == 0
+			}
+			endPage = startPage + pageBlock - 1; // 4 + 3 - 1 = 6
+			if (endPage > pageCount) {
+			endPage = pageCount;
+			}
+			
+
+			model.addAttribute("cnt", cnt);
+			model.addAttribute("number", number);
+			model.addAttribute("pageNum", pageNum);
+			
+			if (cnt > 0) {
+
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageBlock", pageBlock);
+			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("currentPage", currentPage);
+			}
+
+			
+			
+		}
+
+		//공연장 서치
+		@Override
+		public void hallSerchList(HttpServletRequest req, Model model) {
+			// TODO Auto-generated method stub
+			System.out.println("HostServiceImp - hallSerchList");
+			String sCnt=req.getParameter("sCnt");
+			String keyword="";
+
+				keyword="%"+req.getParameter("keyword")+"%";				
+			
+			int cnt=0;
+			Map<String,Object> map= new HashMap<String,Object>();
+			map.put("sCnt", sCnt);
+			map.put("keyword", keyword);
+			cnt=hDao.hallSerchListCnt(map);
+			if (cnt > 0) {
+				model.addAttribute("cnt", cnt);
+				ArrayList<TcatPerformanceVO> dtos=hDao.hallSerchList(map);
+				model.addAttribute("dtos", dtos);
+				model.addAttribute("serch",1);
+				}
+		}
+
+		@Override
+		public void hallDeletePro(HttpServletRequest req, Model model) {
+			// TODO Auto-generated method stub
+			System.out.println("HostServiceImp - hallDeletePro");
+			String hall_id=req.getParameter("hall_id");
+			String place_num=req.getParameter("place_num");
+			Map<String,Object> map= new HashMap<String,Object>();
+			map.put("hall_id", hall_id);
+			map.put("place_num", place_num);
+			int cnt=0;
+			cnt=hDao.placeDeletePro(map);
+			if(cnt!=0) {
+				cnt=hDao.hallDeletePro(map);
+			}
+
+		}
+		
+		//공연장 수정 데이터 가져오기
+		@Override
+		public void hallModifyDB(HttpServletRequest req, Model model) {
+			// TODO Auto-generated method stub
+			System.out.println("HostServiceImp - hallDeletePro");
+			String hall_id=req.getParameter("hall_id");
+			TcatPerformanceVO vo=hDao.hallModifyDB(hall_id);
+			model.addAttribute("vo",vo);
+		}
+		
+		@Override
+		public void hallModifyUpdate(HttpServletRequest req, Model model) {
+			// TODO Auto-generated method stub
+			System.out.println("HostServiceImp - hallModifyUpdate");
+			int cnt=0;
+			String hall_name=req.getParameter("hall_name"); //홀이름
+			String postNum=req.getParameter("postNum"); //우편번호
+			String addr=req.getParameter("addr"); //주소
+			String detailAddr=req.getParameter("detailAddr"); //상세주소
+			String vipSeat=req.getParameter("VIPseat"); //시트
+			String rSeat=req.getParameter("Rseat"); //시트
+			String sSeat=req.getParameter("Sseat"); //시트
+			String aSeat=req.getParameter("Aseat"); //시트
+			String bSeat=req.getParameter("Bseat"); //시트
+			String seatrow=req.getParameter("seatrow");
+			String seatcolumn=req.getParameter("seatcolumn");
+			int hall_id=Integer.parseInt(req.getParameter("hall_id"));
+			int place_num=Integer.parseInt(req.getParameter("place_num"));
+			String province="";
+			String city="";
+			String address="";
+			String seat_line=seatrow+"_"+seatcolumn;
+			String[] addArr=addr.split(" ");
+			for(int i=0;i<addArr.length;i++) {
+				if(i==0) {
+					province=addArr[0];
+				}else if(i==1){
+					city=addArr[1];
+				
+			}else {
+				address+= i==3 ? addArr[i] : " "+ addArr[i] ;
+			}	
+		}
+		address=address+" "+detailAddr ;
+		TcatPerformanceVO vo=new TcatPerformanceVO();
+		vo.setProvince(province);
+		vo.setCity(city);
+		vo.setPostNum(postNum);
+		vo.setAddress(address);
+		int okCnt=0;
+		vo.setHall_id(hall_id);
+		vo.setPlace_num(place_num);
+		okCnt=hDao.placeUpdate(vo);
+		if(okCnt==1) {
+		vo.setHall_name(hall_name);
+		vo.setPlace_num(place_num);
+		vo.setVIP_seat(vipSeat);
+		vo.setR_seat(rSeat);
+		vo.setS_seat(sSeat);
+		vo.setA_seat(aSeat);
+		vo.setB_seat(bSeat);
+		vo.setSeat_line(seat_line);
+		
+		cnt=hDao.hallModifyUpdate(vo);
+		}
+		
+			model.addAttribute("cnt",cnt);
+			
+		}
+
 
 
 

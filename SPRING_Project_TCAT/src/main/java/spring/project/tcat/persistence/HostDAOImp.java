@@ -122,6 +122,88 @@ public class HostDAOImp implements HostDAO {
 		cnt=dao.insertHall(vo);
 		return cnt;
 	}
+	
+	@Override
+	public int hallDeleteCnt() {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.hallDeleteCnt();
+		return cnt;
+	}
+	
+	@Override
+	public ArrayList<TcatPerformanceVO> hallDelete(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatPerformanceVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos=dao.hallDelete(map);
+		return dtos;
+	}
+	
+	@Override
+	public ArrayList<TcatPerformanceVO> hallSerchList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatPerformanceVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos=dao.hallSerchList(map);
+		return dtos;
+	}
+	
+
+	@Override
+	public int hallSerchListCnt(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.hallSerchListCnt(map);
+		return cnt;
+	}
+	
+	//플레이스 삭제
+	@Override
+	public int placeDeletePro(Map<String,Object> map) {
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.placeDeletePro(map);
+		return cnt;
+	}
+	//공연장 삭제
+	@Override
+	public int hallDeletePro(Map<String,Object> map){
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.hallDeletePro(map);
+		return cnt;
+	}
+
+	@Override
+	public TcatPerformanceVO hallModifyDB(String hall_id) {
+		// TODO Auto-generated method stub
+		TcatPerformanceVO vo=new TcatPerformanceVO();
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		vo=dao.hallModifyDB(hall_id);
+		return vo;
+	}
+	
+	@Override
+	public int placeUpdate(TcatPerformanceVO vo) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.placeUpdate(vo);
+		return cnt;
+	}
+	@Override
+	public int hallModifyUpdate(TcatPerformanceVO vo) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.hallModifyUpdate(vo);
+		return cnt;
+	}
+	
+	
 	//////////////////////////////////////18.01.16 명훈//////////////////////////////////////////////////
 	//출력할 공연상품 갯수 가져오기
 	@Override
