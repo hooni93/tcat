@@ -924,5 +924,34 @@ public class TcatHostController {
 	
 	///////////////////////  동금 1/17 end ///////////////////////////
 
+	////////////////////// 태성 1/21 start////////////////////////////
+	//관람/상품 후기 관리 게시판 목록
+	@RequestMapping("commentManager")
+	public String commentManager(HttpServletRequest req,Model model) {
+	System.out.println("commentManager");
+	
+	hService.commentList(req, model);
+	req.getSession().setAttribute("page", "commentManager");
+	
+	return "tcat/borderManager/commentManager";
+	
+	}
+	//관람/상품 후기 관리 게시판_side
+	@RequestMapping("commentManager_side")
+	public String commentManager_side(HttpServletRequest req,Model model) {
+	System.out.println("commentManager_side");
+	return "tcat/borderManager/commentManager_side";
+	}
+	//관람/상품 후기 관리 게시판 - 삭제기능
+	@RequestMapping("commentDelete")
+	public String commentDelete(HttpServletRequest req,Model model) {
+		
+	System.out.println("commentDelete");
+	
+	hService.commentDelete(req, model);
+	hService.commentList(req, model);
+	
+	return "tcat/borderManager/commentManager";
+	}
 	
 }

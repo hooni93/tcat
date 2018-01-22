@@ -203,6 +203,11 @@ public class TSGuestServiceImp implements TSGuestService{
 				// 표 목록 조회
 				System.out.println("map" + map.get("start"));
 				ArrayList<TcatBoardVO> dtos = tsGDAO.commentBoard(map);
+				
+				for(int i =0; i<dtos.size(); i++) {
+	                  String perf_title=dtos.get(i).getPerf_title();
+	                  System.out.println("perf_title==="+perf_title);
+	               }
 				req.setAttribute("dtos", dtos); // 큰바구니 : 게시글 목록 cf)작은 바구니 : 게시글 1건
 				
 			}
@@ -233,4 +238,23 @@ public class TSGuestServiceImp implements TSGuestService{
 
 			}
 		}
+		//고객단 후기 한줄평 쓰기
+		@Override
+		public void commentWrite(HttpServletRequest req, Model model) {
+			int cnt = 0;
+			
+			String notice_title = req.getParameter("notice_title");                 
+			String contents = req.getParameter("contents");
+			String member_id = (String) req.getSession().getAttribute("login_id");
+			
+			TcatBoardVO vo = new TcatBoardVO();
+		
+			vo.setNotice_title(notice_title);
+			vo.setContents(contents);
+			vo.setMember_id(member_id);
+			
+			cnt =tsGDAO.commentWrite(vo);
+		}
+			
+		
 }

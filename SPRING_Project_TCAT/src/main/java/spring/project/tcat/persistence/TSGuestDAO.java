@@ -22,9 +22,12 @@ public interface TSGuestDAO {
 	//회원정보 수정
 	public int updateMember(MemberVO vo);
 	
+	//관람후기 개수
 	public int comment(Map<String, Object> map);
 	//관람후기 목록
 	public ArrayList<TcatBoardVO> commentBoard(Map<String, Object> map);
 	
+	// 게스트 관람/상품후기 등록
+	public int commentWrite(TcatBoardVO vo);
 	
 }

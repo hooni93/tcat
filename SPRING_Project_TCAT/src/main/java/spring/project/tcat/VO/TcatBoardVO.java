@@ -51,6 +51,29 @@ public class TcatBoardVO {
 	String notice_addfile;
 	int notice_div;
 	
+	//태성 01/22추가 시작
+	String perf_title;
+	int per_id;
+	String perf_image;
+	public String getPerf_title() {
+		return perf_title;
+	}
+	public void setPerf_title(String perf_title) {
+		this.perf_title = perf_title;
+	}
+	public int getPer_id() {
+		return per_id;
+	}
+	public void setPer_id(int per_id) {
+		this.per_id = per_id;
+	}
+	public String getPerf_image() {
+		return perf_image;
+	}
+	public void setPerf_image(String perf_image) {
+		this.perf_image = perf_image;
+	}
+	//태성 01/22추가 종료
 	//Service
 	public int getService_num() {
 		return service_num;

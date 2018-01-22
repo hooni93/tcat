@@ -65,6 +65,12 @@ public class TSGuestDAOImp implements TSGuestDAO{
 			ArrayList<TcatBoardVO> dtos = null; // 큰 바구니
 			TSGuestDAO dao = Configuration.getMapper(TSGuestDAO.class);
 			dtos = dao.commentBoard(map);
+			System.out.println("===========================");
+			for(int i =0; i<dtos.size(); i++) {
+                String perf_image=dtos.get(i).getPerf_image();
+                System.out.println("perf_image==="+perf_image);
+             }
+			System.out.println("===========================");
 			return dtos;
 		}
 		// 관람후기 개수
@@ -77,9 +83,15 @@ public class TSGuestDAOImp implements TSGuestDAO{
 
 			return cnt;
 		}
-	
-
-
-
+		//고객단 후기 한줄평 쓰기
+		@Override
+		public int commentWrite(TcatBoardVO vo) {
+			int cnt = 0;
+			
+			TSGuestDAO dao = Configuration.getMapper(TSGuestDAO.class);
+			cnt = dao.commentWrite(vo);
+			
+			return cnt;
+		}
 
 }

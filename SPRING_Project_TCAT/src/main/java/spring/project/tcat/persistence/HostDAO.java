@@ -8,6 +8,7 @@ import spring.project.tcat.VO.HostVO;
 import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.ProductRankVO;
 import spring.project.tcat.VO.SelectHellInfoVO;
+import spring.project.tcat.VO.TcatBoardVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
@@ -248,6 +249,14 @@ public interface HostDAO {
 	
 	///////////////////////  동금 1/15 end ///////////////////////////
 		
-	
-	
+///////////////////////  태성 1/21 start ///////////////////////////
+	// 관람/상품 후기 개수
+	public int commentCnt(Map<String, Object>map);
+	// 관람/상품 후기 목록
+	public ArrayList<TcatBoardVO> commentList(Map<String, Object> map);
+	// 관람/상품후기 삭제
+	public int commentDel(int notice_num);
+/*	// 게스트 관람/상품후기 등록
+	public int commentWrite(TcatBoardVO vo);*/
+///////////////////////  태성 1/21 end ///////////////////////////
 }

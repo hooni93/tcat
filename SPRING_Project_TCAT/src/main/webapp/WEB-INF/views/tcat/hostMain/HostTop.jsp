@@ -176,7 +176,7 @@ function detailOpen(category,id){
 	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );	//hostPage의 오른쪽 result에 결과를 뿌려준다.
 	 
 	 if(url=="hostMain" || url=="join_retireMember" || url=="hotMusical" || url=="sleepMember" || url=="stockDelete_musical" || url=="stockOutOf_musical"
-		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified"){
+		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified" || url =="commentManager"){
 	 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side" );	//들어오는 url이 if조건에 만족할때 그에맞는 사이드페이지를 hostPage의 왼쪽 side_result쪽에 뿌려준다.
 	 }
  }
@@ -214,6 +214,7 @@ function detailOpen(category,id){
 		 return;
 	 }
  }
+
  /* 동금이 제작 */
  
  
@@ -258,7 +259,17 @@ function Sstep(url,category,disc_code,disc_step){
 	var params="disc_code="+disc_code+"&category="+category+"&disc_step="+disc_step;
  	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
 }
- 
+///////////////////태성 01/22 start/////////////////////////////
+//관람/상품 후기 삭제 
+function commentDelete(notice_num,url){
+if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+		load("commentDelete?notice_num="+notice_num+"&url="+url);
+	}else{   //취소
+	    return;
+	}	
+location.reload();
+}
+///////////////////태성 01/22 end///////////////////////////// 
 	 
 </script>
 
@@ -333,7 +344,7 @@ function Sstep(url,category,disc_code,disc_step){
             <li><a href="#">QnA 게시판관리</a></li>
             <li><a href="#">1 : 1 게시판관리</a></li>
             <li class="divider"></li>
-            <li><a href="#">관람/상품후기 게시판관리</a></li>
+            <li><a onclick="load('commentManager');">관람/상품후기 게시판관리</a></li>
             <li class="divider"></li>
             <li><a href="#">영상 게시판관리</a></li>
             <li><a href="#">사진 게시판관리</a></li>

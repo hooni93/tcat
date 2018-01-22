@@ -10,6 +10,7 @@ import spring.project.tcat.VO.HostVO;
 import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.ProductRankVO;
 import spring.project.tcat.VO.SelectHellInfoVO;
+import spring.project.tcat.VO.TcatBoardVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
@@ -842,9 +843,36 @@ public class HostDAOImp implements HostDAO {
 	dao.storediscCount();
 	
 	}
+///////////////////////  동금 1/17  ///////////////////////////
+///////////////////////  태성 1/21 start ///////////////////////////
+	// 관리자 - 관람후기 목록 개수
+	@Override
+	public int commentCnt(Map<String, Object> map) {
+		
+		int cnt = 0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.commentCnt(map);
+		
+		return cnt;
+	}
+	// 관리자 - 관람후기 목록
+	@Override
+	public ArrayList<TcatBoardVO> commentList(Map<String, Object> map) {
+		ArrayList<TcatBoardVO> dtos = null; // 큰 바구니
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos = dao.commentList(map);
+		return dtos;
 	
-	
-	
-	///////////////////////  동금 1/17  ///////////////////////////
-
+	}
+	//관리자 - 관람 후기 삭제
+	@Override
+	public int commentDel(int notice_num) {
+		int cnt = 0;
+		
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.commentDel(notice_num);
+		
+		return cnt;
+	}
+///////////////////////  태성 1/21 end///////////////////////////
 }
