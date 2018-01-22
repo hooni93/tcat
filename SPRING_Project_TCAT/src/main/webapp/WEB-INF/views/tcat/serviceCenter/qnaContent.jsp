@@ -15,19 +15,19 @@
 		<div><span>Q&A 상세 정보</span></div>
 		<table class="table table-hover table-bordered table-condensed c fs10">
 			<tr>
-				<td class="bg-primary"><b>제품이미지</b></td>
-				<td><b>${disc.disc_image } 이미지 안불러옴</b></td>
+				<td class="bg-primary"><b>번호</b></td>
+				<td><b>${dto.service_num}</b></td>
 			</tr>
 			<tr>
-				<td class="bg-primary"><b>제품코드</b></td>
-				<td><b>${disc.disc_code }</b></td>
+				<td class="bg-primary"><b>구분</b></td>
+				<td><b>${dto.service_div}</b></td>
 			</tr>
 			<tr>
-				<td class="bg-primary"><b>제품명</b></td>
-				<td><b>${disc.disc_title }</b></td>
+				<td class="bg-primary"><b>제목</b></td>
+				<td><b>${dto.service_title}</b></td>
 			</tr>
 			<tr>
-				<td class="bg-primary"><b>카테고리</b></td>
+				<td class="bg-primary"><b>작성자</b></td>
 				<td><b>
 					Num: ${disc.cateNum }   ( ${disc.category} > ${disc.mDev} )
 				</b></td>

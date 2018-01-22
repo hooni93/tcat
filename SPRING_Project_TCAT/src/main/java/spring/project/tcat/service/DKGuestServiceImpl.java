@@ -154,7 +154,7 @@ public class DKGuestServiceImpl implements DKGuestService{
 	}
 	
 	//상세페이지
-	/*@Override
+	@Override
 	public void qnaContent(HttpServletRequest req, Model model) {
 		int service_num = Integer.parseInt(req.getParameter("service_num"));
 		
@@ -165,5 +165,5 @@ public class DKGuestServiceImpl implements DKGuestService{
 		
 		
 	}
-*/
+
 }
