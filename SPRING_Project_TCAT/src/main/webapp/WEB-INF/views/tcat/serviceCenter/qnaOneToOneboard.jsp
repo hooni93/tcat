@@ -9,11 +9,11 @@
 
 </head>
 <body>
-	<div ><!--  class="col-md-9 " thumbnail mr15 h300 -->
+	<div class="col-md-9 "><!-- thumbnail mr15 h300 -->
 			<div>
 				<br>
 				<h4>
-					<b>Q&A게시판</b>
+					<b>1:1게시판</b>
 				</h4>
 				<hr>
 				<b>자유롭게 토론하고 게시판입니다!</b><br>
@@ -30,9 +30,8 @@
 						<td><b>구분<b></td>
 						<td><b>제목</b></td>
 						<td><b>작성자</b></td>
-						<!-- <td><b>답변상태</b></td> -->
 						<td><b>날짜</b></td>
-						
+						<td><b>조회수</b></td>
 						
 					</tr>
 					<c:if test="${cnt > 0}">
@@ -40,11 +39,10 @@
 							<tr>
 								<td>${dto.service_num}</td>
 								<td>${dto.service_div}</td>
-								<td><a onclick="BoardContent('qnaContent?service_num=${dto.service_num}&service_title=${dto.service_title}')">${dto.service_title}</a></td>
+								<td>${dto.service_title}</td>
 								<td>${dto.member_id}</td>
-								<%-- <td>${dto.AnswersStatus}</td> --%>
 								<td>${dto.writeDate}</td>
-								
+								<td>${dto.refNum}</td>
 								
 							</tr>
 						</c:forEach>
@@ -57,8 +55,8 @@
 							<c:if test="${cnt > 0}">
 								<!-- 처음[◀◀] / 이전블록[◀] 특수문자 : ㅁ한자키 -->
 								<c:if test="${startPage > pageBlock}">
-									<a onclick="loadBoard('qnaBoardList?cDev=${cDev}&keyword=${keyword}');">[◀◀]</a>
-									<a onclick="loadBoard('qnaBoardList?pageNum=${startPage - pageBlock}&cDev=${cDev}&keyword=${keyword}');">[◀]</a>
+									<a onclick="loadBoard('qnaBoardList');">[◀◀]</a>
+									<a onclick="loadBoard('qnaBoardList?pageNum=${startPage - pageBlock}');">[◀]</a>
 								</c:if>
 
 								<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -68,14 +66,14 @@
 									</c:if>
 
 									<c:if test="${i != currentPage}">
-										<a onclick="loadBoard('qnaBoardList?pageNum=${i}&cDev=${cDev}&keyword=${keyword}');">[${i}]</a>
+										<a onclick="loadBoard('qnaBoardList?pageNum=${i}');">[${i}]</a>
 									</c:if>
 								</c:forEach>
 
 								<!-- 다음블록[▶] / 끝[▶▶] -->
 								<c:if test="${pageCount > endPage}">
-									<a onclick="loadBoard('qnaBoardList?pageNum=${startPage + pageBlock}&cDev=${cDev}&keyword=${keyword}');">[▶]</a>
-									<a onclick="loadBoard('qnaBoardList?pageNum=${pageCount}&cDev=${cDev}&keyword=${keyword}');">[▶▶]</a>
+									<a onclick="loadBoard('qnaBoardList?pageNum=${startPage + pageBlock}');">[◀]</a>
+									<a onclick="loadBoard('qnaBoardList?pageNum=${pageCount}');">[▶▶]</a>
 								</c:if>
 							</c:if>
 						</table>
@@ -100,7 +98,7 @@
 							name="keyword">
 					</div>
 					<button type="button" class="btn btn-default"
-						onclick="ajaxSubmit('qnaBoardList')">검색</button>
+						onclick="ajaxSubmit('qnaOneToOneboard')">검색</button>
 					<!-- stocksearch(); -->
 					
 				</form>

@@ -21,9 +21,37 @@ public class DKGuestServiceImpl implements DKGuestService{
 	//글목록불러오기
 	@Override
 	public void qnaBoardList(HttpServletRequest req, Model model) {
+		System.out.println("qnaBoardList()");
 		
-
-		int pageSize = 10;    //한 페이지당 출력할 글 갯수
+		String service_div = null;
+		
+		String url = (String) req.getAttribute("url");
+		String cDev = req.getParameter("cDev");
+		String keyword = req.getParameter("keyword");
+		String login_id = (String)req.getSession().getAttribute("login_id");
+		
+		if(cDev==null) {
+			cDev="0";
+		}else if(keyword==null) {
+			keyword="";
+		}
+		
+		if(url.equals("qnaOneToOneboard")) {
+			service_div = "1:1게시판";
+			System.out.println("service_div : "+service_div);
+		}
+		/*else if(url.equals("stockDelete_concert")) {
+			mDev= "콘서트";
+			System.out.println("mDev:"+mDev);
+		}else if(url.equals("stockDelete_classic")) {
+			mDev= "클래식";
+			System.out.println("mDev:"+mDev);
+		}else if(url.equals("stockDelete_drama")) {
+			mDev= "연극";
+			System.out.println("mDev:"+mDev);
+		}*/
+		
+		int pageSize = 9;    //한 페이지당 출력할 글 갯수
 		int pageBlock = 3;   //한 블럭당 페이지 갯수
 		
 		int cnt=0;			 //글 갯수
@@ -37,11 +65,18 @@ public class DKGuestServiceImpl implements DKGuestService{
 		int startPage = 0; 		//시작페이지
 		int endPage=0;  		//마지막 페이지	
 		
+		System.out.println("qnaBoardList9_2");
+		
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("service_div", service_div);
+		map.put("cDev", cDev);
+		map.put("keyword", keyword);
+		map.put("login_id", login_id);
+		
 		//글갯수 구하기
 		//cnt = 0;
-		cnt = dao.getQnaBoardCnt();
-		
+		cnt = dao.getQnaBoardCnt(map);
+		System.out.println("qnaBoardList9_3");
 		//req.setAttribute("cnt", cnt);
 		model.addAttribute("cnt", cnt);
 		
@@ -70,6 +105,8 @@ public class DKGuestServiceImpl implements DKGuestService{
 		
 		number = cnt - (currentPage - 1) * pageSize; //출력할 글번호... 최신글(큰 페이지)가 1page 
 		
+		System.out.println("qnaBoardList9_4");
+		
 		System.out.println("number : " + number);
 		System.out.println("cnt : " + cnt);
 		System.out.println("currentPage : " + currentPage);
@@ -79,12 +116,13 @@ public class DKGuestServiceImpl implements DKGuestService{
 			map.put("start", start);
 			map.put("end", end);
 			
+			System.out.println("qnaBoardList9_5");
 			ArrayList<TcatBoardVO> dtos = dao.getQnaBoardList(map);
-		
+			System.out.println("qnaBoardList9_6");
 			model.addAttribute("dtos", dtos);
 			
 		}
-		
+		System.out.println("qnaBoardList9_7");
 		startPage = (currentPage/pageBlock) * pageBlock + 1;
 		if(currentPage % pageBlock == 0) startPage -= pageBlock;
 		
@@ -114,5 +152,18 @@ public class DKGuestServiceImpl implements DKGuestService{
 		}
 		
 	}
-
+	
+	//상세페이지
+	/*@Override
+	public void qnaContent(HttpServletRequest req, Model model) {
+		int service_num = Integer.parseInt(req.getParameter("service_num"));
+		
+		TcatBoardVO dto = dao.getQnaContent(service_num);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("service_num", service_num);
+		
+		
+	}
+*/
 }
