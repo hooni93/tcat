@@ -170,6 +170,18 @@ function detailOpen(category,id){
 
  //모든 결과를 콜백되는 load쪽으로 뿌려준다.
  //첫 페이지 hostMain [그후부터 들어오는 url에따라 result와 side_result를 바꿔준다.]
+ function divSeatload(){	 
+	var row=document.all.seatrow.value;
+	var column=document.all.seatcolumn.value;
+	var vip=document.all.VIPseat.value;
+	var r=document.all.Rseat.value;
+	var s=document.all.Sseat.value;
+	var a=document.all.Aseat.value;
+	var b=document.all.Bseat.value; 
+	var url="seat_result?row="+row+"&column="+column+"&vip="+vip+"&r="+r+"&s="+s+"&a="+a+"&b="+b;
+	 $( "#seat_result1" ).load( "${pageContext.request.contextPath}/"+url );
+}
+ 
  
  function load(url){
 	 

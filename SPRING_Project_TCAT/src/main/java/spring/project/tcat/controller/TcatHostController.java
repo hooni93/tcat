@@ -169,6 +169,7 @@ public class TcatHostController {
 		hService.insertHall(req, model);
 		return "tcat/locationManager/hallAdd";
 	}
+
 	
 	
 	
@@ -183,16 +184,69 @@ public class TcatHostController {
 	@RequestMapping("hallModify")
 	public String hallModify(HttpServletRequest req,Model model) {
 		System.out.println("hallModify");
+		String s=null;
+		s=req.getParameter("search");
+		if(s==null) {
+			s="a";
+		}
+		if(s.equals("a")) {
+			hService.hallDelete(req, model);
+		}else {
+			hService.hallSerchList(req, model);
+		}
+		
 		return "tcat/locationManager/hallModify";
 	}
 	//공연장 삭제
 	@RequestMapping("hallDelete")
 	public String hallDelete(HttpServletRequest req,Model model) {
 		System.out.println("hallDelete");
+		String s=null;
+		s=req.getParameter("search");
+		if(s==null) {
+			s="a";
+		}
+		if(s.equals("a")) {
+			hService.hallDelete(req, model);
+		}else {
+			hService.hallSerchList(req, model);
+		}
+		
 		return "tcat/locationManager/hallDelete";
 	}
+	//공연장 삭제 연산
+		@RequestMapping("hallDeletePro")
+		public String hallDeletePro(HttpServletRequest req,Model model) {
+			System.out.println("hallDeletePro");
+			hService.hallDeletePro(req, model);
+			hallDelete(req,model);
+			return "tcat/locationManager/hallDelete";
+		}
 
-
+		//공연장 수정 데이터 가져오기
+		@RequestMapping("hallModifyDB")
+		public String hallModifyDB(HttpServletRequest req,Model model) {
+			System.out.println("hallModifyDB");
+			hService.hallModifyDB(req, model);
+			return "tcat/locationManager/hallModifyDB";
+		}
+		
+		//공연장 수정 데이터 가져오기
+		@RequestMapping("seat_result")
+		public String seat_result(HttpServletRequest req,Model model) {
+			return "tcat/locationManager/seat_result";
+		}
+		
+		//공연장 수정 데이터 update
+		@RequestMapping("hallModifyUpdate")
+		public String hallModifyUpdate(HttpServletRequest req,Model model) {
+			hService.hallModifyUpdate(req, model);
+			return "tcat/locationManager/hallModifyDB";
+		}
+		
+		
+		
+		
 
 	//////////////////////////// 18.01.16 명훈
 	//////////////////////////// 시작////////////////////////////////////////////
