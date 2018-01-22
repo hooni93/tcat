@@ -162,13 +162,15 @@ function ajaxSubmit(url){   /* AJAX submit */
 
 function load(url){
 	 
-	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );	
+	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );
+	 window.location.hash = '#url' + url;
 	 
 }
 
-
-
-
+//공연 상세페이지 onclick시
+function contentPage(per_id){
+	load('contentMain?per_id='+per_id);
+}
 </script>
 </head>
 <body>

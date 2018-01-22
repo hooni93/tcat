@@ -20,8 +20,8 @@
 				  <a href="#" class="list-group-item disabled">
 				    <span class="text-warning">클래식</span>
 				  </a>
-				  <a href="#" class="list-group-item">클래식</a>
-				  <a href="#" class="list-group-item">국악</a>
+				  <a onclick="load('classicList?sDev=클래식&order=startDate');" class="list-group-item">클래식</a>
+				  <a onclick="load('classicList?sDev=국악&order=startDate');" class="list-group-item">국악</a>
 				</div>
 			</div>
 			<div class="col-md-7 thumbnail mr15 h300">
