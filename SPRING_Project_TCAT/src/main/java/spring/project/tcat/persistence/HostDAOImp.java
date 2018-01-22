@@ -10,6 +10,7 @@ import spring.project.tcat.VO.HostVO;
 import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.ProductRankVO;
 import spring.project.tcat.VO.SelectHellInfoVO;
+import spring.project.tcat.VO.TcatBoardVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
@@ -95,10 +96,114 @@ public class HostDAOImp implements HostDAO {
 		dtos=dao.memberManagerSerchList(map);
 		return dtos;
 	}
+	//지역인서트 넘버키 가져오기
+	@Override
+	public int placeNum() {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.placeNum();
+		return cnt;
+	}
+	//지역정보 인서트
+	@Override
+	public int placeInsert(TcatPerformanceVO vo) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.placeInsert(vo);
+		return cnt;
+	}
+
+	@Override
+	public int insertHall(TcatPerformanceVO vo) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.insertHall(vo);
+		return cnt;
+	}
 	
+	@Override
+	public int hallDeleteCnt() {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.hallDeleteCnt();
+		return cnt;
+	}
 	
+	@Override
+	public ArrayList<TcatPerformanceVO> hallDelete(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatPerformanceVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos=dao.hallDelete(map);
+		return dtos;
+	}
+	
+	@Override
+	public ArrayList<TcatPerformanceVO> hallSerchList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatPerformanceVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos=dao.hallSerchList(map);
+		return dtos;
+	}
 	
 
+	@Override
+	public int hallSerchListCnt(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.hallSerchListCnt(map);
+		return cnt;
+	}
+	
+	//플레이스 삭제
+	@Override
+	public int placeDeletePro(Map<String,Object> map) {
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.placeDeletePro(map);
+		return cnt;
+	}
+	//공연장 삭제
+	@Override
+	public int hallDeletePro(Map<String,Object> map){
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.hallDeletePro(map);
+		return cnt;
+	}
+
+	@Override
+	public TcatPerformanceVO hallModifyDB(String hall_id) {
+		// TODO Auto-generated method stub
+		TcatPerformanceVO vo=new TcatPerformanceVO();
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		vo=dao.hallModifyDB(hall_id);
+		return vo;
+	}
+	
+	@Override
+	public int placeUpdate(TcatPerformanceVO vo) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.placeUpdate(vo);
+		return cnt;
+	}
+	@Override
+	public int hallModifyUpdate(TcatPerformanceVO vo) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.hallModifyUpdate(vo);
+		return cnt;
+	}
+	
 	
 	//////////////////////////////////////18.01.16 명훈//////////////////////////////////////////////////
 	//출력할 공연상품 갯수 가져오기
@@ -820,9 +925,36 @@ public class HostDAOImp implements HostDAO {
 	dao.storediscCount();
 	
 	}
+///////////////////////  동금 1/17  ///////////////////////////
+///////////////////////  태성 1/21 start ///////////////////////////
+	// 관리자 - 관람후기 목록 개수
+	@Override
+	public int commentCnt(Map<String, Object> map) {
+		
+		int cnt = 0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.commentCnt(map);
+		
+		return cnt;
+	}
+	// 관리자 - 관람후기 목록
+	@Override
+	public ArrayList<TcatBoardVO> commentList(Map<String, Object> map) {
+		ArrayList<TcatBoardVO> dtos = null; // 큰 바구니
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos = dao.commentList(map);
+		return dtos;
 	
-	
-	
-	///////////////////////  동금 1/17  ///////////////////////////
-
+	}
+	//관리자 - 관람 후기 삭제
+	@Override
+	public int commentDel(int notice_num) {
+		int cnt = 0;
+		
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.commentDel(notice_num);
+		
+		return cnt;
+	}
+///////////////////////  태성 1/21 end///////////////////////////
 }

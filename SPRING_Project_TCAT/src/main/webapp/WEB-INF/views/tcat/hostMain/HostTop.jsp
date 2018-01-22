@@ -15,6 +15,50 @@
 <script src="${script}bootstrap.js"></script>
 <script src="${script}jquery-ui.js"></script>
 <link rel="stylesheet" href="${css}jquery-ui.css">
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullAddr = ''; // 최종 주소 변수
+                var extraAddr = ''; // 조합형 주소 변수
+
+                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    fullAddr = data.roadAddress;
+
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    fullAddr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                if(data.userSelectedType === 'R'){
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== ''){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== ''){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('sample6_address').value = fullAddr;
+
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById('sample6_address2').focus();
+            }
+        }).open();
+    }
+</script>
 <script>
 /* 0111 현석 */
 $( function() {
@@ -29,7 +73,13 @@ $( function() {
     window.open("remain_round", "confirm", "menubar=no, width=500, height=330");
  } 
 
-
+	//공연장 좌석 만들기 
+	function seatMake(){
+	var a=document.all.seatrow.value;
+	var b=document.all.seatcolumn.value;
+	var url="hallSeatMake?seatRow="+a+"&seatColumn="+b; 
+	window.open(url, "hallSeat","top=50,left=100,menubar=no,location=no,toolbar=no,width=1200,height=700"); 
+}
 
 //ajax
 function ajaxSubmit(url){   /* AJAX submit */  
@@ -120,13 +170,25 @@ function detailOpen(category,id){
 
  //모든 결과를 콜백되는 load쪽으로 뿌려준다.
  //첫 페이지 hostMain [그후부터 들어오는 url에따라 result와 side_result를 바꿔준다.]
+ function divSeatload(){	 
+	var row=document.all.seatrow.value;
+	var column=document.all.seatcolumn.value;
+	var vip=document.all.VIPseat.value;
+	var r=document.all.Rseat.value;
+	var s=document.all.Sseat.value;
+	var a=document.all.Aseat.value;
+	var b=document.all.Bseat.value; 
+	var url="seat_result?row="+row+"&column="+column+"&vip="+vip+"&r="+r+"&s="+s+"&a="+a+"&b="+b;
+	 $( "#seat_result1" ).load( "${pageContext.request.contextPath}/"+url );
+}
+ 
  
  function load(url){
 	 
 	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );	//hostPage의 오른쪽 result에 결과를 뿌려준다.
 	 
 	 if(url=="hostMain" || url=="join_retireMember" || url=="hotMusical" || url=="sleepMember" || url=="stockDelete_musical" || url=="stockOutOf_musical"
-		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" || url=="stockManagement" || url=="googleMap" || url=="registItem" || url=="memberModified"){
+		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified" || url =="commentManager"){
 	 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side" );	//들어오는 url이 if조건에 만족할때 그에맞는 사이드페이지를 hostPage의 왼쪽 side_result쪽에 뿌려준다.
 	 }
  }
@@ -164,11 +226,12 @@ function detailOpen(category,id){
 		 return;
 	 }
  }
+
  /* 동금이 제작 */
  
  
  /* 영민이 제작 */
-	//핫리스트 조건
+	//핫리스트 삭제
 	 function hotDelete(hotListSize, per_id,url){
 		 alert(url);
 		 if(hotListSize>1){
@@ -179,7 +242,7 @@ function detailOpen(category,id){
 			 return false;
 		 } 
 	 }
-	
+	//핫리스트 삭제
 	 function hotUpdate(hotListSize, per_id,url){
 		 alert(url);
 		 if(hotListSize<4){
@@ -190,6 +253,21 @@ function detailOpen(category,id){
 			 return false;
 		 } 
 	 }
+	//이벤트 삭제
+	function eventDelete(notice_num,url){
+		 alert(url);
+		load('eventDelete?notice_num='+notice_num+'&url='+url);
+	 }
+	//이벤트 수정상세
+	function eventUpdate(notice_num,url){
+		 alert(url);
+		load('eventUpdate?notice_num='+notice_num+'&url='+url);
+	 }
+	//이벤트 수정
+	/* function eventUpdateList(contents,notice_num,url){
+		 alert(url);
+		load('eventUpdateList?notice_num='+notice_num+'&contents='+contents+'&notice_title='+notice_title+'&url='+url);
+	 } */
 	 /* 영민이 제작 */
 	 /* 태성이 제작 */
 	 function Cfirst_grade(url,category,id,first_grade){
@@ -208,7 +286,17 @@ function Sstep(url,category,disc_code,disc_step){
 	var params="disc_code="+disc_code+"&category="+category+"&disc_step="+disc_step;
  	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
 }
- 
+///////////////////태성 01/22 start/////////////////////////////
+//관람/상품 후기 삭제 
+function commentDelete(notice_num,url){
+if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+		load("commentDelete?notice_num="+notice_num+"&url="+url);
+	}else{   //취소
+	    return;
+	}	
+location.reload();
+}
+///////////////////태성 01/22 end///////////////////////////// 
 	 
 </script>
 
@@ -272,22 +360,18 @@ function Sstep(url,category,disc_code,disc_step){
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">공연/지역 관리<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">공연장 관리</a></li>
-            <li><a href="#">지역 관리</a></li>
-          </ul>
+          <a  onclick="load('hallAdd');" role="button" aria-expanded="false">공연장 관리</a>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">게시판관리<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">공지사항 게시판관리</a></li>
+            <li><a onclick="load('eventHost');">공지사항 게시판관리</a></li>
             <li><a href="#">SNS후기 게시판관리</a></li>
             <li class="divider"></li>
             <li><a href="#">QnA 게시판관리</a></li>
             <li><a href="#">1 : 1 게시판관리</a></li>
             <li class="divider"></li>
-            <li><a href="#">관람/상품후기 게시판관리</a></li>
+            <li><a onclick="load('commentManager');">관람/상품후기 게시판관리</a></li>
             <li class="divider"></li>
             <li><a href="#">영상 게시판관리</a></li>
             <li><a href="#">사진 게시판관리</a></li>
@@ -307,7 +391,7 @@ function Sstep(url,category,disc_code,disc_step){
           </ul>
         </li>
         <li class="dropdown">
-          <a onclick="load('productRank')" class="" role="button" aria-expanded="false">상품분석 </span></a>
+          <a onclick="load('productRank');" role="button" aria-expanded="false">상품분석</a>
          
         </li>
         <li class="dropdown">

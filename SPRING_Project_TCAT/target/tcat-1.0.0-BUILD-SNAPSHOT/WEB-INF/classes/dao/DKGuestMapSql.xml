@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE mapper
+	          PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	          
+	<mapper namespace="spring.project.tcat.persistence.DKGuestDAO">
+		
+		<select id="getQnaBoardCnt" resultType="int">
+			SELECT COUNT(*)
+			FROM
+			    (SELECT s.service_num service_num, s.service_div service_div, s.service_title service_title,
+			           s.member_id member_id, s.writeDate writeDate, s.AnswersStatus AnswersStatus, 
+			           s.QuestionCon QuestionCon, s.AnswersCon AnswersCon, s.satisfction satisfction
+			    FROM Service s JOIN member m
+			    ON s.member_id = m.member_id
+			    ORDER BY writeDate DESC) a JOIN notice n
+			ON a.member_id = n.member_id
+		</select>
+		
+		<select id="getQnaBoardList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatBoardVO">
+			<![CDATA[
+				SELECT a.service_num service_num, a.service_div service_div, a.service_title service_title, 
+				       a.member_id member_id, a.writeDate writeDate, a.AnswersStatus AnswersStatus, 
+				       a.QuestionCon QuestionCon, a.AnswersCon AnswersCon, a.satisfction satisfction,
+				       n.refNum refNum
+				FROM
+				    (SELECT s.service_num service_num, s.service_div service_div, s.service_title service_title,
+				           s.member_id member_id, s.writeDate writeDate, s.AnswersStatus AnswersStatus, 
+				           s.QuestionCon QuestionCon, s.AnswersCon AnswersCon, s.satisfction satisfction, rownum rNum
+				    FROM Service s JOIN member m
+				    ON s.member_id = m.member_id
+				    ORDER BY writeDate DESC) a JOIN notice n
+				ON a.member_id = n.member_id
+				WHERE rNum >= #{start} AND rNum <= #{end}
+			]]>
+		
+		</select>
+		
+	
+		
+		
+		
+		
+		
+	
+	</mapper>

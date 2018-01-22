@@ -9,4 +9,17 @@ public interface HSGuestService {
 	public void MemberIdCheack(HttpServletRequest req,Model model);
 	//게스트 가입
 	public void insertMember(HttpServletRequest req,Model model);
+	//날짜별 리스트 가져오기
+	public void daySearch(HttpServletRequest req,Model model);
+	//지역별 리스트 가져오기
+	public void placeList(HttpServletRequest req,Model model);
+	//장바구니에 담기
+	public void insertCart(HttpServletRequest req,Model model);
+	//장바구니 리스트 가져오기
+	public void cartList(HttpServletRequest req,Model model);
+	//예매할 상세정보 가져오기
+	public void payList(HttpServletRequest req,Model model);
+	//스토어 구매
+	public void sussessPay(HttpServletRequest req,Model model);
+		
 }

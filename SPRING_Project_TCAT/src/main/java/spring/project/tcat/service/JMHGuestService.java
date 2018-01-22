@@ -14,4 +14,19 @@ public interface JMHGuestService {
 	public void loginPro(HttpServletRequest req,Model model);
 	//마이페이지 정보가져오기
 	public void myPageInfo(HttpServletRequest req,Model model);
+	
+	//공연정보 리스트 가져오기
+	public void  getPerfList(HttpServletRequest req,Model model);
+	//스토어 리스 가져오기
+	public void  getStoreList(HttpServletRequest req,Model model);
+	//공연 상세 정보 가져오기
+	public void  getContent(HttpServletRequest req,Model model);
+	
+	
+	//addWishList 위시리스트 추가
+	public void  addWishList(HttpServletRequest req,Model model);
+	//해당 위시리스트 삭제
+	public void delWishList(HttpServletRequest req,Model model);
+	//getWishListIn 위시리스트 해당 공연 존재 확인
+	public void getWishListIn(HttpServletRequest req,Model model);
 }

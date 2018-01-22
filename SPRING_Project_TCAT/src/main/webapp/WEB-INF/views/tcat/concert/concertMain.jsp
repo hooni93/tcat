@@ -19,9 +19,9 @@
 				  <a href="#" class="list-group-item disabled">
 				    <span class="text-warning">콘서트</span>
 				  </a>
-				  <a href="#" class="list-group-item">국내뮤지션</a>
-				  <a href="#" class="list-group-item">해외뮤지션</a>
-				  <a href="#" class="list-group-item">페스티벌</a>
+				  <a onclick="load('concertList?sDev=국내뮤지션&order=startDate');" class="list-group-item">국내뮤지션</a>
+				  <a onclick="load('concertList?sDev=해외뮤지션&order=startDate');" class="list-group-item">해외뮤지션</a>
+				  <a onclick="load('concertList?sDev=페스티벌&order=startDate');" class="list-group-item">페스티벌</a>
 				</div>
 			</div>
 			<div class="col-md-7 thumbnail mr15 h300">

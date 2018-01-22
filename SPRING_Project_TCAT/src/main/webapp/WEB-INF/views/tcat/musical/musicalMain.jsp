@@ -19,10 +19,10 @@
 				  <a href="#" class="list-group-item disabled">
 				    <span class="text-warning">뮤지컬</span>
 				  </a>
-				  <a href="#" class="list-group-item">라이선스</a>
-				  <a href="#" class="list-group-item">오리지널</a>
-				  <a href="#" class="list-group-item">창작</a>
-				  <a href="#" class="list-group-item">넌버벌</a>
+				  <a onclick="load('musicalList?sDev=오리지널&order=startDate')" class="list-group-item">오리지널</a>
+				  <a onclick="load('musicalList?sDev=라이선스&order=startDate')" class="list-group-item">라이선스</a>
+				  <a onclick="load('musicalList?sDev=창작&order=startDate')" class="list-group-item">창작</a>
+				  <a onclick="load('musicalList?sDev=넌버벌&order=startDate')" class="list-group-item">넌버벌</a>
 				</div>
 			</div>
 			<div class="col-md-7 thumbnail mr15 h300">

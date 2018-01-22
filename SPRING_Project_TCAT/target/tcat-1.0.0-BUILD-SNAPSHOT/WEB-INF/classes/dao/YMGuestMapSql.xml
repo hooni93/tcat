@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE mapper
+             PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+             
+   <mapper namespace="spring.project.tcat.persistence.YMGuestDAO">
+   <!-- 등급관리 -->
+   <select id="mRating" resultType="int">
+		select count(*) as buy
+		from
+		Ticketing
+		where member_id=#{strId}
+	</select>
+	
+	<update id="mRatingUpdate" parameterType="java.util.Map">
+	update member
+	<if test="compare ==0">
+    	set Rating='D'			
+    </if>
+	<if test="compare ==1">
+    	set Rating='C'			
+    </if>
+    <if test="compare ==2">
+    	set Rating='B'			
+    </if>
+    <if test="compare ==3">
+    	set Rating='A'			
+    </if>
+    <if test="compare ==4">
+    	set Rating='S'			
+    </if>
+    <if test="compare ==5">
+    	set Rating='VIP'			
+    </if> 
+	 	where member_id=#{strId}
+	</update>
+	<!-- S랭크 -->
+	<select id="dayCnt" parameterType="java.util.Map" resultType="int">
+		SELECT count(*)
+		FROM 
+		member m join Ticketing t
+		on
+		m.member_id=t.member_id
+		WHERE
+		Rating='A'
+		AND ticet_date BETWEEN #{yesterday} AND #{today}
+	</select>
+	<!-- vip -->
+	<select id="dayCnt1" parameterType="java.util.Map" resultType="int">
+		SELECT count(*)
+		FROM 
+		member m join Ticketing t
+		on
+		m.member_id=t.member_id
+		WHERE
+		Rating='S'
+		AND ticet_date BETWEEN #{yesterday} AND #{today}
+	</select>
+   </mapper>
