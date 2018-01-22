@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import spring.project.tcat.service.HostService;
+import spring.project.tcat.service.YMGuestService;
 
 @Controller
 public class TcatHostController {
@@ -774,7 +775,16 @@ public class TcatHostController {
 	}
 
 /////////////////// HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  /////////////////////////
-	
+/////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민  //////////////////////////////
+	@Autowired
+	YMGuestService YMService;
+	@RequestMapping("eventHost")
+	public String eventHost(HttpServletRequest req, Model model) {
+		System.out.println("eventHost");
+		YMService.eventGuest(req, model);
+		return "tcat/borderManager/eventHost";
+	}
+/////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민  //////////////////////////////
 
 	///////////////////////  동금 1/9 start  //////////////////////// 
 	// HOST/상품관리/상품삭제  

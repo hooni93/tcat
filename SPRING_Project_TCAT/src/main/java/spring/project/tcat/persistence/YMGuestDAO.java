@@ -23,5 +23,8 @@ public interface YMGuestDAO {
 	
 	//이벤트 상세
 	public ArrayList<TcatBoardVO> eventGuestForm(int num);
+	
+	//이벤트 삭제
+	public int eventDeleteCnt(int num);
 
 }

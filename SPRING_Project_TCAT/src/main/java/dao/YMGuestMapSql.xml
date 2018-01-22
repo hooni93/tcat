@@ -83,4 +83,8 @@
 		Notice
 		where notice_num=#{num}
 	</select>
+	<!-- 이벤트 삭제 -->
+	<delete id="eventDeleteCnt" parameterType="int">
+		delete notice where notice_num=#{num}
+	</delete>
    </mapper>

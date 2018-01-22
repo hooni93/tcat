@@ -20,10 +20,10 @@
 						<br>
 						<c:forEach var="vo" items="${dto}" >
 						<h4>${vo.notice_num}</h4>
-						<h3>${vo.notice_title}</h3>
+						<h4>${vo.notice_title}</h4>
 							${vo.writeDate}
 						<img src="${image}eventList/${vo.notice_image}">
-						<h3>${vo.contents}</h3>
+						<h4>${vo.contents}</h4>
 						<h4>(* 티켓 소진시까지 진행)</h4>
 						<br><br><br>
 						</c:forEach>

@@ -42,5 +42,26 @@ public class YMGuestContoroller {
 		YMService.eventForm(req, model);
 		return "tcat/event/eventForm";
 	}
-	
+	//이벤트삭제
+	@RequestMapping("eventDelete")
+	public String eventDelete(HttpServletRequest req,Model model) {
+		System.out.println("eventDelete");
+		YMService.eventDelete(req, model);
+		YMService.eventGuest(req, model);
+		return "tcat/borderManager/eventHost";
+	}
+	//이벤트수정
+		@RequestMapping("eventUpdate")
+		public String eventUpdate(HttpServletRequest req,Model model) {
+			System.out.println("eventUpdate");
+			YMService.eventForm(req, model);
+			YMService.eventGuest(req, model);
+			return "tcat/borderManager/eventUpdate";
+		}
+		//이벤트수정
+		/*@RequestMapping("eventUpdateList")
+		public String eventUpdateList(HttpServletRequest req,Model model) {
+			System.out.println("eventUpdateList");
+			return "tcat/borderManager/eventHost";
+		}*/
 }

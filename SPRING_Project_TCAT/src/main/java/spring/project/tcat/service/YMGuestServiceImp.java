@@ -183,4 +183,24 @@ public class YMGuestServiceImp implements YMGuestService {
 		model.addAttribute("dto", dto);
 		
 	}
+	//이벤트삭제
+	@Override
+	public void eventDelete(HttpServletRequest req, Model model) {
+		int deleteCnt=0;
+		int num=Integer.parseInt(req.getParameter("notice_num"));
+		System.out.println("num======"+num);
+		deleteCnt=YMDao.eventDeleteCnt(num);
+		model.addAttribute("deleteCnt", deleteCnt);
+		
+	}
+	/*//이벤트수정
+	@Override
+	public void eventUpdateList(HttpServletRequest req, Model model) {
+		int num=Integer.parseInt(req.getParameter("notice_num"));
+		String title= req.getParameter("notice_title");
+		String contents= req.getParameter("contents");
+		System.out.println("num===="+num);
+		System.out.println("title===="+title);
+		System.out.println("contents===="+contents);
+	}*/
 }

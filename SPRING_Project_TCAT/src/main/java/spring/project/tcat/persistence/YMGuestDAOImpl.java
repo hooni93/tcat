@@ -70,5 +70,13 @@ public class YMGuestDAOImpl implements YMGuestDAO{
 		dto=dao.eventGuestForm(num);
 		return dto;
 	}
+	//이벤트삭제
+	@Override
+	public int eventDeleteCnt(int num) {
+		int cnt=0;
+		YMGuestDAO dao= Configuration.getMapper(YMGuestDAO.class);
+		cnt=dao.eventDeleteCnt(num);
+		return cnt;
+	}
 		
 }

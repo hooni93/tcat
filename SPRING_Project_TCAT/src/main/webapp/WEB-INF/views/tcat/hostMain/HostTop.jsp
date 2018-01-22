@@ -218,7 +218,7 @@ function detailOpen(category,id){
  
  
  /* 영민이 제작 */
-	//핫리스트 조건
+	//핫리스트 삭제
 	 function hotDelete(hotListSize, per_id,url){
 		 alert(url);
 		 if(hotListSize>1){
@@ -229,7 +229,7 @@ function detailOpen(category,id){
 			 return false;
 		 } 
 	 }
-	
+	//핫리스트 삭제
 	 function hotUpdate(hotListSize, per_id,url){
 		 alert(url);
 		 if(hotListSize<4){
@@ -240,6 +240,21 @@ function detailOpen(category,id){
 			 return false;
 		 } 
 	 }
+	//이벤트 삭제
+	function eventDelete(notice_num,url){
+		 alert(url);
+		load('eventDelete?notice_num='+notice_num+'&url='+url);
+	 }
+	//이벤트 수정상세
+	function eventUpdate(notice_num,url){
+		 alert(url);
+		load('eventUpdate?notice_num='+notice_num+'&url='+url);
+	 }
+	//이벤트 수정
+	/* function eventUpdateList(contents,notice_num,url){
+		 alert(url);
+		load('eventUpdateList?notice_num='+notice_num+'&contents='+contents+'&notice_title='+notice_title+'&url='+url);
+	 } */
 	 /* 영민이 제작 */
 	 /* 태성이 제작 */
 	 function Cfirst_grade(url,category,id,first_grade){
@@ -327,7 +342,7 @@ function Sstep(url,category,disc_code,disc_step){
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">게시판관리<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">공지사항 게시판관리</a></li>
+            <li><a onclick="load('eventHost');">공지사항 게시판관리</a></li>
             <li><a href="#">SNS후기 게시판관리</a></li>
             <li class="divider"></li>
             <li><a href="#">QnA 게시판관리</a></li>
