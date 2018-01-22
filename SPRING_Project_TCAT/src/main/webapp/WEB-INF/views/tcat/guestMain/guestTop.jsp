@@ -199,16 +199,9 @@ function contentPage(per_id){
 				  </li>
 				  <li><a href="#">예매확인/취소</a></li>
 				  <li><a href="#">위시리스트</a></li>
-<<<<<<< HEAD
-				  <li><a onclick="load('qnaBoardMain');">고객센터</a></li>
-=======
-
-				  <li><a onclick="load('qnaBoardMain');">고객센터</a></li>
-
+				 <li><a onclick="load('qnaBoardMain');">고객센터</a></li>
 				  <li><a onclick="load('cartList');">장바구니</a></li>
 				  <li><a onclick="load('qnaBoardList');">고객센터</a></li>
-
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 				  <li><a href="#">모바일APP</a></li>  
 				  <li><a onclick="load('commentBoard');">후기</a></li>  
 				  <li><a onclick="load('intro');">회사</a></li>
