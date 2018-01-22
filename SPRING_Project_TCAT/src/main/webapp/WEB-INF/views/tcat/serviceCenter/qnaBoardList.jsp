@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
+
 </head>
 <body>
 	<div ><!--  class="col-md-9 " thumbnail mr15 h300 -->
@@ -40,7 +41,7 @@
 							<tr>
 								<td>${dto.service_num}</td>
 								<td>${dto.service_div}</td>
-								<td><a onclick="BoardContent('qnaContent?service_num=${dto.service_num}&service_title=${dto.service_title}')">${dto.service_title}</a></td>
+								<td><a onclick="BoardContent('qnaContent?service_num=${dto.service_num}');">${dto.service_title}</a></td>
 								<td>${dto.member_id}</td>
 								<%-- <td>${dto.AnswersStatus}</td> --%>
 								<td>${dto.writeDate}</td>

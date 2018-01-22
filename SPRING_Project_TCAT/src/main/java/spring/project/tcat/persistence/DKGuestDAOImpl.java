@@ -35,7 +35,7 @@ public class DKGuestDAOImpl implements DKGuestDAO{
 	}
 	
 	//상세페이지
-	@Override
+	/*@Override
 	public TcatBoardVO getQnaContent(int service_num) {
 		TcatBoardVO dto = null;
 		
@@ -43,7 +43,7 @@ public class DKGuestDAOImpl implements DKGuestDAO{
 		dto = dao.getQnaContent(service_num);
 		
 		return dto;
-	}
+	}*/
 	
 	//조회수 증가
 	/*@Override

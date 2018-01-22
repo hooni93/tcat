@@ -154,16 +154,17 @@ public class DKGuestServiceImpl implements DKGuestService{
 	}
 	
 	//상세페이지
-	@Override
+	/*@Override
 	public void qnaContent(HttpServletRequest req, Model model) {
+		System.out.println("service_num");
 		int service_num = Integer.parseInt(req.getParameter("service_num"));
-		
+		System.out.println("service_num"+ service_num);
 		TcatBoardVO dto = dao.getQnaContent(service_num);
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("service_num", service_num);
 		
 		
-	}
+	}*/
 
 }

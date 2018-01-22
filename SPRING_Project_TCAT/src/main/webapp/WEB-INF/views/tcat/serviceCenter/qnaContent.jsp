@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../setting.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,6 +15,7 @@
 	<div class="col-md-10">
 		<div><span>Q&A 상세 정보</span></div>
 		<table class="table table-hover table-bordered table-condensed c fs10">
+		<c:forEach var = "dto" items="${dto}">
 			<tr>
 				<td class="bg-primary"><b>번호</b></td>
 				<td><b>${dto.service_num}</b></td>
@@ -29,16 +31,16 @@
 			<tr>
 				<td class="bg-primary"><b>작성자</b></td>
 				<td><b>
-					Num: ${disc.cateNum }   ( ${disc.category} > ${disc.mDev} )
+					${dto.member_id}
 				</b></td>
 			</tr>
 			<tr>
-				<td class="bg-primary"><b>제품가격</b></td>
-				<td><b>${disc.disc_price }</b></td>
+				<td class="bg-primary"><b>작성일</b></td>
+				<td><b>${dto.writeDate}</b></td>
 			</tr>
 			<tr>
-				<td class="bg-primary"><b>상품우선순위</b></td>
-				<td><b> ${disc.first_grade } (A:최고,B:우수,C:보통,D:하,E:최하,F:부적합)</b></td>
+				<td class="bg-primary"><b>답변상태</b></td>
+				<td><b>${dto.AnswersStatus}</b></td>
 			</tr>
 			<tr>
 				<td class="bg-primary"><b>상품스텝</b></td>
@@ -50,6 +52,7 @@
 			<tr>
 				<td colspan="2"><b>${disc.disc_con }</b></td>
 			</tr>
+			</c:forEach>
 		</table>
 	</div>
 

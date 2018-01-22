@@ -14,7 +14,7 @@ public interface DKGuestDAO {
 	public ArrayList<TcatBoardVO> getQnaBoardList(Map<String, Object> map);
 	
 	//상세페이지
-	public TcatBoardVO getQnaContent(int service_num);
+	//public TcatBoardVO getQnaContent(int service_num);
 	
 	//조회수 증가
 	//public void qnaReadCnt(int service_num);
