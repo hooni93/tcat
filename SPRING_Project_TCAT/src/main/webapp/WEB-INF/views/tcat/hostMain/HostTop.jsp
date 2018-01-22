@@ -170,13 +170,25 @@ function detailOpen(category,id){
 
  //모든 결과를 콜백되는 load쪽으로 뿌려준다.
  //첫 페이지 hostMain [그후부터 들어오는 url에따라 result와 side_result를 바꿔준다.]
+ function divSeatload(){	 
+	var row=document.all.seatrow.value;
+	var column=document.all.seatcolumn.value;
+	var vip=document.all.VIPseat.value;
+	var r=document.all.Rseat.value;
+	var s=document.all.Sseat.value;
+	var a=document.all.Aseat.value;
+	var b=document.all.Bseat.value; 
+	var url="seat_result?row="+row+"&column="+column+"&vip="+vip+"&r="+r+"&s="+s+"&a="+a+"&b="+b;
+	 $( "#seat_result1" ).load( "${pageContext.request.contextPath}/"+url );
+}
+ 
  
  function load(url){
 	 
 	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );	//hostPage의 오른쪽 result에 결과를 뿌려준다.
 	 
 	 if(url=="hostMain" || url=="join_retireMember" || url=="hotMusical" || url=="sleepMember" || url=="stockDelete_musical" || url=="stockOutOf_musical"
-		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified"){
+		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified" || url =="commentManager"){
 	 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side" );	//들어오는 url이 if조건에 만족할때 그에맞는 사이드페이지를 hostPage의 왼쪽 side_result쪽에 뿌려준다.
 	 }
  }
@@ -214,11 +226,12 @@ function detailOpen(category,id){
 		 return;
 	 }
  }
+
  /* 동금이 제작 */
  
  
  /* 영민이 제작 */
-	//핫리스트 조건
+	//핫리스트 삭제
 	 function hotDelete(hotListSize, per_id,url){
 		 alert(url);
 		 if(hotListSize>1){
@@ -229,7 +242,7 @@ function detailOpen(category,id){
 			 return false;
 		 } 
 	 }
-	
+	//핫리스트 삭제
 	 function hotUpdate(hotListSize, per_id,url){
 		 alert(url);
 		 if(hotListSize<4){
@@ -240,6 +253,21 @@ function detailOpen(category,id){
 			 return false;
 		 } 
 	 }
+	//이벤트 삭제
+	function eventDelete(notice_num,url){
+		 alert(url);
+		load('eventDelete?notice_num='+notice_num+'&url='+url);
+	 }
+	//이벤트 수정상세
+	function eventUpdate(notice_num,url){
+		 alert(url);
+		load('eventUpdate?notice_num='+notice_num+'&url='+url);
+	 }
+	//이벤트 수정
+	/* function eventUpdateList(contents,notice_num,url){
+		 alert(url);
+		load('eventUpdateList?notice_num='+notice_num+'&contents='+contents+'&notice_title='+notice_title+'&url='+url);
+	 } */
 	 /* 영민이 제작 */
 	 /* 태성이 제작 */
 	 function Cfirst_grade(url,category,id,first_grade){
@@ -258,7 +286,17 @@ function Sstep(url,category,disc_code,disc_step){
 	var params="disc_code="+disc_code+"&category="+category+"&disc_step="+disc_step;
  	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
 }
- 
+///////////////////태성 01/22 start/////////////////////////////
+//관람/상품 후기 삭제 
+function commentDelete(notice_num,url){
+if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+		load("commentDelete?notice_num="+notice_num+"&url="+url);
+	}else{   //취소
+	    return;
+	}	
+location.reload();
+}
+///////////////////태성 01/22 end///////////////////////////// 
 	 
 </script>
 
@@ -327,13 +365,13 @@ function Sstep(url,category,disc_code,disc_step){
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">게시판관리<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">공지사항 게시판관리</a></li>
+            <li><a onclick="load('eventHost');">공지사항 게시판관리</a></li>
             <li><a href="#">SNS후기 게시판관리</a></li>
             <li class="divider"></li>
             <li><a href="#">QnA 게시판관리</a></li>
             <li><a href="#">1 : 1 게시판관리</a></li>
             <li class="divider"></li>
-            <li><a href="#">관람/상품후기 게시판관리</a></li>
+            <li><a onclick="load('commentManager');">관람/상품후기 게시판관리</a></li>
             <li class="divider"></li>
             <li><a href="#">영상 게시판관리</a></li>
             <li><a href="#">사진 게시판관리</a></li>

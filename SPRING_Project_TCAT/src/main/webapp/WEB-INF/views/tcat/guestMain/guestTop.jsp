@@ -162,13 +162,15 @@ function ajaxSubmit(url){   /* AJAX submit */
 
 function load(url){
 	 
-	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );	
+	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );
+	 window.location.hash = '#url' + url;
 	 
 }
 
-
-
-
+//공연 상세페이지 onclick시
+function contentPage(per_id){
+	load('contentMain?per_id='+per_id);
+}
 </script>
 </head>
 <body>
@@ -201,7 +203,8 @@ function load(url){
 				  <li><a onclick="load('qnaBoardList');">고객센터</a></li>
 				  <li><a href="#">모바일APP</a></li>  
 				  <li><a onclick="load('commentBoard');">후기</a></li>  
-				  <li><a onclick="load('intro');">회사</a></li>  
+				  <li><a onclick="load('intro');">회사</a></li>
+				  <li><a onclick="load('eventMain');">이벤트</a></li>  
 				</ol> 
 			</div>
 			<div class="col-md-2">

@@ -32,25 +32,31 @@
 <!--마이페이지 메인  -->
 <div class="row h25"></div>
 
-<div class="row">
-	<div class="col-md-1"></div>
-	<!--사이드 메뉴  -->
-	<div class="col-md-2 ">
-		<div class="sidebar-nav disInline w100p floatR">
-			<div class="well borderMenu disInline w100p"
-				style="background-color: white; padding: 8px 0;">
-				<ul class="nav nav-list  w100p ">
-					<li><a onclick="myPageLoad('myPageMain');" class="000000"><b>마이페이지</b></a>
-						<hr class="w90p" style="margin: 0 auto;"></li>
-					<li><a onclick="myPageLoad('myModifyForm');" class="000000">회원정보수정</a></li>
-					<li><a onclick="myPageLoad('memberPoint');" class="000000">회원등급포인트관리</a></li>
-				</ul>
+
+<!--메뉴  -->
+<div class="col-md-12">
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-2 ">
+			<div class="sidebar-nav disInline w100p">
+				<!--사이드 메뉴  -->
+				<div class="sidebar-nav disInline w100p ">
+					<div class="well borderMenu disInline w100p floatR"
+						style="background-color: white; padding: 8px 0;">
+						<ul class="nav nav-list  w100p ">
+							<li><a onclick="myPageLoad('myPageMain');" class="000000"><b>마이페이지</b></a>
+								<hr class="w90p" style="margin: 0 auto;"></li>
+							<li><a onclick="myPageLoad('myModifyForm');" class="000000">회원정보수정</a></li>
+							<li><a onclick="myPageLoad('memberPoint');" class="000000">회원등급포인트관리</a></li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
+		<!--뿌려주는 div-->
+		<div class="col-md-8" id="myPageResult"></div>
+		<div class="col-md-1"></div>
 	</div>
-	<!--  뿌리는 div  -->
-	<div class="col-md-7" id="myPageResult"></div>
-	<div class="col-md-2"></div>
-</div>
 
+</div>
 </html>

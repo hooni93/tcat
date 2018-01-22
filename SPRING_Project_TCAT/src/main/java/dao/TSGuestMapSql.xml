@@ -21,4 +21,56 @@
 		select * from member where member_id=#{id}
 	</select>
 	
+	<!-- 관람후기 갯수  -->
+	<select id="comment" resultType="int">
+	 select count(*) from notice where notice_div = 4
+	 	<choose>
+	 		<when test="sDev==1">
+				AND notice_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND notice_title LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND contents LIKE '%${keyword}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	<!-- 관람후기 출력 -->
+	<select id="commentBoard" resultType="spring.project.tcat.VO.TcatBoardVO">
+	 select * 
+	 from(select no.notice_num,per.perf_title,per.perf_image, no.contents, no.member_id, no.writedate,ROWNUM rnum
+	 from notice no, performanceInfo per 
+	 where no.per_id = per.per_id and no.notice_div = 4
+	 
+	<choose>
+			<when test="sDev==1">
+				AND notice_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND perf_title LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND contents LIKE '%${keyword}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		order by writedate desc 
+		)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+		</select>
+		
+		<insert id="commentWrite" parameterType="spring.project.tcat.VO.TcatBoardVO">
+			insert into notice(notice_num,writedate,contents,notice_div,member_id,per_id) 
+			values(Notice_SEQ.nextval,sysdate,#{contents},4,#{member_id},1)
+		</insert>
    </mapper>

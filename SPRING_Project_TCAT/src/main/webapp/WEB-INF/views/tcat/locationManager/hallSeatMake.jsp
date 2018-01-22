@@ -122,7 +122,7 @@
 		for(int i=0;i<=seatRow;i++){
 			for(int j=0;j<=seatColumn;j++){ %>
 				
-				&nbsp;<input type="checkbox" name="seatCheck" class="w20 h20" value="<%=i%>-<%=j%>" ><%=i %>-<%=j %>&nbsp;
+				&nbsp;<input type="checkbox" name="seatCheck" class="w20 h20" value="<%=i%>-<%=j%>" ><%=i%>-<%=j%>&nbsp;
 				
 	<%		}%>
 			<br>

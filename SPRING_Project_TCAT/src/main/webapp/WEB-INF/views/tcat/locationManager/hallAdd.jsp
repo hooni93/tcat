@@ -113,6 +113,7 @@
 		<script type="text/javascript">
 			alert("공연장 등록 성공하였습니다.");
 			 $( "#result" ).load( "${pageContext.request.contextPath}/hostMain" );
+			 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side" );
 		</script>
 	</c:if>
 	<c:if test="${cnt==0}">
@@ -129,7 +130,6 @@
 				공연장 등록
 				</h3>
 			</div>
-			<div class="col-md-6 col-md-offset-3">
 				<form action="" role="form" method="post" id="hallAddForm"
 					name="hallAddForm">
 					<!-- 공연장이름 -------------------------------------------------------------------------------- -->
@@ -160,13 +160,20 @@
 						<span style="display: none; color: red;" id="addrError">필수입력입니다.</span>
 				
 					<!-- 주소검색 -------------------------------------------------------------------------------- -->
-					<div class="form-group">
+					<div class="form-group c">
 					<label for="seatrow"><span style="color:red;">*</span> 좌석생성 </label><br>
 							
 						행 : <input type="number" name="seatrow" id="seatrow">
 						열 : <input type="number" name="seatcolumn" id="seatcolumn">
+						<div class="w100p h1"></div>
 						<input type="button" class="btn" value="좌석생성" onclick="seatMake();">
-						<br>
+							<input type="button" class="btn" value="좌석확인" onclick="divSeatload();">
+						<div class="w100p h1"></div>
+						<div class="c">
+
+							<div id="seat_result1"></div>
+
+						</div>	
 						
 						<div class="row">
 							<div class="col-md-1"></div>
@@ -193,7 +200,6 @@
 					</div>
 				</form>
 			</div>
-		</div>
 	<div class="col-md-1"></div>
 </div>
 

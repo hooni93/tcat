@@ -21,7 +21,6 @@ public class TSGuestController {
 	@RequestMapping("myModifyForm")
 	public String myModifyForm(HttpServletRequest req, Model model) {
 		System.out.println("myModifyForm");
-
 		return "tcat/memberMyPage/myModifyForm";
 	}
 
@@ -60,7 +59,6 @@ public class TSGuestController {
 	@RequestMapping("intro")
 	public String intro(HttpServletRequest req, Model model) {
 		System.out.println("intro");
-
 		return "tcat/introCompany/intro";
 	}
 
@@ -68,7 +66,6 @@ public class TSGuestController {
 	@RequestMapping("introCompany")
 	public String introCompany(HttpServletRequest req, Model model) {
 		System.out.println("introCompany");
-
 		return "tcat/introCompany/introCompany";
 	}
 
@@ -76,7 +73,6 @@ public class TSGuestController {
 	@RequestMapping("introPath")
 	public String introPath(HttpServletRequest req, Model model) {
 		System.out.println("introPath");
-
 		return "tcat/introCompany/introPath";
 	}
 
@@ -93,11 +89,20 @@ public class TSGuestController {
 	@RequestMapping("commentBoard")
 	public String commentBoard(HttpServletRequest req, Model model) {
 		System.out.println("commentBoard");
-		
+		TSGService.CommentList(req,model);
 		
 		return "tcat/commentBoard/commentBoard";
 	}
-	
+	//게스트 관람/후기 한줄평 쓰기
+		@RequestMapping("commentWrite")
+		public String commentWrite(HttpServletRequest req,Model model) {
+			
+		System.out.println("commentWrite");
+		
+		TSGService.commentWrite(req, model);
+		
+		return "tcat/commentBoard/commentBoard";
+		}
 	
 	
 }
