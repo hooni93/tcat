@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
+import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 import spring.project.tcat.config.Configuration;
 
@@ -93,6 +94,52 @@ public class JMHGuestDAOImp implements JMHGuestDAO {
 	public int getPerfListCnt(Map<String, Object> map) {
 		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
 		int cnt = dao.getPerfListCnt(map);
+		return cnt;
+	}
+
+	// 스토어 리스트
+	public ArrayList<TcatPerDiscVO> getStoreList(Map<String, Object> map) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<TcatPerDiscVO> discs = dao.getStoreList(map);
+		return discs;
+	}
+
+	// 스토어 갯수
+	public int getStoreListCnt(Map<String, Object> map) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		int cnt = dao.getStoreListCnt(map);
+		return cnt;
+	}
+
+	// getContent 공연 상세정보 가져오기
+	public TcatPerformanceVO getContent(int per_id) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		TcatPerformanceVO perf = dao.getContent(per_id);
+		return perf;
+	}
+
+	// 로그인 후 상세페이지 조회시 조회수 업
+	public void upHits(int per_id) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		dao.upHits(per_id);
+	}
+
+	// addWishList 위시리스트 추가
+	public void addWishList(Map<String, Object> map) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		dao.addWishList(map);
+	}
+
+	// delWishList
+	public void delWishList(Map<String, Object> map) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		dao.delWishList(map);
+	}
+
+	// getWishListIn 위시리스트 존배여부
+	public int getWishListIn(Map<String, Object> map) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		int cnt = dao.getWishListIn(map);
 		return cnt;
 	}
 }

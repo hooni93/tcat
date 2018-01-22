@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<<<<<<< HEAD
+=======
 		<div class="row baaaaaa">
 	
 		<div class="col-md-1"></div>
@@ -109,6 +111,7 @@
 }%>
 		</div> 
 	</div>
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 
 </body>
 </html>

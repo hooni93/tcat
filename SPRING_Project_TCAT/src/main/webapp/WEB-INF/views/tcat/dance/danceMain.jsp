@@ -19,8 +19,8 @@
 				  <a href="#" class="list-group-item disabled">
 				    <span class="text-warning">무용/발레</span>
 				  </a>
-				  <a href="#" class="list-group-item">무용</a>
-				  <a href="#" class="list-group-item">발레</a>
+				  <a onclick="load('danceList?sDev=무용&order=startDate');" class="list-group-item">무용</a>
+				  <a onclick="load('danceList?sDev=발레&order=startDate');" class="list-group-item">발레</a>
 				</div>
 			</div>
 			<div class="col-md-7 thumbnail mr15 h300">

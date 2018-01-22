@@ -90,11 +90,78 @@ public class JMHGuestController {
 	}
 
 	////////////////////////////////////////////////////////////////////
-	// licenseMusical 뮤지컬-라이센스
-	@RequestMapping("licenseMusical")
-	public String licenseMusical(HttpServletRequest req, Model model) {
-		System.out.println("licenseMusical");
+	// musicalList 뮤지컬 리스트
+	@RequestMapping("musicalList")
+	public String musicalList(HttpServletRequest req, Model model) {
+		System.out.println("musicalList");
 		mhService.getPerfList(req, model);
-		return "tcat/musical/licenseMusical";
+		return "tcat/musical/musicalList";
 	}
+
+	// classicList 클래식 리스트
+	@RequestMapping("classicList")
+	public String classicList(HttpServletRequest req, Model model) {
+		System.out.println("classicList");
+		mhService.getPerfList(req, model);
+		return "tcat/classic/classicList";
+	}
+
+	// 콘서트 리스트
+	@RequestMapping("concertList")
+	public String concertList(HttpServletRequest req, Model model) {
+		System.out.println("concertList");
+		mhService.getPerfList(req, model);
+		return "tcat/concert/concertList";
+	}
+
+	// 연극 리스트
+	@RequestMapping("dramaList")
+	public String dramaList(HttpServletRequest req, Model model) {
+		System.out.println("dramaList");
+		mhService.getPerfList(req, model);
+		return "tcat/drama/dramaList";
+	}
+
+	// 무용 발레 리스트
+	@RequestMapping("danceList")
+	public String danceList(HttpServletRequest req, Model model) {
+		System.out.println("danceList");
+		mhService.getPerfList(req, model);
+		return "tcat/dance/danceList";
+	}
+
+	// 스토어 리스트
+	@RequestMapping("storeList")
+	public String storeList(HttpServletRequest req, Model model) {
+		System.out.println("storeList");
+		mhService.getStoreList(req, model);
+		return "tcat/store/storeList";
+	}
+	
+	//상세페이지
+	@RequestMapping("contentMain")
+	public String contentMain(HttpServletRequest req, Model model) {
+		System.out.println("contentMain");
+		//해당 공연 위시리스트 여부 가져오기
+		mhService.getWishListIn(req, model);
+		//상품정보 가져오기
+		mhService.getContent(req, model);
+		return "tcat/content/contentMain";
+	}
+	
+	//위시리스트 추가 addWishList
+	@RequestMapping("addWishList")
+	public String addWishList(HttpServletRequest req, Model model) {
+		System.out.println("addWishList");
+		mhService.addWishList(req, model);
+		return "tcat/content/contentMain";
+	}
+	//delWishList 위시리스트 삭제
+	@RequestMapping("delWishList")
+	public String delWishList(HttpServletRequest req, Model model) {
+		System.out.println("delWishList");
+		mhService.delWishList(req, model);
+		return "tcat/content/contentMain";
+	}
+	
 }
