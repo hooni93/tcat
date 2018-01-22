@@ -8,8 +8,6 @@
 <title>Insert title here</title>
 
 <script type="text/javascript">
-	
-
 
 
   //ajax
@@ -108,36 +106,36 @@
 </script>
 </head>
 <body>
- 
 	<c:if test="${cnt==1}">
 		<script type="text/javascript">
-			alert("공연장 등록 성공하였습니다.");
-			 $( "#result" ).load( "${pageContext.request.contextPath}/hostMain" );
-			 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side" );
+			alert("공연장 수정 성공하였습니다.");
+			 $( "#result" ).load( "${pageContext.request.contextPath}/hallModify" );
 		</script>
 	</c:if>
 	<c:if test="${cnt==0}">
 		<script type="text/javascript">
-			alert("공연장 등록 실패!");
+			alert("공연장 수정 실패!");
 		</script>
 	</c:if> 
 	
 <div class="row">	
 	<div class="col-md-1"></div>
-		<div class="col-md-10">		
+		<div class="col-md-10 c">		
 			<div class="page-header">
 				<h3>
-				공연장 등록
+				공연장 수정
 				</h3>
 			</div>
 				<form action="" role="form" method="post" id="hallAddForm"
 					name="hallAddForm">
 					<!-- 공연장이름 -------------------------------------------------------------------------------- -->
+					<input type="hidden" name="hall_id" value="${vo.hall_id}">
+					<input type="hidden" name="place_num" value="${vo.place_num}">
 					<div class="form-group">
 						<label for="hall_name"><span style="color:red;">*</span> 공연장 이름 </label>
 						<div>
 							<input type="text" class="form-control" id="hall_name" name="hall_name"
-								placeholder="공연장 이름">
+								value="${vo.hall_name }">
 						</div>
 						<div style="display:inline">
 							<span style="display: none; color: red;" id="hallError">필수입력입니다.</span>
@@ -149,59 +147,64 @@
 						<label for="sample6_postcode"><span style="color:red;">*</span> 주소 </label>
 						<div class="form-group">
 						<div class="input-group">
-						<input type="text" class="form-control" id="sample6_postcode" name="postNum" placeholder="우편번호">
+						<input type="text" class="form-control" id="sample6_postcode" name="postNum" 	value="${vo.postNum }">
 						<span class="input-group-btn">
 						<input type="button" class="btn btn-success" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 						</span>
 						</div>
-						<input type="text" class="form-control" id="sample6_address" name="addr" placeholder="주소">
-						<input type="text" class="form-control" id="sample6_address2" name="detailAddr" placeholder="상세주소">
+						<input type="text" class="form-control" id="sample6_address" name="addr" value="${vo.province } ${vo.city}">
+						<input type="text" class="form-control" id="sample6_address2" name="detailAddr" value="${vo.address}">
 						</div>
 						<span style="display: none; color: red;" id="addrError">필수입력입니다.</span>
 				
 					<!-- 주소검색 -------------------------------------------------------------------------------- -->
 					<div class="form-group c">
 					<label for="seatrow"><span style="color:red;">*</span> 좌석생성 </label><br>
-							
-						행 : <input type="number" name="seatrow" id="seatrow">
-						열 : <input type="number" name="seatcolumn" id="seatcolumn">
+							<c:set var="seatArr" value="${fn:split(vo.seat_line,'_') }"/>
+						행 : <input type="number" name="seatrow" id="seatrow" value="${seatArr[0]}">
+						열 : <input type="number" name="seatcolumn" id="seatcolumn" value="${seatArr[1]}">
 						<div class="w100p h1"></div>
 						<input type="button" class="btn" value="좌석생성" onclick="seatMake();">
-							<input type="button" class="btn" value="좌석확인" onclick="divSeatload();">
+						<input type="button" class="btn" value="좌석확인" onclick="divSeatload();">
 						<div class="w100p h1"></div>
-						<div class="c">
+					
+					<div class="c">
 
 							<div id="seat_result1"></div>
 
-						</div>	
+					</div>
 						
 						<div class="row">
 							<div class="col-md-1"></div>
 							<div class="col-md-10">	
-							<span>VIPseat:</span><input type="text" name="VIPseat" class="form-control">
-							<span>Rseat:</span><input type="text" name="Rseat" class="form-control">
-							<span>Sseat:</span><input type="text" name="Sseat" class="form-control">
-							<span>Aseat:</span><input type="text" name="Aseat" class="form-control">
-							<span>Bseat:</span><input type="text" name="Bseat" class="form-control">
+							<span>VIPseat:</span><input type="text" name="VIPseat" class="form-control" value="${vo.getVIP_seat()}">
+							<span>Rseat:</span><input type="text" name="Rseat" class="form-control"  value="${vo.getR_seat()}">
+							<span>Sseat:</span><input type="text" name="Sseat" class="form-control"  value="${vo.getS_seat()}">
+							<span>Aseat:</span><input type="text" name="Aseat" class="form-control"  value="${vo.getA_seat()}">
+							<span>Bseat:</span><input type="text" name="Bseat" class="form-control"  value="${vo.getB_seat()}">
 							</div>
 						</div>
 					</div>
 					<span style="display: none; color: red;" id="seatError">필수입력입니다.</span>
+					
 
 
 
 					<div class="form-group text-center">
-						<button type="button" class="btn btn-info" id="Imember" onclick="return hallSubmit('insertHall');">
-							공연장등록<i class="fa fa-check spaceLeft"></i>
+						<button type="button" class="btn btn-info" id="Imember" onclick="return hallSubmit('hallModifyUpdate');">
+							공연장수정<i class="fa fa-check spaceLeft"></i>
 						</button>
-						<button type="submit" class="btn btn-warning">
-							등록취소<i class="fa fa-times spaceLeft"></i>
+						<button type="button" class="btn btn-warning" onclick="load('hallModify');">
+							수정취소<i class="fa fa-times spaceLeft"></i>
 						</button>
 					</div>
 				</form>
-			</div>
+			
+		</div>
 	<div class="col-md-1"></div>
 </div>
+
+
 
 
 </body>

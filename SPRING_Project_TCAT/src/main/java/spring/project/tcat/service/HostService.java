@@ -17,6 +17,17 @@ public interface HostService {
 	public void memberManagerSerchList(HttpServletRequest req,Model model);
 	//공연장 인서트
 	public void insertHall(HttpServletRequest req,Model model);
+	//공연장 삭제리스트
+	public void hallDelete(HttpServletRequest req,Model model);
+	//공연장 검색
+	public void hallSerchList(HttpServletRequest req, Model model);
+	//공연장 삭제
+	public void hallDeletePro(HttpServletRequest req, Model model);
+	//공연장 수정 데이터 가져오기
+	public void hallModifyDB(HttpServletRequest req, Model model);
+	//공연장 수정 데이터 업데이트
+	public void hallModifyUpdate(HttpServletRequest req, Model model);
+	
 
 	//////////////////////////////////////18.01.16 명훈//////////////////////////////////////////////////
 	//상품목록 나열
@@ -156,6 +167,10 @@ public interface HostService {
 	///////////////////////  동금 1/15 end ///////////////////////////
 	
 	
-	
-	
+	///////////////////////  태성 1/21 start ///////////////////////////
+	//관람/상품 후기 관리 게시판 목록
+	public void commentList(HttpServletRequest req, Model model);
+	//관람/상품 후기 삭제
+	public void commentDelete(HttpServletRequest req, Model model);
+	///////////////////////  태성 1/21 end ///////////////////////////
 }

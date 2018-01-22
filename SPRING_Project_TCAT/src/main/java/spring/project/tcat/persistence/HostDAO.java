@@ -8,6 +8,7 @@ import spring.project.tcat.VO.HostVO;
 import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.ProductRankVO;
 import spring.project.tcat.VO.SelectHellInfoVO;
+import spring.project.tcat.VO.TcatBoardVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
@@ -35,7 +36,28 @@ public interface HostDAO {
 	public int placeInsert(TcatPerformanceVO vo);
 	//hall 인서트
 	public int insertHall(TcatPerformanceVO vo);
-
+	//공연장 삭제 리스트 숫자
+	public int hallDeleteCnt();
+	//공연장 삭제 리스트
+	public ArrayList<TcatPerformanceVO> hallDelete(Map<String,Object> map);
+	//공연장서치
+	public ArrayList<TcatPerformanceVO> hallSerchList(Map<String,Object> map);
+	//공연장 서치 숫자
+	public int hallSerchListCnt(Map<String,Object> map);
+	//플레이스 삭제
+	public int placeDeletePro(Map<String,Object> map);
+	//공연장 삭제
+	public int hallDeletePro(Map<String,Object> map);
+	//공연장 수정 데이터 가져오기
+	public TcatPerformanceVO hallModifyDB(String hall_id);
+	//플레이스 업데이트
+	public int placeUpdate(TcatPerformanceVO vo);
+	//공연장 업데이트
+	public int hallModifyUpdate(TcatPerformanceVO vo);
+	
+	
+	
+	
 
 	//////////////////////////////////////18.01.16 명훈//////////////////////////////////////////////////
 	//출력할 공연상품 갯수 가져오기
@@ -248,6 +270,14 @@ public interface HostDAO {
 	
 	///////////////////////  동금 1/15 end ///////////////////////////
 		
-	
-	
+///////////////////////  태성 1/21 start ///////////////////////////
+	// 관람/상품 후기 개수
+	public int commentCnt(Map<String, Object>map);
+	// 관람/상품 후기 목록
+	public ArrayList<TcatBoardVO> commentList(Map<String, Object> map);
+	// 관람/상품후기 삭제
+	public int commentDel(int notice_num);
+/*	// 게스트 관람/상품후기 등록
+	public int commentWrite(TcatBoardVO vo);*/
+///////////////////////  태성 1/21 end ///////////////////////////
 }
