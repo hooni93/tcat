@@ -186,8 +186,8 @@ public class JMHGuestServiceImp implements JMHGuestService {
 		map.put("place", place);
 
 		// 갯수
-		int perfCnt = mhDAO.getPerfListCnt(map);
-		System.out.println("해당 공연 갯수: " + perfCnt);
+		productCnt = mhDAO.getPerfListCnt(map);
+		System.out.println("해당 공연 갯수: " + productCnt);
 
 		// 현재 보고있는 페이지
 		pageNum = req.getParameter("pageNum");
@@ -245,11 +245,8 @@ public class JMHGuestServiceImp implements JMHGuestService {
 			model.addAttribute("currentPage", currentPage);// 현재 페이지
 		}
 		// 페이지 카테고리 정보
-		//model.addAttribute("disc_buyStep", disc_buyStep); // 대분류, 카테고리 전송
-		//model.addAttribute("mDev", mDev); // 소분류
 		model.addAttribute("sDev", sDev); // 대분류
-		//model.addAttribute("keyword", keyword); // 검색어
-		//model.addAttribute("searchCondition", searchCondition);
-		//System.out.println(disc_buyStep + "/" + mDev + "/" + sDev +"/"+searchCondition+"/"+disc_buyStep+"/"+keyword);
+		model.addAttribute("order", order); // 정렬
+		model.addAttribute("place", place);	//지역
 	}
 }

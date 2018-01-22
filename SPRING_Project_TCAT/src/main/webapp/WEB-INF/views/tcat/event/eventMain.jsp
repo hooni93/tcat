@@ -18,39 +18,43 @@
 	border: 3px solid #f2ecdc;
 }
 </style>
+
 <script type="text/javascript">
 	$(document).ready(function() {
-		myPageLoad('myPageMain');
+		eventLoad('eventList');
 	})
 	//화면 뿌리기
-	function myPageLoad(url) {
-		$("#myPageResult").load(url);
+	function eventLoad(url,notice_num) {
+		$("#eventResult").load(url);
 	}
+	
 </script>
 
 </head>
-<!--마이페이지 메인  -->
-<div class="row h25"></div>
+<!--이벤트메인  -->
 
-<div class="row">
-	<div class="col-md-1"></div>
-	<!--사이드 메뉴  -->
-	<div class="col-md-2 ">
-		<div class="sidebar-nav disInline w100p floatR">
+<!--메뉴  -->
+<div class="col-md-12">
+
+	<div class="col-md-3 ">
+		<div class="sidebar-nav disInline w70p">
 			<div class="well borderMenu disInline w100p"
 				style="background-color: white; padding: 8px 0;">
 				<ul class="nav nav-list  w100p ">
-					<li><a onclick="myPageLoad('myPageMain');" class="000000"><b>마이페이지</b></a>
-						<hr class="w90p" style="margin: 0 auto;"></li>
-					<li><a onclick="myPageLoad('myModifyForm');" class="000000">회원정보수정</a></li>
-					<li><a onclick="myPageLoad('memberPoint');" class="000000">회원등급포인트관리</a></li>
+				
+					<li><a onclick="eventLoad('eventList');" class="000000">이벤트소개<b></b></a>
+					
+					
 				</ul>
 			</div>
+
 		</div>
+
+
+		</div>
+<!--뿌려주는 div-->
+	<div class="col-md-8" id="eventResult"></div>
 	</div>
-	<!--  뿌리는 div  -->
-	<div class="col-md-7" id="myPageResult"></div>
-	<div class="col-md-2"></div>
-</div>
+
 
 </html>
