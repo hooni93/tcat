@@ -3,6 +3,7 @@ package spring.project.tcat.service;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+
+import spring.project.tcat.VO.TcatBoardVO;
 import spring.project.tcat.persistence.YMGuestDAOImpl;
 @Service
 public class YMGuestServiceImp implements YMGuestService {
@@ -114,6 +117,70 @@ public class YMGuestServiceImp implements YMGuestService {
 			}
 		
 		}
+		
+	}
+	//이벤트
+	@Override
+	public void eventGuest(HttpServletRequest req, Model model) {
+		int cnt=0; //글갯수
+		int pageSize=3; //한 페이지당 출력할 글 갯수
+		int pageBlock= 2; //한 블럭당 페이지 갯수
+		
+		int start=0; //현재 페이지 글시작번호
+		int end=0; //현재 페이지 글 마지막번호
+		String pageNum=null; //페이지 번호
+		int currentPage = 0; //현재 페이지
+		
+		int pageCount = 0; //페이지 갯수
+		int startPage= 0;	//시작 페이지
+		int endPage=0;	//마지막 페이지
+		Map<String,Object> map=new HashMap<String, Object>();
+		cnt=YMDao.eventCnt();
+		pageNum=req.getParameter("pageNum");
+		if(pageNum == null) {
+			pageNum ="1";
+		}
+		currentPage=(Integer.parseInt(pageNum));
+		pageCount = (cnt/ pageSize)+(cnt% pageSize > 0 ? 1: 0);  //페이지 갯수 + 나머지
+ 		start=(currentPage -1)* pageSize+1;
+ 		end= start + pageSize -1;
+ 		if(end > cnt) end=cnt;
+		System.out.println("cnt===="+cnt);
+		
+		if(cnt>0) {
+			map.put("start", start);
+ 			map.put("end", end);
+		
+			ArrayList<TcatBoardVO> dtos =YMDao.eventGuestList(map);
+			
+			System.out.println("dtos:"+dtos.size());
+			model.addAttribute("dtos", dtos);
+		}
+	
+		startPage=(currentPage/pageBlock)* pageBlock +1; // (5/3)* 3+ 1= 4
+		if(currentPage % pageBlock ==0) startPage -= pageBlock; // (5%3)==0
+		endPage = startPage + pageBlock -1; // 4+3 -1 =6
+		if(endPage> pageCount) endPage = pageCount;
+		
+		model.addAttribute("cnt",cnt);
+ 		model.addAttribute("pageNum",pageNum);
+ 		
+ 		if(cnt>0) {
+ 			model.addAttribute("startPage",startPage);
+ 			model.addAttribute("endPage",endPage);
+ 			model.addAttribute("pageBlock",pageBlock);
+ 			model.addAttribute("pageCount",pageCount);
+ 			model.addAttribute("currentPage",currentPage);
+ 		}
+	}
+	//이벤트상세
+	@Override
+	public void eventForm(HttpServletRequest req, Model model) {
+		int num=Integer.parseInt(req.getParameter("notice_num"));
+		System.out.println("num======"+num);
+		ArrayList<TcatBoardVO> dto=YMDao.eventGuestForm(num);
+		System.out.println("dto:"+dto.size());
+		model.addAttribute("dto", dto);
 		
 	}
 }
