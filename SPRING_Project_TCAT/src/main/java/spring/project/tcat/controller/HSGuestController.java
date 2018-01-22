@@ -55,6 +55,8 @@ public class HSGuestController {
 	public String Ticketing(HttpServletRequest req, Model model) {
 		System.out.println("Ticketing");
 		
+		/*HSGservice.Ticketing(req,model);*/
+		
 		return "tcat/Ticketing/Ticketing";
 	}
 
@@ -62,6 +64,8 @@ public class HSGuestController {
 	@RequestMapping("chooseDay")
 	public String chooseDay(HttpServletRequest req, Model model) {
 		System.out.println("chooseDay");
+		
+		HSGservice.payList(req,model);
 		
 		return "tcat/Ticketing/chooseDay";
 	}
@@ -120,7 +124,27 @@ public class HSGuestController {
 		
 		return "tcat/purchase/cart";
 	}
-		
 	
+	//장바구니 리스트 가져오기
+	@RequestMapping("storePay")
+	public String storePay(HttpServletRequest req, Model model) {
+		System.out.println("storePay");
+		
+		HSGservice.cartList(req,model);
+		String addr=req.getParameter("addr");
+		req.setAttribute("addr", addr);
+		
+		return "tcat/purchase/storePay";
+	}
+	
+	//장바구니 리스트 가져오기
+	@RequestMapping("sussessPay")
+	public String sussessPay(HttpServletRequest req, Model model) {
+		System.out.println("sussessPay");
+		
+		HSGservice.sussessPay(req,model);
+		
+		return "tcat/purchase/payList";
+	}
 
 }

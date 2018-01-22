@@ -21,6 +21,7 @@
 
 		$( "#result" ).load( "${pageContext.request.contextPath}/daySearch?date="+date );
 		document.all.something2.focus();
+		document.all.something2.blur();
 	}
 	$(function() {
 
@@ -41,7 +42,7 @@
 </head>
 <body>
 		<div id="datepicker"></div>
-		<input type="text" name="something" onfocus="test()">
+		<input type="text"  name="something" onfocus="test()">
 		<input type="text" name="something2">
 <div class="thumbnail">
 

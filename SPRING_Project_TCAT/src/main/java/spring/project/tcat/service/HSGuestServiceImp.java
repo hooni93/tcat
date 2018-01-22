@@ -266,9 +266,11 @@ public class HSGuestServiceImp implements HSGuestService{
 		public void insertCart(HttpServletRequest req, Model model) {
 			String member_id=(String)req.getSession().getAttribute("login_id");
 			int disc_code=Integer.parseInt(req.getParameter("disc_code"));
+			int cart_count=Integer.parseInt(req.getParameter("cart_count"));
 			Map<String,Object> map=new HashMap<String,Object>();
 			map.put("member_id", member_id);
 			map.put("disc_code", disc_code);
+			map.put("cart_count", cart_count);
 			
 			int insertCart=0;
 			insertCart=HSDao.insertCart(map);
@@ -293,8 +295,8 @@ public class HSGuestServiceImp implements HSGuestService{
 			int endPage = 0; // 마지막 페이지
 			
 			// 글갯수 구하기
-			
-			cnt = HSDao.cartCnt();
+			String member_id=(String)req.getSession().getAttribute("login_id");
+			cnt = HSDao.cartCnt(member_id);
 			System.out.println("cnt:" + cnt);
 
 			pageNum = req.getParameter("pageNum");
@@ -336,6 +338,7 @@ public class HSGuestServiceImp implements HSGuestService{
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("start", start);
 				map.put("end", end);
+				map.put("member_id", member_id);
 				ArrayList<CartVO> dtos=HSDao.cartList(map);
 				
 				req.setAttribute("dtos", dtos);
@@ -362,6 +365,43 @@ public class HSGuestServiceImp implements HSGuestService{
 				req.setAttribute("currentPage", currentPage);// 현재 페이지
 			}
 
+		}
+
+		@Override
+		public void payList(HttpServletRequest req, Model model) {
+			int per_id=Integer.parseInt(req.getParameter("per_id"));
+			
+			TcatPerformanceVO vo=new TcatPerformanceVO();
+			vo=HSDao.payList(per_id);
+			req.setAttribute("vo", vo);
+		}
+
+		@Override
+		public void sussessPay(HttpServletRequest req, Model model) {
+			String member_id=(String)req.getSession().getAttribute("login_id");
+			String addrChange=null;
+			addrChange=req.getParameter("addrChange");
+			String member_addr=null;
+			String member_name=null;
+			String member_hp=null;
+			
+			ArrayList<CartVO> dtos=HSDao.cartListDtos(member_id);
+			if(addrChange.equals("1")) {
+				member_addr=req.getParameter("member_addr");
+				member_name=req.getParameter("member_name");
+				member_hp=req.getParameter("member_hp");
+			}else {
+				member_addr=dtos.get(0).getMember_addr();
+				member_name=dtos.get(0).getMember_name();
+				member_hp=dtos.get(0).getMember_hp();
+			}
+			Map<String,Object> map=new HashMap<String,Object>();
+			map.put("member_addr", member_addr);
+			map.put("member_name", member_name);
+			map.put("member_hp", member_hp);
+			
+			HSDao.insertdelevaryInfo(map);
+			/*int del_num=HSDao.maxdel_num();*/
 		}	
 	
 }

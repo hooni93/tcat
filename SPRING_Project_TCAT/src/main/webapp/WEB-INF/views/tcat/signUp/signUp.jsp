@@ -200,7 +200,7 @@
 					<input type="hidden" value="0" name="hiddenId">
 					<!-- 아이디 -------------------------------------------------------------------------------- -->
 					<div class="form-group">
-<<<<<<< HEAD
+
 						<label for="username"><span style="color:red;">*</span> 아이디 입력 </label>
 						<div class="input-group">
 							<input type="text" class="form-control" id="member_id" name="member_id"

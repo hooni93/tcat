@@ -197,6 +197,7 @@ function load(url){
 				  </li>
 				  <li><a href="#">예매확인/취소</a></li>
 				  <li><a href="#">위시리스트</a></li>
+				  <li><a onclick="load('cartList');">장바구니</a></li>
 				  <li><a onclick="load('qnaBoardList');">고객센터</a></li>
 				  <li><a href="#">모바일APP</a></li>  
 				  <li><a onclick="load('commentBoard');">후기</a></li>  

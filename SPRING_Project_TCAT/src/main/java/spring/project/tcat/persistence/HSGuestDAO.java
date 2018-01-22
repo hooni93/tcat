@@ -31,7 +31,13 @@ public interface HSGuestDAO {
 	//장바구니에 담기
 	public int insertCart(Map<String,Object> map);
 	//장바구니 리스트 갯수 가져오기
-	public int cartCnt();
+	public int cartCnt(String member_id);
 	//장바구니 리스트 가져오기
 	public ArrayList<CartVO> cartList(Map<String,Object> map);
+	//구매하는 고객의 장바구니 리스트에 담긴 목록 가져오기
+	public ArrayList<CartVO> cartListDtos(String member_id);
+	//배송정보 추가
+	public void insertdelevaryInfo(Map<String,Object> map);
+	//예매하려고 하는 공연정보 가져오기
+	public TcatPerformanceVO payList(int per_id);
 }

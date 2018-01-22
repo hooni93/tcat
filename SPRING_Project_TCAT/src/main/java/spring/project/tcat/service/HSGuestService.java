@@ -17,4 +17,9 @@ public interface HSGuestService {
 	public void insertCart(HttpServletRequest req,Model model);
 	//장바구니 리스트 가져오기
 	public void cartList(HttpServletRequest req,Model model);
+	//예매할 상세정보 가져오기
+	public void payList(HttpServletRequest req,Model model);
+	//스토어 구매
+	public void sussessPay(HttpServletRequest req,Model model);
+		
 }
