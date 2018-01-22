@@ -30,6 +30,17 @@ public class MoGuestServiceImp implements MoGuestService {
 		dtos=MGDao.hotList(category);
 		model.addAttribute("dtos", dtos);
 	}
+
+	@Override
+	public void ticketSeat(HttpServletRequest req, Model model) {
+		// TODO Auto-generated method stub
+		
+		
+		
+		
+	}
+	
+	
 	
 	
 }
