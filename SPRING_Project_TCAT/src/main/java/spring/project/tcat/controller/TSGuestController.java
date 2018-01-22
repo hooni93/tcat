@@ -21,7 +21,6 @@ public class TSGuestController {
 	@RequestMapping("myModifyForm")
 	public String myModifyForm(HttpServletRequest req, Model model) {
 		System.out.println("myModifyForm");
-		req.getSession().setAttribute("page", "myModifyForm");
 		return "tcat/memberMyPage/myModifyForm";
 	}
 
@@ -60,7 +59,6 @@ public class TSGuestController {
 	@RequestMapping("intro")
 	public String intro(HttpServletRequest req, Model model) {
 		System.out.println("intro");
-		req.getSession().setAttribute("page", "intro");
 		return "tcat/introCompany/intro";
 	}
 
@@ -68,7 +66,6 @@ public class TSGuestController {
 	@RequestMapping("introCompany")
 	public String introCompany(HttpServletRequest req, Model model) {
 		System.out.println("introCompany");
-		req.getSession().setAttribute("page", "introCompany");
 		return "tcat/introCompany/introCompany";
 	}
 
@@ -76,7 +73,6 @@ public class TSGuestController {
 	@RequestMapping("introPath")
 	public String introPath(HttpServletRequest req, Model model) {
 		System.out.println("introPath");
-		req.getSession().setAttribute("page", "introPath");
 		return "tcat/introCompany/introPath";
 	}
 
@@ -93,7 +89,6 @@ public class TSGuestController {
 	@RequestMapping("commentBoard")
 	public String commentBoard(HttpServletRequest req, Model model) {
 		System.out.println("commentBoard");
-		req.getSession().setAttribute("page", "commentBoard");
 		TSGService.CommentList(req,model);
 		
 		return "tcat/commentBoard/commentBoard";
