@@ -17,7 +17,7 @@ $(document).ready(function(){
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
 <body>
-<%-- 
+
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
@@ -41,7 +41,7 @@ $(document).ready(function(){
                                  <td>${vo.city}</td>
                                  <td>${vo.address}</td>
                                  <td>
-                                 <input type="button" onclick="load('sleepMemberPro?member_id=${vo.member_id}&reUrl=sleepMember&Hcnt=1')" value="휴면등록">
+                                 <input type="button" onclick="load('hallDeletePro?hall_id=${vo.hall_id}&place_num=${vo.place_num}')" value="공연장삭제">
                                  </td>  
                               </tr>
                            </c:forEach>
@@ -59,8 +59,8 @@ $(document).ready(function(){
 						<th><c:if test="${cnt > 0}">
 						<!-- 처음[◀◀] / 이전 블록[◀] -->
 						<c:if test="${startPage > pageBlock}">
-							<a onclick="load('hallDelete?Hcnt=1');">[◀◀]</a>
-							<a onclick="load('hallDelete?Hcnt=1&pageNum=${startPage - pageBlock}');">[◀]</a>
+							<a onclick="load('hallDelete');">[◀◀]</a>
+							<a onclick="load('hallDelete?pageNum=${startPage - pageBlock}');">[◀]</a>
 						</c:if>
 
 						<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -69,14 +69,14 @@ $(document).ready(function(){
 							</c:if>
 
 							<c:if test="${i != currentPage}">
-								<a onclick="load('hallDelete?Hcnt=1&pageNum=${i}');">[${i}]</a>
+								<a onclick="load('hallDelete?pageNum=${i}');">[${i}]</a>
 							</c:if>
 						</c:forEach>
 
 						<!-- 다음[▶] / 끝[▶▶] -->
 						<c:if test="${pageCount > endPage}">
-							<a onclick="load('hallDelete?Hcnt=1&pageNum=${startPage + pageBlock}');">[▶]</a>
-							<a onclick="load('hallDelete?Hcnt=1&pageNum=${pageCount}');">[▶▶]</a>
+							<a onclick="load('hallDelete?pageNum=${startPage + pageBlock}');">[▶]</a>
+							<a onclick="load('hallDelete?pageNum=${pageCount}');">[▶▶]</a>
 						</c:if>
 					</c:if></th>
 					</tr>
@@ -88,17 +88,13 @@ $(document).ready(function(){
 				</div>
 				 <div class="col-md-5">
 				 	   <form class="navbar-form navbar-right" role="search" id="ajaxSubmitForm" onsubmit="return false">
-				 	   <input type="hidden" name="Hcnt" value="1">
-				 	   <input type="hidden" name="reUrl" value="hallDelete">
 				 	   <input type="hidden" name="search" value="1">
                              <select class="m10 p5" name="sCnt">
-                            	 <option value="1">아이디</option>
-                            	 <option value="2">이름</option>
-                            	 <option value="3">이메일</option>
-                            	 <option value="4">성별</option>
-                            	 <option value="5">생년월일</option>
-                            	 <option value="6">연락처</option>
-                            	 <option value="7">등급</option>
+                            	 <option value="1">공연장이름</option>
+                            	 <option value="2">공연장코드</option>
+                            	 <option value="3">광역시/도</option>
+                            	 <option value="4">시/군/구</option>
+                            	 <option value="5">상세주소</option>
                           	</select>
                             <div class="form-group">
                                  <input type="text" class="form-control" placeholder="Search" name="keyword">
@@ -110,7 +106,7 @@ $(document).ready(function(){
 		
 	</div>
 
- --%>
+
 </body>
 </html>
 

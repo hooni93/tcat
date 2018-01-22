@@ -32,25 +32,46 @@
 <!--마이페이지 메인  -->
 <div class="row h25"></div>
 
+
+<!--메뉴  -->
+<!-- <div class="col-md-12">
+	<div class="col-md-3 "> -->
+		<div class="sidebar-nav disInline w70p">
+
 <div class="row">
 	<div class="col-md-1"></div>
 	<!--사이드 메뉴  -->
 	<div class="col-md-2 ">
 		<div class="sidebar-nav disInline w100p floatR">
-			<div class="well borderMenu disInline w100p"
-				style="background-color: white; padding: 8px 0;">
-				<ul class="nav nav-list  w100p ">
+
+			<div class="well borderMenu disInline w100p" style="background-color: white; padding: 8px 0;">
+					<ul class="nav nav-list  w100p ">
+						<li><a href="#" class="000000"><b>마이페이지</b></a>
+							<hr class="w90p" style="margin: 0 auto;"></li>
+						<li><a onclick="myPageLoad('myModifyForm');" class="000000">회원정보수정</a></li>
+						<li><a onclick="myPageLoad('memberPoint');" class="000000">회원등급포인트관리</a></li>
+					</ul>
+				<!-- <ul class="nav nav-list  w100p ">
 					<li><a onclick="myPageLoad('myPageMain');" class="000000"><b>마이페이지</b></a>
 						<hr class="w90p" style="margin: 0 auto;"></li>
 					<li><a onclick="myPageLoad('myModifyForm');" class="000000">회원정보수정</a></li>
 					<li><a onclick="myPageLoad('memberPoint');" class="000000">회원등급포인트관리</a></li>
-				</ul>
+				</ul> -->
+
 			</div>
 		</div>
 	</div>
-	<!--  뿌리는 div  -->
-	<div class="col-md-7" id="myPageResult"></div>
-	<div class="col-md-2"></div>
+	<!--뿌려주는 div-->
+	<div class="col-md-3"></div>
+<div class="col-md-8" id="myPageResult"></div>
+		
+
+<div class="col-md-3"></div>
+</div>
+
+
+
+
 </div>
 
 </html>

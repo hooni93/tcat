@@ -108,7 +108,79 @@
 		values( hallInfo_SEQ.nextval,#{hall_name},#{place_num},#{VIP_seat},#{R_seat},#{S_seat},#{A_seat},#{B_seat},#{seat_line})]]>
    </insert>
    
-  
+   <select id="hallDeleteCnt"  resultType="int">
+   	select count(*) from hallInfo h join place p on h.place_num=p.place_num
+   </select>
+   
+   <select id="hallDelete" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+   		<![CDATA[select * from ( select hall_id,hall_name,place_num, province,city,postNum,address, rownum rNum 
+   		 from (select  h.hall_id hall_id,h.hall_name hall_name,p.place_num place_num, p.province province,p.city city,p.postNum postNum,p.address address from hallInfo h join place p on h.place_num=p.place_num order by hall_id desc )
+   		) WHERE rNum >= #{start} AND rNum <= #{end}  ]]>
+   </select>
+   
+   <select id="hallSerchList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+   		select h.hall_id hall_id,h.hall_name hall_name,p.place_num place_num, p.province province,p.city city,p.postNum postNum,p.address address 
+   		 from hallInfo h join place p on h.place_num=p.place_num 
+     	<if test="sCnt==1">
+   			AND hall_name LIKE #{keyword}
+   		</if>
+   		<if test="sCnt==2">
+   			AND hall_id LIKE #{keyword}
+   		</if>
+   		<if test="sCnt==3">
+   			AND province LIKE #{keyword}
+   		</if>
+   		<if test="sCnt==4">
+   			AND city LIKE #{keyword}
+   		</if>
+   		<if test="sCnt==5">
+   			AND address LIKE #{keyword}
+   		</if>
+   </select>
+   
+   <select id="hallSerchListCnt" parameterType="java.util.Map" resultType="int">
+   		select count(*) 
+   		 from hallInfo h join place p on h.place_num=p.place_num 
+     	<if test="sCnt==1">
+   			AND hall_name LIKE #{keyword}
+   		</if>
+   		<if test="sCnt==2">
+   			AND hall_id LIKE #{keyword}
+   		</if>
+   		<if test="sCnt==3">
+   			AND province LIKE #{keyword}
+   		</if>
+   		<if test="sCnt==4">
+   			AND city LIKE #{keyword}
+   		</if>
+   		<if test="sCnt==5">
+   			AND address LIKE #{keyword}
+   		</if>
+   </select>
+   
+   <delete id="placeDeletePro" parameterType="java.util.Map">
+   		delete from place where place_num=#{place_num}
+   </delete>
+   <delete id="hallDeletePro" parameterType="java.util.Map">
+   		delete from hallInfo where place_num=#{hall_id}
+   </delete>
+   
+   <select id="hallModifyDB" parameterType="String" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+   		select  h.hall_id hall_id,h.hall_name hall_name,h.vip_seat vip_seat,h.r_seat r_seat,h.s_seat s_seat,h.a_seat a_seat,h.b_seat b_seat ,h.seat_line seat_line,p.place_num place_num, p.province province,p.city city,p.postNum postNum,p.address address 
+   		 from hallInfo h join place p ON h.place_num=p.place_num WHERE hall_id=#{hall_id}
+   </select>
+   
+   
+   <update id="placeUpdate" parameterType="spring.project.tcat.VO.TcatPerformanceVO">
+   		UPDATE place SET province=#{province}, city=#{city}, postNum=#{postNum}, address=#{address} WHERE place_num=#{place_num} 
+   </update>
+   
+   <update id="hallModifyUpdate" parameterType="spring.project.tcat.VO.TcatPerformanceVO">
+   		UPDATE hallinfo SET hall_name=#{hall_name}, VIP_seat=#{VIP_seat}, R_seat=#{R_seat}, S_seat=#{S_seat}, A_seat=#{A_seat}, B_seat=#{B_seat}, seat_line=#{seat_line} WHERE hall_id=#{hall_id} 
+   </update>
+   
+   
+
 <!--/////////////////////////////// 18.01.16 명훈 시작/////////////////////////////////////////////////-->
 	<!--출력할 공연상품 갯수 가져오기 -->
 	<select id="perProductCnt" resultType="int">
@@ -1391,6 +1463,60 @@
      
 <!--      18.01.17 동금 수정끝  -->
      
-     
+<!-- 18.01.21 태성 수정 시작 -->
+	<select id="commentCnt" resultType="int">
+	 select count(*) from notice where notice_div = 4
+	 	<choose>
+	 		<when test="sDev==1">
+				AND notice_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND notice_title LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND contents LIKE '%${keyword}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	
+	<!-- 관람후기 목록  -->
+	<select id="commentList" resultType="spring.project.tcat.VO.TcatBoardVO">
+	 select * 
+	 from(select no.notice_num,per.perf_title,no.notice_image, no.contents, no.member_id, no.writedate,ROWNUM rnum
+	 from notice no, performanceInfo per 
+	 where no.per_id = per.per_id and no.notice_div = 4
+	 
+	<choose>
+			<when test="sDev==1">
+				AND notice_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND perf_title LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND contents LIKE '%${keyword}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		order by writedate desc 
+		)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+		</select>
+		
+		<!-- 관람후기 삭제 -->
+		<delete id="commentDel" parameterType="int">
+		delete notice where notice_num=#{notice_num}	
+		</delete> 
+
+<!-- 18.01.21 태성 수정 끝 -->
    
    </mapper>

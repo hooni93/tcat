@@ -4,18 +4,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<title>>관람/상품 후기 게시판 관리</title>
 </head>
-<body onload="load('guestMain');">
-	<%@include file="guestTop.jsp" %>
-
-		<div class="row">
-			
-			<div class="col-md-12 bffffff" id="result"></div>
-			
+<body>
+<div class="row">
+		<div class="col-md-10">
+			<ul class="nav nav-pills nav-stacked">
+				<li class="b400040 h50"></li>
+				<li class="b400040"><a
+					onclick="#">>관람/상품 후기 게시판 관리</a></li>
+			</ul>
 		</div>
-
- 	<%@include file="guestFooter.jsp" %>
+	</div>
 </body>
 </html>

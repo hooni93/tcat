@@ -2,11 +2,13 @@ package spring.project.tcat.persistence;
 
 
 
+import java.util.ArrayList;
+
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-
+import spring.project.tcat.VO.TcatBoardVO;
 import spring.project.tcat.config.Configuration;
 
 @Repository
@@ -37,11 +39,44 @@ public class YMGuestDAOImpl implements YMGuestDAO{
 		return sRank;
 	}
 	//S등급 1년 구매
-		@Override
-		public int dayCnt1(Map<String, Object> map) {
-			int vRank=0;
-			YMGuestDAO dao= Configuration.getMapper(YMGuestDAO.class);
-			vRank=dao.dayCnt1(map);
-			return vRank;
-		}
+	@Override
+	public int dayCnt1(Map<String, Object> map) {
+		int vRank=0;
+		YMGuestDAO dao= Configuration.getMapper(YMGuestDAO.class);
+		vRank=dao.dayCnt1(map);
+		return vRank;
+	}
+	//이벤트갯수
+	@Override
+	public int eventCnt() {
+		int cnt=0;
+		YMGuestDAO dao= Configuration.getMapper(YMGuestDAO.class);
+		cnt=dao.eventCnt();
+		return cnt;
+	}
+	//이벤트
+	@Override
+	public ArrayList<TcatBoardVO> eventGuestList(Map<String,Object> map) {
+		ArrayList<TcatBoardVO> dtos = null;
+		YMGuestDAO dao= Configuration.getMapper(YMGuestDAO.class);
+		dtos=dao.eventGuestList(map);
+		return dtos;
+	}
+	//이벤트상세
+	@Override
+	public ArrayList<TcatBoardVO> eventGuestForm(int num) {
+		ArrayList<TcatBoardVO> dto = null;
+		YMGuestDAO dao= Configuration.getMapper(YMGuestDAO.class);
+		dto=dao.eventGuestForm(num);
+		return dto;
+	}
+	//이벤트삭제
+	@Override
+	public int eventDeleteCnt(int num) {
+		int cnt=0;
+		YMGuestDAO dao= Configuration.getMapper(YMGuestDAO.class);
+		cnt=dao.eventDeleteCnt(num);
+		return cnt;
+	}
+		
 }
