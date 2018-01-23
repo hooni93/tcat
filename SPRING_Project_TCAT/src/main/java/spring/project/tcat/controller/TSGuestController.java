@@ -93,16 +93,37 @@ public class TSGuestController {
 		
 		return "tcat/commentBoard/commentBoard";
 	}
-	//게스트 관람/후기 한줄평 쓰기
+
+		/*//게스트 관람/후기 목록
+		@RequestMapping("commentList")
+		public String commentList(HttpServletRequest req,Model model) {
+		System.out.println("commentList");
+		
+		TSGService.selectComment(req, model);
+		TSGService.commentWrite(req, model);	
+		
+		return "tcat/content/watchLatter";
+		}*/
+		
+		//게스트 관람/후기 목록
+		@RequestMapping("watchLatter")
+		public String watchLatter(HttpServletRequest req,Model model) {
+		System.out.println("watchLatter");
+		
+		TSGService.selectComment(req,model);
+		
+		return "tcat/content/watchLatter";
+		}
+		
+		//게스트 관람/후기 한줄평 쓰기
 		@RequestMapping("commentWrite")
 		public String commentWrite(HttpServletRequest req,Model model) {
-			
+		System.out.println("!!!!!!!!!____________________<<<<>>>>:"+req.getParameter("per_id"));
 		System.out.println("commentWrite");
 		
 		TSGService.commentWrite(req, model);
 		
-		return "tcat/commentBoard/commentBoard";
+		return "tcat/content/watchLatter";
 		}
-	
 	
 }

@@ -333,7 +333,7 @@
 						<input class="btn btn-danger btn-xl w80p" type="button"
 							value="결제취소" onclick="return buyCancel(${list.disc_num})">
 						<h2>
-							${list.disc_price }<small> 원 </small>
+							${list.disc_price*list.buy_count }<small> 원 </small>
 						</h2>
 					</div>
 				</c:forEach>
@@ -378,7 +378,7 @@
 						<input class="btn btn-danger btn-xl w80p" type="button" onclick="perfRefund(${list.disc_num})"
 							value="환불요청">
 						<h2>
-							${list.disc_price }<small> 원 </small>
+							${list.disc_price*list.buy_count }<small> 원 </small>
 						</h2>
 					</div>
 				</c:forEach>
@@ -418,10 +418,10 @@
 						<div class="list-group-item-text col-md-12" style="color: red;">배송승인</div>
 					</div>
 					<div class="col-md-3 text-center">
-						<input class="btn btn-danger btn-xl w80p" type="button"
+						<input class="btn btn-danger btn-xl w80p" type="button" onclick="perfRefund(${list.disc_num})"
 							value="환불요청">
 						<h2>
-							${list.disc_price }<small> 원 </small>
+							${list.disc_price*list.buy_count }<small> 원 </small>
 						</h2>
 					</div>
 				</c:forEach>
@@ -461,10 +461,10 @@
 						<div class="list-group-item-text col-md-12" style="color: red;">배송중</div>
 					</div>
 					<div class="col-md-3 text-center">
-						<input class="btn btn-danger btn-xl w80p" type="button"
+						<input class="btn btn-danger btn-xl w80p" type="button" onclick="perfRefund(${list.disc_num})"
 							value="환불요청">
 						<h2>
-							${list.disc_price }<small> 원 </small>
+							${list.disc_price*list.buy_count }<small> 원 </small>
 						</h2>
 					</div>
 				</c:forEach>
@@ -504,10 +504,10 @@
 						<div class="list-group-item-text col-md-12" style="color: red;">배송완료</div>
 					</div>
 					<div class="col-md-3 text-center">
-						<input class="btn btn-danger btn-xl w80p" type="button"
+						<input class="btn btn-danger btn-xl w80p" type="button" onclick="perfRefund(${list.disc_num})"
 							value="환불요청">
 						<h2>
-							${list.disc_price }<small> 원 </small>
+							${list.disc_price*list.buy_count }<small> 원 </small>
 						</h2>
 					</div>
 				</c:forEach>
@@ -553,7 +553,7 @@
 				</div>
 				<div class="col-md-3 text-center">
 					<h2>
-						${list.disc_price }<small> 원 </small>
+						${list.disc_price*list.buy_count }<small> 원 </small>
 					</h2>
 				</div>
 			</c:forEach>
@@ -576,7 +576,7 @@
 				</div>
 				<div class="col-md-3 text-center">
 					<h2>
-						${list.disc_price }<small> 원 </small>
+						${list.disc_price*list.buy_count }<small> 원 </small>
 					</h2>
 				</div>
 			</c:forEach>
@@ -599,7 +599,7 @@
 				</div>
 				<div class="col-md-3 text-center">
 					<h2>
-						${list.disc_price }<small> 원 </small>
+						${list.disc_price*list.buy_count}<small> 원 </small>
 					</h2>
 				</div>
 			</c:forEach>

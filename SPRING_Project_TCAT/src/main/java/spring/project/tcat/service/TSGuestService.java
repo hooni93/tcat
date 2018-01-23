@@ -15,9 +15,12 @@ public interface TSGuestService {
 	//회원정보 수정
 	public void myModifyUpdate(HttpServletRequest req,Model model);
 	
-	//관람후기 목록
+	//관람후기 전체목록
 	public void CommentList(HttpServletRequest req, Model model);
 	
-	//관람/상품 글 쓰기
+	//관람후기 (해당 공연 목록)
+	public void selectComment(HttpServletRequest req, Model model);
+	
+	//관람/후기 글 쓰기
 	public void commentWrite(HttpServletRequest req, Model model);
 }

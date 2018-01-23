@@ -922,6 +922,11 @@ works properly when clicked or hovered */
 html .ui-button.ui-state-disabled:hover,
 html .ui-button.ui-state-disabled:active {
 	border: none;
+<<<<<<< HEAD
+=======
+	
+	font-weight: normal;
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 	color: #454545;
 }
 .ui-state-default a,

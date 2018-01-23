@@ -196,6 +196,22 @@
 		JOIN DetailPage det ON per.detail_num = det.detail_num
 		WHERE per_id = #{_parameter}
 	</select>
+	<!--스토어 상세페이지  -->
+	<select id="getContent_store" resultType="spring.project.tcat.VO.TcatPerDiscVO">
+		SELECT	per.disc_code, per.disc_title, per.disc_price,
+				per.disc_image, per.disc_con, per.cateNum, 
+				per.first_grade, per.disc_step, per.disc_count,
+				cat.category, cat.mDev, cat.sDev,
+				det.detail_num,
+				det.refNum, det.per_ex, det.Detail_Image
+		FROM 	perDisc per
+		JOIN	category cat 
+		ON 		per.cateNum = cat.cateNum
+		JOIN 	DetailPage det 
+		ON 		per.detail_num = det.detail_num
+		WHERE 	disc_code = #{_parameter}
+	</select>
+	
 	<!--조회수 업 -->
 	<update id="upHits">
 	 	UPDATE 	
@@ -246,7 +262,13 @@
 	
 	<!--결제취소  -->
 	<delete id="buyCancel">
-		DELETE 	delevaryInfo
-		WHERE	del_num = #{_parameter}
+		DELETE 	DiscBuy
+		WHERE	disc_num = #{_parameter}
 	</delete>
+	<!--환불요청 -->
+	<update id="perfRefund">
+		UPDATE 	DiscBuy
+		SET		disc_buyStep = 6
+		WHERE	disc_num = #{_parameter}
+	</update>
 </mapper>
