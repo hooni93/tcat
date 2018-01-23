@@ -42,6 +42,7 @@ public class TcatBoardVO {
 	String QuestionCon;
 	String AnswersCon;
 	String satisfction;
+	
 	//Notice
 	int notice_num;
 	String notice_title;
@@ -77,6 +78,7 @@ public class TcatBoardVO {
 	//Service
 	public int getService_num() {
 		return service_num;
+		
 	}
 	public void setService_num(int service_num) {
 		this.service_num = service_num;

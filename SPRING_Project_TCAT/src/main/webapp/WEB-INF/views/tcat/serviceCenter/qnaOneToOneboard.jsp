@@ -8,15 +8,15 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 
-function BoardSearch() {
+function OneToOneBoardSearch() {
+	
 	var cDev=document.all.cDev.value;
 	var keyword=document.all.keyword.value;
-	var url="qnaBoardList?cDev="+cDev+"&keyword="+keyword; 
+	var url="qnaOneToOneboard?cDev="+cDev+"&keyword="+keyword; 
 	
 	$( "#result2" ).load( "${pageContext.request.contextPath}/"+url);	
 
 }   
-
 </script>
 
 </head>
@@ -25,10 +25,10 @@ function BoardSearch() {
 			<div>
 				<br>
 				<h4>
-					<b>Q&A게시판</b>
+					<b>1:1게시판</b>
 				</h4>
 				<hr>
-				<b>자유롭게 토론하고 게시판입니다!</b><br>
+				<b>1:1게시판입니다!</b><br>
 				<b>공개하기 곤란한 질문이나 자주하는 질문은 1:1게시판이나 공지사항을 이용해주세요!</b>
 				<hr>
 				<br>
@@ -69,8 +69,8 @@ function BoardSearch() {
 							<c:if test="${cnt > 0}">
 								<!-- 처음[◀◀] / 이전블록[◀] 특수문자 : ㅁ한자키 -->
 								<c:if test="${startPage > pageBlock}">
-									<a onclick="loadBoard('qnaBoardList?cDev=${cDev}&keyword=${keyword}');">[◀◀]</a>
-									<a onclick="loadBoard('qnaBoardList?pageNum=${startPage - pageBlock}&cDev=${cDev}&keyword=${keyword}');">[◀]</a>
+									<a onclick="loadBoard('qnaOneToOneboard?cDev=${cDev}&keyword=${keyword}');">[◀◀]</a>
+									<a onclick="loadBoard('qnaOneToOneboard?pageNum=${startPage - pageBlock}&cDev=${cDev}&keyword=${keyword}');">[◀]</a>
 								</c:if>
 
 								<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -80,14 +80,14 @@ function BoardSearch() {
 									</c:if>
 
 									<c:if test="${i != currentPage}">
-										<a onclick="loadBoard('qnaBoardList?pageNum=${i}&cDev=${cDev}&keyword=${keyword}');">[${i}]</a>
+										<a onclick="loadBoard('qnaOneToOneboard?pageNum=${i}&cDev=${cDev}&keyword=${keyword}');">[${i}]</a>
 									</c:if>
 								</c:forEach>
 
 								<!-- 다음블록[▶] / 끝[▶▶] -->
 								<c:if test="${pageCount > endPage}">
-									<a onclick="loadBoard('qnaBoardList?pageNum=${startPage + pageBlock}&cDev=${cDev}&keyword=${keyword}');">[▶]</a>
-									<a onclick="loadBoard('qnaBoardList?pageNum=${pageCount}&cDev=${cDev}&keyword=${keyword}');">[▶▶]</a>
+									<a onclick="loadBoard('qnaOneToOneboard?pageNum=${startPage + pageBlock}&cDev=${cDev}&keyword=${keyword}');">[▶]</a>
+									<a onclick="loadBoard('qnaOneToOneboard?pageNum=${pageCount}&cDev=${cDev}&keyword=${keyword}');">[▶▶]</a>
 								</c:if>
 							</c:if>
 						</table>
@@ -112,7 +112,7 @@ function BoardSearch() {
 							name="keyword">
 					</div>
 					<button type="button" class="btn btn-default"
-						onclick="BoardSearch();">검색</button>
+						onclick="OneToOneBoardSearch();">검색</button>
 					<!-- stocksearch(); -->
 					
 				</form>

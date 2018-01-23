@@ -29,4 +29,10 @@ public interface JMHGuestService {
 	public void delWishList(HttpServletRequest req,Model model);
 	//getWishListIn 위시리스트 해당 공연 존재 확인
 	public void getWishListIn(HttpServletRequest req,Model model);
+	
+	//결제취소
+	public void buyCancel(HttpServletRequest req,Model model);
+	//perfRefund 환불요청
+	public void perfRefund(HttpServletRequest req,Model model);
+	
 }

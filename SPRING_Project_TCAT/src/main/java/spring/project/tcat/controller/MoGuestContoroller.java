@@ -63,5 +63,12 @@ public class MoGuestContoroller {
 		System.out.println("storeMain");
 		return "tcat/store/storeMain";
 	}
+	//좌석 정보 가져오기
+	@RequestMapping("ticketSeat")
+	public String ticketSeat(HttpServletRequest req,Model model) {
+		System.out.println("ticketSeat");
+		MGService.ticketSeat(req, model);
+		return "tcat/store/ticketSeat";
+	}
 	
 }

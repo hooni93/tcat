@@ -15,251 +15,166 @@
 
 <title>Insert title here</title>
 <style type="text/css">
-body{ 
-    margin-top:40px; 
+
+
+.roundButton {
+	-moz-box-shadow:inset -3px -26px 0px 0px #ffffff;
+	-webkit-box-shadow:inset -3px -26px 0px 0px #ffffff;
+	box-shadow:inset -3px -26px 0px 0px #ffffff;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
+	background:-moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+	background:-webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+	background:-o-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+	background:-ms-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+	background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0);
+	background-color:#f9f9f9;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Courier New;
+	font-size:15px;
+	font-weight:bold;
+	padding:5px 41px;
+	text-decoration:none;
+	text-shadow:0px -6px 0px #ffffff;
+}
+.roundButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9));
+	background:-moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+	background:-webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+	background:-o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+	background:-ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+	background:linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#f9f9f9',GradientType=0);
+	background-color:#e9e9e9;
+}
+.roundButton:active {
+	position:relative;
+	top:1px;
+}
+.chooseTb {
+	-moz-box-shadow:inset 0px 0px 23px -3px #97c4fe;
+	-webkit-box-shadow:inset 0px 0px 23px -3px #97c4fe;
+	box-shadow:inset 0px 0px 23px -3px #97c4fe;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0));
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0',GradientType=0);
+	background-color:#3d94f6;
+	cursor:pointer;
+	color:#ffffff;
+	font-weight:bold;
+	text-decoration:none;
+	text-shadow:-1px 1px 0px #1570cd;
 }
 
-.stepwizard-step p {
-    margin-top: 10px;
-}
+.ui-datepicker { width: 17em; padding: .2em .2em 0; display: none; font-size: 20px;}
 
-.stepwizard-row {
-    display: table-row;
-}
-
-.stepwizard {
-    display: table;
-    width: 100%;
-    position: relative;
-}
-
-.stepwizard-step button[disabled] {
-    opacity: 1 !important;
-    filter: alpha(opacity=100) !important;
-}
-
-.stepwizard-row:before {
-    top: 14px;
-    bottom: 0;
-    position: absolute;
-    content: " ";
-    width: 100%;
-    height: 1px;
-    background-color: #ccc;
-    z-order: 0;
-
-}
-
-.stepwizard-step {
-    display: table-cell;
-    text-align: center;
-    position: relative;
-}
-
-.btn-circle {
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 12px;
-  line-height: 1.428571429;
-  border-radius: 15px;
-}
 </style>
 <script type="text/javascript">
-$(function() {
-
-	$('#datepicker').datepicker({
-		dateFormat: 'yy-mm-dd',//데이터 형식 변경
-		dayNamesShort:["일","월","화","수","목","금","토"],
-		 changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
-		  changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
-		monthNames:[ "1월", "2월", "3월", "4월", "5월", "6월","7월", "8월", "9월", "10월", "11월", "12월"],
-	    onSelect: function(dateText, inst) { //선택한 데이터를 input박스에 넣기
-	      $("input[name='something']").val(dateText);
-	    }
-	});
+//날짜 캘린더 출력하기
+jQuery(function($){
+    $.datepicker.regional['ko'] = {
+   		closeText: '닫기',
+   		prevText: '이전달',
+   		nextText: '다음달',
+   		currentText: '오늘',
+   		monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)','7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
+   		monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+   		dayNames: ['일','월','화','수','목','금','토'],
+   		dayNamesShort: ['일','월','화','수','목','금','토'],
+   		dayNamesMin: ['일','월','화','수','목','금','토'],
+   		weekHeader: 'Wk',dateFormat: 'yy-mm-dd',
+   		firstDay: 0,
+   		isRTL: false,
+   		showMonthAfterYear: true,
+   		yearSuffix: ''
+   	};
+    $.datepicker.setDefaults($.datepicker.regional['ko']);
+    //달력 날짜 뿌려줄때 시작날짜,종료날짜 안의 날짜 외에는 막기
+    $('#datepicker').datepicker({
+    	showOn: 'both',
+    	buttonText: "달력",
+    	changeMonth: true,
+    	changeYear: true,
+    	showButtonPanel:true,
+    	yearRange: 'c-99:c+99',
+    	constrainInput: true,
+    	maxDate: '+1y',
+    	beforeShowDay: noSundays ,
+   		onSelect: function(dateText, inst) { //선택한 데이터를 input박스에 넣기
+    		$("input[name='ticet_date']").val(dateText);
+   		}
+    });
 });
-$(document).ready(function () {
+// 일요일만 선택 막기
+function noSundays(date) {
+	 var startDate='${vo.startDate}';
+	 var endDate='${vo.endDate}';
+	 var sDate=startDate.split(" ");
+	 var eDate=endDate.split(" ");
+	 var ssDate=sDate[0].split("-");
+	 var eeDate=eDate[0].split("-");
+	 var sssDate=new Date(ssDate[0], ssDate[1], ssDate[2]);
+	 var eeeDate=new Date(eeDate[0], eeDate[1], eeDate[2]);
+	 
+	 if(date<sssDate||date>eeeDate){
+		 return[false];
+	 }
+	 return [true];
+}
+		 
 	
-    var navListItems = $('div.setup-panel div a'),//메인 스텝 1,2,3의 a태그 정보
-            allWells = $('.setup-content'), //밑에 뿌려줄 1,2,3의 정보
-            allNextBtn = $('.nextBtn'); //밑의 뿌려주는 부분의 다음 버튼 1,2
-
-    allWells.hide(); //밑의 정보들을 숨겨놓기
-
-    navListItems.click(function (e) { //메인 스텝 1,2,3a태그가 클릭되면
-        e.preventDefault();//a태그의 이벤트를 정지시킨다
-        var $target = $($(this).attr('href')), //클릭된  a태그 버튼의 href의 정보를 가져와서 target에 저장
-                $item = $(this);//클릭된 a태그버튼정보 저장
-
-        if (!$item.hasClass('disabled')) {//클릭된 a태그버튼정보가 활성화되어있지 않으면
-            navListItems.removeClass('btn-primary').addClass('btn-default'); //모든 a태그 버튼을 btn-primary 클래스를 지우고 btn-default 클래스를 추가한다
-            $item.addClass('btn-primary'); //클릭한 a태그 버튼의 클래스에 btn-primary를 추가한다.
-            allWells.hide(); //모든 밑의 정보를 숨기기
-            $target.show(); //a태그에 저장되있는 href연결되있는 부분을 보여준다.
-            $target.find('input:eq(0)').focus(); //a태그에 저장되있는 href연결되있는 부분의 첫번째 input에 focus를 준다.
-        }
-    });
-
-    allNextBtn.click(function(){ //다음 버튼이 클릭되었을때
-        var curStep = $(this).closest(".setup-content"),// carStep에 지금있는 정
-            curStepBtn = curStep.attr("id"),
-            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-            curInputs = curStep.find("input[type='text'],input[type='url']"),
-            isValid = true;
-
-        $(".form-group").removeClass("has-error");
-        for(var i=0; i<curInputs.length; i++){
-            if (!curInputs[i].validity.valid){
-                isValid = false;
-                $(curInputs[i]).closest(".form-group").addClass("has-error");
-            }
-        }
-
-        if (isValid)
-            nextStepWizard.removeAttr('disabled').trigger('click');
-    });
-
-    $('div.setup-panel div a.btn-primary').trigger('click');
-});
 </script>
 </head>
-<body>
-<div class="container">
-
-<div class="stepwizard">
-    <div class="stepwizard-row setup-panel">
-	
-		        <div class="stepwizard-step">
-		            <a href="#step-1" type="button" class="btn btn-primary ">1</a>
-		            <p>Step 1</p>
-		        </div>
-
-
-		        <div class="stepwizard-step">
-		            <a href="#step-2" type="button" class="btn btn-default " disabled="disabled">2</a>
-		            <p>Step 2</p>
-		        </div>
-
-
-		        <div class="stepwizard-step">
-		            <a href="#step-3" type="button" class="btn btn-default " disabled="disabled">3</a>
-		            <p>Step 3</p>
-		        </div>
-		        
-		        <div class="stepwizard-step">
-		            <a href="#step-4" type="button" class="btn btn-default " disabled="disabled">4</a>
-		            <p>Step 4</p>
-		        </div>
-		        
-		        <div class="stepwizard-step">
-		            <a href="#step-5" type="button" class="btn btn-default " disabled="disabled">5</a>
-		            <p>Step 5</p>
-		        </div>
-
-    </div>
+<body style="background-color:white;">
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+		<table class="table-bordered" style="margin:20px;">
+			<tr>
+				<th class="chooseTb" style="width:35%; padding:5px;">관람일 선택</th>
+				<th class="chooseTb" style="padding:5px;">회차 선택</th>
+			</tr>
+			<tr>
+				<th><div id="datepicker"></div>
+				<td>
+					<br>
+					<b>선택날짜&nbsp</b><input style="background-color:#eeeeee;color:red;border:none" type="text" value="0" name="ticet_date">
+					<table>
+						<tr>
+							<th>회차선택</th>
+							<th>좌석등급/잔여석</th>
+						</tr>
+						<tr>
+							<td>
+								<div style="border:1px solid #dddddd; height:200px;">
+									<c:set var="round" value="${fn:split(vo.remain_round,',')}"/>
+									<c:forEach var="remain_round" items="${round}">
+										<input type="button" class="roundButton" value="${remain_round}"><br>
+									</c:forEach>
+								</div>
+							</td>
+							<td>
+								<div style="border:1px solid #dddddd; height:200px;">
+									<ul>
+										<li>VIP석 : ${vo.getVIP_seatPrice()}</li>
+										<li>R석 : ${vo.getR_seatPrice()}</li>
+										<li>S석 : ${vo.getS_seatPrice()}</li>
+										<li>A석 : ${vo.getA_seatPrice()}</li>
+										<li>B석 : ${vo.getB_seatPrice()}</li>
+									</ul>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		
+		
+		</table>
+	</div>
+<div class="col-md-1"></div>
 </div>
-<form role="form">
-
-	<!-- 관람일 회차선택 -->
-    <div class="row setup-content" id="step-1">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <h3> Step 1</h3>
-                <div class="form-group">
-                    <label class="control-label">First Name</label>
-                    <input  maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name"  />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Last Name</label>
-                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" />
-                </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="row setup-content" id="step-2">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <h3> Step 2</h3>
-                <div class="form-group">
-                    <label class="control-label">Company Name</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Company Address</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address"  />
-                </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="row setup-content" id="step-3">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <h3> Step 3</h3>
-                <div class="form-group">
-                    <label class="control-label">aaae</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">sss</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address"  />
-                </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="row setup-content" id="step-4">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <h3> Step 4</h3>
-                <div class="form-group">
-                    <label class="control-label">adfs</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">asdf</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address"  />
-                </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
-            </div>
-        </div>
-    </div>
-    
-    
-       <div class="row setup-content" id="step-5">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <h3> Step 5</h3>
-                <button class="btn btn-success btn-lg pull-right" type="submit">Finish!</button>
-            </div>
-        </div>
-    </div>
-</form>
-</div>
-
-<div>
-	<ul class="nav nav-tabs">
-	  <li role="presentation" class="active"><a href="#">Home</a></li>
-	  <li role="presentation"><a href="#">Profile</a></li>
-	  <li role="presentation"><a href="#">Messages</a></li>
-	</ul>
-</div>
-
-<!-- 이거바꾸면 됩니까? -->
-
-<div id="datepicker"></div>
-<input type="text" name="something">
-
-
-
 </body>
 </html>

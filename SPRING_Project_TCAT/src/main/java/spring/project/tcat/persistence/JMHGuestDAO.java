@@ -57,5 +57,11 @@ public interface JMHGuestDAO {
 	
 	//로그인 후 상세페이지 조회시 조회수 업
 	public void upHits(int per_id);
+	
+	//buyCancel 결제 취소
+	public int  buyCancel(int disc_num);
+	
+	//환불요청
+	public int  perfRefund(int disc_num);
 
 }

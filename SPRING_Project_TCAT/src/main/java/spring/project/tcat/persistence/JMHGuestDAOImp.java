@@ -142,4 +142,18 @@ public class JMHGuestDAOImp implements JMHGuestDAO {
 		int cnt = dao.getWishListIn(map);
 		return cnt;
 	}
+
+	// buyCancel 결제 취소
+	public int buyCancel(int disc_num) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		int cnt = dao.buyCancel(disc_num);
+		return cnt;
+	}
+
+	// 환불요청
+	public int perfRefund(int disc_num) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		int cnt = dao.perfRefund(disc_num);
+		return cnt;
+	}
 }

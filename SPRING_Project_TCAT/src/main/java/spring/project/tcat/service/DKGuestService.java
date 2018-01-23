@@ -6,10 +6,14 @@ import org.springframework.ui.Model;
 
 public interface DKGuestService {
 	
-	//글목록불러오기
-	public void qnaBoardList(HttpServletRequest req,  Model model);
+	//Q&A글목록불러오기
+	public void qnaBoardList(HttpServletRequest req, Model model);
+	
+	//1:1게시판불러오기
+	public void qnaOneToOneList(HttpServletRequest req, Model model);
 	
 	//상세페이지
+	public void qnaContent(HttpServletRequest req, Model model);
 	
 	//글수정 상세페이지
 	

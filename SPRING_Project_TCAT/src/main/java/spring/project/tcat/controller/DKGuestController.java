@@ -14,14 +14,45 @@ public class DKGuestController {
 	
 	@Autowired
 	DKGuestService dkService;
+	
+	//고객센터메인화면
+	@RequestMapping("qnaBoardMain")
+	public String qnaBoardMain(HttpServletRequest req,Model model) {
+		System.out.println("qnaBoardMain");
+		req.getSession().setAttribute("page", "qnaBoardMain");
+		return "tcat/serviceCenter/qnaBoardMain";
+	}
+	
 	//게시판글 불러오기
 	@RequestMapping("qnaBoardList")
 	public String qnaBoardList(HttpServletRequest req,Model model) {
 		System.out.println("qnaBoardList");
-		
+		req.setAttribute("url", "qnaBoardList");
 		dkService.qnaBoardList(req, model);
 		
 		return "tcat/serviceCenter/qnaBoardList";
+	}
+	
+	//1:1게시판불러오기
+	@RequestMapping("qnaOneToOneboard")
+	public String qnaOneToOneboard(HttpServletRequest req,Model model) {
+		System.out.println("qnaOneToOneboard");
+		req.setAttribute("url", "qnaOneToOneboard");
+		dkService.qnaOneToOneList(req, model);
+		
+		return "tcat/serviceCenter/qnaOneToOneboard";
+		
+	}
+	
+	//상세글보기
+	@RequestMapping("qnaContent")
+	public String qnaContent(HttpServletRequest req,Model model) {
+		System.out.println("qnaContent");
+		
+		dkService.qnaContent(req, model);
+	
+		
+		return "tcat/serviceCenter/qnaContent";
 	}
 	
 }

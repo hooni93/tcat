@@ -83,4 +83,44 @@
    		
    		</select>
    		
+   		<insert id="insertCart" parameterType="java.util.Map">
+   			insert into cart(cart_num,member_id,cart_inDate,disc_code,cart_count)
+   			values(cart_SEQ.nextval,#{member_id},sysdate,#{disc_code},#{cart_count})
+   		</insert>
+   		
+   		<!-- 장바구니 리스트 가져오기 -->
+   		<select id="cartCnt" resultType="int">
+   			select count(*) from cart WHERE member_id=#{member_id}
+   		</select>
+   		<select id="cartList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.CartVO">
+   			<![CDATA[
+   			select * from (
+				select c.cart_num,c.member_id,m.member_pwd,m.member_name,m.member_hp,m.member_addr,m.member_email,m.member_gender,m.member_birth,m.point,m.lastDate,m.Rating,m.member_step,m.member_joindate,c.cart_inDate,c.disc_code,p.disc_title,p.disc_price,p.disc_image,p.disc_con,p.cateNum,ca.category,ca.mDev,ca.sDev,p.first_grade,p.disc_step,p.disc_count,c.cart_count,rownum rNum
+				from cart c,member m,perDisc p,category ca
+				where c.member_id=m.member_id and c.disc_code=p.disc_code and p.cateNum=ca.cateNum)
+			where rNum>=#{start} and rNum<=#{end} and member_id=#{member_id}
+			]]>
+   		</select>
+   		<select id="cartListDtos">
+   			select * from (
+				select c.cart_num,c.member_id,m.member_pwd,m.member_name,m.member_hp,m.member_addr,m.member_email,m.member_gender,m.member_birth,m.point,m.lastDate,m.Rating,m.member_step,m.member_joindate,c.cart_inDate,c.disc_code,p.disc_title,p.disc_price,p.disc_image,p.disc_con,p.cateNum,ca.category,ca.mDev,ca.sDev,p.first_grade,p.disc_step,p.disc_count,c.cart_count,rownum rNum
+				from cart c,member m,perDisc p,category ca
+				where c.member_id=m.member_id and c.disc_code=p.disc_code and p.cateNum=ca.cateNum)
+			where member_id=#{member_id}
+   		</select>
+   		
+   		<insert id="insertdelevaryInfo" parameterType="java.util.Map">
+   			insert into delevaryInfo values(delevaryInfo_SEQ.nextval,#{member_name},#{member_addr},#{member_hp})
+   		</insert>
+   		
+   		<select id="payList" parameterType="int" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+			select * 
+			from
+			(
+			    select p.per_id,p.perf_title,p.cateNum,p.R_seatPrice,p.VIP_seatPrice,p.S_seatPrice,p.A_seatPrice,p.B_seatPrice,c.category,c.mDev,c.sDev,pl.city,pl.postNum,pl.address,pl.province,p.perf_Image,p.startdate,p.enddate,p.hall_id,h.hall_name,p.first_grade,p.per_step,p.remain_round,p.possible_age,rownum rNum
+			    from (select * from performanceInfo order by per_id desc) p,category c,hallInfo h,place pl
+			    where p.cateNum=c.cateNum and p.hall_id = h.hall_id and c.category='공연' and h.place_num=pl.place_num
+			)
+			where per_id=#{per_id}
+   		</select>
    </mapper>
