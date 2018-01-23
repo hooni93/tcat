@@ -161,13 +161,39 @@ function ajaxSubmit(url){   /* AJAX submit */
 
 
 function load(url){
+<<<<<<< HEAD
 	 
 	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );
 	 window.location.hash = '#url' + url;
 	 
 	 
 	 
+=======
+	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url,function(msg){
+		 history.pushState({page:url},null);//1. history에 pushState로  page를 저장 이때 url에 get방식을 쓰면 그 파라미터도 같이 넘어감
+		 //history.pushState(state,title,url);
+		 //state:key와 value 형태의 데이터를 여러개 넘길수 있다 너무 클경우 불가는 640k로 제한되어있다.
+		 //title: 웹페이지 상단에 띄울 제목 null이나 "" 를 줘도 상관 없다.
+		 //url:  아무 의미 없이 url만 변경, 현 방식을 한 이유는 새로고침시 입력되있는 주소에 따라 페이지 전송을 하는데 ajax이기 때문에 새로고침시 guestPage로 이동을 해야하기 때문에 비워둠
+	 } );
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 }
+$(document).ready(function(){
+	//새로고침
+	$(window).bind('load',function(event){	//2-새로고침: url이 guestPage를 지칭하고 있기때문에 새로고침시 guestPage를 불러온다.
+		if(history.state==null){			//2-2: 만약 처음 들어온 경우, 즉 push를 한 적이 없으면 게스트 메인을 뿌려준다.
+			load("guestMain");
+		}else{								//2-1: 새로고침한 페이지 에 따라 pushState의 state를 가져와 ajax  결과에 뿌려준다.
+			$( "#result" ).load("${pageContext.request.contextPath}/"+history.state.page)
+		}
+	});
+	//뒤로 갈때 
+	$(window).bind('popstate',function(event){
+		//2-뒤로가거나 앞으로 갔을경우  1에서 푸쉬해놓았던 url 데이터를 받아 ajax 결과에 뿌린다.
+	    $( "#result" ).load( "${pageContext.request.contextPath}/"+event.originalEvent.state.page);
+																//event.originalEvent.state.page: 푸시해 놓았던 데이터의 page(key값)에 따라 url을 받음
+	});
+});
 
 //공연 상세페이지 onclick시
 function contentPage(per_id){
@@ -200,14 +226,18 @@ function contentPage(per_id){
 			  	  	</c:if>
 				  </li>
 				  <li><a href="#">예매확인/취소</a></li>
+
 				  <li><a href="#">위시리스트</a></li>
-				 <li><a onclick="load('qnaBoardMain');">고객센터</a></li>
+				  <c:if test="${sessionScope.login_id!=null}">
+
 				  <li><a onclick="load('cartList');">장바구니</a></li>
+
+				  </c:if>
 				  <li><a onclick="load('qnaBoardList');">고객센터</a></li>
 				  <li><a href="#">모바일APP</a></li>  
+
 				  <li><a onclick="load('commentBoard');">후기</a></li>  
 				  <li><a onclick="load('intro');">회사</a></li>
-				  <li><a onclick="load('eventMain');">이벤트</a></li>  
 				</ol> 
 			</div>
 			<div class="col-md-2">
@@ -218,7 +248,6 @@ function contentPage(per_id){
 	     				</span>
 					</div>
 			</div>
-			<div class="col-md-1"></div>
 		</div>
 	</div>
 

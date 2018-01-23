@@ -11,7 +11,7 @@ $("#login2").click(function(){
 });
 function payPerformence(url){
 	alert("url:"+url);
-    window.open(url, "confirm", "menubar=no, width=500, height=330");
+    window.open(url, "confirm", "menubar=no, width=1400, height=830");
 } 
 </script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -98,7 +98,7 @@ function payPerformence(url){
 					<div class="c m5">
 						<a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a> 
 						<c:if test="${sessionScope.login_id!=null}">
-							<a onclick="payPerformence('chooseDay?per_id=${vo.per_id}')" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> 예매</a>
+							<a onclick="payPerformence('Ticketing?per_id=${vo.per_id}')" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> 예매</a>
 						</c:if>
 						<c:if test="${sessionScope.login_id==null}">
 							<a data-toggle="modal" data-target="#login-modal" id="login2" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> 예매</a>

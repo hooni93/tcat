@@ -15,6 +15,15 @@
 <script src="${script}bootstrap.js"></script>
 <title>Insert title here</title>
 <script type="text/javascript">
+function pay(url){
+	 
+	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );
+	
+}
+function error(){
+	alert("구매할 상품이 없습니다!");
+	return false;
+}
 </script>
 <style type="text/css">
 body {
@@ -83,21 +92,30 @@ body {
 					<div class="row text-center">
 						<div class="col-xs-9">
 						<%
-							ArrayList<CartVO> dtos=(ArrayList<CartVO>)request.getAttribute("dtos");
-						int price=0;
+							ArrayList<CartVO> dtos=null;
+							dtos=(ArrayList<CartVO>)request.getAttribute("dtos");
+							int price=0;
 						%>
-							<h4 class="text-right">Total <strong><%for(int i=0;i<dtos.size();i++){
-							int count=dtos.get(i).getCart_count();
-							int price2=dtos.get(i).getDisc_price();
-							price+=(count*price2);
+							<h4 class="text-right">Total <strong><%if(dtos!=null){for(int i=0;i<dtos.size();i++){
+								int count=dtos.get(i).getCart_count();
+								int price2=dtos.get(i).getDisc_price();
+								price+=(count*price2);
+								}
 							}%>
 							<%=price%>
 							</strong></h4>
 						</div>
 						<div class="col-xs-3">
-							<button type="button" id="myBtn" class="btn btn-success btn-block" onclick="load('storePay?addr=<%=dtos.get(0).getMember_addr()%>');">
+							<%if(dtos!=null){ %>
+							<button type="button" id="myBtn" class="btn btn-success btn-block" onclick="load('storePay');">
 								구입하기
 							</button>
+							<%} %>
+							<%if(dtos==null){ %>
+							<button type="button" id="myBtn" class="btn btn-success btn-block" onclick="return error();">
+								구입하기
+							</button>
+							<%} %>
 						</div>
 					</div>
 				</div>
