@@ -27,16 +27,17 @@
 <body>
 <div class="thumbnail">
 <div class="c m10">
-	<a class="btn btn-default" onclick="load('placeList?place=서울특별시');" role="button">서울특별시</a>
-	<a class="btn btn-default" onclick="load('placeList?place=경기도');" role="button">경기도</a>
-	<a class="btn btn-default" onclick="load('placeList?place=인천광역시');" role="button">인천광역시</a>
-	<a class="btn btn-default" onclick="load('placeList?place=광주광역시');" role="button">광주광역시</a>
-	<a class="btn btn-default" onclick="load('placeList?place=대전광역시');" role="button">대전광역시</a>
-	<a class="btn btn-default" onclick="load('placeList?place=대구광역시');" role="button">대구광역시</a>
-	<a class="btn btn-default" onclick="load('placeList?place=부산광역시');" role="button">부산광역시</a>
-	<a class="btn btn-default" onclick="load('placeList?place=강원도');" role="button">강원도</a>
-	<a class="btn btn-default" onclick="load('placeList?place=제주도특별시');" role="button">제주도특별시</a>
-
+	<a class="btn btn-default" onclick="load('placeList?place=서울');" role="button">서울</a>
+	<a class="btn btn-default" onclick="load('placeList?place=인천');" role="button">인천</a>
+	<a class="btn btn-default" onclick="load('placeList?place=광주');" role="button">광주</a>
+	<a class="btn btn-default" onclick="load('placeList?place=대전');" role="button">대전</a>
+	<a class="btn btn-default" onclick="load('placeList?place=대구');" role="button">대구</a>
+	<a class="btn btn-default" onclick="load('placeList?place=부산');" role="button">부산</a>
+	<a class="btn btn-default" onclick="load('placeList?place=강원');" role="button">강원</a>
+	<a class="btn btn-default" onclick="load('placeList?place=제주특별자치도');" role="button">제주</a>
+	<a class="btn btn-default" onclick="load('placeList?place=울산');" role="button">울산</a>
+	<a class="btn btn-default" onclick="load('placeList?place=전북');" role="button">전북</a>
+	<a class="btn btn-default" onclick="load('placeList?place=경북');" role="button">경북</a>
 </div>
 
 <!-- 핫리스트 -->

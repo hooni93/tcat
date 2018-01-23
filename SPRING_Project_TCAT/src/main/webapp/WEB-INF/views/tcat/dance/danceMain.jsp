@@ -13,7 +13,7 @@
 <div class="row">
 	<div class="col-md-1"></div>
 	<div class="col-md-10">
-		<div class="row pt5">
+		<div class="row pt5 h100p">
 			<div class="col-md-2 thumbnail mr15 h300">
 				<div class="list-group pt20">
 				  <a href="#" class="list-group-item disabled">
@@ -23,7 +23,7 @@
 				  <a onclick="load('danceList?sDev=발레&order=startDate');" class="list-group-item">발레</a>
 				</div>
 			</div>
-			<div class="col-md-7 thumbnail mr15 h300">
+			<div class="col-md-7 thumbnail mr15 h100p">
 			<!-- 슬라이드 -->
 				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 				  <!-- Indicators -->
@@ -69,7 +69,7 @@
 				<!-- 슬라이드 끝 -->
 			
 			</div>
-			<div class="col-md-2 thumbnail">
+			<div class="col-md-2 thumbnail h300">
 				<div class="list-group pt11">
 				  <div class="pt11"><p class="686868 b m10"><span class="glyphicon glyphicon-star"></span> 랭킹</p></div>
 				  <a href="#" class="list-group-item">1. 베르테르</a>
