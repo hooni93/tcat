@@ -65,13 +65,18 @@ public class HSGuestController {
 	public String chooseDay(HttpServletRequest req, Model model) {
 		System.out.println("chooseDay");
 		
+		model.addAttribute("TicettingCnt",2);
+		HSGservice.payList(req,model);
 		
 		return "tcat/Ticketing/chooseDay";
 	}
+	
+	
 	@RequestMapping("NewFile")
 	public String NewFile(HttpServletRequest req, Model model) {
 		System.out.println("NewFile");
 		
+		model.addAttribute("TicettingCnt",2);
 		
 		return "tcat/registItem/NewFile";
 	}
