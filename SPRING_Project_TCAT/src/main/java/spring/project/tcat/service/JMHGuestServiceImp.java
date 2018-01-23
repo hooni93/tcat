@@ -348,15 +348,28 @@ public class JMHGuestServiceImp implements JMHGuestService {
 	// 공연 상세 정보 가져오기
 	public void getContent(HttpServletRequest req, Model model) {
 		int per_id = Integer.parseInt(req.getParameter("per_id"));
-		//로그인이 된경우에만 조회수 업데이트
+		// 로그인이 된경우에만 조회수 업데이트
 		String login_id = (String) req.getSession().getAttribute("login_id");
-		if(login_id != null) {
+		if (login_id != null) {
 			mhDAO.upHits(per_id);
 		}
 		TcatPerformanceVO perf = mhDAO.getContent(per_id);
 
 		model.addAttribute("perf", perf);
 
+	}
+
+	// 스토어 상세정보
+	public void getContent_store(HttpServletRequest req, Model model) {
+		int disc_code = Integer.parseInt(req.getParameter("disc_code"));
+		// 로그인이 된경우에만 조회수 업데이트
+		String login_id = (String) req.getSession().getAttribute("login_id");
+		if (login_id != null) {
+			mhDAO.upHits(disc_code);
+		}
+		TcatPerDiscVO str = mhDAO.getContent_store(disc_code);
+
+		model.addAttribute("str", str);
 	}
 
 	// addWishList 위시리스트 추가
@@ -438,4 +451,19 @@ public class JMHGuestServiceImp implements JMHGuestService {
 		model.addAttribute("wishResult", wishResult);
 	}
 
+	// 결제취소
+	public void buyCancel(HttpServletRequest req, Model model) {
+		int disc_num = Integer.parseInt(req.getParameter("disc_num"));
+
+		int buyCancelRs = mhDAO.buyCancel(disc_num);
+
+		model.addAttribute("buyCancelRs", buyCancelRs);
+	}
+
+	// perfRefund 환불요청
+	public void perfRefund(HttpServletRequest req, Model model) {
+		int disc_num = Integer.parseInt(req.getParameter("disc_num"));
+		int perfRefundRs = mhDAO.perfRefund(disc_num);
+		model.addAttribute("perfRefundRs", perfRefundRs);
+	}
 }

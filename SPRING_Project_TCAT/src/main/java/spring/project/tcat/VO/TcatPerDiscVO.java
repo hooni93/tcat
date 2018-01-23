@@ -34,9 +34,38 @@ public class TcatPerDiscVO {
     String category;		//카테고리(스토어,공연)
     String mDev;			//중분류
     String sDev;			//소분류
+    //DetailPage
+    int detail_num;			//상세페이지 코드
+    int refNum;				//조회수
+    String per_ex;			//상품상세소개
+    String Detail_Image; 	//추가 이미지
     
 
-    //getter setter
+    public int getDetail_num() {
+		return detail_num;
+	}
+	public void setDetail_num(int detail_num) {
+		this.detail_num = detail_num;
+	}
+	public int getRefNum() {
+		return refNum;
+	}
+	public void setRefNum(int refNum) {
+		this.refNum = refNum;
+	}
+	public String getPer_ex() {
+		return per_ex;
+	}
+	public void setPer_ex(String per_ex) {
+		this.per_ex = per_ex;
+	}
+	public String getDetail_Image() {
+		return Detail_Image;
+	}
+	public void setDetail_Image(String detail_Image) {
+		Detail_Image = detail_Image;
+	}
+	//getter setter
 	public int getDisc_code() {
 		return disc_code;
 	}

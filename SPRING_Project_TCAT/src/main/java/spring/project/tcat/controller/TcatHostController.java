@@ -747,7 +747,7 @@ public class TcatHostController {
 	//////////////////////////////////// /////////////////////////////////////////
 
 	
-//////////////////////HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민 ////////////////////////
+/////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민  //////////////////////////////
 	@RequestMapping("hotMusical_side")
 	public String hotMusical_side(HttpServletRequest req, Model model) {
 		System.out.println("hotMusical_side");
@@ -827,17 +827,60 @@ public class TcatHostController {
 
 		return "tcat/productList/hotStore";
 	}
-
-/////////////////// HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  /////////////////////////
-/////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민  //////////////////////////////
 	@Autowired
 	YMGuestService YMService;
+	//이벤트 호스트
 	@RequestMapping("eventHost")
 	public String eventHost(HttpServletRequest req, Model model) {
 		System.out.println("eventHost");
 		YMService.eventGuest(req, model);
 		return "tcat/borderManager/eventHost";
 	}
+	//이벤트삭제
+		@RequestMapping("eventDelete")
+		public String eventDelete(HttpServletRequest req,Model model) {
+			System.out.println("eventDelete");
+			YMService.eventDelete(req, model);
+			YMService.eventGuest(req, model);
+			return "tcat/borderManager/eventHost";
+		}
+		//이벤트수정
+		@RequestMapping("eventUpdate")
+		public String eventUpdate(HttpServletRequest req,Model model) {
+			System.out.println("eventUpdate");
+			YMService.eventForm(req, model);
+			return "tcat/borderManager/eventUpdate";
+		}
+		//이벤트수정
+		@RequestMapping("eventUpdateList")
+		public String eventUpdateList(MultipartHttpServletRequest req,Model model) {
+			System.out.println("eventUpdateList");
+			YMService.eventUpdateList(req, model);
+			YMService.eventGuest(req, model);
+			return "tcat/borderManager/eventHost";
+		}
+		//구매승인사이트바
+		@RequestMapping("provalMain_side")
+		public String provalMain_side(HttpServletRequest req, Model model) {
+			System.out.println("provalMain_side");
+			return "tcat/proval/provalMain_side";
+		}
+		//구매승인
+		@RequestMapping("provalMain")
+		public String provalMain(HttpServletRequest req,Model model) {
+			System.out.println("provalMain");
+			hService.provalHost(req, model);
+			return "tcat/proval/provalMain";
+		}
+		//구매승인
+		@RequestMapping("provalUpdate")
+		public String provalUpdate(HttpServletRequest req,Model model) {
+			System.out.println("provalUpdate");
+			hService.provalUpdate(req, model);
+			hService.provalHost(req, model);
+			return "tcat/proval/provalMain";
+		}
+		
 /////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민  //////////////////////////////
 
 	///////////////////////  동금 1/9 start  //////////////////////// 
@@ -1006,6 +1049,7 @@ public class TcatHostController {
 	System.out.println("commentManager_side");
 	return "tcat/borderManager/commentManager_side";
 	}
+	
 	//관람/상품 후기 관리 게시판 - 삭제기능
 	@RequestMapping("commentDelete")
 	public String commentDelete(HttpServletRequest req,Model model) {

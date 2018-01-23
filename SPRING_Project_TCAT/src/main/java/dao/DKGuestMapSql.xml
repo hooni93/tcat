@@ -43,6 +43,22 @@
 				       QuestionCon, AnswersCon, satisfction, rownum rNum
 				from Service
 				WHERE NOT(service_div LIKE '1:1게시판')
+				<choose>
+		  			<when test="cDev==1">
+		  				AND service_title LIKE '%${keyword}%'
+		  			</when>
+		  			<when test="cDev==2">
+		  				AND service_div LIKE '%${keyword}%'
+		  			</when>
+		  			<when test="cDev==3">
+		  				AND service_num LIKE '%${keyword}%'
+		  			</when>
+		  			<when test="cDev==4">
+		  				AND member_id LIKE '%${keyword}%'
+		  			</when>
+	  			
+	  				<otherwise></otherwise>
+	  			</choose>
 				ORDER BY service_num DESC)
 				<![CDATA[
 					WHERE rNum >= #{start} AND rNum <= #{end}
@@ -54,6 +70,25 @@
 	     		AND member_id LIKE '${login_id}'
 	     	</if>
 
+		</select>
+		
+		<!-- 상세페이지 -->
+		<select id="getQnaContent" parameterType="int" resultType="spring.project.tcat.VO.TcatBoardVO">
+			SELECT * FROM Service 
+			WHERE service_num = #{_parameter}
+		</select>
+		
+		<!-- 1:1게시판 글갯수 구하기 -->
+		<select id="getQnaOneToOneCnt"  resultType="int" parameterType="java.util.Map">
+			SELECT COUNT(*)
+			FROM Service 
+			WHERE service_div LIKE '1:1게시판'
+			<if test="service_div != null">
+     			AND service_div LIKE '${service_div}'
+	     	</if>
+			<if test="login_id != null">
+	     		AND member_id LIKE '${login_id}'
+	     	</if>
 			<choose>
 	  			<when test="cDev==1">
 	  				AND service_title LIKE '%${keyword}%'
@@ -70,15 +105,47 @@
 	  			
 	  			<otherwise></otherwise>
 	  		</choose>
-			
-			
+		
 		</select>
 		
-		<!-- 상세페이지 -->
-		<select id="getQnaContent" parameterType="int" resultType="spring.project.tcat.VO.TcatBoardVO">
-			SELECT * FROM Service 
-			WHERE service_num = #{_parameter}
+		<!-- 1:1게시판 게시글 목록조회 -->
+		<select id="getQnaOneToOneList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatBoardVO">
+			SELECT *
+			FROM
+				(select service_num, service_div, service_title, member_id, writeDate, AnswersStatus,
+				       QuestionCon, AnswersCon, satisfction, rownum rNum
+				from Service
+				WHERE service_div LIKE '1:1게시판'
+				<choose>
+		  			<when test="cDev==1">
+		  				AND service_title LIKE '%${keyword}%'
+		  			</when>
+		  			<when test="cDev==2">
+		  				AND service_div LIKE '%${keyword}%'
+		  			</when>
+		  			<when test="cDev==3">
+		  				AND service_num LIKE '%${keyword}%'
+		  			</when>
+		  			<when test="cDev==4">
+		  				AND member_id LIKE '%${keyword}%'
+		  			</when>
+	  			
+	  				<otherwise></otherwise>
+	  			</choose>
+				ORDER BY service_num DESC)
+				<![CDATA[
+					WHERE rNum >= #{start} AND rNum <= #{end}
+				]]>	
+			<if test="service_div != null">
+     			AND service_div LIKE '${service_div}'
+	     	</if>
+			<if test="login_id != null">
+	     		AND member_id LIKE '${login_id}'
+	     	</if>
+			
+		
 		</select>
+		
 		
 		
 		

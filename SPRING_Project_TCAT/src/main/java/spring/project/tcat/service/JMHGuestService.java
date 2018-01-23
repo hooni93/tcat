@@ -21,6 +21,8 @@ public interface JMHGuestService {
 	public void  getStoreList(HttpServletRequest req,Model model);
 	//공연 상세 정보 가져오기
 	public void  getContent(HttpServletRequest req,Model model);
+	//스토어 상세정보
+	public void  getContent_store(HttpServletRequest req,Model model);
 	
 	
 	//addWishList 위시리스트 추가
@@ -29,4 +31,10 @@ public interface JMHGuestService {
 	public void delWishList(HttpServletRequest req,Model model);
 	//getWishListIn 위시리스트 해당 공연 존재 확인
 	public void getWishListIn(HttpServletRequest req,Model model);
+	
+	//결제취소
+	public void buyCancel(HttpServletRequest req,Model model);
+	//perfRefund 환불요청
+	public void perfRefund(HttpServletRequest req,Model model);
+	
 }

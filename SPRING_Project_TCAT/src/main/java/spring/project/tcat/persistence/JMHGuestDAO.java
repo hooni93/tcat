@@ -45,6 +45,8 @@ public interface JMHGuestDAO {
 
 	// getContent 공연 상세정보 가져오기
 	public TcatPerformanceVO getContent(int per_id);
+	//getContent_store 스토어 상세페이지
+	public TcatPerDiscVO getContent_store(int disc_code);
 
 	// addWishList 위시리스트 추가
 	public void addWishList(Map<String, Object> map);
@@ -57,5 +59,11 @@ public interface JMHGuestDAO {
 	
 	//로그인 후 상세페이지 조회시 조회수 업
 	public void upHits(int per_id);
+	
+	//buyCancel 결제 취소
+	public int  buyCancel(int disc_num);
+	
+	//환불요청
+	public int  perfRefund(int disc_num);
 
 }

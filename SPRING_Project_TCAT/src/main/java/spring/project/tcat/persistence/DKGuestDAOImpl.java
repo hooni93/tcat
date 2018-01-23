@@ -11,7 +11,7 @@ import spring.project.tcat.config.Configuration;
 @Repository
 public class DKGuestDAOImpl implements DKGuestDAO{
 	
-	//글갯수구하기
+	//Q&A글갯수구하기
 	@Override
 	public int getQnaBoardCnt(Map<String, Object> map) {
 		int cnt=0;
@@ -23,7 +23,7 @@ public class DKGuestDAOImpl implements DKGuestDAO{
 		return cnt;
 	}
 	
-	//게시글 목록 조회
+	//Q&A게시글 목록 조회
 	@Override
 	public ArrayList<TcatBoardVO> getQnaBoardList(Map<String, Object> map) {
 		ArrayList<TcatBoardVO> dtos = null;
@@ -44,6 +44,31 @@ public class DKGuestDAOImpl implements DKGuestDAO{
 		
 		return dto;
 	}
+	
+	//1:1게시판 글갯수 구하기
+	@Override
+	public int getQnaOneToOneCnt(Map<String, Object> map) {
+		int cnt=0;
+		
+		DKGuestDAO dao = Configuration.getMapper(DKGuestDAO.class);
+		cnt = dao.getQnaOneToOneCnt(map);
+		
+		return cnt;
+	}
+	
+	//1:1게시판 게시글 목록조회
+	@Override
+	public ArrayList<TcatBoardVO> getQnaOneToOneList(Map<String, Object> map) {
+		ArrayList<TcatBoardVO> dtos = null;
+		
+		DKGuestDAO dao = Configuration.getMapper(DKGuestDAO.class);
+		dtos = dao.getQnaOneToOneList(map);
+		
+		return dtos;
+	}
+	
+	
+	
 	
 	//조회수 증가
 	/*@Override

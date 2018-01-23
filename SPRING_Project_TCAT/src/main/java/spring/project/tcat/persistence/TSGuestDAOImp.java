@@ -48,7 +48,7 @@ public class TSGuestDAOImp implements TSGuestDAO{
 
 
 
-
+		// 아이디 검색
 		@Override
 		public MemberVO memberSelect(String id) {
 			MemberVO vo=new MemberVO();
@@ -73,6 +73,7 @@ public class TSGuestDAOImp implements TSGuestDAO{
 			System.out.println("===========================");
 			return dtos;
 		}
+		
 		// 관람후기 개수
 		@Override
 		public int comment(Map<String, Object> map) {
@@ -83,6 +84,7 @@ public class TSGuestDAOImp implements TSGuestDAO{
 
 			return cnt;
 		}
+		
 		//고객단 후기 한줄평 쓰기
 		@Override
 		public int commentWrite(TcatBoardVO vo) {
@@ -92,6 +94,36 @@ public class TSGuestDAOImp implements TSGuestDAO{
 			cnt = dao.commentWrite(vo);
 			
 			return cnt;
+		}
+
+
+
+		// 게스트 관람/후기(해당공연) 개수
+		@Override
+		public int selectComment(Map<String, Object> map) {
+			int cnt = 0;
+			
+			TSGuestDAO dao = Configuration.getMapper(TSGuestDAO.class);
+			cnt = dao.selectComment(map);
+			
+			return cnt;
+		}
+
+
+
+		// 게스트 관람/후기 (해당공연) 목록
+		@Override
+		public ArrayList<TcatBoardVO> selectCommentBoard(Map<String, Object> map) {
+			ArrayList<TcatBoardVO> dtos = null; // 큰 바구니
+			TSGuestDAO dao = Configuration.getMapper(TSGuestDAO.class);
+			dtos = dao.selectCommentBoard(map);
+			System.out.println("===========================");
+			for(int i =0; i<dtos.size(); i++) {
+                String perf_image=dtos.get(i).getPerf_image();
+                System.out.println("perf_image==="+perf_image);
+             }
+			System.out.println("===========================");
+			return dtos;
 		}
 
 }

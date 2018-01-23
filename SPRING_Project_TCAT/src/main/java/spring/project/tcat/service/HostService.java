@@ -136,6 +136,11 @@ public interface HostService {
 	
 	//hot 카테고리 올리기
 	public void hotMenuUpdate(HttpServletRequest req,Model model);
+	
+	//구매요청
+	public void provalHost(HttpServletRequest req,Model model);
+	//구매업데이트
+	public void provalUpdate(HttpServletRequest req,Model model);
 	////////////////////////////////////영민 1/11 end //////////////////////////////////////////
 	
 

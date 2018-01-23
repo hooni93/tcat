@@ -95,13 +95,13 @@ public class TcatPerformanceVO {
     int refNum;				//조회수
     String per_ex;			//상품상세소개
     String Detail_Image; 	//추가 이미지
+
    //ticketing
     int round;
     Timestamp ticet_date;
     String seat_type;
     String seat_num;
 
-    
     //get,setter
     public String getSeat_num() {
 		return seat_num;

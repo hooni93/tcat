@@ -29,7 +29,7 @@ public class DKGuestController {
 		System.out.println("qnaBoardList");
 		req.setAttribute("url", "qnaBoardList");
 		dkService.qnaBoardList(req, model);
-		req.getSession().setAttribute("page", "qnaBoardList");
+		
 		return "tcat/serviceCenter/qnaBoardList";
 	}
 	
@@ -38,9 +38,9 @@ public class DKGuestController {
 	public String qnaOneToOneboard(HttpServletRequest req,Model model) {
 		System.out.println("qnaOneToOneboard");
 		req.setAttribute("url", "qnaOneToOneboard");
-		dkService.qnaBoardList(req, model);
-		req.getSession().setAttribute("page", "qnaOneToOneboard");
-		return "tcat/serviceCenter/qnaoneoneboard";
+		dkService.qnaOneToOneList(req, model);
+		
+		return "tcat/serviceCenter/qnaOneToOneboard";
 		
 	}
 	
@@ -48,9 +48,10 @@ public class DKGuestController {
 	@RequestMapping("qnaContent")
 	public String qnaContent(HttpServletRequest req,Model model) {
 		System.out.println("qnaContent");
-		req.setAttribute("url", "qnaContent");
+		
 		dkService.qnaContent(req, model);
-		req.getSession().setAttribute("page", "qnaOneToOneboard");
+	
+		
 		return "tcat/serviceCenter/qnaContent";
 	}
 	
