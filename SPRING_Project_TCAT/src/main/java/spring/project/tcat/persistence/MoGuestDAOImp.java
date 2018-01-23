@@ -1,6 +1,7 @@
 package spring.project.tcat.persistence;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -17,4 +18,18 @@ public class MoGuestDAOImp implements MoGuestDAO{
 		dtos=dao.hotList(category);
 		return dtos;
 	}
+	//좌석정보 가져오기	
+
+	@Override
+	public ArrayList<TcatPerformanceVO> ticketSeat(Map<String,Object> map) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatPerformanceVO> dtos=null;
+		MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		dtos=dao.ticketSeat(map);
+		return dtos;
+	}
+	
+	
+	
+	
 }

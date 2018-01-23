@@ -77,6 +77,7 @@ public class TcatBoardVO {
 	//Service
 	public int getService_num() {
 		return service_num;
+		
 	}
 	public void setService_num(int service_num) {
 		this.service_num = service_num;

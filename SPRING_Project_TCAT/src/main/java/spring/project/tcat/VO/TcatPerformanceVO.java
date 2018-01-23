@@ -95,11 +95,39 @@ public class TcatPerformanceVO {
     int refNum;				//조회수
     String per_ex;			//상품상세소개
     String Detail_Image; 	//추가 이미지
-    
-    
-    
-    
+
+   //ticketing
+    int round;
+    Timestamp ticet_date;
+    String seat_type;
+    String seat_num;
+
     //get,setter
+    public String getSeat_num() {
+		return seat_num;
+	}
+	public void setSeat_num(String seat_num) {
+		this.seat_num = seat_num;
+	}
+    public String getSeat_type() {
+		return seat_type;
+	}
+	public void setSeat_type(String seat_type) {
+		this.seat_type = seat_type;
+	}
+	public Timestamp getTicet_date() {
+		return ticet_date;
+	}
+	public void setTicet_date(Timestamp ticet_date) {
+		this.ticet_date = ticet_date;
+	}
+    public int getRound() {
+		return round;
+	}
+	public void setRound(int round) {
+		this.round = round;
+	}
+
     public String getSeat_line() {
 		return seat_line;
 	}
