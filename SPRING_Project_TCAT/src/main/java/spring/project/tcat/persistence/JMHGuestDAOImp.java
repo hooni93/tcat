@@ -118,6 +118,13 @@ public class JMHGuestDAOImp implements JMHGuestDAO {
 		return perf;
 	}
 
+	// getContent_store 스토어 상세페이지
+	public TcatPerDiscVO getContent_store(int disc_code) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		TcatPerDiscVO str = dao.getContent_store(disc_code);
+		return str;
+	}
+
 	// 로그인 후 상세페이지 조회시 조회수 업
 	public void upHits(int per_id) {
 		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
@@ -156,4 +163,5 @@ public class JMHGuestDAOImp implements JMHGuestDAO {
 		int cnt = dao.perfRefund(disc_num);
 		return cnt;
 	}
+
 }

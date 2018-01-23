@@ -168,6 +168,10 @@ $(document).ready(function(){
 function contentPage(per_id){
 	load('contentMain?per_id='+per_id);
 }
+//스토어 상세페이지 onclick시
+function contentMain_store(disc_code){
+	load('contentMain_store?disc_code='+disc_code);
+}
 </script>
 </head>
 <body>
@@ -196,7 +200,7 @@ function contentPage(per_id){
 				  </li>
 				  <li><a href="#">예매확인/취소</a></li>
 
-				  <li><a href="#">위시리스트</a></li>
+				  <li><a onclick="load('wishList');">위시리스트</a></li>
 				  <c:if test="${sessionScope.login_id!=null}">
 
 				  <li><a onclick="load('cartList');">장바구니</a></li>
