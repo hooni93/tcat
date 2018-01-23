@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>관람/상품 후기 게시판</title>
-</script> -->
+</script>
 </head>
 <body>
 	<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;관람/상품 후기 관리 게시판</h2>

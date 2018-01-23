@@ -188,7 +188,7 @@ function detailOpen(category,id){
 	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );	//hostPage의 오른쪽 result에 결과를 뿌려준다.
 	 
 	 if(url=="hostMain" || url=="join_retireMember" || url=="hotMusical" || url=="sleepMember" || url=="stockDelete_musical" || url=="stockOutOf_musical"
-		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified" || url =="commentManager"){
+		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified" || url =="commentManager"|| url =="eventHost"|| url =="provalMain"){
 	 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side" );	//들어오는 url이 if조건에 만족할때 그에맞는 사이드페이지를 hostPage의 왼쪽 side_result쪽에 뿌려준다.
 	 }
  }
@@ -242,7 +242,7 @@ function detailOpen(category,id){
 			 return false;
 		 } 
 	 }
-	//핫리스트 삭제
+	//핫리스트 업데이트
 	 function hotUpdate(hotListSize, per_id,url){
 		 alert(url);
 		 if(hotListSize<4){
@@ -264,10 +264,32 @@ function detailOpen(category,id){
 		load('eventUpdate?notice_num='+notice_num+'&url='+url);
 	 }
 	//이벤트 수정
-	/* function eventUpdateList(contents,notice_num,url){
+	function eventUpdateList(notice_num,contents,notice_title,notice_image,url){
 		 alert(url);
-		load('eventUpdateList?notice_num='+notice_num+'&contents='+contents+'&notice_title='+notice_title+'&url='+url);
-	 } */
+		load('eventUpdateList?notice_num='+notice_num+'&notice_title='+notice_title+'&contents='+contents+'&notice_image='+notice_image+'&url='+url);
+	 }
+	////////////////////////////
+	/* function eventSubmit(url){ 
+   var result = document.getElementById("result");
+   var formData = $("#eventUpdateForm").serialize();
+   $.ajax({
+               type : "POST",
+               url : url,
+               cache : false,
+               data : formData,
+               success :  function(msg) {
+                  $('#result').html(msg);
+               }, 
+               error : onError
+   });
+   function onError(data, status){alert("error");}
+} */
+	////////////////////////////
+	//핫리스트 업데이트
+	 function provalUpdate(ticket_num,url){
+		 alert(url);
+		load('provalUpdate?ticket_num='+ticket_num+'&url='+url);
+	 }
 	 /* 영민이 제작 */
 	 /* 태성이 제작 */
 	 function Cfirst_grade(url,category,id,first_grade){
@@ -338,7 +360,7 @@ location.reload();
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">주문관리<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
            <li><a onclick="load('orderList')">전체 주문 목록조회</a></li>
-            <li><a href="#">주문승인관리</a></li>
+            <li><a onclick="load('provalMain')">주문승인관리</a></li>
             <li><a href="#">배송관리</a></li>
             <li class="divider"></li>
             <li><a href="#">취소/교환/반품/환불관리</a></li>

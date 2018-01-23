@@ -805,9 +805,35 @@ public class HostDAOImp implements HostDAO {
 			updateCnt=dao.hotUpdateList(strPer_id);
 			return updateCnt;
 		}
+	
 	//////////////// HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  //////////////
-	
-	
+////////////////HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-23 성영민  //////////////
+		//구매요청 갯수
+		@Override
+		public int provalCnt() {
+			int cnt=0;
+			HostDAO dao=Configuration.getMapper(HostDAO.class);
+			cnt=dao.provalCnt();
+			return cnt;
+		}
+		//구매요청리스트
+		@Override
+		public ArrayList<TcatTicketingVO> provalList(Map<String, Object> map) {
+			ArrayList<TcatTicketingVO> dtos = null;
+			HostDAO dao= Configuration.getMapper(HostDAO.class);
+			dtos=dao.provalList(map);
+			System.out.println("maps"+map);
+			return dtos;
+		}
+		//hot카테고리 올리기
+		@Override
+		public int provalUpdateCnt(int num) {
+			int updateCnt=0;
+			HostDAO dao=Configuration.getMapper(HostDAO.class);
+			updateCnt=dao.provalUpdateCnt(num);
+			return updateCnt;
+		}
+////////////////HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-23 성영민  //////////////
 	///////////////////////  동금 1/9  ///////////////////////////
 	//상품갯수 불러오기
 	@Override
@@ -957,4 +983,5 @@ public class HostDAOImp implements HostDAO {
 		return cnt;
 	}
 ///////////////////////  태성 1/21 end///////////////////////////
+	
 }
