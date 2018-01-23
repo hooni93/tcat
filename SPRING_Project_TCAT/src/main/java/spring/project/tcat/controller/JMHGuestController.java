@@ -164,4 +164,20 @@ public class JMHGuestController {
 		return "tcat/content/contentMain";
 	}
 	
+	//결제취소 buyCancel
+	@RequestMapping("buyCancel")
+	public String buyCancel(HttpServletRequest req, Model model) {
+		System.out.println("buyCancel");
+		mhService.buyCancel(req, model);
+		return "tcat/memberMyPage/buyCancelPro";
+	}
+	
+	//perfRefund 환불요청
+	@RequestMapping("perfRefund")
+	public String perfRefund(HttpServletRequest req, Model model) {
+		System.out.println("perfRefund");
+		mhService.perfRefund(req, model);
+		return "tcat/memberMyPage/perfRefundPro";
+	}
+	
 }

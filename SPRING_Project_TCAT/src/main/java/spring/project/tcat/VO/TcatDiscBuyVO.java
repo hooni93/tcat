@@ -31,9 +31,16 @@ public class TcatDiscBuyVO {
     String member_id;
     int disc_buyStep;
     String sale_div ;
+    int buy_count;
 	//<sale>
  	int sale_rate;
- 	//<delevaryInfo>
+ 	public int getBuy_count() {
+		return buy_count;
+	}
+	public void setBuy_count(int buy_count) {
+		this.buy_count = buy_count;
+	}
+	//<delevaryInfo>
  	String del_name;
  	String del_addr;
  	String del_hp; 
