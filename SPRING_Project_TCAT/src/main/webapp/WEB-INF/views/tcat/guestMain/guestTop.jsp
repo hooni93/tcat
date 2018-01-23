@@ -77,31 +77,6 @@ function memberSubmit(url) { /*AJAX submit  */
 		alert("error");
 	}
 }
-/* $(function() {
-	$("#Imember").click(function() {
-		var formData = new FormData();
-		formData.append("member_id", $("input[name=member_id]").val());
-		formData.append("member_pwd",$("input[name=member_pwd]").val());
-		formData.append("member_name",$("input[name=member_name]").val());
-		formData.append("member_hp", $("input[name=member_hp]").val());
-		formData.append("addr", $("input[name=addr]").val());
-		formData.append("postNum", $("input[name=postNum]").val());
-		formData.append("detailAddr", $("input[name=detailAddr]").val());
-		formData.append("member_email",$("input[name=member_email]").val());
-		formData.append("member_gender", $("input[name=member_gender]").val());
-		formData.append("member_birth", $("input[name=member_birth]").val());
-		$.ajax({
-			url : 'insertMember',
-			data : formData,
-			processData : false,
-			contentType : false,
-			type : 'POST',
-			success : function(data) {
-				$('#result').html(data);
-			}
-		});
-	});
-}); */
 /* 0111 현석 */
 $( function() {
 	$( "#d1" ).datepicker();
@@ -141,7 +116,6 @@ function findId(){
 <script type="text/javascript">
 
 
-
 //ajax
 function ajaxSubmit(url){   /* AJAX submit */  
    var result = document.getElementById("result");
@@ -161,6 +135,10 @@ function ajaxSubmit(url){   /* AJAX submit */
 
 
 function load(url){
+	 
+	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );
+	 window.location.hash = '#url' + url;
+	 
 	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url,function(msg){
 		 history.pushState({page:url},null);//1. history에 pushState로  page를 저장 이때 url에 get방식을 쓰면 그 파라미터도 같이 넘어감
 		 //history.pushState(state,title,url);

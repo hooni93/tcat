@@ -42,6 +42,7 @@ public class TcatBoardVO {
 	String QuestionCon;
 	String AnswersCon;
 	String satisfction;
+	
 	//Notice
 	int notice_num;
 	String notice_title;
