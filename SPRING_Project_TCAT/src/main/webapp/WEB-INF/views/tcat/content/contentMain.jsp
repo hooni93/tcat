@@ -85,6 +85,14 @@ $(document).ready(function() {
 			}
 		}
 	});
+	
+	
+	
+//화면 뿌리기
+function commentList(url) {
+	
+	$("#commentList").load( "${pageContext.request.contextPath}/"+url);
+}
 </script>
 </head>
 <div class="row">
@@ -95,7 +103,6 @@ $(document).ready(function() {
 	<div class="col-md-10">
 		<!--사이드  -->
 		<div class="col-md-2"></div>
-
 
 		<!--공연정보  -->
 		<div class="col-md-9">
@@ -200,11 +207,7 @@ $(document).ready(function() {
 					</div>
 				</div>
 			</div>
-
-
 			<div class="col-md-12 h21"></div>
-
-
 			<!--하단  -->
 			<div class="col-md-12" style="padding: 0;">
 				<!--탭  -->
@@ -212,13 +215,12 @@ $(document).ready(function() {
 
 					<ul class="nav nav-tabs" role="tablist">
 						<li role="presentation" class="active"><a href="#content" aria-controls="home" role="tab" data-toggle="tab">상제정보</a></li>
-						<li role="presentation"><a href="#review" aria-controls="profile" role="tab" data-toggle="tab">관람후기</a></li>
-						<li role="presentation"><a href="#cancelInfo" aria-controls="messages" role="tab" data-toggle="tab">취소/환불안내</a></li>
+
+						<li role="presentation"><a href="#review" aria-controls="profile" role="tab" data-toggle="tab" onclick="commentList('watchLatter?perf_title=${perf.perf_title}&per_id=${perf.per_id}');">관람후기</a></li>
+						<li role="presentation"><a href="cancelInfo" aria-controls="messages" role="tab" data-toggle="tab">취소/환불안내</a></li>
 					</ul>
 				</div>
-
 				<div class="col-md-12 h25"></div>
-
 
 				<!--상세내용  -->
 				<div class="col-md-9 bffffff" style="padding: 0;">
@@ -238,20 +240,25 @@ $(document).ready(function() {
 								</div>
 							</div>
 							<!--관람후기  -->
+
+							<div role="tabpanel" class="tab-pane" id="review">
+
+								<div class="col-md-15" id="commentList"></div>
+							</div>
+							
+							
+
 							<div role="tabpanel" class="tab-pane" id="review">2
 								
 							</div>
+
 							<!--취소환불 안내  -->
 							<div role="tabpanel" class="tab-pane" id="cancelInfo">3</div>
 						</div>
 					</div>
 				</div>
-
-
 				<!--최근본 상품, 남녀별 구별   보류?-->
 				<div class="col-md-3 " style="padding: 0;">잡다구리잡다가루</div>
-
-
 			</div>
 		</div>
 		<!--공백  -->

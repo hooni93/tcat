@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>관람/상품 후기 게시판</title>
-</script> -->
+</script>
 </head>
 <body>
 	<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;관람/상품 후기 관리 게시판</h2>
@@ -35,7 +35,7 @@
 
 			<div class="col-md-10">
 				<table
-					class="table table-hover table-bordered table-condensed c fs15">
+					class="table table-hover table-bordered table-condensed c fs12">
 					<tr class="danger">
 						<td><b>후기번호</b></td>
 						<td><b>공연제목</b></td>

@@ -1210,6 +1210,33 @@
 	</update>
 
      <!-- 18.01.11 영민 수정끝  -->
+     <!-- 18.01.23 영민 수정  -->
+     <!-- 구매요청갯수 -->
+     <select id="provalCnt" resultType="int">
+		select count(*)
+		from
+		Ticketing
+		where ticket_step=1
+	</select>
+	<!-- 구매요청리스트 -->
+	<select id="provalList" resultType="spring.project.tcat.VO.TcatTicketingVO">
+		<![CDATA[
+		select *
+		from(select ticket_num, member_id, per_id, ticet_date, seat_type, seat_num, ticket_step, rownum rNum
+		from(
+			select * from Ticketing
+			ORDER by ticket_num desc
+				)
+		where ticket_step=1
+		)
+		WHERE rNum >=#{start} AND rNum <=#{end}
+		]]>
+	</select>
+	<!-- 구매요청 -->
+	<update id="provalUpdateCnt" parameterType="int">
+		update Ticketing set ticket_step='2' where ticket_num=#{num}
+	</update>
+     <!-- 18.01.23 영민 수정끝  -->
      
 <!-- 18.01.11 동금 수정  -->
      
@@ -1485,10 +1512,20 @@
 	
 	<!-- 관람후기 목록  -->
 	<select id="commentList" resultType="spring.project.tcat.VO.TcatBoardVO">
-	 select * 
+	select *
+		from(
+		select notice_num,perf_title,perf_image, contents,member_id,
+		writedate,ROWNUM rnum
+		from (
+		select no.notice_num,per.perf_title,per.perf_image, no.contents,
+		no.member_id, no.writedate
+		from notice no, performanceInfo per
+		where no.per_id LIKE per.per_id 
+		and no.notice_div LIKE 4
+	<!--  select * 
 	 from(select no.notice_num,per.perf_title,no.notice_image, no.contents, no.member_id, no.writedate,ROWNUM rnum
 	 from notice no, performanceInfo per 
-	 where no.per_id = per.per_id and no.notice_div = 4
+	 where no.per_id = per.per_id and no.notice_div = 4 -->
 	 
 	<choose>
 			<when test="sDev==1">
@@ -1505,8 +1542,8 @@
 			</when>
 			<otherwise></otherwise>
 		</choose>
-		order by writedate desc 
-		)
+		order by notice_num desc
+		))
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>

@@ -7,6 +7,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <script type="text/javascript">
+$(function() {
+	$("#eventUp").click(function() {
+		
+			formData.append("notice_num", $("input[name=notice_num]").val());
+			formData.append("notice_title",$("input[name=notice_title]").val());
+			formData.append("contents", $("input[name=contents]").val());
+			formData.append("notice_image", $("input[name=notice_image]").val());
+
+			$.ajax({
+				url : 'eventUpdateList',
+				data : formData,
+				processData : false,
+				contentType : false,
+				type : 'POST',
+				success : function(data) {
+					$('#result').html(data);
+				}
+			});
+		}
+}
 </script>
 </head>
 <body class="b400040">
@@ -21,7 +41,7 @@
 						<h2>이벤트</h2>
 						<hr>
 						<br>
-						<form action="" name="eventUpdateForm" id="eventUpdateForm">
+						<form action="eventUpdateList" id="eventUpdateForm" method="POST">
 							<c:forEach var="vo" items="${dto}">
 								<h4>${vo.notice_num}</h4>
 								<h4>타이틀</h4>
@@ -32,23 +52,16 @@
 								<h4>내용</h4>
 								<input type="text" name="contents" class="form-control"
 									maxlength="200" value="${vo.contents}">
+								<h4>공연이미지</h4>
+								<input type="file" name="notice_image">
 								<h4>(* 티켓 소진시까지 진행)</h4>
 								<br>
 								<br>
 								<br>
 							</c:forEach>
-							<div class="form-group text-center">
-							
-								<button type="button" class="btn btn-info"
-									onclick="eventUpdateList('${vo.notice_num}','${vo.notice_title}','${vo.contents}','eventHost');">
+							<button type="button" class="btn btn-info" id="eventUp">
 									수정완료<i class="fa fa-check spaceLeft"></i>
-								</button>
-								<button type="submit" class="btn btn-warning">
-									수정취소<i class="fa fa-times spaceLeft"
-										onclick="window.history.go(-2);"></i>
-								</button>
-							</div>
-
+								</button>  
 						</form>
 					</div>
 

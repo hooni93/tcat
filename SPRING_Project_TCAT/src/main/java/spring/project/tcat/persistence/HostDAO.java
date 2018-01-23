@@ -229,6 +229,14 @@ public interface HostDAO {
 	
 	//hot 카테고리 올리기
 	public int hotUpdateList(int strPer_id);
+	
+	//구매요청 갯수
+	public int provalCnt();
+	//구매요청 리스트
+	public ArrayList <TcatTicketingVO>provalList(Map<String,Object> map);
+	
+	//구매요청
+	public int provalUpdateCnt(int num);
 	////////////////////////////////////영민 1/10 end ///////////////////////////////////////
 	
 	

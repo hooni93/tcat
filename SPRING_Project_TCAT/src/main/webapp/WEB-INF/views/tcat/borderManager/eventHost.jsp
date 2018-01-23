@@ -25,7 +25,49 @@
 						<hr>
 						<br>
 						</h4>
+						<div>
+							<table
+							class="table table-hover table-bordered table-condensed c fs10">
+							<tr class="bg-primary">
+								<th colspan="2"><h4>이벤트 정보를 입력하세요.</h4></th>
+							</tr>
+							<tr>
+								<th><h5>번호</h5></th>
+								<td>
+								<input type="number" name="num" class="form-control">
+								</td>
+							</tr>
+							<tr>
+								<th><h5>제목</h5></th>
+								<td>
+								<input type="text" name="title" class="form-control"
+									maxlength="200">
+								</td>
+							</tr>
+							<tr>
+								<th><h5>작성일</h5></th>
+								<td>
+								<input type="text" name="writeDate" class="form-control">
+								</td>
+							</tr>
+							<tr>
+								<th><h5>내용</h5></th>
+								<td>
+								<input type="text" name="contents" class="form-control"
+									maxlength="200">
+								</td>
+							</tr>
+							<tr>
+								<th><h5>작성자</h5></th>
+								<td>
+								<input type="text" name="contents" class="form-control">
+								</td>
+							</tr>
+							</table>
+						</div>
 					<div>
+					
+					<br><br><br>
 						<c:if test="${cnt > 0}">
 						<c:forEach var="vos" items="${dtos}" >
 						<h4>${vos.notice_num}</h4>
@@ -34,7 +76,7 @@
 						<img src="${image}eventList/${vos.notice_image}">
 						<h4>${vos.contents}</h4>
 						<button type="button" class="btn btn-primary"
-							onclick="eventUpdate('${vos.notice_num}','eventHost');">수정</button>
+							onclick="eventUpdate('${vos.notice_num}','eventUpdate');">수정</button>
 						<button type="button" class="btn btn-primary"
 							onclick="eventDelete('${vos.notice_num}','eventHost');">삭제</button>
 						<br><br><br>

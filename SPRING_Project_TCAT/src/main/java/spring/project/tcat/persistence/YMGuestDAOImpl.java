@@ -78,5 +78,14 @@ public class YMGuestDAOImpl implements YMGuestDAO{
 		cnt=dao.eventDeleteCnt(num);
 		return cnt;
 	}
+	//이벤트수정
+	@Override
+	public int eventUpdateCnt(Map<String, Object> map) {
+		int cnt=0;
+		YMGuestDAO dao= Configuration.getMapper(YMGuestDAO.class);
+		System.out.println("mapfdsf"+map);
+		cnt=dao.eventUpdateCnt(map);
+		return cnt;
+	}
 		
 }

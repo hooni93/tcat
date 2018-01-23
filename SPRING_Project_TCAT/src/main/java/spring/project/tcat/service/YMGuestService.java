@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public interface YMGuestService {
 	//등급관리
@@ -18,5 +19,6 @@ public interface YMGuestService {
 	//이벤트삭제
 	public void eventDelete(HttpServletRequest req,Model model);
 	//이벤트수정
-	/*public void eventUpdateList(HttpServletRequest req,Model model);*/
+	public void eventUpdateList(MultipartHttpServletRequest req,Model model);
+
 }
