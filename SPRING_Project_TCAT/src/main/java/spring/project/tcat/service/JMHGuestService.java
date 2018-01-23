@@ -21,6 +21,8 @@ public interface JMHGuestService {
 	public void  getStoreList(HttpServletRequest req,Model model);
 	//공연 상세 정보 가져오기
 	public void  getContent(HttpServletRequest req,Model model);
+	//스토어 상세정보
+	public void  getContent_store(HttpServletRequest req,Model model);
 	
 	
 	//addWishList 위시리스트 추가

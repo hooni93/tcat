@@ -35,7 +35,7 @@
 
 			<div class="col-md-10">
 				<table
-					class="table table-hover table-bordered table-condensed c fs15">
+					class="table table-hover table-bordered table-condensed c fs12">
 					<tr class="danger">
 						<td><b>후기번호</b></td>
 						<td><b>공연제목</b></td>

@@ -1057,6 +1057,7 @@ public class TcatHostController {
 	System.out.println("commentManager_side");
 	return "tcat/borderManager/commentManager_side";
 	}
+	
 	//관람/상품 후기 관리 게시판 - 삭제기능
 	@RequestMapping("commentDelete")
 	public String commentDelete(HttpServletRequest req,Model model) {

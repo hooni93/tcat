@@ -63,7 +63,7 @@
 						for(int k=0; k < vipArr.length;k++){
 							if(vipArr[k].equals(check)){
 								checkNum=1;
-								 %> class="myButtonVIP m1 w40" value="VIP.<%=check%>"><% 
+								 %> class="myButtonVIP m1 w50" value="VIP.<%=check%>"><% 
 							}
 						}
 					}
@@ -71,7 +71,7 @@
 						for(int k=0; k < rArr.length;k++){
 							if(rArr[k].equals(check)){
 								checkNum=1;
-								 %> class="myButtonR m1 w40" value="R.<%=check%>"><% 
+								 %> class="myButtonR m1 w50" value="R.<%=check%>"><% 
 							}
 						}
 					}
@@ -79,7 +79,7 @@
 						for(int k=0; k < sArr.length;k++){
 							if(sArr[k].equals(check)){
 								checkNum=1;
-								 %> class="myButtonS m1 w40" value="S.<%=check%>"><% 
+								 %> class="myButtonS m1 w50" value="S.<%=check%>"><% 
 							}
 						}
 					}
@@ -87,7 +87,7 @@
 						for(int k=0; k < aArr.length;k++){
 							if(aArr[k].equals(check)){
 								checkNum=1;
-								 %> class="myButtonA m1 w40" value="A.<%=check%>"><% 
+								 %> class="myButtonA m1 w50" value="A.<%=check%>"><% 
 							}
 						}
 					}
@@ -95,7 +95,7 @@
 						for(int k=0; k < bArr.length;k++){
 							if(bArr[k].equals(check)){
 								checkNum=1;
-								 %> class="myButtonA m1 w40" value="B.<%=check%>"><% 
+								 %> class="myButtonA m1 w50" value="B.<%=check%>"><% 
 							}
 						}
 					}

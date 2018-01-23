@@ -1512,10 +1512,20 @@
 	
 	<!-- 관람후기 목록  -->
 	<select id="commentList" resultType="spring.project.tcat.VO.TcatBoardVO">
-	 select * 
+	select *
+		from(
+		select notice_num,perf_title,perf_image, contents,member_id,
+		writedate,ROWNUM rnum
+		from (
+		select no.notice_num,per.perf_title,per.perf_image, no.contents,
+		no.member_id, no.writedate
+		from notice no, performanceInfo per
+		where no.per_id LIKE per.per_id 
+		and no.notice_div LIKE 4
+	<!--  select * 
 	 from(select no.notice_num,per.perf_title,no.notice_image, no.contents, no.member_id, no.writedate,ROWNUM rnum
 	 from notice no, performanceInfo per 
-	 where no.per_id = per.per_id and no.notice_div = 4
+	 where no.per_id = per.per_id and no.notice_div = 4 -->
 	 
 	<choose>
 			<when test="sDev==1">
@@ -1532,8 +1542,8 @@
 			</when>
 			<otherwise></otherwise>
 		</choose>
-		order by writedate desc 
-		)
+		order by notice_num desc
+		))
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>

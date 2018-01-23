@@ -292,22 +292,22 @@ function detailOpen(category,id){
 	 }
 	 /* 영민이 제작 */
 	 /* 태성이 제작 */
-	 function Cfirst_grade(url,category,id,first_grade){
+	function Cfirst_grade(url,category,id,first_grade){
 	var params="id="+id+"&category="+category+"&first_grade="+first_grade;
  	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
- }
-function Sfirst_grade(url,category,disc_code,first_grade){
+	 }
+	function Sfirst_grade(url,category,disc_code,first_grade){
 	var params="disc_code="+disc_code+"&category="+category+"&first_grade="+first_grade;
  	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
-}
-function Cstep(url,category,id,per_step){
+	}
+	function Cstep(url,category,id,per_step){
 	var params="id="+id+"&category="+category+"&per_step="+per_step;
  	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
- }
-function Sstep(url,category,disc_code,disc_step){
+	 }
+	function Sstep(url,category,disc_code,disc_step){
 	var params="disc_code="+disc_code+"&category="+category+"&disc_step="+disc_step;
  	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
-}
+	}
 ///////////////////태성 01/22 start/////////////////////////////
 //관람/상품 후기 삭제 
 function commentDelete(notice_num,url){

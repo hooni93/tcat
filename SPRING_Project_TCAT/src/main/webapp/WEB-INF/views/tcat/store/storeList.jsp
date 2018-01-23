@@ -91,12 +91,12 @@
 				<div class="col-sm-12 c" style="border-bottom: 1px solid #d0d0d0">
 					<div class="col-sm-8 tm">
 						<div class="col-sm-3 p5">
-							<a onclick=""> <img src="${image}store/${disc.disc_image }"
+							<a onclick="contentMain_store(${disc.disc_code})"> <img src="${image}store/${disc.disc_image }"
 								width="100%" height="80px">
 							</a>
 						</div>
 						<div class="col-sm-9 pt18">
-							<b class="floatL"> <a onclick="" style="color: black">
+							<b class="floatL"> <a onclick="contentMain_store(${disc.disc_code})" style="color: black">
 									${disc.disc_title } </a>
 							</b>
 						</div>

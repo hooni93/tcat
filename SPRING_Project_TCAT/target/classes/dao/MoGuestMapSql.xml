@@ -4,6 +4,7 @@
              "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
              
    <mapper namespace="spring.project.tcat.persistence.MoGuestDAO">
+   		<!-- 핫리스트 가져오기 -->
    		<select id="hotList" parameterType="String" resultType="spring.project.tcat.VO.TcatPerformanceVO">   			
 			SELECT pb.per_id per_id,
 			            pb.perf_title perf_title,
@@ -22,7 +23,7 @@
 			            p.per_step per_step
 			            from performanceInfo p join category c ON p.cateNum = c.cateNum WHERE mDev=#{_parameter} AND per_step=2) pb JOIN hallInfo h ON pb.hall_id=h.hall_id
    		</select>
-   
+   <!-- 좌석정보 가져오기 -->
    		<select id="ticketSeat" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerformanceVO">
 			<![CDATA[select 
 						t.per_id per_id,t.round round,t.ticet_date ticet_date,t.seat_type seat_type,
@@ -42,6 +43,25 @@
 						 where per_step != 4 AND ticket_step != 7 AND ticket_step!=8
 						  AND t.per_id=#{per_id} AND round = #{round} AND ticet_date=#{ticet_date}  ]]> 
    		</select>
+   
+   <!-- 사진게시판 게시글 숫자 가져오기 -->
+   		<select id="photoBoarderListCnt" resultType="int">
+   			select count(*) from Notice WHERE notice_div=3
+   		</select>
+   
+   <!-- 사진게시판 게시글  -->
+   	<select id="photoBoarderList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatBoardVO">
+   		<![CDATA[select * from 
+		 (select notice_num,notice_title,writeDate,contents,notice_image,notice_div,member_id,rownum rNum from 
+		 (select * from notice order by notice_num desc)
+			where notice_div=3)  WHERE rNum>=#{start} AND rNum<=#{end} ]]>
+   	</select>
+   	
+   	<!-- 답글올리기 -->
+   	<insert id="photoBoarderCommentWrite" parameterType="spring.project.tcat.VO.TcatBoardVO">
+   		<![CDATA[INSERT INTO notice (notice_num,notice_title,writedate,contents,member_id,notice_div) 
+   		values (notice_seq.nextval,#{notice_num},sysdate,#{contents},#{member_id},31) ]]>
+   	</insert>
    
    
    

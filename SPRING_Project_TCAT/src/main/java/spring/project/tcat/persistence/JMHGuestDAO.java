@@ -45,6 +45,8 @@ public interface JMHGuestDAO {
 
 	// getContent 공연 상세정보 가져오기
 	public TcatPerformanceVO getContent(int per_id);
+	//getContent_store 스토어 상세페이지
+	public TcatPerDiscVO getContent_store(int disc_code);
 
 	// addWishList 위시리스트 추가
 	public void addWishList(Map<String, Object> map);
