@@ -129,7 +129,9 @@ public class HSGuestDAOImpl implements HSGuestDAO{
 	@Override
 	public ArrayList<CartVO> cartList(Map<String, Object> map) {
 		ArrayList<CartVO> dtos=null;
+		System.out.println("111");
 		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		System.out.println("222");
 		dtos=dao.cartList(map);
 		return dtos;
 	}

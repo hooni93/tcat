@@ -2,6 +2,12 @@ package spring.project.tcat.service;
 
 
 
+import java.io.File;
+
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import spring.project.tcat.VO.TcatBoardVO;
 import spring.project.tcat.persistence.YMGuestDAOImpl;
@@ -193,14 +201,45 @@ public class YMGuestServiceImp implements YMGuestService {
 		model.addAttribute("deleteCnt", deleteCnt);
 		
 	}
-	/*//이벤트수정
+	//이벤트수정
 	@Override
-	public void eventUpdateList(HttpServletRequest req, Model model) {
-		int num=Integer.parseInt(req.getParameter("notice_num"));
-		String title= req.getParameter("notice_title");
-		String contents= req.getParameter("contents");
-		System.out.println("num===="+num);
-		System.out.println("title===="+title);
-		System.out.println("contents===="+contents);
-	}*/
+	public void eventUpdateList(MultipartHttpServletRequest req, Model model) {
+		MultipartFile file = req.getFile("notice_image");
+		String realDir = "C:\\Dev\\TCATworkspace\\git\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\eventList\\";
+		String saveDir = req.getRealPath("/resources/image/eventList/");
+		try {
+			file.transferTo(new File(saveDir + file.getOriginalFilename()));
+			FileInputStream fis = new FileInputStream(saveDir + file.getOriginalFilename());
+			FileOutputStream fos = new FileOutputStream(realDir + file.getOriginalFilename());
+
+			int data = 0;
+
+			while ((data = fis.read()) != -1) {
+				fos.write(data);
+			}
+			
+			fis.close();
+			fos.close();
+			
+			int updateCnt=0;
+			int num=Integer.parseInt(req.getParameter("notice_num"));
+			String title= req.getParameter("notice_title");
+			String content= req.getParameter("contents");
+			String notice_image= file.getOriginalFilename();
+			
+			Map<String,Object> map=new HashMap<String, Object>();
+			map.put("num", num);
+			map.put("title", title);
+			map.put("content", content);
+			map.put("notice_image", notice_image);
+			System.out.println("map111:"+map);
+			updateCnt=YMDao.eventUpdateCnt(map);
+			System.out.println("map222:"+map);
+			model.addAttribute("updateCnt", updateCnt);
+		} catch(IOException e) {
+            e.printStackTrace();
+		}
+	}
+	
+	
 }

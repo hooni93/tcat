@@ -1210,6 +1210,33 @@
 	</update>
 
      <!-- 18.01.11 영민 수정끝  -->
+     <!-- 18.01.23 영민 수정  -->
+     <!-- 구매요청갯수 -->
+     <select id="provalCnt" resultType="int">
+		select count(*)
+		from
+		Ticketing
+		where ticket_step=1
+	</select>
+	<!-- 구매요청리스트 -->
+	<select id="provalList" resultType="spring.project.tcat.VO.TcatTicketingVO">
+		<![CDATA[
+		select *
+		from(select ticket_num, member_id, per_id, ticet_date, seat_type, seat_num, ticket_step, rownum rNum
+		from(
+			select * from Ticketing
+			ORDER by ticket_num desc
+				)
+		where ticket_step=1
+		)
+		WHERE rNum >=#{start} AND rNum <=#{end}
+		]]>
+	</select>
+	<!-- 구매요청 -->
+	<update id="provalUpdateCnt" parameterType="int">
+		update Ticketing set ticket_step='2' where ticket_num=#{num}
+	</update>
+     <!-- 18.01.23 영민 수정끝  -->
      
 <!-- 18.01.11 동금 수정  -->
      

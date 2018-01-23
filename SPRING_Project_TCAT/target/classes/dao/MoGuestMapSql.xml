@@ -23,6 +23,28 @@
 			            from performanceInfo p join category c ON p.cateNum = c.cateNum WHERE mDev=#{_parameter} AND per_step=2) pb JOIN hallInfo h ON pb.hall_id=h.hall_id
    		</select>
    
+   		<select id="ticketSeat" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+			<![CDATA[select 
+						t.per_id per_id,t.round round,t.ticet_date ticet_date,t.seat_type seat_type,
+						t.seat_num seat_num,t.ticket_step ticket_step,ph.per_step per_step,
+						ph.remain_round remain_round,ph.VIP_seatPrice VIP_seatPrice,ph.R_seatPrice R_seatPrice,
+						ph.S_seatPrice S_seatPrice,ph.A_seatPrice A_seatPrice,ph.B_seatPrice B_seatPrice,
+						ph.hall_id hall_id,ph.VIP_seat VIP_seat,ph.R_seat R_seat,ph.S_seat S_seat,
+						ph.A_seat A_seat,ph.B_seat B_seat,ph.seat_line seat_line 
+						 from 
+						(select 
+						p.per_id per_id,p.per_step per_step,p.remain_round remain_round,
+						p.VIP_seatPrice VIP_seatPrice,p.R_seatPrice R_seatPrice,
+						p.S_seatPrice S_seatPrice,p.A_seatPrice A_seatPrice,p.B_seatPrice B_seatPrice,
+						h.hall_id hall_id,h.VIP_seat VIP_seat,
+						h.R_seat R_seat,h.S_seat S_seat,h.A_seat A_seat,h.B_seat B_seat,h.seat_line seat_line 
+						from performanceinfo p join hallinfo h on p.hall_id=h.hall_id) ph join ticketing t on ph.per_id=t.per_id
+						 where per_step != 4 AND ticket_step != 7 AND ticket_step!=8
+						  AND t.per_id=#{per_id} AND round = #{round} AND ticet_date=#{ticet_date}  ]]> 
+   		</select>
+   
+   
+   
    
    </mapper>
    

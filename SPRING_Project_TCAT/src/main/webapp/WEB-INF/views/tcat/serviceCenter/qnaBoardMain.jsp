@@ -10,22 +10,22 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 
-function loadBoard(url,cDev,keyword) {
+function loadBoard(url) {
 		
-	 $( "#result2" ).load( "${pageContext.request.contextPath}/"+url+"?cDev="+cDev+"&keyword="+keyword);	
+	 $( "#result2" ).load( "${pageContext.request.contextPath}/"+url);	
 	 
 }
 
-$( function() {
+ $( function() {
 	 $( "#result2" ).load( "${pageContext.request.contextPath}/qnaBoardList");
-});
+}); 
 
 //상세페이지
-/* function BoardContent(service_num, service_title) {
-	
-	 $( "#result2" ).load( "${pageContext.request.contextPath}/"+url+"?service_num="+service_num);	
+/* function BoardContent(url) {
+		
+	 $( "#result2" ).load( "${pageContext.request.contextPath}/"+url);	
 	 
-} */
+}   */
 
 </script>
 </head>

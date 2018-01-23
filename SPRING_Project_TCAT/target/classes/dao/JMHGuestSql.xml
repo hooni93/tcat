@@ -64,12 +64,13 @@
 		FROM member
 		WHERE member_id=#{member_id}
 	</select>
+	
 	<!--해당 회원 스토어 구매 정보 -->
 	<select id="memDiscBuy" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
 		SELECT
 		dis.disc_num, dis.del_num, dis.disc_buyDate, dis.disc_code,
 		dis.member_id, dis.disc_buyStep, dis.sale_div, s.sale_rate,
-		del.del_name, del.del_addr, del.del_hp,
+		del.del_name, del.del_addr, del.del_hp,dis.buy_count,
 		cat.category, cat.mDev,
 		cat.sDev, per.disc_title,
 		per.disc_image, per.disc_con, per.cateNum,
@@ -79,8 +80,7 @@
 		JOIN sale
 		s ON dis.sale_div =
 		s.sale_div
-		JOIN delevaryInfo del ON dis.del_num =
-		del.del_num
+		JOIN delevaryInfo del ON dis.del_num = del.del_num
 		JOIN
 		perDisc per ON dis.disc_code = per.disc_code
 		JOIN
@@ -242,4 +242,17 @@
 		AND
 		disc_code = #{disc_code}
 	</select>
+	
+	
+	<!--결제취소  -->
+	<delete id="buyCancel">
+		DELETE 	DiscBuy
+		WHERE	disc_num = #{_parameter}
+	</delete>
+	<!--환불요청 -->
+	<update id="perfRefund">
+		UPDATE 	DiscBuy
+		SET		disc_buyStep = 6
+		WHERE	disc_num = #{_parameter}
+	</update>
 </mapper>

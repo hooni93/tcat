@@ -296,6 +296,7 @@ public class HSGuestServiceImp implements HSGuestService{
 			
 			// 글갯수 구하기
 			String member_id=(String)req.getSession().getAttribute("login_id");
+			System.out.println("member_id:"+member_id);
 			cnt = HSDao.cartCnt(member_id);
 			System.out.println("cnt:" + cnt);
 
@@ -342,7 +343,6 @@ public class HSGuestServiceImp implements HSGuestService{
 				ArrayList<CartVO> dtos=HSDao.cartList(map);
 				
 				req.setAttribute("dtos", dtos);
-
 			}
 
 			startPage = (currentPage / pageBlock) * pageBlock + 1; // 시작페이지=(현재 페이지/한 블럭당 페이지 갯수)*한 블럭당 페이지 갯수+1;
