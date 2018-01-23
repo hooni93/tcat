@@ -246,7 +246,13 @@
 	
 	<!--결제취소  -->
 	<delete id="buyCancel">
-		DELETE 	delevaryInfo
-		WHERE	del_num = #{_parameter}
+		DELETE 	DiscBuy
+		WHERE	disc_num = #{_parameter}
 	</delete>
+	<!--환불요청 -->
+	<update id="perfRefund">
+		UPDATE 	DiscBuy
+		SET		disc_buyStep = 6
+		WHERE	disc_num = #{_parameter}
+	</update>
 </mapper>
