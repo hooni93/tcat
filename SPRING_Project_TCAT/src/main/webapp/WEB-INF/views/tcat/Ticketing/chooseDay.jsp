@@ -15,38 +15,45 @@
 
 <title>Insert title here</title>
 <script type="text/javascript">
-$(function() {
+/* $(function() {
 
-	$('#datepicker').datepicker({
+	 $('#datepicker').datepicker({
 		dateFormat: 'yy-mm-dd',//데이터 형식 변경
 		dayNamesShort:["일","월","화","수","목","금","토"],
 		 changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
 		  changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
+		   beforeShowDay: noBefore, 
 		monthNames:[ "1월", "2월", "3월", "4월", "5월", "6월","7월", "8월", "9월", "10월", "11월", "12월"],
 	    onSelect: function(dateText, inst) { //선택한 데이터를 input박스에 넣기
 	      $("input[name='something']").val(dateText);
 	    }
-	});
-	 $('#date2').datepicker({
+	}); 
+	$('#datepicker').datepicker({
 		 showOn: 'both',buttonText: "달력",changeMonth: true,changeYear: true,
 		 showButtonPanel:true,yearRange: 'c-99:c+99',constrainInput: true,maxDate: 
 			 '+1y',beforeShowDay: noBefore  });
-	 function noBefore(date){
-		    if (date < startdate)
+	 alert(${vo.startDate}); 
+	function noBefore(date){
+		  var startDate=${vo.startDate};
+		 var endDate=${vo.endDate}; 
+		    if (date < new Date())
 		        return [false];
-		    if (date > enddate)
-		    	return [false];
+		     if (date > endDate)
+		    	return [false]; 
 		    return [true];
 		}
 
-}); 
-/* jQuery(function($){
+});  */
+jQuery(function($){
 		    $.datepicker.regional['ko'] = {closeText: '닫기',prevText: '이전달',nextText: '다음달',currentText: '오늘',monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)','7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],dayNames: ['일','월','화','수','목','금','토'],dayNamesShort: ['일','월','화','수','목','금','토'],dayNamesMin: ['일','월','화','수','목','금','토'],weekHeader: 'Wk',dateFormat: 'yy-mm-dd',firstDay: 0,isRTL: false,showMonthAfterYear: true,yearSuffix: ''};
 		    $.datepicker.setDefaults($.datepicker.regional['ko']);
 		    $('#date1').datepicker({showOn: 'both',buttonText: "달력",changeMonth: true,changeYear: true,showButtonPanel:true,yearRange: 'c-99:c+99',constrainInput: true,maxDate: '+1y',beforeShowDay: disableAllTheseDays   });
-		    $('#date2').datepicker({showOn: 'both',buttonText: "달력",changeMonth: true,changeYear: true,showButtonPanel:true,yearRange: 'c-99:c+99',constrainInput: true,maxDate: '+1y',beforeShowDay: noBefore  });
-		    $('#date3').datepicker({showOn: 'both',buttonText: "달력",changeMonth: true,changeYear: true,showButtonPanel:true,yearRange: 'c-99:c+99',constrainInput: true,maxDate: '+1y',beforeShowDay: noWeekendsOrHolidays  });
-		    $('#date4').datepicker({showOn: 'both',buttonText: "달력",changeMonth: true,changeYear: true,showButtonPanel:true,yearRange: 'c-99:c+99',constrainInput: true,maxDate: '+1y',beforeShowDay: noSundays });
+		   /*  $('#date2').datepicker({showOn: 'both',buttonText: "달력",changeMonth: true,changeYear: true,showButtonPanel:true,yearRange: 'c-99:c+99',constrainInput: true,maxDate: '+1y',beforeShowDay: noBefore  });
+		    */ $('#date3').datepicker({showOn: 'both',buttonText: "달력",changeMonth: true,changeYear: true,showButtonPanel:true,yearRange: 'c-99:c+99',constrainInput: true,maxDate: '+1y',beforeShowDay: noWeekendsOrHolidays  });
+		    $('#datepicker').datepicker({showOn: 'both',buttonText: "달력",changeMonth: true,changeYear: true,showButtonPanel:true,yearRange: 'c-99:c+99',constrainInput: true,maxDate: '+1y',beforeShowDay: noSundays ,onSelect: function(dateText, inst) { //선택한 데이터를 input박스에 넣기
+			      $("input[name='something']").val(dateText);
+		    }});
+		    
 		});
 		 
 		// 특정날짜들 배열
@@ -62,14 +69,17 @@ $(function() {
 		function noSundays(date) {
 		  return [date.getDay() != 0, ''];
 		}
-		 
+		
 		// 이전 날짜들은 선택막기
 		function noBefore(date){
-		    if (date < new Date())
+			var a[]=${vo.startDate}
+		    if (date < )
 		        return [false];
+		    if(date > ${vo.endDate})
+		    	return [false];
 		    return [true];
 		}
-		 
+		
 		// 특정일 선택막기
 		function disableAllTheseDays(date) {
 		    var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
@@ -80,24 +90,14 @@ $(function() {
 		    }
 		    return [true];
 		}
- */
+
 </script>
 </head>
-<body>
-<div>
-	<ul class="nav nav-tabs">
-	  <li role="presentation" class="active"><a href="#">관람일/회차</a></li>
-	  <li role="presentation"><a href="#">좌석선택</a></li>
-	  <li role="presentation"><a href="#">할인/쿠폰</a></li>
-	  <li role="presentation"><a href="#">수령방법</a></li>
-	  <li role="presentation"><a href="#">결제방법</a></li>
-	</ul>
-</div>
+<body style="background-color:white;">
 
 <!-- 이거바꾸면 됩니까? -->
 <div id="datepicker"></div>
 <input type="text" name="something">
-<input type="text" id="date1">
-
+<input type="text" id="date2">
 </body>
 </html>

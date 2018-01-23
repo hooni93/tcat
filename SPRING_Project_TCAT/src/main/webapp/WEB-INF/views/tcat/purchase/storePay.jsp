@@ -15,7 +15,7 @@
 		msg += "<table class='table table-striped' style='border-top:3px solid #bbbbbb;'>"+
 						"<tr>"+
 						"<th>배송지 </th>"+
-						"<td>${addr}&nbsp<input type='button' onclick='addrChange();' value='배송지변경'></td>"+
+						"<td>${dtos.get(0).getMember_addr()}&nbsp<input type='button' onclick='addrChange();' value='배송지변경'></td>"+
 					"</tr>"+
 					"<tr>"+
 						"<th>이름</th>"+
@@ -54,7 +54,7 @@
 		msg += "<table class='table table-striped' style='border-top:3px solid #bbbbbb;' >"+
 						"<tr>"+
 						"<th>배송지 </th>"+
-						"<td>${addr}&nbsp<input type='button' onclick='addrChange();' value='배송지변경'></td>"+
+						"<td>${dtos.get(0).getMember_addr()}&nbsp<input type='button' onclick='addrChange();' value='배송지변경'></td>"+
 					"</tr>"+
 					"<tr>"+
 						"<th>이름</th>"+
@@ -385,7 +385,6 @@
 										%>
 										
 										</th>
-									
 								</tr>
 							</table>
 						</th>

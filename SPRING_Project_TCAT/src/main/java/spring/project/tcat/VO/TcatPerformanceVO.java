@@ -95,7 +95,7 @@ public class TcatPerformanceVO {
     int refNum;				//조회수
     String per_ex;			//상품상세소개
     String Detail_Image; 	//추가 이미지
-   
+    
     
     
     

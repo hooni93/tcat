@@ -55,7 +55,7 @@ public class HSGuestController {
 	public String Ticketing(HttpServletRequest req, Model model) {
 		System.out.println("Ticketing");
 		
-		/*HSGservice.Ticketing(req,model);*/
+		HSGservice.payList(req,model);
 		
 		return "tcat/Ticketing/Ticketing";
 	}
@@ -65,7 +65,6 @@ public class HSGuestController {
 	public String chooseDay(HttpServletRequest req, Model model) {
 		System.out.println("chooseDay");
 		
-		HSGservice.payList(req,model);
 		
 		return "tcat/Ticketing/chooseDay";
 	}
@@ -131,8 +130,6 @@ public class HSGuestController {
 		System.out.println("storePay");
 		
 		HSGservice.cartList(req,model);
-		String addr=req.getParameter("addr");
-		req.setAttribute("addr", addr);
 		
 		return "tcat/purchase/storePay";
 	}
