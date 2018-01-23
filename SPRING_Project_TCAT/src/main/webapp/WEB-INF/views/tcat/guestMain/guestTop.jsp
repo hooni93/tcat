@@ -165,6 +165,8 @@ function load(url){
 	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );
 	 window.location.hash = '#url' + url;
 	 
+	 
+	 
 }
 
 //공연 상세페이지 onclick시

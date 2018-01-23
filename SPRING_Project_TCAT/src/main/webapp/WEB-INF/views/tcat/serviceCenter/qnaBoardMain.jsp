@@ -16,16 +16,16 @@ function loadBoard(url) {
 	 
 }
 
-$( function() {
+ $( function() {
 	 $( "#result2" ).load( "${pageContext.request.contextPath}/qnaBoardList");
-});
+}); 
 
 //상세페이지
-function BoardContent(url) {
+/* function BoardContent(url) {
 		
 	 $( "#result2" ).load( "${pageContext.request.contextPath}/"+url);	
 	 
-}  
+}   */
 
 </script>
 </head>

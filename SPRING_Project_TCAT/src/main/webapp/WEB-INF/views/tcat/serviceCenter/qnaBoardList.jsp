@@ -6,7 +6,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
 
+function BoardSearch() {
+	var cDev=document.all.cDev.value;
+	var keyword=document.all.keyword.value;
+	var url="qnaBoardList?cDev="+cDev+"&keyword="+keyword; 
+	
+	$( "#result2" ).load( "${pageContext.request.contextPath}/"+url);	
+
+}   
+
+</script>
 
 </head>
 <body>
@@ -41,7 +52,7 @@
 							<tr>
 								<td>${dto.service_num}</td>
 								<td>${dto.service_div}</td>
-								<td><a onclick="BoardContent('qnaContent?service_num=${dto.service_num}');">${dto.service_title}</a></td>
+								<td><a onclick="loadBoard('qnaContent?service_num=${dto.service_num}');">${dto.service_title}</a></td>
 								<td>${dto.member_id}</td>
 								<%-- <td>${dto.AnswersStatus}</td> --%>
 								<td>${dto.writeDate}</td>
@@ -101,7 +112,7 @@
 							name="keyword">
 					</div>
 					<button type="button" class="btn btn-default"
-						onclick="ajaxSubmit('qnaBoardList')">검색</button>
+						onclick="BoardSearch();">검색</button>
 					<!-- stocksearch(); -->
 					
 				</form>

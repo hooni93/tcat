@@ -38,14 +38,14 @@ public class DKGuestController {
 	public String qnaOneToOneboard(HttpServletRequest req,Model model) {
 		System.out.println("qnaOneToOneboard");
 		req.setAttribute("url", "qnaOneToOneboard");
-		dkService.qnaBoardList(req, model);
+		dkService.qnaOneToOneList(req, model);
 		
-		return "tcat/serviceCenter/qnaoneoneboard";
+		return "tcat/serviceCenter/qnaOneToOneboard";
 		
 	}
 	
 	//상세글보기
-	/*@RequestMapping("qnaContent")
+	@RequestMapping("qnaContent")
 	public String qnaContent(HttpServletRequest req,Model model) {
 		System.out.println("qnaContent");
 		
@@ -53,6 +53,6 @@ public class DKGuestController {
 	
 		
 		return "tcat/serviceCenter/qnaContent";
-	}*/
+	}
 	
 }
