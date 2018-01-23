@@ -55,7 +55,7 @@ public class HSGuestController {
 	public String Ticketing(HttpServletRequest req, Model model) {
 		System.out.println("Ticketing");
 		
-		/*HSGservice.Ticketing(req,model);*/
+		HSGservice.payList(req,model);
 		
 		return "tcat/Ticketing/Ticketing";
 	}
@@ -65,14 +65,18 @@ public class HSGuestController {
 	public String chooseDay(HttpServletRequest req, Model model) {
 		System.out.println("chooseDay");
 		
+		model.addAttribute("TicettingCnt",2);
 		HSGservice.payList(req,model);
 		
 		return "tcat/Ticketing/chooseDay";
 	}
+	
+	
 	@RequestMapping("NewFile")
 	public String NewFile(HttpServletRequest req, Model model) {
 		System.out.println("NewFile");
 		
+		model.addAttribute("TicettingCnt",2);
 		
 		return "tcat/registItem/NewFile";
 	}
@@ -131,8 +135,6 @@ public class HSGuestController {
 		System.out.println("storePay");
 		
 		HSGservice.cartList(req,model);
-		String addr=req.getParameter("addr");
-		req.setAttribute("addr", addr);
 		
 		return "tcat/purchase/storePay";
 	}

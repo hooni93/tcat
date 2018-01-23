@@ -101,7 +101,7 @@ $(document).ready(function() {
 		<div class="col-md-9">
 			<!--상세페이지 상단  -->
 			<div class="col-md-12" style="border: 1px solid lightgrey;">
-				<h1>${perf.perf_title }</h1>
+				<h1>${perf.perf_title}</h1>
 				<h5>${perf.mDev}
 					- ${perf.sDev}<span class="m10">|</span>${perf.possible_age}세 이상 관람
 					가능
@@ -211,12 +211,9 @@ $(document).ready(function() {
 				<div class="col-md-12" style="padding: 0;">
 
 					<ul class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active"><a href="#content"
-							aria-controls="home" role="tab" data-toggle="tab">상제정보</a></li>
-						<li role="presentation"><a href="#review"
-							aria-controls="profile" role="tab" data-toggle="tab">관람후기</a></li>
-						<li role="presentation"><a href="#cancelInfo"
-							aria-controls="messages" role="tab" data-toggle="tab">취소/환불안내</a></li>
+						<li role="presentation" class="active"><a href="#content" aria-controls="home" role="tab" data-toggle="tab">상제정보</a></li>
+						<li role="presentation"><a href="#review" aria-controls="profile" role="tab" data-toggle="tab">관람후기</a></li>
+						<li role="presentation"><a href="#cancelInfo" aria-controls="messages" role="tab" data-toggle="tab">취소/환불안내</a></li>
 					</ul>
 				</div>
 
@@ -241,7 +238,9 @@ $(document).ready(function() {
 								</div>
 							</div>
 							<!--관람후기  -->
-							<div role="tabpanel" class="tab-pane" id="review">2</div>
+							<div role="tabpanel" class="tab-pane" id="review">2
+								
+							</div>
 							<!--취소환불 안내  -->
 							<div role="tabpanel" class="tab-pane" id="cancelInfo">3</div>
 						</div>

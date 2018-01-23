@@ -161,6 +161,14 @@ function ajaxSubmit(url){   /* AJAX submit */
 
 
 function load(url){
+<<<<<<< HEAD
+	 
+	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );
+	 window.location.hash = '#url' + url;
+	 
+	 
+	 
+=======
 	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url,function(msg){
 		 history.pushState({page:url},null);//1. history에 pushState로  page를 저장 이때 url에 get방식을 쓰면 그 파라미터도 같이 넘어감
 		 //history.pushState(state,title,url);
@@ -168,6 +176,7 @@ function load(url){
 		 //title: 웹페이지 상단에 띄울 제목 null이나 "" 를 줘도 상관 없다.
 		 //url:  아무 의미 없이 url만 변경, 현 방식을 한 이유는 새로고침시 입력되있는 주소에 따라 페이지 전송을 하는데 ajax이기 때문에 새로고침시 guestPage로 이동을 해야하기 때문에 비워둠
 	 } );
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 }
 $(document).ready(function(){
 	//새로고침
@@ -217,10 +226,16 @@ function contentPage(per_id){
 			  	  	</c:if>
 				  </li>
 				  <li><a href="#">예매확인/취소</a></li>
+
 				  <li><a href="#">위시리스트</a></li>
-				 <li><a onclick="load('qnaBoardMain');">고객센터</a></li>
+				  <c:if test="${sessionScope.login_id!=null}">
+
 				  <li><a onclick="load('cartList');">장바구니</a></li>
-				  <li><a onclick="load('qnaBoardList');">고객센터</a></li> 
+
+				  </c:if>
+				  <li><a onclick="load('qnaBoardList');">고객센터</a></li>
+				  <li><a href="#">모바일APP</a></li>  
+
 				  <li><a onclick="load('commentBoard');">후기</a></li>  
 				  <li><a onclick="load('intro');">회사</a></li>
 				</ol> 
