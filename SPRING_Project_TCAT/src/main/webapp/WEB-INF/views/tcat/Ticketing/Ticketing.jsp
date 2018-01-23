@@ -24,21 +24,21 @@ $( function() {
 })
 function next(){
 	var nextBtn=document.all.nextBtn.value;
-	if(nextBtn=="관람일/회차"){
-		document.all.nextBtn.value="좌석선택";
+	if(nextBtn=="좌석선택"){
+		document.all.nextBtn.value="할인/쿠폰";
 		$("#menu1").removeClass("active");
 		$("#menu2").addClass("active");
 		document.all.nextTest.value=2;
-	}else if(nextBtn=="좌석선택"){
-		document.all.nextBtn.value="할인/쿠폰";
-		$("#menu2").removeClass("active");
-		$("#menu3").addClass("active");
 	}else if(nextBtn=="할인/쿠폰"){
 		document.all.nextBtn.value="수령방법";
-		$("#menu3").removeClass("active");
-		$("#menu4").addClass("active");
+		$("#menu2").removeClass("active");
+		$("#menu3").addClass("active");
 	}else if(nextBtn=="수령방법"){
 		document.all.nextBtn.value="결제방법";
+		$("#menu3").removeClass("active");
+		$("#menu4").addClass("active");
+	}else if(nextBtn=="결제방법"){
+		document.all.nextBtn.value="결제";
 		$("#menu4").removeClass("active");
 		$("#menu5").addClass("active");
 	}
@@ -129,19 +129,19 @@ function next(){
 						<table style="color:white;margin:10px;">
 							<tr>
 								<th>날짜</th>
-								<td><input type="text" style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"value="18/01/23" name="ticet_date" readonly></td>
+								<td><input type="text" style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"value="0" name="ticet_date" readonly></td>
 							</tr>
 							<tr>
 								<th>공연회차</th>
-								<td><input type="text" style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"value="1" name="round" readonly></td>
+								<td><input type="text" style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"value="0" name="round" readonly></td>
 							</tr>
 							<tr>
 								<th>좌석타입</th>
-								<td><input type="text" style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"value="aa" name="seat_type" readonly></td>
+								<td><input type="text" style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"value="0" name="seat_type" readonly></td>
 							</tr>
 							<tr>
 								<th>좌석</th>
-								<td><input type="text" style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"value="aa" name="seat_num" readonly></td>
+								<td><input type="text" style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"value="0" name="seat_num" readonly></td>
 							</tr>
 							
 						</table>
@@ -185,7 +185,7 @@ function next(){
 						<br>
 						<input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="최종결제금액">
 						<br><br>
-						<input type="button" class="TicketingButton" style="margin:5px;"value="관람일/회차" name="nextBtn" onclick="next();">
+						<input type="button" class="TicketingButton" style="margin:5px; width:100%;"value="좌석선택" name="nextBtn" onclick="next();">
 						
 					</form>
 				</div>
