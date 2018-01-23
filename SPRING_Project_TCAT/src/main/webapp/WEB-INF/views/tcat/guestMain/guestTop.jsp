@@ -163,7 +163,6 @@ function ajaxSubmit(url){   /* AJAX submit */
 function load(url){
 	 
 	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );
-	 window.location.hash = '#url' + url;
 	 
 }
 
