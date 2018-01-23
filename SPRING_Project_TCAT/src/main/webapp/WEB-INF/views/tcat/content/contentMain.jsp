@@ -215,13 +215,9 @@ function commentList(url) {
 
 					<ul class="nav nav-tabs" role="tablist">
 						<li role="presentation" class="active"><a href="#content" aria-controls="home" role="tab" data-toggle="tab">상제정보</a></li>
-<<<<<<< HEAD
+
 						<li role="presentation"><a href="#review" aria-controls="profile" role="tab" data-toggle="tab" onclick="commentList('watchLatter?perf_title=${perf.perf_title}&per_id=${perf.per_id}');">관람후기</a></li>
 						<li role="presentation"><a href="cancelInfo" aria-controls="messages" role="tab" data-toggle="tab">취소/환불안내</a></li>
-=======
-						<li role="presentation"><a href="#review" aria-controls="profile" role="tab" data-toggle="tab">관람후기</a></li>
-						<li role="presentation"><a href="#cancelInfo" aria-controls="messages" role="tab" data-toggle="tab">취소/환불안내</a></li>
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 					</ul>
 				</div>
 				<div class="col-md-12 h25"></div>
@@ -244,18 +240,18 @@ function commentList(url) {
 								</div>
 							</div>
 							<!--관람후기  -->
-<<<<<<< HEAD
+
 							<div role="tabpanel" class="tab-pane" id="review">
 
 								<div class="col-md-15" id="commentList"></div>
 							</div>
 							
 							
-=======
+
 							<div role="tabpanel" class="tab-pane" id="review">2
 								
 							</div>
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
+
 							<!--취소환불 안내  -->
 							<div role="tabpanel" class="tab-pane" id="cancelInfo">3</div>
 						</div>
