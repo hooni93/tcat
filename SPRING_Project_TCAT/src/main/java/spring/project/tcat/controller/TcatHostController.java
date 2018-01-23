@@ -859,6 +859,14 @@ public class TcatHostController {
 			YMService.eventGuest(req, model);
 			return "tcat/borderManager/eventHost";
 		}
+		//이벤트등록
+		@RequestMapping("eventAdd")
+		public String eventAdd(MultipartHttpServletRequest req,Model model) {
+			System.out.println("eventAdd");
+			YMService.eventAdd(req, model);
+			YMService.eventGuest(req, model);
+			return "tcat/borderManager/eventHost";
+		}
 		//구매승인사이트바
 		@RequestMapping("provalMain_side")
 		public String provalMain_side(HttpServletRequest req, Model model) {

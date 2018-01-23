@@ -115,6 +115,8 @@ function payPerformence(url){
 </div><!-- 핫리스트 끝 -->
 
 
+<a onclick="load('photoBoarder');">사진게시판보기</a>
+
 
 
 </body>

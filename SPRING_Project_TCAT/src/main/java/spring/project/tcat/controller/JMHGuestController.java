@@ -148,6 +148,15 @@ public class JMHGuestController {
 		mhService.getContent(req, model);
 		return "tcat/content/contentMain";
 	}
+	@RequestMapping("contentMain_store")
+	public String contentMain_store(HttpServletRequest req, Model model) {
+		System.out.println("contentMain_store");
+		//해당 공연 위시리스트 여부 가져오기
+		mhService.getWishListIn(req, model);
+		//상품정보 가져오기
+		mhService.getContent_store(req, model);
+		return "tcat/content/contentMain_store";
+	}
 	
 	//위시리스트 추가 addWishList
 	@RequestMapping("addWishList")
@@ -162,6 +171,13 @@ public class JMHGuestController {
 		System.out.println("delWishList");
 		mhService.delWishList(req, model);
 		return "tcat/content/contentMain";
+	}
+	//wishList 위시리스트 목록
+	@RequestMapping("wishList")
+	public String wishList(HttpServletRequest req, Model model) {
+		System.out.println("wishList");
+		//mhService.delWishList(req, model);
+		return "tcat/wishList/wishList";
 	}
 	
 	//결제취소 buyCancel

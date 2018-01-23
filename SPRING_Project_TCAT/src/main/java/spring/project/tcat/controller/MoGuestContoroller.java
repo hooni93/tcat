@@ -70,5 +70,24 @@ public class MoGuestContoroller {
 		MGService.ticketSeat(req, model);
 		return "tcat/store/ticketSeat";
 	}
+	//사진 게시판 가져오기
+	@RequestMapping("photoBoarder")
+	public String photoBoarder(HttpServletRequest req,Model model) {
+		System.out.println("photoBoarder");
+		MGService.photoBoarderList(req, model);
+		return "tcat/Boarder/photoBoarder";
+	}
+	//사진게시판 답글 달기
+	@RequestMapping("photoBoarderCommentWrite")
+	public String photoBoarderCommentWrite(HttpServletRequest req,Model model) {
+		System.out.println("photoBoarderCommentWrite");
+		MGService.photoBoarderCommentWrite(req, model);
+		photoBoarder(req, model);
+		return "tcat/Boarder/photoBoarder";
+	}
+	
+	
+	
+	
 	
 }
