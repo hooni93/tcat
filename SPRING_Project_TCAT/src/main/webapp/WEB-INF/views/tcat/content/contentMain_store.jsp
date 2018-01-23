@@ -85,6 +85,14 @@ $(document).ready(function() {
 			}
 		}
 	});
+	
+
+	
+	//스토어 후기 화면 뿌리기
+function commentListS(url) {
+		
+	$("#commentListS").load( "${pageContext.request.contextPath}/"+url);
+}
 </script>
 </head>
 <div class="row">
@@ -166,9 +174,9 @@ $(document).ready(function() {
 
 				<ul class="nav nav-tabs" role="tablist">
 					<li role="presentation" class="active"><a href="#content"
-						aria-controls="home" role="tab" data-toggle="tab">상제정보</a></li>
+						aria-controls="home" role="tab" data-toggle="tab">상세정보</a></li>
 					<li role="presentation"><a href="#review"
-						aria-controls="profile" role="tab" data-toggle="tab">후기</a></li>
+						aria-controls="profile" role="tab" data-toggle="tab" onclick="commentListS('watchLatterS?disc_title=${str.disc_title}&disc_code=${str.disc_code}');">상품후기</a></li>
 					<li role="presentation"><a href="#cancelInfo"
 						aria-controls="messages" role="tab" data-toggle="tab">취소/환불안내</a></li>
 				</ul>
@@ -194,8 +202,10 @@ $(document).ready(function() {
 								<img src="${str.getDetail_Image()}">
 							</div>
 						</div>
-						<!--관람후기  -->
-						<div role="tabpanel" class="tab-pane" id="review">2</div>
+						<!--상품후기  -->
+						<div role="tabpanel" class="tab-pane" id="review">
+							<div class="col-md-15" id="commentListS"></div>
+						</div>
 						<!--취소환불 안내  -->
 						<div role="tabpanel" class="tab-pane" id="cancelInfo">3</div>
 					</div>

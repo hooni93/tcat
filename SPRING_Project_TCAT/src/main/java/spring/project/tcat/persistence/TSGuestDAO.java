@@ -36,4 +36,13 @@ public interface TSGuestDAO {
 	// 게스트 관람/후기 (해당공연) 목록
 	public ArrayList<TcatBoardVO> selectCommentBoard(Map<String,Object>map);
 	
+	// 게스트 상품/상품후기 등록
+	public int commentWriteS(TcatBoardVO vo);
+		
+	// 게스트 상품/후기(해당공연) 개수
+	public int selectCommentS(Map<String, Object> map);
+		
+	// 게스트상품/후기 (해당공연) 목록
+	public ArrayList<TcatBoardVO> selectCommentBoardS(Map<String,Object>map);
+	
 }

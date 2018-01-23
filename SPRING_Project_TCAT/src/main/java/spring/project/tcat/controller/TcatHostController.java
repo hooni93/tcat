@@ -1061,5 +1061,24 @@ public class TcatHostController {
 	
 	return "tcat/borderManager/commentManager";
 	}
+//////////////////////태성 1/21 end////////////////////////////
+//////////////////////태성 1/23 start////////////////////////////
+	//관람/상품 후기 관리 게시판 - 삭제기능
+	@RequestMapping("productRefund")
+	public String productRefund(HttpServletRequest req,Model model) {
+		
+	System.out.println("productRefund");
 	
+	
+	return "tcat/productManager/productRefund";
+	}
+	@RequestMapping("productRefund_side")
+	public String productRefund_side(HttpServletRequest req,Model model) {
+		
+	System.out.println("productRefund_side");
+	
+	
+	return "tcat/productManager/productRefund_side";
+	}
+//////////////////////태성 1/23 end////////////////////////////
 }

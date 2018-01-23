@@ -126,4 +126,43 @@ public class TSGuestDAOImp implements TSGuestDAO{
 			return dtos;
 		}
 
+
+
+		// 게스트 상품/후기 작성
+		@Override
+		public int commentWriteS(TcatBoardVO vo) {
+			int cnt = 0;
+			
+			TSGuestDAO dao = Configuration.getMapper(TSGuestDAO.class);
+			cnt = dao.commentWriteS(vo);
+			
+			return cnt;
+		}
+
+
+
+		// 게스트 상품/후기 (해당상품) 개수
+		@Override
+		public int selectCommentS(Map<String, Object> map) {
+			int cnt = 0;
+			
+			TSGuestDAO dao = Configuration.getMapper(TSGuestDAO.class);
+			cnt = dao.selectCommentS(map);
+			
+			return cnt;
+			
+		}
+
+
+
+		// 게스트 스토어/후기 (해당상품) 목록
+		@Override
+		public ArrayList<TcatBoardVO> selectCommentBoardS(Map<String, Object> map) {
+			ArrayList<TcatBoardVO> dtos = null; // 큰 바구니
+			TSGuestDAO dao = Configuration.getMapper(TSGuestDAO.class);
+			dtos = dao.selectCommentBoardS(map);
+			
+			return dtos;
+		}
+
 }
