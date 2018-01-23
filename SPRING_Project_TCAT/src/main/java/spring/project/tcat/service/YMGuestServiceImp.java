@@ -204,6 +204,7 @@ public class YMGuestServiceImp implements YMGuestService {
 	//이벤트수정
 	@Override
 	public void eventUpdateList(MultipartHttpServletRequest req, Model model) {
+		
 		MultipartFile file = req.getFile("notice_image");
 		String realDir = "C:\\Dev\\TCATworkspace\\git\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\eventList\\";
 		String saveDir = req.getRealPath("/resources/image/eventList/");
@@ -239,6 +240,58 @@ public class YMGuestServiceImp implements YMGuestService {
 		} catch(IOException e) {
             e.printStackTrace();
 		}
+	}
+	//이벤트등록
+	@Override
+	public void eventAdd(MultipartHttpServletRequest req, Model model) {
+		MultipartFile file = req.getFile("notice_image");
+		String realDir = "C:\\Dev\\TCATworkspace\\git\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\eventList\\";
+		String saveDir = req.getRealPath("/resources/image/eventList/");
+		try {
+			file.transferTo(new File(saveDir + file.getOriginalFilename()));
+			FileInputStream fis = new FileInputStream(saveDir + file.getOriginalFilename());
+			FileOutputStream fos = new FileOutputStream(realDir + file.getOriginalFilename());
+
+			int data = 0;
+
+			while ((data = fis.read()) != -1) {
+				fos.write(data);
+			}
+			
+			fis.close();
+			fos.close();
+			int addCnt=0;
+			String notice_title= req.getParameter("notice_title");
+			String notice_image= file.getOriginalFilename();
+			String contents= req.getParameter("contents");
+			String writeDate= req.getParameter("writeDate");
+			String member_id= req.getParameter("member_id");
+			int notice_div=Integer.parseInt(req.getParameter("notice_div"));
+			
+			String sDate[] = writeDate.split("/");
+			writeDate = sDate[2] + "/" + sDate[0] + "/" + sDate[1];
+			
+			System.out.println("notice_title======="+notice_title);
+			System.out.println("notice_image======="+notice_image);
+			System.out.println("contents======="+contents);
+			System.out.println("writeDate======="+writeDate);
+			System.out.println("notice_div======="+notice_div);
+			System.out.println("member_id======="+member_id);
+			
+			Map<String,Object> map=new HashMap<String, Object>();
+			map.put("notice_title", notice_title);
+			map.put("notice_image", notice_image);
+			map.put("writeDate", writeDate);
+			map.put("contents", contents);
+			map.put("member_id", member_id);
+			map.put("notice_div", notice_div);
+			addCnt=YMDao.eventAddCnt(map);
+			
+			model.addAttribute("addCnt", addCnt);
+		} catch(IOException e) {
+            e.printStackTrace();
+		}
+		
 	}
 	
 	

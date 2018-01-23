@@ -9,11 +9,11 @@
 <script type="text/javascript">
 $(function() {
 	$("#eventUp").click(function() {
-		
+		var formData = new FormData();
 			formData.append("notice_num", $("input[name=notice_num]").val());
 			formData.append("notice_title",$("input[name=notice_title]").val());
 			formData.append("contents", $("input[name=contents]").val());
-			formData.append("notice_image", $("input[name=notice_image]").val());
+			formData.append("notice_image", $("input[name=notice_image]")[0].files[0]);
 
 			$.ajax({
 				url : 'eventUpdateList',
@@ -24,9 +24,9 @@ $(function() {
 				success : function(data) {
 					$('#result').html(data);
 				}
-			});
-		}
-}
+			});	
+	});
+});
 </script>
 </head>
 <body class="b400040">
@@ -44,6 +44,8 @@ $(function() {
 						<form action="eventUpdateList" id="eventUpdateForm" method="POST">
 							<c:forEach var="vo" items="${dto}">
 								<h4>${vo.notice_num}</h4>
+								<input type="hidden" name="notice_num" class="form-control"
+									value="${vo.notice_num}">
 								<h4>타이틀</h4>
 								<input type="text" name="notice_title" class="form-control"
 									maxlength="200" value="${vo.notice_title}">
