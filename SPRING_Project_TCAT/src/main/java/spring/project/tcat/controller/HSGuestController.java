@@ -149,4 +149,15 @@ public class HSGuestController {
 		return "tcat/purchase/payList";
 	}
 
+	
+	@RequestMapping("RemainingSeats")
+	public String RemainingSeats(HttpServletRequest req, Model model) {
+		System.out.println("RemainingSeats");
+		
+		HSGservice.RemainingSeats(req,model);
+		
+		return "tcat/Ticketing/RemainingSeats";
+	}
+
+	
 }

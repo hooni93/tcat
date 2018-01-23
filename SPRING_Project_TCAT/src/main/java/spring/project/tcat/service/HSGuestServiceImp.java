@@ -402,6 +402,93 @@ public class HSGuestServiceImp implements HSGuestService{
 			
 			HSDao.insertdelevaryInfo(map);
 			/*int del_num=HSDao.maxdel_num();*/
+		}
+
+		@Override
+		public void RemainingSeats(HttpServletRequest req, Model model) {
+			String rd=req.getParameter("round");
+			int round=Integer.parseInt(rd.substring(0, 1));
+			
+			String ticet_date=req.getParameter("ticet_date");
+			int per_id=Integer.parseInt(req.getParameter("per_id"));
+			System.out.println("round:"+round);
+			System.out.println("ticet_date:"+ticet_date);
+			System.out.println("per_id:"+per_id);
+			
+			TcatPerformanceVO dto=new TcatPerformanceVO();
+			System.out.println("1");
+			dto=HSDao.payList(per_id);
+			System.out.println("2");
+			System.out.println("vip_seat[물리번호]:"+dto.getVIP_seat());
+			
+			String vip[]=null;
+			String r[]=null;
+			String s[]=null;
+			String a[]=null;
+			String b[]=null;
+			if(dto.getVIP_seat()!=null) {
+				vip=dto.getVIP_seat().split("/");	
+			}
+			if(dto.getR_seat()!=null) {
+				r=dto.getR_seat().split("/");
+			}
+			if(dto.getS_seat()!=null) {
+				s=dto.getS_seat().split("/");
+			}
+			if(dto.getA_seat()!=null) {
+				a=dto.getA_seat().split("/");
+			}
+			if(dto.getB_seat()!=null) {
+				b=dto.getB_seat().split("/");	
+			}
+			
+			
+			Map<String,Object> map=new HashMap<String,Object>();
+			map.put("round", round);
+			map.put("ticet_date", ticet_date);
+			System.out.println("3");
+			int vipCount=0;
+			int rCount=0;
+			int sCount=0;
+			int aCount=0;
+			int bCount=0;
+			System.out.println("4");
+			vipCount=HSDao.vipCount(map);
+			rCount=HSDao.rCount(map);
+			sCount=HSDao.sCount(map);
+			aCount=HSDao.aCount(map);
+			bCount=HSDao.bCount(map);
+			System.out.println("5");
+			int RemainingSeatsVIP=0;
+			int RemainingSeatsR=0;
+			int RemainingSeatsS=0;
+			int RemainingSeatsA=0;
+			int RemainingSeatsB=0;
+			
+			if(vip!=null) {
+				RemainingSeatsVIP=vip.length-vipCount;	
+			}
+			if(r!=null) {
+				RemainingSeatsR=r.length-rCount;
+			}
+			if(s!=null) {
+				RemainingSeatsS=s.length-sCount;
+			}
+			if(a!=null) {
+				RemainingSeatsA=a.length-aCount;
+			}
+			if(b!=null) {
+				RemainingSeatsB=b.length-bCount;
+			}
+
+			req.setAttribute("RemainingSeatsVIP", RemainingSeatsVIP);
+			req.setAttribute("RemainingSeatsR", RemainingSeatsR);
+			req.setAttribute("RemainingSeatsS", RemainingSeatsS);
+			req.setAttribute("RemainingSeatsA", RemainingSeatsA);
+			req.setAttribute("RemainingSeatsB", RemainingSeatsB);
+			req.setAttribute("vo2", dto);
+
+			
 		}	
 	
 }

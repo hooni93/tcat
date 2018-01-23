@@ -55,18 +55,6 @@
 	top:1px;
 }
 .chooseTb {
-/* 	-moz-box-shadow:inset 0px 0px 23px -3px #97c4fe;
-	-webkit-box-shadow:inset 0px 0px 23px -3px #97c4fe;
-	box-shadow:inset 0px 0px 23px -3px #97c4fe;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0));
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0',GradientType=0);
-	background-color:#3d94f6;
-	cursor:pointer;
-	color:#ffffff;
-	font-weight:bold;
-	text-decoration:none;
-	text-shadow:-1px 1px 0px #1570cd;
-	---- */
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #050505), color-stop(1, #050405));
 	background:-moz-linear-gradient(top, #050505 5%, #050405 100%);
 	background:-webkit-linear-gradient(top, #050505 5%, #050405 100%);
@@ -88,8 +76,17 @@
 
 </style>
 <script type="text/javascript">
-function roundBt(value){
-	$("input[name='round']").val(value);
+function roundBt(round,form,per_id){
+	
+	if(form.ticet_date.value=="0"){
+		alert("날짜를 먼저 선택해주세요!");
+	}else{
+		$("input[name='round']").val(round);
+		
+		var url="RemainingSeats?round="+round+"&ticet_date="+form.ticet_date.value+"&per_id="+per_id;
+		$("#RemainingSeats").load("${pageContext.request.contextPath}/"+ url);	
+	}
+	
 }
 
 //날짜 캘린더 출력하기
@@ -152,6 +149,7 @@ function noSundays(date) {
 <div class="row">
 
 	<div class="col-md-11">
+	<form action="" name="chooseDayForm">
 		<table class="table-bordered" style="margin:20px;">
 			<tr>
 				<th class="chooseTb" style="width:35%; padding:5px;">관람일 선택</th>
@@ -170,10 +168,10 @@ function noSundays(date) {
 						</tr>
 						<tr>
 							<td>
-								<div style="border:1px solid #dddddd; height:200px;">
+								<div style="border:1px solid #dddddd; height:200px;" id="round">
 									<c:set var="round" value="${fn:split(vo.remain_round,',')}"/>
 									<c:forEach var="remain_round" items="${round}">
-										<input type="button" class="roundButton" style="margin:1.5px 10px;" value="${remain_round}" onclick="roundBt(this.value)"><br>
+										<input type="button" class="roundButton" style="margin:1.5px 10px;" value="${remain_round}" onclick="roundBt(this.value,this.form,'${vo.per_id}')"><br>
 									</c:forEach>
 								</div>
 							</td>
@@ -181,14 +179,9 @@ function noSundays(date) {
 								&nbsp
 							</td>
 							<td>
-								<div style="border:1px solid #dddddd; height:200px; width:300px;">
-									<ul>
-										<li style="margin:2px 5px;padding:8px 10px;background-color:#eeeeee">VIP석 : ${vo.getVIP_seatPrice()}</li>
-										<li style="margin:2px 5px;padding:8px 10px;background-color:#eeeeee">R석 : ${vo.getR_seatPrice()}</li>
-										<li style="margin:2px 5px;padding:8px 10px;background-color:#eeeeee">S석 : ${vo.getS_seatPrice()}</li>
-										<li style="margin:2px 5px;padding:8px 10px;background-color:#eeeeee">A석 : ${vo.getA_seatPrice()}</li>
-										<li style="margin:2px 5px;padding:8px 10px;background-color:#eeeeee">B석 : ${vo.getB_seatPrice()}</li>
-									</ul>
+								<div id="RemainingSeats" style="border:1px solid #dddddd; height:200px; width:300px;">
+							
+								
 								</div>
 							</td>
 						</tr>
@@ -196,6 +189,7 @@ function noSundays(date) {
 				</td>
 			</tr>
 		</table>
+		</form>
 		<table  class="table-bordered" style="margin:20px;">
 			<tr>
 				<th class="chooseTb" style="padding:0 10px;">
