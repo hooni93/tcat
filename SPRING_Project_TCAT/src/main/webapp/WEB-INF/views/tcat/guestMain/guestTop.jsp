@@ -224,7 +224,7 @@ function contentPage(per_id){
 				  <li><a onclick="load('cartList');">장바구니</a></li>
 
 				  </c:if>
-				  <li><a onclick="load('qnaBoardList');">고객센터</a></li>
+				  <li><a onclick="load('qnaBoardMain');">고객센터</a></li>
 				  <li><a href="#">모바일APP</a></li>  
 
 				  <li><a onclick="load('commentBoard');">후기</a></li>  
