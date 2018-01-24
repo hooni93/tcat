@@ -22,13 +22,19 @@ $( function() {
 	var per_id=${vo.per_id};
 	 $( "#Ticketing" ).load( "${pageContext.request.contextPath}/chooseDay?per_id="+per_id );
 })
-function next(){
-		var nextBtn=document.all.nextBtn.value;
+function next(form){
+	var nextBtn=document.all.nextBtn.value;
 
 		if(nextBtn=="좌석선택"){
 			document.all.nextBtn.value="할인/쿠폰";
-			
+				
+				  $( "#Ticketing" ).load( "${pageContext.request.contextPath}/ticketSeat?per_id=${vo.per_id}&ticet_date="+form.ticet_date.value+"&round="+form.round.value);	
+		
+			if(nextBtn=="관람일/회차"){
+				document.all.nextBtn.value="좌석선택";
+				
 			$( "#Ticketing" ).load( "${pageContext.request.contextPath}/");
+<<<<<<< HEAD
 			
 			$("#menu1").removeClass("active");
 			$("#menu2").addClass("active");
@@ -44,8 +50,32 @@ function next(){
 			document.all.nextBtn.value="결제";
 			$("#menu4").removeClass("active");
 			$("#menu5").addClass("active");
+=======
+		
+				
+				$("#menu1").removeClass("active");
+				$("#menu2").addClass("active");
+				document.all.nextTest.value=2;
+			}else if(nextBtn=="할인/쿠폰"){
+				document.all.nextBtn.value="수령방법";
+				$("#menu2").removeClass("active");
+				$("#menu3").addClass("active");
+			}else if(nextBtn=="수령방법"){
+				document.all.nextBtn.value="결제방법";
+				$("#menu3").removeClass("active");
+				$("#menu4").addClass("active");
+			}else if(nextBtn=="결제방법"){
+				document.all.nextBtn.value="결제";
+				$("#menu4").removeClass("active");
+				$("#menu5").addClass("active");
+			}
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 		}
+<<<<<<< HEAD
 }
+=======
+	}
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 
 </script>
 <style type="text/css">
@@ -129,7 +159,7 @@ function next(){
 						</tr>
 					</table>
 					<hr style="color:white;margin:5px;">
-					<form action="">
+					<form action="" name="ticketingForm">
 						<h3>선택내역</h3>
 						<table style="color:white;margin:10px;">
 							<tr>
@@ -190,7 +220,7 @@ function next(){
 						<br>
 						<input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="최종결제금액">
 						<br><br>
-						<input type="button" class="TicketingButton" style="margin:5px; width:100%;"value="좌석선택" name="nextBtn" onclick="next();">
+						<input type="button" class="TicketingButton" style="margin:5px; width:100%;"value="좌석선택" name="nextBtn" onclick="next(this.form);">
 						
 					</form>
 				</div>

@@ -3,6 +3,7 @@ package spring.project.tcat.service;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public interface MoGuestService {
 	
@@ -14,6 +15,10 @@ public interface MoGuestService {
 	public void photoBoarderList(HttpServletRequest req,Model model);
 	//사진게시판 답글 달기
 	public void photoBoarderCommentWrite(HttpServletRequest req,Model model);
-	
-	
+	//사진게시판 게시하기
+	public void insertPhotoBoarder(MultipartHttpServletRequest req,Model model);
+	//사진게시판 삭제
+	public void photoBorderDelete(HttpServletRequest req,Model model);
+	// 사진 게시판 수정하기
+	public void noMoPhotoBoarder(MultipartHttpServletRequest req,Model model);
 }

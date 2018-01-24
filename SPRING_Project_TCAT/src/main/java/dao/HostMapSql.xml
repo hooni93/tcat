@@ -1107,16 +1107,18 @@
     					<if test="mDev != null">
            				AND c.mDev LIKE '${mDev}'
         				</if>
-    					
-				        <!-- <choose>
+        				<choose>
 				           <when test="sDev==1">
 				              AND p.per_id LIKE '${keyword}'
 				           </when>
 				           <when test="sDev==2">
 				              AND p.perf_title LIKE '%${keyword}%'
 				           </when>
+				           <when test="sDev==3">
+				              AND c.sDev LIKE '%${keyword}%'
+				           </when>
 				           <otherwise></otherwise>
-				        </choose> -->
+				        </choose>
     					
     </select>
     <!-- 필요한 컬럼 -->
@@ -1161,7 +1163,7 @@
 				f.per_id as per_id,
 				f.perf_title as perf_title,
 				f.per_step as per_step,
-				f.num as gu,
+				f.num as ticet_max,
 				c.mdev as mDev,
 				c.sdev as sDev,
 				rownum rNum
@@ -1201,13 +1203,25 @@
     					<if test="mDev != null">
            				AND c.mDev LIKE '${mDev}'
         				</if>
+        				<choose>
+				           <when test="sDev==1">
+				              AND per_id LIKE '${keyword}'
+				           </when>
+				           <when test="sDev==2">
+				              AND perf_title LIKE '%${keyword}%'
+				           </when>
+				           <when test="sDev==3">
+				              AND sDev LIKE '%${keyword}%'
+				           </when>
+				           <otherwise></otherwise>
+				        </choose>
     					)
     					<if test="step ==1">
     					<![CDATA[
     					where rNum>=#{start} and rNum <=#{end}
     					]]>
     					</if>
-    					order by gu desc
+    					order by ticet_max desc
     					
     				
 	</select>
@@ -1248,6 +1262,46 @@
 	<update id="provalUpdateCnt" parameterType="int">
 		update Ticketing set ticket_step='2' where ticket_num=#{num}
 	</update>
+	 <!-- 혜택갯수 -->
+     <select id="levelCnt" resultType="int">
+		select count(*)
+		from
+		sale
+	</select>
+	<!-- 혜택리스트 -->
+	<select id="levelList" resultType="spring.project.tcat.VO.SaleVO">
+		<![CDATA[
+		select *
+		from(select sale_div, sale_rate, rownum rNum
+		from(
+			select * from sale
+			ORDER by sale_rate desc
+				)
+		)
+		WHERE rNum >=#{start} AND rNum <=#{end}
+		]]>
+	</select>
+	<!-- 혜택 삭제 -->
+	<delete id="levelDeleteCnt" parameterType="String">
+		delete sale where sale_div=#{sale}
+	</delete>
+	<!-- 혜택 상세 -->
+	<select id="levelMemberForm" resultType="spring.project.tcat.VO.SaleVO">
+		select * from
+		sale
+		where sale_div=#{sale_div}
+	</select>
+	<!-- 혜택 수정 -->
+	<update id="levelUpdateCnt" parameterType="java.util.Map">
+		update sale set sale_rate=#{sale_rate} where sale_div=#{sale_div}
+	</update>
+	<!-- 혜택 등록-->
+	<insert id="levelAdd" parameterType="java.util.Map">
+	<![CDATA[
+		INSERT INTO sale (sale_div,sale_rate) 
+		VALUES (#{sale_div},#{sale_rate})
+		]]>
+	</insert>
      <!-- 18.01.23 영민 수정끝  -->
      
 <!-- 18.01.11 동금 수정  -->
@@ -1503,8 +1557,15 @@
 <!--      18.01.17 동금 수정끝  -->
      
 <!-- 18.01.21 태성 수정 시작 -->
+    <!-- 관리자 공연 후기 개수 -->
 	<select id="commentCnt" resultType="int">
-	 select count(*) from notice where notice_div = 4
+	select count(*) 
+	from notice no, category ca, performanceInfo per 
+	where no.notice_div = 4
+	and no.per_id = per.per_id
+	and per.cateNum = ca.cateNum
+	and category = #{Hcnt}
+	 
 	 	<choose>
 	 		<when test="sDev==1">
 				AND notice_num LIKE '${keyword}'
@@ -1513,7 +1574,32 @@
 				AND member_id LIKE '%${keyword}%'
 			</when>
 			<when test="sDev==3">
-				AND notice_title LIKE '%${keyword}%'
+				AND perf_title LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND contents LIKE '%${keyword}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	
+	 <!-- 관리자 스토어 후기 개수 -->
+	<select id="commentCntS" resultType="int">
+	select count(*) 
+		from notice no, category ca, perDisc perD
+		where notice_div = 4
+		and no.disc_code = perD.disc_code
+		and perD.cateNum = ca.cateNum
+		and category = #{Hcnt}
+	 	<choose>
+	 		<when test="sDev==1">
+				AND notice_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND disc_title LIKE '%${keyword}%'
 			</when>
 			<when test="sDev==4">
 				AND contents LIKE '%${keyword}%'
@@ -1523,7 +1609,7 @@
 	</select>
 	
 	<!-- 관람후기 목록  -->
-	<select id="commentList" resultType="spring.project.tcat.VO.TcatBoardVO">
+	<select id="commentListView" resultType="spring.project.tcat.VO.TcatBoardVO">
 	select *
 		from(
 		select notice_num,perf_title,perf_image, contents,member_id,
@@ -1534,11 +1620,6 @@
 		from notice no, performanceInfo per
 		where no.per_id LIKE per.per_id 
 		and no.notice_div LIKE 4
-	<!--  select * 
-	 from(select no.notice_num,per.perf_title,no.notice_image, no.contents, no.member_id, no.writedate,ROWNUM rnum
-	 from notice no, performanceInfo per 
-	 where no.per_id = per.per_id and no.notice_div = 4 -->
-	 
 	<choose>
 			<when test="sDev==1">
 				AND notice_num LIKE '${keyword}'
@@ -1561,11 +1642,182 @@
 		]]>
 		</select>
 		
+		<!-- 상품후기 목록  -->
+	<select id="commentListStore" resultType="spring.project.tcat.VO.TcatBoardVO">
+	select *
+		from(
+		select notice_num,disc_title, contents, member_id, writedate, ROWNUM rnum
+		from (
+		select no.notice_num, perD.disc_title, no.contents,no.member_id, no.writedate
+		from notice no, perDisc perD
+		where no.disc_code LIKE perD.disc_code 
+		and no.notice_div LIKE 4
+	<choose>
+			<when test="sDev==1">
+				AND notice_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND disc_title LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND contents LIKE '%${keyword}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		order by notice_num desc
+		))
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+		</select>
+		
 		<!-- 관람후기 삭제 -->
 		<delete id="commentDel" parameterType="int">
 		delete notice where notice_num=#{notice_num}	
 		</delete> 
 
-<!-- 18.01.21 태성 수정 끝 -->
+<!-- 환불 목록 개수 - 공연 -->
+<select id="refundCnt" resultType="int">
+ select count(*)
+       from Ticketing ti, performanceInfo per
+       where TICKET_STEP = 6
+       and ti.per_id = per.per_id
+ <choose>
+	 		<when test="sDev==1">
+				AND ticket_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND per_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND seat_type LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==5">
+				AND seat_num LIKE '%${keyword}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		
+</select>
+
+<!-- 환불 목록 - 공연 -->
+<select id="refundListA" resultType="spring.project.tcat.VO.TcatTicketingVO">
+select *
+from(select ticket_num, member_id, perf_title, per_id, ticet_date, seat_type, seat_num, del_num, round,ROWNUM rnum
+from(
+select ti.ticket_num, ti.member_id, per.perf_title, ti.per_id, ti.ticet_date, ti.seat_type, ti.seat_num, ti.del_num, ti.round
+       from Ticketing ti, performanceInfo per
+       where TICKET_STEP = 6
+       and ti.per_id = per.per_id
+       <choose>
+	 		<when test="sDev==1">
+				AND ticket_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND per_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND seat_type LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==5">
+				AND seat_num LIKE '%${keyword}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		order by ticket_num desc
+		))
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+</select>
+
+
+
+
+
+<!-- 환불 목록 개수 - 스토어 -->
+<select id="refundSCnt" resultType="int">
+ select count(*)
+       from DiscBuy disc, perDisc perD
+       where DISC_BUYSTEP = 6
+       and disc.disc_code = perD.disc_code
+<choose>
+	 		<when test="sDev==1">
+				AND disc_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND disc_code LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND buy_count LIKE '${keyword}'
+			</when>
+			
+			<otherwise></otherwise>
+		</choose>
+</select>
+<!-- 환불 목록 - 스토어 -->
+<select id="refundListB" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
+select *
+from(
+select disc_num,disc_title,member_id, disc_buyDate, buy_count, del_num,rownum rnum
+from(
+select disc.disc_num, perD.disc_title, disc.member_id, disc.disc_buyDate, disc.buy_count, disc.del_num
+       from DiscBuy disc, perDisc perD
+       where DISC_BUYSTEP = 6
+       and disc.disc_code = perD.disc_code
+       
+         <choose>
+	 		<when test="sDev==1">
+				AND disc_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND disc_code LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND per_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==5">
+				AND buy_count LIKE '%${keyword}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		order by disc_num desc
+		))
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+</select>
+<!-- 환불 승인 - 공연 -->
+<update id="refundPerformanceOk" parameterType="int">
+  update Ticketing set ticket_step='7'  where ticket_num= #{ticket_num}
+</update>
+<!-- 환불 취소 - 공연 -->
+<update id="refundPerformanceCancel" parameterType="int">
+  update Ticketing set ticket_step='5'  where ticket_num= #{ticket_num}
+</update>
+<!-- 환불 승인 - 스토어 -->
+<update id="refundStoreOk" parameterType="int">
+  update DiscBuy set DISC_BUYSTEP='7'  where disc_num= #{disc_num}
+</update>
+<!-- 환불 취소 - 스토어 -->
+<update id="refundStoreCancel" parameterType="int">
+  update DiscBuy set DISC_BUYSTEP='5'  where disc_num= #{disc_num}
+</update>
+<!-- ~18.01.24 태성 수정 끝 -->
    
    </mapper>

@@ -101,8 +101,15 @@ public class TcatPerformanceVO {
     Timestamp ticet_date;
     String seat_type;
     String seat_num;
+    String ticet_max;  //영민 핫리스트 판매량 
 
-    //get,setter
+    public String getTicet_max() {
+		return ticet_max;
+	}
+	public void setTicet_max(String ticet_max) {
+		this.ticet_max = ticet_max;
+	}
+	//get,setter
     public String getSeat_num() {
 		return seat_num;
 	}

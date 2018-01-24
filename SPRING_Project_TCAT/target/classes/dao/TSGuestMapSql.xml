@@ -28,7 +28,12 @@
 
 	<!-- 관람후기 갯수 -->
 	<select id="comment" resultType="int">
-		select count(*) from notice where notice_div = 4
+		select count(*) 
+		from notice no, category ca, performanceInfo per 
+		where no.notice_div = 4
+		and no.per_id = per.per_id
+		and per.cateNum = ca.cateNum
+		and category = #{Hcnt}
 		<choose>
 			<when test="sDev==1">
 				AND notice_num LIKE '${keyword}'
@@ -44,23 +49,46 @@
 			</when>
 			<otherwise></otherwise>
 		</choose>
+			<if test="mDev != null">
+			AND category LIKE #{Hcnt}
+		</if>
 	</select>
-	<!-- 관람후기 출력 -->
-	<select id="commentBoard" resultType="spring.project.tcat.VO.TcatBoardVO">
 	
+	<!-- 스토어후기 갯수 -->
+	<select id="commentS" resultType="int">
+		select count(*) 
+		from notice no, category ca, perDisc perD
+		where notice_div = 4
+		and no.disc_code = perD.disc_code
+		and perD.cateNum = ca.cateNum
+		and category = #{Hcnt}
+		<choose>
+			<when test="sDev==1">
+				AND notice_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND notice_title LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND contents LIKE '%${keyword}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		AND category LIKE #{Hcnt}
+	</select>
+	
+	<!-- 관람후기 출력 -->
+	<select id="commentA" resultType="spring.project.tcat.VO.TcatBoardVO">
 		select *
-		from(
-		select notice_num,perf_title,perf_image, contents,member_id,
-		writedate,ROWNUM rnum
+		from(select notice_num,perf_title, contents,member_id,writedate,ROWNUM rnum
 		from (
-		select no.notice_num,per.perf_title,per.perf_image, no.contents,
-		no.member_id, no.writedate
+		select no.notice_num,per.perf_title, no.contents,no.member_id, no.writedate
 		from notice no, performanceInfo per
 		where no.per_id LIKE per.per_id 
 		and no.notice_div LIKE 4
-
-
-		
 		<choose>
 			<when test="sDev==1">
 				AND notice_num LIKE '${keyword}'
@@ -82,6 +110,38 @@
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
+	
+	<!-- 스토어(상품)후기 출력 -->
+	<select id="commentB" resultType="spring.project.tcat.VO.TcatBoardVO">
+		select *
+		from(
+		select notice_num,disc_title, contents, member_id, writedate, ROWNUM rnum
+		from (
+		select no.notice_num, perD.disc_title, no.contents,no.member_id, no.writedate
+		from notice no, perDisc perD
+		where no.disc_code LIKE perD.disc_code 
+		and no.notice_div LIKE 4
+		<choose>
+			<when test="sDev==1">
+				AND notice_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND disc_title LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND contents LIKE '%${keyword}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		order by notice_num desc
+		))
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
 
 
 
@@ -91,20 +151,7 @@
 		from notice no, performanceInfo per
 		where no.notice_div = 4
 		and no.per_id = per.per_id
-		and per.perf_title =
-		#{perf_title}
-		<choose>
-			<when test="sDev==1">
-				AND notice_num LIKE '${keyword}'
-			</when>
-			<when test="sDev==2">
-				AND member_id LIKE '%${keyword}%'
-			</when>
-			<when test="sDev==3">
-				AND contents LIKE '%${keyword}%'
-			</when>
-			<otherwise></otherwise>
-		</choose>
+		and per.perf_title =#{perf_title}
 	</select>
 
 	<!-- 관람후기 출력(해당공연) -->
@@ -120,18 +167,6 @@
 		where no.per_id = per.per_id
 		and no.notice_div LIKE 4
 		and perf_title LIKE #{perf_title}
-		<choose>
-			<when test="sDev==1">
-				AND notice_num LIKE '${keyword}'
-			</when>
-			<when test="sDev==2">
-				AND member_id LIKE '%${keyword}%'
-			</when>
-			<when test="sDev==3">
-				AND contents LIKE '%${keyword}%'
-			</when>
-			<otherwise></otherwise>
-		</choose>
 		order by notice_num desc
 		))
 		<![CDATA[
@@ -145,4 +180,39 @@
 		notice(notice_num,writedate,contents,notice_div,member_id,per_id)
 		values(Notice_SEQ.nextval,sysdate,#{contents},4,#{member_id},#{per_id})
 	</insert>
+	
+	<!-- 스토어후기(해당 상품) 갯수 -->
+	<select id="selectCommentS" resultType="int">
+		select count(*)
+		from notice no, perDisc perD
+		where no.notice_div = 4
+		and no.disc_code = perD.disc_code
+		and disc_title = #{disc_title}
+	</select>
+
+	<!-- 스토어후기 출력 (해당 상품) -->
+	<select id="selectCommentBoardS" resultType="spring.project.tcat.VO.TcatBoardVO">
+		select *
+		from(
+		SELECT notice_num,disc_title,contents, member_id, writedate,disc_code,rownum rnum
+		FROM(
+		select no.notice_num,perD.disc_title, no.contents,no.member_id, no.writedate,perD.disc_code
+		from notice no, perDisc perD
+		where no.disc_code = perD.disc_code
+		and no.notice_div LIKE 4
+		and disc_title LIKE #{disc_title}
+		order by notice_num desc
+		))
+		<![CDATA[
+			WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+	<!-- 상품 후기 한줄평 쓰기 -->
+	<insert id="commentWriteS" parameterType="spring.project.tcat.VO.TcatBoardVO">
+		insert into
+		notice(notice_num,writedate,contents,notice_div,member_id,disc_code)
+		values(Notice_SEQ.nextval,sysdate,#{contents},4,#{member_id},#{disc_code})
+	</insert>
+	
 </mapper>

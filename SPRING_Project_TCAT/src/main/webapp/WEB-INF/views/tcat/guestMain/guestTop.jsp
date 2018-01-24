@@ -210,9 +210,6 @@
 							<li><a onclick="load('wishList?wish_step=1');">위시리스트</a></li>
 							<li><a onclick="load('cartList');">장바구니</a></li>
 						</c:if>
-
-						<li><a href="#">모바일APP</a></li>
-
 						<li><a onclick="load('commentBoard');">후기</a></li>
 						<li><a onclick="load('intro');">회사</a></li>
 					</ol>

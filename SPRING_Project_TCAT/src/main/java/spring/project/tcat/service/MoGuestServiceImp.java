@@ -1,5 +1,8 @@
 package spring.project.tcat.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import spring.project.tcat.VO.TcatBoardVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
@@ -38,12 +43,15 @@ public class MoGuestServiceImp implements MoGuestService {
 	public void ticketSeat(HttpServletRequest req, Model model) {
 		// TODO Auto-generated method stub
 		int per_id=Integer.parseInt(req.getParameter("per_id"));
-		int round=Integer.parseInt(req.getParameter("round"));
-		String ticet_date=req.getParameter("ticet_date");
 		System.out.println(per_id);
-		System.out.println(round);
+		String srtRound=req.getParameter("round");
+		System.out.println(srtRound);
+		String ticet_date=req.getParameter("ticet_date");
 		System.out.println(ticet_date);
 		System.out.println("============");
+		String[] roundArr=srtRound.split("회차/");
+		int round=Integer.parseInt(roundArr[0]);
+		System.out.println(round);
 		Map<String,Object> map=new HashMap<String,Object>();
 		ArrayList<TcatPerformanceVO> dtos=null;
 		map.put("per_id", per_id);
@@ -51,6 +59,7 @@ public class MoGuestServiceImp implements MoGuestService {
 		map.put("ticet_date", ticet_date);
 		dtos=MGDao.ticketSeat(map);
 		model.addAttribute("dtos", dtos);
+		System.out.println(dtos.get(0).getVIP_seat());
 
 	}
 	//사진게시판 리스트 가져오기
@@ -134,9 +143,135 @@ public class MoGuestServiceImp implements MoGuestService {
 			System.out.println("답글 업로드 완료");
 		}
 	}
+
 	
+	//사진게시판 게시하기
+	@Override
+	public void insertPhotoBoarder(MultipartHttpServletRequest req, Model model) {
+		// TODO Auto-generated method stub
+		MultipartFile file = req.getFile("board_Image");
+		
+		
+		String realDir = "C:\\Dev\\TCATworkspace\\git\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\Boarder\\";
+		String saveDir = req.getRealPath("/resources/image/Boarder/");
+		try {
+
+			file.transferTo(new File(saveDir + file.getOriginalFilename()));
+
+			FileInputStream fis = new FileInputStream(saveDir + file.getOriginalFilename());
+			FileOutputStream fos = new FileOutputStream(realDir + file.getOriginalFilename());
+
+			int data = 0;
+
+			while ((data = fis.read()) != -1) {
+				fos.write(data);
+			}
+			fis.close();
+			fos.close();
+			TcatBoardVO vo=new TcatBoardVO();
+			String notice_title=req.getParameter("no_title");
+			System.out.println(notice_title);
+			String member_id=req.getParameter("mem_id");
+			System.out.println(member_id);
+			String contents=req.getParameter("no_content");
+			String notice_image=file.getOriginalFilename();
+			System.out.println(notice_image);
+			
+			vo.setNotice_title(notice_title);
+			vo.setMember_id(member_id);
+			vo.setContents(contents);
+			vo.setNotice_image(notice_image);
+			int cnt=0;
+			cnt=MGDao.insertPhotoBoarder(vo);
+			if(cnt!=0) {
+				System.out.println("입력에 성공하셨습니다.");
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			int error=1;
+			req.setAttribute("error2", error);
+		}
+		
+		
+	}
+
+	//사진게시판 삭제 
+	@Override
+	public void photoBorderDelete(HttpServletRequest req, Model model) {
+		// TODO Auto-generated method stub
+		int notice_num=Integer.parseInt(req.getParameter("notice_num"));
+		int cnt=0;
+		cnt=MGDao.photoBorderDelete(notice_num);
+		if(cnt!=0) {
+			System.out.println("삭제성공");
+		}
+	}
 	
-	
+	//사진게시판 수정
+		@Override
+		public void noMoPhotoBoarder(MultipartHttpServletRequest req, Model model) {
+			// TODO Auto-generated method stub
+			MultipartFile file = null;
+			file = req.getFile("noMoboard_Image");
+			
+			if(file!=null) {
+			String realDir = "C:\\Dev\\TCATworkspace\\git\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\Boarder\\";
+			String saveDir = req.getRealPath("/resources/image/Boarder/");
+			try {
+
+				file.transferTo(new File(saveDir + file.getOriginalFilename()));
+
+				FileInputStream fis = new FileInputStream(saveDir + file.getOriginalFilename());
+				FileOutputStream fos = new FileOutputStream(realDir + file.getOriginalFilename());
+
+				int data = 0;
+
+				while ((data = fis.read()) != -1) {
+					fos.write(data);
+				}
+				fis.close();
+				fos.close();
+				TcatBoardVO vo=new TcatBoardVO();
+				String notice_title=req.getParameter("noMo_title");
+				int notice_num=Integer.parseInt(req.getParameter("monotice_num"));
+				String contents=req.getParameter("noMo_content");
+				String notice_image=file.getOriginalFilename();
+				System.out.println(notice_image);
+				
+				vo.setNotice_num(notice_num);
+				vo.setNotice_title(notice_title);
+				vo.setContents(contents);
+				vo.setNotice_image(notice_image);
+				int cnt=0;
+				cnt=MGDao.noMoPhotoBoarder(vo);
+				if(cnt!=0) {
+					System.out.println("입력에 성공하셨습니다.");
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+				int error=1;
+				req.setAttribute("error2", error);
+			}
+			
+			
+		}else{
+			TcatBoardVO vo=new TcatBoardVO();
+			String notice_title=req.getParameter("noMo_title");
+			String contents=req.getParameter("noMo_content");	
+			int notice_num=Integer.parseInt(req.getParameter("monotice_num"));
+			vo.setNotice_title(notice_title);
+			vo.setContents(contents);
+			vo.setNotice_num(notice_num);
+			int cnt=0;
+			cnt=MGDao.noMoPhotoBoarder(vo);
+			if(cnt!=0) {
+				System.out.println("입력에 성공하셨습니다.");
+			}
+		}
+		
+		}
 	
 	
 }//클래스 끝
