@@ -369,6 +369,7 @@ public class JMHGuestServiceImp implements JMHGuestService {
 			mhDAO.upHits(disc_code);
 		}
 		TcatPerDiscVO str = mhDAO.getContent_store(disc_code);
+
 		model.addAttribute("str", str);
 	}
 

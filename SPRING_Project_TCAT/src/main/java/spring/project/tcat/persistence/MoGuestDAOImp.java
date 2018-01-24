@@ -59,8 +59,17 @@ public class MoGuestDAOImp implements MoGuestDAO{
 		 cnt=dao.photoBoarderCommentWrite(vo);
 		return cnt;
 	}
-	
+
 	//사진게시판 답글 가져오기
+	@Override
+	public ArrayList<TcatBoardVO> photoBoarderComment() {
+		// TODO Auto-generated method stub
+		 ArrayList<TcatBoardVO> dtos=null;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 dtos=dao.photoBoarderComment();
+		 return dtos;
+	}
+	
 	
 	
 	
