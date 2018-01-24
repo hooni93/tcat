@@ -63,7 +63,10 @@
    		values (notice_seq.nextval,#{notice_num},sysdate,#{contents},#{member_id},31) ]]>
    	</insert>
    
-   
+   <!--사진게시판 답글 가져오기  -->
+   <select id="photoBoarderComment" resultType="spring.project.tcat.VO.TcatBoardVO">
+   		select notice_num,notice_title,writeDate,contents,member_id from notice where notice_div=31 order by notice_num
+   </select>
    
    
    </mapper>

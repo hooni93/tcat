@@ -44,45 +44,42 @@ $(document).ready(function() {
 	//탭
 	$('#myTab a[href="#profile"]').tab('show');
 	
-	$(".active.wish").click(function(){
-		alert("ㅅㅄㅄ");
-	});
 	//위시리스트 킬릭시
 	$(".wish").click(function(){
 		if(${login_id == null}){
 			alert("로그인 후 이용해 주세요.");
 			return false;
 		}else{
-			var per_id = $("#per_id").val();
-			var formData = {"per_id":per_id};
-			var active = $(".wish").hasClass("active");
-			if(active){
-				$.ajax({
-					type : "POST",
-					url : "delWishList",
-					cache : false,
-					data : formData,
-					success : function() {
-						$(".wish").removeClass("active");
-					},
-					error : function(){
-						alert("위시리스트 실패하였습니다.");
-					}
-				});
-			}else{
-				$.ajax({
-					type : "POST",
-					url : "addWishList",
-					cache : false,
-					data : formData,
-					success : function() {
-						$(".wish").addClass("active");
-					},
-					error : function(){
-						alert("위시리스트 실패하였습니다.");
-					}
-				});
-			}
+				var disc_code = $("#disc_code").val();
+				var formData = {"disc_code":disc_code};
+				var active = $(".wish").hasClass("active");
+				if(active){
+					$.ajax({
+						type : "POST",
+						url : "delWishList",
+						cache : false,
+						data : formData,
+						success : function() {
+							$(".wish").removeClass("active");
+						},
+						error : function(){
+							alert("위시리스트 실패하였습니다.");
+						}
+					});
+				}else{
+					$.ajax({
+						type : "POST",
+						url : "addWishList",
+						cache : false,
+						data : formData,
+						success : function() {
+							$(".wish").addClass("active");
+						},
+						error : function(){
+							alert("위시리스트 실패하였습니다.");
+						}
+					});
+				}
 		}
 	});
 </script>
@@ -139,8 +136,13 @@ $(document).ready(function() {
 					<!--예매  -->
 					<div class="col-md-3 " style="padding: 0;">
 						<div class="col-md-12 p10">
+<<<<<<< HEAD
 							<span>위시리스트</span> <input type="hidden" id="per_id"
 								value="${str.disc_code}">
+=======
+							<span>위시리스트</span> <input type="hidden" id="disc_code"
+								value="${str.disc_code }">
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 							<button type="button" class="wish btn-xl">
 								<i class="glyphicon glyphicon-heart fs20"></i>
 							</button>

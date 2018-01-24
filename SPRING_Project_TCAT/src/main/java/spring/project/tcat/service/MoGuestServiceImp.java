@@ -40,6 +40,10 @@ public class MoGuestServiceImp implements MoGuestService {
 		int per_id=Integer.parseInt(req.getParameter("per_id"));
 		int round=Integer.parseInt(req.getParameter("round"));
 		String ticet_date=req.getParameter("ticet_date");
+		System.out.println(per_id);
+		System.out.println(round);
+		System.out.println(ticet_date);
+		System.out.println("============");
 		Map<String,Object> map=new HashMap<String,Object>();
 		ArrayList<TcatPerformanceVO> dtos=null;
 		map.put("per_id", per_id);
@@ -97,9 +101,8 @@ public class MoGuestServiceImp implements MoGuestService {
 		endPage = pageCount;
 		}
 		//사진게시판 답글 가져오기
-		
-		
-		
+		ArrayList<TcatBoardVO> dtos2=MGDao.photoBoarderComment();
+		model.addAttribute("dtos2",dtos2);
 		model.addAttribute("cnt", cnt);
 		model.addAttribute("number", number);
 		model.addAttribute("pageNum", pageNum);

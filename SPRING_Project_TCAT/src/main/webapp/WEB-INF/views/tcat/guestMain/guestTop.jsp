@@ -214,7 +214,7 @@ function contentPage(per_id){
 						<li><a href="#">예매확인/취소</a></li>
 						<li><a onclick="load('qnaBoardMain');">고객센터</a></li>
 						<c:if test="${sessionScope.login_id!=null}">
-							<li><a onclick="load('wishList');">위시리스트</a></li>
+							<li><a onclick="load('wishList?wish_step=1');">위시리스트</a></li>
 							<li><a onclick="load('cartList');">장바구니</a></li>
 						</c:if>
 
