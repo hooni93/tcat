@@ -888,7 +888,62 @@ public class TcatHostController {
 			hService.provalHost(req, model);
 			return "tcat/proval/provalMain";
 		}
-		
+		//회원혜택관리
+		@RequestMapping("levelMember_side")
+		public String levelMember_side(HttpServletRequest req,Model model) {
+			System.out.println("levelMember_side");
+			return "tcat/memberManage/levelMember_side";
+		}
+		//회원혜택관리
+		@RequestMapping("levelMember")
+		public String levelMember(HttpServletRequest req,Model model) {
+			System.out.println("levelMember");
+			hService.levelMember(req, model);
+			return "tcat/memberManage/levelMember";
+		}
+		//혜택삭제
+		@RequestMapping("levelDelete")
+		public String levelDelete(HttpServletRequest req,Model model) {
+			System.out.println("levelDelete");
+			hService.levelDelete(req, model);
+			hService.levelMember(req, model);
+			return "tcat/memberManage/levelMember";
+		}
+		//혜택수정
+		@RequestMapping("levelMemberForm")
+		public String levelMemberForm(HttpServletRequest req,Model model) {
+			System.out.println("levelMemberForm");
+			hService.levelMemberForm(req, model);
+			return "tcat/memberManage/levelMemberForm";
+		}
+		//혜택업데이트
+		@RequestMapping("levelMemberUpdate")
+		public String levelMemberUpdate(HttpServletRequest req,Model model) {
+			System.out.println("levelMemberUpdate");
+			hService.levelMemberUpdate(req, model);
+			hService.levelMember(req, model);
+			return "tcat/memberManage/levelMember";
+		}
+		//혜택등록
+				@RequestMapping("levelAdd")
+				public String levelAdd(MultipartHttpServletRequest req,Model model) {
+					System.out.println("levelAdd");
+					hService.levelAdd(req, model);
+					hService.levelMember(req, model);
+					return "tcat/borderManager/levelMember";
+		}
+		//등급분석사이드
+		@RequestMapping("infoLevel_side")
+		public String infoLevel_side(HttpServletRequest req,Model model) {
+			System.out.println("infoLevel_side");
+			return "tcat/memberAnalysis/infoLevel_side";
+		}
+		//등급분석사이드
+		@RequestMapping("infoLevel")
+		public String infoLevel(HttpServletRequest req,Model model) {
+			System.out.println("infoLevel");
+			return "tcat/memberAnalysis/infoLevel";
+		}
 /////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민  //////////////////////////////
 
 	///////////////////////  동금 1/9 start  //////////////////////// 
@@ -1046,7 +1101,7 @@ public class TcatHostController {
 	System.out.println("commentManager");
 	
 	hService.commentList(req, model);
-	req.getSession().setAttribute("page", "commentManager");
+	req.getSession().setAttribute("page", "commentManagerCate");
 	
 	return "tcat/borderManager/commentManager";
 	
@@ -1069,5 +1124,75 @@ public class TcatHostController {
 	
 	return "tcat/borderManager/commentManager";
 	}
+//////////////////////태성 1/21 end////////////////////////////
+//////////////////////태성 1/23 start////////////////////////////
+	@RequestMapping("productRefund_side")
+	public String productRefund_side(HttpServletRequest req,Model model) {
+	System.out.println("productRefund_side");
+	return "tcat/productManager/productRefund_side";
+	}
 	
+	//공연 환불 - 목록
+	@RequestMapping("productRefund")
+	public String productRefund(HttpServletRequest req,Model model) {
+		
+	System.out.println("productRefund");
+	hService.productRefundBoard(req, model);
+	return "tcat/productManager/productRefund";
+	
+	}
+	
+	//스토어 환불 - 목록
+	@RequestMapping("productRefundS")
+	public String productRefundS(HttpServletRequest req,Model model) {
+		
+	System.out.println("productRefundS");
+	hService.productRefundBoardS(req, model);
+	
+	return "tcat/productManager/productRefundS";
+	}
+	
+	//공연 환불 - 승인
+	@RequestMapping("productRefundUpdate")
+	public String productRefundUpdate(HttpServletRequest req,Model model) {
+		
+	System.out.println("productRefundUpdate");
+	hService.productRefundUpdate(req, model);
+	hService.productRefundBoard(req, model);
+	
+	return "tcat/productManager/productRefund";
+	}
+	//공연 환불 - 취소
+	@RequestMapping("productRefundCancel")
+	public String productRefundCancel(HttpServletRequest req,Model model) {
+	System.out.println("productRefundCancel");
+	
+	hService.productRefundCancel(req, model);
+	hService.productRefundBoard(req, model);
+	
+	return "tcat/productManager/productRefund";
+	}
+	//스토어 환불 - 승인
+	@RequestMapping("productRefundUpdateS")
+	public String productRefundUpdateS(HttpServletRequest req,Model model) {
+		
+	System.out.println("productRefundUpdateS");
+	
+	hService.productRefundUpdateS(req, model);
+	hService.productRefundBoardS(req, model);
+	
+	return "tcat/productManager/productRefundS";
+	}
+	//스토어 환불 - 취소
+	@RequestMapping("productRefundCancelS")
+	public String productRefundCancelS(HttpServletRequest req,Model model) {
+		
+	System.out.println("productRefundCancelS");
+	
+	hService.productRefundCancelS(req, model);
+	hService.productRefundBoardS(req, model);
+	
+	return "tcat/productManager/productRefundS";
+	}
+//////////////////////태성 1/23 end////////////////////////////
 }

@@ -39,10 +39,12 @@ public class YMGuestServiceImp implements YMGuestService {
 	public void memberRating(HttpServletRequest req, Model model) {
 		int cnt=0; //구매 갯수
 		int upCnt=0; //등급업데이트
-		
+		int max=0;//등급값
+		int p=0; //%
 		int sRank=0; //a랭크1년 구매
 		int vRank=0; //s랭크1년 구매
 		String Rating="";//등급
+		String nextRating="";//다음등급
 		String strId = (String) req.getSession().getAttribute("login_id");
 		System.out.println("Id:"+strId);
 		//////////////////////////////////////////////////////////////////
@@ -58,18 +60,26 @@ public class YMGuestServiceImp implements YMGuestService {
 			System.out.println("upCnt:-----"+upCnt);
 			System.out.println("cnt"+cnt);
 			Rating="D";
+			nextRating="C";
 			model.addAttribute("Rating", Rating);
+			model.addAttribute("nextRating", nextRating);
 			model.addAttribute("cnt", cnt);
 		//C등급
 		}else if(cnt<10) {
+			
 			map.put("compare", 1);
 			map.put("strId", strId);
 			upCnt=YMDao.mRatingUpdate(map);
 			System.out.println("upCnt1:-----"+upCnt);
 			System.out.println("cnt1"+cnt);
 			Rating="C";
+			nextRating="B";
+			max=10;
+			p=cnt*max;
 			model.addAttribute("Rating", Rating);
+			model.addAttribute("nextRating", nextRating);
 			model.addAttribute("cnt", cnt);
+			model.addAttribute("p", p);
 		//B등급
 		}else if(cnt<50) {
 			map.put("compare", 2);
@@ -78,8 +88,14 @@ public class YMGuestServiceImp implements YMGuestService {
 			System.out.println("upCnt2:-----"+upCnt);
 			System.out.println("cnt2"+cnt);
 			Rating="B";
+			nextRating="A";
+			max=2;
+			p=cnt*max;
 			model.addAttribute("Rating", Rating);
+			model.addAttribute("nextRating", nextRating);
 			model.addAttribute("cnt", cnt);
+			model.addAttribute("p", p);
+			
 		//A등급
 		}else if(cnt>=50) {
 			System.out.println("11111");
@@ -87,9 +103,8 @@ public class YMGuestServiceImp implements YMGuestService {
 			map.put("strId", strId);
 			upCnt=YMDao.mRatingUpdate(map);
 			System.out.println("upCnt3:-----"+upCnt);
-			Rating="A";
-			model.addAttribute("Rating", Rating);
-			model.addAttribute("cnt", cnt);
+			
+			
 			SimpleDateFormat date=new SimpleDateFormat("yy/MM/dd");
 			Date today=new Date();
 			Date yesterDay=new Date();
@@ -100,6 +115,17 @@ public class YMGuestServiceImp implements YMGuestService {
 			 map.put("today", todayStr);
 			 map.put("yesterday", yesterDayStr);
 			 sRank=YMDao.dayCnt(map);
+			 Rating="A";
+				nextRating="S";
+				max=10;
+				p=sRank*max;
+				model.addAttribute("Rating", Rating);
+				model.addAttribute("nextRating", nextRating);
+				model.addAttribute("sRank", sRank);
+				model.addAttribute("p", p);
+				model.addAttribute("cnt", cnt);
+				model.addAttribute("today", today);
+				model.addAttribute("yesterDay", yesterDay);
 			 System.out.println("1");
 			if(sRank>=10) {
 				System.out.println("3");
@@ -107,10 +133,16 @@ public class YMGuestServiceImp implements YMGuestService {
 				map.put("strId", strId);
 				upCnt=YMDao.mRatingUpdate(map);
 				Rating="S";
+				nextRating="VIP";
+				max=5;
+				p=sRank*max;
 				model.addAttribute("Rating", Rating);
+				model.addAttribute("nextRating", nextRating);
 				model.addAttribute("cnt", cnt);
 				model.addAttribute("sRank", sRank);
-				
+				model.addAttribute("today", today);
+				model.addAttribute("yesterDay", yesterDay);
+				model.addAttribute("p", p);
 				vRank=YMDao.dayCnt1(map);
 				if(vRank>=20) {
 					System.out.println("4");
@@ -118,9 +150,12 @@ public class YMGuestServiceImp implements YMGuestService {
 					map.put("strId", strId);
 					upCnt=YMDao.mRatingUpdate(map);
 					Rating="VIP";
+					 max=10;
+					 p=sRank*max;
 					model.addAttribute("Rating", Rating);
 					model.addAttribute("cnt", cnt);
 					model.addAttribute("vRank", vRank);
+					model.addAttribute("p", p);
 				}
 			}
 		
