@@ -370,11 +370,8 @@ public class JMHGuestServiceImp implements JMHGuestService {
 			mhDAO.upHits(disc_code);
 		}
 		TcatPerDiscVO str = mhDAO.getContent_store(disc_code);
-<<<<<<< HEAD
 			System.out.println(str.getDisc_title());
-=======
 
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 		model.addAttribute("str", str);
 	}
 
