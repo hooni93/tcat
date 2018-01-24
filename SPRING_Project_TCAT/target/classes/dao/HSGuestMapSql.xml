@@ -125,19 +125,19 @@
    		</select>
    		
    		<select id="vipCount" parameterType="java.util.Map" resultType="int">
-   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='vip'
+   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='VIP'
    		</select>
    		<select id="rCount" parameterType="java.util.Map" resultType="int">
-   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='r'
+   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='R'
    		</select>
    		<select id="sCount" parameterType="java.util.Map" resultType="int">
-   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='s'
+   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='S'
    		</select>
    		<select id="aCount" parameterType="java.util.Map" resultType="int">
-   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='a'
+   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='A'
    		</select>
    		<select id="bCount" parameterType="java.util.Map" resultType="int">
-   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='b'
+   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='B'
    		</select>
    		
    </mapper>

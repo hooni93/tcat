@@ -79,6 +79,7 @@
    		DELETE FROM notice WHERE notice_num=#{_parameter}
    </delete>
    
+   <!-- 사진게시판 수정 -->
    <update id="noMoPhotoBoarder">
    		UPDATE notice SET notice_title=#{notice_title},contents=#{contents}
    		<if test="notice_image!=null">

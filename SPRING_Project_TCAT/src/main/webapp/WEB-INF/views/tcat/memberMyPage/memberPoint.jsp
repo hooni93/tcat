@@ -36,12 +36,11 @@
 					
 					</div>
 					
-					<div class="progress">
-  					<div class="progress-bar progress-bar-striped active" style="width: ${cnt}%">
+		
+  					<div class="progress">  					
+  					 <div class="progress-bar progress-bar-striped active" style="width: ${cnt}%">
     				<center>${cnt}%</center>
-  					</div>
-					</div>
-					
+  					</div> 
 				</div>
 				<div class="col-md-1"></div>
 				<!--리스트목록 끝  -->

@@ -69,7 +69,8 @@ public class MoGuestContoroller {
 	public String ticketSeat(HttpServletRequest req,Model model) {
 		System.out.println("ticketSeat");
 		MGService.ticketSeat(req, model);
-		return "tcat/store/ticketSeat";
+		System.out.println("여기가 마지노선이다");
+		return "tcat/Ticketing/ticketSeat";
 	}
 	//사진 게시판 가져오기
 	@RequestMapping("photoBoarder")

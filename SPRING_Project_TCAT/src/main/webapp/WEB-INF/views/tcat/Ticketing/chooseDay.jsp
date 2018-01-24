@@ -90,7 +90,7 @@ function roundBt(round,form,per_id){
 	 
 	if(ticet_date=="0"){
 		alert("날짜를 먼저 선택해주세요!");
-	}else if(sysday[2]==dateDay&&dateHours>split2[0]){
+	}else if(sysday[2]==dateDay&&dateHours>=split2[0]){
 		alert("마감되었습니다!");
 		$("#RemainingSeats").load("${pageContext.request.contextPath}/fake");
 	}else{

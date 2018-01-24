@@ -43,12 +43,15 @@ public class MoGuestServiceImp implements MoGuestService {
 	public void ticketSeat(HttpServletRequest req, Model model) {
 		// TODO Auto-generated method stub
 		int per_id=Integer.parseInt(req.getParameter("per_id"));
-		int round=Integer.parseInt(req.getParameter("round"));
-		String ticet_date=req.getParameter("ticet_date");
 		System.out.println(per_id);
-		System.out.println(round);
+		String srtRound=req.getParameter("round");
+		System.out.println(srtRound);
+		String ticet_date=req.getParameter("ticet_date");
 		System.out.println(ticet_date);
 		System.out.println("============");
+		String[] roundArr=srtRound.split("회차/");
+		int round=Integer.parseInt(roundArr[0]);
+		System.out.println(round);
 		Map<String,Object> map=new HashMap<String,Object>();
 		ArrayList<TcatPerformanceVO> dtos=null;
 		map.put("per_id", per_id);
@@ -56,6 +59,7 @@ public class MoGuestServiceImp implements MoGuestService {
 		map.put("ticet_date", ticet_date);
 		dtos=MGDao.ticketSeat(map);
 		model.addAttribute("dtos", dtos);
+		System.out.println(dtos.get(0).getVIP_seat());
 
 	}
 	//사진게시판 리스트 가져오기

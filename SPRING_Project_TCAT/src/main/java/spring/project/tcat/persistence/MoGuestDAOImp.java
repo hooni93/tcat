@@ -26,7 +26,9 @@ public class MoGuestDAOImp implements MoGuestDAO{
 		// TODO Auto-generated method stub
 		ArrayList<TcatPerformanceVO> dtos=null;
 		MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		System.out.println("tickeSeatDao--------");
 		dtos=dao.ticketSeat(map);
+		System.out.println("tickeSeatDao--------");
 		return dtos;
 	}
 	
