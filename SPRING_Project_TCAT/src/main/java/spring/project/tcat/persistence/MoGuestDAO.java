@@ -20,5 +20,11 @@ public interface MoGuestDAO {
 		public int photoBoarderCommentWrite(TcatBoardVO vo);
 	//사진게시판 답글 가져오기
 		public ArrayList<TcatBoardVO> photoBoarderComment();
+	//사진게시판 업로드
+		public int insertPhotoBoarder(TcatBoardVO vo);
+	//사진게시판 삭제
+		public int photoBorderDelete(int notice_num);
+	//사진게시판 수정
+		public int noMoPhotoBoarder(TcatBoardVO vo);
 		
 }

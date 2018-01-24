@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import spring.project.tcat.service.MoGuestService;
 
@@ -85,7 +86,31 @@ public class MoGuestContoroller {
 		photoBoarder(req, model);
 		return "tcat/Boarder/photoBoarder";
 	}
+	//사진게시판 게시하기 
+	@RequestMapping("insertPhotoBoarder")
+	public String insertPhotoBoarder(MultipartHttpServletRequest req,Model model) {
+		System.out.println("insertPhotoBoarder");
+		MGService.insertPhotoBoarder(req, model);
+		MGService.photoBoarderList(req, model);
+		return "tcat/Boarder/photoBoarder";
+	}
+	//사진게시판 삭제
+	@RequestMapping("photoBorderDelete")
+	public String photoBorderDelete(HttpServletRequest req,Model model) {
+		System.out.println("photoBorderDelete");
+		MGService.photoBorderDelete(req, model);
+		MGService.photoBoarderList(req, model);
+		return "tcat/Boarder/photoBoarder";
+	}
 	
+	//사진게시판 수정
+	@RequestMapping("noMoPhotoBoarder")
+	public String noMoPhotoBoarder(MultipartHttpServletRequest req,Model model) {
+		System.out.println("noMoPhotoBoarder");
+		MGService.noMoPhotoBoarder(req, model);
+		MGService.photoBoarderList(req, model);
+		return "tcat/Boarder/photoBoarder";
+	}
 	
 	
 	

@@ -68,6 +68,25 @@
    		select notice_num,notice_title,writeDate,contents,member_id from notice where notice_div=31 order by notice_num
    </select>
    
+   <!-- 사진게시판 업로드 -->
+   <insert id="insertPhotoBoarder" parameterType="spring.project.tcat.VO.TcatBoardVO" >
+   		<![CDATA[INSERT INTO notice (notice_num,notice_title,writeDate,contents,notice_image,notice_div,member_id)
+   		 values(notice_seq.nextval,#{notice_title},sysdate,#{contents},#{notice_image},3,#{member_id})]]>
+   </insert>
+   
+   <!-- 사진게시판 삭제 -->
+   <delete id="photoBorderDelete" parameterType="int">
+   		DELETE FROM notice WHERE notice_num=#{_parameter}
+   </delete>
+   
+   <update id="noMoPhotoBoarder">
+   		UPDATE notice SET notice_title=#{notice_title},contents=#{contents}
+   		<if test="notice_image!=null">
+   			,notice_image=#{notice_image}
+   		</if>
+   		where notice_num=#{notice_num}
+   </update>
+   
    
    </mapper>
    

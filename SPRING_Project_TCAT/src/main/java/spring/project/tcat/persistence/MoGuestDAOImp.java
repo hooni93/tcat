@@ -69,6 +69,42 @@ public class MoGuestDAOImp implements MoGuestDAO{
 		 dtos=dao.photoBoarderComment();
 		 return dtos;
 	}
+
+	
+	//사진 게시판 업로드
+	@Override
+	public int insertPhotoBoarder(TcatBoardVO vo) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 cnt=dao.insertPhotoBoarder(vo);
+		return cnt;
+	}
+
+
+	
+	//사진 게시판 삭제
+	@Override
+	public int photoBorderDelete(int notice_num) {
+		// TODO Auto-generated method stub
+		int cnt =0;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 cnt=dao.photoBorderDelete(notice_num);
+		return cnt;
+	}
+
+	//사진게시판 수정
+	@Override
+	public int noMoPhotoBoarder(TcatBoardVO vo) {
+		// TODO Auto-generated method stub
+		int cnt =0;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 cnt=dao.noMoPhotoBoarder(vo);
+		return cnt;
+	}
+	
+	
+	
 	
 	
 	
