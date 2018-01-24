@@ -122,7 +122,7 @@ $(document).ready(function() {
 								<div class="col-md-3">
 									<b>수량</b>
 								</div>
-								<div class="col-md-9">${str.disc_count }개</div>
+								<div class="col-md-9">${str.disc_count}개</div>
 							</div>
 							<div class="row p10" style="border-top: 1px solid grey;">
 								<div class="col-md-3 ">
@@ -140,7 +140,7 @@ $(document).ready(function() {
 					<div class="col-md-3 " style="padding: 0;">
 						<div class="col-md-12 p10">
 							<span>위시리스트</span> <input type="hidden" id="per_id"
-								value="${str.disc_code }">
+								value="${str.disc_code}">
 							<button type="button" class="wish btn-xl">
 								<i class="glyphicon glyphicon-heart fs20"></i>
 							</button>
