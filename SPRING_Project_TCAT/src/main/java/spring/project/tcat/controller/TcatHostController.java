@@ -738,11 +738,49 @@ public class TcatHostController {
 	}
 	
 	 // 호스트 멤버 가입
-	   @RequestMapping("hostMemberJoin")
-	   public String hostMemberJoin(HttpServletRequest req, Model model) {
-	      System.out.println("hostMemberJoin");
-	      return "tcat/memberManage/hostMemberJoin";
-	   }
+	@RequestMapping("hostMemberJoin")
+	public String hostMemberJoin(HttpServletRequest req, Model model) {
+	   System.out.println("hostMemberJoin");
+	   return "tcat/memberManage/hostMemberJoin";
+	}
+	//공연상세 수정 페이지
+	@RequestMapping("detailPer")
+	public String detailPer(HttpServletRequest req, Model model) {
+	   System.out.println("detailPer");
+	  
+	   hService.detaillist(req,model);
+	  
+	   
+	   return "tcat/registItem/detailPer";
+	}
+	
+	//스토어 상세 수정 페이지
+	@RequestMapping("detailStore")
+	public String detailStore(HttpServletRequest req, Model model) {
+	   System.out.println("detailStore");
+	   
+	   hService.detaillist(req,model);
+	   
+	   return "tcat/registItem/detailStore";
+	}
+	//공연상세페이지 수정
+	@RequestMapping("updateDetailPer")
+	public String updateDetailPer(MultipartHttpServletRequest req, Model model) {
+	   System.out.println("updateDetailPer");
+	   
+	   hService.updateDetailPer(req,model);
+	   hService.detaillist(req,model);
+	   return "tcat/registItem/detailPer";
+	}
+	//스토어 상세 수정 페이지
+	@RequestMapping("updateDetailStore")
+	public String updateDetailStore(MultipartHttpServletRequest req, Model model) {
+	   System.out.println("updateDetailStore");
+	   
+	   hService.updateDetailStore(req,model);
+	   hService.detaillist(req,model);
+	   return "tcat/registItem/detailStore";
+	}
 	//////////////////////////////////// 현석 1/11 end/
 	//////////////////////////////////// /////////////////////////////////////////
 

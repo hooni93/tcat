@@ -13,7 +13,7 @@ import spring.project.tcat.service.JMHGuestService;
 public class JMHGuestController {
 	@Autowired
 	JMHGuestService mhService;
-
+	
 	//////// 보류단계
 	// memberFind
 	@RequestMapping("memberFind")

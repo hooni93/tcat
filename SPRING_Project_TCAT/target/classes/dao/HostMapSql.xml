@@ -929,7 +929,7 @@
 			select * 
 			from
 			(
-			    select p.per_id,p.perf_title,p.cateNum,p.R_seatPrice,p.VIP_seatPrice,p.S_seatPrice,p.A_seatPrice,p.B_seatPrice,c.category,c.mDev,c.sDev,p.perf_Image,p.startdate,p.enddate,p.hall_id,h.hall_name,p.first_grade,p.per_step,p.remain_round,p.possible_age,rownum rNum
+			    select p.per_id,p.perf_title,p.cateNum,p.R_seatPrice,p.VIP_seatPrice,p.S_seatPrice,p.A_seatPrice,p.B_seatPrice,p.detail_num,c.category,c.mDev,c.sDev,p.perf_Image,p.startdate,p.enddate,p.hall_id,h.hall_name,p.first_grade,p.per_step,p.remain_round,p.possible_age,rownum rNum
 			    from (select * from performanceInfo order by per_id desc) p,category c,hallInfo h
 			    where p.cateNum=c.cateNum and p.hall_id = h.hall_id and c.category='공연'
 			)
@@ -955,7 +955,7 @@
 			<![CDATA[
 			select * 
 			from(
-			    select p.disc_code,p.disc_title,p.disc_price,p.disc_image,p.disc_con,p.cateNum,
+			    select p.disc_code,p.disc_title,p.disc_price,p.disc_image,p.disc_con,p.cateNum,p.detail_num,
 			            p.first_grade,p.disc_step,p.disc_count,c.category,c.mDev,c.sDev,rownum rNum
 			    from (select * from perDisc order by disc_code desc) p ,category c
 			    where p.CATENUM=c.CATENUM and c.CATEGORY='스토어' and p.DISC_STEP=1
@@ -966,8 +966,8 @@
 		</select>
 		
 		<insert id="insertStore" parameterType="spring.project.tcat.VO.TcatPerDiscVO">
-			insert into perDisc(disc_code, disc_title, disc_price, disc_image, disc_con, cateNum, first_grade, disc_step, disc_count)
-			values(perDisc_SEQ.NEXTVAL,#{disc_title},#{disc_price},#{disc_image},#{disc_con},#{cateNum},#{first_grade},#{disc_step},#{disc_count})
+			insert into perDisc(disc_code, disc_title, disc_price, disc_image, disc_con, cateNum, first_grade, disc_step, disc_count,detail_num)
+			values(perDisc_SEQ.NEXTVAL,#{disc_title},#{disc_price},#{disc_image},#{disc_con},#{cateNum},#{first_grade},#{disc_step},#{disc_count},DetailPage_SEQ.NEXTVAL)
 		</insert>
 		
 		<!-- 2018.01.14 -->
@@ -985,6 +985,10 @@
 		
 		<select id="SearchDetail_num" resultType="int">
 			select max(detail_num) from performanceInfo
+		</select>
+		
+		<select id="SearchDetail_numStore" resultType="int">
+			select max(detail_num) from perDisc
 		</select>
 		
 		<insert id="insertDetailP_DEFAULT" parameterType="int">
@@ -1043,6 +1047,14 @@
 		<delete id="deleteHost" parameterType="String">
 			delete host where host_id=#{host_id}		
 		</delete>		
+		
+		<select id="detaillist" parameterType="int" resultType="spring.project.tcat.VO.detailPageVO">
+			select * from detailpage where detail_num=#{detail_num}
+		</select>
+		
+		<update id="updateDetail">
+			update detailpage set per_ex=#{per_ex},detail_Image=#{Detail_Image} where detail_num=#{detail_num}
+		</update>
       <!-- 18.01.11 현석 수정 끝  -->
       
          <!-- 18.01.11 영민 수정  -->

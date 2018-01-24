@@ -13,6 +13,7 @@ import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 import spring.project.tcat.VO.TcatTicketingVO;
+import spring.project.tcat.VO.detailPageVO;
 
 public interface HostDAO {
 	
@@ -177,6 +178,8 @@ public interface HostDAO {
 	public ArrayList<SelectHellInfoVO> HellList();
 	//상세페이지 번호 찾아오기
 	public int SearchDetail_num();
+	//상세페이지 번호 찾아오기[store]
+	public int SearchDetail_numStore();
 	//상세페이지 생성[초기화]
 	public void insertDetailP_DEFAULT(int detail_num);
 	//공연정보 추가하기
@@ -207,6 +210,10 @@ public interface HostDAO {
 	public ArrayList<HostVO> HostMemberList(Map<String,Object> map);
 	//관리자 삭제
 	public int deleteHost(String host_id);
+	//상세페이지 정보 가져오기
+	public detailPageVO detaillist(int detail_num);
+	//상세페이지 수정
+	public void updateDetail(Map<String,Object> map);
 	
 	////////////////////////////////////현석 1/11 end //////////////////////////////////////////
 

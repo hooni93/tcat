@@ -29,16 +29,9 @@ function next(){
 			document.all.nextBtn.value="할인/쿠폰";
 			
 			$( "#Ticketing" ).load( "${pageContext.request.contextPath}/");
-	
-		if(nextBtn=="관람일/회차"){
-			document.all.nextBtn.value="좌석선택";
-			
-			  $( "#Ticketing" ).load( "${pageContext.request.contextPath}/ticketSeat?per_id=${vo.per_id}&ticet_date="+document.all.ticet_date.value+"&round="+document.all.round.value);	
-	
 			
 			$("#menu1").removeClass("active");
 			$("#menu2").addClass("active");
-			document.all.nextTest.value=2;
 		}else if(nextBtn=="할인/쿠폰"){
 			document.all.nextBtn.value="수령방법";
 			$("#menu2").removeClass("active");
@@ -52,8 +45,8 @@ function next(){
 			$("#menu4").removeClass("active");
 			$("#menu5").addClass("active");
 		}
-	}
 }
+
 </script>
 <style type="text/css">
 .TicketingButton {

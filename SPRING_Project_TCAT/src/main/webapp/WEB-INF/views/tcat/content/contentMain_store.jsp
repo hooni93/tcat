@@ -36,6 +36,17 @@ a {
 </style>
 
 <script type="text/javascript">
+function insertCart(cart_count,disc_code){
+	
+	var url="insertCart?cart_count="+cart_count+"&disc_code="+disc_code;
+	$("#result").load("${pageContext.request.contextPath}/"+url);
+	
+}
+
+$("#login2").click(function(){
+	$("#modal_result").load("${pageContext.request.contextPath}/memberLogin");
+	
+});
 $(document).ready(function() {
 	if(${wishResult!=0}){
 		$(".wish").addClass("active");
@@ -84,6 +95,12 @@ $(document).ready(function() {
 	});
 </script>
 </head>
+<body>
+<c:if test="${insertCart==1}">
+	<script type="text/javascript">
+		alert("장바구니에 담겼습니다.");
+	</script>
+</c:if>
 <div class="row">
 	<br>
 	<!--공백  -->
@@ -93,15 +110,14 @@ $(document).ready(function() {
 		<!--사이드  -->
 		<div class="col-md-2"></div>
 
-
 		<!--공연정보  -->
 		<div class="col-md-9">
 			<!--상세페이지 상단  -->
 			<div class="col-md-12" style="border: 1px solid lightgrey;">
-				<h1>${str.disc_title }</h1>
+				<h1>${str.disc_title}</h1>
 				<h5>${str.mDev}-${str.sDev}</h5>
 			</div>
-
+			<form action="" name="store">
 			<!--사진, 예매, 가격  -->
 			<div class="col-md-12"
 				style="border-top: 3px solid black; padding: 0;">
@@ -117,9 +133,15 @@ $(document).ready(function() {
 						<div class="col-md-8">
 							<div class="row p10">
 								<div class="col-md-3">
-									<b>수량</b>
+									<b>재고수량</b>
 								</div>
 								<div class="col-md-9">${str.disc_count}개</div>
+							</div>
+							<div class="row p10">
+								<div class="col-md-3">
+									<b>구매수량</b>
+								</div>
+								<div class="col-md-9"><input type="number" name="count"></div>
 							</div>
 							<div class="row p10" style="border-top: 1px solid grey;">
 								<div class="col-md-3 ">
@@ -139,19 +161,31 @@ $(document).ready(function() {
 
 							<span>위시리스트</span> <input type="hidden" id="disc_code"
 								value="${str.disc_code }">
-
 							<button type="button" class="wish btn-xl">
 								<i class="glyphicon glyphicon-heart fs20"></i>
 							</button>
+							
+							<c:if test="${sessionScope.login_id!=null}">
+								<img  src="/tcat/resources/image/cart_icon.png" onclick="insertCart(document.all.count.value,'${str.disc_code}');" style="width:50px">+
+							</c:if>		
+							<c:if test="${sessionScope.login_id==null}">
+								<img data-toggle="modal" data-target="#login-modal" id="login2" style="width:50px"  src="/tcat/resources/image/cart_icon.png">
+							</c:if>	
+
+							
 						</div>
 						<div class="col-md-12">
-							<input class="btn btn-danger btn-xl w100p" type="button"
-								value="구매하기">
+							<c:if test="${sessionScope.login_id!=null}">
+								<input class="btn btn-danger btn-xl w100p" type="button" value="구매하기">
+							</c:if>		
+							<c:if test="${sessionScope.login_id==null}">
+								<input class="btn btn-danger btn-xl w100p" data-toggle="modal" data-target="#login-modal" id="login2" type="button" value="구매하기">
+							</c:if>			
 						</div>
 					</div>
 				</div>
 			</div>
-
+			</form>
 
 
 
@@ -218,4 +252,5 @@ $(document).ready(function() {
 <!--공백  -->
 <div class="col-md-1"></div>
 </div>
+</body>
 </html>

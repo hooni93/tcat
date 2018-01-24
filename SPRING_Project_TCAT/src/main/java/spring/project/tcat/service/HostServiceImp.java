@@ -32,6 +32,7 @@ import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 import spring.project.tcat.VO.TcatTicketingVO;
+import spring.project.tcat.VO.detailPageVO;
 import spring.project.tcat.persistence.HostDAO;
 import spring.project.tcat.persistence.HostDAOImp;
 
@@ -1948,6 +1949,8 @@ public class HostServiceImp implements HostService {
 			String disc_step = "1";
 			int disc_count = Integer.parseInt(req.getParameter("disc_count"));
 
+			
+			
 			dto.setDisc_title(disc_title);
 			dto.setDisc_price(disc_price);
 			dto.setDisc_image(disc_image);
@@ -1965,6 +1968,8 @@ public class HostServiceImp implements HostService {
 					+ "==================================\n");
 			hDao.insertStore(dto);
 
+			int detail_num = hDao.SearchDetail_numStore();
+			hDao.insertDetailP_DEFAULT(detail_num);
 		} catch (Exception e) {
 			e.printStackTrace();
 			int error = 1;
@@ -2277,6 +2282,95 @@ public class HostServiceImp implements HostService {
 
 		req.setAttribute("deleteHost", deleteHost);
 
+	}
+	//상세페이지 정보 가져오기
+	@Override
+	public void detaillist(HttpServletRequest req, Model model) {
+		int detail_num=Integer.parseInt(req.getParameter("detail_num"));
+		
+		detailPageVO dto=new detailPageVO();
+		dto=hDao.detaillist(detail_num);
+		
+		model.addAttribute("dto",dto);
+		model.addAttribute("detail_num", detail_num);
+		
+	}
+	@Override
+	public void updateDetailStore(MultipartHttpServletRequest req, Model model) {
+		MultipartFile file = req.getFile("Detail_Image");
+
+		String realDir = "E:\\Team_project\\projectGit\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\store\\";
+		String saveDir = req.getRealPath("/resources/image/store/");
+		try {
+
+			file.transferTo(new File(saveDir + file.getOriginalFilename()));
+
+			FileInputStream fis = new FileInputStream(saveDir + file.getOriginalFilename());
+			FileOutputStream fos = new FileOutputStream(realDir + file.getOriginalFilename());
+
+			int data = 0;
+
+			while ((data = fis.read()) != -1) {
+				fos.write(data);
+			}
+			fis.close();
+			fos.close();
+
+			String per_ex=req.getParameter("per_ex");
+			String Detail_Image=file.getOriginalFilename();
+			int detail_num=Integer.parseInt(req.getParameter("detail_num"));
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("per_ex", per_ex);
+			map.put("Detail_Image", Detail_Image);
+			map.put("detail_num", detail_num);
+			
+			hDao.updateDetail(map);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			int error = 1;
+			req.setAttribute("error2", error);
+		}
+
+		
+	}
+	@Override
+	public void updateDetailPer(MultipartHttpServletRequest req, Model model) {
+		MultipartFile file = req.getFile("Detail_Image");
+
+		String realDir = "E:\\Team_project\\projectGit\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\performance\\";
+		String saveDir = req.getRealPath("/resources/image/performance/");
+		try {
+
+			file.transferTo(new File(saveDir + file.getOriginalFilename()));
+
+			FileInputStream fis = new FileInputStream(saveDir + file.getOriginalFilename());
+			FileOutputStream fos = new FileOutputStream(realDir + file.getOriginalFilename());
+
+			int data = 0;
+
+			while ((data = fis.read()) != -1) {
+				fos.write(data);
+			}
+			fis.close();
+			fos.close();
+
+		
+			String per_ex=req.getParameter("per_ex");
+			String Detail_Image=file.getOriginalFilename();
+			int detail_num=Integer.parseInt(req.getParameter("detail_num"));
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("per_ex", per_ex);
+			map.put("Detail_Image", Detail_Image);
+			map.put("detail_num", detail_num);
+			
+			hDao.updateDetail(map);
+
+		} catch (Exception e) {
+			
+		}
+
+		
 	}
 	//////////////////////////////////// 현석 1/11////////////////////////////////////
 
@@ -3083,6 +3177,9 @@ public class HostServiceImp implements HostService {
 		model.addAttribute("commentDel", commentDel);
 
 	}
+
+	
+	
 
 }
 /////////////////////// 태성 1/21 end ///////////////////////////

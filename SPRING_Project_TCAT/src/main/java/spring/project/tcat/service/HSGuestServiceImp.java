@@ -379,29 +379,56 @@ public class HSGuestServiceImp implements HSGuestService{
 		@Override
 		public void sussessPay(HttpServletRequest req, Model model) {
 			String member_id=(String)req.getSession().getAttribute("login_id");
+			System.out.println("--------member_id:"+member_id);
 			String addrChange=null;
 			addrChange=req.getParameter("addrChange");
 			String member_addr=null;
 			String member_name=null;
 			String member_hp=null;
 			
-			ArrayList<CartVO> dtos=HSDao.cartListDtos(member_id);
-			if(addrChange.equals("1")) {
-				member_addr=req.getParameter("member_addr");
-				member_name=req.getParameter("member_name");
-				member_hp=req.getParameter("member_hp");
-			}else {
+			Map<String,Object> map2=new HashMap<String,Object>();
+			map2.put("member_id", member_id);
+			System.out.println("1");
+			ArrayList<CartVO> dtos=HSDao.cartListDtos(map2);
+			System.out.println("addr"+dtos);
+			if(addrChange==null) {
 				member_addr=dtos.get(0).getMember_addr();
 				member_name=dtos.get(0).getMember_name();
 				member_hp=dtos.get(0).getMember_hp();
+			}else {
+				member_addr=req.getParameter("member_addr");
+				member_name=req.getParameter("member_name");
+				member_hp=req.getParameter("member_hp");
 			}
+			System.out.println("2");
 			Map<String,Object> map=new HashMap<String,Object>();
 			map.put("member_addr", member_addr);
 			map.put("member_name", member_name);
 			map.put("member_hp", member_hp);
-			
+			System.out.println("3");
+			//배송정보 추가
 			HSDao.insertdelevaryInfo(map);
-			/*int del_num=HSDao.maxdel_num();*/
+			System.out.println("4");
+			//배송번호 가져오기
+			int del_num=HSDao.maxdel_num();
+			map.put("del_num", del_num);
+			System.out.println("5");
+			for(int i=0;i<dtos.size();i++) {
+				//상품구입번호[시퀀스]
+				//배송번호 del_num
+				//구매일자 [sysdate]
+				map.put("disc_code", dtos.get(i).getDisc_code());//상품코드 dtos.get(i).getDisc_code()
+				map.put("member_id", member_id);//구매자 id member_id
+				//구매스텝[1=구매]
+				map.put("Rating", dtos.get(i).getRating());//할인조건[rating]
+				map.put("buy_count", dtos.get(i).getCart_count());//구매수량 dtos.get(i).getCart_count()
+				HSDao.insertStorePay(map);
+			}
+			System.out.println("6");
+			//구매자의 장바구니 목록 제거
+			HSDao.cartDel(member_id);
+			System.out.println("7");
+			req.setAttribute("Pay", 1);
 		}
 
 		@Override

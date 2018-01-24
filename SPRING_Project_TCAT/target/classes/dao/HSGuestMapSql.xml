@@ -101,7 +101,7 @@
 			where rNum>=#{start} and rNum<=#{end} and member_id=#{member_id}
 			]]>
    		</select>
-   		<select id="cartListDtos">
+   		<select id="cartListDtos" resultType="spring.project.tcat.VO.CartVO" parameterType="java.util.Map">
    			select * from (
 				select c.cart_num,c.member_id,m.member_pwd,m.member_name,m.member_hp,m.member_addr,m.member_email,m.member_gender,m.member_birth,m.point,m.lastDate,m.Rating,m.member_step,m.member_joindate,c.cart_inDate,c.disc_code,p.disc_title,p.disc_price,p.disc_image,p.disc_con,p.cateNum,ca.category,ca.mDev,ca.sDev,p.first_grade,p.disc_step,p.disc_count,c.cart_count,rownum rNum
 				from cart c,member m,perDisc p,category ca
@@ -112,6 +112,9 @@
    		<insert id="insertdelevaryInfo" parameterType="java.util.Map">
    			insert into delevaryInfo values(delevaryInfo_SEQ.nextval,#{member_name},#{member_addr},#{member_hp})
    		</insert>
+   		<select id="maxdel_num" resultType="int">
+   			select max(del_num) from delevaryInfo
+   		</select>
    		
    		<select id="payList" parameterType="int" resultType="spring.project.tcat.VO.TcatPerformanceVO">
 			select * 
@@ -125,19 +128,27 @@
    		</select>
    		
    		<select id="vipCount" parameterType="java.util.Map" resultType="int">
-   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='vip'
+   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='VIP'
    		</select>
    		<select id="rCount" parameterType="java.util.Map" resultType="int">
-   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='r'
+   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='R'
    		</select>
    		<select id="sCount" parameterType="java.util.Map" resultType="int">
-   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='s'
+   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='S'
    		</select>
    		<select id="aCount" parameterType="java.util.Map" resultType="int">
-   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='a'
+   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='A'
    		</select>
    		<select id="bCount" parameterType="java.util.Map" resultType="int">
-   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='b'
+   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='B'
    		</select>
    		
+   		<insert id="insertStorePay" parameterType="java.util.Map">
+   			insert into DiscBuy(disc_num,del_num,disc_buyDate,disc_code,member_id,disc_buyStep,sale_div,buy_count)
+   						values(DiscBuy_SEQ.nextval,#{del_num},sysdate,#{disc_code},#{member_id},1,#{Rating},#{buy_count})
+   		</insert>
+   		
+   		<delete id="cartDel" parameterType="String">
+   			delete cart where member_id=#{member_id}
+   		</delete>
    </mapper>

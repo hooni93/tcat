@@ -125,6 +125,13 @@ public interface HostService {
 	public void HostMemberList(HttpServletRequest req,Model model);
 	//관리자 삭제
 	public void deleteHost(HttpServletRequest req,Model model);
+	//상세페이지 정보 가져오기
+	public void detaillist(HttpServletRequest req,Model model);
+	//상세페이지 정보 업데이트[스토어]
+	public void updateDetailStore(MultipartHttpServletRequest req,Model model);
+	//상세페이지 정보 업데이트[공연]
+	public void updateDetailPer(MultipartHttpServletRequest req,Model model);
+		
 	////////////////////////////////////현석 1/11 end //////////////////////////////////////////
 
 	

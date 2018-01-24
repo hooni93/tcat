@@ -94,6 +94,7 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<form action="" name="delevaryForm" style="border-top:3px solid #bbbbbb">
+			
 				<h2>주문/결제</h2>
 				<hr>
 				<h4>주문상품 정보</h4>
@@ -127,6 +128,7 @@
 							</table>
 						</td>
 						<%	int price=0;
+						     
 							  	int amount=0;
 							  	int finalPrice=0;
 							  	ArrayList<CartVO> dtos=(ArrayList<CartVO>)request.getAttribute("dtos");
@@ -167,23 +169,23 @@
 						<td valign=middle>
 							<%if(dtos.get(0).getRating().equals("VIP")){
 							%>
-								<%=finalPrice*0.85%>원
+								<%=Math.round(finalPrice*0.85)%>원
 							<%
 							}else if(dtos.get(0).getRating().equals("S")){
 							%>
-								<%=finalPrice*0.80%>원
+								<%=Math.round(finalPrice*0.80)%>원
 							<%	
 							}else if(dtos.get(0).getRating().equals("A")){
 							%>
-								<%=finalPrice*0.85%>원
+								<%=Math.round(finalPrice*0.85)%>원
 							<%	
 							}else if(dtos.get(0).getRating().equals("B")){
 							%>
-								<%=finalPrice*0.90%>원
+								<%=Math.round(finalPrice*0.90)%>원
 							<%
 							}else if(dtos.get(0).getRating().equals("C")){
 							%>
-								<%=finalPrice*0.95%>원
+								<%=Math.round(finalPrice*0.95)%>원
 							<%
 							}else if(dtos.get(0).getRating().equals("D")){
 							%>
@@ -279,28 +281,28 @@
 							<input type="checkbox" name="confirm"> 주문할 상품설명에 명시된 내용과 사용조건을 확인하였으며 취소,환불규정에 동의합니다.
 						</th>
 						<th>
-						<table style="font-size:25px;">
+						<table style="font-size:20px;">
 								<tr>
 									<th style="color:orange">총 상품금액</th>
 									<th style="color:orange"><%if(dtos.get(0).getRating().equals("VIP")){
 										%>
-											<%=finalPrice*0.85%>원
+											<%=Math.round(finalPrice*0.85)%>원
 										<%
 										}else if(dtos.get(0).getRating().equals("S")){
 										%>
-											<%=finalPrice*0.80%>원
+											<%=Math.round(finalPrice*0.80)%>원
 										<%	
 										}else if(dtos.get(0).getRating().equals("A")){
 										%>
-											<%=finalPrice*0.85%>원
+											<%=Math.round(finalPrice*0.85)%>원
 										<%	
 										}else if(dtos.get(0).getRating().equals("B")){
 										%>
-											<%=finalPrice*0.90%>원
+											<%=Math.round(finalPrice*0.90)%>원
 										<%
 										}else if(dtos.get(0).getRating().equals("C")){
 										%>
-											<%=finalPrice*0.95%>원
+											<%=Math.round(finalPrice*0.95)%>원
 										<%
 										}else if(dtos.get(0).getRating().equals("D")){
 										%>
@@ -324,27 +326,27 @@
 									<th>할인금액</th>
 									<th><%if(dtos.get(0).getRating().equals("VIP")){
 										%>
-											<%=finalPrice-finalPrice*0.85%>원
+											<%=Math.round(finalPrice-finalPrice*0.85)%>원
 										<%
 										}else if(dtos.get(0).getRating().equals("S")){
 										%>
-											<%=finalPrice-finalPrice*0.80%>원
+											<%=Math.round(finalPrice-finalPrice*0.80)%>원
 										<%
 										}else if(dtos.get(0).getRating().equals("A")){
 										%>
-											<%=finalPrice-finalPrice*0.85%>원
+											<%=Math.round(finalPrice-finalPrice*0.85)%>원
 										<%	
 										}else if(dtos.get(0).getRating().equals("B")){
 										%>
-											<%=finalPrice-finalPrice*0.90%>원
+											<%=Math.round(finalPrice-finalPrice*0.90)%>원
 										<%
 										}else if(dtos.get(0).getRating().equals("C")){
 										%>
-											<%=finalPrice-finalPrice*0.95%>원
+											<%=Math.round(finalPrice-finalPrice*0.95)%>원
 										<%
 										}else if(dtos.get(0).getRating().equals("D")){
 										%>
-											<%=finalPrice-finalPrice%>원
+											<%=Math.round(finalPrice-finalPrice)%>원
 										<%
 										}
 										%></th>
@@ -353,33 +355,33 @@
 									<th>올라가는 포인트(0.5%)</th>
 									<th><%if(dtos.get(0).getRating().equals("VIP")){
 										%>
-											<%=finalPrice*0.85*0.05%>원
-											<input type="hidden" value="<%=finalPrice*0.85*0.05%>" name="point">
+											<%=Math.round(finalPrice*0.85*0.05)%>원
+											<input type="hidden" value="<%=Math.round(finalPrice*0.85*0.05)%>" name="point">
 										<%
 										}else if(dtos.get(0).getRating().equals("S")){
 										%>
-											<%=finalPrice*0.80*0.05%>원
-											<input type="hidden" value="<%=finalPrice*0.80*0.05%>" name="point">
+											<%=Math.round(finalPrice*0.80*0.05)%>원
+											<input type="hidden" value="<%=Math.round(finalPrice*0.80*0.05)%>" name="point">
 										<%	
 										}else if(dtos.get(0).getRating().equals("A")){
 										%>
-											<%=finalPrice*0.85*0.05%>원
-											<input type="hidden" value="<%=finalPrice*0.85*0.05%>" name="point">
+											<%=Math.round(finalPrice*0.85*0.05)%>원
+											<input type="hidden" value="<%=Math.round(finalPrice*0.85*0.05)%>" name="point">
 										<%	
 										}else if(dtos.get(0).getRating().equals("B")){
 										%>
-											<%=finalPrice*0.90*0.05%>원
-											<input type="hidden" value="<%=finalPrice*0.90*0.05%>" name="point">
+											<%=Math.round(finalPrice*0.90*0.05)%>원
+											<input type="hidden" value="<%=Math.round(finalPrice*0.90*0.05)%>" name="point">
 										<%
 										}else if(dtos.get(0).getRating().equals("C")){
 										%>
-											<%=finalPrice*0.95*0.05%>원
-											<input type="hidden" value="<%=finalPrice*0.95*0.05%>" name="point">
+											<%=Math.round(finalPrice*0.95*0.05)%>원
+											<input type="hidden" value="<%=Math.round(finalPrice*0.95*0.05)%>" name="point">
 										<%
 										}else if(dtos.get(0).getRating().equals("D")){
 										%>
-											<%=finalPrice*0.05%>원
-											<input type="hidden" value="<%=finalPrice*0.05%>" name="point">
+											<%=Math.round(finalPrice*0.05)%>원
+											<input type="hidden" value="<%=Math.round(finalPrice*0.05)%>" name="point">
 										<%
 										}
 										%>

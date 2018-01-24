@@ -34,7 +34,7 @@ body {
 <body>
 <div class="container">
 	<div class="row">
-		<div class="col-xs-8">
+		<div class="col-xs-10">
 			<div class="panel panel-info">
 				<div class="panel-heading">
 					<div class="panel-title">

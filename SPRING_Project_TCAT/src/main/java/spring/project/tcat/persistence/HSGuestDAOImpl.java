@@ -137,10 +137,10 @@ public class HSGuestDAOImpl implements HSGuestDAO{
 	}
 
 	@Override
-	public ArrayList<CartVO> cartListDtos(String member_id) {
+	public ArrayList<CartVO> cartListDtos(Map<String,Object> map) {
 		ArrayList<CartVO> dtos=null;
 		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
-		dtos=dao.cartListDtos(member_id);
+		dtos=dao.cartListDtos(map);
 		return dtos;
 	}
 
@@ -152,6 +152,14 @@ public class HSGuestDAOImpl implements HSGuestDAO{
 
 	}
 
+	@Override
+	public int maxdel_num() {
+		int cnt=0;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		cnt=dao.maxdel_num();
+		return cnt;
+	}
+	
 	@Override
 	public TcatPerformanceVO payList(int per_id) {
 		TcatPerformanceVO vo=null;
@@ -199,6 +207,20 @@ public class HSGuestDAOImpl implements HSGuestDAO{
 		cnt=dao.bCount(map);
 		return cnt;
 	}
+
+	@Override
+	public void insertStorePay(Map<String, Object> map) {
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dao.insertStorePay(map);
+	}
+
+	@Override
+	public void cartDel(String member_id) {
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dao.cartDel(member_id);
+	}
+
+
 
 
 }

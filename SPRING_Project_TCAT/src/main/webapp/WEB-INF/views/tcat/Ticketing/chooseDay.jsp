@@ -80,17 +80,16 @@ function roundBt(round,form,per_id){
  	var sysday=ticet_date.split("-");
 	
 	
-	var date=new Date();
+	 var date=new Date();
 	var dateDay=date.getDate();
 	var dateHours=date.getHours();
-
+	
 	 
-	 var split1=round.split("/");
-	 var split2=split1[1].split(":");
-	 
+	var split1=round.split('/');
+	var split2=split1[1].split(':');
 	if(ticet_date=="0"){
 		alert("날짜를 먼저 선택해주세요!");
-	}else if(sysday[2]==dateDay&&dateHours>split2[0]){
+	}else if(sysday[2]==dateDay&&dateHours>=split2[0]){
 		alert("마감되었습니다!");
 		$("#RemainingSeats").load("${pageContext.request.contextPath}/fake");
 	}else{
@@ -100,7 +99,6 @@ function roundBt(round,form,per_id){
 		var url="RemainingSeats?round="+round+"&ticet_date="+form.ticet_date.value+"&per_id="+per_id;
 		$("#RemainingSeats").load("${pageContext.request.contextPath}/"+ url);	
 	}
-	
 }
 
 //날짜 캘린더 출력하기
@@ -151,12 +149,8 @@ function noSundays(date) {
 	 var eeeDate=new Date(eeDate[0], (eeDate[1]*1)-1, eeDate[2]);
 	 var sysdate=new Date();
 	 if(date<new Date()&&date.getDate()!=sysdate.getDate()||date<sssDate||date>eeeDate){
-		 
-			 return[false];	 
-		 
-	 
+			 return[false];
 	 }
-	 
 	 return [true];
 }
 		 
