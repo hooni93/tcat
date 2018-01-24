@@ -23,17 +23,25 @@ $(document).ready(function(){
     		
     		 if(idArr.length==1){
     			 $("input[name='seat_type']").val("0");
-    		 }else{
-    	   	 $("input[name='seat_type']").val("0");
-    		 for(var i=0;i<idArr.length-1;i++){
-    			 idvalue+=idArr[i];
-    		 }
+       		 }else{
+    	   	idvalue="";
+    	   	var idclick=$(id).val();
+    	   	alert("클릭"+idclick);
+     	   	 for(var i=0;i<idArr.length;i++){
+    	   		 if(idArr[i]!=idclick){
+    	   			if(idvalue==""){
+       	    		 idvalue=idArr[i];
+       	    		alert(idvalue);
+       	    		 }else{	 
+       	    			 idvalue+=","+idArr[i];
+       	    			 alert(idvalue);
+       	    		 } 	
+    	   		 }
+    		 } 
     		 alert(idArr.length);
- 
+    	   	 $("input[name='seat_type']").val("");
     		 $("input[name='seat_type']").val(idvalue);
     		 }
-    		 
-    		
     	}else{
     		 $(id).addClass("active");
     		 $(id).addClass("selected");
@@ -47,7 +55,6 @@ $(document).ready(function(){
     			 alert(idvalue);
     		 } 		
     		 $("input[name='seat_type']").val(idvalue);
-    		 
     	}  
     
     });
