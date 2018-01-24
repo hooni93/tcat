@@ -40,4 +40,15 @@ public interface HSGuestDAO {
 	public void insertdelevaryInfo(Map<String,Object> map);
 	//예매하려고 하는 공연정보 가져오기
 	public TcatPerformanceVO payList(int per_id);
+	//예매하려고 하는 날짜+공연회차에 좌석이 얼마남았는지 가져오기[vip]
+	public int vipCount(Map<String,Object> map);
+	//예매하려고 하는 날짜+공연회차에 좌석이 얼마남았는지 가져오기[r]
+	public int rCount(Map<String,Object> map);
+	//예매하려고 하는 날짜+공연회차에 좌석이 얼마남았는지 가져오기[s]
+	public int sCount(Map<String,Object> map);
+	//예매하려고 하는 날짜+공연회차에 좌석이 얼마남았는지 가져오기[a]
+	public int aCount(Map<String,Object> map);
+	//예매하려고 하는 날짜+공연회차에 좌석이 얼마남았는지 가져오기[b]
+	public int bCount(Map<String,Object> map);
+		
 }

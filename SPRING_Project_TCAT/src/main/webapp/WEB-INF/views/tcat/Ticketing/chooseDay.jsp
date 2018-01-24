@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../setting.jsp"%>
@@ -15,63 +16,93 @@
 
 <title>Insert title here</title>
 <style type="text/css">
-
-
 .roundButton {
-	-moz-box-shadow:inset -3px -26px 0px 0px #ffffff;
-	-webkit-box-shadow:inset -3px -26px 0px 0px #ffffff;
-	box-shadow:inset -3px -26px 0px 0px #ffffff;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
-	background:-moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
-	background:-webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
-	background:-o-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
-	background:-ms-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
-	background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0);
-	background-color:#f9f9f9;
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));
+	background:-moz-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-webkit-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-o-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-ms-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0);
+	background-color:#ffffff;
 	border:1px solid #dcdcdc;
 	display:inline-block;
 	cursor:pointer;
 	color:#666666;
-	font-family:Courier New;
-	font-size:15px;
+	font-family:Arial;
+	font-size:10px;
 	font-weight:bold;
-	padding:5px 41px;
+	padding:6px 67px;
 	text-decoration:none;
-	text-shadow:0px -6px 0px #ffffff;
+	text-shadow:0px 1px 0px #ffffff;
 }
 .roundButton:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9));
-	background:-moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-	background:-webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-	background:-o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-	background:-ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-	background:linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#f9f9f9',GradientType=0);
-	background-color:#e9e9e9;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, #ffffff));
+	background:-moz-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-webkit-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-o-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-ms-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0);
+	background-color:#f6f6f6;
 }
 .roundButton:active {
 	position:relative;
 	top:1px;
 }
 .chooseTb {
-	-moz-box-shadow:inset 0px 0px 23px -3px #97c4fe;
-	-webkit-box-shadow:inset 0px 0px 23px -3px #97c4fe;
-	box-shadow:inset 0px 0px 23px -3px #97c4fe;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0));
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0',GradientType=0);
-	background-color:#3d94f6;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #050505), color-stop(1, #050405));
+	background:-moz-linear-gradient(top, #050505 5%, #050405 100%);
+	background:-webkit-linear-gradient(top, #050505 5%, #050405 100%);
+	background:-o-linear-gradient(top, #050505 5%, #050405 100%);
+	background:-ms-linear-gradient(top, #050505 5%, #050405 100%);
+	background:linear-gradient(to bottom, #050505 5%, #050405 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#050505', endColorstr='#050405',GradientType=0);
+	background-color:#050505;
 	cursor:pointer;
 	color:#ffffff;
+	font-family:Verdana;
+	font-size:15px;
 	font-weight:bold;
+	padding:13px 32px;
 	text-decoration:none;
-	text-shadow:-1px 1px 0px #1570cd;
 }
 
 .ui-datepicker { width: 17em; padding: .2em .2em 0; display: none; font-size: 20px;}
 
 </style>
 <script type="text/javascript">
+function roundBt(round,form,per_id){
+ 	var ticet_date=form.ticet_date.value;
+ 	var sysday=ticet_date.split("-");
+	
+	
+	var date=new Date();
+	var dateDay=date.getDate();
+	var dateHours=date.getHours();
+
+	 
+	 var split1=round.split("/");
+	 var split2=split1[1].split(":");
+	 
+	if(ticet_date=="0"){
+		alert("날짜를 먼저 선택해주세요!");
+	}else if(sysday[2]==dateDay&&dateHours>=split2[0]){
+		alert("마감되었습니다!");
+		$("#RemainingSeats").load("${pageContext.request.contextPath}/fake");
+	}else{
+
+		$("input[name='round']").val(round);
+		
+		var url="RemainingSeats?round="+round+"&ticet_date="+form.ticet_date.value+"&per_id="+per_id;
+		$("#RemainingSeats").load("${pageContext.request.contextPath}/"+ url);	
+	}
+	
+}
+
 //날짜 캘린더 출력하기
 jQuery(function($){
     $.datepicker.regional['ko'] = {
@@ -101,9 +132,10 @@ jQuery(function($){
     	yearRange: 'c-99:c+99',
     	constrainInput: true,
     	maxDate: '+1y',
-    	beforeShowDay: noSundays ,
+    	beforeShowDay: noSundays,
    		onSelect: function(dateText, inst) { //선택한 데이터를 input박스에 넣기
     		$("input[name='ticet_date']").val(dateText);
+   			
    		}
     });
 });
@@ -115,12 +147,16 @@ function noSundays(date) {
 	 var eDate=endDate.split(" ");
 	 var ssDate=sDate[0].split("-");
 	 var eeDate=eDate[0].split("-");
-	 var sssDate=new Date(ssDate[0], ssDate[1], ssDate[2]);
-	 var eeeDate=new Date(eeDate[0], eeDate[1], eeDate[2]);
+	 var sssDate=new Date(ssDate[0], (ssDate[1]*1)-1, ssDate[2]);
+	 var eeeDate=new Date(eeDate[0], (eeDate[1]*1)-1, eeDate[2]);
+	 var sysdate=new Date();
+	 if(date<new Date()&&date.getDate()!=sysdate.getDate()||date<sssDate||date>eeeDate){
+		 
+			 return[false];	 
+		 
 	 
-	 if(date<sssDate||date>eeeDate){
-		 return[false];
 	 }
+	 
 	 return [true];
 }
 		 
@@ -128,9 +164,11 @@ function noSundays(date) {
 </script>
 </head>
 <body style="background-color:white;">
+<br><br>
 <div class="row">
-	<div class="col-md-1"></div>
-	<div class="col-md-10">
+
+	<div class="col-md-11">
+	<form action="" name="chooseDayForm">
 		<table class="table-bordered" style="margin:20px;">
 			<tr>
 				<th class="chooseTb" style="width:35%; padding:5px;">관람일 선택</th>
@@ -140,41 +178,58 @@ function noSundays(date) {
 				<th><div id="datepicker"></div>
 				<td>
 					<br>
-					<b>선택날짜&nbsp</b><input style="background-color:#eeeeee;color:red;border:none" type="text" value="0" name="ticet_date">
-					<table>
+					<b style="margin-left:15px;">선택날짜&nbsp</b><input style="padding:2px 10px;background-color:#eeeeee;color:red;border:none" type="text" value="0" name="ticet_date">
+					<table style="margin:10px;">
 						<tr>
-							<th>회차선택</th>
-							<th>좌석등급/잔여석</th>
+							<th style="width:20%; padding:5px;"><b>회차선택</b></th>
+							<th>&nbsp&nbsp&nbsp</th>
+							<th style="width:70%; padding:5px;" ><b>좌석등급/잔여석</b></th>
 						</tr>
 						<tr>
 							<td>
-								<div style="border:1px solid #dddddd; height:200px;">
+								<div style="border:1px solid #dddddd; height:200px;" id="round">
 									<c:set var="round" value="${fn:split(vo.remain_round,',')}"/>
 									<c:forEach var="remain_round" items="${round}">
-										<input type="button" class="roundButton" value="${remain_round}"><br>
+											<input type="button" class="roundButton" style="margin:1.5px 10px;" value="${remain_round}" onclick="roundBt(this.value,this.form,'${vo.per_id}')"><br>
 									</c:forEach>
 								</div>
 							</td>
 							<td>
-								<div style="border:1px solid #dddddd; height:200px;">
-									<ul>
-										<li>VIP석 : ${vo.getVIP_seatPrice()}</li>
-										<li>R석 : ${vo.getR_seatPrice()}</li>
-										<li>S석 : ${vo.getS_seatPrice()}</li>
-										<li>A석 : ${vo.getA_seatPrice()}</li>
-										<li>B석 : ${vo.getB_seatPrice()}</li>
-									</ul>
+								&nbsp
+							</td>
+							<td>
+								<div id="RemainingSeats" style="border:1px solid #dddddd; height:200px; width:300px;">
+							
+								
 								</div>
 							</td>
 						</tr>
 					</table>
 				</td>
 			</tr>
-		
-		
+		</table>
+		</form>
+		<table  class="table-bordered" style="margin:20px;">
+			<tr>
+				<th class="chooseTb" style="padding:0 10px;">
+				유<br>
+				의<br>
+				사<br>
+				항
+				</th>
+				<td style="padding:10px;">
+					-장애인,국가유공자,학생 할인 등 증빙서류가 필요한 경우 현장수령만 가능하며, 현장에서 증빙서류 미지참 시 차액 지불하셔야 합니다.<br>
+					-쿠폰을 사용하더나 복합결제를 한 경우 부분취소가 불가합니다. 고객센터로 문의해주시기 바랍니다.<br>
+					-관람 당일 공연 예매 시에는 변경/취소/환불이 불가합니다.<br>
+					-경우에 따라 ATM 기기에서 가상계좌 입금이 안 될 수 있으니 가급적 인터넷/폰뱅킹 등을 이용하여주시기 바랍니다.<br>
+					-예매 취소 시 예매수수료는 예매 당일 밤 12시 이전까지 환불되며, 그 이후 기간에는 환불되지 않습니다.<br>
+					-예매 취소 시점에 따라 취소수수료가 부과될 수 있습니다. 예매 후 취소마감시간과 함께 취소수수료를 꼭 확인해주시기 바랍니다.<br>
+				</td>
+			</tr>
 		</table>
 	</div>
-<div class="col-md-1"></div>
+
 </div>
 </body>
+
 </html>

@@ -116,7 +116,7 @@
 					success : function(data) {
 						$('#result').html(data);
 					}
-				});	
+				});
 			}
 			
 		});

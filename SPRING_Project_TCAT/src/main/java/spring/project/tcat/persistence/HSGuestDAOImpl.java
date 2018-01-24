@@ -160,5 +160,45 @@ public class HSGuestDAOImpl implements HSGuestDAO{
 		return vo;
 	}
 
+	@Override
+	public int vipCount(Map<String, Object> map) {
+		int cnt=0;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		cnt=dao.vipCount(map);
+		return cnt;
+	}
+
+	@Override
+	public int rCount(Map<String, Object> map) {
+		int cnt=0;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		cnt=dao.rCount(map);
+		return cnt;
+	}
+
+	@Override
+	public int sCount(Map<String, Object> map) {
+		int cnt=0;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		cnt=dao.sCount(map);
+		return cnt;
+	}
+
+	@Override
+	public int aCount(Map<String, Object> map) {
+		int cnt=0;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		cnt=dao.aCount(map);
+		return cnt;
+	}
+
+	@Override
+	public int bCount(Map<String, Object> map) {
+		int cnt=0;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		cnt=dao.bCount(map);
+		return cnt;
+	}
+
 
 }

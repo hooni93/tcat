@@ -188,7 +188,12 @@ function detailOpen(category,id){
 	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );	//hostPage의 오른쪽 result에 결과를 뿌려준다.
 	 
 	 if(url=="hostMain" || url=="join_retireMember" || url=="hotMusical" || url=="sleepMember" || url=="stockDelete_musical" || url=="stockOutOf_musical"
+<<<<<<< HEAD
 		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified" || url =="commentManager"|| url =="eventHost"|| url =="provalMain" || url == "productRefund"){
+=======
+		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified" 
+		 || url =="commentManager"|| url =="eventHost"|| url =="provalMain" || url =="levelMember"|| url =="infoLevel"){
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 	 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side" );	//들어오는 url이 if조건에 만족할때 그에맞는 사이드페이지를 hostPage의 왼쪽 side_result쪽에 뿌려준다.
 	 }
  }
@@ -268,28 +273,22 @@ function detailOpen(category,id){
 		 alert(url);
 		load('eventUpdateList?notice_num='+notice_num+'&notice_title='+notice_title+'&contents='+contents+'&notice_image='+notice_image+'&url='+url);
 	 }
-	////////////////////////////
-	/* function eventSubmit(url){ 
-   var result = document.getElementById("result");
-   var formData = $("#eventUpdateForm").serialize();
-   $.ajax({
-               type : "POST",
-               url : url,
-               cache : false,
-               data : formData,
-               success :  function(msg) {
-                  $('#result').html(msg);
-               }, 
-               error : onError
-   });
-   function onError(data, status){alert("error");}
-} */
-	////////////////////////////
-	//핫리스트 업데이트
+
+	//구매요청
 	 function provalUpdate(ticket_num,url){
 		 alert(url);
 		load('provalUpdate?ticket_num='+ticket_num+'&url='+url);
 	 }
+	//이벤트 삭제
+	function levelDelete(sale_div,url){
+		alert(url);
+		load('levelDelete?sale_div='+sale_div+'&url='+url);
+	}
+	//이벤트 상세
+	function levelMemberForm(sale_div,url){
+		alert(url);
+		load('levelMemberForm?sale_div='+sale_div+'&url='+url);
+	}
 	 /* 영민이 제작 */
 	 /* 태성이 제작 */
 	function Cfirst_grade(url,category,id,first_grade){
@@ -373,8 +372,7 @@ location.reload();
           <ul class="dropdown-menu" role="menu">
             <li><a onclick="load('memberModified');">회원정보조회/수정</a></li>
             <li class="divider"></li>
-            <li><a href="#">회원등급관리</a></li>
-            <li><a href="#">회원혜택관리</a></li>
+            <li><a onclick="load('levelMember');">회원혜택관리</a></li>
             <li class="divider"></li>
             <li><a onclick="load('join_retireMember');">회원가입/탈퇴관리</a></li>
             <li class="divider"></li>
@@ -414,7 +412,6 @@ location.reload();
         </li>
         <li class="dropdown">
           <a onclick="load('productRank');" role="button" aria-expanded="false">상품분석</a>
-         
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">고객분석 <span class="caret"></span></a>
@@ -422,7 +419,7 @@ location.reload();
             <li><a href="#">요일별분석</a></li>
             <li><a href="#">시간별분석</a></li>
             <li class="divider"></li>
-            <li><a href="#">등급별분석</a></li>
+            <li><a onclick="load('infoLevel');">등급별분석</a></li>
             <li class="divider"></li>
             <li><a href="#">지역별분석</a></li>
             <li><a href="#">성별분석</a></li>

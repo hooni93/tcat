@@ -4,7 +4,7 @@
 <head>
 	<title>Home</title>
 </head>
-<body>
+<body onload="window.location='guestPage';">
 <h1>
 	Hello world!
 </h1>

@@ -82,7 +82,7 @@
 			</div>
 			<!--리스트 시작  -->
 			<c:forEach var="perf" items="${perfs }">
-				<div class="col-sm-12 c" style="border-bottom: 1px solid #d0d0d0">
+				<div class="col-sm-12 c" style="border-bottom: 1px solid #d0d0d0; margin-top: 10px;">
 					<div class="col-sm-8 tm">
 						<div class="col-sm-3 p5">
 							<a onclick="contentPage(${perf.per_id})"> <img

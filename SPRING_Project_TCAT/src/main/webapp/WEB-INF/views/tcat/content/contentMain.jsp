@@ -44,49 +44,51 @@ $(document).ready(function() {
 	//탭
 	$('#myTab a[href="#profile"]').tab('show');
 	
-	$(".active.wish").click(function(){
-		alert("ㅅㅄㅄ");
-	});
 	//위시리스트 킬릭시
 	$(".wish").click(function(){
 		if(${login_id == null}){
 			alert("로그인 후 이용해 주세요.");
 			return false;
 		}else{
-			var per_id = $("#per_id").val();
-			var formData = {"per_id":per_id};
-			var active = $(".wish").hasClass("active");
-			if(active){
-				$.ajax({
-					type : "POST",
-					url : "delWishList",
-					cache : false,
-					data : formData,
-					success : function() {
-						$(".wish").removeClass("active");
-					},
-					error : function(){
-						alert("위시리스트 실패하였습니다.");
-					}
-				});
-			}else{
-				$.ajax({
-					type : "POST",
-					url : "addWishList",
-					cache : false,
-					data : formData,
-					success : function() {
-						$(".wish").addClass("active");
-					},
-					error : function(){
-						alert("위시리스트 실패하였습니다.");
-					}
-				});
-			}
+				var per_id = $("#per_id").val();
+				var formData = {"per_id":per_id};
+				var active = $(".wish").hasClass("active");
+				if(active){
+					$.ajax({
+						type : "POST",
+						url : "delWishList",
+						cache : false,
+						data : formData,
+						success : function() {
+							$(".wish").removeClass("active");
+						},
+						error : function(){
+							alert("위시리스트 실패하였습니다.");
+						}
+					});
+				}else{
+					$.ajax({
+						type : "POST",
+						url : "addWishList",
+						cache : false,
+						data : formData,
+						success : function() {
+							$(".wish").addClass("active");
+						},
+						error : function(){
+							alert("위시리스트 실패하였습니다.");
+						}
+					});
+				}
 		}
 	});
-	
-	
+	$("#login2").click(function(){
+		$("#modal_result").load("${pageContext.request.contextPath}/memberLogin");
+	});
+	function payPerformence(url){
+		alert("url:"+url);
+	    window.open(url, "confirm", "menubar=no, width=1400, height=830");
+	} 
 	
 //화면 뿌리기
 function commentList(url) {
@@ -201,8 +203,14 @@ function commentList(url) {
 							</button>
 						</div>
 						<div class="col-md-12">
+						<c:if test="${sessionScope.login_id!=null}">
 							<input class="btn btn-danger btn-xl w100p" type="button"
-								value="예매하기">
+								onclick="payPerformence('Ticketing?per_id=${perf.per_id}')" value="예매하기" >
+						</c:if>								
+						<c:if test="${sessionScope.login_id==null}">
+							<input class="btn btn-danger btn-xl w100p" type="button"
+								data-toggle="modal" data-target="#login-modal" id="login2" value="예매하기" >
+						</c:if>
 						</div>
 					</div>
 				</div>

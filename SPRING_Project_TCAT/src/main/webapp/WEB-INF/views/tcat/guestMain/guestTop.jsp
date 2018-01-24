@@ -175,7 +175,11 @@
 							//event.originalEvent.state.page: 푸시해 놓았던 데이터의 page(key값)에 따라 url을 받음
 						});
 			});
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 	//공연 상세페이지 onclick시
 	function contentPage(per_id) {
 		load('contentMain?per_id=' + per_id);
@@ -207,7 +211,7 @@
 						<li><a href="#">예매확인/취소</a></li>
 						<li><a onclick="load('qnaBoardMain');">고객센터</a></li>
 						<c:if test="${sessionScope.login_id!=null}">
-							<li><a onclick="load('wishList');">위시리스트</a></li>
+							<li><a onclick="load('wishList?wish_step=1');">위시리스트</a></li>
 							<li><a onclick="load('cartList');">장바구니</a></li>
 						</c:if>
 

@@ -44,15 +44,13 @@ $(document).ready(function() {
 	//탭
 	$('#myTab a[href="#profile"]').tab('show');
 	
-	$(".active.wish").click(function(){
-		alert("ㅅㅄㅄ");
-	});
 	//위시리스트 킬릭시
 	$(".wish").click(function(){
 		if(${login_id == null}){
 			alert("로그인 후 이용해 주세요.");
 			return false;
 		}else{
+<<<<<<< HEAD
 			var disc_code = $("#disc_code").val();
 			var formData = {"disc_code":disc_code};
 			var active = $(".wish").hasClass("active");
@@ -83,6 +81,38 @@ $(document).ready(function() {
 					}
 				});
 			}
+=======
+				var disc_code = $("#disc_code").val();
+				var formData = {"disc_code":disc_code};
+				var active = $(".wish").hasClass("active");
+				if(active){
+					$.ajax({
+						type : "POST",
+						url : "delWishList",
+						cache : false,
+						data : formData,
+						success : function() {
+							$(".wish").removeClass("active");
+						},
+						error : function(){
+							alert("위시리스트 실패하였습니다.");
+						}
+					});
+				}else{
+					$.ajax({
+						type : "POST",
+						url : "addWishList",
+						cache : false,
+						data : formData,
+						success : function() {
+							$(".wish").addClass("active");
+						},
+						error : function(){
+							alert("위시리스트 실패하였습니다.");
+						}
+					});
+				}
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 		}
 	});
 	
@@ -154,9 +184,27 @@ function commentListS(url) {
 							<i class="glyphicon glyphicon-heart fs20"></i>
 						</button>
 					</div>
+<<<<<<< HEAD
 					<div class="col-md-12">
 						<input class="btn btn-danger btn-xl w100p" type="button"
 							value="구매하기">
+=======
+					<!--예매  -->
+					<div class="col-md-3 " style="padding: 0;">
+						<div class="col-md-12 p10">
+
+							<span>위시리스트</span> <input type="hidden" id="disc_code"
+								value="${str.disc_code }">
+
+							<button type="button" class="wish btn-xl">
+								<i class="glyphicon glyphicon-heart fs20"></i>
+							</button>
+						</div>
+						<div class="col-md-12">
+							<input class="btn btn-danger btn-xl w100p" type="button"
+								value="구매하기">
+						</div>
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 					</div>
 				</div>
 			</div>

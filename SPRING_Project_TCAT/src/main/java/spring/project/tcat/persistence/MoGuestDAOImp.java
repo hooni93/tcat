@@ -26,7 +26,9 @@ public class MoGuestDAOImp implements MoGuestDAO{
 		// TODO Auto-generated method stub
 		ArrayList<TcatPerformanceVO> dtos=null;
 		MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		System.out.println("tickeSeatDao--------");
 		dtos=dao.ticketSeat(map);
+		System.out.println("tickeSeatDao--------");
 		return dtos;
 	}
 	
@@ -59,8 +61,53 @@ public class MoGuestDAOImp implements MoGuestDAO{
 		 cnt=dao.photoBoarderCommentWrite(vo);
 		return cnt;
 	}
-	
+
 	//사진게시판 답글 가져오기
+	@Override
+	public ArrayList<TcatBoardVO> photoBoarderComment() {
+		// TODO Auto-generated method stub
+		 ArrayList<TcatBoardVO> dtos=null;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 dtos=dao.photoBoarderComment();
+		 return dtos;
+	}
+
+	
+	//사진 게시판 업로드
+	@Override
+	public int insertPhotoBoarder(TcatBoardVO vo) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 cnt=dao.insertPhotoBoarder(vo);
+		return cnt;
+	}
+
+
+	
+	//사진 게시판 삭제
+	@Override
+	public int photoBorderDelete(int notice_num) {
+		// TODO Auto-generated method stub
+		int cnt =0;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 cnt=dao.photoBorderDelete(notice_num);
+		return cnt;
+	}
+
+	//사진게시판 수정
+	@Override
+	public int noMoPhotoBoarder(TcatBoardVO vo) {
+		// TODO Auto-generated method stub
+		int cnt =0;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 cnt=dao.noMoPhotoBoarder(vo);
+		return cnt;
+	}
+	
+	
+	
+	
 	
 	
 	
