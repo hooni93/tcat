@@ -24,7 +24,8 @@ public interface JMHGuestService {
 	//스토어 상세정보
 	public void  getContent_store(HttpServletRequest req,Model model);
 	
-	
+	//위시 리스트
+	public void getWishList(HttpServletRequest req,Model model);
 	//addWishList 위시리스트 추가
 	public void  addWishList(HttpServletRequest req,Model model);
 	//해당 위시리스트 삭제

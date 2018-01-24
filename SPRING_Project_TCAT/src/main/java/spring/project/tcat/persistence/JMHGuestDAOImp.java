@@ -12,6 +12,7 @@ import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
+import spring.project.tcat.VO.WishListVO;
 import spring.project.tcat.config.Configuration;
 
 @Repository
@@ -131,12 +132,17 @@ public class JMHGuestDAOImp implements JMHGuestDAO {
 		dao.upHits(per_id);
 	}
 
+	// getWishList 위시리스트
+	public ArrayList<WishListVO> getWishList(Map<String, Object> map) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<WishListVO> wishs = dao.getWishList(map);
+		return wishs;
+	}
 	// addWishList 위시리스트 추가
 	public void addWishList(Map<String, Object> map) {
 		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
 		dao.addWishList(map);
 	}
-
 	// delWishList
 	public void delWishList(Map<String, Object> map) {
 		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
