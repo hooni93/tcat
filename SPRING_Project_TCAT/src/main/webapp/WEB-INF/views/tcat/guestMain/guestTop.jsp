@@ -139,9 +139,6 @@
 	}
 
 	function load(url) {
-
-		$("#result").load("${pageContext.request.contextPath}/" + url);
-
 		$("#result").load("${pageContext.request.contextPath}/" + url,
 				function(msg) {
 					history.pushState({
@@ -178,19 +175,6 @@
 							//event.originalEvent.state.page: 푸시해 놓았던 데이터의 page(key값)에 따라 url을 받음
 						});
 			});
-
-
-
-function load(url){
-	 
-	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );
-	 
-}
-
-//공연 상세페이지 onclick시
-function contentPage(per_id){
-	load('contentMain?per_id='+per_id);
-}
 
 	//공연 상세페이지 onclick시
 	function contentPage(per_id) {

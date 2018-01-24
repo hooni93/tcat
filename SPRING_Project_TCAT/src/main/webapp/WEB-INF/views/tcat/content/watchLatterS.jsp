@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>후기 게시판</title>
+<title>상품후기 게시판</title>
 <script type="text/javascript">
 function commentWriteS(url){   /* AJAX submit */  
 	   var result = document.getElementById("result");
@@ -27,14 +27,14 @@ function commentWriteS(url){   /* AJAX submit */
 </script>
 </head>
 <body>
-<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;후기 게시판</h2>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품 후기 게시판</h3>
 <hr>
-<!-- 검색 -->
+<%-- <!-- 검색 -->
  <form class="navbar-form navbar-center" role="search"
                id="ajaxSubmitForm" onsubmit="return false">
                <input type="hidden" name="category" value=${category}>
-               <input type="hidden" name="disc_title" value=${str.disc_title}>
-               <input type="hidden" name="disc_code" value=${str.disc_code}>
+               <input type="hidden" name="disc_title" value=${dto.disc_title}>
+               <input type="hidden" name="disc_code" value=${dto.disc_code}>
                
                <!--카테고리  -->
                <select id="sDev" name="sDev" class="m10 p5">
@@ -48,9 +48,9 @@ function commentWriteS(url){   /* AJAX submit */
                      name="keyword"> 
                </div>
                <button type="button" class="btn btn-default"
-                  onclick="ajaxSubmit('watchLatter?disc_title=${disc_title}')">검색</button>
+                  onclick="ajaxSubmit('watchLatterS?disc_title=${disc_title}')">검색</button>
             </form>
-             <!-- 검색 종료 -->
+             <!-- 검색 종료 --> --%>
              
 		<div class="row">
 			<div class="col-md-1"></div>
@@ -58,10 +58,10 @@ function commentWriteS(url){   /* AJAX submit */
 			<div class="col-md-16">
 				<table class="table table-hover table-bordered table-condensed c fs13">
 					<tr class="danger">
-						<td width="200px"><b>후기번호</b></td>
-						<td width="200px"><b>상품명</b></td>
+						<td width="100px"><b>후기번호</b></td>
+						<td width="250px"><b>상품명</b></td>
 						<td width="800px"><b>내용</b></td>
-						<td width="100px"><b>작성자</b></td>
+						<td width="150px"><b>작성자</b></td>
 						<td width="200px"><b>작성일</b></td>
 						
 					</tr>
@@ -85,21 +85,21 @@ function commentWriteS(url){   /* AJAX submit */
 			<tr>
 				<th align="center"><c:if test="${cnt > 0}">
 				<c:if test="${startPage > pageBlock}">
-							<a onclick="commentList('watchLatterS?&sDev=${sDev}&keyword=${keyword}&disc_title=${disc_title}');">[◀◀]</a>
-							<a onclick="commentList('watchLatterS?&pageNum=${startPage - pageBlock}&sDev=${sDev}&keyword=${keyword}&perf_title=${perf_title}');">[◀]</a>				
+							<a onclick="commentListS('watchLatterS?&disc_title=${disc_title}');">[◀◀]</a>
+							<a onclick="commentListS('watchLatterS?&pageNum=${startPage - pageBlock}&disc_title=${disc_title}');">[◀]</a>				
 						</c:if>
 						<c:forEach var="i" begin="${startPage}" end="${endPage}">
 							<c:if test="${i == currentPage}">
 								<span><b>[${i}]</b></span>
 							</c:if>
 							<c:if test="${i != currentPage}">
-								<a onclick="commentList('watchLatterS?&pageNum=${i}&sDev=${sDev}&keyword=${keyword}&disc_title=${disc_title}');">[${i}]</a>
+								<a onclick="commentListS('watchLatterS?&pageNum=${i}&disc_title=${disc_title}');">[${i}]</a>
 							</c:if>
 						</c:forEach>
 						<!-- 다음[▶] / 끝[▶▶] -->
 						<c:if test="${pageCount > endPage}">
-							<a onclick="commentList('watchLatterS?&pageNum=${startPage + pageBlock}&sDev=${sDev}&keyword=${keyword}&disc_title=${disc_title}');">[▶]</a>
-							<a onclick="commentList('watchLatterS?&pageCount=${pageCount}&sDev=${sDev}&keyword=${keyword}&disc_title=${disc_title}');">[▶▶]</a>
+							<a onclick="commentListS('watchLatterS?&pageNum=${startPage + pageBlock}&disc_title=${disc_title}');">[▶]</a>
+							<a onclick="commentListS('watchLatterS?&pageCount=${pageCount}&disc_title=${disc_title}');">[▶▶]</a>
 						</c:if>
 					</c:if></th>
 			</tr>

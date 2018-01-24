@@ -43,6 +43,23 @@ public class TcatTicketingVO {
  	String 		del_name;			//이름
  	String 		del_addr;			//주소
  	String 		del_hp;				//연락처
+ 	
+ 	//태성이가 한거^^
+ 	String perf_title;
+ 	int round;
+ 	
+	public int getRound() {
+		return round;
+	}
+	public void setRound(int round) {
+		this.round = round;
+	}
+	public String getPerf_title() {
+		return perf_title;
+	}
+	public void setPerf_title(String perf_title) {
+		this.perf_title = perf_title;
+	}
 	public int getTicket_num() {
 		return ticket_num;
 	}

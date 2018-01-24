@@ -120,15 +120,16 @@ public class TSGuestController {
 		public String watchLatterS(HttpServletRequest req,Model model) {
 		System.out.println("watchLatterS");
 		
+		TSGService.selectCommentS(req, model);
 		
 		return "tcat/content/watchLatterS";
 		}
 		//게스트 관람/후기 한줄평 쓰기
 		@RequestMapping("commentWriteS")
 		public String commentWriteS(HttpServletRequest req,Model model) {
-		System.out.println("!!!!!!!!!____________________<<<<>>>>:"+req.getParameter("disc_code"));
-		System.out.println("commentWriteS");
 			
+		System.out.println("commentWriteS");
+		TSGService.commentWriteS(req, model);	
 				
 		return "tcat/content/watchLatterS";
 		}

@@ -177,5 +177,20 @@ public interface HostService {
 	public void commentList(HttpServletRequest req, Model model);
 	//관람/상품 후기 삭제
 	public void commentDelete(HttpServletRequest req, Model model);
+	
+	// 환불 승인할 목록 - 공연
+	public void productRefundBoard(HttpServletRequest req, Model model);
+	// 환불 승인할 목록 - 스토어
+	public void productRefundBoardS(HttpServletRequest req, Model model);
+	
+	// 환불 승인 - 공연
+	public void productRefundUpdate(HttpServletRequest req, Model model);
+	// 환불 취소 - 공연
+	public void productRefundCancel(HttpServletRequest req, Model model);
+	
+	// 환불 승인 - 스토어
+	public void productRefundUpdateS(HttpServletRequest req, Model model);
+	// 환불 취소 - 스토어
+	public void productRefundCancelS(HttpServletRequest req, Model model);
 	///////////////////////  태성 1/21 end ///////////////////////////
 }

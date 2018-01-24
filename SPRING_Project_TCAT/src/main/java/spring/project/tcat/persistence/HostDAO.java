@@ -279,13 +279,43 @@ public interface HostDAO {
 	///////////////////////  동금 1/15 end ///////////////////////////
 		
 ///////////////////////  태성 1/21 start ///////////////////////////
-	// 관람/상품 후기 개수
+	// 관람 후기 개수
 	public int commentCnt(Map<String, Object>map);
+	// 상품 후기 개수
+	public int commentCntS(Map<String, Object>map);
+	
 	// 관람/상품 후기 목록
 	public ArrayList<TcatBoardVO> commentList(Map<String, Object> map);
+	//공연후기 목록 출력
+	public ArrayList<TcatBoardVO> commentListView(Map<String, Object> map);
+	//상품후기 목록 출력
+	public ArrayList<TcatBoardVO> commentListStore(Map<String, Object> map);
+	
 	// 관람/상품후기 삭제
 	public int commentDel(int notice_num);
-/*	// 게스트 관람/상품후기 등록
-	public int commentWrite(TcatBoardVO vo);*/
+	
+	
+	////////////////////////////////
+	// 환불 공연 개수
+	public int refundCnt(Map<String, Object>map);
+	// 환불 스토어 개수
+	public int refundSCnt(Map<String, Object>map);
+	
+	
+	// 환불 공연 목록
+	public ArrayList<TcatTicketingVO> refundListA(Map<String, Object> map);
+	// 환불 스토어 목록
+	public ArrayList<TcatDiscBuyVO> refundListB(Map<String, Object> map);
+	
+	// 환불 승인 - 공연
+	public int refundPerformanceOk(int refundUpdate);
+	// 환불 취소 - 공연
+	public int refundPerformanceCancel(int refundDown);
+	
+	// 환불 승인 - 스토어
+	public int refundStoreOk(int refundUpdateS);
+	// 환불 취소 - 스토어
+	public int refundStoreCancel(int refundDownS);
+	
 ///////////////////////  태성 1/21 end ///////////////////////////
 }

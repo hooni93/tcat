@@ -245,12 +245,7 @@ function commentList(url) {
 
 								<div class="col-md-15" id="commentList"></div>
 							</div>
-							
-							
-
-							<div role="tabpanel" class="tab-pane" id="review">2
-								
-							</div>
+						
 
 							<!--취소환불 안내  -->
 							<div role="tabpanel" class="tab-pane" id="cancelInfo">3</div>

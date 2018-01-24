@@ -56,6 +56,20 @@ public class TcatBoardVO {
 	String perf_title;
 	int per_id;
 	String perf_image;
+	String disc_title;
+	int disc_code;
+	public String getDisc_title() {
+		return disc_title;
+	}
+	public void setDisc_title(String disc_title) {
+		this.disc_title = disc_title;
+	}
+	public int getDisc_code() {
+		return disc_code;
+	}
+	public void setDisc_code(int disc_code) {
+		this.disc_code = disc_code;
+	}
 	public String getPerf_title() {
 		return perf_title;
 	}

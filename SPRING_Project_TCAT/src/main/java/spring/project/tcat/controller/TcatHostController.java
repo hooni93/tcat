@@ -1046,7 +1046,7 @@ public class TcatHostController {
 	System.out.println("commentManager");
 	
 	hService.commentList(req, model);
-	req.getSession().setAttribute("page", "commentManager");
+	req.getSession().setAttribute("page", "commentManagerCate");
 	
 	return "tcat/borderManager/commentManager";
 	
@@ -1071,22 +1071,73 @@ public class TcatHostController {
 	}
 //////////////////////태성 1/21 end////////////////////////////
 //////////////////////태성 1/23 start////////////////////////////
-	//관람/상품 후기 관리 게시판 - 삭제기능
+	@RequestMapping("productRefund_side")
+	public String productRefund_side(HttpServletRequest req,Model model) {
+	System.out.println("productRefund_side");
+	return "tcat/productManager/productRefund_side";
+	}
+	
+	//공연 환불 - 목록
 	@RequestMapping("productRefund")
 	public String productRefund(HttpServletRequest req,Model model) {
 		
 	System.out.println("productRefund");
+	hService.productRefundBoard(req, model);
+	return "tcat/productManager/productRefund";
 	
+	}
+	
+	//스토어 환불 - 목록
+	@RequestMapping("productRefundS")
+	public String productRefundS(HttpServletRequest req,Model model) {
+		
+	System.out.println("productRefundS");
+	hService.productRefundBoardS(req, model);
+	
+	return "tcat/productManager/productRefundS";
+	}
+	
+	//공연 환불 - 승인
+	@RequestMapping("productRefundUpdate")
+	public String productRefundUpdate(HttpServletRequest req,Model model) {
+		
+	System.out.println("productRefundUpdate");
+	hService.productRefundUpdate(req, model);
+	hService.productRefundBoard(req, model);
 	
 	return "tcat/productManager/productRefund";
 	}
-	@RequestMapping("productRefund_side")
-	public String productRefund_side(HttpServletRequest req,Model model) {
+	//공연 환불 - 취소
+	@RequestMapping("productRefundCancel")
+	public String productRefundCancel(HttpServletRequest req,Model model) {
+	System.out.println("productRefundCancel");
+	
+	hService.productRefundCancel(req, model);
+	hService.productRefundBoard(req, model);
+	
+	return "tcat/productManager/productRefund";
+	}
+	//스토어 환불 - 승인
+	@RequestMapping("productRefundUpdateS")
+	public String productRefundUpdateS(HttpServletRequest req,Model model) {
 		
-	System.out.println("productRefund_side");
+	System.out.println("productRefundUpdateS");
 	
+	hService.productRefundUpdateS(req, model);
+	hService.productRefundBoardS(req, model);
 	
-	return "tcat/productManager/productRefund_side";
+	return "tcat/productManager/productRefundS";
+	}
+	//스토어 환불 - 취소
+	@RequestMapping("productRefundCancelS")
+	public String productRefundCancelS(HttpServletRequest req,Model model) {
+		
+	System.out.println("productRefundCancelS");
+	
+	hService.productRefundCancelS(req, model);
+	hService.productRefundBoardS(req, model);
+	
+	return "tcat/productManager/productRefundS";
 	}
 //////////////////////태성 1/23 end////////////////////////////
 }
