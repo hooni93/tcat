@@ -26,6 +26,9 @@ function next(){
 	var nextBtn=document.all.nextBtn.value;
 	if(nextBtn=="좌석선택"){
 		document.all.nextBtn.value="할인/쿠폰";
+		
+		$( "#Ticketing" ).load( "${pageContext.request.contextPath}/");
+		
 		$("#menu1").removeClass("active");
 		$("#menu2").addClass("active");
 		document.all.nextTest.value=2;
@@ -113,8 +116,9 @@ function next(){
 			<div id="side_bar">
 					<table style="border:1px solid black; margin-top:0; padding:10px; color:white">
 						<tr>
-							<td><img src="${image}/performance/${vo.perf_Image}" style="width:100px;margin:10px;">
-							<td><c:set var="startdate" value="${fn:split(vo.startDate,' ')}"/>
+							<td style="width:100px;"><img src="${image}/performance/${vo.perf_Image}" style="width:100px;margin:10px;">
+							<td style="width:80px;">
+								<c:set var="startdate" value="${fn:split(vo.startDate,' ')}"/>
 								<c:set var="enddate" value="${fn:split(vo.endDate,' ')}"/>
 								<b>${vo.perf_title}</b><br><br>
 								${startdate[0]}<br>

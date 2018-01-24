@@ -15,8 +15,6 @@
 
 <title>Insert title here</title>
 <style type="text/css">
-
-
 .roundButton {
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -212,4 +210,5 @@ function noSundays(date) {
 
 </div>
 </body>
+
 </html>
