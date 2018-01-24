@@ -91,4 +91,11 @@
 	<update id="eventUpdateCnt" parameterType="java.util.Map">
 		update notice set notice_title=#{title}, contents=#{content}, notice_image=#{notice_image} where notice_num=#{num}
 	</update>
+	<!-- 이벤트 등록-->
+	<insert id="eventAddCnt" parameterType="java.util.Map">
+	<![CDATA[
+		INSERT INTO Notice (notice_num, notice_title, writeDate, contents, notice_image,notice_div, member_id) 
+		VALUES (Notice_SEQ.nextval,  #{notice_title},#{writeDate},#{contents},#{notice_image},#{notice_div},#{member_id})
+		]]>
+	</insert>
    </mapper>

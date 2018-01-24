@@ -20,5 +20,6 @@ public interface YMGuestService {
 	public void eventDelete(HttpServletRequest req,Model model);
 	//이벤트수정
 	public void eventUpdateList(MultipartHttpServletRequest req,Model model);
-
+	//이벤트등록
+	public void eventAdd(MultipartHttpServletRequest req,Model model);
 }

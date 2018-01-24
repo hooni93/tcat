@@ -179,6 +179,19 @@
 						});
 			});
 
+
+
+function load(url){
+	 
+	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );
+	 
+}
+
+//공연 상세페이지 onclick시
+function contentPage(per_id){
+	load('contentMain?per_id='+per_id);
+}
+
 	//공연 상세페이지 onclick시
 	function contentPage(per_id) {
 		load('contentMain?per_id=' + per_id);

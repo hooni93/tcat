@@ -87,5 +87,13 @@ public class YMGuestDAOImpl implements YMGuestDAO{
 		cnt=dao.eventUpdateCnt(map);
 		return cnt;
 	}
+	//이벤트등록 eventAddCnt
+	@Override
+	public int eventAddCnt(Map<String, Object> map) {
+		int cnt=0;
+		YMGuestDAO dao= Configuration.getMapper(YMGuestDAO.class);
 		
+		cnt=dao.eventAddCnt(map);
+		return cnt;
+	}	
 }
