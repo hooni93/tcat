@@ -65,7 +65,6 @@ public class HSGuestController {
 	public String chooseDay(HttpServletRequest req, Model model) {
 		System.out.println("chooseDay");
 		
-		model.addAttribute("TicettingCnt",2);
 		HSGservice.payList(req,model);
 		
 		return "tcat/Ticketing/chooseDay";
