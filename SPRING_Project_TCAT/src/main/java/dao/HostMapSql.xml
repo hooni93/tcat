@@ -1095,16 +1095,18 @@
     					<if test="mDev != null">
            				AND c.mDev LIKE '${mDev}'
         				</if>
-    					
-				        <!-- <choose>
+        				<choose>
 				           <when test="sDev==1">
 				              AND p.per_id LIKE '${keyword}'
 				           </when>
 				           <when test="sDev==2">
 				              AND p.perf_title LIKE '%${keyword}%'
 				           </when>
+				           <when test="sDev==3">
+				              AND c.sDev LIKE '%${keyword}%'
+				           </when>
 				           <otherwise></otherwise>
-				        </choose> -->
+				        </choose>
     					
     </select>
     <!-- 필요한 컬럼 -->
@@ -1149,7 +1151,7 @@
 				f.per_id as per_id,
 				f.perf_title as perf_title,
 				f.per_step as per_step,
-				f.num as gu,
+				f.num as ticet_max,
 				c.mdev as mDev,
 				c.sdev as sDev,
 				rownum rNum
@@ -1189,13 +1191,25 @@
     					<if test="mDev != null">
            				AND c.mDev LIKE '${mDev}'
         				</if>
+        				<choose>
+				           <when test="sDev==1">
+				              AND per_id LIKE '${keyword}'
+				           </when>
+				           <when test="sDev==2">
+				              AND perf_title LIKE '%${keyword}%'
+				           </when>
+				           <when test="sDev==3">
+				              AND sDev LIKE '%${keyword}%'
+				           </when>
+				           <otherwise></otherwise>
+				        </choose>
     					)
     					<if test="step ==1">
     					<![CDATA[
     					where rNum>=#{start} and rNum <=#{end}
     					]]>
     					</if>
-    					order by gu desc
+    					order by ticet_max desc
     					
     				
 	</select>
@@ -1236,6 +1250,46 @@
 	<update id="provalUpdateCnt" parameterType="int">
 		update Ticketing set ticket_step='2' where ticket_num=#{num}
 	</update>
+	 <!-- 혜택갯수 -->
+     <select id="levelCnt" resultType="int">
+		select count(*)
+		from
+		sale
+	</select>
+	<!-- 혜택리스트 -->
+	<select id="levelList" resultType="spring.project.tcat.VO.SaleVO">
+		<![CDATA[
+		select *
+		from(select sale_div, sale_rate, rownum rNum
+		from(
+			select * from sale
+			ORDER by sale_rate desc
+				)
+		)
+		WHERE rNum >=#{start} AND rNum <=#{end}
+		]]>
+	</select>
+	<!-- 혜택 삭제 -->
+	<delete id="levelDeleteCnt" parameterType="String">
+		delete sale where sale_div=#{sale}
+	</delete>
+	<!-- 혜택 상세 -->
+	<select id="levelMemberForm" resultType="spring.project.tcat.VO.SaleVO">
+		select * from
+		sale
+		where sale_div=#{sale_div}
+	</select>
+	<!-- 혜택 수정 -->
+	<update id="levelUpdateCnt" parameterType="java.util.Map">
+		update sale set sale_rate=#{sale_rate} where sale_div=#{sale_div}
+	</update>
+	<!-- 혜택 등록-->
+	<insert id="levelAdd" parameterType="java.util.Map">
+	<![CDATA[
+		INSERT INTO sale (sale_div,sale_rate) 
+		VALUES (#{sale_div},#{sale_rate})
+		]]>
+	</insert>
      <!-- 18.01.23 영민 수정끝  -->
      
 <!-- 18.01.11 동금 수정  -->

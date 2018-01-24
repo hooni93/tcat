@@ -888,7 +888,62 @@ public class TcatHostController {
 			hService.provalHost(req, model);
 			return "tcat/proval/provalMain";
 		}
-		
+		//회원혜택관리
+		@RequestMapping("levelMember_side")
+		public String levelMember_side(HttpServletRequest req,Model model) {
+			System.out.println("levelMember_side");
+			return "tcat/memberManage/levelMember_side";
+		}
+		//회원혜택관리
+		@RequestMapping("levelMember")
+		public String levelMember(HttpServletRequest req,Model model) {
+			System.out.println("levelMember");
+			hService.levelMember(req, model);
+			return "tcat/memberManage/levelMember";
+		}
+		//혜택삭제
+		@RequestMapping("levelDelete")
+		public String levelDelete(HttpServletRequest req,Model model) {
+			System.out.println("levelDelete");
+			hService.levelDelete(req, model);
+			hService.levelMember(req, model);
+			return "tcat/memberManage/levelMember";
+		}
+		//혜택수정
+		@RequestMapping("levelMemberForm")
+		public String levelMemberForm(HttpServletRequest req,Model model) {
+			System.out.println("levelMemberForm");
+			hService.levelMemberForm(req, model);
+			return "tcat/memberManage/levelMemberForm";
+		}
+		//혜택업데이트
+		@RequestMapping("levelMemberUpdate")
+		public String levelMemberUpdate(HttpServletRequest req,Model model) {
+			System.out.println("levelMemberUpdate");
+			hService.levelMemberUpdate(req, model);
+			hService.levelMember(req, model);
+			return "tcat/memberManage/levelMember";
+		}
+		//혜택등록
+				@RequestMapping("levelAdd")
+				public String levelAdd(MultipartHttpServletRequest req,Model model) {
+					System.out.println("levelAdd");
+					hService.levelAdd(req, model);
+					hService.levelMember(req, model);
+					return "tcat/borderManager/levelMember";
+		}
+		//등급분석사이드
+		@RequestMapping("infoLevel_side")
+		public String infoLevel_side(HttpServletRequest req,Model model) {
+			System.out.println("infoLevel_side");
+			return "tcat/memberAnalysis/infoLevel_side";
+		}
+		//등급분석사이드
+		@RequestMapping("infoLevel")
+		public String infoLevel(HttpServletRequest req,Model model) {
+			System.out.println("infoLevel");
+			return "tcat/memberAnalysis/infoLevel";
+		}
 /////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민  //////////////////////////////
 
 	///////////////////////  동금 1/9 start  //////////////////////// 

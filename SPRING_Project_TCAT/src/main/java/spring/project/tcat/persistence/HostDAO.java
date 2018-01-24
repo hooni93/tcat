@@ -7,6 +7,7 @@ import spring.project.tcat.VO.CategoryVO;
 import spring.project.tcat.VO.HostVO;
 import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.ProductRankVO;
+import spring.project.tcat.VO.SaleVO;
 import spring.project.tcat.VO.SelectHellInfoVO;
 import spring.project.tcat.VO.TcatBoardVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
@@ -237,6 +238,18 @@ public interface HostDAO {
 	
 	//구매요청
 	public int provalUpdateCnt(int num);
+	//혜택 갯수
+	public int levelCnt();
+	//혜택 리스트
+	public ArrayList <SaleVO>levelList(Map<String,Object> map);
+	//혜택삭제
+	public int levelDeleteCnt(String sale);
+	//혜택 상세
+	public ArrayList<SaleVO> levelMemberForm(String sale_div);
+	//혜택 수정
+	public int levelUpdateCnt(Map<String,Object> map);
+	//혜택등록
+	public int levelAdd(Map<String,Object> map);
 	////////////////////////////////////영민 1/10 end ///////////////////////////////////////
 	
 	

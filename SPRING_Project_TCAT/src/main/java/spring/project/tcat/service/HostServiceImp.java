@@ -26,6 +26,7 @@ import spring.project.tcat.VO.CategoryVO;
 import spring.project.tcat.VO.HostVO;
 import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.ProductRankVO;
+import spring.project.tcat.VO.SaleVO;
 import spring.project.tcat.VO.SelectHellInfoVO;
 import spring.project.tcat.VO.TcatBoardVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
@@ -2504,9 +2505,117 @@ public class HostServiceImp implements HostService {
 		int updateCnt=0;
 		int num=Integer.parseInt(req.getParameter("ticket_num"));
 		updateCnt = hDao.provalUpdateCnt(num);
-		
 		model.addAttribute("updateCnt", updateCnt);
 
+	}
+	//고객혜택관리
+	@Override
+	public void levelMember(HttpServletRequest req, Model model) {
+		int cnt = 0; // 글갯수
+		int pageSize = 3; // 한 페이지당 출력할 글 갯수
+		int pageBlock = 2; // 한 블럭당 페이지 갯수
+
+		int start = 0; // 현재 페이지 글시작번호
+		int end = 0; // 현재 페이지 글 마지막번호
+		String pageNum = null; // 페이지 번호
+		int currentPage = 0; // 현재 페이지
+
+		int pageCount = 0; // 페이지 갯수
+		int startPage = 0; // 시작 페이지
+		int endPage = 0; // 마지막 페이지
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		cnt = hDao.levelCnt();
+		System.out.println("cnt======" + cnt);
+		pageNum = req.getParameter("pageNum");
+		if (pageNum == null) {
+			pageNum = "1";
+		}
+		currentPage = (Integer.parseInt(pageNum));
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0); // 페이지 갯수 + 나머지
+		start = (currentPage - 1) * pageSize + 1;
+		end = start + pageSize - 1;
+		if (end > cnt)
+			end = cnt;
+		System.out.println("cnt====" + cnt);
+
+		if (cnt > 0) {
+			map.put("start", start);
+			map.put("end", end);
+
+			ArrayList<SaleVO> dtos = hDao.levelList(map);
+
+			System.out.println("dtos:" + dtos.size());
+			model.addAttribute("dtos", dtos);
+		}
+
+		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5/3)* 3+ 1= 4
+		if (currentPage % pageBlock == 0)
+			startPage -= pageBlock; // (5%3)==0
+		endPage = startPage + pageBlock - 1; // 4+3 -1 =6
+		if (endPage > pageCount)
+			endPage = pageCount;
+
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("pageNum", pageNum);
+
+		if (cnt > 0) {
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageBlock", pageBlock);
+			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("currentPage", currentPage);
+		}
+		
+	}
+	//혜택삭제
+	@Override
+	public void levelDelete(HttpServletRequest req, Model model) {
+		int deleteCnt=0;
+		String sale=req.getParameter("sale_div");
+		System.out.println("sale_div====="+sale);
+		deleteCnt = hDao.levelDeleteCnt(sale);
+		model.addAttribute("deleteCnt", deleteCnt);
+		
+	}
+	//혜택상세
+	@Override
+	public void levelMemberForm(HttpServletRequest req, Model model) {
+		String sale_div=req.getParameter("sale_div");
+		ArrayList<SaleVO> dtos=hDao.levelMemberForm(sale_div);
+		model.addAttribute("dtos", dtos);
+		/*int sale_rate=Integer.parseInt(req.getParameter("sale_rate"));
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("sale_div", sale_div);
+		map.put("sale_rate", sale_rate);*/
+	}
+	//혜택업데이트
+	@Override
+	public void levelMemberUpdate(HttpServletRequest req, Model model) {
+		int levelCnt=0;
+		String sale_div=req.getParameter("sale_div");
+		int sale_rate=Integer.parseInt(req.getParameter("sale_rate"));
+		
+		System.out.println("sale_div===="+sale_div);
+		System.out.println("sale_rate===="+sale_rate);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("sale_div", sale_div);
+		map.put("sale_rate", sale_rate);
+		levelCnt=hDao.levelUpdateCnt(map);
+		model.addAttribute("levelCnt", levelCnt);
+	}
+	//혜택등록
+	@Override
+	public void levelAdd(HttpServletRequest req, Model model) {
+		int addCnt=0;
+		String sale_div=req.getParameter("sale_div");
+		int sale_rate=Integer.parseInt(req.getParameter("sale_rate"));
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("sale_div",sale_div);
+		map.put("sale_rate",sale_rate);
+		addCnt=hDao.levelAdd(map);
+		model.addAttribute("addCnt", addCnt);
 	}
 
 	///////////// HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-23 성영민 ///////////////
@@ -3083,6 +3192,8 @@ public class HostServiceImp implements HostService {
 		model.addAttribute("commentDel", commentDel);
 
 	}
+	
+
 
 }
 /////////////////////// 태성 1/21 end ///////////////////////////

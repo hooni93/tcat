@@ -141,6 +141,16 @@ public interface HostService {
 	public void provalHost(HttpServletRequest req,Model model);
 	//구매업데이트
 	public void provalUpdate(HttpServletRequest req,Model model);
+	//혜택관리
+	public void levelMember(HttpServletRequest req,Model model);
+	//혜택삭제
+	public void levelDelete(HttpServletRequest req,Model model);
+	//혜택상세
+	public void levelMemberForm(HttpServletRequest req,Model model);
+	//혜택업데이트
+	public void levelMemberUpdate(HttpServletRequest req,Model model);
+	//혜택등록
+	public void levelAdd(HttpServletRequest req,Model model);
 	////////////////////////////////////영민 1/11 end //////////////////////////////////////////
 	
 

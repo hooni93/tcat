@@ -9,11 +9,10 @@
 </head>
 <body class="b400040">
 <c:set var="image" value="/tcat/resources/image/"/>
-	<div class="row mt50">
-		<!-- <div class="col-md-1"></div> -->
+
+	
 		<div class="col-md-10">
 			<div class="row">
-				<!-- <div class="col-md-1"></div> -->
 				<div class="col-md-10">
 					<div>
 					<h2>포인트</h2>
@@ -22,25 +21,41 @@
 					<img src="${image}memberPoint/log.png"  width="100%" height="200px">
 					</div>
 
-					<div>
+					<div class=" b333366">
 					
-					<h4><center><%=request.getSession().getAttribute("login_id") %>님의 등급은</center></h4>
-					<h3><center>${Rating}등급입니다</center></h3>
+					<center class=" ffffff fs18"><%=request.getSession().getAttribute("login_id") %>님의 등급은</center>
+					<center class=" ffffff fs25">${Rating}등급입니다</center>
+					
+					<c:if test="${Rating.equals('A')}">
+						<center class="ffffff fs18px ">이번년도 구매횟수 ${sRank}회</center>
+						<center class="ffffff fs18px">1년안에 10회 구매시 등급업</center>
+						<center class="ffffff fs18px ">등급기간</center>
+						<center class="ffffff fs18px">${yesterDay} ~ ${today}</center>
+					</c:if>
+					
 					<c:if test="${Rating.equals('S')}">
-						<h4><center>이번년도 구매횟수 ${sRank}회</center></h4>
+						<center class="ffffff fs18px">이번년도 구매횟수 ${sRank}회</center>
+						<center class="ffffff fs18px">1년안에 20회 구매시 등급업</center>
+						<center class="ffffff fs18px">등급기간</center>
+						<center class="ffffff fs18px">${yesterDay} ~ ${today}</center>
 					</c:if>
 					<c:if test="${Rating.equals('VIP')}">
-						<h4><center>이번년도 구매횟수 ${vRank}회</center></h4>
+						<center class="ffffff fs18px">이번년도 구매횟수 ${vRank}회</center>
 					</c:if>
-					<h4><center>총 구매횟수 ${cnt}회</center></h4>
-					
+					<center class="ffffff fs18px">총 구매횟수 ${cnt}회</center>
 					</div>
 					
 					<div class="progress">
-  					<div class="progress-bar progress-bar-striped active" style="width: ${cnt}%">
-    				<center>${cnt}%</center>
+  					<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width:${p}%" >
   					</div>
 					</div>
+					<div class=" bff3333">
+					<c:if test="${Rating.equals('VIP')}">
+						<h4><center></center></h4>
+					</c:if>
+					<c:if test="${!Rating.equals('VIP')}">
+						<center class="ffffff fs18 ">다음 등급은 ${nextRating}등급입니다</center>
+					</c:if>
 					
 				</div>
 				<div class="col-md-1"></div>
@@ -50,8 +65,6 @@
 			<br> <br> <br> <br> <br>
 		</div>
 			<div class="col-md-1"></div>
-
-	</div>
 
 </body>
 </html>

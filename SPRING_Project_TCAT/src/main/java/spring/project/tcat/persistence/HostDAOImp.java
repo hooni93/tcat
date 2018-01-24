@@ -9,6 +9,7 @@ import spring.project.tcat.VO.CategoryVO;
 import spring.project.tcat.VO.HostVO;
 import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.ProductRankVO;
+import spring.project.tcat.VO.SaleVO;
 import spring.project.tcat.VO.SelectHellInfoVO;
 import spring.project.tcat.VO.TcatBoardVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
@@ -825,13 +826,62 @@ public class HostDAOImp implements HostDAO {
 			System.out.println("maps"+map);
 			return dtos;
 		}
-		//hot카테고리 올리기
+		//구매요청 업데이트
 		@Override
 		public int provalUpdateCnt(int num) {
 			int updateCnt=0;
 			HostDAO dao=Configuration.getMapper(HostDAO.class);
 			updateCnt=dao.provalUpdateCnt(num);
 			return updateCnt;
+		}
+		//혜택갯수
+		@Override
+		public int levelCnt() {
+			int cnt=0;
+			HostDAO dao=Configuration.getMapper(HostDAO.class);
+			cnt=dao.levelCnt();
+			return cnt;
+		}
+		//혜택리스트
+		@Override
+		public ArrayList<SaleVO> levelList(Map<String, Object> map) {
+			ArrayList<SaleVO> dtos = null;
+			HostDAO dao= Configuration.getMapper(HostDAO.class);
+			dtos=dao.levelList(map);
+			System.out.println("maps"+map);
+			return dtos;
+		}
+		//혜택삭제
+		@Override
+		public int levelDeleteCnt(String sale) {
+			int deleteCnt=0;
+			HostDAO dao=Configuration.getMapper(HostDAO.class);
+			deleteCnt=dao.levelDeleteCnt(sale);
+			return deleteCnt;
+		}
+		//혜택상세
+		@Override
+		public ArrayList<SaleVO> levelMemberForm(String sale_div) {
+			ArrayList<SaleVO> dto = null;
+			HostDAO dao= Configuration.getMapper(HostDAO.class);
+			dto=dao.levelMemberForm(sale_div);
+			return dto;
+		}
+		//혜택수정
+		@Override
+		public int levelUpdateCnt(Map<String, Object> map) {
+			int cnt=0;
+			HostDAO dao= Configuration.getMapper(HostDAO.class);
+			cnt=dao.levelUpdateCnt(map);
+			return cnt;
+		}
+		//혜택등록
+		@Override
+		public int levelAdd(Map<String, Object> map) {
+			int cnt=0;
+			HostDAO dao=Configuration.getMapper(HostDAO.class);
+			cnt=dao.levelAdd(map);
+			return cnt;
 		}
 ////////////////HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-23 성영민  //////////////
 	///////////////////////  동금 1/9  ///////////////////////////
@@ -983,5 +1033,6 @@ public class HostDAOImp implements HostDAO {
 		return cnt;
 	}
 ///////////////////////  태성 1/21 end///////////////////////////
+	
 	
 }
