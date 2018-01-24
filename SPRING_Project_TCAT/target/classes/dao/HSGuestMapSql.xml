@@ -117,10 +117,27 @@
 			select * 
 			from
 			(
-			    select p.per_id,p.perf_title,p.cateNum,p.R_seatPrice,p.VIP_seatPrice,p.S_seatPrice,p.A_seatPrice,p.B_seatPrice,c.category,c.mDev,c.sDev,pl.city,pl.postNum,pl.address,pl.province,p.perf_Image,p.startdate,p.enddate,p.hall_id,h.hall_name,p.first_grade,p.per_step,p.remain_round,p.possible_age,rownum rNum
+			    select p.per_id,p.perf_title,p.cateNum,p.R_seatPrice,p.VIP_seatPrice,p.S_seatPrice,p.A_seatPrice,p.B_seatPrice,c.category,c.mDev,c.sDev,pl.city,pl.postNum,pl.address,pl.province,p.perf_Image,p.startdate,p.enddate,p.hall_id,h.hall_name,h.VIP_seat,h.R_seat,h.S_seat,h.A_seat,h.B_seat,p.first_grade,p.per_step,p.remain_round,p.possible_age,rownum rNum
 			    from (select * from performanceInfo order by per_id desc) p,category c,hallInfo h,place pl
 			    where p.cateNum=c.cateNum and p.hall_id = h.hall_id and c.category='공연' and h.place_num=pl.place_num
 			)
 			where per_id=#{per_id}
    		</select>
+   		
+   		<select id="vipCount" parameterType="java.util.Map" resultType="int">
+   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='vip'
+   		</select>
+   		<select id="rCount" parameterType="java.util.Map" resultType="int">
+   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='r'
+   		</select>
+   		<select id="sCount" parameterType="java.util.Map" resultType="int">
+   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='s'
+   		</select>
+   		<select id="aCount" parameterType="java.util.Map" resultType="int">
+   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='a'
+   		</select>
+   		<select id="bCount" parameterType="java.util.Map" resultType="int">
+   			select count(*) from Ticketing where round=${round} and ticet_date=#{ticet_date} and seat_type='b'
+   		</select>
+   		
    </mapper>

@@ -61,6 +61,13 @@ public class JMHGuestDAOImp implements JMHGuestDAO {
 		return cnt;
 	}
 
+	// 호스트 로그인
+	public int host_loginPro(Map<String, String> map) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		int cnt = dao.host_loginPro(map);
+		return cnt;
+	}
+
 	// 접속일 갱신
 	@Override
 	public void updateLastDate(Map<String, String> map) {
@@ -138,11 +145,13 @@ public class JMHGuestDAOImp implements JMHGuestDAO {
 		ArrayList<WishListVO> wishs = dao.getWishList(map);
 		return wishs;
 	}
+
 	// addWishList 위시리스트 추가
 	public void addWishList(Map<String, Object> map) {
 		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
 		dao.addWishList(map);
 	}
+
 	// delWishList
 	public void delWishList(Map<String, Object> map) {
 		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);

@@ -21,5 +21,6 @@ public interface HSGuestService {
 	public void payList(HttpServletRequest req,Model model);
 	//스토어 구매
 	public void sussessPay(HttpServletRequest req,Model model);
-		
+	//회차 클릭했을때 그회차의 남은좌석 가져오기
+	public void RemainingSeats(HttpServletRequest req,Model model);
 }

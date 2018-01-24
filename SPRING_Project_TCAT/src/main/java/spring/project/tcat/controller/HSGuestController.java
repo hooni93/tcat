@@ -65,7 +65,6 @@ public class HSGuestController {
 	public String chooseDay(HttpServletRequest req, Model model) {
 		System.out.println("chooseDay");
 		
-		model.addAttribute("TicettingCnt",2);
 		HSGservice.payList(req,model);
 		
 		return "tcat/Ticketing/chooseDay";
@@ -147,6 +146,24 @@ public class HSGuestController {
 		HSGservice.sussessPay(req,model);
 		
 		return "tcat/purchase/payList";
+	}
+
+	
+	@RequestMapping("RemainingSeats")
+	public String RemainingSeats(HttpServletRequest req, Model model) {
+		System.out.println("RemainingSeats");
+		
+		HSGservice.RemainingSeats(req,model);
+		
+		return "tcat/Ticketing/RemainingSeats";
+	}
+
+	@RequestMapping("fake")
+	public String fake(HttpServletRequest req, Model model) {
+		System.out.println("fake");
+		
+		
+		return "tcat/Ticketing/fake";
 	}
 
 }

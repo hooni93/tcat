@@ -203,4 +203,18 @@ public class JMHGuestController {
 		return "tcat/memberMyPage/perfRefundPro";
 	}
 	
+	//host 로그인
+	@RequestMapping("host_login")
+	public String host_login(HttpServletRequest req, Model model) {
+		System.out.println("host_login");
+		return "tcat/hostMain/host_login";
+	}
+	//host 로그인 처리 host_loginPro
+	@RequestMapping("host_loginPro")
+	public String host_loginPro(HttpServletRequest req, Model model) {
+		System.out.println("host_loginPro");
+		mhService.host_loginPro(req, model);
+		return "tcat/hostMain/host_loginPro";
+	}
+	
 }

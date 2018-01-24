@@ -26,6 +26,13 @@
 		AND NOT(
 		member_step = 3)
 	</select>
+	<!--호스트 로그인 확인  -->
+	<select id="host_loginPro" resultType="int">
+		SELECT COUNT(*)
+		FROM host
+		WHERE host_id = #{host_id}
+		AND host_pwd = #{host_pwd}
+	</select>
 	<!-- 접속일 변경 -->
 	<update id="updateLastDate">
 		UPDATE member
