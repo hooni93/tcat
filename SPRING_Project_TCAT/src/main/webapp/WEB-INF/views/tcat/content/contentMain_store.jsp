@@ -136,13 +136,10 @@ $(document).ready(function() {
 					<!--예매  -->
 					<div class="col-md-3 " style="padding: 0;">
 						<div class="col-md-12 p10">
-<<<<<<< HEAD
-							<span>위시리스트</span> <input type="hidden" id="per_id"
-								value="${str.disc_code}">
-=======
+
 							<span>위시리스트</span> <input type="hidden" id="disc_code"
 								value="${str.disc_code }">
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
+
 							<button type="button" class="wish btn-xl">
 								<i class="glyphicon glyphicon-heart fs20"></i>
 							</button>

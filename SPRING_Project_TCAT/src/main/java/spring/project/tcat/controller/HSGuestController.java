@@ -158,5 +158,12 @@ public class HSGuestController {
 		return "tcat/Ticketing/RemainingSeats";
 	}
 
-	
+	@RequestMapping("fake")
+	public String fake(HttpServletRequest req, Model model) {
+		System.out.println("fake");
+		
+		
+		return "tcat/Ticketing/fake";
+	}
+
 }
