@@ -474,4 +474,23 @@ public class JMHGuestServiceImp implements JMHGuestService {
 		int perfRefundRs = mhDAO.perfRefund(disc_num);
 		model.addAttribute("perfRefundRs", perfRefundRs);
 	}
+
+	// 호스트 로그인
+	public void host_loginPro(HttpServletRequest req, Model model) {
+		// 값 받기
+		String host_id = req.getParameter("host_id");
+		String host_pwd = req.getParameter("host_pwd");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("host_id", host_id);
+		map.put("host_pwd", host_pwd);
+		// 로그인 확인
+		int loginRs = mhDAO.host_loginPro(map);
+		if (loginRs == 1) {
+			// 세션 태우기
+			// 로그인 상태 아이디
+			req.getSession().setAttribute("host_id", host_id);
+		}
+		// 로그인 결과값
+		model.addAttribute("loginRs", loginRs);
+	}
 }

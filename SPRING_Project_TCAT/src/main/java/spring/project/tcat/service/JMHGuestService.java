@@ -38,4 +38,7 @@ public interface JMHGuestService {
 	//perfRefund 환불요청
 	public void perfRefund(HttpServletRequest req,Model model);
 	
+	//호스트 로그인
+	public void host_loginPro(HttpServletRequest req,Model model);
+	
 }
