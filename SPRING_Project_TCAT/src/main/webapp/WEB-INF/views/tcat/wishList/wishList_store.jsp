@@ -72,9 +72,9 @@
 </style>
 
 <script type="text/javascript">
-function setPer_id(wish_num){
-	var per_id = $("input[name='"+wish_num+"_per_id']").val();
-	var formData = {"wish_num":wish_num,"per_id":per_id};
+function setDisc_code(wish_num){
+	var disc_code = $("input[name='"+wish_num+"_disc_code']").val();
+	var formData = {"wish_num":wish_num,"disc_code":disc_code};
 	var cla = "."+wish_num;
 	var active = $(cla).hasClass("active");
 	if(active){
@@ -134,13 +134,13 @@ function setPer_id(wish_num){
 			<!--위시리스트  -->
 			<div class="col-md-8">
 
-				<c:forEach var="wish" items="${ wishs}">
+				<c:forEach var="wish" items="${wishs}">
 					<!-- 리스트 시작 -->
 					<div class="col-md-4">
 						<div class="ui centered fluid card"
 							style="border: 1px solid #d0d0d0; border-radius: 5px; margin-bottom: 20px;">
 							<div class="image">
-								<c:choose>
+								<%-- <c:choose>
 									<c:when test="${wish.mDev.equals('뮤지컬') }">
 										<c:set var="folder" value="musical/" />
 									</c:when>
@@ -153,27 +153,25 @@ function setPer_id(wish_num){
 									<c:when test="${wish.mDev.equals('클래식') }">
 										<c:set var="folder" value="classic/" />
 									</c:when>
-								</c:choose>
-								<a onclick="contentPage(${wish.per_id})"> <img
-									src="${image}${folder}${wish.getPerf_Image()}" />
+								</c:choose> --%>
+								<a onclick="contentMain_store(${wish.disc_code})"> <img
+									src="${image}${folder}${wish.disc_image}" />
 								</a>
 							</div>
 							<div class="content">
-								<a class="header" onclick="contentPage(${wish.per_id})">${wish.perf_title }</a>
+								<a class="header" onclick="contentMain_store(${wish.disc_code})">${wish.disc_title }</a>
 								<div class="meta">
-									<span class="date"> <fmt:formatDate
-											value="${wish.startDate }" pattern="yyyy.MM.dd" /> ~ <fmt:formatDate
-											value="${wish.endDate }" pattern="yyyy.MM.dd" />
+									<span class="date"> 
+										<fmt:formatNumber value="${wish.disc_price }" pattern="#.###"/>원
 									</span>
 								</div>
-								<div class="description">${wish.hall_name }</div>
 							</div>
 							<div class="extra content">
 								<!--좋아요 추가하기 위한 데이터  -->
-								<input type="hidden" name="${wish.wish_num}_per_id" value="${wish.per_id }">
+								<input type="hidden" name="${wish.wish_num}_disc_code" value="${wish.disc_code }">
 								<span class="right floated"><i
 									class="glyphicon glyphicon-heart wish active ${wish.wish_num} "
-									onclick="setPer_id(${wish.wish_num})"></i>좋아요</span>
+									onclick="setDisc_code(${wish.wish_num})"></i>좋아요</span>
 							</div>
 						</div>
 

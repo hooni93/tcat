@@ -6,12 +6,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
-
+$(function() {
+	$("#eventcheck").click(function() {
+		var formData = new FormData();
+		//notice_num =nextval ,writeDate=sysdate
+			formData.append("notice_title",$("input[name=notice_title]").val());
+			formData.append("notice_image", $("input[name=notice_image]")[0].files[0]);
+			formData.append("writeDate", $("input[name=writeDate]").val());
+			formData.append("contents", $("input[name=contents]").val());
+			formData.append("member_id", $("input[name=member_id]").val());
+			formData.append("notice_div", $("input[name=notice_div]").val());
+			$.ajax({
+				url : 'eventAdd',
+				data : formData,
+				processData : false,
+				contentType : false,
+				type : 'POST',
+				success : function(data) {
+					$('#result').html(data);
+				}
+			});	
+	});
+});
 </script>
 
 </head>
 <body class="b400040">
-
+<script>
+		
+$(function() {
+	$("#d1").datepicker();
+	
+});
+</script>
 	<div class="row mt50">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
@@ -26,28 +53,31 @@
 						<br>
 						</h4>
 						<div>
+						<form action="eventAdd" id="eventAdd" method="POST">
 							<table
 							class="table table-hover table-bordered table-condensed c fs10">
 							<tr class="bg-primary">
 								<th colspan="2"><h4>이벤트 정보를 입력하세요.</h4></th>
 							</tr>
 							<tr>
-								<th><h5>번호</h5></th>
-								<td>
-								<input type="number" name="num" class="form-control">
-								</td>
-							</tr>
-							<tr>
 								<th><h5>제목</h5></th>
 								<td>
-								<input type="text" name="title" class="form-control"
+								<input type="text" name="notice_title" class="form-control"
 									maxlength="200">
 								</td>
 							</tr>
 							<tr>
+								<th><h5>이미지</h5></th>
+								<td>
+								<input type="file" name="notice_image">
+								</td>
+							</tr>
+							
+							 <tr>
 								<th><h5>작성일</h5></th>
 								<td>
-								<input type="text" name="writeDate" class="form-control">
+								<input type="text" name="writeDate" class="form-control"
+								id="d1" readonly>
 								</td>
 							</tr>
 							<tr>
@@ -60,10 +90,20 @@
 							<tr>
 								<th><h5>작성자</h5></th>
 								<td>
-								<input type="text" name="contents" class="form-control">
+								<input type="text" name="member_id" class="form-control">
+								</td>
+							</tr>
+							<tr>
+								<th><h5>구분</h5></th>
+								<td>
+								<input type="number" name="notice_div" class="form-control">
 								</td>
 							</tr>
 							</table>
+							<button type="button" class="btn btn-info" id="eventcheck">
+									등록<i class="fa fa-check spaceLeft"></i>
+								</button> 
+							</form>
 						</div>
 					<div>
 					

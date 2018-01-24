@@ -15,6 +15,7 @@ import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
+import spring.project.tcat.VO.WishListVO;
 import spring.project.tcat.persistence.HostDAO;
 import spring.project.tcat.persistence.JMHGuestDAO;
 
@@ -368,8 +369,21 @@ public class JMHGuestServiceImp implements JMHGuestService {
 			mhDAO.upHits(disc_code);
 		}
 		TcatPerDiscVO str = mhDAO.getContent_store(disc_code);
-
 		model.addAttribute("str", str);
+	}
+
+	// 위시 리스트
+	public void getWishList(HttpServletRequest req, Model model) {
+		String member_id = (String) req.getSession().getAttribute("login_id");
+		int wish_step = Integer.parseInt(req.getParameter("wish_step"));
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("member_id", member_id);
+		map.put("wish_step", wish_step);
+
+		ArrayList<WishListVO> wishs = mhDAO.getWishList(map);
+		System.out.println("wishs: " + wishs.size());
+		model.addAttribute("wishs", wishs);
 	}
 
 	// addWishList 위시리스트 추가
@@ -403,23 +417,24 @@ public class JMHGuestServiceImp implements JMHGuestService {
 	// 해당 위시리스트 삭제
 	public void delWishList(HttpServletRequest req, Model model) {
 		String member_id = (String) req.getSession().getAttribute("login_id");
-		String per = req.getParameter("per_id");
-		String disc = req.getParameter("disc_code");
-		int wish_step = 0;
-		int disc_code = 0;
 		int per_id = 0;
-
+		int disc_code = 0;
+		int wish_num = 0;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("member_id", member_id);
-
-		if (per == null) {
-			disc_code = Integer.parseInt(disc);
-			map.put("disc_code", disc_code);
-			map.put("per_id", 0);
-		} else {
-			per_id = Integer.parseInt(per);
+		// wish_num가 있을 경우
+		String wish_n = req.getParameter("wish_num");
+		if (wish_n != null) {
+			wish_num = Integer.parseInt(wish_n);
+			map.put("wish_num", wish_num);
+		}
+		// 없을 경우
+		if (wish_n == null) {
+			per_id = req.getParameter("per_id") == null ? 0 : Integer.parseInt((String) req.getParameter("per_id"));
+			disc_code = req.getParameter("disc_code") == null ? 0
+					: Integer.parseInt((String) req.getParameter("disc_code"));
 			map.put("per_id", per_id);
-			map.put("disc_code", 0);
+			map.put("disc_code", disc_code);
+			map.put("member_id", member_id);
 		}
 
 		mhDAO.delWishList(map);
@@ -430,22 +445,14 @@ public class JMHGuestServiceImp implements JMHGuestService {
 		String member_id = (String) req.getSession().getAttribute("login_id");
 		String per = req.getParameter("per_id");
 		String disc = req.getParameter("disc_code");
-		int disc_code = 0;
-		int per_id = 0;
+		int disc_code = disc == null ? 0 : Integer.parseInt(disc);
+		int per_id = per == null ? 0 : Integer.parseInt(per);
 		int wishResult = 0;
 		if (member_id != null) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("member_id", member_id);
-			if (per == null) {
-				disc_code = Integer.parseInt(disc);
-				map.put("disc_code", disc_code);
-				map.put("per_id", 0);
-			} else {
-				per_id = Integer.parseInt(per);
-				map.put("per_id", per_id);
-				map.put("disc_code", 0);
-			}
-
+			map.put("disc_code", disc_code);
+			map.put("per_id", per_id);
 			wishResult = mhDAO.getWishListIn(map);
 		}
 		model.addAttribute("wishResult", wishResult);

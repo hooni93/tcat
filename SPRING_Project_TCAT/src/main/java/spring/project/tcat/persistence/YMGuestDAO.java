@@ -28,4 +28,6 @@ public interface YMGuestDAO {
 	public int eventDeleteCnt(int num);
 	//이벤트 수정
 	public int eventUpdateCnt(Map<String,Object> map);
+	//이벤트 등록
+	public int eventAddCnt(Map<String,Object> map);
 }
