@@ -7,14 +7,63 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+
+$(document).ready(function(){ 
+    $('.checkButton').click(function(e){
+    	var id="#";
+        id +=e.target.getAttribute('id');
+        if ( ( id != '') && (id != null))  
+    	var active = $(id).hasClass("active");
+     	if(active){
+    		 $(id).removeClass("active");
+    		 $(id).removeClass("selected");
+    		 var idvalue=$("input[name='seat_type']").val();
+    		 var idArr=idvalue.split(",");   
+    		
+    		 if(idArr.length==1){
+    			 $("input[name='seat_type']").val("0");
+    		 }else{
+    	   	 $("input[name='seat_type']").val("0");
+    		 for(var i=0;i<idArr.length-1;i++){
+    			 idvalue+=idArr[i];
+    		 }
+    		 alert(idArr.length);
+ 
+    		 $("input[name='seat_type']").val(idvalue);
+    		 }
+    		 
+    		
+    	}else{
+    		 $(id).addClass("active");
+    		 $(id).addClass("selected");
+    		 var idvalue=$("input[name='seat_type']").val();
+    		 if(idvalue==0){
+    		 idvalue=$(id).val();
+    		 alert(idvalue);
+    		 }else{
+    			 idvalue=$("input[name='seat_type']").val();
+    			 idvalue+=","+$(id).val();
+    			 alert(idvalue);
+    		 } 		
+    		 $("input[name='seat_type']").val(idvalue);
+    		 
+    	}  
+    
+    });
+});
+
+
+
+
+
+
+</script>
 </head>
 <body>
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
-		<div class="row baaaaaa">
-	
+		<div class="row bf5f5f5">
+	<div class="h25"></div>
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
 			<h4>좌석확인</h4>
@@ -32,19 +81,18 @@
 		int seatRow=Integer.parseInt(seat_lineArr[0]);
 		int seatColumn=Integer.parseInt(seat_lineArr[1]);
 		Map<String,Object> map=new HashMap<String,Object>();
-	for(int d=0;d<dtos.size();d++){
-		map.put("seatnum",dtos.get(d).getSeat_num());
-		map.put("seattype",dtos.get(d).getSeat_type());
+		
 		String vip=null;
 		String r=null;
 		String s=null;
 		String a=null;
 		String b=null;
-		vip=dtos.get(d).getVIP_seat();
-		r=dtos.get(d).getR_seat();
-		s=dtos.get(d).getS_seat();
-		a=dtos.get(d).getA_seat();
-		b=dtos.get(d).getB_seat();
+		vip=dtos.get(0).getVIP_seat();
+		r=dtos.get(0).getR_seat();
+		s=dtos.get(0).getS_seat();
+		a=dtos.get(0).getA_seat();
+		b=dtos.get(0).getB_seat();
+
 		String[] vipArr=null;
 		String[] rArr=null;
 		String[] sArr=null;
@@ -65,6 +113,10 @@
 		if(b!=null){
 			bArr=b.split("/");					
 		}
+		for(int q=0;q<dtos.size();q++){
+			map.put(dtos.get(q).getSeat_num(),dtos.get(q).getSeat_type());
+		}
+
 		for(int i=0;i<=seatRow;i++){
 			for(int j=0;j<=seatColumn;j++){ 
 				%>
@@ -76,10 +128,10 @@
 						for(int k=0; k < vipArr.length;k++){
 							if(vipArr[k].equals(check)){
 								checkNum=1;
-								 if(map.containsValue("VIP") && map.containsValue(vipArr[k])){
-								 %> class="myButtonVIP m1 w40" value="X" disabled><% 									 									 
+								 if(map.containsValue("VIP") && map.containsKey(vipArr[k])){
+								 %> class="myButtonVIP m1 w50 checkButton" id="<%=check%>" value="X" disabled><% 									 									 
 								 }else{
-								 %> class="myButtonVIP m1 w40" value="VIP.<%=check%>"><% 									 
+								 %> class="myButtonVIP m1 w50 checkButton" id="<%=check%>" value="VIP.<%=check%>"><% 									 
 								 }
 							}
 						}
@@ -88,10 +140,10 @@
 						for(int k=0; k < rArr.length;k++){
 							if(rArr[k].equals(check)){
 								checkNum=1;
-								 if(map.containsValue("R") && map.containsValue(rArr[k])){
-									 %> class="myButtonR m1 w40" value="X" disabled><% 									 									 
+								 if(map.containsValue("R") && map.containsKey(rArr[k])){
+									 %> class="myButtonR m1 w50 checkButton" id="<%=check%>" value="X" disabled><% 									 									 
 									 }else{
-									 %> class="myButtonR m1 w40" value="R.<%=check%>"><% 
+									 %> class="myButtonR m1 w50 checkButton" id="<%=check%>" value="R.<%=check%>"><% 
 							
 									 }
 							}
@@ -101,10 +153,10 @@
 						for(int k=0; k < sArr.length;k++){
 							if(sArr[k].equals(check)){
 								checkNum=1;
-								  if(map.containsValue("S") && map.containsValue(sArr[k])){
-								 %> class="myButtonS m1 w40" value="X" disabled><% 									 									 
+								  if(map.containsValue("S") && map.containsKey(sArr[k])){
+								 %> class="myButtonS m1 w50 checkButton" id="<%=check%>" value="X" disabled><% 									 									 
 								 }else{
-								 %> class="myButtonS m1 w40" value="S.<%=check%>"><% 
+								 %> class="myButtonS m1 w50 checkButton" id="<%=check%>" value="S.<%=check%>"><% 
 							}
 						}
 					}
@@ -113,10 +165,10 @@
 						for(int k=0; k < aArr.length;k++){
 							if(aArr[k].equals(check)){
 								checkNum=1;
-								  if(map.containsValue("A") && map.containsValue(aArr[k])){
-										 %> class="myButtonA m1 w40" value="X" disabled><% 									 									 
+								  if(map.containsValue("A") && map.containsKey(aArr[k])){
+										 %> class="myButtonA m1 w50 checkButton" id="<%=check%>" value="X" disabled><% 									 									 
 										 }else{
-										 %> class="myButtonA m1 w40" value="A.<%=check%>"><% 
+										 %> class="myButtonA m1 w50 checkButton" id="<%=check%>" value="A.<%=check%>"><% 
 							}
 						}
 					}
@@ -125,28 +177,26 @@
 						for(int k=0; k < bArr.length;k++){
 							if(bArr[k].equals(check)){
 								checkNum=1;
-								  if(map.containsValue("B") && map.containsValue(bArr[k])){
-										 %> class="myButtonA m1 w40" value="X" disabled><% 									 									 
+								  if(map.containsValue("B") && map.containsKey(bArr[k])){
+										 %> class="myButtonA m1 w50 checkButton" id="<%=check%>" value="X" disabled><% 									 									 
 										 }else{
-										 %> class="myButtonA m1 w40" value="B.<%=check%>"><% 
+										 %> class="myButtonA m1 w50 checkButton" id="<%=check%>" value="B.<%=check%>"><% 
 							}
 						}
 					}
 				}
 				if(checkNum==0) {
-					%> class="myButtonNO m1 w40" value="<%=check%>" disabled>
+					%> class="myButtonNO m1 w50 checkButton" id="<%=check%>" value="<%=check%>" disabled>
 			<% }
 				
 		}
 			%><br> <%
 	}
-}%>
+%>
 		</div> 
-<<<<<<< HEAD
 	</div>
-=======
-	</div>
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
+
+
 
 </body>
 </html>

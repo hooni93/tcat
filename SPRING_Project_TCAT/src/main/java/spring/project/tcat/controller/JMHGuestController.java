@@ -151,7 +151,7 @@ public class JMHGuestController {
 	@RequestMapping("contentMain_store")
 	public String contentMain_store(HttpServletRequest req, Model model) {
 		System.out.println("contentMain_store");
-		//해당 공연 위시리스트 여부 가져오기
+		//해당 상품 위시리스트 여부 가져오기
 		mhService.getWishListIn(req, model);
 		//상품정보 가져오기
 		mhService.getContent_store(req, model);
@@ -176,8 +176,15 @@ public class JMHGuestController {
 	@RequestMapping("wishList")
 	public String wishList(HttpServletRequest req, Model model) {
 		System.out.println("wishList");
-		//mhService.delWishList(req, model);
+		mhService.getWishList(req, model);
 		return "tcat/wishList/wishList";
+	}
+	//wishList 스토어 위시리스트 목록
+	@RequestMapping("wishList_store")
+	public String wishList_store(HttpServletRequest req, Model model) {
+		System.out.println("wishList_store");
+		mhService.getWishList(req, model);
+		return "tcat/wishList/wishList_store";
 	}
 	
 	//결제취소 buyCancel
@@ -194,6 +201,20 @@ public class JMHGuestController {
 		System.out.println("perfRefund");
 		mhService.perfRefund(req, model);
 		return "tcat/memberMyPage/perfRefundPro";
+	}
+	
+	//host 로그인
+	@RequestMapping("host_login")
+	public String host_login(HttpServletRequest req, Model model) {
+		System.out.println("host_login");
+		return "tcat/hostMain/host_login";
+	}
+	//host 로그인 처리 host_loginPro
+	@RequestMapping("host_loginPro")
+	public String host_loginPro(HttpServletRequest req, Model model) {
+		System.out.println("host_loginPro");
+		mhService.host_loginPro(req, model);
+		return "tcat/hostMain/host_loginPro";
 	}
 	
 }

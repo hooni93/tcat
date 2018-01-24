@@ -27,7 +27,7 @@
 		//ajax submit enter
 		$('#ajaxSubmitForm').keydown(function(e) {
 	        if (e.keyCode == 13) {
-	          ajaxSubmit('orderList_store');
+	         	$("#modal_result").load("${pageContext.request.contextPath}/memberFind");
 	        }
    		 });
 	});

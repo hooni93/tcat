@@ -19,6 +19,9 @@ function load(){
 	var msg ="";
 	for(var i=0;i<(remain_round*1);i++){
 		msg += "<select name='remain_time"+(i+1)+"'>"+
+		   "	<option value='/09:00'>(09:00)</option>"+
+		   "	<option value='/10:00'>(10:00)</option>"+
+		   "	<option value='/11:00'>(11:00)</option>"+
 		   "	<option value='/12:00'>(12:00)</option>"+
 		   "	<option value='/13:00'>(13:00)</option>"+
 		   "	<option value='/14:00'>(14:00)</option>"+

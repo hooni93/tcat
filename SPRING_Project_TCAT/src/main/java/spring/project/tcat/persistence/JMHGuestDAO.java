@@ -7,6 +7,7 @@ import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
+import spring.project.tcat.VO.WishListVO;
 
 public interface JMHGuestDAO {
 
@@ -21,6 +22,8 @@ public interface JMHGuestDAO {
 
 	// 로그인 처리
 	public int loginPro(Map<String, String> map);
+	//호스트 로그인
+	public int host_loginPro(Map<String, String> map);
 
 	// 접속일 갱신
 	public void updateLastDate(Map<String, String> map);
@@ -48,9 +51,10 @@ public interface JMHGuestDAO {
 	//getContent_store 스토어 상세페이지
 	public TcatPerDiscVO getContent_store(int disc_code);
 
+	//getWishList 위시리스트
+	public ArrayList<WishListVO> getWishList(Map<String, Object> map);
 	// addWishList 위시리스트 추가
 	public void addWishList(Map<String, Object> map);
-
 	// delWishList
 	public void delWishList(Map<String, Object> map);
 

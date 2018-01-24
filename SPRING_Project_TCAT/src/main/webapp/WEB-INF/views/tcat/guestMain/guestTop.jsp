@@ -139,9 +139,6 @@
 	}
 
 	function load(url) {
-
-		$("#result").load("${pageContext.request.contextPath}/" + url);
-
 		$("#result").load("${pageContext.request.contextPath}/" + url,
 				function(msg) {
 					history.pushState({
@@ -179,19 +176,6 @@
 						});
 			});
 
-
-
-function load(url){
-	 
-	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );
-	 
-}
-
-//공연 상세페이지 onclick시
-function contentPage(per_id){
-	load('contentMain?per_id='+per_id);
-}
-
 	//공연 상세페이지 onclick시
 	function contentPage(per_id) {
 		load('contentMain?per_id=' + per_id);
@@ -223,7 +207,7 @@ function contentPage(per_id){
 						<li><a href="#">예매확인/취소</a></li>
 						<li><a onclick="load('qnaBoardMain');">고객센터</a></li>
 						<c:if test="${sessionScope.login_id!=null}">
-							<li><a onclick="load('wishList');">위시리스트</a></li>
+							<li><a onclick="load('wishList?wish_step=1');">위시리스트</a></li>
 							<li><a onclick="load('cartList');">장바구니</a></li>
 						</c:if>
 

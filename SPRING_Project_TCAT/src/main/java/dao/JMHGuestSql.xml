@@ -26,6 +26,13 @@
 		AND NOT(
 		member_step = 3)
 	</select>
+	<!--호스트 로그인 확인  -->
+	<select id="host_loginPro" resultType="int">
+		SELECT COUNT(*)
+		FROM host
+		WHERE host_id = #{host_id}
+		AND host_pwd = #{host_pwd}
+	</select>
 	<!-- 접속일 변경 -->
 	<update id="updateLastDate">
 		UPDATE member
@@ -224,7 +231,39 @@
 				)
 		SET 	refNum = refNum + 1
 	</update>
-
+	<!--위시리스트  -->
+	<select id="getWishList" resultType="spring.project.tcat.VO.WishListVO">
+		SELECT		wis.wish_num, wis.wish_inDate, wis.disc_code, wis.wish_step,
+				<if test="wish_step == 1">
+					per.per_id, per.perf_title, per.cateNum, per.perf_Image, 
+					per.startDate, per.endDate, per.hall_id, per.first_grade,
+					per.per_step, per.remain_round, per.possible_age,
+					hal.hall_name, hal.place_num,
+					pla.province, pla.city, pla.postNum, pla.address,
+				</if>
+			<if test="wish_step == 2">
+					per.disc_title, per.disc_price, per.disc_image, 
+					per.disc_con, per.disc_step, per.disc_count,
+				</if> 
+					cat.category, cat.mDev, cat.sDev
+		FROM	wishList	wis
+		<if test="wish_step == 1">
+			JOIN	performanceInfo per
+			ON		wis.per_id = per.per_id
+			JOIN	hallInfo	hal
+			ON		per.hall_id = hal.hall_id
+			JOIN	place 	pla
+			ON		hal.place_num = pla.place_num
+		</if>
+		 <if test="wish_step == 2">
+			JOIN	perDisc per
+			ON		wis.disc_code = per.disc_code
+		</if> 
+		JOIN	category cat
+		ON		per.cateNum = cat.cateNum
+		ORDER BY	wish_inDate desc
+	</select>
+	
 	<!--위시리스트 추가 -->
 	<insert id="addWishList">
 		INSERT INTO wishList(
@@ -243,20 +282,22 @@
 	<!--위시리스트 삭제 -->
 	<delete id="delWishList">
 		DELETE wishList
-		WHERE member_id = #{member_id}
-		AND
-		per_id = #{per_id}
-		AND disc_code = #{disc_code}
+		<if test="wish_num != null">
+			WHERE wish_num = #{wish_num}
+		</if>
+		<if test="wish_num == null">
+			WHERE member_id = #{member_id}
+			AND per_id = #{per_id}
+			AND disc_code = #{disc_code}
+		</if>
 	</delete>
 	<!--위시리스트 존재여부 -->
 	<select id="getWishListIn" resultType="int">
-		SELECT COUNT(*)
-		FROM
-		wishList
-		WHERE member_id = #{member_id}
-		AND per_id = #{per_id}
-		AND
-		disc_code = #{disc_code}
+		SELECT 	COUNT(*)
+		FROM	wishList
+		WHERE 	member_id = #{member_id}
+		AND 	per_id = #{per_id}
+		AND 	disc_code = #{disc_code}
 	</select>
 	
 	
