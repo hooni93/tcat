@@ -26,6 +26,9 @@ function next(){
 	var nextBtn=document.all.nextBtn.value;
 	if(nextBtn=="관람일/회차"){
 		document.all.nextBtn.value="좌석선택";
+		
+		 $( "#Ticketing" ).load( "${pageContext.request.contextPath}/ticketSeat?per_id="+${vo.per_id}+"&ticet_date="+document.all.ticet_date.value+"&round="+document.all.round.value);	
+		
 		$("#menu1").removeClass("active");
 		$("#menu2").addClass("active");
 		document.all.nextTest.value=2;

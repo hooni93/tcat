@@ -7,9 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+
 $("#photoBoarderLogin").click(function(){
 	$("#modal_result").load("${pageContext.request.contextPath}/memberLogin");
 });
+
 
 function photoBoarderCommentWrite(member_id,notice_num,form){
 	  var contents=form.contents.value; 
@@ -27,7 +29,7 @@ function photoBoarderCommentWrite(member_id,notice_num,form){
     <h4><b>공연 사진 게시판</b></h4>
 			<hr>
     	
-    	<div class="col-md-2"><input type="button" class="btn btn-primary w170" value="게시글 작성"></div>
+    	<div class="col-md-2"><input type="button" data-toggle="modal" data-target="#insert-modal" class="btn btn-primary w170" value="게시글 작성"></div>
     		
     <div class="col-md-10">
     	 <c:forEach var="vo" items="${dtos}" > 
@@ -46,10 +48,11 @@ function photoBoarderCommentWrite(member_id,notice_num,form){
 					</div>
 					<hr>
 					<div class="m5 bf0f0f0">
-						<h6 class="floatL"><label>아이디 : </label> 오늘 마스터에서 윤도현을 보았다 대박 완전 신기 얼굴도 넘나 작고 잘생겼당!!!&nbsp;&nbsp;&nbsp;<span class="fs8">(18/01/30)</span></h6><br>
-						<h6 class="floatL"><label>아이디 : </label> 오늘 마스터에서 윤도현을 보았다 대박 완전 신기 얼굴도 넘나 작고 잘생겼당!!!&nbsp;&nbsp;&nbsp;<span class="fs8">(18/01/30)</span></h6><br>
-						<h6 class="floatL"><label>아이디 : </label> 오늘 마스터에서 윤도현을 보았다 대박 완전 신기 얼굴도 넘나 작고 잘생겼당!!!&nbsp;&nbsp;&nbsp;<span class="fs8">(18/01/30)</span></h6><br>
-
+						 <c:forEach var="vo2" items="${dtos2}" >
+						 	<c:if test="${vo2.notice_title==vo.notice_num}"> 
+								<h6 class="floatL"><label>${vo2.member_id} : </label>&nbsp;${vo2.contents}&nbsp;&nbsp;<span class="fs8">(${vo2.writeDate})</span></h6><br><br>
+							</c:if>
+						</c:forEach>
 			<form action="" name="commentGWrite" id="commentGWrite">
 			<div>		
 				<table class="table table-hover table-bordered table-condensed c fs15">
@@ -109,6 +112,44 @@ function photoBoarderCommentWrite(member_id,notice_num,form){
   	</div>
 	</div><!--row 끝  -->
 </div><!-- 컨테이너 끝 -->
+
+
+<div id="insert-modal" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	 <div class="row bf0f0f0">
+    <div class="col-md-12 h25"></div>
+    	<div class="col-md-1"></div>	
+    	  
+			<div class="col-sm-10 col-md-10">
+			 <h4><b>공연 사진 작성</b></h4>
+				<hr>
+				<div class="thumbnail c" >
+					<div class="disInline ">
+						<table class="borderCollSe borderSpace20 w100p" >
+							<tr>						
+								<td class="w70 floatl"><h6><label>제목 : </label></h6></td>
+								<td class="w450 floatl"><input type="text" name="no_title" class="form-control" ></td>
+								<td class="w120"><h6><label>이미지파일: </label></h6></td>
+								<td><input type="file" name="perf_Image" style="width: 100%"></td>
+									
+								<td class="w70"><h6><label>작성자 : </label></h6> </td>
+								<td><input type="text" name="mem_id" value="${login_id}" class="form-control" disabled></td>
+							</tr>
+						</table>
+						
+					</div>
+					<hr>				
+						
+					<div class="caption">
+						<h6 class="floatL"><label>내용 : </label></h6> <input type="textarea" name="no_content" class="w100p h250">
+					</div>
+					<hr>
+				</div><!-- outline -->
+			</div><!-- md10 -->
+		 <div class="col-md-1"></div>	 
+	</div><!--row 끝  -->
+</div>
+
+
 
 </body>
 </html>
