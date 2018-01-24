@@ -363,17 +363,13 @@ public class JMHGuestServiceImp implements JMHGuestService {
 	// 스토어 상세정보
 	public void getContent_store(HttpServletRequest req, Model model) {
 		int disc_code = Integer.parseInt(req.getParameter("disc_code"));
-		System.out.println("11111disc_code:"+disc_code);
 		// 로그인이 된경우에만 조회수 업데이트
 		String login_id = (String) req.getSession().getAttribute("login_id");
 		if (login_id != null) {
 			mhDAO.upHits(disc_code);
 		}
 		TcatPerDiscVO str = mhDAO.getContent_store(disc_code);
-<<<<<<< HEAD
-		System.out.println("=========code:"+str.getDisc_code());
-=======
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
+
 		model.addAttribute("str", str);
 	}
 
