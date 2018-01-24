@@ -22,6 +22,8 @@ public interface JMHGuestDAO {
 
 	// 로그인 처리
 	public int loginPro(Map<String, String> map);
+	//호스트 로그인
+	public int host_loginPro(Map<String, String> map);
 
 	// 접속일 갱신
 	public void updateLastDate(Map<String, String> map);
