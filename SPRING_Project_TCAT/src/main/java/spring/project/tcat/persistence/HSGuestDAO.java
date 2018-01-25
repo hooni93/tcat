@@ -5,6 +5,7 @@ import java.util.Map;
 
 import spring.project.tcat.VO.CartVO;
 import spring.project.tcat.VO.MemberVO;
+import spring.project.tcat.VO.SaleVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 
 public interface HSGuestDAO {
@@ -35,9 +36,11 @@ public interface HSGuestDAO {
 	//장바구니 리스트 가져오기
 	public ArrayList<CartVO> cartList(Map<String,Object> map);
 	//구매하는 고객의 장바구니 리스트에 담긴 목록 가져오기
-	public ArrayList<CartVO> cartListDtos(String member_id);
+	public ArrayList<CartVO> cartListDtos(Map<String,Object> map);
 	//배송정보 추가
 	public void insertdelevaryInfo(Map<String,Object> map);
+	//배송번호 가져오기
+	public int maxdel_num();
 	//예매하려고 하는 공연정보 가져오기
 	public TcatPerformanceVO payList(int per_id);
 	//예매하려고 하는 날짜+공연회차에 좌석이 얼마남았는지 가져오기[vip]
@@ -50,5 +53,16 @@ public interface HSGuestDAO {
 	public int aCount(Map<String,Object> map);
 	//예매하려고 하는 날짜+공연회차에 좌석이 얼마남았는지 가져오기[b]
 	public int bCount(Map<String,Object> map);
-		
+	//장바구니 구매
+	public void insertStorePay(Map<String,Object> map);
+	//장바구니 목록 제거
+	public void cartDel(String member_id);
+	//고객정보 가져오기
+	public MemberVO getMember(String member_id);
+	//할인정보 가져오기
+	public ArrayList<SaleVO> getSale();
+	//공연배송정보 insert
+	public void insertdel(Map<String,Object> map);
+	//공연예매
+	public void insertTicket(Map<String,Object> map);
 }

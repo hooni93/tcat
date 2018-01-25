@@ -18,7 +18,8 @@
 					<h2>포인트</h2>
 					<hr>
 					<br>
-					<img src="${image}memberPoint/log.png"  width="100%" height="200px">
+					<img src="${image}memberPoint/log1.png"  width="100%" height="60%">
+					<img src="${image}memberPoint/log2.png"  width="100%" height="60%">
 					</div>
 
 					<div class=" b333366">
@@ -44,25 +45,33 @@
 					</c:if>
 					<center class="ffffff fs18px">총 구매횟수 ${cnt}회</center>
 					</div>
+<<<<<<< HEAD
 
+=======
+				
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 					<div class="progress">
-  					<div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width:${p}%" >
+  					<div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width:${p}%" >
   					</div>
 					</div>
-					<div class=" bff3333">
+					<div>
 					<c:if test="${Rating.equals('VIP')}">
 						<h4><center></center></h4>
 					</c:if>
 					<c:if test="${!Rating.equals('VIP')}">
-						<center class="ffffff fs18 ">다음 등급은 ${nextRating}등급입니다</center>
+						<h2><center>다음 등급은 ${nextRating}등급입니다</center></h2>
 					</c:if>
 					
+<<<<<<< HEAD
 
 		
   					<div class="progress">  					
   					 <div class="progress-bar progress-bar-striped active" style="width: ${cnt}%">
     				<center>${cnt}%</center>
   					</div> 
+=======
+					<img src="${image}memberPoint/log3.png"  width="100%" height="60%">
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 				</div>
 				<div class="col-md-1"></div>
 				<!--리스트목록 끝  -->

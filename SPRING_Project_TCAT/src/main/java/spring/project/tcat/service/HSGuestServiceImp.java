@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import spring.project.tcat.VO.CartVO;
 import spring.project.tcat.VO.CategoryVO;
 import spring.project.tcat.VO.MemberVO;
+import spring.project.tcat.VO.SaleVO;
 import spring.project.tcat.VO.SelectHellInfoVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 import spring.project.tcat.persistence.HSGuestDAO;
@@ -379,29 +380,56 @@ public class HSGuestServiceImp implements HSGuestService{
 		@Override
 		public void sussessPay(HttpServletRequest req, Model model) {
 			String member_id=(String)req.getSession().getAttribute("login_id");
+			System.out.println("--------member_id:"+member_id);
 			String addrChange=null;
 			addrChange=req.getParameter("addrChange");
 			String member_addr=null;
 			String member_name=null;
 			String member_hp=null;
 			
-			ArrayList<CartVO> dtos=HSDao.cartListDtos(member_id);
-			if(addrChange.equals("1")) {
-				member_addr=req.getParameter("member_addr");
-				member_name=req.getParameter("member_name");
-				member_hp=req.getParameter("member_hp");
-			}else {
+			Map<String,Object> map2=new HashMap<String,Object>();
+			map2.put("member_id", member_id);
+			System.out.println("1");
+			ArrayList<CartVO> dtos=HSDao.cartListDtos(map2);
+			System.out.println("addr"+dtos);
+			if(addrChange==null) {
 				member_addr=dtos.get(0).getMember_addr();
 				member_name=dtos.get(0).getMember_name();
 				member_hp=dtos.get(0).getMember_hp();
+			}else {
+				member_addr=req.getParameter("member_addr");
+				member_name=req.getParameter("member_name");
+				member_hp=req.getParameter("member_hp");
 			}
+			System.out.println("2");
 			Map<String,Object> map=new HashMap<String,Object>();
 			map.put("member_addr", member_addr);
 			map.put("member_name", member_name);
 			map.put("member_hp", member_hp);
-			
+			System.out.println("3");
+			//배송정보 추가
 			HSDao.insertdelevaryInfo(map);
-			/*int del_num=HSDao.maxdel_num();*/
+			System.out.println("4");
+			//배송번호 가져오기
+			int del_num=HSDao.maxdel_num();
+			map.put("del_num", del_num);
+			System.out.println("5");
+			for(int i=0;i<dtos.size();i++) {
+				//상품구입번호[시퀀스]
+				//배송번호 del_num
+				//구매일자 [sysdate]
+				map.put("disc_code", dtos.get(i).getDisc_code());//상품코드 dtos.get(i).getDisc_code()
+				map.put("member_id", member_id);//구매자 id member_id
+				//구매스텝[1=구매]
+				map.put("Rating", dtos.get(i).getRating());//할인조건[rating]
+				map.put("buy_count", dtos.get(i).getCart_count());//구매수량 dtos.get(i).getCart_count()
+				HSDao.insertStorePay(map);
+			}
+			System.out.println("6");
+			//구매자의 장바구니 목록 제거
+			HSDao.cartDel(member_id);
+			System.out.println("7");
+			req.setAttribute("Pay", 1);
 		}
 
 		@Override
@@ -489,6 +517,116 @@ public class HSGuestServiceImp implements HSGuestService{
 			req.setAttribute("vo2", dto);
 
 			
-		}	
-	
+		}
+
+		@Override
+		public void sale(HttpServletRequest req, Model model) {
+			String member_id=(String)req.getSession().getAttribute("login_id");
+			MemberVO mvo=new MemberVO();
+			//고객정보 가져오기
+			mvo=HSDao.getMember(member_id);
+			//할인조건 가져오기
+			ArrayList<SaleVO> dtos=null;
+			dtos=HSDao.getSale();
+			
+			req.setAttribute("mvo", mvo);
+			req.setAttribute("dtos", dtos);
+		}
+
+		@Override
+		public void insertTicket(HttpServletRequest req, Model model) {
+			String member_id=(String)req.getSession().getAttribute("login_id");//구매자id
+			int per_id=Integer.parseInt(req.getParameter("per_id"));//공연번호
+			String ticet_date=req.getParameter("ticet_date");//공연날짜
+			
+			String a=req.getParameter("seat_type");
+
+			String sale_div=req.getParameter("sale_div");//할인조건
+			String round1=req.getParameter("round");//회차
+			int round=Integer.parseInt(round1.substring(0, 1));
+			
+			//배송번호
+			String addr=req.getParameter("addr");//주소
+			String hp=req.getParameter("hp");//연락처
+			String name=req.getParameter("name");//이름
+			
+			//1. 배송정보 insert
+			Map<String,Object> map=new HashMap<String,Object>();
+			map.put("addr", addr);
+			map.put("hp", hp);
+			map.put("name", name);
+			
+			HSDao.insertdel(map);
+			//최근 insert된 배송번호 가져오기
+			int del_num=HSDao.maxdel_num();
+			
+			
+			System.out.println(
+					"member_id:"+member_id+"\n"+
+					"per_id:"+per_id+"\n"+
+					"ticet_date:"+ticet_date+"\n"+
+					"seat_type:"+a+"\n"+
+					"sale_div:"+sale_div+"\n"+
+					"round:"+round1+"\n"+
+					"divround:"+round+"\n"+
+					"addr:"+addr+"\n"+
+					"hp:"+hp+"\n"+
+					"name:"+name+"\n"+
+					"del_num:"+del_num
+			);
+			
+			try{
+				String b[]=a.split(",");
+				String e="";
+				for(int i=0;i<b.length;i++) {
+					e=b[i];
+					String[] c=e.split(".");
+					System.out.println(e);
+					String c1=b[i].substring(0, 3);
+					String c2=null;
+					if(c1.equals("VIP")) {
+						c1=b[i].substring(0, 3);
+						c2=b[i].substring(4, 7);
+					}else {
+						c1=b[i].substring(0, 1);
+						c2=b[i].substring(2, 5);
+					}
+					
+					
+					map.put("member_id", member_id);
+					map.put("per_id", per_id);
+					map.put("ticet_date", ticet_date);
+					map.put("seat_type", c1);
+					map.put("seat_num", c2);
+					map.put("sale_div", sale_div);
+					map.put("del_num", del_num);
+					map.put("ticket_step", 1);
+					map.put("round", round);
+					
+					HSDao.insertTicket(map);
+				}
+			}catch(Exception e) {
+				String b=a;
+				String c1=b.substring(0, 3);
+				String c2=null;
+				if(c1.equals("VIP")) {
+					c1=b.substring(0, 3);
+					c2=b.substring(4, 7);
+				}else {
+					c1=b.substring(0, 1);
+					c2=b.substring(2, 5);
+				}
+				map.put("member_id", member_id);
+				map.put("per_id", per_id);
+				map.put("ticet_date", ticet_date);
+				map.put("seat_type", c1);
+				map.put("seat_num", c2);
+				map.put("sale_div", sale_div);
+				map.put("del_num", del_num);
+				map.put("ticket_step", 1);
+				map.put("round", round);
+				
+				HSDao.insertTicket(map);
+			}
+	}	
 }

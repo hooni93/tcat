@@ -239,10 +239,11 @@ public class YMGuestServiceImp implements YMGuestService {
 	//이벤트수정
 	@Override
 	public void eventUpdateList(MultipartHttpServletRequest req, Model model) {
-		
+	
 		MultipartFile file = req.getFile("notice_image");
 		String realDir = "C:\\Dev\\TCATworkspace\\git\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\eventList\\";
 		String saveDir = req.getRealPath("/resources/image/eventList/");
+		
 		try {
 			file.transferTo(new File(saveDir + file.getOriginalFilename()));
 			FileInputStream fis = new FileInputStream(saveDir + file.getOriginalFilename());
@@ -262,12 +263,14 @@ public class YMGuestServiceImp implements YMGuestService {
 			String title= req.getParameter("notice_title");
 			String content= req.getParameter("contents");
 			String notice_image= file.getOriginalFilename();
+			String notice_addfile =req.getParameter("notice_addfile");
 			
 			Map<String,Object> map=new HashMap<String, Object>();
 			map.put("num", num);
 			map.put("title", title);
 			map.put("content", content);
 			map.put("notice_image", notice_image);
+			map.put("notice_addfile", notice_addfile);
 			System.out.println("map111:"+map);
 			updateCnt=YMDao.eventUpdateCnt(map);
 			System.out.println("map222:"+map);
@@ -302,6 +305,7 @@ public class YMGuestServiceImp implements YMGuestService {
 			String writeDate= req.getParameter("writeDate");
 			String member_id= req.getParameter("member_id");
 			int notice_div=Integer.parseInt(req.getParameter("notice_div"));
+			String notice_addfile =req.getParameter("notice_addfile");
 			
 			String sDate[] = writeDate.split("/");
 			writeDate = sDate[2] + "/" + sDate[0] + "/" + sDate[1];
@@ -320,6 +324,7 @@ public class YMGuestServiceImp implements YMGuestService {
 			map.put("contents", contents);
 			map.put("member_id", member_id);
 			map.put("notice_div", notice_div);
+			map.put("notice_addfile", notice_addfile);
 			addCnt=YMDao.eventAddCnt(map);
 			
 			model.addAttribute("addCnt", addCnt);

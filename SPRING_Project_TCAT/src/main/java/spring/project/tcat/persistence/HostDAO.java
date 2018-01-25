@@ -14,6 +14,7 @@ import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 import spring.project.tcat.VO.TcatTicketingVO;
+import spring.project.tcat.VO.detailPageVO;
 
 public interface HostDAO {
 	
@@ -123,9 +124,16 @@ public interface HostDAO {
 	public ArrayList<ProductRankVO > wishListRank_store(int productNum);
 	//////////////////////////////////////18.01. 명훈 끝//////////////////////////////////////////////////
 	
+	
+	/////////////////////////////////////18.01.25 명훈 시작//////////////////////////////////////////////////
+	//배송관리 스텝 변경
+	public void orderMangement_storeChange(Map<String, Object> map);
+	//예매 관리 스탭 변경
+	public void orderMangement_Change(Map<String, Object> map);
 
-
-
+	//////////////////////////////////////18.01.25 명훈 끝//////////////////////////////////////////////////
+	
+	
 	/////////////////////////////////// 태성 1/9 start ////////////////////////////////////////
 	//상품 목록 출력 진열
 	public ArrayList<TcatPerformanceVO> getArticleList(Map<String, Object> map);
@@ -178,6 +186,8 @@ public interface HostDAO {
 	public ArrayList<SelectHellInfoVO> HellList();
 	//상세페이지 번호 찾아오기
 	public int SearchDetail_num();
+	//상세페이지 번호 찾아오기[store]
+	public int SearchDetail_numStore();
 	//상세페이지 생성[초기화]
 	public void insertDetailP_DEFAULT(int detail_num);
 	//공연정보 추가하기
@@ -208,6 +218,10 @@ public interface HostDAO {
 	public ArrayList<HostVO> HostMemberList(Map<String,Object> map);
 	//관리자 삭제
 	public int deleteHost(String host_id);
+	//상세페이지 정보 가져오기
+	public detailPageVO detaillist(int detail_num);
+	//상세페이지 수정
+	public void updateDetail(Map<String,Object> map);
 	
 	////////////////////////////////////현석 1/11 end //////////////////////////////////////////
 
@@ -250,10 +264,11 @@ public interface HostDAO {
 	public int levelUpdateCnt(Map<String,Object> map);
 	//혜택등록
 	public int levelAdd(Map<String,Object> map);
+	//상품수정 갯수
+	public int hostProModifyCnt();
+	/*//상품수정 리스트
+	public ArrayList <TcatPerformanceVO>hostProModifyList(Map<String,Object> map);*/
 	////////////////////////////////////영민 1/10 end ///////////////////////////////////////
-	
-	
-	
 	///////////////////////  동금 1/11  ///////////////////////////
 	//상품갯수 불러오기
 	public int getPerfoCnt(Map<String, Object> map);

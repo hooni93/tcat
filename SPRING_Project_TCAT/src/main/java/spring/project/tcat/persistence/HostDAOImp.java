@@ -16,11 +16,12 @@ import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 import spring.project.tcat.VO.TcatTicketingVO;
+import spring.project.tcat.VO.detailPageVO;
 import spring.project.tcat.config.Configuration;
 
 @Repository
 public class HostDAOImp implements HostDAO {
-	
+
 	//최근 가입 회원 숫자
 	@Override
 	public int latelyJoinMemberCnt(Map<String,Object> map) {
@@ -399,7 +400,19 @@ public class HostDAOImp implements HostDAO {
 	}
 	//////////////////////////////////////18.01.15 명훈 끝//////////////////////////////////////////////////
 	
-	
+	/////////////////////////////////////18.01.25 명훈 시작//////////////////////////////////////////////////
+	//배송관리 스텝 변경
+	public void orderMangement_storeChange(Map<String, Object> map) {
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dao.orderMangement_storeChange(map);
+	}
+	//예매 관리 스탭 변경
+	public void orderMangement_Change(Map<String, Object> map) {
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dao.orderMangement_Change(map);
+	}
+
+	//////////////////////////////////////18.01.25 명훈 끝//////////////////////////////////////////////////
 
 
 	/////////////////////////////////// 태성 1/9 start
@@ -654,6 +667,14 @@ public class HostDAOImp implements HostDAO {
 			detail_num=dao.SearchDetail_num();
 			return detail_num;
 		}
+		//상세페이지 찾아오기 [store]
+		@Override
+		public int SearchDetail_numStore() {
+			int detail_num=0;
+			HostDAO dao=Configuration.getMapper(HostDAO.class);
+			detail_num=dao.SearchDetail_numStore();
+			return detail_num;
+		}
 		@Override
 		public void insertDetailP_DEFAULT(int detail_num) {
 			HostDAO dao=Configuration.getMapper(HostDAO.class);
@@ -727,6 +748,19 @@ public class HostDAOImp implements HostDAO {
 			HostDAO dao=Configuration.getMapper(HostDAO.class);
 			cnt=dao.deleteHost(host_id);
 			return cnt;
+		}
+		
+		@Override
+		public detailPageVO detaillist(int detail_num) {
+			detailPageVO dto=null;
+			HostDAO dao=Configuration.getMapper(HostDAO.class);
+			dto=dao.detaillist(detail_num);
+			return dto;
+		}
+		@Override
+		public void updateDetail(Map<String, Object> map) {
+			HostDAO dao=Configuration.getMapper(HostDAO.class);
+			dao.updateDetail(map);
 		}
 		////////////////////////////////////현석 1/11  end//////////////////////////////////////////
 		
@@ -880,6 +914,26 @@ public class HostDAOImp implements HostDAO {
 			return cnt;
 		}
 ////////////////HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-23 성영민  //////////////
+///////////////////////  영민 1/25  //////////////////////////////////////////////
+		//상품수정 갯수
+		@Override
+		public int hostProModifyCnt() {
+			int cnt=0;
+			HostDAO dao=Configuration.getMapper(HostDAO.class);
+			cnt=dao.hostProModifyCnt();
+			return cnt;
+		}
+		/*//상품수정 리스트
+		@Override
+		public ArrayList<TcatPerformanceVO> hostProModifyList(Map<String, Object> map) {
+			ArrayList<TcatPerformanceVO> dtos = null;
+			HostDAO dao= Configuration.getMapper(HostDAO.class);
+			dtos=dao.hostProModifyList(map);
+			System.out.println("map"+map);
+			return dtos;
+		}*/
+		
+///////////////////////  영민 1/25  //////////////////////////////////////////////
 	///////////////////////  동금 1/9  ///////////////////////////
 	//상품갯수 불러오기
 	@Override
@@ -1069,6 +1123,7 @@ public class HostDAOImp implements HostDAO {
 		return cnt;
 	}
 ///////////////////////  태성 1/21 end///////////////////////////
+
 	//환불 목록 개수 - 공연
 	@Override
 	public int refundCnt(Map<String, Object> map) {
@@ -1145,7 +1200,6 @@ public class HostDAOImp implements HostDAO {
 		return cnt;
 	}
 
-	
 	
 	
 }
