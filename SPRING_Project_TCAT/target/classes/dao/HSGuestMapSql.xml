@@ -151,4 +151,21 @@
    		<delete id="cartDel" parameterType="String">
    			delete cart where member_id=#{member_id}
    		</delete>
+   		
+   		<select id="getMember" parameterType="String" resultType="spring.project.tcat.VO.MemberVO">
+   			select * from member where member_id=#{member_id}
+   		</select>
+   		
+   		<select id="getSale" resultType="spring.project.tcat.VO.SaleVO">
+   			select * from sale
+   		</select>
+   		
+   		<insert id="insertdel" parameterType="java.util.Map">
+   			insert into delevaryInfo values(delevaryInfo_SEQ.nextval,#{name},#{addr},#{hp})
+   		</insert>
+   		
+   		<insert id="insertTicket" parameterType="java.util.Map">
+   			insert into Ticketing(ticket_num,member_id,per_id,ticet_date,seat_type,seat_num,sale_div,del_num,ticket_step,round)
+   						values(Ticketing_SEQ.nextval,#{member_id},#{per_id},#{ticet_date},#{seat_type},#{seat_num},#{sale_div},#{del_num},#{ticket_step},#{round})
+   		</insert>
    </mapper>

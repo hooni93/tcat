@@ -163,8 +163,39 @@ public class HSGuestController {
 	public String fake(HttpServletRequest req, Model model) {
 		System.out.println("fake");
 		
-		
 		return "tcat/Ticketing/fake";
 	}
+	@RequestMapping("sale")
+	public String sale(HttpServletRequest req, Model model) {
+		System.out.println("sale");
+		
+		//할인선택에서 필요한 테이블 : member,sale
+		HSGservice.sale(req,model);
+		
+		return "tcat/Ticketing/sale";
+	}
+	@RequestMapping("del")
+	public String del(HttpServletRequest req, Model model) {
+		System.out.println("del");
+		
+		return "tcat/Ticketing/del";
+	}
+	@RequestMapping("pay")
+	public String pay(HttpServletRequest req, Model model) {
+		System.out.println("pay");
+		
+		return "tcat/Ticketing/pay";
+	}
+	
+	//공연 예매
+	@RequestMapping("insertTicket")
+	public String insertTicket(HttpServletRequest req, Model model) {
+		System.out.println("insertTicket");
+		
+		HSGservice.insertTicket(req,model);
+		
+		return "tcat/Ticketing/insertTicket";
+	}
+	
 
 }

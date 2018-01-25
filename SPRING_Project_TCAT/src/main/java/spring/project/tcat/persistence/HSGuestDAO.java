@@ -5,6 +5,7 @@ import java.util.Map;
 
 import spring.project.tcat.VO.CartVO;
 import spring.project.tcat.VO.MemberVO;
+import spring.project.tcat.VO.SaleVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 
 public interface HSGuestDAO {
@@ -56,4 +57,12 @@ public interface HSGuestDAO {
 	public void insertStorePay(Map<String,Object> map);
 	//장바구니 목록 제거
 	public void cartDel(String member_id);
+	//고객정보 가져오기
+	public MemberVO getMember(String member_id);
+	//할인정보 가져오기
+	public ArrayList<SaleVO> getSale();
+	//공연배송정보 insert
+	public void insertdel(Map<String,Object> map);
+	//공연예매
+	public void insertTicket(Map<String,Object> map);
 }

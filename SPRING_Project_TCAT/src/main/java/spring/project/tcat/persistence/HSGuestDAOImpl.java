@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import spring.project.tcat.VO.CartVO;
 import spring.project.tcat.VO.MemberVO;
+import spring.project.tcat.VO.SaleVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 import spring.project.tcat.config.Configuration;
 
@@ -220,7 +221,32 @@ public class HSGuestDAOImpl implements HSGuestDAO{
 		dao.cartDel(member_id);
 	}
 
+	@Override
+	public MemberVO getMember(String member_id) {
+		MemberVO dto=null;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dto=dao.getMember(member_id);
+		return dto;
+	}
 
+	@Override
+	public ArrayList<SaleVO> getSale() {
+		ArrayList<SaleVO> dtos=null;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dtos=dao.getSale();
+		return dtos;
+	}
 
+	@Override
+	public void insertdel(Map<String, Object> map) {
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dao.insertdel(map);
+	}
+
+	@Override
+	public void insertTicket(Map<String, Object> map) {
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dao.insertTicket(map);
+	}
 
 }

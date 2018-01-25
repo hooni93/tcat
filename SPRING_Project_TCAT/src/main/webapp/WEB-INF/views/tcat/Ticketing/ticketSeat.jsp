@@ -53,6 +53,12 @@ $(document).ready(function(){
     	   	 $("input[name='seat_type']").val("");
     		 $("input[name='seat_type']").val(idvalue);
     		 $("input[name='price']").val(price);
+    		 
+    		 
+    		 var a=$("input[name='delpay']").val();
+    		 var b=$("input[name='price']").val();
+    		 var total=(a*1)+(b*1);
+    		 $("input[name='totalPrice']").val(total);
     		 }
     	}else{
     		 $(id).addClass("active");
@@ -94,6 +100,10 @@ $(document).ready(function(){
     		 $("input[name='seat_type']").val(idvalue);
     		 $("input[name='price']").val(price);
     		 
+    		 var a=$("input[name='delpay']").val();
+    		 var b=$("input[name='price']").val();
+    		 var total=(a*1)+(b*1);
+    		 $("input[name='totalPrice']").val(total);
     	}  
     
     });
