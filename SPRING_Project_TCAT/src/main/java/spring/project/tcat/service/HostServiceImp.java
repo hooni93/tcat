@@ -1757,7 +1757,7 @@ public class HostServiceImp implements HostService {
 
 		MultipartFile file = req.getFile("perf_Image");
 
-		String realDir = "E:\\Team_project\\projectGit\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\performance\\";
+		String realDir = "C:\\Dev\\TCATworkspace\\git\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\performance\\";
 		String saveDir = req.getRealPath("/resources/image/performance/");
 		try {
 
@@ -2300,7 +2300,7 @@ public class HostServiceImp implements HostService {
 	public void updateDetailStore(MultipartHttpServletRequest req, Model model) {
 		MultipartFile file = req.getFile("Detail_Image");
 
-		String realDir = "E:\\Team_project\\projectGit\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\store\\";
+		String realDir = "C:\\Dev\\TCATworkspace\\git\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\store\\";
 		String saveDir = req.getRealPath("/resources/image/store/");
 		try {
 
