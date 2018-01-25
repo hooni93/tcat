@@ -422,6 +422,16 @@ public class MoGuestServiceImp implements MoGuestService {
 				}
 		
 		}
+
+		
+		//메인화면 출력데이터 
+		@Override
+		public void guestMainList(HttpServletRequest req, Model model) {
+			// TODO Auto-generated method stub
+			ArrayList<TcatBoardVO> dtos=null;
+			dtos=MGDao.mainComentBoarderList();
+			model.addAttribute("borderDtos",dtos);
+		}
 		
 		
 		

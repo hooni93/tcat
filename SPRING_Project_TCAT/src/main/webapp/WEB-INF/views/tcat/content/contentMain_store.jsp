@@ -186,7 +186,7 @@ function commentListS(url) {
 						</div>
 						<div class="col-md-12">
 							<c:if test="${sessionScope.login_id!=null}">
-								<input class="btn btn-danger btn-xl w100p" type="button" value="구매하기">
+								<input class="btn btn-danger btn-xl w100p" type="button" value="구매하기" onclick="directBuy();">
 							</c:if>		
 							<c:if test="${sessionScope.login_id==null}">
 								<input class="btn btn-danger btn-xl w100p" data-toggle="modal" data-target="#login-modal" id="login2" type="button" value="구매하기">

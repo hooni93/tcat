@@ -40,6 +40,8 @@ public interface MoGuestDAO {
 		public int insertMovieBoarder(TcatBoardVO vo);
 	//영상게시판 수정
 		public int noMoMovieBoarder(TcatBoardVO vo);
+	//메인 화면 후기 게시판
+		public ArrayList<TcatBoardVO> mainComentBoarderList();
 		
 		
 }

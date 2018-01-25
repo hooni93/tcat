@@ -78,26 +78,36 @@ function next(form){
 		$("#menu2").removeClass("active");
 		$("#menu3").addClass("active");
 	}else if(nextBtn=="수령방법"){
-		$("input[name='seat_type']").val();
-		/* if() */
-		document.all.nextBtn.value="결제방법";
-		$( "#Ticketing" ).load( "${pageContext.request.contextPath}/del");
-		$("#menu3").removeClass("active");
-		$("#menu4").addClass("active");
 		
+			document.all.nextBtn.value="결제방법";
+			$( "#Ticketing" ).load( "${pageContext.request.contextPath}/del");
+			$("#menu3").removeClass("active");
+			$("#menu4").addClass("active");
 		
-		
+	
 	}else if(nextBtn=="결제방법"){
-		document.all.nextBtn.value="결제";
+		var addr=$("input[name='addr']").val();
+		var hp=$("input[name='hp']").val();
+		var name=$("input[name='name']").val();
 		
-		var totalPrice=$("input[name='totalPrice']").val();
-		var totalSale=$("input[name='totalSale']").val();
-		var total=(totalPrice*1)-(totalSale*1);
-		$("input[name='total']").val(total);
-		
-		$( "#Ticketing" ).load( "${pageContext.request.contextPath}/pay");		
-		$("#menu4").removeClass("active");
-		$("#menu5").addClass("active");
+		if(name==0){
+			alert("이름을 입력해주세요!");
+		}else if(hp==0){
+			alert("연락처를 입력해주세요!");
+		}else if(addr==0){
+			alert("주소를 입력해주세요!");
+		}else{
+			document.all.nextBtn.value="결제";
+			
+			var totalPrice=$("input[name='totalPrice']").val();
+			var totalSale=$("input[name='totalSale']").val();
+			var total=(totalPrice*1)-(totalSale*1);
+			$("input[name='total']").val(total);
+			
+			$( "#Ticketing" ).load( "${pageContext.request.contextPath}/pay");		
+			$("#menu4").removeClass("active");
+			$("#menu5").addClass("active");
+		}
 	}else if(nextBtn=="결제"){
 		//ajax
 		$(function(){   /* AJAX submit */  
