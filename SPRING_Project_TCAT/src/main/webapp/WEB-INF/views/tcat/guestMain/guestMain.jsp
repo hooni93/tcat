@@ -115,7 +115,8 @@ function payPerformence(url){
 </div><!-- 핫리스트 끝 -->
 
 
-<a onclick="load('photoBoarder');">사진게시판보기</a>
+<a onclick="load('photoBoarder');">사진게시판보기</a> <br>
+<a onclick="load('movieBoarder');">영상게시판보기</a>
 
 
 

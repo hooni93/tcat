@@ -75,7 +75,10 @@ $(document).ready(function(){
 	<div class="col-md-12 c pt30 thumbnail ">
 	<%
 	
-	    ArrayList<TcatPerformanceVO> dtos=(ArrayList<TcatPerformanceVO>)request.getAttribute("dtos");
+	    ArrayList<TcatPerformanceVO> dtos=null;
+	    dtos=(ArrayList<TcatPerformanceVO>)request.getAttribute("dtos");
+	    ArrayList<TcatPerformanceVO> dtos2=null;
+	    dtos2=(ArrayList<TcatPerformanceVO>)request.getAttribute("dtos2");
 		String seat_line=dtos.get(0).getSeat_line();
 		String[] seat_lineArr=seat_line.split("_");
 		int seatRow=Integer.parseInt(seat_lineArr[0]);
@@ -113,10 +116,11 @@ $(document).ready(function(){
 		if(b!=null){
 			bArr=b.split("/");					
 		}
-		for(int q=0;q<dtos.size();q++){
+		if(dtos2!=null){
+		for(int q=0;q<dtos2.size();q++){
 			map.put(dtos.get(q).getSeat_num(),dtos.get(q).getSeat_type());
 		}
-
+		}
 		for(int i=0;i<=seatRow;i++){
 			for(int j=0;j<=seatColumn;j++){ 
 				%>
@@ -128,7 +132,7 @@ $(document).ready(function(){
 						for(int k=0; k < vipArr.length;k++){
 							if(vipArr[k].equals(check)){
 								checkNum=1;
-								 if(map.containsValue("VIP") && map.containsKey(vipArr[k])){
+								 if(dtos2!=null && map.containsValue("VIP") && map.containsKey(vipArr[k])){
 								 %> class="myButtonVIP m1 w50 checkButton" id="<%=check%>" value="X" disabled><% 									 									 
 								 }else{
 								 %> class="myButtonVIP m1 w50 checkButton" id="<%=check%>" value="VIP.<%=check%>"><% 									 
@@ -140,7 +144,7 @@ $(document).ready(function(){
 						for(int k=0; k < rArr.length;k++){
 							if(rArr[k].equals(check)){
 								checkNum=1;
-								 if(map.containsValue("R") && map.containsKey(rArr[k])){
+								 if(dtos2!=null && map.containsValue("R") && map.containsKey(rArr[k])){
 									 %> class="myButtonR m1 w50 checkButton" id="<%=check%>" value="X" disabled><% 									 									 
 									 }else{
 									 %> class="myButtonR m1 w50 checkButton" id="<%=check%>" value="R.<%=check%>"><% 
@@ -153,7 +157,7 @@ $(document).ready(function(){
 						for(int k=0; k < sArr.length;k++){
 							if(sArr[k].equals(check)){
 								checkNum=1;
-								  if(map.containsValue("S") && map.containsKey(sArr[k])){
+								  if(dtos2!=null && map.containsValue("S") && map.containsKey(sArr[k])){
 								 %> class="myButtonS m1 w50 checkButton" id="<%=check%>" value="X" disabled><% 									 									 
 								 }else{
 								 %> class="myButtonS m1 w50 checkButton" id="<%=check%>" value="S.<%=check%>"><% 
@@ -165,7 +169,7 @@ $(document).ready(function(){
 						for(int k=0; k < aArr.length;k++){
 							if(aArr[k].equals(check)){
 								checkNum=1;
-								  if(map.containsValue("A") && map.containsKey(aArr[k])){
+								  if(dtos2!=null && map.containsValue("A") && map.containsKey(aArr[k])){
 										 %> class="myButtonA m1 w50 checkButton" id="<%=check%>" value="X" disabled><% 									 									 
 										 }else{
 										 %> class="myButtonA m1 w50 checkButton" id="<%=check%>" value="A.<%=check%>"><% 
@@ -177,7 +181,7 @@ $(document).ready(function(){
 						for(int k=0; k < bArr.length;k++){
 							if(bArr[k].equals(check)){
 								checkNum=1;
-								  if(map.containsValue("B") && map.containsKey(bArr[k])){
+								  if(dtos2!=null && map.containsValue("B") && map.containsKey(bArr[k])){
 										 %> class="myButtonA m1 w50 checkButton" id="<%=check%>" value="X" disabled><% 									 									 
 										 }else{
 										 %> class="myButtonA m1 w50 checkButton" id="<%=check%>" value="B.<%=check%>"><% 

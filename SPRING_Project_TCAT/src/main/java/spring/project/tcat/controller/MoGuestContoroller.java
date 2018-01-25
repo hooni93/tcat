@@ -113,7 +113,31 @@ public class MoGuestContoroller {
 		return "tcat/Boarder/photoBoarder";
 	}
 	
+	//영상 게시판 가져오기
+		@RequestMapping("movieBoarder")
+		public String movieBoarder(HttpServletRequest req,Model model) {
+			System.out.println("movieBoarder");
+			MGService.movieBoarderList(req, model);
+			return "tcat/Boarder/movieBoarder";
+		}
 	
+	//영상게시판 답글 달기
+	@RequestMapping("MovieBoarderCommentWrite")
+	public String MovieBoarderCommentWrite(HttpServletRequest req,Model model) {
+		System.out.println("MovieBoarderCommentWrite");
+		MGService.MovieBoarderCommentWrite(req, model);
+		photoBoarder(req, model);
+		return "tcat/Boarder/photoBoarder";
+	}
+	
+	//영상게시판 게시하기 
+	@RequestMapping("insertMovieBoarder")
+	public String insertMovieBoarder(MultipartHttpServletRequest req,Model model) {
+		System.out.println("insertMovieBoarder");
+		MGService.insertMovieBoarder(req, model);
+		MGService.photoBoarderList(req, model);
+		return "tcat/Boarder/photoBoarder";
+	}
 	
 	
 }
