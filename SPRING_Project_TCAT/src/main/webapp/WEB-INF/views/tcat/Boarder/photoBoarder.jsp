@@ -84,7 +84,7 @@ function photoBoarderCommentWrite(member_id,notice_num,form){
     	
     	<div class="col-md-2">
     		<c:if test="${sessionScope.login_id==null}">
-    			<input type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-primary w170" value="게시글 작성">    		
+    			<input type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-primary w170" id="photoBoarderLogin" value="게시글 작성">    		
 			</c:if>    		
     		<c:if test="${sessionScope.login_id!=null}">
     			<input type="button" data-toggle="modal" data-target="#insert-modal" class="btn btn-primary w170" value="게시글 작성">
