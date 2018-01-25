@@ -993,18 +993,59 @@
 		<!-- 2018-01-15 -->
 		<select id="member_cnt" resultType="int">
 			select count(*) from member
+							<choose>
+				           <when test="sDev==1">
+				              WHERE member_id LIKE '${keyword}'
+				           </when>
+				           <when test="sDev==2">
+				              where member_name LIKE '%${keyword}%'
+				           </when>
+				           <when test="sDev==3">
+				              where member_gender LIKE '%${keyword}%'
+				           </when>
+				           <when test="sDev==4">
+				              where member_birth LIKE '%${keyword}%'
+				           </when>
+				           <when test="sDev==5">
+				              where Rating LIKE '%${keyword}%'
+				           </when>
+				           <otherwise></otherwise>
+				       		 </choose>
 		</select>
 		
 		<select id="member_list" parameterType="java.util.Map" resultType="spring.project.tcat.VO.MemberVO">
-			<![CDATA[
-			select * from(
+			
+			select * 
+			from(
 			select member_id, member_pwd, member_name, member_hp, member_addr, member_email, 
-					member_gender, member_birth, point, lastDate, Rating, member_step,member_joindate, rownum rNum
-			from (select * from member order by member_joindate desc))
+					member_gender, member_birth, point, lastDate, Rating, member_step,member_joindate, rownum rNum			
+			from (select * from member 
+			
+						<choose>
+				           <when test="sDev==1">
+				              where member_id LIKE '${keyword}'
+				           </when>
+				           <when test="sDev==2">
+				              where member_name LIKE '%${keyword}%'
+				           </when>
+				           <when test="sDev==3">
+				              where member_gender LIKE '%${keyword}%'
+				           </when>
+				           <when test="sDev==4">
+				              where member_birth LIKE '%${keyword}%'
+				           </when>
+				           <when test="sDev==5">
+				              where Rating LIKE '%${keyword}%'
+				           </when>
+				           <otherwise></otherwise>
+				        </choose>	
+				        order by member_joindate desc)) 		
+			<![CDATA[
 			where rNum>=#{start} and rNum <=#{end}
 			]]>
 		</select>
 		
+				           
 		<select id="detailMember" parameterType="String" resultType="spring.project.tcat.VO.MemberVO">
 			select * from member where member_id=#{member_id}
 		</select>
@@ -1291,7 +1332,26 @@
 		]]>
 	</insert>
      <!-- 18.01.23 영민 수정끝  -->
-     
+     <!-- 상품수정 갯수 -->
+     <select id="hostProModifyCnt" resultType="int">
+		select count(*)
+		from
+		performanceInfo
+	</select>
+	<!-- 상품수정 리스트 -->
+     <!-- <select id="hostProModifyList" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+		<![CDATA[
+		select *
+		from(select per_id, perf_title, perf_Image, startDate, endDate,      rownum rNum
+		from(
+			select * from performanceInfo
+			ORDER by per_id desc
+				)
+		)
+		WHERE rNum >=#{start} AND rNum <=#{end}
+		]]>
+	</select> -->
+
 <!-- 18.01.11 동금 수정  -->
      
 	<!-- 상품갯수구하기 -->
@@ -1609,5 +1669,4 @@
 		</delete> 
 
 <!-- 18.01.21 태성 수정 끝 -->
-   
-   </mapper>
+</mapper>

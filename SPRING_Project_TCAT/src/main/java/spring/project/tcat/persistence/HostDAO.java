@@ -250,10 +250,11 @@ public interface HostDAO {
 	public int levelUpdateCnt(Map<String,Object> map);
 	//혜택등록
 	public int levelAdd(Map<String,Object> map);
+	//상품수정 갯수
+	public int hostProModifyCnt();
+	//상품수정 리스트
+	public ArrayList <TcatPerformanceVO>hostProModifyList(Map<String,Object> map);
 	////////////////////////////////////영민 1/10 end ///////////////////////////////////////
-	
-	
-	
 	///////////////////////  동금 1/11  ///////////////////////////
 	//상품갯수 불러오기
 	public int getPerfoCnt(Map<String, Object> map);

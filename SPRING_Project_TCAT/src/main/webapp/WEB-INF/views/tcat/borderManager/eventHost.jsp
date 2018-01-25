@@ -16,6 +16,7 @@ $(function() {
 			formData.append("contents", $("input[name=contents]").val());
 			formData.append("member_id", $("input[name=member_id]").val());
 			formData.append("notice_div", $("input[name=notice_div]").val());
+			formData.append("notice_addfile", $("select[name=notice_addfile]").val());
 			$.ajax({
 				url : 'eventAdd',
 				data : formData,
@@ -99,6 +100,13 @@ $(function() {
 								<input type="number" name="notice_div" class="form-control">
 								</td>
 							</tr>
+							<tr>
+								<th><h5>분류</h5></th>
+								<td><h5><select name="notice_addfile" style="width: 100%">
+										<option value="0"></option>
+										<option value="event1">event1</option>
+								</select></h5></td>
+							</tr>
 							</table>
 							<button type="button" class="btn btn-info" id="eventcheck">
 									등록<i class="fa fa-check spaceLeft"></i>
@@ -106,25 +114,42 @@ $(function() {
 							</form>
 						</div>
 					<div>
-					
-					<br><br><br>
-						<c:if test="${cnt > 0}">
-						<c:forEach var="vos" items="${dtos}" >
-						<h4>${vos.notice_num}</h4>
-						<h4>${vos.notice_title}</h4>
-						${vos.writeDate}
-						<img src="${image}eventList/${vos.notice_image}">
-						<h4>${vos.contents}</h4>
-						<button type="button" class="btn btn-primary"
-							onclick="eventUpdate('${vos.notice_num}','eventUpdate');">수정</button>
-						<button type="button" class="btn btn-primary"
-							onclick="eventDelete('${vos.notice_num}','eventHost');">삭제</button>
-						<br><br><br>
-						</c:forEach>
-						</c:if>
-						<c:if test="${cnt==0}">
-						<h2>이벤트 상품이 없습니다.</h2>
-						</c:if>
+					<br><br>
+					<h4>
+						<b>이벤트리스트</b>
+						<hr>
+						<br>
+						</h4>
+					<table
+							class="table table-hover table-bordered table-condensed c fs10">
+							<tr class="bg-primary">
+								<td><h5><b>번호</b></h5></td>
+								<td><h5><b>제목</b></h5></td>
+								<td><h5><b>이미지</b></h5></td>
+								<td><h5><b>분류</b></h5></td>
+								<td><h5><b>수정</b></h5></td>
+								<td><h5><b>삭제</b></h5></td>
+							</tr>
+							<c:if test="${cnt > 0}">
+									<c:forEach var="vos" items="${dtos}" >
+									<tr>
+										<td><br><br>${vos.notice_num}</td>
+										<td><br><br>${vos.notice_title}</td>
+										<td><img src="${image}eventList/${vos.notice_image}" width="150px" height="70px"></td>
+										<td><br><br>${vos.notice_addfile}</td>
+										<td><br><button type="button" class="btn btn-primary"
+											onclick="eventUpdate('${vos.notice_num}','eventUpdate');">수정</button></td>
+										<td><br><button type="button" class="btn btn-primary"
+											onclick="eventDelete('${vos.notice_num}','eventHost');">삭제</button></td>
+									</tr>
+								</c:forEach>
+							</c:if>
+							<c:if test="${cnt==0}">
+								<tr>
+									<td colspan="7" align="center">이벤트가 없습니다.</td>
+								</tr>
+							</c:if>
+						</table>
 						<table style="width: 1000px" align="center">
 							<tr>
 								<th align="center"><c:if test="${cnt > 0}">
@@ -158,7 +183,7 @@ $(function() {
 				
 				<div class="col-md-1"></div>
 				<!--리스트목록 끝  -->
-
+					</div>
 			</div>
 			<br> <br> <br> <br> <br>
 		</div>

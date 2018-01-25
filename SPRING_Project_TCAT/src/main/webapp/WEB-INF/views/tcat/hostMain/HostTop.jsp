@@ -189,7 +189,7 @@ function detailOpen(category,id){
 	 
 	 if(url=="hostMain" || url=="join_retireMember" || url=="hotMusical" || url=="sleepMember" || url=="stockDelete_musical" || url=="stockOutOf_musical"
 		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified" 
-		 || url =="commentManager"|| url =="eventHost"|| url =="provalMain" || url =="levelMember"|| url =="infoLevel"){
+		 || url =="commentManager"|| url =="eventHost"|| url =="provalMain" || url =="levelMember"|| url =="infoLevel"|| url =="hostProModify"){
 	 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side" );	//들어오는 url이 if조건에 만족할때 그에맞는 사이드페이지를 hostPage의 왼쪽 side_result쪽에 뿌려준다.
 	 }
  }
@@ -344,7 +344,7 @@ location.reload();
             <li><a onclick="load('hotMusical');">핫카테고리 상품진열관리</a></li>
             <li class="divider"></li>
             <li><a onclick="load('registItem');">상품등록</a></li>
-            <li><a href="#">상품등록수정</a></li>
+            <li><a onclick="load('hostProModify');">상품수정</a></li>
             <li><a onclick="load('stockDelete_musical');">상품삭제</a></li>
             <li class="divider"></li>
             <li><a onclick="load('stockManagement');">상품재고관리</a></li>
@@ -366,7 +366,7 @@ location.reload();
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">고객관리<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a onclick="load('memberModified');">회원정보조회/수정</a></li>
+            <li><a onclick="load('memberModified');">회원정보조회</a></li>
             <li class="divider"></li>
             <li><a onclick="load('levelMember');">회원혜택관리</a></li>
             <li class="divider"></li>
@@ -381,7 +381,8 @@ location.reload();
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">게시판관리<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a onclick="load('eventHost');">공지사항 게시판관리</a></li>
+            <li><a href="#">공지사항 게시판관리</a></li>
+            <li><a onclick="load('eventHost');">이벤트 게시판관리</a></li>
             <li><a href="#">SNS후기 게시판관리</a></li>
             <li class="divider"></li>
             <li><a href="#">QnA 게시판관리</a></li>

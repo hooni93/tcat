@@ -1975,7 +1975,7 @@ public class HostServiceImp implements HostService {
 	}
 
 	// 2018-01-15---------------------------------------------------------------
-	// 고객 리스트 가져오기
+	// 고객 리스트 가져오기 //----------------------영민수정----------------------------------
 	@Override
 	public void member_list(HttpServletRequest req, Model model) {
 		int pageSize = 10; // 한 페이지당 출력한 글 갯수
@@ -1991,7 +1991,17 @@ public class HostServiceImp implements HostService {
 		int pageCount = 0; // 페이지 갯수
 		int startPage = 0; // 시작 페이지
 		int endPage = 0; // 마지막 페이지
+		
+		String sDev = req.getParameter("sDev"); //분류
+		String keyword = req.getParameter("keyword"); //키워드
 
+		if (sDev == null) {
+			sDev = "0";
+		}
+
+		if (keyword == null) {
+			keyword = "";
+		}
 		// 글갯수 구하기
 
 		cnt = hDao.member_cnt();
@@ -2036,6 +2046,8 @@ public class HostServiceImp implements HostService {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("start", start);
 			map.put("end", end);
+			map.put("sDev", sDev);
+			map.put("keyword", keyword);
 			ArrayList<MemberVO> dtos = hDao.member_list(map);
 			req.setAttribute("dtos", dtos);
 
@@ -2619,7 +2631,68 @@ public class HostServiceImp implements HostService {
 	}
 
 	///////////// HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-23 성영민 ///////////////
+/////////////////////////////////// 영민1/25 start /////////////////////////////////
+	//상품수정 리스트
+	@Override
+	public void hostProModify(HttpServletRequest req, Model model) {
+		int cnt = 0; // 글갯수
+		int pageSize = 10; // 한 페이지당 출력할 글 갯수
+		int pageBlock = 2; // 한 블럭당 페이지 갯수
 
+		int start = 0; // 현재 페이지 글시작번호
+		int end = 0; // 현재 페이지 글 마지막번호
+		String pageNum = null; // 페이지 번호
+		int currentPage = 0; // 현재 페이지
+
+		int pageCount = 0; // 페이지 갯수
+		int startPage = 0; // 시작 페이지
+		int endPage = 0; // 마지막 페이지
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		cnt = hDao.hostProModifyCnt();
+		System.out.println("cnt======" + cnt);
+		pageNum = req.getParameter("pageNum");
+		if (pageNum == null) {
+			pageNum = "1";
+		}
+		currentPage = (Integer.parseInt(pageNum));
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0); // 페이지 갯수 + 나머지
+		start = (currentPage - 1) * pageSize + 1;
+		end = start + pageSize - 1;
+		if (end > cnt)
+			end = cnt;
+		System.out.println("cnt====" + cnt);
+
+		if (cnt > 0) {
+			map.put("start", start);
+			map.put("end", end);
+
+			ArrayList<TcatPerformanceVO> dtos = hDao.hostProModifyList(map);
+
+			System.out.println("dtos:" + dtos.size());
+			model.addAttribute("dtos", dtos);
+		}
+
+		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5/3)* 3+ 1= 4
+		if (currentPage % pageBlock == 0)
+			startPage -= pageBlock; // (5%3)==0
+		endPage = startPage + pageBlock - 1; // 4+3 -1 =6
+		if (endPage > pageCount)
+			endPage = pageCount;
+
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("pageNum", pageNum);
+
+		if (cnt > 0) {
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageBlock", pageBlock);
+			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("currentPage", currentPage);
+		}
+		
+	}
+/////////////////////////////////// 영민1/25 end /////////////////////////////////
 	/////////////////////// 동금 1/9 start ////////////////////////
 	// HOST/상품관리/상품삭제
 	@Override

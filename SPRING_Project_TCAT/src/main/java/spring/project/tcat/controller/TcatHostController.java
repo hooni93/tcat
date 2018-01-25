@@ -829,6 +829,12 @@ public class TcatHostController {
 	}
 	@Autowired
 	YMGuestService YMService;
+	//이벤트 사이트
+	@RequestMapping("eventHost_side")
+	public String eventHost_side(HttpServletRequest req, Model model) {
+		System.out.println("eventHost_side");
+		return "tcat/borderManager/eventHost_side";
+	}
 	//이벤트 호스트
 	@RequestMapping("eventHost")
 	public String eventHost(HttpServletRequest req, Model model) {
@@ -945,6 +951,24 @@ public class TcatHostController {
 			return "tcat/memberAnalysis/infoLevel";
 		}
 /////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민  //////////////////////////////
+/////////////////// HOST/상품관리/공연정보 수정-2018-01-25 성영민  //////////////////////////////
+		//공연정보 수정 사이드
+		@RequestMapping("hostProModify_side")
+		public String hostProModify_side(HttpServletRequest req,Model model) {
+			System.out.println("hostProModify_side");
+			return "tcat/productList/hostProModify_side";
+		}
+		//공연정보 수정
+		@RequestMapping("hostProModify")
+		public String hostProModify(HttpServletRequest req,Model model) {
+			System.out.println("hostProModify");
+			hService.hostProModify(req, model);
+			return "tcat/productList/hostProModify";
+		}
+		
+		
+		
+/////////////////// HOST/상품관리/공연정보 수정-2018-01-25 성영민  //////////////////////////////
 
 	///////////////////////  동금 1/9 start  //////////////////////// 
 	// HOST/상품관리/상품삭제  
