@@ -50,7 +50,6 @@ $(document).ready(function() {
 			alert("로그인 후 이용해 주세요.");
 			return false;
 		}else{
-<<<<<<< HEAD
 			var disc_code = $("#disc_code").val();
 			var formData = {"disc_code":disc_code};
 			var active = $(".wish").hasClass("active");
@@ -81,7 +80,6 @@ $(document).ready(function() {
 					}
 				});
 			}
-=======
 				var disc_code = $("#disc_code").val();
 				var formData = {"disc_code":disc_code};
 				var active = $(".wish").hasClass("active");
@@ -112,7 +110,7 @@ $(document).ready(function() {
 						}
 					});
 				}
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
+
 		}
 	});
 	
@@ -184,11 +182,11 @@ function commentListS(url) {
 							<i class="glyphicon glyphicon-heart fs20"></i>
 						</button>
 					</div>
-<<<<<<< HEAD
+
 					<div class="col-md-12">
 						<input class="btn btn-danger btn-xl w100p" type="button"
 							value="구매하기">
-=======
+
 					<!--예매  -->
 					<div class="col-md-3 " style="padding: 0;">
 						<div class="col-md-12 p10">
@@ -204,7 +202,6 @@ function commentListS(url) {
 							<input class="btn btn-danger btn-xl w100p" type="button"
 								value="구매하기">
 						</div>
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 					</div>
 				</div>
 			</div>

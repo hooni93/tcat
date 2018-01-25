@@ -215,4 +215,25 @@
 		values(Notice_SEQ.nextval,sysdate,#{contents},4,#{member_id},#{disc_code})
 	</insert>
 	
+	<!-- 게스트가 자기 후기 수정할 수 있게 하기 = 공연용 -->
+	<update id="commentsModify" parameterType="spring.project.tcat.VO.TcatBoardVO">
+		update notice set
+		contents = #{contents}
+		where notice_num = #{notice_num}
+	</update>
+	<!-- 게스트가 자기 후기 삭제 할 수 있게 하기 = 공연용-->
+	<delete id="commentDeldao" parameterType="int">
+		delete notice where notice_num=#{notice_num}
+	</delete>
+	
+		<!-- 게스트가 자기 후기 수정할 수 있게 하기 = 스토어 -->
+	<update id="commentsModifyS" parameterType="spring.project.tcat.VO.TcatBoardVO">
+		update notice set
+		contents = #{contents}
+		where notice_num = #{notice_num}
+	</update>
+	<!-- 게스트가 자기 후기 삭제 할 수 있게 하기 = 스토어-->
+	<delete id="commentDeldaoS" parameterType="int">
+		delete notice where notice_num=#{notice_num}
+	</delete>
 </mapper>

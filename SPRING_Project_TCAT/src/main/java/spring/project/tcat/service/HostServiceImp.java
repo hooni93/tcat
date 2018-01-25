@@ -3217,15 +3217,12 @@ public class HostServiceImp implements HostService {
 
 	}
 	
-<<<<<<< HEAD
+
 	// 환불 목록 - 공연
 	@Override
 	public void productRefundBoard(HttpServletRequest req, Model model) {
 		int pageSize = 10; // 한 페이지당 출력할 글 개수
 		int pageBlock = 3; // 한 블럭당 페이지 개수
-=======
-
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 
 		int cnt = 0; // 글 개수
 		int start = 0; // 현재 페이지 글시작번호
