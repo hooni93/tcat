@@ -27,7 +27,7 @@
 		//ajax submit enter
 		$('#ajaxSubmitForm').keydown(function(e) {
 	        if (e.keyCode == 13) {
-	         	$("#modal_result").load("${pageContext.request.contextPath}/memberFind");
+	         	ajaxSubmit('orderList_store');
 	        }
    		 });
 	});
@@ -52,7 +52,7 @@
 					<option  value="2">구매승인</option>
 					<option   value="3">배송시작</option>
 					<option   value="4">배송중</option>
-					<option   value="5">구매완료</option>
+					<option   value="5">배송완료</option>
 					<option value="6">환불요청</option>
 					<option  value="7">환불승인</option>
 					<option   value="8">교환</option>
@@ -69,7 +69,7 @@
 				<!--키워드 카테고리  -->
 				<select name="searchCondition" class="btn btn-default">
 					<option value="">전체</option>
-					<option value="del_num">구매번호</option>
+					<option value="disc_num">구매번호</option>
 					<option value="member_id">구매자 아이디</option>
 					<option value="disc_title">상품명</option>
 					<option value="del_name">이름</option>
@@ -98,7 +98,7 @@
 			<c:if test="${orders!=null }">
 				<c:forEach var="order" items="${orders}">
 					<tr>
-						<td>${order.del_num }</td>
+						<td>${order.disc_num }</td>
 						<td>${order.member_id }</td>
 						<td>${order.disc_title }</td>
 						<td>${order.del_name }</td>

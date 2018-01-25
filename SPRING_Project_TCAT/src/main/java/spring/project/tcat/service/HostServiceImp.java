@@ -506,7 +506,7 @@ public class HostServiceImp implements HostService {
 	////////////////////////////////////// 18.01.16 명훈
 	////////////////////////////////////// 시작//////////////////////////////////////////////////
 	// 상품목록 나열
-	@Override
+	@Override // 18.01.25 명훈 수정
 	public void productList(HttpServletRequest req, Model model) {
 		System.out.println("HostServiceImp - productList");
 		// 화면에서 원하는 데이터 호출
@@ -561,16 +561,11 @@ public class HostServiceImp implements HostService {
 		if (category.equals("스토어")) {
 			productCnt = hDao.storeProductCnt(map);
 			System.out.println("store - productCnt: " + productCnt);
-			// 보여줄ajax url
-			// model.addAttribute("url", "productList_store");
 		}
 		// 2. 공연
 		else {
-			map.replace("category", "공연");
 			productCnt = hDao.perProductCnt(map);
 			System.out.println("productCnt: " + productCnt);
-			// 보여줄ajax url
-			// model.addAttribute("url", "productList_perf");
 		}
 
 		// 현재 보고있는 페이지
@@ -579,6 +574,7 @@ public class HostServiceImp implements HostService {
 			pageNum = "1"; // 첫 페이지를 1페이지로 설정
 		}
 		System.out.println("pageNum: " + pageNum);
+
 		// 현재 페이지
 		currentPage = Integer.parseInt(pageNum);
 		// 페이지 갯수 = 앨범 갯수 / 페이지에 보여줄 갯수 +(나머지가 존재하면 1페이지 추가)
@@ -667,7 +663,7 @@ public class HostServiceImp implements HostService {
 	}
 
 	// 예매 정보 가져오기
-	@Override
+	@Override // 18.01.25 명훈 수정
 	public void orderList(HttpServletRequest req, Model model) {
 		System.out.println("HostServiceImp - orderList");
 		// 화면에서 원하는 데이터 호출
@@ -797,6 +793,7 @@ public class HostServiceImp implements HostService {
 		String sDev = req.getParameter("sDev"); // 소분류
 		String keyword = req.getParameter("keyword"); // 검색어
 		String searchCondition = req.getParameter("searchCondition"); // 검색조건
+		System.out.println("disc_buyStep: " + disc_buyStep);
 		System.out.println(disc_buyStep + "/" + mDev + "/" + sDev + "/" + keyword + "/" + searchCondition);
 
 		// 널체크
@@ -1168,6 +1165,280 @@ public class HostServiceImp implements HostService {
 
 	////////////////////////////////////// 18.01.15 명훈
 	////////////////////////////////////// 끝//////////////////////////////////////////////////
+
+	///////////////////////////////////// 01.25장명훈
+	///////////////////////////////////// 시작///////////////////////////////////////////////////////
+	// 배송관리
+	@Override
+	public void orderManagement_store(HttpServletRequest req, Model model) {
+		System.out.println("HostServiceImp - orderManagement_store");
+		// 화면에서 원하는 데이터 호출
+		String disc_buyStep = req.getParameter("disc_buyStep"); // 구매스텝
+		String mDev = req.getParameter("mDev"); // 중분류
+		String sDev = req.getParameter("sDev"); // 소분류
+		String keyword = req.getParameter("keyword"); // 검색어
+		String searchCondition = req.getParameter("searchCondition"); // 검색조건
+		System.out.println("disc_buyStep: " + disc_buyStep);
+		System.out.println(disc_buyStep + "/" + mDev + "/" + sDev + "/" + keyword + "/" + searchCondition);
+		// 널체크
+		if (disc_buyStep == null || disc_buyStep.equals("")) {
+			disc_buyStep = "2"; // 구매승인 목록
+		}
+		if (mDev != null) {
+			if (mDev.equals(""))
+				mDev = null;
+		}
+		if (sDev != null) {
+			if (sDev.equals(""))
+				sDev = null;
+		}
+		if (keyword != null) {
+			if (keyword.equals(""))
+				keyword = null;
+		}
+		if (searchCondition != null) {
+			if (searchCondition.equals(""))
+				searchCondition = null;
+		}
+		// 게시판 구조
+		int pageSize = 5; // 한 페이지당 출력할 글의 갯수
+		int pageBlock = 10; // 한 블럭당 페이지 갯수
+		int start = 0; // 현재 페이지 시작번호
+		int end = 0; // 현재 페이지 글 마지막번호
+		int number = 0; // 출력할 글번호
+		String pageNum = null; // 페이지번호
+		int currentPage = 0; // 현재 페이지
+		int pageCnt = 0; // 페이지 갯수
+		int startPage = 0; // 시작페이지
+		int endPage = 0; // 마지막 페이지
+		int productCnt = 0; // 앨범 갯수
+
+		// 조건
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("disc_buyStep", disc_buyStep);
+		map.put("mDev", mDev);
+		map.put("sDev", sDev);
+		map.put("keyword", keyword);
+		map.put("searchCondition", searchCondition);
+
+		// 갯수
+		productCnt = hDao.orderList_storeCnt(map);
+		System.out.println("스토어 구매 갯수: " + productCnt);
+
+		// 현재 보고있는 페이지
+		pageNum = req.getParameter("pageNum");
+		if ((pageNum == null)) {
+			pageNum = "1"; // 첫 페이지를 1페이지로 설정
+		}
+		System.out.println("pageNum: " + pageNum);
+		// 현재 페이지
+		currentPage = Integer.parseInt(pageNum);
+		// 페이지 갯수 = 앨범 갯수 / 페이지에 보여줄 갯수 +(나머지가 존재하면 1페이지 추가)
+		pageCnt = (productCnt / pageSize) + (productCnt % pageSize > 0 ? 1 : 0);
+
+		// 현재페이지 글 시작번호
+		number = 1 + (currentPage - 1) * pageSize;
+		// 1페이지 경우 시작번호는 1
+		start = (currentPage - 1) * pageSize + 1;
+		// 현재페이지 끝번호
+		end = start + pageSize - 1;
+
+		// 만약 페이지 끝번호보다 앨범갯수보다 크면
+		if (end > productCnt)
+			end = productCnt;
+
+		// 게시글 받아오기
+		if (productCnt > 0) {
+			// 게시물 가져오기
+			map.put("start", start);
+			map.put("end", end);
+			// 담을 바구니 생성
+			ArrayList<TcatDiscBuyVO> orders = new ArrayList<TcatDiscBuyVO>();
+			orders = hDao.orderList_store(map);
+			System.out.println("스토어 구매 갯수: " + orders.size());
+			model.addAttribute("orders", orders);
+		}
+
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if (currentPage % pageBlock == 0) {
+			startPage -= pageBlock; // (5%3) == 0
+		}
+		endPage = startPage + pageBlock - 1;
+		if (endPage > pageCnt) {
+			endPage = pageCnt;
+		}
+
+		// req넘기기
+
+		model.addAttribute("number", number);
+		model.addAttribute("productCnt", productCnt);// 글갯수
+		model.addAttribute("pageNum", pageNum);// 페이지 번호
+		if (productCnt > 0) {
+			model.addAttribute("startPage", startPage); // 시작페이지
+			model.addAttribute("endPage", endPage); // 마지막페이지
+			model.addAttribute("pageBlock", pageBlock); // 출력할 페이지 갯수
+			model.addAttribute("pageCnt", pageCnt); // 페이지 갯수
+			model.addAttribute("currentPage", currentPage);// 현재 페이지
+		}
+		// 페이지 카테고리 정보
+		model.addAttribute("disc_buyStep", disc_buyStep); // 대분류, 카테고리 전송
+		model.addAttribute("mDev", mDev); // 소분류
+		model.addAttribute("sDev", sDev); // 대분류
+		model.addAttribute("keyword", keyword); // 검색어
+		model.addAttribute("searchCondition", searchCondition);
+		System.out.println(
+				disc_buyStep + "/" + mDev + "/" + sDev + "/" + searchCondition + "/" + disc_buyStep + "/" + keyword);
+	}
+
+	// orderMangement_storeChange 배송스텝 변경
+	@Override
+	public void orderMangement_storeChange(HttpServletRequest req, Model model) {
+		String disc_num = req.getParameter("disc_num");
+		String disc_changeStep = req.getParameter("disc_changeStep");
+		System.out.println("disc_num: " + disc_num + "disc_changeStep" + disc_changeStep);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("disc_num", disc_num);
+		map.put("disc_buyStep", disc_changeStep);
+
+		hDao.orderMangement_storeChange(map);
+	}
+
+	// orderMangement_Change
+	public void orderMangement_Change(HttpServletRequest req, Model model) {
+		String ticket_num = req.getParameter("ticket_num");
+		String ticket_step = req.getParameter("ticket_stepChange");
+		System.out.println("ticket_num: " + ticket_num + "ticket_step" + ticket_step);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("ticket_num", ticket_num);
+		map.put("ticket_step", ticket_step);
+
+		hDao.orderMangement_Change(map);
+	}
+
+	// orderManagement
+	public void orderManagement(HttpServletRequest req, Model model) {
+		System.out.println("HostServiceImp - orderManagement");
+		// 화면에서 원하는 데이터 호출
+		String ticket_step = req.getParameter("ticket_step"); // 예매 스텝
+		String mDev = req.getParameter("mDev"); // 중분류
+		String sDev = req.getParameter("sDev"); // 소분류
+		String keyword = req.getParameter("keyword"); // 검색어
+		String searchCondition = req.getParameter("searchCondition"); // 검색조건
+		System.out.println(ticket_step + "/" + mDev + "/" + sDev + "/" + keyword + "/" + searchCondition);
+
+		// 널체크
+		if (ticket_step == null || ticket_step.equals("")) {
+			ticket_step = "2"; // 구매승인 목록
+		}
+		if (ticket_step != null) {
+			if (ticket_step.equals(""))
+				ticket_step = null;
+		}
+		if (mDev != null) {
+			if (mDev.equals(""))
+				mDev = null;
+		}
+		if (sDev != null) {
+			if (sDev.equals(""))
+				sDev = null;
+		}
+		if (keyword != null) {
+			if (keyword.equals(""))
+				keyword = null;
+		}
+		if (searchCondition != null) {
+			if (searchCondition.equals(""))
+				searchCondition = null;
+		}
+		// 게시판 구조
+		int pageSize = 5; // 한 페이지당 출력할 글의 갯수
+		int pageBlock = 10; // 한 블럭당 페이지 갯수
+		int start = 0; // 현재 페이지 시작번호
+		int end = 0; // 현재 페이지 글 마지막번호
+		int number = 0; // 출력할 글번호
+		String pageNum = null; // 페이지번호
+		int currentPage = 0; // 현재 페이지
+		int pageCnt = 0; // 페이지 갯수
+		int startPage = 0; // 시작페이지
+		int endPage = 0; // 마지막 페이지
+		int productCnt = 0; // 앨범 갯수
+
+		// 조건
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("ticket_step", ticket_step);
+		map.put("mDev", mDev);
+		map.put("sDev", sDev);
+		map.put("keyword", keyword);
+		map.put("searchCondition", searchCondition);
+
+		// 갯수
+		productCnt = hDao.orderListCnt(map);
+
+		// 현재 보고있는 페이지
+		pageNum = req.getParameter("pageNum");
+		if ((pageNum == null)) {
+			pageNum = "1"; // 첫 페이지를 1페이지로 설정
+		}
+		System.out.println("pageNum: " + pageNum);
+		// 현재 페이지
+		currentPage = Integer.parseInt(pageNum);
+		// 페이지 갯수 = 앨범 갯수 / 페이지에 보여줄 갯수 +(나머지가 존재하면 1페이지 추가)
+		pageCnt = (productCnt / pageSize) + (productCnt % pageSize > 0 ? 1 : 0);
+
+		// 현재페이지 글 시작번호
+		number = 1 + (currentPage - 1) * pageSize;
+		// 1페이지 경우 시작번호는 1
+		start = (currentPage - 1) * pageSize + 1;
+		// 현재페이지 끝번호
+		end = start + pageSize - 1;
+
+		// 만약 페이지 끝번호보다 앨범갯수보다 크면
+		if (end > productCnt)
+			end = productCnt;
+
+		// 게시글 받아오기
+		if (productCnt > 0) {
+			// 게시물 가져오기
+			map.put("start", start);
+			map.put("end", end);
+			// 담을 바구니 생성
+			ArrayList<TcatTicketingVO> orders = new ArrayList<TcatTicketingVO>();
+			orders = hDao.orderList(map);
+			model.addAttribute("orders", orders);
+		}
+
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if (currentPage % pageBlock == 0) {
+			startPage -= pageBlock; // (5%3) == 0
+		}
+		endPage = startPage + pageBlock - 1;
+		if (endPage > pageCnt) {
+			endPage = pageCnt;
+		}
+
+		// req넘기기
+
+		model.addAttribute("number", number);
+		model.addAttribute("productCnt", productCnt);// 글갯수
+		model.addAttribute("pageNum", pageNum);// 페이지 번호
+		if (productCnt > 0) {
+			model.addAttribute("startPage", startPage); // 시작페이지
+			model.addAttribute("endPage", endPage); // 마지막페이지
+			model.addAttribute("pageBlock", pageBlock); // 출력할 페이지 갯수
+			model.addAttribute("pageCnt", pageCnt); // 페이지 갯수
+			model.addAttribute("currentPage", currentPage);// 현재 페이지
+		}
+		// 페이지 카테고리 정보
+		model.addAttribute("ticket_step", ticket_step); // 대분류, 카테고리 전송
+		model.addAttribute("mDev", mDev); // 소분류
+		model.addAttribute("sDev", sDev); // 대분류
+		model.addAttribute("keyword", keyword); // 검색어
+		model.addAttribute("searchCondition", searchCondition);
+		System.out.println(ticket_step + "/" + mDev + "/" + sDev);
+	}
+
+	///////////////////////////////////// 01.25장명훈
+	///////////////////////////////////// 시작///////////////////////////////////////////////////////
 
 	/////////////////////////////////// 태성 1/9 start
 	/////////////////////////////////// /////////////////////////////////////////
@@ -2593,11 +2864,12 @@ public class HostServiceImp implements HostService {
 		}
 
 	}
-	//구매요청업데이트
+
+	// 구매요청업데이트
 	@Override
 	public void provalUpdate(HttpServletRequest req, Model model) {
-		int updateCnt=0;
-		int num=Integer.parseInt(req.getParameter("ticket_num"));
+		int updateCnt = 0;
+		int num = Integer.parseInt(req.getParameter("ticket_num"));
 		updateCnt = hDao.provalUpdateCnt(num);
 		model.addAttribute("updateCnt", updateCnt);
 

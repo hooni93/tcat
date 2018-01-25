@@ -255,7 +255,7 @@
 			<div class="stepwizard-step w18p">
 				<a class="btn btn-default btn-circle" data-toggle="tab"
 					href="#step3">${step3}</a>
-				<p>배송시작</p>
+				<p>상품준비</p>
 			</div>
 
 			<div class="stepwizard-step">
@@ -389,7 +389,7 @@
 			<!--  리스트 시작 -->
 			<div class="list-group">
 				<c:if test="${listStep3.size()==0}">
-					<div class="c h70 pt30">배송시작 중인 상품이 없습니다.</div>
+					<div class="c h70 pt30">상품준비 중인 상품이 없습니다.</div>
 				</c:if>
 				<c:forEach var="list" items="${listStep3 }">
 					<div class="media col-md-3 ">
@@ -415,7 +415,7 @@
 							<div class="col-md-8">${list.del_addr }</div>
 						</div>
 
-						<div class="list-group-item-text col-md-12" style="color: red;">배송승인</div>
+						<div class="list-group-item-text col-md-12" style="color: red;">상품준비 중</div>
 					</div>
 					<div class="col-md-3 text-center">
 						<input class="btn btn-danger btn-xl w80p" type="button" onclick="perfRefund(${list.disc_num})"

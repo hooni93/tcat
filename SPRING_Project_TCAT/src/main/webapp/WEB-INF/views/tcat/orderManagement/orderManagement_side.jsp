@@ -4,17 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
-
-</script>
 </head>
 <body>
+
 	<ul class="nav nav-pills nav-stacked">
 		<li class="b400040 h20"></li>
-		<li class="b400040 h50 c"><span class="fs15 aaaaaa">전체 상품 목록</span></li>
-		<li class="b400040"><a onclick="load('productList?category=공연');">공연 상품</a></li>
-		<li class="b400040"><a onclick="load('productList_store?category=스토어');">스토어 상품</a></li>
+		<li class="b400040 h50 c"><span class="fs15 aaaaaa">배송관리</span></li>
+		<li class="b400040"><a onclick="load('orderManagement');">공연상품</a></li>
+		<li class="b400040"><a onclick="load('orderManagement_store');">스토어 상품</a></li>
 	</ul>
+
 </body>
 </html>
