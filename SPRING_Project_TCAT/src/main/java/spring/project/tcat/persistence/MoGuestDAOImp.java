@@ -181,6 +181,15 @@ public class MoGuestDAOImp implements MoGuestDAO{
 		 cnt=dao.noMoMovieBoarder(vo);
 		return cnt;
 	}
+	//메인 화면 후기 게시판
+	@Override
+	public ArrayList<TcatBoardVO> mainComentBoarderList() {
+		// TODO Auto-generated method stub
+		 ArrayList<TcatBoardVO> dtos=null;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 dtos=dao.mainComentBoarderList();
+		return dtos;
+	}
 	
 	
 }

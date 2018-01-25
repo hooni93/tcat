@@ -184,6 +184,12 @@
 	function contentMain_store(disc_code) {
 		load('contentMain_store?disc_code=' + disc_code);
 	}
+	//이벤트 상세페이지
+	
+	function hotCategoryLoad(url){
+		$("#hotMainResult").load("${pageContext.request.contextPath}/" + url);
+	}
+	
 </script>
 </head>
 <body>

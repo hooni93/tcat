@@ -25,7 +25,7 @@ public class MoGuestContoroller {
 	@RequestMapping("guestMain")
 	public String guestMain(HttpServletRequest req,Model model) {
 		System.out.println("guestMain");
-		MGService.hotList(req, model);
+		MGService.guestMainList(req, model);
 		return "tcat/guestMain/guestMain";
 	}
 	//뮤지컬 전체 메인 리스트 페이지 
@@ -147,6 +147,25 @@ public class MoGuestContoroller {
 		MGService.movieBoarderList(req, model);
 		return "tcat/Boarder/movieBoarder";
 	}
+	
+	//핫카테고리 구현
+	@RequestMapping("hotCategory")
+	public String hotCategory(HttpServletRequest req,Model model) {
+		System.out.println("hotCategory");
+		MGService.hotList(req, model);
+		return "tcat/guestMain/hotCategory";
+	}
+	
+	//메인화면 무비 영상 
+	@RequestMapping("movieMain")
+	public String movieMain(HttpServletRequest req,Model model) {
+		System.out.println("movieMain");
+		String movie_url=req.getParameter("movie_url");
+		System.out.println(movie_url);
+		model.addAttribute("movie_url", movie_url);
+		return "tcat/guestMain/movieMain";
+	}
+	
 	
 	
 }

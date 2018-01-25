@@ -32,5 +32,8 @@ public interface MoGuestService {
 	public void movieBorderDelete(HttpServletRequest req,Model model);
 	//영상게시판 수정
 	public void noMoMovieBoarder(HttpServletRequest req,Model model);
+	//메인화면 출력데이터 
+	public void guestMainList(HttpServletRequest req,Model model);
+	
 	
 }
