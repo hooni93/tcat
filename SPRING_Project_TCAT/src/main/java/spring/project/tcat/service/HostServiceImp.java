@@ -2998,7 +2998,7 @@ public class HostServiceImp implements HostService {
 
 	///////////// HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-23 성영민 ///////////////
 /////////////////////////////////// 영민1/25 start /////////////////////////////////
-	//상품수정 리스트
+	/*//상품수정 리스트
 	@Override
 	public void hostProModify(HttpServletRequest req, Model model) {
 		int cnt = 0; // 글갯수
@@ -3057,7 +3057,7 @@ public class HostServiceImp implements HostService {
 			model.addAttribute("currentPage", currentPage);
 		}
 		
-	}
+	}*/
 /////////////////////////////////// 영민1/25 end /////////////////////////////////
 	/////////////////////// 동금 1/9 start ////////////////////////
 	// HOST/상품관리/상품삭제

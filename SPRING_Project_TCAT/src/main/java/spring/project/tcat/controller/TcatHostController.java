@@ -917,7 +917,7 @@ public class TcatHostController {
 
 	@Autowired
 	YMGuestService YMService;
-<<<<<<< HEAD
+
 	//이벤트 사이트
 	@RequestMapping("eventHost_side")
 	public String eventHost_side(HttpServletRequest req, Model model) {
@@ -925,10 +925,6 @@ public class TcatHostController {
 		return "tcat/borderManager/eventHost_side";
 	}
 	//이벤트 호스트
-=======
-
-	// 이벤트 호스트
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 	@RequestMapping("eventHost")
 	public String eventHost(HttpServletRequest req, Model model) {
 		System.out.println("eventHost");
@@ -1028,7 +1024,6 @@ public class TcatHostController {
 			return "tcat/memberAnalysis/infoLevel";
 		}
 /////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민  //////////////////////////////
-<<<<<<< HEAD
 /////////////////// HOST/상품관리/공연정보 수정-2018-01-25 성영민  //////////////////////////////
 		//공연정보 수정 사이드
 		@RequestMapping("hostProModify_side")
@@ -1040,22 +1035,13 @@ public class TcatHostController {
 		@RequestMapping("hostProModify")
 		public String hostProModify(HttpServletRequest req,Model model) {
 			System.out.println("hostProModify");
-			hService.hostProModify(req, model);
+			/*hService.hostProModify(req, model);*/
 			return "tcat/productList/hostProModify";
 		}
 		
 		
 		
 /////////////////// HOST/상품관리/공연정보 수정-2018-01-25 성영민  //////////////////////////////
-
-	///////////////////////  동금 1/9 start  //////////////////////// 
-	// HOST/상품관리/상품삭제  
-	@RequestMapping("stockDelete_musical_side")
-	public String stockDelete_musical_side(HttpServletRequest req,Model model) {
-	System.out.println("stockDelete_musical_side");
-	
-	return "tcat/productList/stockDelete_musical_side";
-=======
 	// 이벤트삭제
 	@RequestMapping("eventDelete")
 	public String eventDelete(HttpServletRequest req, Model model) {
@@ -1063,7 +1049,6 @@ public class TcatHostController {
 		YMService.eventDelete(req, model);
 		YMService.eventGuest(req, model);
 		return "tcat/borderManager/eventHost";
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 	}
 
 

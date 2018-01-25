@@ -923,7 +923,7 @@ public class HostDAOImp implements HostDAO {
 			cnt=dao.hostProModifyCnt();
 			return cnt;
 		}
-		//상품수정 리스트
+		/*//상품수정 리스트
 		@Override
 		public ArrayList<TcatPerformanceVO> hostProModifyList(Map<String, Object> map) {
 			ArrayList<TcatPerformanceVO> dtos = null;
@@ -931,7 +931,7 @@ public class HostDAOImp implements HostDAO {
 			dtos=dao.hostProModifyList(map);
 			System.out.println("map"+map);
 			return dtos;
-		}
+		}*/
 		
 ///////////////////////  영민 1/25  //////////////////////////////////////////////
 	///////////////////////  동금 1/9  ///////////////////////////
