@@ -28,5 +28,9 @@ public interface MoGuestService {
 	//영상게시판 게시하기
 	public void insertMovieBoarder(HttpServletRequest req,Model model);
 	
+	//영상게시판 삭제
+	public void movieBorderDelete(HttpServletRequest req,Model model);
+	//영상게시판 수정
+	public void noMoMovieBoarder(HttpServletRequest req,Model model);
 	
 }

@@ -386,4 +386,44 @@ public class MoGuestServiceImp implements MoGuestService {
 			}
 		
 	
+		//영상게시판 삭제 
+		@Override
+		public void movieBorderDelete(HttpServletRequest req, Model model) {
+			// TODO Auto-generated method stub
+			int notice_num=Integer.parseInt(req.getParameter("notice_num"));
+			int cnt=0;
+			cnt=MGDao.photoBorderDelete(notice_num);
+			if(cnt!=0) {
+				System.out.println("삭제성공");
+			}
+		}
+		
+		
+		//사진게시판 수정
+		@Override
+		public void noMoMovieBoarder(HttpServletRequest req, Model model) {
+			// TODO Auto-generated method stub
+		
+				TcatBoardVO vo=new TcatBoardVO();
+				String notice_title=req.getParameter("noMo_title");
+				int notice_num=Integer.parseInt(req.getParameter("monotice_num"));
+				String contents=req.getParameter("noMo_content");
+				String notice_addfile=req.getParameter("noMoboard_videoSrc");
+				
+				vo.setNotice_num(notice_num);
+				vo.setNotice_title(notice_title);
+				vo.setContents(contents);
+				vo.setNotice_addfile(notice_addfile);
+				int cnt=0;
+				cnt=MGDao.noMoMovieBoarder(vo);
+				if(cnt!=0) {
+					System.out.println("입력에 성공하셨습니다.");
+				}
+		
+		}
+		
+		
+		
+		
+		
 }//클래스 끝

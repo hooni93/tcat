@@ -17,9 +17,9 @@ $("#insertMovieBoarder").click(function(){
 	if(!$("input[name=no_title]").val()){
 	alert("작성자 이름을 입력하시오");
 	$("input[name=no_title]").focus();
-	}else if(!$("input[name=board_Image]").val()){
+	}else if(!$("input[name=board_videoSrc]").val()){
 		alert("비디오링크주소를 넣어주세요");
-		$("input[name=board_Image]").focus();
+		$("input[name=board_videoSrc]").focus();
 	}else{
 		formData.append("no_title",$("input[name=no_title]").val());
 		formData.append("mem_id",$("input[name=mem_id]").val());
@@ -79,7 +79,7 @@ function MovieBoarderCommentWrite(member_id,notice_num,form){
 <div class="container">
     <div class="row">
     <div class="col-md-12 h25"></div>
-    <h4><b>공연 사진 게시판</b></h4>
+    <h4><b>공연 영상 게시판</b></h4>
 			<hr>
     	
     	<div class="col-md-2">
@@ -186,7 +186,7 @@ function MovieBoarderCommentWrite(member_id,notice_num,form){
 			</div><!-- md10 -->
 		 <div class="col-md-1"></div>	 
 	</div><!--row 끝  -->
-</div>
+</div> 
 				
 		 </c:forEach> 
 		 <div class="col-md-3"></div>

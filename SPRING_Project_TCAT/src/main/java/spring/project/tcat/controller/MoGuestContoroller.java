@@ -126,8 +126,8 @@ public class MoGuestContoroller {
 	public String MovieBoarderCommentWrite(HttpServletRequest req,Model model) {
 		System.out.println("MovieBoarderCommentWrite");
 		MGService.MovieBoarderCommentWrite(req, model);
-		photoBoarder(req, model);
-		return "tcat/Boarder/photoBoarder";
+		MGService.movieBoarderList(req, model);
+		return "tcat/Boarder/movieBoarder";
 	}
 	
 	//영상게시판 게시하기 
@@ -135,8 +135,17 @@ public class MoGuestContoroller {
 	public String insertMovieBoarder(MultipartHttpServletRequest req,Model model) {
 		System.out.println("insertMovieBoarder");
 		MGService.insertMovieBoarder(req, model);
-		MGService.photoBoarderList(req, model);
-		return "tcat/Boarder/photoBoarder";
+		MGService.movieBoarderList(req, model);
+		return "tcat/Boarder/movieBoarder";
+	}
+	
+	//사진게시판 삭제
+	@RequestMapping("movieBorderDelete")
+	public String movieBorderDelete(HttpServletRequest req,Model model) {
+		System.out.println("movieBorderDelete");
+		MGService.movieBorderDelete(req, model);
+		MGService.movieBoarderList(req, model);
+		return "tcat/Boarder/movieBoarder";
 	}
 	
 	

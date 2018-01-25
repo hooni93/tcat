@@ -172,7 +172,15 @@ public class MoGuestDAOImp implements MoGuestDAO{
 		return cnt;
 	}
 	
-
+	//영상게시판 수정
+	@Override
+	public int noMoMovieBoarder(TcatBoardVO vo) {
+		// TODO Auto-generated method stub
+		int cnt =0;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 cnt=dao.noMoMovieBoarder(vo);
+		return cnt;
+	}
 	
 	
 }
