@@ -182,7 +182,7 @@
    
 
 <!--/////////////////////////////// 18.01.16 명훈 시작/////////////////////////////////////////////////-->
-	<!--출력할 공연상품 갯수 가져오기 -->
+	<!--출력할 공연상품 갯수 가져오기 --><!--1/25수정  -->
 	<select id="perProductCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM performanceInfo per, category cat, hallInfo hall, place pla 
@@ -204,23 +204,23 @@
 		<if test="sDev!=null">AND cat.sDev LIKE '${sDev}'</if>
 		<if test="keyword!=null">AND per.disc_title LIKE '%${keyword}%'</if>
 	</select>
-	<!--공연상품 출력 -->
+	<!--공연상품 출력 --><!--1/25 수정  -->
 	<select id="perProduct" resultType="spring.project.tcat.VO.TcatPerformanceVO">
 		SELECT		*
 		FROM(
-				SELECT  per.per_id, per.perf_title, per.cateNum, per.startDate,
-						per.endDate, per.hall_id, per.first_grade, per.per_step,
-						per.remain_round, per.possible_age,
-						cat.category, cat.mDev, cat.sDev,
-						hall.hall_name, hall.place_num, hall.VIP_seatPrice, hall.R_seatPrice,
-						hall.S_seatPrice, hall.A_seatPrice, hall.B_seatPrice,
-						hall.VIP_seat, hall.R_seat, hall.S_seat, hall.A_seat, hall.B_seat,
-						pla.province, pla.city, pla.gu, pla.address, rownum rNum
-				FROM 	performanceInfo per, category cat, hallInfo hall, place pla 
-				WHERE 	per.cateNum = cat.cateNum
-				AND		per.hall_id = hall.hall_id
-				AND		pla.place_num = hall.place_num
-				AND 	cat.category LIKE '${category}'
+				SELECT  	per.per_id, per.perf_title, per.cateNum, per.perf_Image, 
+							per.startDate, per.endDate, per.hall_id, per.first_grade, 
+							per.per_step, per.remain_round, per.possible_age,
+							cat.category, cat.mDev, cat.sDev,
+							hall.hall_name, hall.place_num, per.VIP_seatPrice, per.R_seatPrice,
+							per.S_seatPrice, per.A_seatPrice, per.B_seatPrice,
+							hall.VIP_seat, hall.R_seat, hall.S_seat, hall.A_seat, hall.B_seat,
+							pla.province, pla.city, pla.address, rownum rNum
+				FROM 		performanceInfo per
+				JOIN		category cat	ON 	per.cateNum = cat.cateNum
+				JOIN		hallInfo hall	ON	per.hall_id = hall.hall_id 
+				JOIN		place pla		ON	pla.place_num = hall.place_num
+				WHERE 		cat.category LIKE '${category}'
 				<if test="mDev!=null">AND cat.mDev LIKE '${mDev}'</if>
 				<if test="sDev!=null">AND cat.sDev LIKE '${sDev}'</if>
 				<if test="keyword != null">AND perf_title LIKE '%${keyword}%'</if>
@@ -248,12 +248,12 @@
 	<select id="productDetail_perf" resultType="spring.project.tcat.VO.TcatPerformanceVO">
 		SELECT  per.per_id, per.perf_title, per.cateNum, per.startDate,
 				per.endDate, per.hall_id, per.first_grade, per.per_step,
-				per.remain_round, per.possible_age,
+				per.remain_round, per.possible_age,per.perf_Image,
 				cat.category, cat.mDev, cat.sDev,
-				hall.hall_name, hall.place_num, hall.VIP_seatPrice, hall.R_seatPrice,
-				hall.S_seatPrice, hall.A_seatPrice, hall.B_seatPrice,
+				hall.hall_name, hall.place_num, per.VIP_seatPrice,per.R_seatPrice,
+				per.S_seatPrice, per.A_seatPrice, per.B_seatPrice,
 				hall.VIP_seat, hall.R_seat, hall.S_seat, hall.A_seat, hall.B_seat,
-				pla.province, pla.city, pla.gu, pla.address,
+				pla.province, pla.city, pla.address,
 				det.detail_num, det.refNum, det.per_ex, det.Detail_Image detail_image			
 		FROM 	performanceInfo per, category cat, hallInfo hall, place pla, DetailPage det
 		WHERE 	per.cateNum = cat.cateNum
@@ -268,8 +268,11 @@
 				per.disc_code, per.disc_title, per.disc_price,
 			    per.disc_image, per.disc_con, per.cateNum,
 			    per.first_grade, per.disc_step, per.disc_count,
-			    cat.category, cat.mDev, cat.sDev
-		FROM 	perDisc per JOIN category	cat ON per.cateNum = cat.cateNum
+			    cat.category, cat.mDev, cat.sDev,
+			   	det.refNum, det.per_ex, det.Detail_Image
+		FROM 	perDisc per 
+		JOIN	category	cat ON per.cateNum = cat.cateNum
+		JOIN	DetailPage	det	ON per.detail_num = det.detail_num	
 		WHERE 	per.disc_code = ${_parameter}
 	</select>
 	<!--예매목록 갯수  -->
@@ -304,7 +307,7 @@
 				</choose>
 			</if>
 	</select>
-	<!--주문목록 가져오기  -->
+	<!--주문목록 가져오기   -->
 	<select id="orderList" resultType="spring.project.tcat.VO.TcatTicketingVO">
 		SELECT *
 		FROM(
@@ -318,7 +321,7 @@
 			JOIN		sale			s		ON tic.sale_div = s.sale_div
 			JOIN		performanceInfo per		ON tic.per_id = per.per_id
 			JOIN		category		cat		ON per.cateNum = cat.cateNum
-			WHERE	1=1
+			WHERE		cat.category LIKE '공연'
 			<if test="ticket_step!=null">AND tic.ticket_step LIKE '${ticket_step}'</if>
 			<if test="mDev!=null">AND cat.mDev LIKE '${mDev}'</if>
 			<if test="sDev!=null">AND cat.sDev LIKE '${sDev}'</if>
@@ -357,7 +360,7 @@
 			<if test="sDev!=null">AND cat.sDev LIKE '${sDev}'</if>
 			<if test="keyword!=null">
 				<choose >
-					<when test="searchCondition=='del_num'">AND del.del_num LIKE '${keyword}'</when>
+					<when test="searchCondition=='disc_num'">AND dis.disc_num LIKE '${keyword}'</when>
 					<when test="searchCondition=='member_id'">AND dis.member_id LIKE '%${keyword}%'</when>
 					<when test="searchCondition=='disc_title'">AND per.disc_title LIKE '%${keyword}%'</when>
 					<when test="searchCondition=='del_name'">AND del.del_name LIKE '%${keyword}%'</when>
@@ -365,7 +368,7 @@
 					<when test="searchCondition=='del_hp'">AND del.del_hp LIKE '%${keyword}%'</when>
 					<otherwise>
 						AND(
-							del.del_num LIKE '${keyword}'
+							dis.disc_num LIKE '${keyword}'
 							OR dis.member_id LIKE '%${keyword}%'
 							OR per.disc_title LIKE '%${keyword}%'
 							OR del.del_name LIKE '%${keyword}%'
@@ -396,7 +399,7 @@
 			<if test="sDev!=null">AND cat.sDev LIKE '${sDev}'</if>
 			<if test="keyword!=null">
 				<choose >
-					<when test="searchCondition=='del_num'">AND del.del_num LIKE '${keyword}'</when>
+					<when test="searchCondition=='disc_num'">AND dis.disc_num LIKE '${keyword}'</when>
 					<when test="searchCondition=='member_id'">AND dis.member_id LIKE '%${keyword}%'</when>
 					<when test="searchCondition=='disc_title'">AND per.disc_title LIKE '%${keyword}%'</when>
 					<when test="searchCondition=='del_name'">AND del.del_name LIKE '%${keyword}%'</when>
@@ -404,7 +407,7 @@
 					<when test="searchCondition=='del_hp'">AND del.del_hp LIKE '%${keyword}%'</when>
 					<otherwise>
 						AND(
-							del.del_num LIKE '${keyword}'
+							dis.disc_num LIKE '${keyword}'
 							OR dis.member_id LIKE '%${keyword}%'
 							OR per.disc_title LIKE '%${keyword}%'
 							OR del.del_name LIKE '%${keyword}%'
@@ -692,6 +695,20 @@
 <!--/////////////////////////////// 18.01. 명훈 추후통합 /////////////////////////////////////////////////-->
 
 
+<!--/////////////////////////////// 18.01.25 명훈 추가 /////////////////////////////////////////////////-->
+
+	<update id="orderMangement_storeChange">
+		UPDATE	DiscBuy
+		SET		disc_buyStep = #{disc_buyStep}
+		WHERE	disc_num = #{disc_num}
+	</update>
+	<update id="orderMangement_Change">
+		UPDATE	Ticketing
+		SET		ticket_step = #{ticket_step}
+		WHERE	ticket_num = #{ticket_num}
+	</update>
+
+<!--/////////////////////////////// 18.01.25 명훈 추가 끝 /////////////////////////////////////////////////-->
    
  
 	<!-- 18.01.11 태성 수정 -->
@@ -929,7 +946,7 @@
 			select * 
 			from
 			(
-			    select p.per_id,p.perf_title,p.cateNum,p.R_seatPrice,p.VIP_seatPrice,p.S_seatPrice,p.A_seatPrice,p.B_seatPrice,c.category,c.mDev,c.sDev,p.perf_Image,p.startdate,p.enddate,p.hall_id,h.hall_name,p.first_grade,p.per_step,p.remain_round,p.possible_age,rownum rNum
+			    select p.per_id,p.perf_title,p.cateNum,p.R_seatPrice,p.VIP_seatPrice,p.S_seatPrice,p.A_seatPrice,p.B_seatPrice,p.detail_num,c.category,c.mDev,c.sDev,p.perf_Image,p.startdate,p.enddate,p.hall_id,h.hall_name,p.first_grade,p.per_step,p.remain_round,p.possible_age,rownum rNum
 			    from (select * from performanceInfo order by per_id desc) p,category c,hallInfo h
 			    where p.cateNum=c.cateNum and p.hall_id = h.hall_id and c.category='공연'
 			)
@@ -955,7 +972,7 @@
 			<![CDATA[
 			select * 
 			from(
-			    select p.disc_code,p.disc_title,p.disc_price,p.disc_image,p.disc_con,p.cateNum,
+			    select p.disc_code,p.disc_title,p.disc_price,p.disc_image,p.disc_con,p.cateNum,p.detail_num,
 			            p.first_grade,p.disc_step,p.disc_count,c.category,c.mDev,c.sDev,rownum rNum
 			    from (select * from perDisc order by disc_code desc) p ,category c
 			    where p.CATENUM=c.CATENUM and c.CATEGORY='스토어' and p.DISC_STEP=1
@@ -966,8 +983,8 @@
 		</select>
 		
 		<insert id="insertStore" parameterType="spring.project.tcat.VO.TcatPerDiscVO">
-			insert into perDisc(disc_code, disc_title, disc_price, disc_image, disc_con, cateNum, first_grade, disc_step, disc_count)
-			values(perDisc_SEQ.NEXTVAL,#{disc_title},#{disc_price},#{disc_image},#{disc_con},#{cateNum},#{first_grade},#{disc_step},#{disc_count})
+			insert into perDisc(disc_code, disc_title, disc_price, disc_image, disc_con, cateNum, first_grade, disc_step, disc_count,detail_num)
+			values(perDisc_SEQ.NEXTVAL,#{disc_title},#{disc_price},#{disc_image},#{disc_con},#{cateNum},#{first_grade},#{disc_step},#{disc_count},DetailPage_SEQ.NEXTVAL)
 		</insert>
 		
 		<!-- 2018.01.14 -->
@@ -985,6 +1002,10 @@
 		
 		<select id="SearchDetail_num" resultType="int">
 			select max(detail_num) from performanceInfo
+		</select>
+		
+		<select id="SearchDetail_numStore" resultType="int">
+			select max(detail_num) from perDisc
 		</select>
 		
 		<insert id="insertDetailP_DEFAULT" parameterType="int">
@@ -1084,6 +1105,14 @@
 		<delete id="deleteHost" parameterType="String">
 			delete host where host_id=#{host_id}		
 		</delete>		
+		
+		<select id="detaillist" parameterType="int" resultType="spring.project.tcat.VO.detailPageVO">
+			select * from detailpage where detail_num=#{detail_num}
+		</select>
+		
+		<update id="updateDetail">
+			update detailpage set per_ex=#{per_ex},detail_Image=#{Detail_Image} where detail_num=#{detail_num}
+		</update>
       <!-- 18.01.11 현석 수정 끝  -->
       
          <!-- 18.01.11 영민 수정  -->
@@ -1605,8 +1634,15 @@
 <!--      18.01.17 동금 수정끝  -->
      
 <!-- 18.01.21 태성 수정 시작 -->
+    <!-- 관리자 공연 후기 개수 -->
 	<select id="commentCnt" resultType="int">
-	 select count(*) from notice where notice_div = 4
+	select count(*) 
+	from notice no, category ca, performanceInfo per 
+	where no.notice_div = 4
+	and no.per_id = per.per_id
+	and per.cateNum = ca.cateNum
+	and category = #{Hcnt}
+	 
 	 	<choose>
 	 		<when test="sDev==1">
 				AND notice_num LIKE '${keyword}'
@@ -1615,7 +1651,32 @@
 				AND member_id LIKE '%${keyword}%'
 			</when>
 			<when test="sDev==3">
-				AND notice_title LIKE '%${keyword}%'
+				AND perf_title LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND contents LIKE '%${keyword}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+	
+	 <!-- 관리자 스토어 후기 개수 -->
+	<select id="commentCntS" resultType="int">
+	select count(*) 
+		from notice no, category ca, perDisc perD
+		where notice_div = 4
+		and no.disc_code = perD.disc_code
+		and perD.cateNum = ca.cateNum
+		and category = #{Hcnt}
+	 	<choose>
+	 		<when test="sDev==1">
+				AND notice_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND disc_title LIKE '%${keyword}%'
 			</when>
 			<when test="sDev==4">
 				AND contents LIKE '%${keyword}%'
@@ -1625,7 +1686,7 @@
 	</select>
 	
 	<!-- 관람후기 목록  -->
-	<select id="commentList" resultType="spring.project.tcat.VO.TcatBoardVO">
+	<select id="commentListView" resultType="spring.project.tcat.VO.TcatBoardVO">
 	select *
 		from(
 		select notice_num,perf_title,perf_image, contents,member_id,
@@ -1636,11 +1697,6 @@
 		from notice no, performanceInfo per
 		where no.per_id LIKE per.per_id 
 		and no.notice_div LIKE 4
-	<!--  select * 
-	 from(select no.notice_num,per.perf_title,no.notice_image, no.contents, no.member_id, no.writedate,ROWNUM rnum
-	 from notice no, performanceInfo per 
-	 where no.per_id = per.per_id and no.notice_div = 4 -->
-	 
 	<choose>
 			<when test="sDev==1">
 				AND notice_num LIKE '${keyword}'
@@ -1663,10 +1719,187 @@
 		]]>
 		</select>
 		
+		<!-- 상품후기 목록  -->
+	<select id="commentListStore" resultType="spring.project.tcat.VO.TcatBoardVO">
+	select *
+		from(
+		select notice_num,disc_title, contents, member_id, writedate, ROWNUM rnum
+		from (
+		select no.notice_num, perD.disc_title, no.contents,no.member_id, no.writedate
+		from notice no, perDisc perD
+		where no.disc_code LIKE perD.disc_code 
+		and no.notice_div LIKE 4
+	<choose>
+			<when test="sDev==1">
+				AND notice_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND disc_title LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND contents LIKE '%${keyword}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		order by notice_num desc
+		))
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+		</select>
+		
 		<!-- 관람후기 삭제 -->
 		<delete id="commentDel" parameterType="int">
 		delete notice where notice_num=#{notice_num}	
 		</delete> 
 
+<<<<<<< HEAD
 <!-- 18.01.21 태성 수정 끝 -->
 </mapper>
+=======
+<!-- 환불 목록 개수 - 공연 -->
+<select id="refundCnt" resultType="int">
+ select count(*)
+       from Ticketing ti, performanceInfo per
+       where TICKET_STEP = 6
+       and ti.per_id = per.per_id
+ <choose>
+	 		<when test="sDev==1">
+				AND ticket_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND per_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND seat_type LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==5">
+				AND seat_num LIKE '%${keyword}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		
+</select>
+
+<!-- 환불 목록 - 공연 -->
+<select id="refundListA" resultType="spring.project.tcat.VO.TcatTicketingVO">
+select *
+from(select ticket_num, member_id, perf_title, per_id, ticet_date, seat_type, seat_num, del_num, round,ROWNUM rnum
+from(
+select ti.ticket_num, ti.member_id, per.perf_title, ti.per_id, ti.ticet_date, ti.seat_type, ti.seat_num, ti.del_num, ti.round
+       from Ticketing ti, performanceInfo per
+       where TICKET_STEP = 6
+       and ti.per_id = per.per_id
+       <choose>
+	 		<when test="sDev==1">
+				AND ticket_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND per_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND seat_type LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==5">
+				AND seat_num LIKE '%${keyword}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		order by ticket_num desc
+		))
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+</select>
+
+
+
+
+
+<!-- 환불 목록 개수 - 스토어 -->
+<select id="refundSCnt" resultType="int">
+ select count(*)
+       from DiscBuy disc, perDisc perD
+       where DISC_BUYSTEP = 6
+       and disc.disc_code = perD.disc_code
+<choose>
+	 		<when test="sDev==1">
+				AND disc_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND disc_code LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND buy_count LIKE '${keyword}'
+			</when>
+			
+			<otherwise></otherwise>
+		</choose>
+</select>
+<!-- 환불 목록 - 스토어 -->
+<select id="refundListB" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
+select *
+from(
+select disc_num,disc_title,member_id, disc_buyDate, buy_count, del_num,rownum rnum
+from(
+select disc.disc_num, perD.disc_title, disc.member_id, disc.disc_buyDate, disc.buy_count, disc.del_num
+       from DiscBuy disc, perDisc perD
+       where DISC_BUYSTEP = 6
+       and disc.disc_code = perD.disc_code
+       
+         <choose>
+	 		<when test="sDev==1">
+				AND disc_num LIKE '${keyword}'
+			</when>
+			<when test="sDev==2">
+				AND disc_code LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==3">
+				AND per_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==4">
+				AND member_id LIKE '%${keyword}%'
+			</when>
+			<when test="sDev==5">
+				AND buy_count LIKE '%${keyword}%'
+			</when>
+			<otherwise></otherwise>
+		</choose>
+		order by disc_num desc
+		))
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+</select>
+<!-- 환불 승인 - 공연 -->
+<update id="refundPerformanceOk" parameterType="int">
+  update Ticketing set ticket_step='7'  where ticket_num= #{ticket_num}
+</update>
+<!-- 환불 취소 - 공연 -->
+<update id="refundPerformanceCancel" parameterType="int">
+  update Ticketing set ticket_step='5'  where ticket_num= #{ticket_num}
+</update>
+<!-- 환불 승인 - 스토어 -->
+<update id="refundStoreOk" parameterType="int">
+  update DiscBuy set DISC_BUYSTEP='7'  where disc_num= #{disc_num}
+</update>
+<!-- 환불 취소 - 스토어 -->
+<update id="refundStoreCancel" parameterType="int">
+  update DiscBuy set DISC_BUYSTEP='5'  where disc_num= #{disc_num}
+</update>
+<!-- ~18.01.24 태성 수정 끝 -->
+   
+   </mapper>
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git

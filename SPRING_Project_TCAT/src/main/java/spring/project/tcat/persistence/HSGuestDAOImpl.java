@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import spring.project.tcat.VO.CartVO;
 import spring.project.tcat.VO.MemberVO;
+import spring.project.tcat.VO.SaleVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 import spring.project.tcat.config.Configuration;
 
@@ -137,10 +138,10 @@ public class HSGuestDAOImpl implements HSGuestDAO{
 	}
 
 	@Override
-	public ArrayList<CartVO> cartListDtos(String member_id) {
+	public ArrayList<CartVO> cartListDtos(Map<String,Object> map) {
 		ArrayList<CartVO> dtos=null;
 		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
-		dtos=dao.cartListDtos(member_id);
+		dtos=dao.cartListDtos(map);
 		return dtos;
 	}
 
@@ -152,6 +153,14 @@ public class HSGuestDAOImpl implements HSGuestDAO{
 
 	}
 
+	@Override
+	public int maxdel_num() {
+		int cnt=0;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		cnt=dao.maxdel_num();
+		return cnt;
+	}
+	
 	@Override
 	public TcatPerformanceVO payList(int per_id) {
 		TcatPerformanceVO vo=null;
@@ -200,5 +209,44 @@ public class HSGuestDAOImpl implements HSGuestDAO{
 		return cnt;
 	}
 
+	@Override
+	public void insertStorePay(Map<String, Object> map) {
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dao.insertStorePay(map);
+	}
+
+	@Override
+	public void cartDel(String member_id) {
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dao.cartDel(member_id);
+	}
+
+	@Override
+	public MemberVO getMember(String member_id) {
+		MemberVO dto=null;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dto=dao.getMember(member_id);
+		return dto;
+	}
+
+	@Override
+	public ArrayList<SaleVO> getSale() {
+		ArrayList<SaleVO> dtos=null;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dtos=dao.getSale();
+		return dtos;
+	}
+
+	@Override
+	public void insertdel(Map<String, Object> map) {
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dao.insertdel(map);
+	}
+
+	@Override
+	public void insertTicket(Map<String, Object> map) {
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dao.insertTicket(map);
+	}
 
 }

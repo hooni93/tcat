@@ -14,6 +14,7 @@ import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 import spring.project.tcat.VO.TcatTicketingVO;
+import spring.project.tcat.VO.detailPageVO;
 
 public interface HostDAO {
 	
@@ -123,9 +124,16 @@ public interface HostDAO {
 	public ArrayList<ProductRankVO > wishListRank_store(int productNum);
 	//////////////////////////////////////18.01. 명훈 끝//////////////////////////////////////////////////
 	
+	
+	/////////////////////////////////////18.01.25 명훈 시작//////////////////////////////////////////////////
+	//배송관리 스텝 변경
+	public void orderMangement_storeChange(Map<String, Object> map);
+	//예매 관리 스탭 변경
+	public void orderMangement_Change(Map<String, Object> map);
 
-
-
+	//////////////////////////////////////18.01.25 명훈 끝//////////////////////////////////////////////////
+	
+	
 	/////////////////////////////////// 태성 1/9 start ////////////////////////////////////////
 	//상품 목록 출력 진열
 	public ArrayList<TcatPerformanceVO> getArticleList(Map<String, Object> map);
@@ -178,6 +186,8 @@ public interface HostDAO {
 	public ArrayList<SelectHellInfoVO> HellList();
 	//상세페이지 번호 찾아오기
 	public int SearchDetail_num();
+	//상세페이지 번호 찾아오기[store]
+	public int SearchDetail_numStore();
 	//상세페이지 생성[초기화]
 	public void insertDetailP_DEFAULT(int detail_num);
 	//공연정보 추가하기
@@ -208,6 +218,10 @@ public interface HostDAO {
 	public ArrayList<HostVO> HostMemberList(Map<String,Object> map);
 	//관리자 삭제
 	public int deleteHost(String host_id);
+	//상세페이지 정보 가져오기
+	public detailPageVO detaillist(int detail_num);
+	//상세페이지 수정
+	public void updateDetail(Map<String,Object> map);
 	
 	////////////////////////////////////현석 1/11 end //////////////////////////////////////////
 
@@ -293,13 +307,43 @@ public interface HostDAO {
 	///////////////////////  동금 1/15 end ///////////////////////////
 		
 ///////////////////////  태성 1/21 start ///////////////////////////
-	// 관람/상품 후기 개수
+	// 관람 후기 개수
 	public int commentCnt(Map<String, Object>map);
+	// 상품 후기 개수
+	public int commentCntS(Map<String, Object>map);
+	
 	// 관람/상품 후기 목록
 	public ArrayList<TcatBoardVO> commentList(Map<String, Object> map);
+	//공연후기 목록 출력
+	public ArrayList<TcatBoardVO> commentListView(Map<String, Object> map);
+	//상품후기 목록 출력
+	public ArrayList<TcatBoardVO> commentListStore(Map<String, Object> map);
+	
 	// 관람/상품후기 삭제
 	public int commentDel(int notice_num);
-/*	// 게스트 관람/상품후기 등록
-	public int commentWrite(TcatBoardVO vo);*/
+	
+	
+	////////////////////////////////
+	// 환불 공연 개수
+	public int refundCnt(Map<String, Object>map);
+	// 환불 스토어 개수
+	public int refundSCnt(Map<String, Object>map);
+	
+	
+	// 환불 공연 목록
+	public ArrayList<TcatTicketingVO> refundListA(Map<String, Object> map);
+	// 환불 스토어 목록
+	public ArrayList<TcatDiscBuyVO> refundListB(Map<String, Object> map);
+	
+	// 환불 승인 - 공연
+	public int refundPerformanceOk(int refundUpdate);
+	// 환불 취소 - 공연
+	public int refundPerformanceCancel(int refundDown);
+	
+	// 환불 승인 - 스토어
+	public int refundStoreOk(int refundUpdateS);
+	// 환불 취소 - 스토어
+	public int refundStoreCancel(int refundDownS);
+	
 ///////////////////////  태성 1/21 end ///////////////////////////
 }

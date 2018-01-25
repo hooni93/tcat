@@ -21,4 +21,19 @@ public interface MoGuestService {
 	public void photoBorderDelete(HttpServletRequest req,Model model);
 	// 사진 게시판 수정하기
 	public void noMoPhotoBoarder(MultipartHttpServletRequest req,Model model);
+	//영상게시판 리스트 가져오기
+	public void movieBoarderList(HttpServletRequest req,Model model);
+	//영상게시판 답글 달기
+	public void MovieBoarderCommentWrite(HttpServletRequest req,Model model);
+	//영상게시판 게시하기
+	public void insertMovieBoarder(HttpServletRequest req,Model model);
+	
+	//영상게시판 삭제
+	public void movieBorderDelete(HttpServletRequest req,Model model);
+	//영상게시판 수정
+	public void noMoMovieBoarder(HttpServletRequest req,Model model);
+	//메인화면 출력데이터 
+	public void guestMainList(HttpServletRequest req,Model model);
+	
+	
 }

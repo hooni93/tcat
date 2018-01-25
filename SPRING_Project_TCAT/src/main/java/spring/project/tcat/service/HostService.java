@@ -67,8 +67,16 @@ public interface HostService {
 	public void wishListRank_store(HttpServletRequest req, Model model);
 	//////////////////////////////////////18.01.17 명훈시작 완//////////////////////////////////////////////////
 	
-	
-	
+	/////////////////////////////////////01.25장명훈 시작///////////////////////////////////////////////////////
+	//배송관리
+	public void orderManagement_store(HttpServletRequest req, Model model);
+	//orderMangement_storeChange 배송스텝 변경
+	public void orderMangement_storeChange(HttpServletRequest req, Model model);
+	//orderManagement 
+	public void orderManagement(HttpServletRequest req, Model model);
+	//orderMangement_Change
+	public void orderMangement_Change(HttpServletRequest req, Model model);
+	/////////////////////////////////////01.25장명훈 시작///////////////////////////////////////////////////////
 	
 	
 
@@ -125,6 +133,13 @@ public interface HostService {
 	public void HostMemberList(HttpServletRequest req,Model model);
 	//관리자 삭제
 	public void deleteHost(HttpServletRequest req,Model model);
+	//상세페이지 정보 가져오기
+	public void detaillist(HttpServletRequest req,Model model);
+	//상세페이지 정보 업데이트[스토어]
+	public void updateDetailStore(MultipartHttpServletRequest req,Model model);
+	//상세페이지 정보 업데이트[공연]
+	public void updateDetailPer(MultipartHttpServletRequest req,Model model);
+		
 	////////////////////////////////////현석 1/11 end //////////////////////////////////////////
 
 	
@@ -190,5 +205,20 @@ public interface HostService {
 	public void commentList(HttpServletRequest req, Model model);
 	//관람/상품 후기 삭제
 	public void commentDelete(HttpServletRequest req, Model model);
+	
+	// 환불 승인할 목록 - 공연
+	public void productRefundBoard(HttpServletRequest req, Model model);
+	// 환불 승인할 목록 - 스토어
+	public void productRefundBoardS(HttpServletRequest req, Model model);
+	
+	// 환불 승인 - 공연
+	public void productRefundUpdate(HttpServletRequest req, Model model);
+	// 환불 취소 - 공연
+	public void productRefundCancel(HttpServletRequest req, Model model);
+	
+	// 환불 승인 - 스토어
+	public void productRefundUpdateS(HttpServletRequest req, Model model);
+	// 환불 취소 - 스토어
+	public void productRefundCancelS(HttpServletRequest req, Model model);
 	///////////////////////  태성 1/21 end ///////////////////////////
 }

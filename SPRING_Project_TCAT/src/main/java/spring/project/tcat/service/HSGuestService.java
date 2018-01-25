@@ -23,4 +23,8 @@ public interface HSGuestService {
 	public void sussessPay(HttpServletRequest req,Model model);
 	//회차 클릭했을때 그회차의 남은좌석 가져오기
 	public void RemainingSeats(HttpServletRequest req,Model model);
+	//공연구매 할인탭 할인조건,고객정보 가져오기
+	public void sale(HttpServletRequest req,Model model);
+	//공연예매
+	public void insertTicket(HttpServletRequest req,Model model);
 }
