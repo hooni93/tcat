@@ -577,11 +577,21 @@ public class HSGuestServiceImp implements HSGuestService{
 			
 			try{
 				String b[]=a.split(",");
-				
+				String e="";
 				for(int i=0;i<b.length;i++) {
+					e=b[i];
+					String[] c=e.split(".");
+					System.out.println(e);
 					String c1=b[i].substring(0, 3);
-					String c2=b[i].substring(4, 7);
-
+					String c2=null;
+					if(c1.equals("VIP")) {
+						c1=b[i].substring(0, 3);
+						c2=b[i].substring(4, 7);
+					}else {
+						c1=b[i].substring(0, 1);
+						c2=b[i].substring(2, 5);
+					}
+					
 					
 					map.put("member_id", member_id);
 					map.put("per_id", per_id);
@@ -598,8 +608,14 @@ public class HSGuestServiceImp implements HSGuestService{
 			}catch(Exception e) {
 				String b=a;
 				String c1=b.substring(0, 3);
-				String c2=b.substring(4, 7);
-				
+				String c2=null;
+				if(c1.equals("VIP")) {
+					c1=b.substring(0, 3);
+					c2=b.substring(4, 7);
+				}else {
+					c1=b.substring(0, 1);
+					c2=b.substring(2, 5);
+				}
 				map.put("member_id", member_id);
 				map.put("per_id", per_id);
 				map.put("ticet_date", ticet_date);

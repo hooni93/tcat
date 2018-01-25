@@ -78,10 +78,15 @@ function next(form){
 		$("#menu2").removeClass("active");
 		$("#menu3").addClass("active");
 	}else if(nextBtn=="수령방법"){
+		$("input[name='seat_type']").val();
+		/* if() */
 		document.all.nextBtn.value="결제방법";
 		$( "#Ticketing" ).load( "${pageContext.request.contextPath}/del");
 		$("#menu3").removeClass("active");
 		$("#menu4").addClass("active");
+		
+		
+		
 	}else if(nextBtn=="결제방법"){
 		document.all.nextBtn.value="결제";
 		
@@ -200,9 +205,9 @@ function next(form){
 					</table>
 					<hr style="color:white;margin:5px;">
 					<form action="" id="ticketingForm" name="ticketingForm">
-						<input type="hidden" name="addr">
-						<input type="hidden" name="hp">
-						<input type="hidden" name="name">
+						<input type="hidden" name="addr" value="0">
+						<input type="hidden" name="hp" value="0">
+						<input type="hidden" name="name" value="0">
 						<input type="hidden" name="per_id" value="${vo.per_id}">
 						
 						<h3>선택내역</h3>

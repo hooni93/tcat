@@ -118,7 +118,7 @@ $(document).ready(function(){
 </head>
 <body>
 
-		<div class="row bf5f5f5">
+	<div class="row bf5f5f5">
 	<div class="h25"></div>
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
@@ -189,7 +189,7 @@ $(document).ready(function(){
 		}
 		}
 		for(int i=0;i<=seatRow;i++){
-			for(int j=0;j<=seatColumn;j++){ 
+			for(int j=0;j<=seatColumn;j++){
 				%>
 				&nbsp;<input type="button" name="<%=i%>-<%=j%>" 
 				<%
