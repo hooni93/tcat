@@ -90,37 +90,46 @@
    		</if>
    		where notice_num=#{notice_num}
    </update>
-<!--    
-      영상게시판 게시글 숫자 가져오기
-   		<select id="photoBoarderListCnt" resultType="int">
+    
+     <!--  영상게시판 게시글 숫자 가져오기 -->
+   		<select id="movieBoarderListCnt" resultType="int">
    			select count(*) from Notice WHERE notice_div=2
    		</select>
    
-      영상게시판 게시글 
-   	<select id="photoBoarderList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatBoardVO">
+     <!--  영상게시판 게시글  -->
+   	<select id="movieBoarderList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatBoardVO">
    		<![CDATA[select * from 
 		 (select notice_num,notice_title,writeDate,contents,notice_addfile,notice_div,member_id,rownum rNum from 
 		 (select * from notice order by notice_num desc)
 			where notice_div=2)  WHERE rNum>=#{start} AND rNum<=#{end} ]]>
-   	</select>  -->
+   	</select> 
     
-<!--      영상게시판 답글 가져오기 
+     <!--  영상게시판 답글 가져오기  -->
    <select id="movieBoarderComment" resultType="spring.project.tcat.VO.TcatBoardVO">
    		select notice_num,notice_title,writeDate,contents,member_id from notice where notice_div=21 order by notice_num
    </select>
    
-   	답글올리기
+  	<!-- 답글올리기 -->
    	<insert id="MovieBoarderCommentWrite" parameterType="spring.project.tcat.VO.TcatBoardVO">
    		<![CDATA[INSERT INTO notice (notice_num,notice_title,writedate,contents,member_id,notice_div) 
    		values (notice_seq.nextval,#{notice_num},sysdate,#{contents},#{member_id},21) ]]>
-   	</insert>  -->
+   	</insert> 
  
-<!--  	영상게시판 업로드
+  	<!-- 영상게시판 업로드 -->
    <insert id="insertMovieBoarder" parameterType="spring.project.tcat.VO.TcatBoardVO" >
-   		<![CDATA[INSERT INTO notice (notice_num,notice_title,writeDate,contents,notice_image,notice_div,member_id)
+   		<![CDATA[INSERT INTO notice (notice_num,notice_title,writeDate,contents,notice_addfile,notice_div,member_id)
    		 values(notice_seq.nextval,#{notice_title},sysdate,#{contents},#{notice_addfile},2,#{member_id})]]>
    </insert>
-  -->
+ 
+    <!-- 영상게시판 수정 -->
+   <update id="noMoMovieBoarder">
+   		UPDATE notice SET notice_title=#{notice_title},contents=#{contents}
+   			,notice_addfile=#{notice_addfile}
+   		where notice_num=#{notice_num}
+   </update>
+ 
+ 
+ 
    </mapper>
    
    

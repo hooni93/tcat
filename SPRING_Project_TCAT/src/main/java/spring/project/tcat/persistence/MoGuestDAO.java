@@ -38,5 +38,8 @@ public interface MoGuestDAO {
 		public int MovieBoarderCommentWrite(TcatBoardVO vo);	
 	//영상게시판 업로드
 		public int insertMovieBoarder(TcatBoardVO vo);
+	//영상게시판 수정
+		public int noMoMovieBoarder(TcatBoardVO vo);
+		
 		
 }
