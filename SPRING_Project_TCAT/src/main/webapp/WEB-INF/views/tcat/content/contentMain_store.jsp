@@ -61,7 +61,7 @@ $(document).ready(function() {
 			alert("로그인 후 이용해 주세요.");
 			return false;
 		}else{
-<<<<<<< HEAD
+
 			var disc_code = $("#disc_code").val();
 			var formData = {"disc_code":disc_code};
 			var active = $(".wish").hasClass("active");
@@ -92,38 +92,6 @@ $(document).ready(function() {
 					}
 				});
 			}
-=======
-				var disc_code = $("#disc_code").val();
-				var formData = {"disc_code":disc_code};
-				var active = $(".wish").hasClass("active");
-				if(active){
-					$.ajax({
-						type : "POST",
-						url : "delWishList",
-						cache : false,
-						data : formData,
-						success : function() {
-							$(".wish").removeClass("active");
-						},
-						error : function(){
-							alert("위시리스트 실패하였습니다.");
-						}
-					});
-				}else{
-					$.ajax({
-						type : "POST",
-						url : "addWishList",
-						cache : false,
-						data : formData,
-						success : function() {
-							$(".wish").addClass("active");
-						},
-						error : function(){
-							alert("위시리스트 실패하였습니다.");
-						}
-					});
-				}
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 		}
 	});
 	
@@ -195,22 +163,8 @@ function commentListS(url) {
 							</div>
 						</div>
 
-					</div>
-				</div>
-				<!--예매  -->
-				<div class="col-md-3 " style="padding: 0;">
-					<div class="col-md-12 p10">
-						<span>위시리스트</span> <input type="hidden" id="disc_code"
-							value="${str.disc_code}">
-						<button type="button" class="wish btn-xl">
-							<i class="glyphicon glyphicon-heart fs20"></i>
-						</button>
-					</div>
-<<<<<<< HEAD
-					<div class="col-md-12">
-						<input class="btn btn-danger btn-xl w100p" type="button"
-							value="구매하기">
-=======
+					
+
 					<!--예매  -->
 					<div class="col-md-3 " style="padding: 0;">
 						<div class="col-md-12 p10">
@@ -238,16 +192,15 @@ function commentListS(url) {
 								<input class="btn btn-danger btn-xl w100p" data-toggle="modal" data-target="#login-modal" id="login2" type="button" value="구매하기">
 							</c:if>			
 						</div>
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
+
+					</div>
+				
 					</div>
 				</div>
-			</div>
-<<<<<<< HEAD
 			</form>
-=======
+
 		</div>
 
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 
 		<div class="col-md-12 h21"></div>
 

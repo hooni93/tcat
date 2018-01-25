@@ -21,61 +21,31 @@ function Ticketing(url){
 $( function() {
 	var per_id=${vo.per_id};
 	 $( "#Ticketing" ).load( "${pageContext.request.contextPath}/chooseDay?per_id="+per_id );
-})
+});
 function next(form){
 	var nextBtn=document.all.nextBtn.value;
-
-		if(nextBtn=="좌석선택"){
-			document.all.nextBtn.value="할인/쿠폰";
-				
-				  $( "#Ticketing" ).load( "${pageContext.request.contextPath}/ticketSeat?per_id=${vo.per_id}&ticet_date="+form.ticet_date.value+"&round="+form.round.value);	
-		
-			if(nextBtn=="관람일/회차"){
-				document.all.nextBtn.value="좌석선택";
-				
-			$( "#Ticketing" ).load( "${pageContext.request.contextPath}/");
-<<<<<<< HEAD
-			
-			$("#menu1").removeClass("active");
-			$("#menu2").addClass("active");
-		}else if(nextBtn=="할인/쿠폰"){
-			document.all.nextBtn.value="수령방법";
-			$("#menu2").removeClass("active");
-			$("#menu3").addClass("active");
-		}else if(nextBtn=="수령방법"){
-			document.all.nextBtn.value="결제방법";
-			$("#menu3").removeClass("active");
-			$("#menu4").addClass("active");
-		}else if(nextBtn=="결제방법"){
-			document.all.nextBtn.value="결제";
-			$("#menu4").removeClass("active");
-			$("#menu5").addClass("active");
-=======
-		
-				
-				$("#menu1").removeClass("active");
-				$("#menu2").addClass("active");
-				document.all.nextTest.value=2;
-			}else if(nextBtn=="할인/쿠폰"){
-				document.all.nextBtn.value="수령방법";
-				$("#menu2").removeClass("active");
-				$("#menu3").addClass("active");
-			}else if(nextBtn=="수령방법"){
-				document.all.nextBtn.value="결제방법";
-				$("#menu3").removeClass("active");
-				$("#menu4").addClass("active");
-			}else if(nextBtn=="결제방법"){
-				document.all.nextBtn.value="결제";
-				$("#menu4").removeClass("active");
-				$("#menu5").addClass("active");
-			}
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
-		}
-<<<<<<< HEAD
-}
-=======
+	if(nextBtn=="좌석선택"){
+		document.all.nextBtn.value="할인/쿠폰";
+		$( "#Ticketing" ).load( "${pageContext.request.contextPath}/ticketSeat?per_id=${vo.per_id}&ticet_date="+form.ticet_date.value+"&round="+form.round.value);	
+		alert("form.round.value"+form.round.value);
+		$("#menu1").removeClass("active");
+		$("#menu2").addClass("active");
+	}else if(nextBtn=="할인/쿠폰"){
+		document.all.nextBtn.value="수령방법";
+		$("#menu2").removeClass("active");
+		$("#menu3").addClass("active");
+	}else if(nextBtn=="수령방법"){
+		document.all.nextBtn.value="결제방법";
+		$("#menu3").removeClass("active");
+		$("#menu4").addClass("active");
+	}else if(nextBtn=="결제방법"){
+		document.all.nextBtn.value="결제";
+		$("#menu4").removeClass("active");
+		$("#menu5").addClass("active");
 	}
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
+}
+
+
 
 </script>
 <style type="text/css">
@@ -174,10 +144,7 @@ function next(form){
 								<th>좌석타입</th>
 								<td><input type="text" style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"value="0" name="seat_type" readonly></td>
 							</tr>
-							<tr>
-								<th>좌석</th>
-								<td><input type="text" style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"value="0" name="seat_num" readonly></td>
-							</tr>
+							
 							
 						</table>
 						<br><br>
@@ -201,19 +168,19 @@ function next(form){
 						<table style="color:white;margin:10px;">
 							<tr>
 								<th>등급별 할인</th>
-								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="3000" name="delpay"></td>
+								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="3000" name="ratingSale"></td>
 							</tr>
 							<tr>
 								<th>상품권</th>
-								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="">
+								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0">
 							</tr>
 							<tr>
 								<th>이벤트 할인</th>
-								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="">
+								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0">
 							</tr>
 							<tr>
 								<th>총 할인금액</th>
-								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="">
+								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0">
 							</tr>
 						</table>
 						<hr style="color:#fafafaf;margin:5px;">

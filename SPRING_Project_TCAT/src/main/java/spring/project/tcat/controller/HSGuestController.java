@@ -72,7 +72,7 @@ public class HSGuestController {
 		
 		return "tcat/Ticketing/chooseDay";
 	}
-
+	
 	//날짜별 공연일자 가져오기
 	@RequestMapping("daySearch")
 	public String daySearch(HttpServletRequest req, Model model) {
@@ -92,7 +92,13 @@ public class HSGuestController {
 		
 		return "tcat/dayList/dayList";
 	}
-
+	//날짜별 공연일자 가져오기
+		@RequestMapping("dayListMain")
+		public String dayListMain(HttpServletRequest req, Model model) {
+			System.out.println("dayListMain");
+			
+			return "tcat/dayList/dayListMain";
+		}
 	//장소별 공연 가져오기
 	@RequestMapping("placeList")
 	public String placeList(HttpServletRequest req, Model model) {

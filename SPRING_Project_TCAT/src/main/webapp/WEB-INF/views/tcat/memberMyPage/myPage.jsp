@@ -29,11 +29,6 @@
 </script>
 
 </head>
-<c:if test="${pay==1}">
-	<script type="text/javascript">
-		alert("구매되었습니다.");
-	</script>
-</c:if>
 <!--마이페이지 메인  -->
 <div class="row h25"></div>
 

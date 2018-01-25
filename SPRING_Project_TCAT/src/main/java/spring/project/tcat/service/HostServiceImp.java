@@ -3317,11 +3317,6 @@ public class HostServiceImp implements HostService {
 		int pageSize = 10; // 한 페이지당 출력할 글 개수
 		int pageBlock = 3; // 한 블럭당 페이지 개수
 
-<<<<<<< HEAD
-	
-	
-
-=======
 		int cnt = 0; // 글 개수
 		int start = 0; // 현재 페이지 글시작번호
 		int end = 0; // 현재 페이지 글마지막 번호
@@ -3615,7 +3610,5 @@ public class HostServiceImp implements HostService {
 		
 	}
 
-	
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 }
 /////////////////////// 태성 1/21 end ///////////////////////////

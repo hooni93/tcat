@@ -76,12 +76,9 @@
 			data : formData,
 			success : function(msg) {
 				$('#result').html(msg);
-			},
-			error : onError
+			}
 		});
-		function onError(data, status) {
-			alert("error");
-		}
+		
 	}
 	// 모두체크하기
 

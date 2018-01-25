@@ -21,11 +21,7 @@ import spring.project.tcat.config.Configuration;
 
 @Repository
 public class HostDAOImp implements HostDAO {
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 	//최근 가입 회원 숫자
 	@Override
 	public int latelyJoinMemberCnt(Map<String,Object> map) {
@@ -1095,11 +1091,7 @@ public class HostDAOImp implements HostDAO {
 		return cnt;
 	}
 ///////////////////////  태성 1/21 end///////////////////////////
-<<<<<<< HEAD
 
-	
-
-=======
 	//환불 목록 개수 - 공연
 	@Override
 	public int refundCnt(Map<String, Object> map) {
@@ -1177,7 +1169,5 @@ public class HostDAOImp implements HostDAO {
 	}
 
 	
-	
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 	
 }

@@ -32,6 +32,11 @@ body {
 </style>
 </head>
 <body>
+<c:if test="${pay==1}">
+	<script type="text/javascript">
+		alert("구매되었습니다.");
+	</script>
+</c:if>
 <div class="container">
 	<div class="row">
 		<div class="col-xs-10">

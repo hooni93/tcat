@@ -59,7 +59,6 @@ public class MoGuestServiceImp implements MoGuestService {
 		map.put("ticet_date", ticet_date);
 		dtos=MGDao.ticketSeat(map);
 		model.addAttribute("dtos", dtos);
-		System.out.println(dtos.get(0).getVIP_seat());
 
 	}
 	//사진게시판 리스트 가져오기
