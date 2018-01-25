@@ -90,8 +90,8 @@
    		</if>
    		where notice_num=#{notice_num}
    </update>
-   
-<!--      영상게시판 게시글 숫자 가져오기
+<!--    
+      영상게시판 게시글 숫자 가져오기
    		<select id="photoBoarderListCnt" resultType="int">
    			select count(*) from Notice WHERE notice_div=2
    		</select>
@@ -102,9 +102,9 @@
 		 (select notice_num,notice_title,writeDate,contents,notice_addfile,notice_div,member_id,rownum rNum from 
 		 (select * from notice order by notice_num desc)
 			where notice_div=2)  WHERE rNum>=#{start} AND rNum<=#{end} ]]>
-   	</select> -->
-<!--    
-    영상게시판 답글 가져오기 
+   	</select>  -->
+    
+<!--      영상게시판 답글 가져오기 
    <select id="movieBoarderComment" resultType="spring.project.tcat.VO.TcatBoardVO">
    		select notice_num,notice_title,writeDate,contents,member_id from notice where notice_div=21 order by notice_num
    </select>
@@ -113,7 +113,7 @@
    	<insert id="MovieBoarderCommentWrite" parameterType="spring.project.tcat.VO.TcatBoardVO">
    		<![CDATA[INSERT INTO notice (notice_num,notice_title,writedate,contents,member_id,notice_div) 
    		values (notice_seq.nextval,#{notice_num},sysdate,#{contents},#{member_id},21) ]]>
-   	</insert> -->
+   	</insert>  -->
  
 <!--  	영상게시판 업로드
    <insert id="insertMovieBoarder" parameterType="spring.project.tcat.VO.TcatBoardVO" >

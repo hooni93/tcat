@@ -20,9 +20,12 @@ $(document).ready(function(){
     		 $(id).removeClass("selected");
     		 var idvalue=$("input[name='seat_type']").val();
     		 var idArr=idvalue.split(",");   
+    		 var onClickId=$(id).val();
+    		 var onClickIdArr=onClickId.split(".");
     		 if(idArr.length==1){
     			 $("input[name='seat_type']").val("0");
-       		 }else{
+    			 $("input[name='price']").val(0);
+    		 }else{
     	   	idvalue="";
     	   	var idclick=$(id).val();
      	   	 for(var i=0;i<idArr.length;i++){
@@ -32,22 +35,65 @@ $(document).ready(function(){
        	    		 }else{
        	    			 idvalue+=","+idArr[i];
        	    		 } 	
+    	   		 }else{
+    	   			 price=$("input[name='price']").val();
+    	   			if(onClickIdArr[0]=="VIP"){
+        		 		price=(price*1)-($("input[name='vipprice']").val()*1);
+        		 	}else if(onClickIdArr[0]=="R"){
+        		 		price=(price*1)-($("input[name='rprice']").val()*1);
+        		 	}else if(onClickIdArr[0]=="S"){
+        		 		price=(price*1)-($("input[name='sprice']").val()*1);
+        		 	}else if(onClickIdArr[0]=="A"){
+        		 		price=(price*1)-($("input[name='aprice']").val()*1);
+        		 	}else if(onClickIdArr[0]=="B"){
+        		 		price=(price*1)-($("input[name='bprice']").val()*1);
+        		 	}
     	   		 }
     		 } 
     	   	 $("input[name='seat_type']").val("");
     		 $("input[name='seat_type']").val(idvalue);
+    		 $("input[name='price']").val(price);
     		 }
     	}else{
     		 $(id).addClass("active");
     		 $(id).addClass("selected");
     		 var idvalue=$("input[name='seat_type']").val();
+    		 var onClickId=$(id).val();
+    		 var onClickIdArr=onClickId.split(".");
+    		 var price=0;
     		 if(idvalue==0){
     		 idvalue=$(id).val();
+    		 	if(onClickIdArr[0]=="VIP"){
+    		 		price=$("input[name='vipprice']").val();
+    		 	}else if(onClickIdArr[0]=="R"){
+    		 		price=$("input[name='rprice']").val();
+    		 	}else if(onClickIdArr[0]=="S"){
+    		 		price=$("input[name='sprice']").val();
+    		 	}else if(onClickIdArr[0]=="A"){
+    		 		price=$("input[name='aprice']").val();
+    		 	}else if(onClickIdArr[0]=="B"){
+    		 		price=$("input[name='bprice']").val();
+    		 	}
+    		 
     		 }else{
+    			 price=(1*$("input[name='price']").val());
     			 idvalue=$("input[name='seat_type']").val();
     			 idvalue+=","+$(id).val();
+     		 	if(onClickIdArr[0]=="VIP"){
+    		 		price=(price*1)+($("input[name='vipprice']").val()*1);
+    		 	}else if(onClickIdArr[0]=="R"){
+    		 		price=(price*1)+($("input[name='rprice']").val()*1);
+    		 	}else if(onClickIdArr[0]=="S"){
+    		 		price=(price*1)+($("input[name='sprice']").val()*1);
+    		 	}else if(onClickIdArr[0]=="A"){
+    		 		price=(price*1)+($("input[name='aprice']").val()*1);
+    		 	}else if(onClickIdArr[0]=="B"){
+    		 		price=(price*1)+($("input[name='bprice']").val()*1);
+    		 	}
     		 } 		
     		 $("input[name='seat_type']").val(idvalue);
+    		 $("input[name='price']").val(price);
+    		 
     	}  
     
     });
@@ -95,7 +141,18 @@ $(document).ready(function(){
 		s=dtos.get(0).getS_seat();
 		a=dtos.get(0).getA_seat();
 		b=dtos.get(0).getB_seat();
-
+		int vipPrice=dtos.get(0).getVIP_seatPrice();
+		int rPrice=dtos.get(0).getR_seatPrice();
+		int sPrice=dtos.get(0).getS_seatPrice();
+		int aPrice=dtos.get(0).getA_seatPrice();
+		int bPrice=dtos.get(0).getB_seatPrice();
+		%>
+		<input type="hidden" name="vipprice" value="<%=vipPrice %>"> 		
+		<input type="hidden" name="rprice" value="<%=rPrice %>"> 		
+		<input type="hidden" name="sprice" value="<%=sPrice %>"> 		
+		<input type="hidden" name="aprice" value="<%=aPrice %>"> 		
+		<input type="hidden" name="bprice" value="<%=bPrice %>"> 		
+		<% 
 		String[] vipArr=null;
 		String[] rArr=null;
 		String[] sArr=null;
