@@ -29,7 +29,7 @@ $(document).ready(function(){
     	   		 if(idArr[i]!=idclick){
     	   			if(idvalue==""){
        	    		 idvalue=idArr[i];
-       	    		 }else{	 
+       	    		 }else{
        	    			 idvalue+=","+idArr[i];
        	    		 } 	
     	   		 }

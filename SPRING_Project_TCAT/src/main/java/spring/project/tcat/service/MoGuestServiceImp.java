@@ -61,11 +61,9 @@ public class MoGuestServiceImp implements MoGuestService {
 		dtos=MGDao.ticketSeat(per_id);
 		dtos2=MGDao.ticketPerformanceSeat(map);
 		model.addAttribute("dtos", dtos);
-<<<<<<< HEAD
-=======
+
 		model.addAttribute("dtos2", dtos2);
 		System.out.println(dtos.get(0).getVIP_seat());
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 
 	}
 	//사진게시판 리스트 가져오기

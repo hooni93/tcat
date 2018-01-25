@@ -157,11 +157,11 @@ function next(form){
 							</tr>
 							<tr>
 								<th>배송료</th>
-								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="3000" name="delpay"></td>
+								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="delpay"></td>
 							</tr>
 							<tr>
 								<th>총금액</th>
-								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="">
+								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0">
 							</tr>
 						</table>
 						<hr style="color:#fafafaf;margin:5px;">
