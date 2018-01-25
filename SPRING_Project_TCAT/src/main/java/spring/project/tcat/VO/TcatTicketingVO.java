@@ -38,96 +38,81 @@ public class TcatTicketingVO {
 	String per_step; // 공연 스텝
 	String remain_round; // 회차(하루간 공연회차)
 	int possible_age; // 관람가능연령
-	// <sale>
-	int sale_rate; // 할인률
-	// <delevaryInfo>
-	String del_name; // 이름
-	String del_addr; // 주소
-	String del_hp; // 연락처
-
-	
-	
-	
+    //<sale>
+ 	int 		sale_rate; 			//할인률
+	//<delevaryInfo>
+ 	String 		del_name;			//이름
+ 	String 		del_addr;			//주소
+ 	String 		del_hp;				//연락처
+ 	
+ 	int round;
+ 	
+	public int getRound() {
+		return round;
+	}
+	public void setRound(int round) {
+		this.round = round;
+	}
 	public String getPerf_title() {
 		return perf_title;
 	}
-
 	public void setPerf_title(String perf_title) {
 		this.perf_title = perf_title;
 	}
-
 	public int getCateNum() {
 		return cateNum;
 	}
-
 	public void setCateNum(int cateNum) {
 		this.cateNum = cateNum;
 	}
-
 	public String getPerf_Image() {
 		return perf_Image;
 	}
-
 	public void setPerf_Image(String perf_Image) {
 		this.perf_Image = perf_Image;
 	}
-
 	public Timestamp getStartDate() {
 		return startDate;
 	}
-
 	public void setStartDate(Timestamp startDate) {
 		this.startDate = startDate;
 	}
-
 	public Timestamp getEndDate() {
 		return endDate;
 	}
-
 	public void setEndDate(Timestamp endDate) {
 		this.endDate = endDate;
 	}
-
 	public int getHall_id() {
 		return hall_id;
 	}
-
 	public void setHall_id(int hall_id) {
 		this.hall_id = hall_id;
 	}
-
 	public String getFirst_grade() {
 		return first_grade;
 	}
-
 	public void setFirst_grade(String first_grade) {
 		this.first_grade = first_grade;
 	}
-
 	public String getPer_step() {
 		return per_step;
 	}
-
 	public void setPer_step(String per_step) {
 		this.per_step = per_step;
 	}
-
 	public String getRemain_round() {
 		return remain_round;
 	}
-
 	public void setRemain_round(String remain_round) {
 		this.remain_round = remain_round;
 	}
-
 	public int getPossible_age() {
 		return possible_age;
 	}
-
 	public void setPossible_age(int possible_age) {
 		this.possible_age = possible_age;
 	}
-
 	public int getTicket_num() {
 		return ticket_num;
 	}

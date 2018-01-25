@@ -786,12 +786,49 @@ public class TcatHostController {
 
 		return "tcat/memberManage/hostMemberRetire";
 	}
-
-	// 호스트 멤버 가입
+	 // 호스트 멤버 가입
 	@RequestMapping("hostMemberJoin")
 	public String hostMemberJoin(HttpServletRequest req, Model model) {
-		System.out.println("hostMemberJoin");
-		return "tcat/memberManage/hostMemberJoin";
+	   System.out.println("hostMemberJoin");
+	   return "tcat/memberManage/hostMemberJoin";
+	}
+	//공연상세 수정 페이지
+	@RequestMapping("detailPer")
+	public String detailPer(HttpServletRequest req, Model model) {
+	   System.out.println("detailPer");
+	  
+	   hService.detaillist(req,model);
+	  
+	   
+	   return "tcat/registItem/detailPer";
+	}
+	
+	//스토어 상세 수정 페이지
+	@RequestMapping("detailStore")
+	public String detailStore(HttpServletRequest req, Model model) {
+	   System.out.println("detailStore");
+	   
+	   hService.detaillist(req,model);
+	   
+	   return "tcat/registItem/detailStore";
+	}
+	//공연상세페이지 수정
+	@RequestMapping("updateDetailPer")
+	public String updateDetailPer(MultipartHttpServletRequest req, Model model) {
+	   System.out.println("updateDetailPer");
+	   
+	   hService.updateDetailPer(req,model);
+	   hService.detaillist(req,model);
+	   return "tcat/registItem/detailPer";
+	}
+	//스토어 상세 수정 페이지
+	@RequestMapping("updateDetailStore")
+	public String updateDetailStore(MultipartHttpServletRequest req, Model model) {
+	   System.out.println("updateDetailStore");
+	   
+	   hService.updateDetailStore(req,model);
+	   hService.detaillist(req,model);
+	   return "tcat/registItem/detailStore";
 	}
 	//////////////////////////////////// 현석 1/11 end/
 	//////////////////////////////////// /////////////////////////////////////////
@@ -888,7 +925,99 @@ public class TcatHostController {
 		YMService.eventGuest(req, model);
 		return "tcat/borderManager/eventHost";
 	}
-
+		//이벤트수정
+		@RequestMapping("eventUpdate")
+		public String eventUpdate(HttpServletRequest req,Model model) {
+			System.out.println("eventUpdate");
+			YMService.eventForm(req, model);
+			return "tcat/borderManager/eventUpdate";
+		}
+		//이벤트등록
+		@RequestMapping("eventAdd")
+		public String eventAdd(MultipartHttpServletRequest req,Model model) {
+			System.out.println("eventAdd");
+			YMService.eventAdd(req, model);
+			YMService.eventGuest(req, model);
+			return "tcat/borderManager/eventHost";
+		}
+		//구매승인사이트바
+		@RequestMapping("provalMain_side")
+		public String provalMain_side(HttpServletRequest req, Model model) {
+			System.out.println("provalMain_side");
+			return "tcat/proval/provalMain_side";
+		}
+		//구매승인
+		@RequestMapping("provalMain")
+		public String provalMain(HttpServletRequest req,Model model) {
+			System.out.println("provalMain");
+			hService.provalHost(req, model);
+			return "tcat/proval/provalMain";
+		}
+		//구매승인
+		@RequestMapping("provalUpdate")
+		public String provalUpdate(HttpServletRequest req,Model model) {
+			System.out.println("provalUpdate");
+			hService.provalUpdate(req, model);
+			hService.provalHost(req, model);
+			return "tcat/proval/provalMain";
+		}
+		//회원혜택관리
+		@RequestMapping("levelMember_side")
+		public String levelMember_side(HttpServletRequest req,Model model) {
+			System.out.println("levelMember_side");
+			return "tcat/memberManage/levelMember_side";
+		}
+		//회원혜택관리
+		@RequestMapping("levelMember")
+		public String levelMember(HttpServletRequest req,Model model) {
+			System.out.println("levelMember");
+			hService.levelMember(req, model);
+			return "tcat/memberManage/levelMember";
+		}
+		//혜택삭제
+		@RequestMapping("levelDelete")
+		public String levelDelete(HttpServletRequest req,Model model) {
+			System.out.println("levelDelete");
+			hService.levelDelete(req, model);
+			hService.levelMember(req, model);
+			return "tcat/memberManage/levelMember";
+		}
+		//혜택수정
+		@RequestMapping("levelMemberForm")
+		public String levelMemberForm(HttpServletRequest req,Model model) {
+			System.out.println("levelMemberForm");
+			hService.levelMemberForm(req, model);
+			return "tcat/memberManage/levelMemberForm";
+		}
+		//혜택업데이트
+		@RequestMapping("levelMemberUpdate")
+		public String levelMemberUpdate(HttpServletRequest req,Model model) {
+			System.out.println("levelMemberUpdate");
+			hService.levelMemberUpdate(req, model);
+			hService.levelMember(req, model);
+			return "tcat/memberManage/levelMember";
+		}
+		//혜택등록
+				@RequestMapping("levelAdd")
+				public String levelAdd(MultipartHttpServletRequest req,Model model) {
+					System.out.println("levelAdd");
+					hService.levelAdd(req, model);
+					hService.levelMember(req, model);
+					return "tcat/borderManager/levelMember";
+		}
+		//등급분석사이드
+		@RequestMapping("infoLevel_side")
+		public String infoLevel_side(HttpServletRequest req,Model model) {
+			System.out.println("infoLevel_side");
+			return "tcat/memberAnalysis/infoLevel_side";
+		}
+		//등급분석사이드
+		@RequestMapping("infoLevel")
+		public String infoLevel(HttpServletRequest req,Model model) {
+			System.out.println("infoLevel");
+			return "tcat/memberAnalysis/infoLevel";
+		}
+/////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민  //////////////////////////////
 	// 이벤트삭제
 	@RequestMapping("eventDelete")
 	public String eventDelete(HttpServletRequest req, Model model) {
@@ -898,13 +1027,6 @@ public class TcatHostController {
 		return "tcat/borderManager/eventHost";
 	}
 
-	// 이벤트수정
-	@RequestMapping("eventUpdate")
-	public String eventUpdate(HttpServletRequest req, Model model) {
-		System.out.println("eventUpdate");
-		YMService.eventForm(req, model);
-		return "tcat/borderManager/eventUpdate";
-	}
 
 	// 이벤트수정
 	@RequestMapping("eventUpdateList")
@@ -915,38 +1037,6 @@ public class TcatHostController {
 		return "tcat/borderManager/eventHost";
 	}
 
-	// 이벤트등록
-	@RequestMapping("eventAdd")
-	public String eventAdd(MultipartHttpServletRequest req, Model model) {
-		System.out.println("eventAdd");
-		YMService.eventAdd(req, model);
-		YMService.eventGuest(req, model);
-		return "tcat/borderManager/eventHost";
-	}
-
-	// 구매승인사이트바
-	@RequestMapping("provalMain_side")
-	public String provalMain_side(HttpServletRequest req, Model model) {
-		System.out.println("provalMain_side");
-		return "tcat/proval/provalMain_side";
-	}
-
-	// 구매승인
-	@RequestMapping("provalMain")
-	public String provalMain(HttpServletRequest req, Model model) {
-		System.out.println("provalMain");
-		hService.provalHost(req, model);
-		return "tcat/proval/provalMain";
-	}
-
-	// 구매승인
-	@RequestMapping("provalUpdate")
-	public String provalUpdate(HttpServletRequest req, Model model) {
-		System.out.println("provalUpdate");
-		hService.provalUpdate(req, model);
-		hService.provalHost(req, model);
-		return "tcat/proval/provalMain";
-	}
 
 	/////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민
 	/////////////////// //////////////////////////////
@@ -1092,13 +1182,13 @@ public class TcatHostController {
 	////////////////////// 태성 1/21 start////////////////////////////
 	// 관람/상품 후기 관리 게시판 목록
 	@RequestMapping("commentManager")
-	public String commentManager(HttpServletRequest req, Model model) {
-		System.out.println("commentManager");
-
-		hService.commentList(req, model);
-
-		return "tcat/borderManager/commentManager";
-
+	public String commentManager(HttpServletRequest req,Model model) {
+	System.out.println("commentManager");
+	
+	hService.commentList(req, model);
+	req.getSession().setAttribute("page", "commentManagerCate");
+	
+	return "tcat/borderManager/commentManager";
 	}
 
 	// 관람/상품 후기 관리 게시판_side
@@ -1119,5 +1209,75 @@ public class TcatHostController {
 
 		return "tcat/borderManager/commentManager";
 	}
-
+//////////////////////태성 1/21 end////////////////////////////
+//////////////////////태성 1/23 start////////////////////////////
+	@RequestMapping("productRefund_side")
+	public String productRefund_side(HttpServletRequest req,Model model) {
+	System.out.println("productRefund_side");
+	return "tcat/productManager/productRefund_side";
+	}
+	
+	//공연 환불 - 목록
+	@RequestMapping("productRefund")
+	public String productRefund(HttpServletRequest req,Model model) {
+		
+	System.out.println("productRefund");
+	hService.productRefundBoard(req, model);
+	return "tcat/productManager/productRefund";
+	
+	}
+	
+	//스토어 환불 - 목록
+	@RequestMapping("productRefundS")
+	public String productRefundS(HttpServletRequest req,Model model) {
+		
+	System.out.println("productRefundS");
+	hService.productRefundBoardS(req, model);
+	
+	return "tcat/productManager/productRefundS";
+	}
+	
+	//공연 환불 - 승인
+	@RequestMapping("productRefundUpdate")
+	public String productRefundUpdate(HttpServletRequest req,Model model) {
+		
+	System.out.println("productRefundUpdate");
+	hService.productRefundUpdate(req, model);
+	hService.productRefundBoard(req, model);
+	
+	return "tcat/productManager/productRefund";
+	}
+	//공연 환불 - 취소
+	@RequestMapping("productRefundCancel")
+	public String productRefundCancel(HttpServletRequest req,Model model) {
+	System.out.println("productRefundCancel");
+	
+	hService.productRefundCancel(req, model);
+	hService.productRefundBoard(req, model);
+	
+	return "tcat/productManager/productRefund";
+	}
+	//스토어 환불 - 승인
+	@RequestMapping("productRefundUpdateS")
+	public String productRefundUpdateS(HttpServletRequest req,Model model) {
+		
+	System.out.println("productRefundUpdateS");
+	
+	hService.productRefundUpdateS(req, model);
+	hService.productRefundBoardS(req, model);
+	
+	return "tcat/productManager/productRefundS";
+	}
+	//스토어 환불 - 취소
+	@RequestMapping("productRefundCancelS")
+	public String productRefundCancelS(HttpServletRequest req,Model model) {
+		
+	System.out.println("productRefundCancelS");
+	
+	hService.productRefundCancelS(req, model);
+	hService.productRefundBoardS(req, model);
+	
+	return "tcat/productManager/productRefundS";
+	}
+//////////////////////태성 1/23 end////////////////////////////
 }

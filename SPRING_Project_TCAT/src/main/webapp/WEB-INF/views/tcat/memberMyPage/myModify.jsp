@@ -66,7 +66,7 @@
 				+ "<span style='display: none; color: red;' id='addrError'>필수입력입니다.</span>"
 				+ "</div>";
 		addrModify.innerHTML = msg;
-	}
+	}member_pwd,member_pwd1,member_hp,postNum,addr,detailAddr
 </script>
 <script>
 	$(function() {
@@ -245,13 +245,11 @@
 
 
 						<div class="form-group text-center">
-							<button type="button" class="btn btn-info"
-								onclick="myModifySubmit('myModifyUpdate');">
+							<button type="button" class="btn btn-info" onclick="myModifySubmit('myModifyUpdate');">
 								수정완료<i class="fa fa-check spaceLeft"></i>
 							</button>
 							<button type="submit" class="btn btn-warning">
-								수정취소<i class="fa fa-times spaceLeft"
-									onclick="window.history.go(-2);"></i>
+								수정취소<i class="fa fa-times spaceLeft" onclick="load('myPage');"></i>
 							</button>
 						</div>
 

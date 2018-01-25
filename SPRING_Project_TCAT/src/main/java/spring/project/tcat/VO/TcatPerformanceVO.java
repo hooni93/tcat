@@ -67,7 +67,9 @@ public class TcatPerformanceVO {
     String per_step;		//공연 스텝        
     String remain_round;	//회차(하루간 공연회차)    
     int possible_age; 		//관람가능연령
-    //category
+    String movie_url;
+
+	//category
     String category;		//카테고리(스토어,공연)
     String mDev;			//중분류
     String sDev;			//소분류
@@ -101,8 +103,21 @@ public class TcatPerformanceVO {
     Timestamp ticet_date;
     String seat_type;
     String seat_num;
+    String ticet_max;  //영민 핫리스트 판매량 
 
-    //get,setter
+    public String getTicet_max() {
+		return ticet_max;
+	}
+	public void setTicet_max(String ticet_max) {
+		this.ticet_max = ticet_max;
+	}
+	//get,setter
+    public String getMovie_url() {
+		return movie_url;
+	}
+	public void setMovie_url(String movie_url) {
+		this.movie_url = movie_url;
+	}
     public String getSeat_num() {
 		return seat_num;
 	}

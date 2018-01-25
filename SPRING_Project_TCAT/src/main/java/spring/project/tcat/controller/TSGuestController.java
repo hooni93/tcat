@@ -93,17 +93,6 @@ public class TSGuestController {
 		
 		return "tcat/commentBoard/commentBoard";
 	}
-
-		/*//게스트 관람/후기 목록
-		@RequestMapping("commentList")
-		public String commentList(HttpServletRequest req,Model model) {
-		System.out.println("commentList");
-		
-		TSGService.selectComment(req, model);
-		TSGService.commentWrite(req, model);	
-		
-		return "tcat/content/watchLatter";
-		}*/
 		
 		//게스트 관람/후기 목록
 		@RequestMapping("watchLatter")
@@ -125,5 +114,24 @@ public class TSGuestController {
 		
 		return "tcat/content/watchLatter";
 		}
-	
+		
+		//게스트 상품/후기 목록
+		@RequestMapping("watchLatterS")
+		public String watchLatterS(HttpServletRequest req,Model model) {
+		System.out.println("watchLatterS");
+		
+		TSGService.selectCommentS(req, model);
+		
+		return "tcat/content/watchLatterS";
+		}
+		//게스트 관람/후기 한줄평 쓰기
+		@RequestMapping("commentWriteS")
+		public String commentWriteS(HttpServletRequest req,Model model) {
+			
+		System.out.println("commentWriteS");
+		TSGService.commentWriteS(req, model);	
+				
+		return "tcat/content/watchLatterS";
+		}
+		
 }

@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../setting.jsp"%>
@@ -75,16 +76,29 @@
 </style>
 <script type="text/javascript">
 function roundBt(round,form,per_id){
+ 	var ticet_date=form.ticet_date.value;
+ 	var sysday=ticet_date.split("-");
 	
-	if(form.ticet_date.value=="0"){
+	
+	 var date=new Date();
+	var dateDay=date.getDate();
+	var dateHours=date.getHours();
+	
+	 
+	var split1=round.split('/');
+	var split2=split1[1].split(':');
+	if(ticet_date=="0"){
 		alert("날짜를 먼저 선택해주세요!");
+	}else if(sysday[2]==dateDay&&dateHours>=split2[0]){
+		alert("마감되었습니다!");
+		$("#RemainingSeats").load("${pageContext.request.contextPath}/fake");
 	}else{
+
 		$("input[name='round']").val(round);
 		
 		var url="RemainingSeats?round="+round+"&ticet_date="+form.ticet_date.value+"&per_id="+per_id;
 		$("#RemainingSeats").load("${pageContext.request.contextPath}/"+ url);	
 	}
-	
 }
 
 //날짜 캘린더 출력하기
@@ -119,6 +133,7 @@ jQuery(function($){
     	beforeShowDay: noSundays,
    		onSelect: function(dateText, inst) { //선택한 데이터를 input박스에 넣기
     		$("input[name='ticet_date']").val(dateText);
+   			
    		}
     });
 });
@@ -130,11 +145,11 @@ function noSundays(date) {
 	 var eDate=endDate.split(" ");
 	 var ssDate=sDate[0].split("-");
 	 var eeDate=eDate[0].split("-");
-	 var sssDate=new Date(ssDate[0], ssDate[1], ssDate[2]);
-	 var eeeDate=new Date(eeDate[0], eeDate[1], eeDate[2]);
-	 
-	 if(date<sssDate||date>eeeDate){
-		 return[false];
+	 var sssDate=new Date(ssDate[0], (ssDate[1]*1)-1, ssDate[2]);
+	 var eeeDate=new Date(eeDate[0], (eeDate[1]*1)-1, eeDate[2]);
+	 var sysdate=new Date();
+	 if(date<new Date()&&date.getDate()!=sysdate.getDate()||date<sssDate||date>eeeDate){
+			 return[false];
 	 }
 	 return [true];
 }
@@ -169,7 +184,7 @@ function noSundays(date) {
 								<div style="border:1px solid #dddddd; height:200px;" id="round">
 									<c:set var="round" value="${fn:split(vo.remain_round,',')}"/>
 									<c:forEach var="remain_round" items="${round}">
-										<input type="button" class="roundButton" style="margin:1.5px 10px;" value="${remain_round}" onclick="roundBt(this.value,this.form,'${vo.per_id}')"><br>
+											<input type="button" class="roundButton" style="margin:1.5px 10px;" value="${remain_round}" onclick="roundBt(this.value,this.form,'${vo.per_id}')"><br>
 									</c:forEach>
 								</div>
 							</td>

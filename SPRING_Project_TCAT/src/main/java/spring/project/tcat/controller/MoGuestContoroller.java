@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import spring.project.tcat.service.MoGuestService;
 
@@ -24,7 +25,7 @@ public class MoGuestContoroller {
 	@RequestMapping("guestMain")
 	public String guestMain(HttpServletRequest req,Model model) {
 		System.out.println("guestMain");
-		MGService.hotList(req, model);
+		MGService.guestMainList(req, model);
 		return "tcat/guestMain/guestMain";
 	}
 	//뮤지컬 전체 메인 리스트 페이지 
@@ -68,7 +69,8 @@ public class MoGuestContoroller {
 	public String ticketSeat(HttpServletRequest req,Model model) {
 		System.out.println("ticketSeat");
 		MGService.ticketSeat(req, model);
-		return "tcat/store/ticketSeat";
+		System.out.println("여기가 마지노선이다");
+		return "tcat/Ticketing/ticketSeat";
 	}
 	//사진 게시판 가져오기
 	@RequestMapping("photoBoarder")
@@ -85,8 +87,84 @@ public class MoGuestContoroller {
 		photoBoarder(req, model);
 		return "tcat/Boarder/photoBoarder";
 	}
+	//사진게시판 게시하기 
+	@RequestMapping("insertPhotoBoarder")
+	public String insertPhotoBoarder(MultipartHttpServletRequest req,Model model) {
+		System.out.println("insertPhotoBoarder");
+		MGService.insertPhotoBoarder(req, model);
+		MGService.photoBoarderList(req, model);
+		return "tcat/Boarder/photoBoarder";
+	}
+	//사진게시판 삭제
+	@RequestMapping("photoBorderDelete")
+	public String photoBorderDelete(HttpServletRequest req,Model model) {
+		System.out.println("photoBorderDelete");
+		MGService.photoBorderDelete(req, model);
+		MGService.photoBoarderList(req, model);
+		return "tcat/Boarder/photoBoarder";
+	}
 	
+	//사진게시판 수정
+	@RequestMapping("noMoPhotoBoarder")
+	public String noMoPhotoBoarder(MultipartHttpServletRequest req,Model model) {
+		System.out.println("noMoPhotoBoarder");
+		MGService.noMoPhotoBoarder(req, model);
+		MGService.photoBoarderList(req, model);
+		return "tcat/Boarder/photoBoarder";
+	}
 	
+	//영상 게시판 가져오기
+		@RequestMapping("movieBoarder")
+		public String movieBoarder(HttpServletRequest req,Model model) {
+			System.out.println("movieBoarder");
+			MGService.movieBoarderList(req, model);
+			return "tcat/Boarder/movieBoarder";
+		}
+	
+	//영상게시판 답글 달기
+	@RequestMapping("MovieBoarderCommentWrite")
+	public String MovieBoarderCommentWrite(HttpServletRequest req,Model model) {
+		System.out.println("MovieBoarderCommentWrite");
+		MGService.MovieBoarderCommentWrite(req, model);
+		MGService.movieBoarderList(req, model);
+		return "tcat/Boarder/movieBoarder";
+	}
+	
+	//영상게시판 게시하기 
+	@RequestMapping("insertMovieBoarder")
+	public String insertMovieBoarder(MultipartHttpServletRequest req,Model model) {
+		System.out.println("insertMovieBoarder");
+		MGService.insertMovieBoarder(req, model);
+		MGService.movieBoarderList(req, model);
+		return "tcat/Boarder/movieBoarder";
+	}
+	
+	//사진게시판 삭제
+	@RequestMapping("movieBorderDelete")
+	public String movieBorderDelete(HttpServletRequest req,Model model) {
+		System.out.println("movieBorderDelete");
+		MGService.movieBorderDelete(req, model);
+		MGService.movieBoarderList(req, model);
+		return "tcat/Boarder/movieBoarder";
+	}
+	
+	//핫카테고리 구현
+	@RequestMapping("hotCategory")
+	public String hotCategory(HttpServletRequest req,Model model) {
+		System.out.println("hotCategory");
+		MGService.hotList(req, model);
+		return "tcat/guestMain/hotCategory";
+	}
+	
+	//메인화면 무비 영상 
+	@RequestMapping("movieMain")
+	public String movieMain(HttpServletRequest req,Model model) {
+		System.out.println("movieMain");
+		String movie_url=req.getParameter("movie_url");
+		System.out.println(movie_url);
+		model.addAttribute("movie_url", movie_url);
+		return "tcat/guestMain/movieMain";
+	}
 	
 	
 	

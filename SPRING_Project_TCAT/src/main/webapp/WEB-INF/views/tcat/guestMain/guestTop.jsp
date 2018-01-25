@@ -184,6 +184,12 @@
 	function contentMain_store(disc_code) {
 		load('contentMain_store?disc_code=' + disc_code);
 	}
+	//이벤트 상세페이지
+	
+	function hotCategoryLoad(url){
+		$("#hotMainResult").load("${pageContext.request.contextPath}/" + url);
+	}
+	
 </script>
 </head>
 <body>
@@ -211,9 +217,6 @@
 							<li><a onclick="load('wishList?wish_step=1');">위시리스트</a></li>
 							<li><a onclick="load('cartList');">장바구니</a></li>
 						</c:if>
-
-						<li><a href="#">모바일APP</a></li>
-
 						<li><a onclick="load('commentBoard');">후기</a></li>
 						<li><a onclick="load('intro');">회사</a></li>
 					</ol>
@@ -277,7 +280,7 @@
 
 					<ul class="nav navbar-nav">
 						<li><a class="trgothic ffffff fs14px b mr20 guestMenuHover"
-							onclick="load('dayList')">날짜</a></li>
+							onclick="load('dayListMain')">날짜</a></li>
 						<li><a class="trgothic ffffff fs14px b mr20 guestMenuHover"
 							onclick="load('placeList')">지역</a></li>
 

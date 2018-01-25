@@ -133,6 +133,13 @@ public interface HostService {
 	public void HostMemberList(HttpServletRequest req,Model model);
 	//관리자 삭제
 	public void deleteHost(HttpServletRequest req,Model model);
+	//상세페이지 정보 가져오기
+	public void detaillist(HttpServletRequest req,Model model);
+	//상세페이지 정보 업데이트[스토어]
+	public void updateDetailStore(MultipartHttpServletRequest req,Model model);
+	//상세페이지 정보 업데이트[공연]
+	public void updateDetailPer(MultipartHttpServletRequest req,Model model);
+		
 	////////////////////////////////////현석 1/11 end //////////////////////////////////////////
 
 	
@@ -149,6 +156,16 @@ public interface HostService {
 	public void provalHost(HttpServletRequest req,Model model);
 	//구매업데이트
 	public void provalUpdate(HttpServletRequest req,Model model);
+	//혜택관리
+	public void levelMember(HttpServletRequest req,Model model);
+	//혜택삭제
+	public void levelDelete(HttpServletRequest req,Model model);
+	//혜택상세
+	public void levelMemberForm(HttpServletRequest req,Model model);
+	//혜택업데이트
+	public void levelMemberUpdate(HttpServletRequest req,Model model);
+	//혜택등록
+	public void levelAdd(HttpServletRequest req,Model model);
 	////////////////////////////////////영민 1/11 end //////////////////////////////////////////
 	
 
@@ -185,5 +202,20 @@ public interface HostService {
 	public void commentList(HttpServletRequest req, Model model);
 	//관람/상품 후기 삭제
 	public void commentDelete(HttpServletRequest req, Model model);
+	
+	// 환불 승인할 목록 - 공연
+	public void productRefundBoard(HttpServletRequest req, Model model);
+	// 환불 승인할 목록 - 스토어
+	public void productRefundBoardS(HttpServletRequest req, Model model);
+	
+	// 환불 승인 - 공연
+	public void productRefundUpdate(HttpServletRequest req, Model model);
+	// 환불 취소 - 공연
+	public void productRefundCancel(HttpServletRequest req, Model model);
+	
+	// 환불 승인 - 스토어
+	public void productRefundUpdateS(HttpServletRequest req, Model model);
+	// 환불 취소 - 스토어
+	public void productRefundCancelS(HttpServletRequest req, Model model);
 	///////////////////////  태성 1/21 end ///////////////////////////
 }

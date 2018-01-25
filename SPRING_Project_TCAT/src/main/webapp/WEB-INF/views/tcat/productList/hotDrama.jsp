@@ -44,7 +44,7 @@
 										<td>${v.perf_title}</td>
 										<td>${v.mDev}</td>
 										<td>${v.sDev}</td>
-										<td>${v.gu}</td>
+										<td>${v.ticet_max}</td>
 										<td>${v.per_step}</td>
 										<td><c:if test="${vo.size()!=null}">
 												<button type="button" class="btn btn-primary"
@@ -79,7 +79,7 @@
 										<td>${full.perf_title}</td>
 										<td>${full.mDev}</td>
 										<td>${full.sDev}</td>
-										<td>${full.gu}</td>
+										<td>${full.ticet_max}</td>
 										<td>${full.per_step}</td>
 										<td><c:if test="${vo.size()==null}">
 												<button type="button" class="btn btn-primary"
@@ -129,13 +129,14 @@
 							</tr>
 						</table>
 
-						<!-- <form class="navbar-form navbar-right" role="search"
+						<form class="navbar-form navbar-right" role="search"
 							id="ajaxSubmitForm" onsubmit="return false">
 							카테고리 
 							<select id="sDev" name="sDev" class="m10 p5">
 								<option value="0">분류</option>
 								<option value="1">공연번호</option>
 								<option value="2">제목</option>
+								<option value="3">소분류</option>
 							</select>
 
 							<div class="form-group">
@@ -144,8 +145,7 @@
 							</div>
 							<button type="button" class="btn btn-default"
 								onclick="ajaxSubmit('hotDrama')">검색</button>
-				
-						</form> -->
+						</form>
 
 					</div>
 				</div>

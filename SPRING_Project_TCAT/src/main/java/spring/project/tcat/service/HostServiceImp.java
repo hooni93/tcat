@@ -26,12 +26,14 @@ import spring.project.tcat.VO.CategoryVO;
 import spring.project.tcat.VO.HostVO;
 import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.ProductRankVO;
+import spring.project.tcat.VO.SaleVO;
 import spring.project.tcat.VO.SelectHellInfoVO;
 import spring.project.tcat.VO.TcatBoardVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 import spring.project.tcat.VO.TcatTicketingVO;
+import spring.project.tcat.VO.detailPageVO;
 import spring.project.tcat.persistence.HostDAO;
 import spring.project.tcat.persistence.HostDAOImp;
 
@@ -2219,6 +2221,8 @@ public class HostServiceImp implements HostService {
 			String disc_step = "1";
 			int disc_count = Integer.parseInt(req.getParameter("disc_count"));
 
+			
+			
 			dto.setDisc_title(disc_title);
 			dto.setDisc_price(disc_price);
 			dto.setDisc_image(disc_image);
@@ -2236,6 +2240,8 @@ public class HostServiceImp implements HostService {
 					+ "==================================\n");
 			hDao.insertStore(dto);
 
+			int detail_num = hDao.SearchDetail_numStore();
+			hDao.insertDetailP_DEFAULT(detail_num);
 		} catch (Exception e) {
 			e.printStackTrace();
 			int error = 1;
@@ -2549,6 +2555,95 @@ public class HostServiceImp implements HostService {
 		req.setAttribute("deleteHost", deleteHost);
 
 	}
+	//상세페이지 정보 가져오기
+	@Override
+	public void detaillist(HttpServletRequest req, Model model) {
+		int detail_num=Integer.parseInt(req.getParameter("detail_num"));
+		
+		detailPageVO dto=new detailPageVO();
+		dto=hDao.detaillist(detail_num);
+		
+		model.addAttribute("dto",dto);
+		model.addAttribute("detail_num", detail_num);
+		
+	}
+	@Override
+	public void updateDetailStore(MultipartHttpServletRequest req, Model model) {
+		MultipartFile file = req.getFile("Detail_Image");
+
+		String realDir = "E:\\Team_project\\projectGit\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\store\\";
+		String saveDir = req.getRealPath("/resources/image/store/");
+		try {
+
+			file.transferTo(new File(saveDir + file.getOriginalFilename()));
+
+			FileInputStream fis = new FileInputStream(saveDir + file.getOriginalFilename());
+			FileOutputStream fos = new FileOutputStream(realDir + file.getOriginalFilename());
+
+			int data = 0;
+
+			while ((data = fis.read()) != -1) {
+				fos.write(data);
+			}
+			fis.close();
+			fos.close();
+
+			String per_ex=req.getParameter("per_ex");
+			String Detail_Image=file.getOriginalFilename();
+			int detail_num=Integer.parseInt(req.getParameter("detail_num"));
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("per_ex", per_ex);
+			map.put("Detail_Image", Detail_Image);
+			map.put("detail_num", detail_num);
+			
+			hDao.updateDetail(map);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			int error = 1;
+			req.setAttribute("error2", error);
+		}
+
+		
+	}
+	@Override
+	public void updateDetailPer(MultipartHttpServletRequest req, Model model) {
+		MultipartFile file = req.getFile("Detail_Image");
+
+		String realDir = "E:\\Team_project\\projectGit\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\performance\\";
+		String saveDir = req.getRealPath("/resources/image/performance/");
+		try {
+
+			file.transferTo(new File(saveDir + file.getOriginalFilename()));
+
+			FileInputStream fis = new FileInputStream(saveDir + file.getOriginalFilename());
+			FileOutputStream fos = new FileOutputStream(realDir + file.getOriginalFilename());
+
+			int data = 0;
+
+			while ((data = fis.read()) != -1) {
+				fos.write(data);
+			}
+			fis.close();
+			fos.close();
+
+		
+			String per_ex=req.getParameter("per_ex");
+			String Detail_Image=file.getOriginalFilename();
+			int detail_num=Integer.parseInt(req.getParameter("detail_num"));
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("per_ex", per_ex);
+			map.put("Detail_Image", Detail_Image);
+			map.put("detail_num", detail_num);
+			
+			hDao.updateDetail(map);
+
+		} catch (Exception e) {
+			
+		}
+
+		
+	}
 	//////////////////////////////////// 현석 1/11////////////////////////////////////
 
 	//////////// HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민 ////////
@@ -2776,9 +2871,117 @@ public class HostServiceImp implements HostService {
 		int updateCnt = 0;
 		int num = Integer.parseInt(req.getParameter("ticket_num"));
 		updateCnt = hDao.provalUpdateCnt(num);
-
 		model.addAttribute("updateCnt", updateCnt);
 
+	}
+	//고객혜택관리
+	@Override
+	public void levelMember(HttpServletRequest req, Model model) {
+		int cnt = 0; // 글갯수
+		int pageSize = 3; // 한 페이지당 출력할 글 갯수
+		int pageBlock = 2; // 한 블럭당 페이지 갯수
+
+		int start = 0; // 현재 페이지 글시작번호
+		int end = 0; // 현재 페이지 글 마지막번호
+		String pageNum = null; // 페이지 번호
+		int currentPage = 0; // 현재 페이지
+
+		int pageCount = 0; // 페이지 갯수
+		int startPage = 0; // 시작 페이지
+		int endPage = 0; // 마지막 페이지
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		cnt = hDao.levelCnt();
+		System.out.println("cnt======" + cnt);
+		pageNum = req.getParameter("pageNum");
+		if (pageNum == null) {
+			pageNum = "1";
+		}
+		currentPage = (Integer.parseInt(pageNum));
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0); // 페이지 갯수 + 나머지
+		start = (currentPage - 1) * pageSize + 1;
+		end = start + pageSize - 1;
+		if (end > cnt)
+			end = cnt;
+		System.out.println("cnt====" + cnt);
+
+		if (cnt > 0) {
+			map.put("start", start);
+			map.put("end", end);
+
+			ArrayList<SaleVO> dtos = hDao.levelList(map);
+
+			System.out.println("dtos:" + dtos.size());
+			model.addAttribute("dtos", dtos);
+		}
+
+		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5/3)* 3+ 1= 4
+		if (currentPage % pageBlock == 0)
+			startPage -= pageBlock; // (5%3)==0
+		endPage = startPage + pageBlock - 1; // 4+3 -1 =6
+		if (endPage > pageCount)
+			endPage = pageCount;
+
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("pageNum", pageNum);
+
+		if (cnt > 0) {
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageBlock", pageBlock);
+			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("currentPage", currentPage);
+		}
+		
+	}
+	//혜택삭제
+	@Override
+	public void levelDelete(HttpServletRequest req, Model model) {
+		int deleteCnt=0;
+		String sale=req.getParameter("sale_div");
+		System.out.println("sale_div====="+sale);
+		deleteCnt = hDao.levelDeleteCnt(sale);
+		model.addAttribute("deleteCnt", deleteCnt);
+		
+	}
+	//혜택상세
+	@Override
+	public void levelMemberForm(HttpServletRequest req, Model model) {
+		String sale_div=req.getParameter("sale_div");
+		ArrayList<SaleVO> dtos=hDao.levelMemberForm(sale_div);
+		model.addAttribute("dtos", dtos);
+		/*int sale_rate=Integer.parseInt(req.getParameter("sale_rate"));
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("sale_div", sale_div);
+		map.put("sale_rate", sale_rate);*/
+	}
+	//혜택업데이트
+	@Override
+	public void levelMemberUpdate(HttpServletRequest req, Model model) {
+		int levelCnt=0;
+		String sale_div=req.getParameter("sale_div");
+		int sale_rate=Integer.parseInt(req.getParameter("sale_rate"));
+		
+		System.out.println("sale_div===="+sale_div);
+		System.out.println("sale_rate===="+sale_rate);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("sale_div", sale_div);
+		map.put("sale_rate", sale_rate);
+		levelCnt=hDao.levelUpdateCnt(map);
+		model.addAttribute("levelCnt", levelCnt);
+	}
+	//혜택등록
+	@Override
+	public void levelAdd(HttpServletRequest req, Model model) {
+		int addCnt=0;
+		String sale_div=req.getParameter("sale_div");
+		int sale_rate=Integer.parseInt(req.getParameter("sale_rate"));
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("sale_div",sale_div);
+		map.put("sale_rate",sale_rate);
+		addCnt=hDao.levelAdd(map);
+		model.addAttribute("addCnt", addCnt);
 	}
 
 	///////////// HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-23 성영민 ///////////////
@@ -3232,6 +3435,7 @@ public class HostServiceImp implements HostService {
 		int pageCount = 0; // 페이지 개수
 		int startPage = 0; // 시작 페이지
 		int endPage = 0; // 마지막 페이지
+		int Hcnt = 0;
 		String sDev = "";
 		String keyword = "";
 
@@ -3243,8 +3447,8 @@ public class HostServiceImp implements HostService {
 		keyword = req.getParameter("keyword");
 		System.out.println("keyword -----> :" + keyword);
 
+		String commentManagerCate = "";
 		String category = "";
-
 		if (sDev == null) {
 			sDev = "0";
 		}
@@ -3252,13 +3456,34 @@ public class HostServiceImp implements HostService {
 		if (keyword == null) {
 			keyword = "";
 		}
+		try {
+			commentManagerCate = req.getParameter("commentManagerCate");
+		} catch (Exception e) {
+
+		}
+		if (commentManagerCate == null) {
+			commentManagerCate = "공연";
+		}
+		
+		System.out.println("Host 서비스 첫번째 출입니다. ");
+		if (commentManagerCate.equals("공연")) {
+			Hcnt = 1;
+		} else if (commentManagerCate.equals("스토어")) {
+			Hcnt = 4;
+		}
 		System.out.println("TSGuset 관람후기관리 목록 서비스 첫번째 출입니다. ");
 		Map<String, Object> map = new HashMap<String, Object>();
-
+		map.put("Hcnt", commentManagerCate); // category에서 보낸 cnt값
 		map.put("keyword", keyword);
 		map.put("sDev", sDev);
 		System.out.println("keyword" + map.get("keyword") + "\n" + "sDev" + sDev);
-		cnt = hDao.commentCnt(map);
+		
+		if (commentManagerCate.equals("스토어")) {
+			cnt = hDao.commentCntS(map);
+		} else {
+			cnt = hDao.commentCnt(map);
+		}
+		
 		/* cnt = hDao.getStore(map); */
 
 		System.out.println("cnt :" + cnt);
@@ -3324,10 +3549,12 @@ public class HostServiceImp implements HostService {
 		if (endPage > pageCount)
 			endPage = pageCount;
 
+		model.addAttribute("category", category);
 		model.addAttribute("sDev", sDev);
 		model.addAttribute("keyword", keyword);
-		model.addAttribute("category", category); // cnt == 글 개수
+		model.addAttribute("commentManagerCate",commentManagerCate); // cnt == 글 개수
 		model.addAttribute("cnt", cnt); // cnt == 글 개수
+		model.addAttribute("Hcnt", Hcnt); // cnt == 글 개수
 		model.addAttribute("number", number); // number == 글번호
 		model.addAttribute("pageNum", pageNum); // pageNum 페이지 번호
 
@@ -3354,6 +3581,305 @@ public class HostServiceImp implements HostService {
 		model.addAttribute("url", (String) req.getParameter("url"));
 		model.addAttribute("commentDel", commentDel);
 
+	}
+	
+	// 환불 목록 - 공연
+	@Override
+	public void productRefundBoard(HttpServletRequest req, Model model) {
+		int pageSize = 10; // 한 페이지당 출력할 글 개수
+		int pageBlock = 3; // 한 블럭당 페이지 개수
+
+		int cnt = 0; // 글 개수
+		int start = 0; // 현재 페이지 글시작번호
+		int end = 0; // 현재 페이지 글마지막 번호
+		int number = 0; // 출력할 글 번호
+		String pageNum = null; // 페이지 번호
+		int currentPage = 0; // 현재 페이지
+
+		int pageCount = 0; // 페이지 개수
+		int startPage = 0; // 시작 페이지
+		int endPage = 0; // 마지막 페이지
+		
+		String sDev = "";
+		String keyword = "";
+
+		// 검색추가(01/16)-------------------
+
+		sDev = req.getParameter("sDev");
+		System.out.println("sDev -----> :" + sDev);
+
+		keyword = req.getParameter("keyword");
+		System.out.println("keyword -----> :" + keyword);
+
+		
+		String category = "";
+		
+		if (sDev == null) {
+			sDev = "0";
+		}
+
+		if (keyword == null) {
+			keyword = "";
+		}
+		
+		System.out.println("Host 서비스 첫번째 출입니다. ");
+	
+		System.out.println("TSGuset 관람후기관리 목록 서비스 첫번째 출입니다. ");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyword", keyword);
+		map.put("sDev", sDev);
+		System.out.println("keyword" + map.get("keyword") + "\n" + "sDev" + sDev);
+		
+		cnt = hDao.refundCnt(map);
+
+		
+		/* cnt = hDao.getStore(map); */
+
+		System.out.println("cnt :" + cnt);
+		pageNum = req.getParameter("pageNum");
+		System.out.println("pageNum" + pageNum);
+
+		if (pageNum == null) {
+			pageNum = "1"; // 첫페이지를 1페이지로 설정
+		}
+		System.out.println("pageNum+Host service --> categoryList-->: " + pageNum);
+		currentPage = (Integer.parseInt(pageNum)); // 현재 페이지
+
+		// pageCnt = 12 / 5 + 1 // 나머지 2건이 1페이지로 할당되므로 3페이지
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);// 페이지 개수 + 나머지
+
+		// 1 = (1-1) * 5 + 1
+		// 6 = (2-1) * 5 + 1
+		// 11 = (3-1) * 5 + 1
+		// 21 = (5-1) * 5 + 1
+		start = (currentPage - 1) * pageSize + 1; // 현재페이지 시작번호
+
+		// 5 = 1 + 5 - 1;
+		// 10 = 6 + 5 - 1;
+		// 21 = 17 + 5 - 1;
+		end = start + pageSize - 1; // 현재페이지 끝번호
+
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
+
+		if (end > cnt)
+			end = cnt;
+
+		// 1 = 25 - (5-1) * 5;
+		number = cnt - (currentPage - 1) * pageSize; // 출력할 글번호..최신글(큰페이지)가 1p
+
+		System.out.println("number : " + number);
+		System.out.println("cnt : " + cnt);
+		System.out.println("currentPage : " + currentPage);
+		System.out.println("pageSize : " + currentPage);
+
+		if (cnt > 0) {
+			/* Map<String, Object> map = new HashMap<String, Object>(); */
+			map.put("start", start);
+			map.put("end", end);
+			System.out.println("end !!!!!!!!!----->:" + end);
+			/*
+			 * map.put("Hcnt", category); // category에서 보낸 cnt값 map.put("mdev", mDev);
+			 * map.put("keyword", keyword);
+			 */
+
+			// 표 목록 조회
+			System.out.println("map" + map.get("start"));
+			ArrayList<TcatTicketingVO> dtos = hDao.refundListA(map);
+			req.setAttribute("dtos", dtos); // 큰바구니 : 게시글 목록 cf)작은 바구니 : 게시글 1건
+
+		}
+
+		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5/3) * 3 + 1 = 4
+		if (currentPage % pageBlock == 0)
+			startPage -= pageBlock; // (5%3) == 0
+
+		endPage = startPage + pageBlock - 1;// 4+3-1=6
+		if (endPage > pageCount)
+			endPage = pageCount;
+
+		model.addAttribute("category", category);
+		model.addAttribute("sDev", sDev);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("cnt", cnt); // cnt == 글 개수
+		model.addAttribute("number", number); // number == 글번호
+		model.addAttribute("pageNum", pageNum); // pageNum 페이지 번호
+
+		if (cnt > 0) {
+			model.addAttribute("startPage", startPage); // startPage 시작페이지
+			model.addAttribute("endPage", endPage); // 마지막 페이지
+			model.addAttribute("pageBlock", pageBlock); // 출력할 페이지 개수
+			model.addAttribute("pageCount", pageCount); // 페이지 개수
+			model.addAttribute("currentPage", currentPage); // 현재 페이지
+
+		}
+		
+	}
+	// 환불 목록 - 스토어
+	@Override
+	public void productRefundBoardS(HttpServletRequest req, Model model) {
+		int pageSize = 10; // 한 페이지당 출력할 글 개수
+		int pageBlock = 3; // 한 블럭당 페이지 개수
+
+		int cnt = 0; // 글 개수
+		int start = 0; // 현재 페이지 글시작번호
+		int end = 0; // 현재 페이지 글마지막 번호
+		int number = 0; // 출력할 글 번호
+		String pageNum = null; // 페이지 번호
+		int currentPage = 0; // 현재 페이지
+
+		int pageCount = 0; // 페이지 개수
+		int startPage = 0; // 시작 페이지
+		int endPage = 0; // 마지막 페이지
+		int Hcnt = 0;
+		String sDev = "";
+		String keyword = "";
+
+		// 검색추가(01/16)-------------------
+
+		sDev = req.getParameter("sDev");
+		System.out.println("sDev -----> :" + sDev);
+
+		keyword = req.getParameter("keyword");
+		System.out.println("keyword -----> :" + keyword);
+		String category = "";
+		
+		if (sDev == null) {
+			sDev = "0";
+		}
+
+		if (keyword == null) {
+			keyword = "";
+		}
+
+		
+		System.out.println("Host 환불 (스토어) 서비스 첫번째 출입니다. ");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyword", keyword);
+		map.put("sDev", sDev);
+		System.out.println("keyword" + map.get("keyword") + "\n" + "sDev" + sDev);
+		cnt = hDao.refundSCnt(map);
+
+		System.out.println("cnt :" + cnt);
+		pageNum = req.getParameter("pageNum");
+		System.out.println("pageNum" + pageNum);
+
+		if (pageNum == null) {
+			pageNum = "1"; // 첫페이지를 1페이지로 설정
+		}
+		System.out.println("pageNum+Host service --> categoryList-->: " + pageNum);
+		currentPage = (Integer.parseInt(pageNum)); // 현재 페이지
+
+		// pageCnt = 12 / 5 + 1 // 나머지 2건이 1페이지로 할당되므로 3페이지
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);// 페이지 개수 + 나머지
+
+		// 1 = (1-1) * 5 + 1
+		// 6 = (2-1) * 5 + 1
+		// 11 = (3-1) * 5 + 1
+		// 21 = (5-1) * 5 + 1
+		start = (currentPage - 1) * pageSize + 1; // 현재페이지 시작번호
+
+		// 5 = 1 + 5 - 1;
+		// 10 = 6 + 5 - 1;
+		// 21 = 17 + 5 - 1;
+		end = start + pageSize - 1; // 현재페이지 끝번호
+
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
+
+		if (end > cnt)
+			end = cnt;
+
+		// 1 = 25 - (5-1) * 5;
+		number = cnt - (currentPage - 1) * pageSize; // 출력할 글번호..최신글(큰페이지)가 1p
+
+		System.out.println("number : " + number);
+		System.out.println("cnt : " + cnt);
+		System.out.println("currentPage : " + currentPage);
+		System.out.println("pageSize : " + currentPage);
+
+		if (cnt > 0) {
+			map.put("start", start);
+			map.put("end", end);
+			System.out.println("end !!!!!!!!!----->:" + end);
+			// 표 목록 조회
+			System.out.println("map" + map.get("start"));
+			ArrayList<TcatDiscBuyVO> dtos = hDao.refundListB(map);
+			req.setAttribute("dtos", dtos); // 큰바구니 : 게시글 목록 cf)작은 바구니 : 게시글 1건
+		}
+
+		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5/3) * 3 + 1 = 4
+		if (currentPage % pageBlock == 0)
+			startPage -= pageBlock; // (5%3) == 0
+
+		endPage = startPage + pageBlock - 1;// 4+3-1=6
+		if (endPage > pageCount)
+			endPage = pageCount;
+
+		model.addAttribute("category", category);
+		model.addAttribute("sDev", sDev);
+		model.addAttribute("keyword", keyword);
+		
+		model.addAttribute("cnt", cnt); // cnt == 글 개수
+		model.addAttribute("Hcnt", Hcnt); // cnt == 글 개수
+		model.addAttribute("number", number); // number == 글번호
+		model.addAttribute("pageNum", pageNum); // pageNum 페이지 번호
+
+		if (cnt > 0) {
+			model.addAttribute("startPage", startPage); // startPage 시작페이지
+			model.addAttribute("endPage", endPage); // 마지막 페이지
+			model.addAttribute("pageBlock", pageBlock); // 출력할 페이지 개수
+			model.addAttribute("pageCount", pageCount); // 페이지 개수
+			model.addAttribute("currentPage", currentPage); // 현재 페이지
+
+		}
+		
+	}
+
+	
+	//환불 승인 - 공연
+	@Override
+	public void productRefundUpdate(HttpServletRequest req, Model model) {
+		int refundUpdate = 0;
+		
+		int	ticket_num = Integer.parseInt(req.getParameter("ticket_num"));
+		refundUpdate = hDao.refundPerformanceOk(ticket_num);
+		
+		model.addAttribute("refundUpdate", refundUpdate);
+	}
+	//환불 취소 - 공연
+	@Override
+	public void productRefundCancel(HttpServletRequest req, Model model) {
+		int refundDown = 0;
+		
+		int	ticket_num = Integer.parseInt(req.getParameter("ticket_num"));
+		refundDown = hDao.refundPerformanceCancel(ticket_num);
+		
+		model.addAttribute("refundDown",refundDown);
+	}
+	//환불 승인 - 스토어
+	@Override
+	public void productRefundUpdateS(HttpServletRequest req, Model model) {
+		int refundUpdateS = 0;
+		
+		int	disc_num = Integer.parseInt(req.getParameter("disc_num"));
+		refundUpdateS = hDao.refundStoreOk(disc_num);
+		
+		model.addAttribute("refundUpdateS", refundUpdateS);
+	}
+		
+	
+	//환불 취소 - 스토어
+	@Override
+	public void productRefundCancelS(HttpServletRequest req, Model model) {
+		int refundDownS = 0;
+		
+		int	disc_num = Integer.parseInt(req.getParameter("disc_num"));
+		refundDownS = hDao.refundStoreCancel(disc_num);
+		
+		model.addAttribute("refundDownS",refundDownS);
+		
 	}
 
 }

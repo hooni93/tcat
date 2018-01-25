@@ -23,4 +23,10 @@ public interface TSGuestService {
 	
 	//관람/후기 글 쓰기
 	public void commentWrite(HttpServletRequest req, Model model);
+	
+	//상품후기 (해당 상품 목록)
+	public void selectCommentS(HttpServletRequest req, Model model);
+		
+	//상품/후기 글 쓰기
+	public void commentWriteS(HttpServletRequest req, Model model);
 }

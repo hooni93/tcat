@@ -13,7 +13,50 @@
 <script src="${script}jquery-ui.js"></script>
 <link rel="stylesheet" href="${css}jquery-ui.css">
 <title>Insert title here</title>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullAddr = ''; // 최종 주소 변수
+                var extraAddr = ''; // 조합형 주소 변수
+
+                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    fullAddr = data.roadAddress;
+
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    fullAddr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                if(data.userSelectedType === 'R'){
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== ''){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== ''){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('sample6_address').value = fullAddr;
+
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById('sample6_address2').focus();
+            }
+        }).open();
+    }
+</script>
 <script type="text/javascript">
 function Ticketing(url){
 	 $( "#Ticketing" ).load( "${pageContext.request.contextPath}/"+url );
@@ -21,39 +64,74 @@ function Ticketing(url){
 $( function() {
 	var per_id=${vo.per_id};
 	 $( "#Ticketing" ).load( "${pageContext.request.contextPath}/chooseDay?per_id="+per_id );
-})
-function next(){
-		var nextBtn=document.all.nextBtn.value;
-
-		if(nextBtn=="좌석선택"){
-			document.all.nextBtn.value="할인/쿠폰";
-			
-			$( "#Ticketing" ).load( "${pageContext.request.contextPath}/");
-	
-		if(nextBtn=="관람일/회차"){
-			document.all.nextBtn.value="좌석선택";
-			
-			  $( "#Ticketing" ).load( "${pageContext.request.contextPath}/ticketSeat?per_id=${vo.per_id}&ticet_date="+document.all.ticet_date.value+"&round="+document.all.round.value);	
-	
-			
-			$("#menu1").removeClass("active");
-			$("#menu2").addClass("active");
-			document.all.nextTest.value=2;
-		}else if(nextBtn=="할인/쿠폰"){
-			document.all.nextBtn.value="수령방법";
-			$("#menu2").removeClass("active");
-			$("#menu3").addClass("active");
-		}else if(nextBtn=="수령방법"){
+});
+function next(form){
+	var nextBtn=document.all.nextBtn.value;
+	if(nextBtn=="좌석선택"){
+		document.all.nextBtn.value="할인/쿠폰";
+		$( "#Ticketing" ).load( "${pageContext.request.contextPath}/ticketSeat?per_id=${vo.per_id}&ticet_date="+form.ticet_date.value+"&round="+form.round.value);
+		$("#menu1").removeClass("active");
+		$("#menu2").addClass("active");
+	}else if(nextBtn=="할인/쿠폰"){
+		document.all.nextBtn.value="수령방법";
+		$( "#Ticketing" ).load( "${pageContext.request.contextPath}/sale");
+		$("#menu2").removeClass("active");
+		$("#menu3").addClass("active");
+	}else if(nextBtn=="수령방법"){
+		
 			document.all.nextBtn.value="결제방법";
+			$( "#Ticketing" ).load( "${pageContext.request.contextPath}/del");
 			$("#menu3").removeClass("active");
 			$("#menu4").addClass("active");
-		}else if(nextBtn=="결제방법"){
+		
+	
+	}else if(nextBtn=="결제방법"){
+		var addr=$("input[name='addr']").val();
+		var hp=$("input[name='hp']").val();
+		var name=$("input[name='name']").val();
+		
+		if(name==0){
+			alert("이름을 입력해주세요!");
+		}else if(hp==0){
+			alert("연락처를 입력해주세요!");
+		}else if(addr==0){
+			alert("주소를 입력해주세요!");
+		}else{
 			document.all.nextBtn.value="결제";
+			
+			var totalPrice=$("input[name='totalPrice']").val();
+			var totalSale=$("input[name='totalSale']").val();
+			var total=(totalPrice*1)-(totalSale*1);
+			$("input[name='total']").val(total);
+			
+			$( "#Ticketing" ).load( "${pageContext.request.contextPath}/pay");		
 			$("#menu4").removeClass("active");
 			$("#menu5").addClass("active");
 		}
+	}else if(nextBtn=="결제"){
+		//ajax
+		$(function(){   /* AJAX submit */  
+		   var result = document.getElementById("result");
+		   var formData = $("#ticketingForm").serialize();
+		   $.ajax({
+		               type : "POST",
+		               url : "insertTicket",
+		               cache : false,
+		               data : formData,
+		               success :  function(msg) {
+		                  alert("구매되었습니다.");
+		                  self.close();
+		               }, 
+		               error : onError
+		   });
+		   function onError(data, status){ alert("구매되었습니다.");self.close();}
+		});
+		
 	}
 }
+
+
+
 </script>
 <style type="text/css">
 .TicketingButton {
@@ -136,7 +214,12 @@ function next(){
 						</tr>
 					</table>
 					<hr style="color:white;margin:5px;">
-					<form action="">
+					<form action="" id="ticketingForm" name="ticketingForm">
+						<input type="hidden" name="addr" value="0">
+						<input type="hidden" name="hp" value="0">
+						<input type="hidden" name="name" value="0">
+						<input type="hidden" name="per_id" value="${vo.per_id}">
+						
 						<h3>선택내역</h3>
 						<table style="color:white;margin:10px;">
 							<tr>
@@ -151,13 +234,10 @@ function next(){
 								<th>좌석타입</th>
 								<td><input type="text" style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"value="0" name="seat_type" readonly></td>
 							</tr>
-							<tr>
-								<th>좌석</th>
-								<td><input type="text" style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"value="0" name="seat_num" readonly></td>
-							</tr>
+							
 							
 						</table>
-						<br><br>
+						<br>
 						<hr style="color:#fafafaf;margin:5px;">
 						<h3>결제내역</h3>
 						<table style="color:white;margin:10px;">
@@ -167,37 +247,36 @@ function next(){
 							</tr>
 							<tr>
 								<th>배송료</th>
-								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="3000" name="delpay"></td>
+								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="delpay"></td>
 							</tr>
 							<tr>
 								<th>총금액</th>
-								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="">
+								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="totalPrice"></td>
 							</tr>
 						</table>
-						<hr style="color:#fafafaf;margin:5px;">
-						<table style="color:white;margin:10px;">
-							<tr>
-								<th>등급별 할인</th>
-								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="3000" name="delpay"></td>
-							</tr>
-							<tr>
-								<th>상품권</th>
-								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="">
-							</tr>
-							<tr>
-								<th>이벤트 할인</th>
-								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="">
-							</tr>
-							<tr>
-								<th>총 할인금액</th>
-								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="">
-							</tr>
-						</table>
+						<br>
 						<hr style="color:#fafafaf;margin:5px;">
 						<br>
-						<input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="최종결제금액">
-						<br><br>
-						<input type="button" class="TicketingButton" style="margin:5px; width:100%;"value="좌석선택" name="nextBtn" onclick="next();">
+						<table style="color:white;margin:10px;">
+							<tr>
+								<th>할인구분</th>
+								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="sale_div"></td>
+							</tr>
+							<tr>
+								<th>할인율</th>
+								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="sale_rate"></td>
+							</tr>							
+							<tr>
+								<th>총 할인금액</th>
+								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="totalSale"></td>
+							</tr>
+						</table>
+						<br>
+						<hr style="color:#fafafaf;margin:5px;">
+						<br>
+						최종결제금액  <input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="total">
+						<br><br><br><br><br>
+						<input type="button" class="TicketingButton" style="margin:5px; width:100%;"value="좌석선택" name="nextBtn" onclick="next(this.form);">
 						
 					</form>
 				</div>
