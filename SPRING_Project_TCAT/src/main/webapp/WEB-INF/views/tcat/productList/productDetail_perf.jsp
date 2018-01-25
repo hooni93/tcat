@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../setting.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,11 +25,13 @@
 	<div class="col-md-1"></div>
 
 	<div class="col-md-10">
-		<div><span>공연 상세 정보</span></div>
+		<div>
+			<span>공연 상세 정보</span>
+		</div>
 		<table class="table table-hover table-bordered table-condensed c fs10">
 			<tr>
 				<td class="bg-primary"><b>제품 이미지</b></td>
-				<td><b>${perf.getPerf_Image() } 이미지 안불러옴</b></td>
+				<td><b> <img src="${image}performance/${perf.perf_Image }" class="w30p"> </b></td>
 			</tr>
 			<tr>
 				<td class="bg-primary"><b>공연코드</b></td>
@@ -40,33 +43,42 @@
 			</tr>
 			<tr>
 				<td class="bg-primary"><b>카테고리</b></td>
-				<td><b>
-					code: ${perf.cateNum }   ( ${perf.category} > ${perf.mDev} > ${perf.sDev} )
-				</b></td>
+				<td><b> code: ${perf.cateNum } ( ${perf.category} >
+						${perf.mDev} > ${perf.sDev} ) </b></td>
 			</tr>
 			<tr>
 				<td class="bg-primary"><b>공연기간</b></td>
-				<td><b>${perf.startDate } ~ ${perf.endDate }</b></td>
+				<td><b><fmt:formatDate value="${perf.startDate }" pattern="yyyy년 MM월 dd일"/>
+				 ~ <fmt:formatDate value="${perf.endDate }" pattern="yyyy년 MM월 dd일"/></b></td>
 			</tr>
 			<tr>
 				<td class="bg-primary"><b>장소</b></td>
-				<td><b>
-					<c:if test="${!perf.province.equals('0')}">${perf.province} </c:if>
-					<c:if test="${!perf.city.equals('0')}">${perf.city} </c:if>
-					${perf.gu } ${perf.address }
-				</b></td>
+				<td><b> ${perf.province} ${perf.city} ${perf.address } </b></td>
 			</tr>
 			<tr>
 				<td class="bg-primary"><b>공연장</b></td>
-				<td><b> code: ${perf.hall_id }  ${perf.hall_name}</b></td>
+				<td><b> code: ${perf.hall_id } ${perf.hall_name}</b></td>
 			</tr>
 			<tr>
 				<td class="bg-primary"><b>공연회차</b></td>
 				<td><b> ${perf.remain_round }</b></td>
 			</tr>
 			<tr>
-				<td class="bg-primary"><b>좌석별 가격</b></td>
-				<td><b> 아직 db 안가져옴</b></td>
+				<td class="bg-primary tm"><b>좌석별 가격</b></td>
+				<td><b>
+					<table  class="table table-bordered table-condensed c fs10" style="margin:0">
+						<tr class="c">
+							<th>VIP</th><th>R</th><th>S</th><th>A</th><th>B</th>
+						</tr>
+						<tr>
+							<td><fmt:formatNumber value="${perf.getVIP_seatPrice()}" pattern="#,###" /></td>
+							<td><fmt:formatNumber value="${perf.getR_seatPrice()}" pattern="#,###" /></td>
+							<td><fmt:formatNumber value="${perf.getS_seatPrice()}" pattern="#,###" /></td>
+							<td><fmt:formatNumber value="${perf.getA_seatPrice()}" pattern="#,###" /></td>
+							<td><fmt:formatNumber value="${perf.getB_seatPrice()}" pattern="#,###" /></td>
+						</tr>
+					</table>
+				</b></td>
 			</tr>
 			<tr>
 				<td class="bg-primary"><b>관람가능 연령</b></td>
@@ -74,7 +86,8 @@
 			</tr>
 			<tr>
 				<td class="bg-primary"><b>상품우선순위</b></td>
-				<td><b> ${perf.first_grade } (A:최고,B:우수,C:보통,D:하,E:최하,F:부적합)</b></td>
+				<td><b> ${perf.first_grade }
+						(A:최고,B:우수,C:보통,D:하,E:최하,F:부적합)</b></td>
 			</tr>
 			<tr>
 				<td class="bg-primary"><b>공연스텝</b></td>
@@ -94,7 +107,9 @@
 				<td class="bg-primary" colspan="2"><b>추가 이미지</b></td>
 			</tr>
 			<tr>
-				<td colspan="2"><b>${perf.getDetail_Image() }</b></td>
+				<td colspan="2"><b>
+					<img src="${image}performance/${perf.getDetail_Image()}" >
+				</b></td>
 			</tr>
 		</table>
 	</div>

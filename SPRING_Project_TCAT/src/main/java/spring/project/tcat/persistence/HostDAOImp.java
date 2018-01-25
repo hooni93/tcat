@@ -402,7 +402,19 @@ public class HostDAOImp implements HostDAO {
 	}
 	//////////////////////////////////////18.01.15 명훈 끝//////////////////////////////////////////////////
 	
-	
+	/////////////////////////////////////18.01.25 명훈 시작//////////////////////////////////////////////////
+	//배송관리 스텝 변경
+	public void orderMangement_storeChange(Map<String, Object> map) {
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dao.orderMangement_storeChange(map);
+	}
+	//예매 관리 스탭 변경
+	public void orderMangement_Change(Map<String, Object> map) {
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dao.orderMangement_Change(map);
+	}
+
+	//////////////////////////////////////18.01.25 명훈 끝//////////////////////////////////////////////////
 
 
 	/////////////////////////////////// 태성 1/9 start

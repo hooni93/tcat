@@ -81,11 +81,8 @@
 							</a>
 						</td>
 						<td>${performance.startDate}  ~  ${performance.endDate}</td>
-						<td><c:if test="${!performance.province.equals('0')}">${performance.province} </c:if>
-							<c:if test="${!performance.city.equals('0')}">${performance.city} </c:if>
-								${performance.gu} ${performance.address}</td>
-						<td>${performance.category} > ${performance.mDev} >
-							${performance.sDev}</td>
+						<td>${performance.province} ${performance.city} ${performance.address} ${performance.hall_name}</td>
+						<td>${performance.category} > ${performance.mDev} > ${performance.sDev}</td>
 						<td>${performance.perf_Image}</td>
 					</tr>
 				</c:forEach>

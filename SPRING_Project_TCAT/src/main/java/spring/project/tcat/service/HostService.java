@@ -67,8 +67,16 @@ public interface HostService {
 	public void wishListRank_store(HttpServletRequest req, Model model);
 	//////////////////////////////////////18.01.17 명훈시작 완//////////////////////////////////////////////////
 	
-	
-	
+	/////////////////////////////////////01.25장명훈 시작///////////////////////////////////////////////////////
+	//배송관리
+	public void orderManagement_store(HttpServletRequest req, Model model);
+	//orderMangement_storeChange 배송스텝 변경
+	public void orderMangement_storeChange(HttpServletRequest req, Model model);
+	//orderManagement 
+	public void orderManagement(HttpServletRequest req, Model model);
+	//orderMangement_Change
+	public void orderMangement_Change(HttpServletRequest req, Model model);
+	/////////////////////////////////////01.25장명훈 시작///////////////////////////////////////////////////////
 	
 	
 
