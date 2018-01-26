@@ -11,32 +11,11 @@
 <body>
 	<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;관람/상품 후기 관리 게시판</h2>
 <hr>
-
+<br>
+<div class="col-md-12 h25"></div>
 <c:if test="${commentManagerCate=='공연'}">
- <form class="navbar-form navbar-center" role="search"
-               id="ajaxSubmitForm" onsubmit="return false">   
-               <input type="hidden" name="commentManagerCate" value=${commentManagerCate}>
-               
-               <!--카테고리  -->
-               <select id="sDev" name="sDev" class="m10 p5">
-                  <option value="0">분류</option>
-                  <option value="1">후기번호</option>
-                  <option value="2">작성자</option>
-                  <option value="3">제목</option>
-                  <option value="4">내용</option>
-               </select>
-
-               <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Search"
-                     name="keyword">
-               </div>
-               <button type="button" class="btn btn-default"
-                  onclick="ajaxSubmit('commentManager')">검색</button>
-               <!-- stocksearch(); -->
-            </form>
 		<div class="row">
 			<div class="col-md-1"></div>
-
 			<div class="col-md-10">
 				<table
 					class="table table-hover table-bordered table-condensed c fs12">
@@ -59,10 +38,16 @@
 						</tr>
 					</c:forEach>
 				</table>
-			</div>
 			<div class="col-md-1"></div>
-		</div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+			
+			<div class="col-md-1"></div>
+		<br>
 	<!-- 페이지 컨트롤 -->
+	<div class="col-md-5"></div>
+		<div class="col-md-6">
 		<table style="width: 1000px" align="center">
 			<tr>
 				<th align="center"><c:if test="${cnt > 0}">
@@ -89,14 +74,11 @@
 						</c:if>
 					</c:if></th>
 			</tr>
-		</table>
-		</c:if>
-		
-		<c:if test="${commentManagerCate=='스토어'}">
- 		<form class="navbar-form navbar-center" role="search"
-               id="ajaxSubmitForm" onsubmit="return false">
+		</table></div>
+		 <form class="navbar-form navbar-right" role="search"
+               id="ajaxSubmitForm" onsubmit="return false">   
                <input type="hidden" name="commentManagerCate" value=${commentManagerCate}>
-            
+               
                <!--카테고리  -->
                <select id="sDev" name="sDev" class="m10 p5">
                   <option value="0">분류</option>
@@ -114,9 +96,14 @@
                   onclick="ajaxSubmit('commentManager')">검색</button>
                <!-- stocksearch(); -->
             </form>
+            <div class="col-md-1"></div>
+            </div></div>
+		</c:if>
+		
+		<c:if test="${commentManagerCate=='스토어'}">
+ 		
 		<div class="row">
 			<div class="col-md-1"></div>
-
 				<div class="col-md-10">
 				<table
 					class="table table-hover table-bordered table-condensed c fs12">
@@ -139,10 +126,16 @@
 						</tr>
 					</c:forEach>
 				</table>
-			</div>
 			<div class="col-md-1"></div>
-		</div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+			
+			<div class="col-md-1"></div>
+		<br>
 	<!-- 페이지 컨트롤 -->
+	<div class="col-md-5"></div>
+		<div class="col-md-6">
 		<table style="width: 1000px" align="center">
 			<tr>
 				<th align="center"><c:if test="${cnt > 0}">
@@ -169,7 +162,30 @@
 						</c:if>
 					</c:if></th>
 			</tr>
-		</table>
+		</table></div>
+		<form class="navbar-form navbar-right" role="search"
+               id="ajaxSubmitForm" onsubmit="return false">
+               <input type="hidden" name="commentManagerCate" value=${commentManagerCate}>
+            
+               <!--카테고리  -->
+               <select id="sDev" name="sDev" class="m10 p5">
+                  <option value="0">분류</option>
+                  <option value="1">후기번호</option>
+                  <option value="2">작성자</option>
+                  <option value="3">제목</option>
+                  <option value="4">내용</option>
+               </select>
+
+               <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search"
+                     name="keyword">
+               </div>
+               <button type="button" class="btn btn-default"
+                  onclick="ajaxSubmit('commentManager')">검색</button>
+               <!-- stocksearch(); -->
+            </form>
+            <div class="col-md-1"></div>
+            </div></div>
 		</c:if>
 	
 			<div class="col-md-1"></div>

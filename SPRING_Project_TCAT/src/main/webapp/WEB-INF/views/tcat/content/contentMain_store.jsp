@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 <style type="text/css">
 .wish {
 	border: 0;
@@ -34,7 +33,6 @@ a {
 	color: black;
 }
 </style>
-
 <script type="text/javascript">
 function insertCart(cart_count,disc_code){
 	
@@ -60,12 +58,8 @@ $(document).ready(function() {
 		if(${login_id == null}){
 			alert("로그인 후 이용해 주세요.");
 			return false;
-<<<<<<< HEAD
-		}else{
-=======
 		}else{
 
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 			var disc_code = $("#disc_code").val();
 			var formData = {"disc_code":disc_code};
 			var active = $(".wish").hasClass("active");
@@ -96,40 +90,6 @@ $(document).ready(function() {
 					}
 				});
 			}
-<<<<<<< HEAD
-				var disc_code = $("#disc_code").val();
-				var formData = {"disc_code":disc_code};
-				var active = $(".wish").hasClass("active");
-				if(active){
-					$.ajax({
-						type : "POST",
-						url : "delWishList",
-						cache : false,
-						data : formData,
-						success : function() {
-							$(".wish").removeClass("active");
-						},
-						error : function(){
-							alert("위시리스트 실패하였습니다.");
-						}
-					});
-				}else{
-					$.ajax({
-						type : "POST",
-						url : "addWishList",
-						cache : false,
-						data : formData,
-						success : function() {
-							$(".wish").addClass("active");
-						},
-						error : function(){
-							alert("위시리스트 실패하였습니다.");
-						}
-					});
-				}
-
-=======
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 		}
 	});
 	
@@ -142,7 +102,6 @@ function commentListS(url) {
 }
 </script>
 </head>
-<body>
 <c:if test="${insertCart==1}">
 	<script type="text/javascript">
 		alert("장바구니에 담겼습니다.");
@@ -164,7 +123,7 @@ function commentListS(url) {
 				<h1>${str.disc_title}</h1>
 				<h5>${str.mDev}-${str.sDev}</h5>
 			</div>
-			<form action="" name="store">
+
 			<!--사진, 예매, 가격  -->
 			<div class="col-md-12"
 				style="border-top: 3px solid black; padding: 0;">
@@ -174,10 +133,11 @@ function commentListS(url) {
 						style="border: 1px solid lightgrey; padding: 0;">
 						<!--사진  -->
 						<div class="col-md-4">
-							<img src="${image}concert/${str.disc_image}" class="p10">
+							<img src="${image}store/${str.disc_image}" class="p10">
 						</div>
 
 						<div class="col-md-8">
+							<!--장소  -->
 							<div class="row p10">
 								<div class="col-md-3">
 									<b>재고수량</b>
@@ -188,8 +148,11 @@ function commentListS(url) {
 								<div class="col-md-3">
 									<b>구매수량</b>
 								</div>
-								<div class="col-md-9"><input type="number" name="count"></div>
+								<div class="col-md-9">
+									<input type="number" name="count">
+								</div>
 							</div>
+
 							<div class="row p10" style="border-top: 1px solid grey;">
 								<div class="col-md-3 ">
 									<b>기본가</b>
@@ -199,135 +162,92 @@ function commentListS(url) {
 											value="${str.disc_price}" pattern="#,###" /></span>원
 								</div>
 							</div>
+
 						</div>
-
-<<<<<<< HEAD
 					</div>
-				</div>
-				<!--예매  -->
-				<div class="col-md-3 " style="padding: 0;">
-					<div class="col-md-12 p10">
-						<span>위시리스트</span> <input type="hidden" id="disc_code"
-							value="${str.disc_code}">
-						<button type="button" class="wish btn-xl">
-							<i class="glyphicon glyphicon-heart fs20"></i>
-						</button>
-					</div>
-
-					<div class="col-md-12">
-						<input class="btn btn-danger btn-xl w100p" type="button"
-							value="구매하기">
-=======
-					
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
-
 					<!--예매  -->
 					<div class="col-md-3 " style="padding: 0;">
 						<div class="col-md-12 p10">
-
 							<span>위시리스트</span> <input type="hidden" id="disc_code"
 								value="${str.disc_code }">
 							<button type="button" class="wish btn-xl">
 								<i class="glyphicon glyphicon-heart fs20"></i>
 							</button>
-							
-							<c:if test="${sessionScope.login_id!=null}">
-								<img  src="/tcat/resources/image/cart_icon.png" onclick="insertCart(document.all.count.value,'${str.disc_code}');" style="width:50px">+
-							</c:if>		
-							<c:if test="${sessionScope.login_id==null}">
-								<img data-toggle="modal" data-target="#login-modal" id="login2" style="width:50px"  src="/tcat/resources/image/cart_icon.png">
-							</c:if>	
-
-							
 						</div>
-						<div class="col-md-12">
-<<<<<<< HEAD
-							<input class="btn btn-danger btn-xl w100p" type="button"
+						<c:if test="${sessionScope.login_id!=null}">
+							<img src="/tcat/resources/image/cart_icon.png"
+								onclick="insertCart(document.all.count.value,'${str.disc_code}');"
+								style="width: 50px">+
+											<input class="btn btn-danger btn-xl w100p" type="button"
+								value="구매하기" onclick="directBuy();">
+						</c:if>
+						<c:if test="${sessionScope.login_id==null}">
+							<img data-toggle="modal" data-target="#login-modal" id="login2"
+								style="width: 50px" src="/tcat/resources/image/cart_icon.png">
+							<input class="btn btn-danger btn-xl w100p" data-toggle="modal"
+								data-target="#login-modal" id="login2" type="button"
 								value="구매하기">
-						</div>
-=======
-							<c:if test="${sessionScope.login_id!=null}">
-								<input class="btn btn-danger btn-xl w100p" type="button" value="구매하기" onclick="directBuy();">
-							</c:if>		
-							<c:if test="${sessionScope.login_id==null}">
-								<input class="btn btn-danger btn-xl w100p" data-toggle="modal" data-target="#login-modal" id="login2" type="button" value="구매하기">
-							</c:if>			
-						</div>
-
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
-					</div>
-				
+						</c:if>
 					</div>
 				</div>
-			</form>
-
-		</div>
-
-
-		<div class="col-md-12 h21"></div>
-
-
-		<!--하단  -->
-		<div class="col-md-12" style="padding: 0;">
-			<!--탭  -->
+			</div>
+			<div class="col-md-12 h21"></div>
+			<!--하단  -->
 			<div class="col-md-12" style="padding: 0;">
-
-				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="active">
-					<a href="#content" aria-controls="home" role="tab" data-toggle="tab">상세정보</a></li>
-					
-					<li role="presentation">
-					<a href="#review" aria-controls="profile" role="tab" data-toggle="tab" onclick="commentListS('watchLatterS?disc_title=${str.disc_title}&disc_code=${str.disc_code}');">상품후기</a></li>
-					
-					<li role="presentation">
-					<a href="#cancelInfo" aria-controls="messages" role="tab" data-toggle="tab">취소/환불안내</a></li>
-				</ul>
-			</div>
-
-			<div class="col-md-12 h25"></div>
-
-
-			<!--상세내용  -->
-			<div class="col-md-9 bffffff" style="padding: 0;">
-				<!--출력 내용  -->
+				<!--탭  -->
 				<div class="col-md-12" style="padding: 0;">
-					<div class="tab-content">
-						<!--상세정보  -->
-						<div role="tabpanel" class="tab-pane active" id="content">
-							<div class="col-md-12"
-								style="padding: 0; border-bottom: 1px solid grey">
-								<h5>
-									<i class="glyphicon glyphicon-play"></i> 상품상세정보
-								</h5>
-							</div>
-							<div class="col-md-12" style="padding: 0;">
-								<img src="${str.getDetail_Image()}">
-							</div>
-	
+					<ul class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active"><a href="#content"
+							aria-controls="home" role="tab" data-toggle="tab">상세정보</a></li>
+						<li role="presentation"><a href="#review"
+							aria-controls="profile" role="tab" data-toggle="tab"
+							onclick="commentListS('watchLatterS?disc_title=${str.disc_title}&disc_code=${str.disc_code}');">상품후기</a></li>
+						<li role="presentation"><a href="#cancelInfo"
+							aria-controls="messages" role="tab" data-toggle="tab">취소/환불안내</a></li>
+					</ul>
+				</div>
+				<!--공백  -->
+				<div class="col-md-12 h25"></div>
 
-						<!--상품후기  -->
-						<div role="tabpanel" class="tab-pane" id="review">
-						
-							<div class="col-md-15" id="commentListS">
+				<!--상세내용  -->
+				<div class="col-md-9 bffffff" style="padding: 0;">
+					<!--출력 내용  -->
+					<div class="col-md-12" style="padding: 0;">
+						<div class="tab-content">
+							<!--상세정보  -->
+							<div role="tabpanel" class="tab-pane active" id="content">
+								<div class="col-md-12"
+									style="padding: 0; border-bottom: 1px solid grey">
+									<h5>
+										<i class="glyphicon glyphicon-play"></i>상품상세정보
+									</h5>
+								</div>
+								<div class="col-md-12" style="padding: 0;">
+									<img src="${image}store/${str.getDetail_Image()}">
+								</div>
+							</div>
+							<!--관람후기  -->
+
+							<div role="tabpanel" class="tab-pane" id="review">
+
+								<div class="col-md-12" id="commentListS"></div>
+							</div>
+
+
+							<!--취소환불 안내  -->
+							<div role="tabpanel" class="tab-pane" id="cancelInfo">3</div>
 						</div>
-						
-						</div>
-						<!--취소환불 안내  -->
-						<div role="tabpanel" class="tab-pane" id="cancelInfo">3</div>
 					</div>
 				</div>
-			</div>
-			<!--최근본 상품, 남녀별 구별   보류?-->
+				<!--최근본 상품, 남녀별 구별   보류?-->
 				<div class="col-md-3 " style="padding: 0;">잡다구리잡다가루</div>
 			</div>
 		</div>
+		<!--공백  -->
+		<div class="col-md-1"></div>
 	</div>
+	<br>
 	<!--공백  -->
 	<div class="col-md-1"></div>
 </div>
-<br>
-<!--공백  -->
-<div class="col-md-1"></div>
-</div>
-</body>
 </html>

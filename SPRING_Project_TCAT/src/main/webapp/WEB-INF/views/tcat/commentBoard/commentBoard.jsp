@@ -6,27 +6,62 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>후기 게시판</title>
+<style type="text/css">
+a {
+	color: black;
+}
+
+.nav-tabs {
+	border-bottom: 1.3px solid gray;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover
+	{
+	border: 1.3px solid gray;
+	border-bottom-color: transparent;
+	color: black;
+}
+</style>
+<script type="text/javascript">
+/* 탭 클릭시 active 활성화 조건 */
+$(document).ready(function(){
+	if(${commentCategory=='공연'}){
+		$("#perf_tab").addClass("active");
+		$("#store_tab").removeClass("active");
+	}else{
+		$("#store_tab").addClass("active");
+		$("#perf_tab").removeClass("active");
+	}
+});
+//탭
+	$('#myTab a[href="#profile"]').tab('show');
+
+</script>
+
 </head>
-<body class="b400040">
+<body>
 
 	<br>
 	<br>
-	<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;후기 게시판</h2>
+	<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;후기 게시판</h2>
 	<hr>
 
 	<div class="col-md-1"></div>
-	<div class="commentCategory" align="center">
-		<ul class="nav nav-pills">
-			<li role="presentation" class="active"><a
-				onclick="load('commentBoard?commentCategory=공연');">공연</a></li>
-			<li role="presentation" class="active"><a
-				onclick="load('commentBoard?commentCategory=스토어');">스토어</a></li>
+		<ul class="nav nav-tabs" role="tablist">
+		
+			<li role="presentation" class="active" id="perf_tab">
+			<a href="#perf" aria-controls="home" role="tab" data-toggle="tab" onclick="load('commentBoard?commentCategory=공연');">공연</a></li>
+			
+			<li role="presentation" id="store_tab">
+			<a  href="#store" aria-controls="profile" role="tab" data-toggle="tab" onclick="load('commentBoard?commentCategory=스토어');">스토어</a></li>
+			
 		</ul>
-	</div>
-
+	
 	<br>
+
+		<div class="col-md-12 h25"></div>
 	<c:if test="${commentCategory=='공연'}">
-		<div class="row">
+		<div class="row" id="perf">
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
 				<table class="table table-striped">
@@ -117,11 +152,11 @@
 				<div class="col-md-1"></div>
 			</div>
 		</div>
+	
 	</c:if>
 
-
 	<c:if test="${commentCategory=='스토어'}">
-		<div class="row">
+		<div class="row" id="store">
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
 				<table class="table table-striped">
@@ -210,7 +245,6 @@
 				</form>
 			</div>
 		</div>
-
 	</c:if>
 	<br>
 	<br>

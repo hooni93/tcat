@@ -1235,6 +1235,7 @@ public class TcatHostController {
 	}
 //////////////////////태성 1/21 end////////////////////////////
 //////////////////////태성 1/23 start////////////////////////////
+	//환불
 	@RequestMapping("productRefund_side")
 	public String productRefund_side(HttpServletRequest req,Model model) {
 	System.out.println("productRefund_side");
