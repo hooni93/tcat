@@ -6,7 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
-
+function seatPrice(title,hall_name,vip,r,s,a,b){
+	var url="seatPrice?title="+title+"&hall_name="+hall_name+"&vip="+vip+"&r="+r+"&s="+s+"&a="+a+"&b="+b;
+	window.open(url, "confirm", "menubar=no, width=500, height=330");
+}
 </script>
 
 </head>
@@ -28,7 +31,7 @@
 					<h3>상품 전체리스트</h3>
 					<div>
 						<hr>
-						<!-- 뮤지컬전체리스트 -->
+						<!-- 상품 전체리스트 -->
 						<table
 							class="table table-hover table-bordered table-condensed c fs10">
 							<tr class="bg-primary">
@@ -43,19 +46,28 @@
 								<td><b>공연스텝</b></td>
 								<td><b>회차(하루간 공연회차)</b></td>
 								<td><b>관람가능연령</b></td>
+								<td><b>정보수정</b></td>
 							</tr>
 							<c:if test="${cnt > 0}">
-								<c:forEach var="full" items="${full}">
-									<tr>
-										<td>${full.per_id}</td>
-										<td>${full.perf_title}</td>
-										<td>${full.mDev}</td>
-										<td>${full.sDev}</td>
-										<td>${full.ticet_max}</td>
-										<td>${full.per_step}</td>
+								<c:forEach var="dto" items="${dtos}">
+								<!-- items : dtos(ArrayList)의 배열만큼 반복된다. -->
+								<tr>
+									<td>${dto.per_id}</td>
+									<td>${dto.perf_title}</td>
+									<td>${dto.category}&nbsp${dto.mDev}&nbsp${sDev}</td>
+								<td><img
+										src="/tcat/resources/image/performance/${dto.perf_Image}"
+										style="width: 50px; height: 50px;"></td>
+									<td>${dto.startDate}~${dto.endDate}</td>
+									<td>${dto.hall_name}</td>
+									<td><input type="button" class="btn" value="가격" onclick="seatPrice('${dto.perf_title}','${dto.hall_name}','${dto.getVIP_seatPrice()}','${dto.getR_seatPrice()}','${dto.getS_seatPrice()}','${dto.getA_seatPrice()}','${dto.getB_seatPrice()}');"></td>
+									<td>${dto.first_grade}</td>
+									<td>${dto.per_step}</td>
+									<td>${dto.remain_round}</td>
+									<td>${dto.possible_age}</td> 
 										<td>
 												<button type="button" class="btn btn-primary"
-													onclick="return hotUpdate(1,${full.per_id})">추가</button>
+													onclick="return hostProForm('${dto.per_id}','hostProModify')">수정</button>
 										</td>
 									</tr>
 								</c:forEach>
@@ -66,13 +78,16 @@
 								</tr>
 							</c:if>
 						</table>
+						<!-- 페이지 컨트롤 -->
+						<div class="col-md-5"></div>
+						<div class="col-md-6">
 						<table style="width: 1000px" align="center">
 							<tr>
 								<th align="center"><c:if test="${cnt > 0}">
 										<!-- 처음[◀◀] / 이전 블록[◀] -->
 										<c:if test="${startPage > pageBlock}">
 											<a
-												onclick="load('hotMusical?pageNum=${startPage - pageBlock}');">[◀]</a>
+												onclick="load('hostProModify?pageNum=${startPage - pageBlock}');">[◀]</a>
 										</c:if>
 
 										<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -82,33 +97,28 @@
 
 											<c:if test="${i != currentPage}">
 												<a
-													onclick="load('hotMusical?pageNum=${i}');">[${i}]</a>
+													onclick="load('hostProModify?pageNum=${i}');">[${i}]</a>
 											</c:if>
 										</c:forEach>
 										<!-- 다음[▶] / 끝[▶▶] -->
 										<c:if test="${pageCount > endPage}">
 											<a
-												onclick="load('hotMusical?pageNum=${startPage + pageBlock}');">[▶]</a>
+												onclick="load('hostProModify?pageNum=${startPage + pageBlock}');">[▶]</a>
 											<a
-												onclick="load('hotMusical?pageNum=${pageCount}');">[▶▶]</a>
+												onclick="load('hostProModify?pageNum=${pageCount}');">[▶▶]</a>
 										</c:if>
-									</c:if></th>
+									</c:if>
+									</th>
 							</tr>
 						</table>
-
-						
-
 					</div>
-				</div>
 				<div class="col-md-1"></div>
 				<!--리스트목록 끝  -->
-
+				</div>
+				<div class="col-md-1"></div>
 			</div>
-			<br> <br> <br> <br> <br>
-		</div>
-		<div class="col-md-1"></div>
-
+			</div>
+			</div>
 	</div>
-
 </body>
 </html>

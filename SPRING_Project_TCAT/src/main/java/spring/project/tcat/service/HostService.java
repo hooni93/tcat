@@ -166,12 +166,12 @@ public interface HostService {
 	public void levelMemberUpdate(HttpServletRequest req,Model model);
 	//혜택등록
 	public void levelAdd(HttpServletRequest req,Model model);
+	//상품수정 폼
+	public void hostProForm(HttpServletRequest req,Model model);
+	//상품수정 업데이트
+	public void hostProUpdate(MultipartHttpServletRequest req,Model model);
 	////////////////////////////////////영민 1/11 end //////////////////////////////////////////
-////////////////////////////////////영민 1/25 end //////////////////////////////////////////
-	
-/*	//공연상품 목록
-	public void hostProModify(HttpServletRequest req,Model model);*/
-////////////////////////////////////영민 1/25 start //////////////////////////////////////////
+
 	///////////////////////  동금 1/9 start  //////////////////////// 
 	
 	// HOST/상품관리/상품삭제  -- update부분

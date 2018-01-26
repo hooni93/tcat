@@ -1035,12 +1035,24 @@ public class TcatHostController {
 		@RequestMapping("hostProModify")
 		public String hostProModify(HttpServletRequest req,Model model) {
 			System.out.println("hostProModify");
-			/*hService.hostProModify(req, model);*/
+			// 공연정보 목록 가져오기
+			hService.performanceList(req, model);
 			return "tcat/productList/hostProModify";
 		}
-		
-		
-		
+		// 상품수정 폼
+		@RequestMapping("hostProForm")
+		public String hostProForm(HttpServletRequest req, Model model) {
+			System.out.println("hostProForm");
+			hService.hostProForm(req, model);
+			return "tcat/productList/hostProForm";
+		}
+		// 상품수정 폼
+		@RequestMapping("hostProUpdate")
+		public String hostProUpdate(MultipartHttpServletRequest req,Model model) {
+			System.out.println("hostProUpdate");
+			hService.hostProUpdate(req, model);
+			return "tcat/productList/hostProModify";
+		}
 /////////////////// HOST/상품관리/공연정보 수정-2018-01-25 성영민  //////////////////////////////
 	// 이벤트삭제
 	@RequestMapping("eventDelete")
@@ -1063,8 +1075,21 @@ public class TcatHostController {
 
 
 	/////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민
-	/////////////////// //////////////////////////////
 
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
 	/////////////////////// 동금 1/9 start ////////////////////////
 	// HOST/상품관리/상품삭제
 	@RequestMapping("stockDelete_musical_side")

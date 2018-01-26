@@ -2962,10 +2962,7 @@ public class HostServiceImp implements HostService {
 		String sale_div=req.getParameter("sale_div");
 		ArrayList<SaleVO> dtos=hDao.levelMemberForm(sale_div);
 		model.addAttribute("dtos", dtos);
-		/*int sale_rate=Integer.parseInt(req.getParameter("sale_rate"));
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("sale_div", sale_div);
-		map.put("sale_rate", sale_rate);*/
+	
 	}
 	//혜택업데이트
 	@Override
@@ -2998,67 +2995,171 @@ public class HostServiceImp implements HostService {
 
 	///////////// HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-23 성영민 ///////////////
 /////////////////////////////////// 영민1/25 start /////////////////////////////////
-	/*//상품수정 리스트
+	//상품수정 상세
 	@Override
-	public void hostProModify(HttpServletRequest req, Model model) {
-		int cnt = 0; // 글갯수
-		int pageSize = 10; // 한 페이지당 출력할 글 갯수
-		int pageBlock = 2; // 한 블럭당 페이지 갯수
-
-		int start = 0; // 현재 페이지 글시작번호
-		int end = 0; // 현재 페이지 글 마지막번호
-		String pageNum = null; // 페이지 번호
-		int currentPage = 0; // 현재 페이지
-
-		int pageCount = 0; // 페이지 갯수
-		int startPage = 0; // 시작 페이지
-		int endPage = 0; // 마지막 페이지
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		cnt = hDao.hostProModifyCnt();
-		System.out.println("cnt======" + cnt);
-		pageNum = req.getParameter("pageNum");
-		if (pageNum == null) {
-			pageNum = "1";
-		}
-		currentPage = (Integer.parseInt(pageNum));
-		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0); // 페이지 갯수 + 나머지
-		start = (currentPage - 1) * pageSize + 1;
-		end = start + pageSize - 1;
-		if (end > cnt)
-			end = cnt;
-		System.out.println("cnt====" + cnt);
-
-		if (cnt > 0) {
-			map.put("start", start);
-			map.put("end", end);
-
-			ArrayList<TcatPerformanceVO> dtos = hDao.hostProModifyList(map);
-
-			System.out.println("dtos:" + dtos.size());
-			model.addAttribute("dtos", dtos);
-		}
-
-		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5/3)* 3+ 1= 4
-		if (currentPage % pageBlock == 0)
-			startPage -= pageBlock; // (5%3)==0
-		endPage = startPage + pageBlock - 1; // 4+3 -1 =6
-		if (endPage > pageCount)
-			endPage = pageCount;
-
-		model.addAttribute("cnt", cnt);
-		model.addAttribute("pageNum", pageNum);
-
-		if (cnt > 0) {
-			model.addAttribute("startPage", startPage);
-			model.addAttribute("endPage", endPage);
-			model.addAttribute("pageBlock", pageBlock);
-			model.addAttribute("pageCount", pageCount);
-			model.addAttribute("currentPage", currentPage);
-		}
+	public void hostProForm(HttpServletRequest req, Model model) {
+		int per_id=Integer.parseInt(req.getParameter("per_id"));
+		System.out.println("per_id============"+per_id);
 		
-	}*/
+		ArrayList<TcatPerformanceVO> dtos=hDao.hostProCnt(per_id);
+		ArrayList<CategoryVO> SDtos = hDao.cateList();
+
+		// 공연지역 가져오기
+		ArrayList<SelectHellInfoVO> HDtos = hDao.HellList();
+
+		req.setAttribute("SDtos", SDtos);
+		req.setAttribute("HDtos", HDtos);
+		model.addAttribute("dtos", dtos);
+	}
+	//상품업데이트
+	@Override
+	public void hostProUpdate(MultipartHttpServletRequest req, Model model) {
+		MultipartFile file = req.getFile("perf_Image");
+
+		String realDir = "C:\\Dev\\TCATworkspace\\git\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\eventList\\";
+		String saveDir = req.getRealPath("/resources/image/eventList/");
+		try {
+
+			file.transferTo(new File(saveDir + file.getOriginalFilename()));
+			FileInputStream fis = new FileInputStream(saveDir + file.getOriginalFilename());
+			FileOutputStream fos = new FileOutputStream(realDir + file.getOriginalFilename());
+
+			int data = 0;
+
+			while ((data = fis.read()) != -1) {
+				fos.write(data);
+			}
+			fis.close();
+			fos.close();
+			int updateCnt1=0;
+			int updateCnt2=0;
+			int updateCnt3=0;
+			int per_id=Integer.parseInt(req.getParameter("per_id"));
+			String perf_title = req.getParameter("perf_title");
+			int cateNum = Integer.parseInt(req.getParameter("cateNum"));
+			String perf_Image = file.getOriginalFilename();
+			String startDate = req.getParameter("startDate");
+			String endDate = req.getParameter("endDate");
+			int hall_id = Integer.parseInt(req.getParameter("hall_id"));
+			String first_grade = req.getParameter("first_grade");
+			String remain_round = req.getParameter("remain_round");
+			int possible_age = Integer.parseInt(req.getParameter("possible_age"));
+			int VIP_seatPrice = Integer.parseInt(req.getParameter("VIP_seatPrice"));
+			int R_seatPrice = Integer.parseInt(req.getParameter("R_seatPrice"));
+			int S_seatPrice = Integer.parseInt(req.getParameter("S_seatPrice"));
+			int A_seatPrice = Integer.parseInt(req.getParameter("A_seatPrice"));
+			int B_seatPrice = Integer.parseInt(req.getParameter("B_seatPrice"));
+
+			String sDate[] = startDate.split("/");
+			startDate = sDate[2] + "/" + sDate[0] + "/" + sDate[1];
+			String eDate[] = endDate.split("/");
+			endDate = eDate[2] + "/" + eDate[0] + "/" + eDate[1];
+
+			Map<String, Object> map1 = new HashMap<String, Object>();
+			map1.put("per_id", per_id);
+			map1.put("perf_title", perf_title);
+			map1.put("perf_Image", perf_Image);
+			map1.put("startDate", startDate);
+			map1.put("endDate", endDate);
+			map1.put("first_grade", first_grade);
+			map1.put("remain_round", remain_round);
+			map1.put("possible_age", possible_age);
+			map1.put("VIP_seatPrice", VIP_seatPrice);
+			map1.put("R_seatPrice", R_seatPrice);
+			map1.put("S_seatPrice", S_seatPrice);
+			map1.put("A_seatPrice", A_seatPrice);
+			map1.put("B_seatPrice", B_seatPrice);
+			
+			Map<String, Object> map2 = new HashMap<String, Object>();
+			map2.put("cateNum", cateNum);
+			
+			Map<String, Object> map3 = new HashMap<String, Object>();
+			map3.put("hall_id", hall_id);
+
+			
+			updateCnt1=hDao.hostProUpdateCnt1(map1);
+			updateCnt2=hDao.hostProUpdateCnt2(map2);
+			updateCnt3=hDao.hostProUpdateCnt3(map3);
+			model.addAttribute("updateCnt1", updateCnt1);
+			model.addAttribute("updateCnt2", updateCnt2);
+			model.addAttribute("updateCnt3", updateCnt3);
+		} catch (Exception e) {
+			e.printStackTrace();
+			int error = 1;
+			req.setAttribute("error", error);
+		}
+
+	}
 /////////////////////////////////// 영민1/25 end /////////////////////////////////
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/////////////////////// 동금 1/9 start ////////////////////////
 	// HOST/상품관리/상품삭제
 	@Override

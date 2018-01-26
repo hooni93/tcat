@@ -241,8 +241,8 @@ function detailOpen(category,id){
 		});	//hostPage의 오른쪽 result에 결과를 뿌려준다.
 	 if(url=="hostMain" || url=="join_retireMember" || url=="hotMusical" || url=="sleepMember" || url=="stockDelete_musical" || url=="stockOutOf_musical"
 		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" 
-		 || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified" 
-		 || url =="commentManager"|| url =="eventHost"|| url =="provalMain" || url =="orderManagement"){
+		 || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified"
+		 || url =="commentManager"|| url =="eventHost"|| url =="provalMain" || url =="orderManagement"|| url =="hostProModify"){
 	 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side",function(msg) {
 			history.pushState({side : url+"_side",page : url}, null);	//들어오는 url이 if조건에 만족할때 그에맞는 사이드페이지를 hostPage의 왼쪽 side_result쪽에 뿌려준다.
 	 });
@@ -339,6 +339,11 @@ function detailOpen(category,id){
 	function levelMemberForm(sale_div,url){
 		alert(url);
 		load('levelMemberForm?sale_div='+sale_div+'&url='+url);
+	}
+	//수정 상세
+	function hostProForm(per_id,url){
+		alert(url);
+		load('hostProForm?per_id='+per_id+'&url='+url);
 	}
 	 /* 영민이 제작 */
 	 /* 태성이 제작 */
