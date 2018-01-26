@@ -7,6 +7,7 @@ import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
+import spring.project.tcat.VO.TcatTicketingVO;
 import spring.project.tcat.VO.WishListVO;
 
 public interface JMHGuestDAO {
@@ -69,5 +70,13 @@ public interface JMHGuestDAO {
 	
 	//환불요청
 	public int  perfRefund(int disc_num);
+	
+	//티켓 배송번호 가져오기
+	public ArrayList<Integer> getDel_nums(Map<String, Object> map);
+	//배송번호에 해당하는 티켓 정보 가져오기
+	public ArrayList<TcatTicketingVO> getTickets(Map<String, Object> map);
+	
+	//예매 스텝 업데이트
+	public int ticStepUpdate(Map<String, Object> map);
 
 }

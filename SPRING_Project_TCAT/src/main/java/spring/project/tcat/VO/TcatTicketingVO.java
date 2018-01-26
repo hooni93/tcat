@@ -45,7 +45,105 @@ public class TcatTicketingVO {
  	String 		del_addr;			//주소
  	String 		del_hp;				//연락처
  	
- 	int round;
+ 	//hallInfo
+    String hall_name; 		//공연장명
+    int place_num;			//공연지역번호fk
+    int VIP_seatPrice;		//vip좌석가격
+    int R_seatPrice; 		//R좌석가격
+    int S_seatPrice;		//S좌석가격
+    int A_seatPrice;		//A좌석가격
+    int B_seatPrice;		//B좌석가격
+    String VIP_seat;		//vip물리번호
+    String R_seat;			//R물리번호
+    String S_seat;			//S물리번호
+    String A_seat;			//A물리번호
+    String B_seat;			//B물리번호
+    String seat_line;
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	public String getHall_name() {
+		return hall_name;
+	}
+	public void setHall_name(String hall_name) {
+		this.hall_name = hall_name;
+	}
+	public int getPlace_num() {
+		return place_num;
+	}
+	public void setPlace_num(int place_num) {
+		this.place_num = place_num;
+	}
+	public int getVIP_seatPrice() {
+		return VIP_seatPrice;
+	}
+	public void setVIP_seatPrice(int vIP_seatPrice) {
+		VIP_seatPrice = vIP_seatPrice;
+	}
+	public int getR_seatPrice() {
+		return R_seatPrice;
+	}
+	public void setR_seatPrice(int r_seatPrice) {
+		R_seatPrice = r_seatPrice;
+	}
+	public int getS_seatPrice() {
+		return S_seatPrice;
+	}
+	public void setS_seatPrice(int s_seatPrice) {
+		S_seatPrice = s_seatPrice;
+	}
+	public int getA_seatPrice() {
+		return A_seatPrice;
+	}
+	public void setA_seatPrice(int a_seatPrice) {
+		A_seatPrice = a_seatPrice;
+	}
+	public int getB_seatPrice() {
+		return B_seatPrice;
+	}
+	public void setB_seatPrice(int b_seatPrice) {
+		B_seatPrice = b_seatPrice;
+	}
+	public String getVIP_seat() {
+		return VIP_seat;
+	}
+	public void setVIP_seat(String vIP_seat) {
+		VIP_seat = vIP_seat;
+	}
+	public String getR_seat() {
+		return R_seat;
+	}
+	public void setR_seat(String r_seat) {
+		R_seat = r_seat;
+	}
+	public String getS_seat() {
+		return S_seat;
+	}
+	public void setS_seat(String s_seat) {
+		S_seat = s_seat;
+	}
+	public String getA_seat() {
+		return A_seat;
+	}
+	public void setA_seat(String a_seat) {
+		A_seat = a_seat;
+	}
+	public String getB_seat() {
+		return B_seat;
+	}
+	public void setB_seat(String b_seat) {
+		B_seat = b_seat;
+	}
+	public String getSeat_line() {
+		return seat_line;
+	}
+	public void setSeat_line(String seat_line) {
+		this.seat_line = seat_line;
+	}
+
+	int round;
  	
 	public int getRound() {
 		return round;

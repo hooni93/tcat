@@ -7,16 +7,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-
-function OneToOneBoardSearch() {
-	
+//검색할때
+function noticeBoardSearch() {
 	var cDev=document.all.cDev.value;
 	var keyword=document.all.keyword.value;
-	var url="qnaOneToOneboard?cDev="+cDev+"&keyword="+keyword; 
+	var url="noticeBoard?cDev="+cDev+"&keyword="+keyword; 
 	
 	$( "#result2" ).load( "${pageContext.request.contextPath}/"+url);	
 
-}   
+} 
+
+//글쓰기
+function qnawrite(){
+	
+	$( "#result2" ).load( "${pageContext.request.contextPath}/"+url);
+}
+
 </script>
 
 </head>
@@ -25,17 +31,18 @@ function OneToOneBoardSearch() {
 			<div>
 				<br>
 				<h4>
-					<b>1:1게시판</b>
+					<b>공지사항 게시판</b>
 				</h4>
 				<hr>
-				<b>1:1게시판입니다!</b><br>
-				<b>자유롭게 토론하는 질문이나 자주하는 질문은 Q&A게시판이나 공지사항을 이용해주세요!</b>
+				<b>공지사항 게시판입니다.</b><br>
+				<b>자유롭게 토론하거나 공개하기 곤란한 질문이나 자주하는 질문은 Q&A게시판이나 1:1게시판을 이용해주세요!</b>
 				<hr>
 				<br>
-				<div class="navbar-form navbar-right">
+				<!-- <div class="navbar-form navbar-right">
+					<button type="button" class="btn btn-primary btn-sm btn btn-info">글쓰기</button>
 					 <input type="button" value="글쓰기" class="btn btn-primary btn-sm btn btn-info" 
-					        onclick="checkid('oneToOneWriteForm');">
-				</div>
+					        onclick="checkid('qnaWriteForm');">
+				</div> -->
 				<table
 					class="table table-hover table-bordered table-condensed c fs12">
 					<tr class="bg-primary">
@@ -43,7 +50,7 @@ function OneToOneBoardSearch() {
 						<td><b>구분<b></td>
 						<td><b>제목</b></td>
 						<td><b>작성자</b></td>
-						<td><b>답변상태</b></td>
+						<td><b>조회수</b></td>
 						<td><b>날짜</b></td>
 						
 						
@@ -51,17 +58,22 @@ function OneToOneBoardSearch() {
 					<c:if test="${cnt > 0}">
 						<c:forEach var="dto" items="${dtos}">
 							<tr>
-								<td>${dto.service_num}</td>
-								<td>${dto.service_div}</td>
-								<td><a onclick="loadBoard('oneToOneContent?service_num=${dto.service_num}');">${dto.service_title}</a></td>
+								<td>${dto.notice_num}</td>
+								<td>
+									<c:if test="${dto.notice_div==1}">
+									 	공지사항
+									 </c:if>
+									 <c:if test="${dto.notice_div==2}">
+									 	영상컨텐츠 게시판
+									 </c:if>
+									 <c:if test="${dto.notice_div==3}">
+									 	사진컨텐츠 게시판
+									 </c:if>
+								</td>
+								<td><a onclick="loadBoard('noticeContent?notice_num=${dto.notice_num}');">${dto.notice_title}</a></td>
 								<td>${dto.member_id}</td>
 								<td>
-									 <c:if test="${dto.getAnswersStatus()==1}">
-									 	대기
-									 </c:if>
-									 <c:if test="${dto.getAnswersStatus()==2}">
-									 	답변완료
-									 </c:if>
+									${dto.refNum}
 								</td>
 								<td>${dto.writeDate}</td>
 								
@@ -77,8 +89,8 @@ function OneToOneBoardSearch() {
 							<c:if test="${cnt > 0}">
 								<!-- 처음[◀◀] / 이전블록[◀] 특수문자 : ㅁ한자키 -->
 								<c:if test="${startPage > pageBlock}">
-									<a onclick="loadBoard('qnaOneToOneboard?cDev=${cDev}&keyword=${keyword}');">[◀◀]</a>
-									<a onclick="loadBoard('qnaOneToOneboard?pageNum=${startPage - pageBlock}&cDev=${cDev}&keyword=${keyword}');">[◀]</a>
+									<a onclick="loadBoard('noticeBoard?cDev=${cDev}&keyword=${keyword}');">[◀◀]</a>
+									<a onclick="loadBoard('noticeBoard?pageNum=${startPage - pageBlock}&cDev=${cDev}&keyword=${keyword}');">[◀]</a>
 								</c:if>
 
 								<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -88,14 +100,14 @@ function OneToOneBoardSearch() {
 									</c:if>
 
 									<c:if test="${i != currentPage}">
-										<a onclick="loadBoard('qnaOneToOneboard?pageNum=${i}&cDev=${cDev}&keyword=${keyword}');">[${i}]</a>
+										<a onclick="loadBoard('noticeBoard?pageNum=${i}&cDev=${cDev}&keyword=${keyword}');">[${i}]</a>
 									</c:if>
 								</c:forEach>
 
 								<!-- 다음블록[▶] / 끝[▶▶] -->
 								<c:if test="${pageCount > endPage}">
-									<a onclick="loadBoard('qnaOneToOneboard?pageNum=${startPage + pageBlock}&cDev=${cDev}&keyword=${keyword}');">[▶]</a>
-									<a onclick="loadBoard('qnaOneToOneboard?pageNum=${pageCount}&cDev=${cDev}&keyword=${keyword}');">[▶▶]</a>
+									<a onclick="loadBoard('noticeBoard?pageNum=${startPage + pageBlock}&cDev=${cDev}&keyword=${keyword}');">[▶]</a>
+									<a onclick="loadBoard('noticeBoard?pageNum=${pageCount}&cDev=${cDev}&keyword=${keyword}');">[▶▶]</a>
 								</c:if>
 							</c:if>
 						</table>
@@ -111,7 +123,6 @@ function OneToOneBoardSearch() {
 						<option value="1">제목</option>
 						<option value="2">구분</option>
 						<option value="3">번호</option>
-						<option value="4">작성자</option>
 						
 					</select>
 
@@ -120,7 +131,7 @@ function OneToOneBoardSearch() {
 							name="keyword">
 					</div>
 					<button type="button" class="btn btn-default"
-						onclick="OneToOneBoardSearch();">검색</button>
+						onclick="noticeBoardSearch();">검색</button>
 					<!-- stocksearch(); -->
 					
 				</form>

@@ -22,25 +22,34 @@ function qnacomment(service_num,service_div,service_title,member_id,QuestionCon,
 	$( "#result2" ).load( "${pageContext.request.contextPath}/"+url );
 }
 
- 
- //댓글 삭제
- function commentDel(service_num){
+/* function commentDel(service_num){
+	var url="deleteComment?service_num"
+	
+	$( "#result2" ).load( "${pageContext.request.contextPath}/"+url );
+} */
+
+/* function commentDel(per_id, url){
 	if (confirm("정말 삭제하시겠습니까??") == true){    //확인
-		//loadBoard("deleteComment?service_num="+service_num+"&url="+url);
-	    var url="deleteComment?service_num=${dto.service_num}&delService_num="+service_num;
-	    $( "#result2" ).load( "${pageContext.request.contextPath}/"+url );
+		load("stockDelete_Pro?per_id="+per_id+"&url="+url);
+	}else{   //취소
+	    return;
+	}		
+ } */
+ function commentDel(service_num, url){
+	if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+		load("deleteComment?service_num="+service_num+"&url="+url);
 	}else{   //취소
 	    return;
 	}		
  }
  
  //글수정
- function qnaBoardUpdate(service_num){
+ function oneBoardUpdate(service_num){
 	 if(${sessionScope.login_id != dto.member_id}){
 		 alert("본인이 쓴 글이 아닙니다. 수정할수 없습니다!");
 	 }else if(${sessionScope.login_id == dto.member_id}){
 		 if (confirm("수정하시겠습니까??") == true){    //확인
-			loadBoard("qnaWriteUpdate?service_num="+service_num);
+			loadBoard("oneWriteUpdate?service_num="+service_num);
 			 //var url="qnaCommentWrite?service_num="+service_num+"&service_div="+service_div 
 			 //$( "#result2" ).load( "${pageContext.request.contextPath}/"+url );
 		 }else{   //취소
@@ -50,12 +59,12 @@ function qnacomment(service_num,service_div,service_title,member_id,QuestionCon,
  }
  
  //글삭제
- function qnaBoardDelete(service_num){
+ function oneBoardDelete(service_num){
 	 if(${sessionScope.login_id != dto.member_id}){
 		 alert("본인이 쓴 글이 아닙니다. 삭제할수 없습니다!");
 	 }else if(${sessionScope.login_id == dto.member_id}){
 		 if (confirm("삭제하시겠습니까??") == true){    //확인
-			loadBoard("qnaWriteDelete?service_num="+service_num);
+			loadBoard("oneWriteDelete?service_num="+service_num);
 			 //var url="qnaCommentWrite?service_num="+service_num+"&service_div="+service_div 
 			 //$( "#result2" ).load( "${pageContext.request.contextPath}/"+url );
 		 }else{   //취소
@@ -78,7 +87,7 @@ function qnacomment(service_num,service_div,service_title,member_id,QuestionCon,
 
 	<div class="col-md-10">
 		<hr>
-		<div><span>Q&A게시판 '${dto.service_title}' 의 상세 정보</span></div>
+		<div><span>1:1게시판 '${dto.service_title}' 의 상세 정보</span></div>
 		<hr><br>
 		
 		<table class="table table-hover table-bordered table-condensed c fs12">
@@ -138,14 +147,14 @@ function qnacomment(service_num,service_div,service_title,member_id,QuestionCon,
 			</tr>
 		</table>
 		<div class="navbar-form navbar-right">
-			 <c:if test="${dto.member_id.equals(sessionScope.login_id)}">
-				<input type="button" value="글삭제" onclick="qnaBoardDelete('${dto.service_num}');"
-					   class="btn btn-primary btn-sm btn btn-info">
-				<input type="button" value="글수정" onclick="qnaBoardUpdate('${dto.service_num}');"
-					   class="btn btn-primary btn-sm btn btn-info">
-			 </c:if>		   
-				<input type="button" value="목록보기" onclick="loadBoard('qnaBoardList');"
-		 			   class="btn btn-primary btn-sm btn btn-info">
+				<c:if test="${dto.member_id.equals(sessionScope.login_id)}">
+					<input type="button" value="글삭제" onclick="oneBoardDelete('${dto.service_num}');"
+						   class="btn btn-primary btn-sm btn btn-info">
+					<input type="button" value="글수정" onclick="oneBoardUpdate('${dto.service_num}');"
+						   class="btn btn-primary btn-sm btn btn-info">
+			 	</c:if>	
+				<input type="button" value="목록보기" onclick="loadBoard('qnaOneToOneboard');"
+	 			   class="btn btn-primary btn-sm btn btn-info"><!-- onclick="window.history.back();" -->
 		</div>
 		<br>
 		댓글
@@ -154,11 +163,7 @@ function qnacomment(service_num,service_div,service_title,member_id,QuestionCon,
 	        <c:forEach var="dto2" items="${dtos2}" >
 	        	 <input type="hidden" value="${dto2.service_num}" name="service_num">
 	             <h6 class="floatL"><label>${dto2.member_id} : </label>&nbsp;${dto2.getAnswersCon()}&nbsp;&nbsp;<span class="fs8">(${dto2.writeDate})</span>
-	             &nbsp;&nbsp;
-	             <c:if test="${dto2.member_id.equals(sessionScope.login_id)}">
-	             	<a onclick="commentDel('${dto2.service_num}')">X</a>
-	             </c:if>
-	             </h6><br><br><!-- ,'qnaContent' -->
+	             &nbsp;&nbsp;<a onclick="commentDel('${dto2.service_num}','qnaContent')">X</a></h6><br><br>
 	        </c:forEach>
             <form action="" name="commentGWrite" id="commentGWrite">
            	<div>      

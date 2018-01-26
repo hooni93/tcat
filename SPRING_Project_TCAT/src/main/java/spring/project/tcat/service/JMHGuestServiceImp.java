@@ -15,6 +15,7 @@ import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
+import spring.project.tcat.VO.TcatTicketingVO;
 import spring.project.tcat.VO.WishListVO;
 import spring.project.tcat.persistence.HostDAO;
 import spring.project.tcat.persistence.JMHGuestDAO;
@@ -370,7 +371,6 @@ public class JMHGuestServiceImp implements JMHGuestService {
 			mhDAO.upHits(disc_code);
 		}
 		TcatPerDiscVO str = mhDAO.getContent_store(disc_code);
-			System.out.println(str.getDisc_title());
 
 		model.addAttribute("str", str);
 	}
@@ -494,5 +494,57 @@ public class JMHGuestServiceImp implements JMHGuestService {
 		}
 		// 로그인 결과값
 		model.addAttribute("loginRs", loginRs);
+	}
+
+	// getTicketInfo예매 정보
+	public void getTicketInfo(HttpServletRequest req, Model model) {
+		String member_id = (String) req.getSession().getAttribute("login_id");
+		String year = (String) req.getParameter("year");	//기간 판정
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("member_id", member_id);
+		//미래 티켓
+		//배송번호 받아오기
+		map.put("date", "ticet_date	>=TO_DATE(SYSDATE,'yy/MM/dd')");//미래판정
+		ArrayList<Integer> del_nums = mhDAO.getDel_nums(map);
+		Map<Integer,ArrayList<TcatTicketingVO>> futureTicket = new HashMap<Integer, ArrayList<TcatTicketingVO>>();
+		
+		map.put("del_num", 0);//배송정보 초기화
+		if(del_nums.size()>0) {
+			for(int index=0;index<del_nums.size();index++) {
+				map.replace("del_num", del_nums.get(index));
+				futureTicket.put(del_nums.get(index), mhDAO.getTickets(map));// 미래 티켓들의 티켓정보
+			}
+		}
+		//데이터 전송
+		model.addAttribute("futureTicket_num", del_nums);
+		model.addAttribute("futureTicket",futureTicket);
+		
+		/////////////////////////////////////////////////
+		//과거 기록
+		//배송번호 받아오기
+		map.replace("date", "ticet_date	< TO_DATE(SYSDATE,'yy/MM/dd')");//과거판정
+		ArrayList<Integer> past_nums = mhDAO.getDel_nums(map);
+		Map<Integer,ArrayList<TcatTicketingVO>> pastTicket = new HashMap<Integer, ArrayList<TcatTicketingVO>>();
+		if(past_nums.size()>0) {
+			for(int index=0;index<past_nums.size();index++) {
+				map.replace("del_num", past_nums.get(index));
+				pastTicket.put(past_nums.get(index), mhDAO.getTickets(map));// 미래 티켓들의 티켓정보
+			}
+		}
+		//데이터 전송
+		model.addAttribute("past_nums", past_nums);
+		model.addAttribute("pastTicket",pastTicket);
+				
+	}
+	
+	//예매취소 ticCancel
+	public void ticStepUpdate(HttpServletRequest req,Model model) {
+		int del_num = Integer.parseInt(req.getParameter("del_num"));
+		int ticket_step = Integer.parseInt(req.getParameter("ticket_step"));
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("del_num", del_num);
+		map.put("ticket_step", ticket_step);
+		int ticStepUpdateRs = mhDAO.ticStepUpdate(map);
+		model.addAttribute("ticStepUpdateRs", ticStepUpdateRs);
 	}
 }
