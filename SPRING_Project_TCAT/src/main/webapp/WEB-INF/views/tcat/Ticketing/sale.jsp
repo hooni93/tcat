@@ -96,6 +96,9 @@ function sale(value){
 		var price2=price*0.95;
 		price=(price*1)-(price2*1);
 		$("input[name='totalSale']").val(price);
+	}else if(value==0){
+		$("input[name='sale_rate']").val("0");
+		$("input[name='totalSale']").val("0");
 	}
 }
 </script>
@@ -144,6 +147,7 @@ function sale(value){
 	<tr>
 		<th>
 			<select onchange="sale(this.value);">
+			<option value="0">할인선택</option>
 			<%
 			for(int i=0;i<dtos.size();i++){
 				if(i<6){

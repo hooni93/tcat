@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import spring.project.tcat.service.HostService;
+import spring.project.tcat.service.JMHGuestService;
 import spring.project.tcat.service.TSGuestService;
 
 @Controller
@@ -134,4 +135,66 @@ public class TSGuestController {
 		return "tcat/content/watchLatterS";
 		}
 		
+		//////////////////////태성 1/25 start////////////////////////////
+		// 고객이 한줄평 본인꺼 수정하기 - 공연용
+		@RequestMapping("commentModify")
+		public String commentModify(HttpServletRequest req,Model model) {
+		System.out.println("commentModify");
+		
+		TSGService.commentModify(req, model);
+		TSGService.selectComment(req,model);
+		
+		return "tcat/content/watchLatter";
+		}
+		@Autowired
+		JMHGuestService mhService;
+		
+		// 고객이 한줄평 본인꺼 삭제하기 - 공연용
+		@RequestMapping("commentDel")
+		public String commentDel(HttpServletRequest req,Model model) {
+		System.out.println("commentDel");
+		
+		TSGService.commentDel(req, model);
+		
+		mhService.getWishListIn(req, model);
+		//상품정보 가져오기
+		mhService.getContent(req, model);
+
+		TSGService.selectComment(req,model);
+		
+		return "tcat/content/contentMain";
+		}
+		
+		
+		// 고객이 한줄평 본인꺼 수정하기 - 스토어용
+		@RequestMapping("commentModifyS")
+		public String commentModifyS(HttpServletRequest req,Model model) {
+		System.out.println("commentModifyS");
+		
+		TSGService.commentModifyS(req, model);
+		TSGService.selectCommentS(req,model);
+		
+		return "tcat/content/watchLatterS";
+		}
+
+		
+		// 고객이 한줄평 본인꺼 삭제하기 - 스토어용
+		@RequestMapping("commentDelS")
+		public String commentDelS(HttpServletRequest req,Model model) {
+		System.out.println("commentDelS");
+		
+		TSGService.commentDelS(req, model);
+		
+		mhService.getWishListIn(req, model);
+		//상품정보 가져오기
+		mhService.getContent_store(req, model);
+
+		TSGService.selectCommentS(req,model);
+		
+		return "tcat/content/contentMain_store";
+		}
+		
+		
+		
+		//////////////////////태성 1/25 end////////////////////////////	
 }

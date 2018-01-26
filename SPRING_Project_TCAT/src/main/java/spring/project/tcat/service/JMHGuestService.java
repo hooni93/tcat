@@ -41,4 +41,8 @@ public interface JMHGuestService {
 	//호스트 로그인
 	public void host_loginPro(HttpServletRequest req,Model model);
 	
+	//getTicketInfo예매 정보
+	public void getTicketInfo(HttpServletRequest req,Model model);
+	//예매취소 ticCancel
+	public void ticStepUpdate(HttpServletRequest req,Model model);
 }

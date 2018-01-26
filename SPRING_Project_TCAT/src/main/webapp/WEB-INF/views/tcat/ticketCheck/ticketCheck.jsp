@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../setting.jsp"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -39,23 +40,23 @@
 	background: #fff;
 	height: 250px;
 	width: 450px;
-	padding: 40px;
+	padding: 30px;
 	position: relative;
 	border: 1px solid #d0d0d0;
 }
 
 .check .big {
-	font-size: 50px;
+	font-size: 30px;
 	font-weight: 900;
 	line-height: .8em;
 }
 
 .check .number {
 	position: absolute;
-	top: 50px;
+	top: 30px;
 	right: 50px;
 	color: #ef5658;
-	font-size: 40px;
+	font-size: 30px;
 }
 
 .check .info {
@@ -71,7 +72,8 @@
 }
 
 .check .info section {
-	margin-right: 50px;
+	width: 25%;
+	margin: 0;
 }
 
 .check .info section:before {
@@ -87,106 +89,216 @@
 	font-size: 10px;
 	text-transform: uppercase;
 }
+
+.darkness {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: inherit;
+	height: inherit;
+	background: #000000;
+	/* 추가된 부분 */
+	opacity: 0;
+	transition: all .6s linear;
+}
+
+/* 추가된 부분 */
+.stub:hover .darkness {
+	opacity: 0.4;
+}
+
+.btn-plus {
+	margin: 100px 80px;
+	top:0;
+	left:0;
+	position: absolute;
+	text-align: center;
+	/* 추가된 부분 */
+	opacity: 0;
+}
+/* 추가된 부분 */
+.stub:hover .btn-plus {
+	opacity: 1;
+	transform: scale(1);
+}
 </style>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.btn-filter').change(function() {
+			var $target = $(this).val();
+			if ($target != 'all') {
+				$('.tic').css('display', 'none');
+				$('.tic[data-status="' + $target + '"]').fadeIn('slow');
+			} else {
+				$('.tic').css('display', 'none').fadeIn('slow');
+			}
+		});
+		
+		$(".ticCancel").click(function(){
+			var del_num = $(this).attr("name");
+			var bool = confirm("예매취소 하시겠습니까?");
+			if(bool){//결제취소
+				load("ticStepUpdate?del_num="+del_num+"&ticket_step=6");
+			}
+		});
+	});
+</script>
 </head>
 <!--공백  -->
 <div class="col-md-12 h50"></div>
 
 <!--지금 예매한 영화 -->
 <div class="col-md-12">
+	<div class="col-md-12">
+		<div class="col-md-2"></div>
+		<div class="col-md-8 h50">
+			<div class="col-md-12 c fs18 pt17"><b>예매 중인 공연</b></div>
+		</div>
+		<div class="col-md-2"></div>
 
+	</div>
+	<!--미래 티켓 갯수대로 출력  -->
+	<c:if test="${futureTicket_num ==null}">
+		현재 예매하신 공연이 없습니다.
+	</c:if>
+	<c:forEach var="index" items="${futureTicket_num }">
+		<div class="ticket">
+			<div class="stub c"
+				style="background-image:url('${image}performance/${futureTicket.get(index).get(0).perf_Image}');  background-size: 100%;">
+				<div class="darkness"></div>
+				<div class="btn-plus">
+					<input type="button" class="btn btn-warning w80p ticCancel" value="예매취소" name="${index}">
+				</div>
+			</div>
+			<div class="check">
+				<div class="big">${futureTicket.get(index).get(0).perf_title}
+				</div>
+				<div class="big">
+					<br>
+					<fmt:formatDate
+						value="${futureTicket.get(index).get(0).ticet_date}"
+						pattern="yyyy년 MM월DD일" />
+					${futureTicket.get(index).get(0).remain_round.split("/")[1]}
+				</div>
+				<div class="number">${futureTicket.get(index).size()}매</div>
+				<div class="info">
+					<section>
+					<div class="title">${futureTicket.get(index).get(0).remain_round.split("/")[0]}</div>
+					<div>${futureTicket.get(index).get(0).remain_round.split("/")[1]}</div>
+					</section>
+					<br>
+					<section>
+					<div class="title">장소</div>
+					<div>${futureTicket.get(index).get(0).hall_name}</div>
+					</section>
+					<section>
+					<div class="title">티켓번호</div>
+					<div>${futureTicket.get(index).get(0).ticket_num}</div>
+					</section>
+					<section>
+					<div class="title">좌석</div>
+					<div>
+						<c:forEach var="tic" items="${futureTicket.get(index)}">
+						${tic.seat_type} - ${tic.seat_num}<br>
+						</c:forEach>
 
-	<div class="ticket">
-		<div class="stub c "
-			style="background-image:url('${image}performance/perf_Image.jpg');  background-size: 100%;">
-			<div>
-				<input type="button" class="w40p btn btn-primary" value="예매확인"> 
-				<input type="button" class="w40p btn btn-warning" value="예매취소">
-			</div>
-			</div>
-		<div class="check">
-			<div class="big">타이틀</div>
-			<div class="big">
-				<br> 남은 시간
-			</div>
-			<div class="number">2매</div>
-			<div class="info">
-				<section>
-				<div class="title">1회차</div>
-				<div>12312312</div>
-				</section>
-				<section>
-				<div class="title">장소</div>
-				<div>홀이름</div>
-				</section>
-				<section>
-				<div class="title">티켓번호</div>
-				<div>31415926</div>
-				</section>
-				<section>
-				<div class="title">좌석</div>
-				<div>31415926</div>
-				</section>
+					</div>
+					</section>
+				</div>
 			</div>
 		</div>
-	</div>
-
+	</c:forEach>
 
 
 </div>
 
 <!--과거 예매 영화 -->
-<div class="col-md-12">
+<div class="col-md-12" style="background-color: #d4d3c9">
 	<div class="col-md-12">
 		<div class="col-md-2"></div>
-		<div class="col-md-8">
-			<div class="col-md-10">
-				<i class="glyphicon glyphicon-play"></i> 관람하신 공연 11개
+		<div class="col-md-8 h50">
+			<div class="col-md-12 c fs18 pt17"><b>내가 본 공연</b></div>
+		</div>
+		<div class="col-md-2"></div>
+
+	</div>
+	<div class="col-md-12">
+		<hr>
+		<div class="col-md-2"></div>
+		<div class="col-md-8 h50">
+			
+			<div class="col-md-10 fs18">
+				<i class="glyphicon glyphicon-play "></i> 관람하신 공연 ${pastTicket.size()}개
 			</div>
 			<div class="col-md-2">
-				<select class="w100p">
-					<option>전체</option>
-					<option>2018</option>
-					<option>2017</option>
-					<option>2016</option>
+				<select class="w100p btn-filter form-control">
+					<option value="all">전체</option>
+					<option value="2018">2018</option>
+					<option value="2017">2017</option>
+					<option value="2016">2016</option>
 				</select>
 			</div>
 		</div>
 		<div class="col-md-2"></div>
-
 	</div>
-	<div class="col-md-12">
-		<hr style="margin-top: 10px;">
-	</div>
-	<div class="ticket">
-		<div class="stub">이미지</div>
-
-		<div class="check">
-			<div class="big">타이틀</div>
-			<div class="big">
-				<br> 남은 시간
+	<br>
+	<c:if test="${pastTicket.size()==0}">
+		<div class="col-md-12">
+			<div class="col-md-2"></div>
+			<div class="col-md-8 c">
+				과거 기록이 없습니다.<br>
 			</div>
-			<div class="number">#1</div>
-			<div class="info">
-				<section>
-				<div class="title">1회차</div>
-				<div>날짜 시간</div>
-				</section>
-				<section>
-				<div class="title">장소</div>
-				<div>홀이름</div>
-				</section>
-				<section>
-				<div class="title">티켓번호</div>
-				<div>31415926</div>
-				</section>
+			<div class="col-md-2"></div>
+		</div>
+	</c:if>
+	<c:forEach var="index" items="${past_nums }">
+		<div class="ticket tic"
+			data-status="<fmt:formatDate value="${pastTicket.get(index).get(0).ticet_date}" pattern="yyyy" />">
+			<div class="stub c"
+				style="background-image:url('${image}performance/${pastTicket.get(index).get(0).perf_Image}');  background-size: 100%;">
+			</div>
+			<div class="check">
+				<div class="big">${pastTicket.get(index).get(0).perf_title}</div>
+				<div class="big">
+					<br>
+					<fmt:formatDate value="${pastTicket.get(index).get(0).ticet_date}"
+						pattern="yyyy년 MM월DD일" />
+					${pastTicket.get(index).get(0).remain_round.split("/")[1]}
+				</div>
+				<div class="number">${pastTicket.get(index).size()}매</div>
+				<div class="info">
+					<section>
+					<div class="title">${pastTicket.get(index).get(0).remain_round.split("/")[0]}</div>
+					<div>${pastTicket.get(index).get(0).remain_round.split("/")[1]}</div>
+					</section>
+					<br>
+					<section>
+					<div class="title">장소</div>
+					<div>${pastTicket.get(index).get(0).hall_name}</div>
+					</section>
+					<section>
+					<div class="title">티켓번호</div>
+					<div>${pastTicket.get(index).get(0).ticket_num}</div>
+					</section>
+					<section>
+					<div class="title">좌석</div>
+					<div>
+						<c:forEach var="tic" items="${pastTicket.get(index)}">
+						${tic.seat_type} - ${tic.seat_num}<br>
+						</c:forEach>
+
+					</div>
+					</section>
+				</div>
 			</div>
 		</div>
-	</div>
+	</c:forEach>
+
+
 
 	<!--더보기 -->
 </div>
-
 
 
 </html>
