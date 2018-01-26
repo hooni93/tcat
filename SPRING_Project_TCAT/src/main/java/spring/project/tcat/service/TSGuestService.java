@@ -29,4 +29,14 @@ public interface TSGuestService {
 		
 	//상품/후기 글 쓰기
 	public void commentWriteS(HttpServletRequest req, Model model);
+	
+	//고객이 후기 쓴거 수정 - 공연용
+	public void commentModify(HttpServletRequest req, Model model);
+	//고객이 후기 쓴거 삭제 - 공연용
+	public void commentDel(HttpServletRequest req, Model model);
+	
+	//고객이 후기 쓴거 수정 - 스토어용
+	public void commentModifyS(HttpServletRequest req, Model model);
+	//고객이 후기 쓴거 삭제 - 스토어용
+	public void commentDelS(HttpServletRequest req, Model model);
 }

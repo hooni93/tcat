@@ -166,8 +166,11 @@ public interface HostService {
 	public void levelMemberUpdate(HttpServletRequest req,Model model);
 	//혜택등록
 	public void levelAdd(HttpServletRequest req,Model model);
+	//상품수정 폼
+	public void hostProForm(HttpServletRequest req,Model model);
+	//상품수정 업데이트
+	public void hostProUpdate(MultipartHttpServletRequest req,Model model);
 	////////////////////////////////////영민 1/11 end //////////////////////////////////////////
-	
 
 	///////////////////////  동금 1/9 start  //////////////////////// 
 	

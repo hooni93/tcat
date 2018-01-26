@@ -1,8 +1,11 @@
 package spring.project.tcat.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 public interface HSGuestService {
 	//아이디 있는지 체크
@@ -27,4 +30,14 @@ public interface HSGuestService {
 	public void sale(HttpServletRequest req,Model model);
 	//공연예매
 	public void insertTicket(HttpServletRequest req,Model model);
+	//스토어 바로구매 페이지
+	public void directBuy(HttpServletRequest req,Model model);
+	//바로구매 결제
+	public void directPay(HttpServletRequest req,Model model);
+	//장바구니에 담긴 물품의 갯수 변경하기
+	public void changeCount(HttpServletRequest req,Model model);
+	//스토어 장바구니 구매 [체크값]
+	public void storePay(HttpServletRequest req,Model model,@RequestParam (value = "valueArrTest[]") List<String> valueArr);
+	//스토어 장바구니 삭제
+	public void deleteCart(HttpServletRequest req,Model model);
 }

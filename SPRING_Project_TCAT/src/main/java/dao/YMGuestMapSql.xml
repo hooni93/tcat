@@ -67,7 +67,7 @@
 	<select id="eventGuestList" resultType="spring.project.tcat.VO.TcatBoardVO">
 		<![CDATA[
 		select *
-		from(select notice_num, notice_title, contents, notice_image, rownum rNum
+		from(select notice_num, notice_title, contents, notice_image,notice_addfile, rownum rNum
 		from(
 			select * from Notice
 			ORDER by notice_num desc
@@ -89,13 +89,13 @@
 	</delete>
 	<!-- 이벤트 수정 -->
 	<update id="eventUpdateCnt" parameterType="java.util.Map">
-		update notice set notice_title=#{title}, contents=#{content}, notice_image=#{notice_image} where notice_num=#{num}
+		update notice set notice_title=#{title}, contents=#{content}, notice_image=#{notice_image},notice_addfile=#{notice_addfile} where notice_num=#{num}
 	</update>
 	<!-- 이벤트 등록-->
 	<insert id="eventAddCnt" parameterType="java.util.Map">
 	<![CDATA[
-		INSERT INTO Notice (notice_num, notice_title, writeDate, contents, notice_image,notice_div, member_id) 
-		VALUES (Notice_SEQ.nextval,  #{notice_title},#{writeDate},#{contents},#{notice_image},#{notice_div},#{member_id})
+		INSERT INTO Notice (notice_num, notice_title, writeDate, contents, notice_image,notice_div,notice_addfile, member_id) 
+		VALUES (Notice_SEQ.nextval,  #{notice_title},#{writeDate},#{contents},#{notice_image},#{notice_div},#{notice_addfile},#{member_id})
 		]]>
 	</insert>
    </mapper>

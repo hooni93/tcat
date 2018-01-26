@@ -312,4 +312,49 @@
 		SET		disc_buyStep = 6
 		WHERE	disc_num = #{_parameter}
 	</update>
+	
+	
+	<!--티켓 배송번호 가져오기  -->
+	<select id="getDel_nums" resultType="int">
+		SELECT 	del_num
+		FROM(
+			SELECT		del_num, ticet_date
+			FROM		ticketing
+			WHERE		member_id = #{member_id}
+			AND			${date}
+			AND			ticket_step &lt;= 5
+			GROUP BY	del_num,ticet_date
+		)
+		ORDER BY	ticet_date desc
+		
+	</select>
+	<!--배송번호에 해당하는 티켓정보 가져오기  -->
+	<select id="getTickets" resultType="spring.project.tcat.VO.TcatTicketingVO">
+		SELECT
+				tic.ticket_num, tic.member_id, tic.per_id, 
+				tic.ticet_date, tic.seat_type, tic.seat_num, tic.sale_div, 
+				tic.del_num, tic.ticket_step, 
+				per.perf_title, per.perf_Image, per.startDate, 
+				per.endDate, per.hall_id, per.first_grade, per.per_step, 
+				per.remain_round, per.possible_age, s.sale_rate, per.R_seatPrice, 
+				per.S_seatPrice, per.A_seatPrice, per.B_seatPrice, per.VIP_seatPrice, 
+				h.hall_name, h.place_num, h.VIP_seat, h.R_seat, h.S_seat, 
+				h.A_seat, h.B_seat, h.seat_line
+		FROM	Ticketing 		tic
+		JOIN	performanceInfo per
+		ON		tic.per_id = per.per_id
+		JOIN 	sale			s
+		ON		s.sale_div = tic.sale_div
+		JOIN	hallInfo			h
+		ON		h.hall_id = per.hall_id
+		WHERE	del_num = #{del_num}
+	</select>
+	
+	<!--예매 스텝 업데이트  -->
+	<update id="ticStepUpdate">
+		UPDATE 	Ticketing
+		SET		ticket_step = #{ticket_step}
+		WHERE	del_num = #{del_num}
+	</update>
+	
 </mapper>

@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-
+//검색할때
 function BoardSearch() {
 	var cDev=document.all.cDev.value;
 	var keyword=document.all.keyword.value;
@@ -15,7 +15,13 @@ function BoardSearch() {
 	
 	$( "#result2" ).load( "${pageContext.request.contextPath}/"+url);	
 
-}   
+} 
+
+//글쓰기
+function qnawrite(){
+	
+	$( "#result2" ).load( "${pageContext.request.contextPath}/"+url);
+}
 
 </script>
 
@@ -33,7 +39,9 @@ function BoardSearch() {
 				<hr>
 				<br>
 				<div class="navbar-form navbar-right">
-					 <button type="button" class="btn btn-primary btn-sm btn btn-info">글쓰기</button>
+					<!-- <button type="button" class="btn btn-primary btn-sm btn btn-info">글쓰기</button> -->
+					 <input type="button" value="글쓰기" class="btn btn-primary btn-sm btn btn-info" 
+					        onclick="checkid('qnaWriteForm');">
 				</div>
 				<table
 					class="table table-hover table-bordered table-condensed c fs12">
@@ -42,7 +50,7 @@ function BoardSearch() {
 						<td><b>구분<b></td>
 						<td><b>제목</b></td>
 						<td><b>작성자</b></td>
-						<!-- <td><b>답변상태</b></td> -->
+						<td><b>답변상태</b></td>
 						<td><b>날짜</b></td>
 						
 						
@@ -54,7 +62,14 @@ function BoardSearch() {
 								<td>${dto.service_div}</td>
 								<td><a onclick="loadBoard('qnaContent?service_num=${dto.service_num}');">${dto.service_title}</a></td>
 								<td>${dto.member_id}</td>
-								<%-- <td>${dto.AnswersStatus}</td> --%>
+								<td>
+									 <c:if test="${dto.getAnswersStatus()==1}">
+									 	대기
+									 </c:if>
+									 <c:if test="${dto.getAnswersStatus()==2}">
+									 	답변완료
+									 </c:if>
+								</td>
 								<td>${dto.writeDate}</td>
 								
 								

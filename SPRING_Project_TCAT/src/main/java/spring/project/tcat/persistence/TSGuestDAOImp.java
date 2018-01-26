@@ -192,13 +192,49 @@ public class TSGuestDAOImp implements TSGuestDAO{
 			return dtos;
 		}
 
+		// 게스트가 후기 수정할 수 있게 - 공연용
+		@Override
+		public int commentsModify(TcatBoardVO vo) {
+			int cnt = 0;
+			
+			TSGuestDAO dao = Configuration.getMapper(TSGuestDAO.class);
+			cnt = dao.commentsModify(vo);
+			
+			return cnt;
+		}
 
 
 
-	
+		// 게스트가 후기 삭제하기 - 공연용
+		@Override
+		public int commentDeldao(int notice_num) {
+			int cnt = 0;
+			
+			TSGuestDAO dao = Configuration.getMapper(TSGuestDAO.class);
+			cnt = dao.commentDeldao(notice_num);
+			
+			return cnt;
+		}
 
 
 
+		// 게스트가 후기 수정할 수 있게 - 스토어
+		@Override
+		public int commentsModifyS(TcatBoardVO vo) {
+			int cnt = 0;
+			TSGuestDAO dao = Configuration.getMapper(TSGuestDAO.class);
+			cnt = dao.commentsModifyS(vo);
+			return cnt;
+		}
 
 
+
+		// 게스트가 후기 삭제하기 - 스토어
+		@Override
+		public int commentDeldaoS(int notice_num) {
+			int cnt = 0;
+			TSGuestDAO dao = Configuration.getMapper(TSGuestDAO.class);
+			cnt = dao.commentDeldaoS(notice_num);
+			return cnt;
+		}
 }

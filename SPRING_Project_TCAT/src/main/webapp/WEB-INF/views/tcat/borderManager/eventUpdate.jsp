@@ -14,6 +14,7 @@ $(function() {
 			formData.append("notice_title",$("input[name=notice_title]").val());
 			formData.append("contents", $("input[name=contents]").val());
 			formData.append("notice_image", $("input[name=notice_image]")[0].files[0]);
+			formData.append("notice_addfile", $("select[name=notice_addfile]").val());
 
 			$.ajax({
 				url : 'eventUpdateList',
@@ -55,7 +56,14 @@ $(function() {
 								<input type="text" name="contents" class="form-control"
 									maxlength="200" value="${vo.contents}">
 								<h4>공연이미지</h4>
-								<input type="file" name="notice_image">
+								<input type="file" name="notice_image" class="form-control"
+								 value="${vo.notice_image}">
+								<br>
+								<h4>분류</h4>
+								<select name="notice_addfile" style="width: 100%">
+										<option value="0"></option>
+										<option value="event1">event1</option>
+								</select>
 								<h4>(* 티켓 소진시까지 진행)</h4>
 								<br>
 								<br>

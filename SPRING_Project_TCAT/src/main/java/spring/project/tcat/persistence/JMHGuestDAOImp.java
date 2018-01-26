@@ -12,6 +12,7 @@ import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
+import spring.project.tcat.VO.TcatTicketingVO;
 import spring.project.tcat.VO.WishListVO;
 import spring.project.tcat.config.Configuration;
 
@@ -179,4 +180,23 @@ public class JMHGuestDAOImp implements JMHGuestDAO {
 		return cnt;
 	}
 
+	// 티켓 배송번호 가져오기
+	public ArrayList<Integer> getDel_nums(Map<String, Object> map) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<Integer> cnt = dao.getDel_nums(map);
+		return cnt;
+	}
+	//배송번호에 해당하는 티켓 정보 가져오기
+	public ArrayList<TcatTicketingVO> getTickets(Map<String, Object> map){
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<TcatTicketingVO> cnt = dao.getTickets(map);
+		return cnt;
+	}
+	
+	//예매 스텝 업데이트
+	public int ticStepUpdate(Map<String, Object> map) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		int cnt = dao.ticStepUpdate(map);
+		return cnt;
+	}
 }

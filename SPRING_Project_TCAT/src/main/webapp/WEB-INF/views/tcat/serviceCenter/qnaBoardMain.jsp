@@ -16,6 +16,19 @@ function loadBoard(url) {
 	 
 }
 
+//아이디 체크하기
+function checkid(url){
+	if(${sessionScope.login_id==null}){
+		
+		alert("로그인 먼저해주세요!");
+		
+	}else {
+		$( "#result2" ).load( "${pageContext.request.contextPath}/"+url);	
+	}
+	
+}
+
+//들어오자마자 메인리스트실행
  $( function() {
 	 $( "#result2" ).load( "${pageContext.request.contextPath}/qnaBoardList");
 }); 
@@ -39,8 +52,8 @@ function loadBoard(url) {
 				<div class="list-group pt11">
 				  <div class="pt11"><p class="686868 b m10"><span ></span>고객센터</p></div><!-- class="glyphicon glyphicon-star" -->
 				  <a onclick="loadBoard('qnaBoardList')" class="list-group-item"> Q&A게시판</a>
-				  <a onclick="loadBoard('qnaOneToOneboard')" class="list-group-item"> 1:1게시판</a>
-				  <a href="#" class="list-group-item"> 공지사항</a>
+				  <a onclick="checkid('qnaOneToOneboard')" class="list-group-item"> 1:1게시판</a>
+				  <a onclick="loadBoard('noticeBoard')" class="list-group-item"> 공지사항</a>
 				</div>
 			</div>	
 			<div id="result2" class="col-md-9">

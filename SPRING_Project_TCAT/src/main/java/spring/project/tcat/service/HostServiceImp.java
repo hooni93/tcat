@@ -2251,7 +2251,7 @@ public class HostServiceImp implements HostService {
 	}
 
 	// 2018-01-15---------------------------------------------------------------
-	// 고객 리스트 가져오기
+	// 고객 리스트 가져오기 //----------------------영민수정----------------------------------
 	@Override
 	public void member_list(HttpServletRequest req, Model model) {
 		int pageSize = 10; // 한 페이지당 출력한 글 갯수
@@ -2267,7 +2267,17 @@ public class HostServiceImp implements HostService {
 		int pageCount = 0; // 페이지 갯수
 		int startPage = 0; // 시작 페이지
 		int endPage = 0; // 마지막 페이지
+		
+		String sDev = req.getParameter("sDev"); //분류
+		String keyword = req.getParameter("keyword"); //키워드
 
+		if (sDev == null) {
+			sDev = "0";
+		}
+
+		if (keyword == null) {
+			keyword = "";
+		}
 		// 글갯수 구하기
 
 		cnt = hDao.member_cnt();
@@ -2312,6 +2322,8 @@ public class HostServiceImp implements HostService {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("start", start);
 			map.put("end", end);
+			map.put("sDev", sDev);
+			map.put("keyword", keyword);
 			ArrayList<MemberVO> dtos = hDao.member_list(map);
 			req.setAttribute("dtos", dtos);
 
@@ -2950,10 +2962,7 @@ public class HostServiceImp implements HostService {
 		String sale_div=req.getParameter("sale_div");
 		ArrayList<SaleVO> dtos=hDao.levelMemberForm(sale_div);
 		model.addAttribute("dtos", dtos);
-		/*int sale_rate=Integer.parseInt(req.getParameter("sale_rate"));
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("sale_div", sale_div);
-		map.put("sale_rate", sale_rate);*/
+	
 	}
 	//혜택업데이트
 	@Override
@@ -2985,7 +2994,172 @@ public class HostServiceImp implements HostService {
 	}
 
 	///////////// HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-23 성영민 ///////////////
+/////////////////////////////////// 영민1/25 start /////////////////////////////////
+	//상품수정 상세
+	@Override
+	public void hostProForm(HttpServletRequest req, Model model) {
+		int per_id=Integer.parseInt(req.getParameter("per_id"));
+		System.out.println("per_id============"+per_id);
+		
+		ArrayList<TcatPerformanceVO> dtos=hDao.hostProCnt(per_id);
+		ArrayList<CategoryVO> SDtos = hDao.cateList();
 
+		// 공연지역 가져오기
+		ArrayList<SelectHellInfoVO> HDtos = hDao.HellList();
+
+		req.setAttribute("SDtos", SDtos);
+		req.setAttribute("HDtos", HDtos);
+		model.addAttribute("dtos", dtos);
+	}
+	//상품업데이트
+	@Override
+	public void hostProUpdate(MultipartHttpServletRequest req, Model model) {
+		MultipartFile file = req.getFile("perf_Image");
+
+		String realDir = "C:\\Dev\\TCATworkspace\\git\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\eventList\\";
+		String saveDir = req.getRealPath("/resources/image/eventList/");
+		try {
+
+			file.transferTo(new File(saveDir + file.getOriginalFilename()));
+			FileInputStream fis = new FileInputStream(saveDir + file.getOriginalFilename());
+			FileOutputStream fos = new FileOutputStream(realDir + file.getOriginalFilename());
+
+			int data = 0;
+
+			while ((data = fis.read()) != -1) {
+				fos.write(data);
+			}
+			fis.close();
+			fos.close();
+			int updateCnt1=0;
+			int updateCnt2=0;
+			int updateCnt3=0;
+			int per_id=Integer.parseInt(req.getParameter("per_id"));
+			String perf_title = req.getParameter("perf_title");
+			int cateNum = Integer.parseInt(req.getParameter("cateNum"));
+			String perf_Image = file.getOriginalFilename();
+			String startDate = req.getParameter("startDate");
+			String endDate = req.getParameter("endDate");
+			int hall_id = Integer.parseInt(req.getParameter("hall_id"));
+			String first_grade = req.getParameter("first_grade");
+			String remain_round = req.getParameter("remain_round");
+			int possible_age = Integer.parseInt(req.getParameter("possible_age"));
+			int VIP_seatPrice = Integer.parseInt(req.getParameter("VIP_seatPrice"));
+			int R_seatPrice = Integer.parseInt(req.getParameter("R_seatPrice"));
+			int S_seatPrice = Integer.parseInt(req.getParameter("S_seatPrice"));
+			int A_seatPrice = Integer.parseInt(req.getParameter("A_seatPrice"));
+			int B_seatPrice = Integer.parseInt(req.getParameter("B_seatPrice"));
+
+			String sDate[] = startDate.split("/");
+			startDate = sDate[2] + "/" + sDate[0] + "/" + sDate[1];
+			String eDate[] = endDate.split("/");
+			endDate = eDate[2] + "/" + eDate[0] + "/" + eDate[1];
+
+			Map<String, Object> map1 = new HashMap<String, Object>();
+			map1.put("per_id", per_id);
+			map1.put("perf_title", perf_title);
+			map1.put("perf_Image", perf_Image);
+			map1.put("startDate", startDate);
+			map1.put("endDate", endDate);
+			map1.put("first_grade", first_grade);
+			map1.put("remain_round", remain_round);
+			map1.put("possible_age", possible_age);
+			map1.put("VIP_seatPrice", VIP_seatPrice);
+			map1.put("R_seatPrice", R_seatPrice);
+			map1.put("S_seatPrice", S_seatPrice);
+			map1.put("A_seatPrice", A_seatPrice);
+			map1.put("B_seatPrice", B_seatPrice);
+			
+			Map<String, Object> map2 = new HashMap<String, Object>();
+			map2.put("cateNum", cateNum);
+			
+			Map<String, Object> map3 = new HashMap<String, Object>();
+			map3.put("hall_id", hall_id);
+
+			
+			updateCnt1=hDao.hostProUpdateCnt1(map1);
+			updateCnt2=hDao.hostProUpdateCnt2(map2);
+			updateCnt3=hDao.hostProUpdateCnt3(map3);
+			model.addAttribute("updateCnt1", updateCnt1);
+			model.addAttribute("updateCnt2", updateCnt2);
+			model.addAttribute("updateCnt3", updateCnt3);
+		} catch (Exception e) {
+			e.printStackTrace();
+			int error = 1;
+			req.setAttribute("error", error);
+		}
+
+	}
+/////////////////////////////////// 영민1/25 end /////////////////////////////////
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/////////////////////// 동금 1/9 start ////////////////////////
 	// HOST/상품관리/상품삭제
 	@Override
@@ -3582,13 +3756,12 @@ public class HostServiceImp implements HostService {
 		model.addAttribute("commentDel", commentDel);
 
 	}
-	
 	// 환불 목록 - 공연
 	@Override
 	public void productRefundBoard(HttpServletRequest req, Model model) {
+
 		int pageSize = 10; // 한 페이지당 출력할 글 개수
 		int pageBlock = 3; // 한 블럭당 페이지 개수
-
 		int cnt = 0; // 글 개수
 		int start = 0; // 현재 페이지 글시작번호
 		int end = 0; // 현재 페이지 글마지막 번호
