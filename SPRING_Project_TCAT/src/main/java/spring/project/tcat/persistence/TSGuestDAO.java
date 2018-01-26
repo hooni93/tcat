@@ -52,4 +52,13 @@ public interface TSGuestDAO {
 	// 게스트상품/후기 (해당공연) 목록
 	public ArrayList<TcatBoardVO> selectCommentBoardS(Map<String,Object>map);
 	
+	// 게스트 후기 수정 할수있게 - 공연용
+	public int commentsModify(TcatBoardVO vo);
+	// 게스트 후기 삭제 할수있게 - 공연용
+	public int commentDeldao(int notice_num);
+	
+	// 게스트 후기 수정 할수있게 - 스토어용
+	public int commentsModifyS(TcatBoardVO vo);
+	// 게스트 후기 삭제 할수있게 - 스토어용
+	public int commentDeldaoS(int notice_num);
 }

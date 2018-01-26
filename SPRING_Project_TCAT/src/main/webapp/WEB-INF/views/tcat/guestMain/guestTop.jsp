@@ -205,12 +205,13 @@
 							</c:if> <c:if test="${login_id!=null }">
 								<a href="logout">로그아웃</a>
 							</c:if></li>
-						<li><c:if test="${login_id==null }">
-								<a onclick="load('signUp')">회원가입</a>
-							</c:if> <c:if test="${login_id!=null }">
-								<a onclick="load('myPage');">마이페이지</a>
-							</c:if></li>
-						<li><a href="#">예매확인/취소</a></li>
+							<c:if test="${login_id==null }">
+								<li><a onclick="load('signUp')">회원가입</a></li>
+							</c:if> 
+							<c:if test="${login_id!=null }">
+								<li><a onclick="load('myPage');">마이페이지</a></li>
+								<li><a onclick="load('ticketCheck');">예매확인/취소</a></li>
+							</c:if>
 						<li><a onclick="load('qnaBoardMain');">고객센터</a></li>
 						<c:if test="${sessionScope.login_id!=null}">
 							<li><a onclick="load('wishList?wish_step=1');">위시리스트</a></li>

@@ -26,31 +26,7 @@
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
 				<h3 align="center">고객 리스트</h3>
-				<!-- 페이지 컨트롤 -->
-				<table style="width: 1000px" align="center">
-					<th align="center"><c:if test="${cnt>0}">
-							<!-- 처음[◀◀]/이전블록[◀] 특수문자 :ㅁ한자키 -->
-							<c:if test="${startPage>pageBlock}">
-								<a onclick="page('memberModified')">[◀◀]</a>
-								<a onclick="page('memberModified','${startPage-pageBlock}')">[◀]</a>
-							</c:if>
-
-							<c:forEach var="i" begin="${startPage}" end="${endPage}">
-								<c:if test="${i==currentPage}">
-									<span><b>[${i}]</b></span>
-								</c:if>
-								<c:if test="${i!=currentPage}">
-									<a onclick="page('memberModified','${i}')">[${i}]</a>
-								</c:if>
-							</c:forEach>
-
-							<!-- 다음블록[▶]/끝[▶▶] -->
-							<c:if test="${pageCount > endPage}">
-								<a onclick="page('memberModified','${startPage+pageBlock}')">[▶]</a>
-								<a onclick="page('memberModified','${pageCount}')">[▶▶]</a>
-							</c:if>
-						</c:if></th>
-				</table>
+				
 				<table
 					class="table table-hover table-bordered table-condensed c fs10">
 					<tr class="bg-primary">
@@ -85,6 +61,51 @@
 						</tr>
 					</c:if>
 				</table>
+				<!-- 페이지 컨트롤 -->
+				<table style="width: 1000px" align="center">
+					<th align="center"><c:if test="${cnt>0}">
+							<!-- 처음[◀◀]/이전블록[◀] 특수문자 :ㅁ한자키 -->
+							<c:if test="${startPage>pageBlock}">
+								<a onclick="page('memberModified')">[◀◀]</a>
+								<a onclick="page('memberModified','${startPage-pageBlock}')">[◀]</a>
+							</c:if>
+
+							<c:forEach var="i" begin="${startPage}" end="${endPage}">
+								<c:if test="${i==currentPage}">
+									<span><b>[${i}]</b></span>
+								</c:if>
+								<c:if test="${i!=currentPage}">
+									<a onclick="page('memberModified','${i}')">[${i}]</a>
+								</c:if>
+							</c:forEach>
+
+							<!-- 다음블록[▶]/끝[▶▶] -->
+							<c:if test="${pageCount > endPage}">
+								<a onclick="page('memberModified','${startPage+pageBlock}')">[▶]</a>
+								<a onclick="page('memberModified','${pageCount}')">[▶▶]</a>
+							</c:if>
+						</c:if></th>
+				</table>
+				<form class="navbar-form navbar-right" role="search"
+							id="ajaxSubmitForm" onsubmit="return false">
+							카테고리 
+							<select id="sDev" name="sDev" class="m10 p5">
+								<option value="0">분류</option>
+								<option value="1">아이디</option>
+								<option value="2">이름</option>
+								<option value="3">성별</option>
+								<option value="4">생년월일</option>
+								<option value="5">등급</option>
+							</select>
+
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Search"
+									name="keyword">
+							</div>
+							<button type="button" class="btn btn-default"
+								onclick="ajaxSubmit('memberModified')">검색</button>
+				
+						</form>
 			</div>
 			<div class="col-md-1"></div>
 		</div>

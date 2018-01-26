@@ -63,7 +63,6 @@ public class MoGuestServiceImp implements MoGuestService {
 		model.addAttribute("dtos", dtos);
 
 		model.addAttribute("dtos2", dtos2);
-		System.out.println(dtos.get(0).getVIP_seat());
 
 	}
 	//사진게시판 리스트 가져오기

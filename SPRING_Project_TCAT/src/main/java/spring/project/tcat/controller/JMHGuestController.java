@@ -216,5 +216,12 @@ public class JMHGuestController {
 		mhService.host_loginPro(req, model);
 		return "tcat/hostMain/host_loginPro";
 	}
+	//ticketCheck 예매확인 취소
+	@RequestMapping("ticketCheck")
+	public String ticketCheck(HttpServletRequest req, Model model) {
+		System.out.println("ticketCheck");
+		//mhService.host_loginPro(req, model);
+		return "tcat/ticketCheck/ticketCheck";
+	}
 	
 }

@@ -124,9 +124,16 @@ public interface HostDAO {
 	public ArrayList<ProductRankVO > wishListRank_store(int productNum);
 	//////////////////////////////////////18.01. 명훈 끝//////////////////////////////////////////////////
 	
+	
+	/////////////////////////////////////18.01.25 명훈 시작//////////////////////////////////////////////////
+	//배송관리 스텝 변경
+	public void orderMangement_storeChange(Map<String, Object> map);
+	//예매 관리 스탭 변경
+	public void orderMangement_Change(Map<String, Object> map);
 
-
-
+	//////////////////////////////////////18.01.25 명훈 끝//////////////////////////////////////////////////
+	
+	
 	/////////////////////////////////// 태성 1/9 start ////////////////////////////////////////
 	//상품 목록 출력 진열
 	public ArrayList<TcatPerformanceVO> getArticleList(Map<String, Object> map);
@@ -257,10 +264,11 @@ public interface HostDAO {
 	public int levelUpdateCnt(Map<String,Object> map);
 	//혜택등록
 	public int levelAdd(Map<String,Object> map);
+	//상품수정 갯수
+	public int hostProModifyCnt();
+	/*//상품수정 리스트
+	public ArrayList <TcatPerformanceVO>hostProModifyList(Map<String,Object> map);*/
 	////////////////////////////////////영민 1/10 end ///////////////////////////////////////
-	
-	
-	
 	///////////////////////  동금 1/11  ///////////////////////////
 	//상품갯수 불러오기
 	public int getPerfoCnt(Map<String, Object> map);
