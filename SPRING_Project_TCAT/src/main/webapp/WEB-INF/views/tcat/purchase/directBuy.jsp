@@ -1,3 +1,5 @@
+<%@page import="spring.project.tcat.VO.MemberVO"%>
+<%@page import="spring.project.tcat.VO.TcatPerDiscVO"%>
 <%@page import="spring.project.tcat.VO.CartVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -15,15 +17,15 @@
 		msg += "<table class='table table-striped' style='border-top:3px solid #bbbbbb;'>"+
 						"<tr>"+
 						"<th>배송지 </th>"+
-						"<td>${dtos.get(0).getMember_addr()}&nbsp<input type='button' onclick='addrChange();' value='배송지변경'></td>"+
+						"<td>${memVO.getMember_addr()}&nbsp<input type='button' onclick='addrChange();' value='배송지변경'></td>"+
 					"</tr>"+
 					"<tr>"+
 						"<th>이름</th>"+
-						"<td>${dtos.get(0).getMember_name()}</td>"+
+						"<td>${memVO.getMember_name()}</td>"+
 					"</tr>"+
 					"<tr>"+
 						"<th>연락처</th>"+
-						"<td>${dtos.get(0).getMember_hp()}</td>"+
+						"<td>${memVO.getMember_hp()}</td>"+
 					"</tr>"+
 				"</table>";
 		addrInfo.innerHTML = msg;
@@ -34,7 +36,10 @@
 		msg += "<table class='table table-striped' style='border-top:3px solid #bbbbbb;'>"+
 						"<tr>"+
 						"<th>배송지 </th>"+
-						"<td><input type='text' name='member_addr'>&nbsp<input type='button' onclick='addr();' value='기본배송지 이용'></td>"+
+						"<td><input type='text' name='postNum' id='sample6_postcode' placeholder='우편번호'>"+
+						"<input type='button' onclick='sample6_execDaumPostcode()' value='우편번호 찾기'>&nbsp<input type='button' onclick='addr();' value='기본배송지 이용'><br>"+
+						"<input type='text' name='addr1' id='sample6_address' placeholder='주소'>"+
+						"<input type='text' name='addr2' id='sample6_address2' placeholder='상세주소'></td>"+
 					"</tr>"+
 					"<tr>"+
 						"<th>이름</th>"+
@@ -46,6 +51,7 @@
 						"<td><input type='text' name='member_hp'></td>"+
 					"</tr>"+
 				"</table>";
+				$("input[name=addrD]").val("1");
 		addrInfo.innerHTML = msg;
 	}
 	function addr() {
@@ -54,30 +60,47 @@
 		msg += "<table class='table table-striped' style='border-top:3px solid #bbbbbb;' >"+
 						"<tr>"+
 						"<th>배송지 </th>"+
-						"<td>${dtos.get(0).getMember_addr()}&nbsp<input type='button' onclick='addrChange();' value='배송지변경'></td>"+
+						"<td>${memVO.getMember_addr()}&nbsp<input type='button' onclick='addrChange();' value='배송지변경'></td>"+
 					"</tr>"+
 					"<tr>"+
 						"<th>이름</th>"+
-						"<td>${dtos.get(0).getMember_name()}</td>"+
+						"<td>${memVO.getMember_name()}</td>"+
 					"</tr>"+
 					"<tr>"+
 						"<th>연락처</th>"+
-						"<td>${dtos.get(0).getMember_hp()}</td>"+
+						"<td>${memVO.getMember_hp()}</td>"+
 					"</tr>"+
 				"</table>";
+				$("input[name=addrD]").val("0");
 		addrInfo.innerHTML = msg;
 	}
-	function paySubmit(url) { /*AJAX submit  */
-		var formData = $("#delevaryForm").serialize();
+	function pSubmit() { /*AJAX submit  */
+		var formData = new FormData();
+		formData.append("count", $("input[name=count]").val());
+		alert($("input[name=count]").val());
+		formData.append("disc_code",$("input[name=disc_code]").val());
+		var addrD=$("input[name=addrD]").val();
+		if(addrD==1){
+			formData.append("addrChange","1");
+			formData.append("postNum",$("input[name=postNum]").val());
+			formData.append("addr1",$("input[name=addr1]").val());
+			formData.append("addr2",$("input[name=addr2]").val());	
+		}else if(addrD==0){
+			formData.append("addrChange","0");
+		}
 		$.ajax({
-			type : "POST",
-			url : url,
-			cache : false,
+			url : 'directPay',
 			data : formData,
-			success : function(msg) {
-				$('#result').html(msg);
-			}
-		});
+			processData : false,
+			contentType : false,
+			type : 'POST',
+			success : function(data) {
+				$('#result').html(data);
+				alert("구매되었습니다.");
+			}, 
+			error : onError
+	   });
+	   function onError(data, status){alert("error");}
 		
 	}
 	// 모두체크하기
@@ -91,7 +114,9 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<form action="" name="delevaryForm" style="border-top:3px solid #bbbbbb">
-			
+				<input type="hidden" name="count" value="${count}">
+				<input type="hidden" name="disc_code" value="${perVO.disc_code}">
+				<input type="hidden" name="addrD" value="0">
 				<h2>주문/결제</h2>
 				<hr>
 				<h4>주문상품 정보</h4>
@@ -106,87 +131,82 @@
 						<td>
 							<table class="table table-striped">
 							
-								<c:forEach var="vo" items="${dtos}" >	
+								
 									<tr>
 										<td>
-											<img src="${image}/store/${vo.disc_image}">
+											<img src="${image}/store/${perVO.disc_image}">
 										</td>
 										<td>
-										    ${vo.disc_title}
+										    ${perVO.disc_title}
 										</td>
 										<td>
-											${vo.cart_count}개
+											${count}개
 										</td>
 										<td>
-											${vo.disc_price}원
+											${perVO.disc_price*count}원
 										</td>
 									</tr>	
-								</c:forEach>
+								
 							</table>
 						</td>
-						<%	int price=0;
-						     
-							  	int amount=0;
-							  	int finalPrice=0;
-							  	ArrayList<CartVO> dtos=(ArrayList<CartVO>)request.getAttribute("dtos");
-							  	for(int i=0;i<dtos.size();i++){
-							  		amount=dtos.get(i).getCart_count();
-							  		price=dtos.get(i).getDisc_price();
-							  		finalPrice+=amount*price;
-							  	}
-							%>
+						
 						<td valign=middle>
-							<c:if test="${dtos.get(0).getRating()=='VIP'}">
+							<c:if test="${memVO.getRating()=='VIP'}">
 								25%[VIP등급]
 							</c:if>
-							<c:if test="${dtos.get(0).getRating()=='S'}">
+							<c:if test="${memVO.getRating()=='S'}">
 								20%[S등급]
 							</c:if>
-							<c:if test="${dtos.get(0).getRating()=='A'}">
+							<c:if test="${memVO.getRating()=='A'}">
 								15%[A등급]
 							</c:if>
-							<c:if test="${dtos.get(0).getRating()=='B'}">
+							<c:if test="${memVO.getRating()=='B'}">
 								10%[B등급]
 							</c:if>
-							<c:if test="${dtos.get(0).getRating()=='C'}">
+							<c:if test="${memVO.getRating()=='C'}">
 								5%[C등급]
 							</c:if>
-							<c:if test="${dtos.get(0).getRating()=='D'}">
+							<c:if test="${memVO.getRating()=='D'}">
 								없음
 							</c:if>
 						</td>
 						<td valign=middle>
-							<%if(finalPrice<15000){%>
+							<c:if test="${perVO.getDisc_price()*count<15000}">
 								3000원
-							<%} %>
-							<%if(finalPrice>=15000){%>
+							</c:if>
+							<c:if test="${perVO.getDisc_price()*count>=15000}">
 								무료
-							<%} %>
+							</c:if>
 						</td>
+						<%
+						TcatPerDiscVO perVO=(TcatPerDiscVO)request.getAttribute("perVO");
+						MemberVO memVO=(MemberVO)request.getAttribute("memVO");
+						int count=(Integer)request.getAttribute("count");
+						%>
 						<td valign=middle>
-							<%if(dtos.get(0).getRating().equals("VIP")){
+							<%if(memVO.getRating().equals("VIP")){
 							%>
-								<%=Math.round(finalPrice*0.85)%>원
+								<%=Math.round(perVO.getDisc_price()*count*0.85)%>원
 							<%
-							}else if(dtos.get(0).getRating().equals("S")){
+							}else if(memVO.getRating().equals("S")){
 							%>
-								<%=Math.round(finalPrice*0.80)%>원
+								<%=Math.round(perVO.getDisc_price()*count*0.80)%>원
 							<%	
-							}else if(dtos.get(0).getRating().equals("A")){
+							}else if(memVO.getRating().equals("A")){
 							%>
-								<%=Math.round(finalPrice*0.85)%>원
+								<%=Math.round(perVO.getDisc_price()*count*0.85)%>원
 							<%	
-							}else if(dtos.get(0).getRating().equals("B")){
+							}else if(memVO.getRating().equals("B")){
 							%>
-								<%=Math.round(finalPrice*0.90)%>원
+								<%=Math.round(perVO.getDisc_price()*count*0.90)%>원
 							<%
-							}else if(dtos.get(0).getRating().equals("C")){
+							}else if(memVO.getRating().equals("C")){
 							%>
-								<%=Math.round(finalPrice*0.95)%>원
+								<%=Math.round(perVO.getDisc_price()*count*0.95)%>원
 							<%
-							}else if(dtos.get(0).getRating().equals("D")){
+							}else if(memVO.getRating().equals("D")){
 							%>
-								<%=finalPrice%>원
+								<%=perVO.getDisc_price()*count%>원
 							<%
 							}
 							%>
@@ -241,7 +261,7 @@
 							<b>포인트 사용</b>
 							<input type="text" value="0"><input type="button" value="전액사용">
 							<ul>
-								<li>현재 사용가능 포인트 : ${dtos.get(i).getPoint()}</li>
+								<li>현재 사용가능 포인트 : ${memVO.getPoint()}</li>
 							</ul>
 						</td>
 					</tr>
@@ -281,29 +301,29 @@
 						<table style="font-size:20px;">
 								<tr>
 									<th style="color:orange">총 상품금액</th>
-									<th style="color:orange"><%if(dtos.get(0).getRating().equals("VIP")){
+									<th style="color:orange"><%if(memVO.getRating().equals("VIP")){
 										%>
-											<%=Math.round(finalPrice*0.85)%>원
+											<%=Math.round(perVO.getDisc_price()*count*0.85)%>원
 										<%
-										}else if(dtos.get(0).getRating().equals("S")){
+										}else if(memVO.getRating().equals("S")){
 										%>
-											<%=Math.round(finalPrice*0.80)%>원
+											<%=Math.round(perVO.getDisc_price()*count*0.80)%>원
 										<%	
-										}else if(dtos.get(0).getRating().equals("A")){
+										}else if(memVO.getRating().equals("A")){
 										%>
-											<%=Math.round(finalPrice*0.85)%>원
+											<%=Math.round(perVO.getDisc_price()*count*0.85)%>원
 										<%	
-										}else if(dtos.get(0).getRating().equals("B")){
+										}else if(memVO.getRating().equals("B")){
 										%>
-											<%=Math.round(finalPrice*0.90)%>원
+											<%=Math.round(perVO.getDisc_price()*count*0.90)%>원
 										<%
-										}else if(dtos.get(0).getRating().equals("C")){
+										}else if(memVO.getRating().equals("C")){
 										%>
-											<%=Math.round(finalPrice*0.95)%>원
+											<%=Math.round(perVO.getDisc_price()*count*0.95)%>원
 										<%
-										}else if(dtos.get(0).getRating().equals("D")){
+										}else if(memVO.getRating().equals("D")){
 										%>
-											<%=finalPrice%>원
+											<%=perVO.getDisc_price()*count%>원
 										<%
 										}
 										%></th>
@@ -311,74 +331,74 @@
 									<tr>
 									<th>배송비</th>
 									<th>
-										<%if(finalPrice<15000){%>
+										<%if(perVO.getDisc_price()*count<15000){%>
 											3000원
 										<%} %>
-										<%if(finalPrice>=15000){%>
+										<%if(perVO.getDisc_price()*count>=15000){%>
 											무료
 										<%} %>
 									</th>
 									</tr>
 									<tr>
 									<th>할인금액</th>
-									<th><%if(dtos.get(0).getRating().equals("VIP")){
+									<th><%if(memVO.getRating().equals("VIP")){
 										%>
-											<%=Math.round(finalPrice-finalPrice*0.85)%>원
+											<%=Math.round(perVO.getDisc_price()*count-perVO.getDisc_price()*count*0.85)%>원
 										<%
-										}else if(dtos.get(0).getRating().equals("S")){
+										}else if(memVO.getRating().equals("S")){
 										%>
-											<%=Math.round(finalPrice-finalPrice*0.80)%>원
+											<%=Math.round(perVO.getDisc_price()*count-perVO.getDisc_price()*count*0.80)%>원
 										<%
-										}else if(dtos.get(0).getRating().equals("A")){
+										}else if(memVO.getRating().equals("A")){
 										%>
-											<%=Math.round(finalPrice-finalPrice*0.85)%>원
+											<%=Math.round(perVO.getDisc_price()*count-perVO.getDisc_price()*count*0.85)%>원
 										<%	
-										}else if(dtos.get(0).getRating().equals("B")){
+										}else if(memVO.getRating().equals("B")){
 										%>
-											<%=Math.round(finalPrice-finalPrice*0.90)%>원
+											<%=Math.round(perVO.getDisc_price()*count-perVO.getDisc_price()*count*0.90)%>원
 										<%
-										}else if(dtos.get(0).getRating().equals("C")){
+										}else if(memVO.getRating().equals("C")){
 										%>
-											<%=Math.round(finalPrice-finalPrice*0.95)%>원
+											<%=Math.round(perVO.getDisc_price()*count-perVO.getDisc_price()*count*0.95)%>원
 										<%
-										}else if(dtos.get(0).getRating().equals("D")){
+										}else if(memVO.getRating().equals("D")){
 										%>
-											<%=Math.round(finalPrice-finalPrice)%>원
+											<%=Math.round(perVO.getDisc_price()*count)%>원
 										<%
 										}
 										%></th>
 										</tr>
 										<tr>
 									<th>올라가는 포인트(0.5%)</th>
-									<th><%if(dtos.get(0).getRating().equals("VIP")){
+									<th><%if(memVO.getRating().equals("VIP")){
 										%>
-											<%=Math.round(finalPrice*0.85*0.05)%>원
-											<input type="hidden" value="<%=Math.round(finalPrice*0.85*0.05)%>" name="point">
+											<%=Math.round(perVO.getDisc_price()*count*0.85*0.05)%>원
+											<input type="hidden" value="<%=Math.round(perVO.getDisc_price()*0.85*0.05)%>" name="point">
 										<%
-										}else if(dtos.get(0).getRating().equals("S")){
+										}else if(memVO.getRating().equals("S")){
 										%>
-											<%=Math.round(finalPrice*0.80*0.05)%>원
-											<input type="hidden" value="<%=Math.round(finalPrice*0.80*0.05)%>" name="point">
+											<%=Math.round(perVO.getDisc_price()*count*0.80*0.05)%>원
+											<input type="hidden" value="<%=Math.round(perVO.getDisc_price()*0.80*0.05)%>" name="point">
 										<%	
-										}else if(dtos.get(0).getRating().equals("A")){
+										}else if(memVO.getRating().equals("A")){
 										%>
-											<%=Math.round(finalPrice*0.85*0.05)%>원
-											<input type="hidden" value="<%=Math.round(finalPrice*0.85*0.05)%>" name="point">
+											<%=Math.round(perVO.getDisc_price()*count*0.85*0.05)%>원
+											<input type="hidden" value="<%=Math.round(perVO.getDisc_price()*0.85*0.05)%>" name="point">
 										<%	
-										}else if(dtos.get(0).getRating().equals("B")){
+										}else if(memVO.getRating().equals("B")){
 										%>
-											<%=Math.round(finalPrice*0.90*0.05)%>원
-											<input type="hidden" value="<%=Math.round(finalPrice*0.90*0.05)%>" name="point">
+											<%=Math.round(perVO.getDisc_price()*count*0.90*0.05)%>원
+											<input type="hidden" value="<%=Math.round(perVO.getDisc_price()*0.90*0.05)%>" name="point">
 										<%
-										}else if(dtos.get(0).getRating().equals("C")){
+										}else if(memVO.getRating().equals("C")){
 										%>
-											<%=Math.round(finalPrice*0.95*0.05)%>원
-											<input type="hidden" value="<%=Math.round(finalPrice*0.95*0.05)%>" name="point">
+											<%=Math.round(perVO.getDisc_price()*count*0.95*0.05)%>원
+											<input type="hidden" value="<%=Math.round(perVO.getDisc_price()*0.95*0.05)%>" name="point">
 										<%
-										}else if(dtos.get(0).getRating().equals("D")){
+										}else if(memVO.getRating().equals("D")){
 										%>
-											<%=Math.round(finalPrice*0.05)%>원
-											<input type="hidden" value="<%=Math.round(finalPrice*0.05)%>" name="point">
+											<%=Math.round(perVO.getDisc_price()*count*0.05)%>원
+											<input type="hidden" value="<%=Math.round(perVO.getDisc_price()*0.05)%>" name="point">
 										<%
 										}
 										%>
@@ -391,7 +411,7 @@
 				</table>
 
 		<div id="result2"></div>
-		<button onclick="paySubmit('sussessPay')">구입하기</button>
+		<button onclick="pSubmit();">구입하기</button>
 		</form>
 		<div class="col-md-2"></div>
 		</div>

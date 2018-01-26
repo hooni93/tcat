@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import spring.project.tcat.VO.CartVO;
 import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.SaleVO;
+import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 import spring.project.tcat.config.Configuration;
 
@@ -216,9 +217,9 @@ public class HSGuestDAOImpl implements HSGuestDAO{
 	}
 
 	@Override
-	public void cartDel(String member_id) {
+	public void cartDel(Map<String,Object> map) {
 		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
-		dao.cartDel(member_id);
+		dao.cartDel(map);
 	}
 
 	@Override
@@ -247,6 +248,67 @@ public class HSGuestDAOImpl implements HSGuestDAO{
 	public void insertTicket(Map<String, Object> map) {
 		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
 		dao.insertTicket(map);
+	}
+
+	@Override
+	public TcatPerDiscVO DiscInfo(int disc_code) {
+		TcatPerDiscVO dto=null;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dto=dao.DiscInfo(disc_code);
+		return dto;
+	}
+
+	@Override
+	public MemberVO MemInfo(String member_id) {
+		MemberVO dto=null;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dto=dao.MemInfo(member_id);
+		return dto;
+	}
+
+	@Override
+	public int searchCart(Map<String, Object> map) {
+		int cnt=0;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		cnt=dao.searchCart(map);
+		return cnt;
+	}
+
+	@Override
+	public int updateCart(Map<String, Object> map) {
+		int cnt=0;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		cnt=dao.updateCart(map);
+		return cnt;
+	}
+
+	@Override
+	public void updateCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dao.updateCount(map);
+	}
+
+	@Override
+	public void changeCount(Map<String, Object> map) {
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dao.changeCount(map);
+	}
+
+	@Override
+	public CartVO cheackCartList(Map<String, Object> map) {
+		CartVO dto=null;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dto=dao.cheackCartList(map);
+		return dto;
+	}
+
+	@Override
+	public int deleteCart(Map<String, Object> map) {
+		int cnt=0;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		cnt=dao.deleteCart(map);
+		return cnt;
 	}
 
 }
