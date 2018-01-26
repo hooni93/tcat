@@ -222,7 +222,6 @@ function commentList(url) {
 				<div class="col-md-12" style="padding: 0;">
 
 					<ul class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active"><a href="#content" aria-controls="home" role="tab" data-toggle="tab">상제정보</a></li>
 						<li role="presentation" class="active"><a href="#content" aria-controls="home" role="tab" data-toggle="tab">상세정보</a></li>
 						<li role="presentation"><a href="#review" aria-controls="profile" role="tab" data-toggle="tab" onclick="commentList('watchLatter?perf_title=${perf.perf_title}&per_id=${perf.per_id}');">관람후기</a></li>
 						<li role="presentation"><a href="cancelInfo" aria-controls="messages" role="tab" data-toggle="tab">취소/환불안내</a></li>

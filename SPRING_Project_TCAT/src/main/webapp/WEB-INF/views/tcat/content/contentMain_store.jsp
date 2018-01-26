@@ -123,180 +123,100 @@ function commentListS(url) {
 }
 </script>
 </head>
-<<<<<<< HEAD
-<c:if test="${insertCart==1}">
-	<script type="text/javascript">
-=======
-<body>
-	<c:if test="${insertCart==1}">
-		<script type="text/javascript">
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
-		alert("장바구니에 담겼습니다.");
-	</script>
-	</c:if>
-	<div class="row">
-		<br>
-		<!--공백  -->
-		<div class="col-md-1"></div>
-		<!--내용물  -->
-		<div class="col-md-10">
-			<!--사이드  -->
-			<div class="col-md-2"></div>
+ <c:if test="${insertCart==1}">
+      <script type="text/javascript">
+      alert("장바구니에 담겼습니다.");
+   </script>
+   </c:if>
+   <div class="row">
+      <br>
+      <!--공백  -->
+      <div class="col-md-1"></div>
+      <!--내용물  -->
+      <div class="col-md-10">
+         <!--사이드  -->
+         <div class="col-md-2"></div>
 
-<<<<<<< HEAD
-		<!--공연정보  -->
-		<div class="col-md-9">
-			<!--상세페이지 상단  -->
-			<div class="col-md-12" style="border: 1px solid lightgrey;">
-				<h1>${str.disc_title}</h1>
-				<h5>${str.mDev}-${str.sDev}</h5>
-			</div>
 
-			<!--사진, 예매, 가격  -->
-			<div class="col-md-12"
-				style="border-top: 3px solid black; padding: 0;">
-				<!--내용  -->
-				<div class="col-md-12 bf0f0f0" style="padding: 0;">
-					<div class="col-md-9 bffffff"
-						style="border: 1px solid lightgrey; padding: 0;">
-						<!--사진  -->
-						<div class="col-md-4">
-							<img src="${image}store/${str.disc_image}" class="p10">
-						</div>
+	<!--공연정보  -->
+         <div class="col-md-9">
+            <!--상세페이지 상단  -->
+            <div class="col-md-12" style="border: 1px solid lightgrey;">
+               <h1>${str.disc_title}</h1>
+               <h5>${str.mDev}-${str.sDev}</h5>
+            </div>
 
-						<div class="col-md-8">
-							<!--장소  -->
-							<div class="row p10">
-								<div class="col-md-3">
-									<b>재고수량</b>
-								</div>
-								<div class="col-md-9">${str.disc_count}개</div>
-							</div>
-							<div class="row p10">
-								<div class="col-md-3">
-									<b>구매수량</b>
-								</div>
-								<div class="col-md-9">
-									<input type="number" name="count">
-								</div>
-							</div>
 
-							<div class="row p10" style="border-top: 1px solid grey;">
-								<div class="col-md-3 ">
-									<b>기본가</b>
-								</div>
-								<div class="col-md-9">
-									<span class="red"> <fmt:formatNumber
-											value="${str.disc_price}" pattern="#,###" /></span>원
-								</div>
-							</div>
+	    <!--사진, 예매, 가격  -->
+            <div class="col-md-12"
+               style="border-top: 3px solid black; padding: 0;">
+               <!--내용  -->
+               <div class="col-md-12 bf0f0f0" style="padding: 0;">
+                  <div class="col-md-9 bffffff"
+                     style="border: 1px solid lightgrey; padding: 0;">
+                     <!--사진  -->
+                     <div class="col-md-4">
+                        <img src="${image}store/${str.disc_image}" class="p10">
+                     </div>
 
-						</div>
-					</div>
-					<!--예매  -->
-					<div class="col-md-3 " style="padding: 0;">
-						<div class="col-md-12 p10">
-							<span>위시리스트</span> <input type="hidden" id="disc_code"
-								value="${str.disc_code }">
-							<button type="button" class="wish btn-xl">
-								<i class="glyphicon glyphicon-heart fs20"></i>
-							</button>
-=======
-			<!--공연정보  -->
-			<div class="col-md-9">
-				<!--상세페이지 상단  -->
-				<div class="col-md-12" style="border: 1px solid lightgrey;">
-					<h1>${str.disc_title}</h1>
-					<h5>${str.mDev}-${str.sDev}</h5>
-				</div>
+                     <div class="col-md-8">
+                        <!--장소  -->
+                        <div class="row p10">
+                           <div class="col-md-3">
+                              <b>재고수량</b>
+                           </div>
+                           <div class="col-md-9">${str.disc_count}개</div>
+                        </div>
+                        <div class="row p10">
+                           <div class="col-md-3">
+                              <b>구매수량</b>
+                           </div>
+                           <div class="col-md-9">
+                              <input type="number" name="count">
+                           </div>
+                        </div>
 
-				<!--사진, 예매, 가격  -->
-				<div class="col-md-12"
-					style="border-top: 3px solid black; padding: 0;">
-					<!--내용  -->
-					<div class="col-md-12 bf0f0f0" style="padding: 0;">
-						<div class="col-md-9 bffffff"
-							style="border: 1px solid lightgrey; padding: 0;">
-							<!--사진  -->
-							<div class="col-md-4">
-								<img src="${image}store/${str.disc_image}" class="p10">
-							</div>
+                        <div class="row p10" style="border-top: 1px solid grey;">
+                           <div class="col-md-3 ">
+                              <b>기본가</b>
+                           </div>
+                           <div class="col-md-9">
+                              <span class="red"> <fmt:formatNumber
+                                    value="${str.disc_price}" pattern="#,###" /></span>원
+                           </div>
+                        </div>
 
-							<div class="col-md-8">
-								<!--장소  -->
-								<div class="row p10">
-									<div class="col-md-3">
-										<b>재고수량</b>
-									</div>
-									<div class="col-md-9">${str.disc_count}개</div>
-								</div>
-								<div class="row p10">
-									<div class="col-md-3">
-										<b>구매수량</b>
-									</div>
-									<div class="col-md-9">
-										<input type="number" name="count">
-									</div>
-								</div>
-
-								<div class="row p10" style="border-top: 1px solid grey;">
-									<div class="col-md-3 ">
-										<b>기본가</b>
-									</div>
-									<div class="col-md-9">
-										<span class="red"> <fmt:formatNumber
-												value="${str.disc_price}" pattern="#,###" /></span>원
-									</div>
-								</div>
-
-							</div>
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
-						</div>
-<<<<<<< HEAD
-						<c:if test="${sessionScope.login_id!=null}">
-							<img src="/tcat/resources/image/cart_icon.png"
-								onclick="insertCart(document.all.count.value,'${str.disc_code}');"
-								style="width: 50px">+
-											<input class="btn btn-danger btn-xl w100p" type="button"
-								value="구매하기" onclick="directBuy();">
-						</c:if>
-						<c:if test="${sessionScope.login_id==null}">
-							<img data-toggle="modal" data-target="#login-modal" id="login2"
-								style="width: 50px" src="/tcat/resources/image/cart_icon.png">
-							<input class="btn btn-danger btn-xl w100p" data-toggle="modal"
-								data-target="#login-modal" id="login2" type="button"
-								value="구매하기">
-=======
-						<!--예매  -->
-						<div class="col-md-3 " style="padding: 0;">
-							<div class="col-md-12 p10 c">
-								<input type="hidden" id="disc_code" value="${str.disc_code }">
-								<button type="button" class="wish btn-xl">
-									<i class="glyphicon glyphicon-heart fs20"></i>
-								</button>
-								<span>좋아요</span>
-								<c:if test="${sessionScope.login_id!=null}">
-									<img src="/tcat/resources/image/cart_icon.png"
-										onclick="insertCart(document.all.count.value,'${str.disc_code}');"
-										style="width: 50px">+
-							
-							</div>
-							<input class="btn btn-danger btn-xl w100p" type="button"
-								value="구매하기"
-								onclick="directBuy(document.all.count.value,'${str.disc_code}');">
-							</c:if>
-							<c:if test="${sessionScope.login_id==null}">
-								<img data-toggle="modal" data-target="#login-modal" id="login2"
-									style="width: 50px" src="/tcat/resources/image/cart_icon.png">
-						</div>
-						<input class="btn btn-danger btn-xl w100p" data-toggle="modal"
-							data-target="#login-modal" id="login2" type="button" value="구매하기">
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
-						</c:if>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-12 h21"></div>
+                     </div>
+                  </div>
+                  <!--예매  -->
+                  <div class="col-md-3 " style="padding: 0;">
+                     <div class="col-md-12 p10 c">
+                        <input type="hidden" id="disc_code" value="${str.disc_code }">
+                        <button type="button" class="wish btn-xl">
+                           <i class="glyphicon glyphicon-heart fs20"></i>
+                        </button>
+                        <span>좋아요</span>
+                        <c:if test="${sessionScope.login_id!=null}">
+                           <img src="/tcat/resources/image/cart_icon.png"
+                              onclick="insertCart(document.all.count.value,'${str.disc_code}');"
+                              style="width: 50px">+
+                     
+                     </div>
+                     <input class="btn btn-danger btn-xl w100p" type="button"
+                        value="구매하기"
+                        onclick="directBuy(document.all.count.value,'${str.disc_code}');">
+                     </c:if>
+                     <c:if test="${sessionScope.login_id==null}">
+                        <img data-toggle="modal" data-target="#login-modal" id="login2"
+                           style="width: 50px" src="/tcat/resources/image/cart_icon.png">
+                  </div>
+                  <input class="btn btn-danger btn-xl w100p" data-toggle="modal"
+                     data-target="#login-modal" id="login2" type="button" value="구매하기">
+                  </c:if>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-12 h21"></div>
 			<!--하단  -->
 			<div class="col-md-12" style="padding: 0;">
 				<!--탭  -->
@@ -354,10 +274,9 @@ function commentListS(url) {
 	<br>
 	<!--공백  -->
 	<div class="col-md-1"></div>
-<<<<<<< HEAD
+
 </div>
-=======
+
 	</div>
 </body>
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 </html>

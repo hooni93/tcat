@@ -228,13 +228,8 @@ function detailOpen(category,id){
 	var url="seat_result?row="+row+"&column="+column+"&vip="+vip+"&r="+r+"&s="+s+"&a="+a+"&b="+b;
 	 $( "#seat_result1" ).load( "${pageContext.request.contextPath}/"+url );
 }
-<<<<<<< HEAD
  
  
-
-
-=======
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
  function load(url){
 	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url ,function(msg) {
 		 	var s = $( "#side_result" ).html();
@@ -246,22 +241,15 @@ function detailOpen(category,id){
 		});	//hostPage의 오른쪽 result에 결과를 뿌려준다.
 	 if(url=="hostMain" || url=="join_retireMember" || url=="hotMusical" || url=="sleepMember" || url=="stockDelete_musical" || url=="stockOutOf_musical"
 		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" 
-<<<<<<< HEAD
+
 		 || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified" 
 		 || url =="commentManager"|| url =="eventHost"|| url =="provalMain" || url =="orderManagement" || url=="productRefund"){
-=======
 
-		 || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified"
-		 || url =="commentManager"|| url =="eventHost"|| url =="provalMain" || url =="orderManagement"|| url =="hostProModify"){
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 	 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side",function(msg) {
 			history.pushState({side : url+"_side",page : url}, null);	//들어오는 url이 if조건에 만족할때 그에맞는 사이드페이지를 hostPage의 왼쪽 side_result쪽에 뿌려준다.
 	 });
-<<<<<<< HEAD
+
  }
-=======
- }
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
  }
  
 /* 동금이 제작 */
