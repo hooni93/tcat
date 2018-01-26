@@ -64,7 +64,7 @@
    .mw300{min-width:300px;}
    .h1{height:1px;}   .h25{height:25px;} .h21{height:21px;}  .h55{height:55px;} .h70{height:70px;} .h100{height:100px;} .h165{height:165px;} .h18{height:18px;} .h50{height:50px;} .h20{height:30px;}
    .h3{height:3px;}   .h60{height:60px;}   .h250{height:250px;}   .h300{height:300px;}  .h400{height:400px;}  .h450{height:450px;} .h500{height:500px;}  .h550{height:550px;} .h675{height:675px;} .h800{height:800px;}  .h100p{height:100%;}
-   .disno{display:none;} .disInline{display:inline-block;} .disBlock{display:block;}
+   .disno{display:none;} .disInline{display:inline-block;} .disBlock{display:block;} .inline{display:inline;}
    .floatR{float:right;}
    .floatL{float:left;}
    .aaaaaa{color:#aaaaaa}
@@ -93,6 +93,7 @@
    .borderSpace14{border-spacing:14px}
    .borderSpace20{border-spacing:20px}
    .borderSpace30{border-spacing:30px}
+   .overflow{overflow: hidden}
   
 	
 

@@ -24,6 +24,7 @@ $("#insertMovieBoarder").click(function(){
 		formData.append("no_title",$("input[name=no_title]").val());
 		formData.append("mem_id",$("input[name=mem_id]").val());
 		formData.append("no_content",$("input[name=no_content]").val());
+		formData.append("category",$("input[name=categoryNum]").val());
 		formData.append("board_videoSrc",$("input[name=board_videoSrc]").val());
 		$.ajax({
 			url : 'insertMovieBoarder',
@@ -47,6 +48,7 @@ $("#noMoMovieBoarder").click(function(){
 		formData.append("noMo_title",$("input[name=noMo_title]").val());
 		formData.append("monotice_num",$("input[name=monotice_num]").val());
 		formData.append("noMo_content",$("input[name=noMo_content]").val());
+		formData.append("category",$("input[name=categoryNum]").val());
 		formData.append("noMoboard_videoSrc",$("input[name=noMoboard_videoSrc]").val());
 		$.ajax({
 			url : 'noMoMovieBoarder',
@@ -68,7 +70,7 @@ $("#noMoMovieBoarder").click(function(){
 
 function MovieBoarderCommentWrite(member_id,notice_num,form){
 	  var contents=form.contents.value; 
-	  var url="MovieBoarderCommentWrite?member_id="+member_id+"&notice_num="+notice_num+"&contents="+contents;
+	  var url="MovieBoarderCommentWrite?member_id="+member_id+"&notice_num="+notice_num+"&contents="+contents+"&category="+category;
 	$( "#result" ).load( "${pageContext.request.contextPath}/"+url );  
 }
 
@@ -81,7 +83,7 @@ function MovieBoarderCommentWrite(member_id,notice_num,form){
     <div class="col-md-12 h25"></div>
     <h4><b>공연 영상 게시판</b></h4>
 			<hr>
-    	
+    	<input type="hidden" name="categoryNum"	value="${category}">
     	<div class="col-md-2">
     		<c:if test="${sessionScope.login_id==null}">
     			<input type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-primary w170" id="movieBoarderLogin" value="게시글 작성">    		

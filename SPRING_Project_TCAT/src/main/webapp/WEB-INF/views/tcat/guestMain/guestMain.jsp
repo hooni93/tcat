@@ -116,21 +116,21 @@ $(document).ready(function(){
 				  </ol>
 				
 				  <!-- Wrapper for slides -->
-				  <div class="carousel-inner" role="listbox">
-				    <div class="item active">
-				      <img src="${image}eventList/event5.jpg"  width="100%" height="100px" alt="A_1">
+				  <div class="carousel-inner"  role="listbox">
+				    <div class="item active">		    
+				      <img src="${image}eventList/event5.jpg"  width="100%"  alt="A_1"> 
 				      <div class="carousel-caption">
 				
 				      </div>
 				    </div>
 				    <div class="item">
-				      <img src="${image}eventList/event4.jpg" width="100%" height="100px" alt="A_2">
+				      <img src="${image}eventList/event4.jpg" width="100%" alt="A_2">
 				      <div class="carousel-caption">
 				
 				      </div>
 				    </div>
 				    <div class="item">
-				      <img src="${image}eventList/event3.jpg" width="100%" height="100px" alt="A_3">
+				      <img src="${image}eventList/event3.jpg" width="100%"  alt="A_3">
 				      <div class="carousel-caption">
 				
 				      </div>
@@ -148,15 +148,15 @@ $(document).ready(function(){
 				    <span class="sr-only">Next</span>
 				  </a>
 				</div><!-- 슬라이드 끝 -->
-			<div class="col-md-6">
+			<div class="w50p floatL">
 				<a onclick="load('storeMain');"><img alt="store_info" src="${image}eventList/store_info.jpg" width="100%"></a>
 			</div>
-			<div class="col-md-6">
+			<div class="w50p floatL">
 				<a onclick="load('commentBoard');"><img alt="coment_info" src="${image}eventList/coment_info.jpg" width="100%"></a>
 			</div>
 		</div>
 		<div class="col-md-4">
-				<a onclick="load('myPage');"><img alt="VIP" src="${image}eventList/vip_INFO.jpg" width="100%"></a>		
+				<a onclick="load('myPage');"><img alt="VIP" src="${image}eventList/vip_INFO.jpg" width="110%"></a>	
 		</div>
 	</div>
 
@@ -174,7 +174,16 @@ $(document).ready(function(){
 				<span class="trgothic fs15 floatL">공지사항</span>
 				<span class="glyphicon glyphicon-plus floatR hand" onclick=""></span>
 			</div>
-			<hr>
+			<table class="table table-condensed" style="table-layout:fixed">
+			<c:forEach var="borderVo2" items="${borderDtos2}">
+				<tr>
+					<td><span class="b">${borderVo2.notice_title}</span> | <span class="fs10">${borderVo2.writeDate}</span></td>
+				</tr>
+				<tr>
+					<td style="text-overflow:ellipsis; overflow:hidden"><nobr>${borderVo2.contents}</nobr></td>
+				</tr>
+			</c:forEach>
+			</table>
 		</div>		
 		<div class="col-md-1"></div>
 			
@@ -191,7 +200,7 @@ $(document).ready(function(){
 			<table class="table table-condensed" style="table-layout:fixed">
 			<c:forEach var="borderVo" items="${borderDtos}">
 				<tr>
-					<td>${borderVo.member_id} | ${borderVo.writeDate}</td>
+					<td><span class="b fs11">${borderVo.member_id}</span> | <span class="fs10">${borderVo.writeDate}</span></td>
 				</tr>
 				<tr>
 					<td style="text-overflow:ellipsis; overflow:hidden"><nobr>${borderVo.contents}</nobr></td>
@@ -206,11 +215,6 @@ $(document).ready(function(){
 	<div class="col-md-1"></div>
 </div>
 
-
-
-
-<a onclick="load('photoBoarder');">사진게시판보기</a> <br>
-<a onclick="load('movieBoarder');">영상게시판보기</a>
 
 
 

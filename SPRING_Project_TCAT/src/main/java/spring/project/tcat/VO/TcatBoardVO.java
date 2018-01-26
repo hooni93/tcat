@@ -51,6 +51,8 @@ public class TcatBoardVO {
 	String notice_image;
 	String notice_addfile;
 	int notice_div;
+	int category;
+	int categoryComment;
 	
 	//태성 01/22추가 시작
 	String perf_title;
@@ -58,6 +60,22 @@ public class TcatBoardVO {
 	String perf_image;
 	String disc_title;
 	int disc_code;
+	
+	
+	
+	public int getCategory() {
+		return category;
+	}
+	public void setCategory(int category) {
+		this.category = category;
+	}
+	public int getCategoryComment() {
+		return categoryComment;
+	}
+	public void setCategoryComment(int categoryComment) {
+		this.categoryComment = categoryComment;
+	}
+	
 	public String getDisc_title() {
 		return disc_title;
 	}

@@ -80,9 +80,11 @@ public class MoGuestServiceImp implements MoGuestService {
 		int startPage = 0; // 시작페이지
 		int endPage = 0; // 마지막 페이지
 		int cnt=0;
-		
-		cnt=MGDao.photoBoarderListCnt();
-		
+		String strCategory=(String)req.getAttribute("category");
+		System.out.println(strCategory);
+		int category=Integer.parseInt(strCategory);
+		cnt=MGDao.photoBoarderListCnt(category);
+		model.addAttribute("category",category);
 		pageNum = req.getParameter("pageNum");
 		
 		if (pageNum == null) {
@@ -101,6 +103,7 @@ public class MoGuestServiceImp implements MoGuestService {
 			Map<String,Object> map=new HashMap<String,Object>();
 			map.put("start", start);
 			map.put("end", end);
+			map.put("category", category);
 			ArrayList<TcatBoardVO> dtos=MGDao.photoBoarderList(map);
 			model.addAttribute("dtos", dtos);
 		}
@@ -112,8 +115,24 @@ public class MoGuestServiceImp implements MoGuestService {
 		if (endPage > pageCount) {
 		endPage = pageCount;
 		}
+		int categoryComment=0;
+		if(category==31) {
+			categoryComment=311;
+		}else if(category==32) {
+			categoryComment=321;
+		}else if(category==33) {
+			categoryComment=331;
+		}else if(category==34) {
+			categoryComment=341;
+		}else if(category==35) {
+			categoryComment=351;
+		}else if(category==36) {
+			categoryComment=361;
+		}
+		
+		
 		//사진게시판 답글 가져오기
-		ArrayList<TcatBoardVO> dtos2=MGDao.photoBoarderComment();
+		ArrayList<TcatBoardVO> dtos2=MGDao.photoBoarderComment(categoryComment);
 		model.addAttribute("dtos2",dtos2);
 		model.addAttribute("cnt", cnt);
 		model.addAttribute("number", number);
@@ -136,7 +155,23 @@ public class MoGuestServiceImp implements MoGuestService {
 		String member_id=req.getParameter("member_id");
 		int notice_num=Integer.parseInt(req.getParameter("notice_num"));
 		String contents=req.getParameter("contents");
+		int category=Integer.parseInt(req.getParameter("category"));
+		int categoryComment=0;
+		if(category==31) {
+			categoryComment=311;
+		}else if(category==32) {
+			categoryComment=321;
+		}else if(category==33) {
+			categoryComment=331;
+		}else if(category==34) {
+			categoryComment=341;
+		}else if(category==35) {
+			categoryComment=351;
+		}else if(category==36) {
+			categoryComment=361;
+		}
 		TcatBoardVO vo=new TcatBoardVO();
+		vo.setCategoryComment(categoryComment);
 		vo.setMember_id(member_id);
 		vo.setNotice_num(notice_num);
 		vo.setContents(contents);
@@ -145,6 +180,7 @@ public class MoGuestServiceImp implements MoGuestService {
 		if(cnt!=0) {
 			System.out.println("답글 업로드 완료");
 		}
+		req.setAttribute("category", category);
 	}
 
 	
@@ -179,7 +215,8 @@ public class MoGuestServiceImp implements MoGuestService {
 			String contents=req.getParameter("no_content");
 			String notice_image=file.getOriginalFilename();
 			System.out.println(notice_image);
-			
+			int category=Integer.parseInt(req.getParameter("category"));
+			vo.setCategory(category);
 			vo.setNotice_title(notice_title);
 			vo.setMember_id(member_id);
 			vo.setContents(contents);
@@ -271,6 +308,7 @@ public class MoGuestServiceImp implements MoGuestService {
 			cnt=MGDao.noMoPhotoBoarder(vo);
 			if(cnt!=0) {
 				System.out.println("입력에 성공하셨습니다.");
+				req.setAttribute("category", req.getParameter("category"));
 			}
 		}
 		
@@ -292,9 +330,10 @@ public class MoGuestServiceImp implements MoGuestService {
 			int startPage = 0; // 시작페이지
 			int endPage = 0; // 마지막 페이지
 			int cnt=0;
-			
-			cnt=MGDao.movieBoarderListCnt();
-			
+			String categoryStr=(String)req.getAttribute("category");
+			int category=Integer.parseInt(categoryStr);
+			cnt=MGDao.movieBoarderListCnt(category);
+			model.addAttribute("category",category);
 			pageNum = req.getParameter("pageNum");
 			
 			if (pageNum == null) {
@@ -313,6 +352,7 @@ public class MoGuestServiceImp implements MoGuestService {
 				Map<String,Object> map=new HashMap<String,Object>();
 				map.put("start", start);
 				map.put("end", end);
+				map.put("category", category);
 				ArrayList<TcatBoardVO> dtos=MGDao.movieBoarderList(map);
 				model.addAttribute("dtos", dtos);
 			}
@@ -324,8 +364,22 @@ public class MoGuestServiceImp implements MoGuestService {
 			if (endPage > pageCount) {
 			endPage = pageCount;
 			}
+			int categoryComment=0;
+			if(category==21) {
+				categoryComment=211;
+			}else if(category==22) {
+				categoryComment=221;
+			}else if(category==23) {
+				categoryComment=231;
+			}else if(category==24) {
+				categoryComment=241;
+			}else if(category==25) {
+				categoryComment=251;
+			}else if(category==26) {
+				categoryComment=261;
+			}
 			//사진게시판 답글 가져오기
-			ArrayList<TcatBoardVO> dtos2=MGDao.movieBoarderComment();
+			ArrayList<TcatBoardVO> dtos2=MGDao.movieBoarderComment(categoryComment);
 			model.addAttribute("dtos2",dtos2);
 			model.addAttribute("cnt", cnt);
 			model.addAttribute("number", number);
@@ -348,7 +402,25 @@ public class MoGuestServiceImp implements MoGuestService {
 			String member_id=req.getParameter("member_id");
 			int notice_num=Integer.parseInt(req.getParameter("notice_num"));
 			String contents=req.getParameter("contents");
+			
+			int category=Integer.parseInt(req.getParameter("category"));
+			int categoryComment=0;
+			if(category==21) {
+				categoryComment=211;
+			}else if(category==22) {
+				categoryComment=221;
+			}else if(category==23) {
+				categoryComment=231;
+			}else if(category==24) {
+				categoryComment=241;
+			}else if(category==25) {
+				categoryComment=251;
+			}else if(category==26) {
+				categoryComment=261;
+			}
+			
 			TcatBoardVO vo=new TcatBoardVO();
+			vo.setCategoryComment(categoryComment);
 			vo.setMember_id(member_id);
 			vo.setNotice_num(notice_num);
 			vo.setContents(contents);
@@ -372,7 +444,8 @@ public class MoGuestServiceImp implements MoGuestService {
 				String contents=req.getParameter("no_content");
 				String notice_addfile=req.getParameter("board_videoSrc");
 				System.out.println(notice_addfile);
-				
+				int category=Integer.parseInt(req.getParameter("category"));
+				vo.setCategory(category);
 				vo.setNotice_title(notice_title);
 				vo.setMember_id(member_id);
 				vo.setContents(contents);
@@ -399,7 +472,7 @@ public class MoGuestServiceImp implements MoGuestService {
 		}
 		
 		
-		//사진게시판 수정
+		//영상게시판 수정
 		@Override
 		public void noMoMovieBoarder(HttpServletRequest req, Model model) {
 			// TODO Auto-generated method stub
@@ -430,6 +503,29 @@ public class MoGuestServiceImp implements MoGuestService {
 			ArrayList<TcatBoardVO> dtos=null;
 			dtos=MGDao.mainComentBoarderList();
 			model.addAttribute("borderDtos",dtos);
+			ArrayList<TcatBoardVO> dtos2=null;
+			dtos2=MGDao.mainServiceBoardList();
+			model.addAttribute("borderDtos2",dtos2);
+			
+		}
+
+		//뮤지컬 메인리스트
+		@Override
+		public void musicalCategoryMainList(HttpServletRequest req, Model model) {
+			// TODO Auto-generated method stub
+			ArrayList<TcatBoardVO> dtosPhoto=null;
+			ArrayList<TcatBoardVO> dtosMovie=null;
+			String photoCategory=null;
+			String movieCategory=null;
+			photoCategory=(String)req.getAttribute("photocategory");
+			movieCategory=(String)req.getAttribute("moviecategory");
+			System.out.println(photoCategory);
+			System.out.println(movieCategory);
+			dtosPhoto=MGDao.categoryPhotoList(Integer.parseInt(photoCategory));
+			dtosMovie=MGDao.categoryMovieList(Integer.parseInt(movieCategory));
+			model.addAttribute("dtosPhoto",dtosPhoto);
+			model.addAttribute("dtosMovie",dtosMovie);
+			
 		}
 		
 		

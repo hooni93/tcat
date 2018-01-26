@@ -24,6 +24,7 @@ $("#insertPhotoBoarder").click(function(){
 		formData.append("no_title",$("input[name=no_title]").val());
 		formData.append("mem_id",$("input[name=mem_id]").val());
 		formData.append("no_content",$("input[name=no_content]").val());
+		formData.append("category",$("input[name=categoryNum]").val());
 		formData.append("board_Image",$("input[name=board_Image]")[0].files[0]);
 		$.ajax({
 			url : 'insertPhotoBoarder',
@@ -47,6 +48,7 @@ $("#noMoPhotoBoarder").click(function(){
 		formData.append("noMo_title",$("input[name=noMo_title]").val());
 		formData.append("monotice_num",$("input[name=monotice_num]").val());
 		formData.append("noMo_content",$("input[name=noMo_content]").val());
+		formData.append("category",$("input[name=categoryNum]").val());
 		formData.append("noMoboard_Image",$("input[name=noMoboard_Image]")[0].files[0]);
 		$.ajax({
 			url : 'noMoPhotoBoarder',
@@ -66,9 +68,9 @@ $("#noMoPhotoBoarder").click(function(){
 
 
 
-function photoBoarderCommentWrite(member_id,notice_num,form){
+function photoBoarderCommentWrite(member_id,notice_num,category,form){
 	  var contents=form.contents.value; 
-	  var url="photoBoarderCommentWrite?member_id="+member_id+"&notice_num="+notice_num+"&contents="+contents;
+	  var url="photoBoarderCommentWrite?member_id="+member_id+"&notice_num="+notice_num+"&contents="+contents+"&category="+category;
 	$( "#result" ).load( "${pageContext.request.contextPath}/"+url );  
 }
 
@@ -81,7 +83,7 @@ function photoBoarderCommentWrite(member_id,notice_num,form){
     <div class="col-md-12 h25"></div>
     <h4><b>공연 사진 게시판</b></h4>
 			<hr>
-    	
+    	<input type="hidden" name="categoryNum"	value="${category}">
     	<div class="col-md-2">
     		<c:if test="${sessionScope.login_id==null}">
     			<input type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-primary w170" id="photoBoarderLogin" value="게시글 작성">    		
@@ -119,7 +121,7 @@ function photoBoarderCommentWrite(member_id,notice_num,form){
 						<tr>
 							<td><input type="text" class="form-control" name="contents" id="contents" maxlength="200" placeholder="답글을 작성해주세요"></td>
 								<c:if test="${sessionScope.login_id!=null}">
-									<td><button type="button" class="btn btn-info" onclick="photoBoarderCommentWrite('${login_id}','${vo.notice_num}',this.form);">
+									<td><button type="button" class="btn btn-info" onclick="photoBoarderCommentWrite('${login_id}','${vo.notice_num}',this.form,'${category}');">
 									작성하기<i class="fa fa-check spaceLeft"></i>
 									</button>					
 									</td>
