@@ -191,6 +191,7 @@
 								<th style="width: 8%">관람가능연령</th>
 								<th style="width: 4%"></th>
 							</tr>
+							
 							<tr>
 								<td><input type="text" name="perf_title"
 									style="width: 100%"></td>

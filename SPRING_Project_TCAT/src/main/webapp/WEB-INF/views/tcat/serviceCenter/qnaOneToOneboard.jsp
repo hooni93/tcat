@@ -29,11 +29,12 @@ function OneToOneBoardSearch() {
 				</h4>
 				<hr>
 				<b>1:1게시판입니다!</b><br>
-				<b>공개하기 곤란한 질문이나 자주하는 질문은 1:1게시판이나 공지사항을 이용해주세요!</b>
+				<b>자유롭게 토론하는 질문이나 자주하는 질문은 Q&A게시판이나 공지사항을 이용해주세요!</b>
 				<hr>
 				<br>
 				<div class="navbar-form navbar-right">
-					 <button type="button" class="btn btn-primary btn-sm btn btn-info">글쓰기</button>
+					 <input type="button" value="글쓰기" class="btn btn-primary btn-sm btn btn-info" 
+					        onclick="checkid('oneToOneWriteForm');">
 				</div>
 				<table
 					class="table table-hover table-bordered table-condensed c fs12">
@@ -42,7 +43,7 @@ function OneToOneBoardSearch() {
 						<td><b>구분<b></td>
 						<td><b>제목</b></td>
 						<td><b>작성자</b></td>
-						<!-- <td><b>답변상태</b></td> -->
+						<td><b>답변상태</b></td>
 						<td><b>날짜</b></td>
 						
 						
@@ -52,9 +53,16 @@ function OneToOneBoardSearch() {
 							<tr>
 								<td>${dto.service_num}</td>
 								<td>${dto.service_div}</td>
-								<td><a onclick="loadBoard('qnaContent?service_num=${dto.service_num}');">${dto.service_title}</a></td>
+								<td><a onclick="loadBoard('oneToOneContent?service_num=${dto.service_num}');">${dto.service_title}</a></td>
 								<td>${dto.member_id}</td>
-								<%-- <td>${dto.AnswersStatus}</td> --%>
+								<td>
+									 <c:if test="${dto.getAnswersStatus()==1}">
+									 	대기
+									 </c:if>
+									 <c:if test="${dto.getAnswersStatus()==2}">
+									 	답변완료
+									 </c:if>
+								</td>
 								<td>${dto.writeDate}</td>
 								
 								

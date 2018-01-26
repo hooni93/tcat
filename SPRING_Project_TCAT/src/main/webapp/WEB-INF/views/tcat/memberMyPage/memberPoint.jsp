@@ -56,11 +56,15 @@
 					<c:if test="${!Rating.equals('VIP')}">
 						<h2><center>다음 등급은 ${nextRating}등급입니다</center></h2>
 					</c:if>
+<<<<<<< HEAD
 					
 
 		
   				
 
+=======
+  					</div>
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 					<img src="${image}memberPoint/log3.png"  width="100%" height="60%">
 
 				</div>

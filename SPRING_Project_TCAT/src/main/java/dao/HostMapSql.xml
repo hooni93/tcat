@@ -1431,19 +1431,30 @@
 		VALUES (#{sale_div},#{sale_rate})
 		]]>
 	</insert>
-	<!-- 18.01.23 영민 수정끝 -->
-	<!-- 상품수정 갯수 -->
-	<select id="hostProModifyCnt" resultType="int">
-		select count(*)
-		from
-		performanceInfo
+	<!-- 상품 수정 폼 -->
+	<select id="hostProCnt" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+		<![CDATA[
+			select * 
+			from
+			(
+			    select p.per_id,p.perf_title,p.cateNum,p.R_seatPrice,p.VIP_seatPrice,p.S_seatPrice,p.A_seatPrice,p.B_seatPrice,p.detail_num,c.category,c.mDev,c.sDev,p.perf_Image,p.startdate,p.enddate,p.hall_id,h.hall_name,p.first_grade,p.per_step,p.remain_round,p.possible_age
+			    from (select * from performanceInfo order by per_id desc) p,category c,hallInfo h
+			    where p.cateNum=c.cateNum and p.hall_id = h.hall_id and c.category='공연'
+			)
+			where per_id=#{per_id}
+		]]>
 	</select>
-	<!-- 상품수정 리스트 -->
-	<!-- <select id="hostProModifyList" resultType="spring.project.tcat.VO.TcatPerformanceVO"> 
-		<![CDATA[ select * from(select per_id, perf_title, perf_Image, startDate, 
-		endDate, rownum rNum from( select * from performanceInfo ORDER by per_id 
-		desc ) ) WHERE rNum >=#{start} AND rNum <=#{end} ]]> </select> -->
-
+	<!-- 상품 수정 업데이트 -->
+	<update id="hostProUpdateCnt1" parameterType="java.util.Map">
+		update performanceInfo set perf_title=#{perf_title},perf_Image=#{perf_Image},startDate=#{startDate},endDate=#{endDate},first_grade=#{first_grade},remain_round=#{remain_round},possible_age=#{possible_age},VIP_seatPrice=#{VIP_seatPrice},R_seatPrice=#{R_seatPrice},S_seatPrice=#{S_seatPrice},A_seatPrice=#{A_seatPrice},B_seatPrice=#{B_seatPrice}  where per_id=#{per_id}
+	</update>
+	<update id="hostProUpdateCnt2" parameterType="java.util.Map">
+		update category set cateNum=#{cateNum} where cateNum=#{cateNum}
+	</update>
+	<update id="hostProUpdateCnt3" parameterType="java.util.Map">
+		update hallInfo set hall_id=#{hall_id} where hall_id=#{hall_id}
+	</update>
+	<!-- 18.01.23 영민 수정끝 -->
 	<!-- 18.01.11 동금 수정 -->
 
 	<!-- 상품갯수구하기 -->

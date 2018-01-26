@@ -220,8 +220,18 @@ public class JMHGuestController {
 	@RequestMapping("ticketCheck")
 	public String ticketCheck(HttpServletRequest req, Model model) {
 		System.out.println("ticketCheck");
-		//mhService.host_loginPro(req, model);
+		//예매정보 가져오기
+		mhService.getTicketInfo(req, model);
 		return "tcat/ticketCheck/ticketCheck";
 	}
 	
+	
+	//예매 취소ticCancel
+	@RequestMapping("ticStepUpdate")
+	public String ticStepUpdate(HttpServletRequest req, Model model) {
+		System.out.println("ticStepUpdate");
+		//예매정보 가져오기
+		mhService.ticStepUpdate(req, model);
+		return "tcat/ticketCheck/ticStepUpdatePro";
+	}
 }

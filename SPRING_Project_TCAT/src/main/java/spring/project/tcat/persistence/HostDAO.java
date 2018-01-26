@@ -264,12 +264,79 @@ public interface HostDAO {
 	public int levelUpdateCnt(Map<String,Object> map);
 	//혜택등록
 	public int levelAdd(Map<String,Object> map);
-	//상품수정 갯수
-	public int hostProModifyCnt();
-	/*//상품수정 리스트
-	public ArrayList <TcatPerformanceVO>hostProModifyList(Map<String,Object> map);*/
+	//상품상세
+	public ArrayList<TcatPerformanceVO> hostProCnt(int per_id);
+	//상품 수정
+	public int hostProUpdateCnt1(Map<String,Object> map1);
+	public int hostProUpdateCnt2(Map<String,Object> map2);
+	public int hostProUpdateCnt3(Map<String,Object> map3);
+	
 	////////////////////////////////////영민 1/10 end ///////////////////////////////////////
 	///////////////////////  동금 1/11  ///////////////////////////
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//상품갯수 불러오기
 	public int getPerfoCnt(Map<String, Object> map);
 	

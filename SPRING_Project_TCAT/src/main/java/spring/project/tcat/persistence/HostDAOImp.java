@@ -915,25 +915,141 @@ public class HostDAOImp implements HostDAO {
 		}
 ////////////////HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-23 성영민  //////////////
 ///////////////////////  영민 1/25  //////////////////////////////////////////////
-		//상품수정 갯수
+		//수정상품상세
 		@Override
-		public int hostProModifyCnt() {
+		public ArrayList<TcatPerformanceVO> hostProCnt(int per_id) {
+			ArrayList<TcatPerformanceVO> dto = null;
+			HostDAO dao= Configuration.getMapper(HostDAO.class);
+			dto=dao.hostProCnt(per_id);
+			return dto;
+		}
+		//수정상품업데이트1
+		@Override
+		public int hostProUpdateCnt1(Map<String, Object> map1) {
 			int cnt=0;
-			HostDAO dao=Configuration.getMapper(HostDAO.class);
-			cnt=dao.hostProModifyCnt();
+			HostDAO dao= Configuration.getMapper(HostDAO.class);
+			cnt=dao.hostProUpdateCnt1(map1);
 			return cnt;
 		}
-		/*//상품수정 리스트
+		//수정상품업데이트2
 		@Override
-		public ArrayList<TcatPerformanceVO> hostProModifyList(Map<String, Object> map) {
-			ArrayList<TcatPerformanceVO> dtos = null;
+		public int hostProUpdateCnt2(Map<String, Object> map2) {
+			int cnt=0;
 			HostDAO dao= Configuration.getMapper(HostDAO.class);
-			dtos=dao.hostProModifyList(map);
-			System.out.println("map"+map);
-			return dtos;
-		}*/
-		
+			cnt=dao.hostProUpdateCnt2(map2);
+			return cnt;
+		}
+		//수정상품업데이트3
+		@Override
+		public int hostProUpdateCnt3(Map<String, Object> map3) {
+			int cnt=0;
+			HostDAO dao= Configuration.getMapper(HostDAO.class);
+			cnt=dao.hostProUpdateCnt3(map3);
+			return cnt;
+		}
 ///////////////////////  영민 1/25  //////////////////////////////////////////////
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	///////////////////////  동금 1/9  ///////////////////////////
 	//상품갯수 불러오기
 	@Override
@@ -1200,6 +1316,4 @@ public class HostDAOImp implements HostDAO {
 		return cnt;
 	}
 
-	
-	
 }

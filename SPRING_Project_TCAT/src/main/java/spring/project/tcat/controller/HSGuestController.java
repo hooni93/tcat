@@ -1,11 +1,14 @@
 package spring.project.tcat.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import spring.project.tcat.service.HSGuestService;
 import spring.project.tcat.service.HostService;
@@ -130,10 +133,10 @@ public class HSGuestController {
 	
 
 	@RequestMapping("storePay")
-	public String storePay(HttpServletRequest req, Model model) {
+	public String storePay(HttpServletRequest req, Model model, @RequestParam (value = "valueArrTest[]") List<String> valueArr) {
 		System.out.println("storePay");
 		
-		HSGservice.cartList(req,model);
+		HSGservice.storePay(req,model,valueArr);
 		
 		return "tcat/purchase/storePay";
 	}
@@ -197,5 +200,41 @@ public class HSGuestController {
 		return "tcat/Ticketing/insertTicket";
 	}
 	
-
+	//스토어 바로구매
+	@RequestMapping("directBuy")
+	public String directBuy(HttpServletRequest req, Model model) {
+		System.out.println("directBuy");
+		
+		HSGservice.directBuy(req,model);
+		
+		return "tcat/purchase/directBuy";
+	}
+	
+	@RequestMapping("directPay")
+	public String directPay(HttpServletRequest req, Model model) {
+		System.out.println("directPay");
+		
+		HSGservice.directPay(req,model);
+		
+		return "tcat/memberMyPage/myPage";
+	}
+	
+	@RequestMapping("changeCount")
+	public String changeCount(HttpServletRequest req, Model model) {
+		System.out.println("changeCount");
+		
+		HSGservice.changeCount(req,model);
+		HSGservice.cartList(req,model);
+		System.out.println("11");
+		return "tcat/purchase/cart";
+	}
+	@RequestMapping("deleteCart")
+	public String deleteCart(HttpServletRequest req, Model model) {
+		System.out.println("deleteCart");
+		
+		HSGservice.deleteCart(req,model);
+	
+		return "tcat/purchase/cart";
+	}
+	
 }
