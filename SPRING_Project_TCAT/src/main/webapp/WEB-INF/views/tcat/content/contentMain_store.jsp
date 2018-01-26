@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <style type="text/css">
 .wish {
 	border: 0;
@@ -33,11 +34,21 @@ a {
 	color: black;
 }
 </style>
+
 <script type="text/javascript">
 function insertCart(cart_count,disc_code){
+
+
+	if((cart_count*1)>(disc_code*1)){
+		alert("구매수량을 초과하였습니다.");
+	}else if(cart_count==0){
+		alert("수량을 정해주세요!");
+	}else{
 	
-	var url="insertCart?cart_count="+cart_count+"&disc_code="+disc_code;
-	$("#result").load("${pageContext.request.contextPath}/"+url);
+		var url="insertCart?cart_count="+cart_count+"&disc_code="+disc_code;
+		$("#result").load("${pageContext.request.contextPath}/"+url);
+	}
+
 	
 }
 
@@ -93,98 +104,114 @@ $(document).ready(function() {
 		}
 	});
 	
+function directBuy(count,disc_code){
+	var disc_count="${str.disc_count}";
 
+	if((count*1)>(disc_count*1)){
+		alert("구매수량을 초과하였습니다.");
+	}else if(count==0){
+		alert("수량을 정해주세요!");
+	}else{
 	
+		var url="directBuy?count="+count+"&disc_code="+disc_code;
+		$("#result").load("${pageContext.request.contextPath}/"+url);
+	}
+	
+}
+
 	//스토어 후기 화면 뿌리기
 function commentListS(url) {
 	$("#commentListS").load( "${pageContext.request.contextPath}/"+url);
 }
 </script>
 </head>
-<c:if test="${insertCart==1}">
-	<script type="text/javascript">
+<body>
+	<c:if test="${insertCart==1}">
+		<script type="text/javascript">
 		alert("장바구니에 담겼습니다.");
 	</script>
-</c:if>
-<div class="row">
-	<br>
-	<!--공백  -->
-	<div class="col-md-1"></div>
-	<!--내용물  -->
-	<div class="col-md-10">
-		<!--사이드  -->
-		<div class="col-md-2"></div>
+	</c:if>
+	<div class="row">
+		<br>
+		<!--공백  -->
+		<div class="col-md-1"></div>
+		<!--내용물  -->
+		<div class="col-md-10">
+			<!--사이드  -->
+			<div class="col-md-2"></div>
 
-		<!--공연정보  -->
-		<div class="col-md-9">
-			<!--상세페이지 상단  -->
-			<div class="col-md-12" style="border: 1px solid lightgrey;">
-				<h1>${str.disc_title}</h1>
-				<h5>${str.mDev}-${str.sDev}</h5>
-			</div>
+			<!--공연정보  -->
+			<div class="col-md-9">
+				<!--상세페이지 상단  -->
+				<div class="col-md-12" style="border: 1px solid lightgrey;">
+					<h1>${str.disc_title}</h1>
+					<h5>${str.mDev}-${str.sDev}</h5>
+				</div>
 
-			<!--사진, 예매, 가격  -->
-			<div class="col-md-12"
-				style="border-top: 3px solid black; padding: 0;">
-				<!--내용  -->
-				<div class="col-md-12 bf0f0f0" style="padding: 0;">
-					<div class="col-md-9 bffffff"
-						style="border: 1px solid lightgrey; padding: 0;">
-						<!--사진  -->
-						<div class="col-md-4">
-							<img src="${image}store/${str.disc_image}" class="p10">
+				<!--사진, 예매, 가격  -->
+				<div class="col-md-12"
+					style="border-top: 3px solid black; padding: 0;">
+					<!--내용  -->
+					<div class="col-md-12 bf0f0f0" style="padding: 0;">
+						<div class="col-md-9 bffffff"
+							style="border: 1px solid lightgrey; padding: 0;">
+							<!--사진  -->
+							<div class="col-md-4">
+								<img src="${image}store/${str.disc_image}" class="p10">
+							</div>
+
+							<div class="col-md-8">
+								<!--장소  -->
+								<div class="row p10">
+									<div class="col-md-3">
+										<b>재고수량</b>
+									</div>
+									<div class="col-md-9">${str.disc_count}개</div>
+								</div>
+								<div class="row p10">
+									<div class="col-md-3">
+										<b>구매수량</b>
+									</div>
+									<div class="col-md-9">
+										<input type="number" name="count">
+									</div>
+								</div>
+
+								<div class="row p10" style="border-top: 1px solid grey;">
+									<div class="col-md-3 ">
+										<b>기본가</b>
+									</div>
+									<div class="col-md-9">
+										<span class="red"> <fmt:formatNumber
+												value="${str.disc_price}" pattern="#,###" /></span>원
+									</div>
+								</div>
+
+							</div>
 						</div>
-
-						<div class="col-md-8">
-							<!--장소  -->
-							<div class="row p10">
-								<div class="col-md-3">
-									<b>재고수량</b>
-								</div>
-								<div class="col-md-9">${str.disc_count}개</div>
+						<!--예매  -->
+						<div class="col-md-3 " style="padding: 0;">
+							<div class="col-md-12 p10 c">
+								<input type="hidden" id="disc_code" value="${str.disc_code }">
+								<button type="button" class="wish btn-xl">
+									<i class="glyphicon glyphicon-heart fs20"></i>
+								</button>
+								<span>좋아요</span>
+								<c:if test="${sessionScope.login_id!=null}">
+									<img src="/tcat/resources/image/cart_icon.png"
+										onclick="insertCart(document.all.count.value,'${str.disc_code}');"
+										style="width: 50px">+
 							</div>
-							<div class="row p10">
-								<div class="col-md-3">
-									<b>구매수량</b>
-								</div>
-								<div class="col-md-9">
-									<input type="number" name="count">
-								</div>
-							</div>
-
-							<div class="row p10" style="border-top: 1px solid grey;">
-								<div class="col-md-3 ">
-									<b>기본가</b>
-								</div>
-								<div class="col-md-9">
-									<span class="red"> <fmt:formatNumber
-											value="${str.disc_price}" pattern="#,###" /></span>원
-								</div>
-							</div>
-
+							<input class="btn btn-danger btn-xl w100p" type="button"
+								value="구매하기"
+								onclick="directBuy(document.all.count.value,'${str.disc_code}');">
+							</c:if>
+							<c:if test="${sessionScope.login_id==null}">
+								<img data-toggle="modal" data-target="#login-modal" id="login2"
+									style="width: 50px" src="/tcat/resources/image/cart_icon.png">
 						</div>
-					</div>
-					<!--예매  -->
-					<div class="col-md-3 " style="padding: 0;">
-						<div class="col-md-12 p10 c">
-							<input type="hidden" id="disc_code"
-								value="${str.disc_code }">
-							<button type="button" class="wish btn-xl">
-								<i class="glyphicon glyphicon-heart fs20"></i>
-							</button><span>좋아요</span>
-						<c:if test="${sessionScope.login_id!=null}">
-							<img src="/tcat/resources/image/cart_icon.png"
-								onclick="insertCart(document.all.count.value,'${str.disc_code}');"
-								style="width: 50px"></div>
-											<input class="btn btn-danger btn-xl w100p" type="button"
-								value="구매하기" onclick="directBuy();">
-						</c:if>
-						<c:if test="${sessionScope.login_id==null}">
-							<img data-toggle="modal" data-target="#login-modal" id="login2"
-								style="width: 50px" src="/tcat/resources/image/cart_icon.png"></div>
-							<input class="btn btn-danger btn-xl w100p" data-toggle="modal"
-								data-target="#login-modal" id="login2" type="button"
-								value="구매하기">
+						<input class="btn btn-danger btn-xl w100p" data-toggle="modal"
+							data-target="#login-modal" id="login2" type="button" value="구매하기">
 						</c:if>
 					</div>
 				</div>
@@ -247,5 +274,6 @@ function commentListS(url) {
 	<br>
 	<!--공백  -->
 	<div class="col-md-1"></div>
-</div>
+	</div>
+</body>
 </html>

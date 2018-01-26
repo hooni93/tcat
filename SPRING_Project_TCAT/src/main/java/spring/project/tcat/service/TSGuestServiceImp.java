@@ -528,7 +528,60 @@ public class TSGuestServiceImp implements TSGuestService{
 			vo.setMember_id(member_id);
 			
 			cnt =tsGDAO.commentWriteS(vo);
+		}
+		
+		// 고객이 본인 후기 쓴거 수정하기 - 공연용
+		@Override
+		public void commentModify(HttpServletRequest req, Model model) {
+		int cnt = 0;
+		int notice_num = Integer.parseInt(req.getParameter("notice_num"));
+		String contents = req.getParameter("contents");	
+		System.out.println("notice_num==="+notice_num);
+		System.out.println("contents==="+contents);
+		
+		TcatBoardVO vo = new TcatBoardVO();
+		vo.setNotice_num(notice_num);
+		vo.setContents(contents);
+		cnt = tsGDAO.commentsModify(vo);
+		model.addAttribute("cnt",cnt);
+		
+		}
+		// 고객이 쓴 후기 삭제 - 공연용
+		@Override
+		public void commentDel(HttpServletRequest req, Model model) {
+			int commentDel = 0;
 			
+			int notice_num = Integer.parseInt(req.getParameter("notice_num"));
+			commentDel = tsGDAO.commentDeldao(notice_num);
+			
+			model.addAttribute("commentDel", commentDel);
+			
+		}
+		// 고객이 본인 후기 쓴거 수정하기 - 스토어용
+		@Override
+		public void commentModifyS(HttpServletRequest req, Model model) {
+			int cnt = 0;
+			int notice_num = Integer.parseInt(req.getParameter("notice_num"));
+			String contents = req.getParameter("contents");	
+			System.out.println("notice_num==="+notice_num);
+			System.out.println("contents==="+contents);
+			
+			TcatBoardVO vo = new TcatBoardVO();
+			vo.setNotice_num(notice_num);
+			vo.setContents(contents);
+			cnt = tsGDAO.commentsModifyS(vo);
+			model.addAttribute("cnt",cnt);
+			
+		}
+		// 고객이 쓴 후기 삭제 - 스토어용
+		@Override
+		public void commentDelS(HttpServletRequest req, Model model) {
+			int commentDelS = 0;
+			
+			int notice_num = Integer.parseInt(req.getParameter("notice_num"));
+			commentDelS = tsGDAO.commentDeldaoS(notice_num);
+			
+			model.addAttribute("commentDel", commentDelS);
 			
 		}
 			

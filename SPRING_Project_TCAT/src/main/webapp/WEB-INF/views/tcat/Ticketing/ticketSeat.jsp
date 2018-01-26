@@ -185,7 +185,7 @@ $(document).ready(function(){
 		}
 		if(dtos2!=null){
 		for(int q=0;q<dtos2.size();q++){
-			map.put(dtos.get(q).getSeat_num(),dtos.get(q).getSeat_type());
+			map.put(dtos2.get(q).getSeat_num(),dtos2.get(q).getSeat_type());
 		}
 		}
 		for(int i=0;i<=seatRow;i++){

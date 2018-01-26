@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="../setting.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ include file="../setting.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link href="${css}style.css" rel="stylesheet" type="text/css">
- <link href="${css}bootstrap_tcatMain.css" rel="stylesheet">
+<link href="${css}bootstrap_tcatMain.css" rel="stylesheet">
 <script src="${script}ajax/request.js"></script>
 <script src="${script}jquery-3.1.1.min.js"></script>
 <script src="${script}bootstrap.js"></script>
@@ -228,8 +228,6 @@ function detailOpen(category,id){
 	var url="seat_result?row="+row+"&column="+column+"&vip="+vip+"&r="+r+"&s="+s+"&a="+a+"&b="+b;
 	 $( "#seat_result1" ).load( "${pageContext.request.contextPath}/"+url );
 }
- 
- 
  function load(url){
 	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url ,function(msg) {
 		 	var s = $( "#side_result" ).html();
@@ -243,9 +241,10 @@ function detailOpen(category,id){
 		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" 
 		 || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified" 
 		 || url =="commentManager"|| url =="eventHost"|| url =="provalMain" || url =="orderManagement"){
-	 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side",function(msg) {
-			history.pushState({side : url+"_side",page : url}, null);	//들어오는 url이 if조건에 만족할때 그에맞는 사이드페이지를 hostPage의 왼쪽 side_result쪽에 뿌려준다.
-	 });}
+		 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side",function(msg) {
+				history.pushState({side : url+"_side",page : url}, null);	//들어오는 url이 if조건에 만족할때 그에맞는 사이드페이지를 hostPage의 왼쪽 side_result쪽에 뿌려준다.
+		 });
+	 }
  }
  
 /* 동금이 제작 */
@@ -373,115 +372,119 @@ location.reload();
 
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" onclick="load('hostMain');"><b>TCAT 관리자센터</b></a>
-    </div>
+	<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" onclick="load('hostMain');"><b>TCAT
+					관리자센터</b></a>
+		</div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">상품관리<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a onclick="load('productList')">상품목록</a></li>
-            <li class="divider"></li>
-           <li><a onclick="load('categoryList');">카테고리별 상품진열관리</a></li>
-            <li><a onclick="load('hotMusical');">핫카테고리 상품진열관리</a></li>
-            <li class="divider"></li>
-            <li><a onclick="load('registItem');">상품등록</a></li>
-            <li><a href="#">상품등록수정</a></li>
-            <li><a onclick="load('stockDelete_musical');">상품삭제</a></li>
-            <li class="divider"></li>
-            <li><a onclick="load('stockManagement');">상품재고관리</a></li>
-             <li><a onclick="load('stockOutOf_musical');">품절상품관리</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">주문관리<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-           <li><a onclick="load('orderList')">전체 주문 목록조회</a></li>
-            <li><a onclick="load('provalMain')">주문승인관리</a></li>
-            <li><a onclick="load('orderManagement')">배송관리</a></li>
-            <li class="divider"></li>
-            <li><a onclick="load('productRefund')">환불관리</a></li>
-            <li class="divider"></li>
-            <li><a href="#">자동입금확인 관리</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">고객관리<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a onclick="load('memberModified');">회원정보조회/수정</a></li>
-            <li class="divider"></li>
-            <li><a onclick="load('levelMember');">회원혜택관리</a></li>
-            <li class="divider"></li>
-            <li><a onclick="load('join_retireMember');">회원가입/탈퇴관리</a></li>
-            <li class="divider"></li>
-            <li><a onclick="load('sleepMember');">휴면회원관리</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a  onclick="load('hallAdd');" role="button" aria-expanded="false">공연장 관리</a>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">게시판관리<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a onclick="load('eventHost');">공지사항 게시판관리</a></li>
-            <li><a href="#">SNS후기 게시판관리</a></li>
-            <li class="divider"></li>
-            <li><a href="#">QnA 게시판관리</a></li>
-            <li><a href="#">1 : 1 게시판관리</a></li>
-            <li class="divider"></li>
-            <li><a onclick="load('commentManager');">관람/상품후기 게시판관리</a></li>
-            <li class="divider"></li>
-            <li><a href="#">영상 게시판관리</a></li>
-            <li><a href="#">사진 게시판관리</a></li>
-          </ul>
-        </li>
-      </ul>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false">상품관리<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a onclick="load('productList')">상품목록</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('categoryList');">카테고리별 상품진열관리</a></li>
+						<li><a onclick="load('hotMusical');">핫카테고리 상품진열관리</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('registItem');">상품등록</a></li>
+						<li><a onclick="load('hostProModify');">상품수정</a></li>
+						<li><a onclick="load('stockDelete_musical');">상품삭제</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('stockManagement');">상품재고관리</a></li>
+						<li><a onclick="load('stockOutOf_musical');">품절상품관리</a></li>
+					</ul></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false">주문관리<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a onclick="load('orderList')">전체 주문 목록조회</a></li>
+						<li><a onclick="load('provalMain')">주문승인관리</a></li>
+						<li><a onclick="load('orderManagement')">배송관리</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('productRefund')">환불관리</a></li>
+						<li class="divider"></li>
+						<li><a href="#">자동입금확인 관리</a></li>
+					</ul></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false">고객관리<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a onclick="load('memberModified');">회원정보조회</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('levelMember');">회원혜택관리</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('join_retireMember');">회원가입/탈퇴관리</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('sleepMember');">휴면회원관리</a></li>
+					</ul></li>
+				<li class="dropdown"><a onclick="load('hallAdd');"
+					role="button" aria-expanded="false">공연장 관리</a></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false">게시판관리<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">공지사항 게시판관리</a></li>
+						<li><a onclick="load('eventHost');">이벤트 게시판관리</a></li>
+						<li><a href="#">SNS후기 게시판관리</a></li>
+						<li class="divider"></li>
+						<li><a href="#">QnA 게시판관리</a></li>
+						<li><a href="#">1 : 1 게시판관리</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('commentManager');">관람/상품후기 게시판관리</a></li>
+						<li class="divider"></li>
+						<li><a href="#">영상 게시판관리</a></li>
+						<li><a href="#">사진 게시판관리</a></li>
+					</ul></li>
+			</ul>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">매출분석 <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">일별매출</a></li>
-            <li><a href="#">주별매출</a></li>
-            <li><a href="#">월별매출</a></li>
-            <li class="divider"></li>
-            <li><a href="#">매출집계</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a onclick="load('productRank');" role="button" aria-expanded="false">상품분석</a>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">고객분석 <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">요일별분석</a></li>
-            <li><a href="#">시간별분석</a></li>
-            <li class="divider"></li>
-            <li><a onclick="load('infoLevel');">등급별분석</a></li>
-            <li class="divider"></li>
-            <li><a href="#">지역별분석</a></li>
-            <li><a href="#">성별분석</a></li>
-            <li><a href="#">연령분석</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false">매출분석
+						<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">일별매출</a></li>
+						<li><a href="#">주별매출</a></li>
+						<li><a href="#">월별매출</a></li>
+						<li class="divider"></li>
+						<li><a href="#">매출집계</a></li>
+					</ul></li>
+				<li class="dropdown"><a onclick="load('productRank');"
+					role="button" aria-expanded="false">상품분석</a></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false">고객분석
+						<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">요일별분석</a></li>
+						<li><a href="#">시간별분석</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('infoLevel');">등급별분석</a></li>
+						<li class="divider"></li>
+						<li><a href="#">지역별분석</a></li>
+						<li><a href="#">성별분석</a></li>
+						<li><a href="#">연령분석</a></li>
+					</ul></li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container-fluid --> </nav>
 
-<div class="w100p h50"></div>
+	<div class="w100p h50"></div>
 
 </body>
 </html>

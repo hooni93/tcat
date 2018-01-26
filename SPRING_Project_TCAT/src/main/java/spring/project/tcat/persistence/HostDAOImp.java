@@ -914,6 +914,26 @@ public class HostDAOImp implements HostDAO {
 			return cnt;
 		}
 ////////////////HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-23 성영민  //////////////
+///////////////////////  영민 1/25  //////////////////////////////////////////////
+		//상품수정 갯수
+		@Override
+		public int hostProModifyCnt() {
+			int cnt=0;
+			HostDAO dao=Configuration.getMapper(HostDAO.class);
+			cnt=dao.hostProModifyCnt();
+			return cnt;
+		}
+		/*//상품수정 리스트
+		@Override
+		public ArrayList<TcatPerformanceVO> hostProModifyList(Map<String, Object> map) {
+			ArrayList<TcatPerformanceVO> dtos = null;
+			HostDAO dao= Configuration.getMapper(HostDAO.class);
+			dtos=dao.hostProModifyList(map);
+			System.out.println("map"+map);
+			return dtos;
+		}*/
+		
+///////////////////////  영민 1/25  //////////////////////////////////////////////
 	///////////////////////  동금 1/9  ///////////////////////////
 	//상품갯수 불러오기
 	@Override
