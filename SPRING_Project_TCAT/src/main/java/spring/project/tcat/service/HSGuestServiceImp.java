@@ -2,6 +2,7 @@ package spring.project.tcat.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,12 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import spring.project.tcat.VO.CartVO;
 import spring.project.tcat.VO.CategoryVO;
 import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.SaleVO;
 import spring.project.tcat.VO.SelectHellInfoVO;
+import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 import spring.project.tcat.persistence.HSGuestDAO;
 
@@ -268,14 +271,20 @@ public class HSGuestServiceImp implements HSGuestService{
 			String member_id=(String)req.getSession().getAttribute("login_id");
 			int disc_code=Integer.parseInt(req.getParameter("disc_code"));
 			int cart_count=Integer.parseInt(req.getParameter("cart_count"));
+			System.out.println(disc_code+" "+cart_count);
 			Map<String,Object> map=new HashMap<String,Object>();
 			map.put("member_id", member_id);
 			map.put("disc_code", disc_code);
 			map.put("cart_count", cart_count);
-			
 			int insertCart=0;
-			insertCart=HSDao.insertCart(map);
+			int cnt=0;
+			cnt=HSDao.searchCart(map);
 			
+			if(cnt>0) {
+				insertCart=HSDao.updateCart(map);
+			}else {
+				insertCart=HSDao.insertCart(map);
+			}
 			req.setAttribute("insertCart", insertCart);
 		}
 		//장바구니 리스트 가져오기
@@ -379,34 +388,53 @@ public class HSGuestServiceImp implements HSGuestService{
 
 		@Override
 		public void sussessPay(HttpServletRequest req, Model model) {
+			String a=req.getParameter("checkArr");
+			String disc_code[]=a.split(",");
 			String member_id=(String)req.getSession().getAttribute("login_id");
-			System.out.println("--------member_id:"+member_id);
+			
 			String addrChange=null;
 			addrChange=req.getParameter("addrChange");
 			String member_addr=null;
 			String member_name=null;
 			String member_hp=null;
-			
+			ArrayList<CartVO> dtos=new ArrayList<CartVO>();
 			Map<String,Object> map2=new HashMap<String,Object>();
 			map2.put("member_id", member_id);
+			MemberVO mem=new MemberVO();
+			mem = HSDao.MemInfo(member_id);
 			System.out.println("1");
-			ArrayList<CartVO> dtos=HSDao.cartListDtos(map2);
-			System.out.println("addr"+dtos);
-			if(addrChange==null) {
-				member_addr=dtos.get(0).getMember_addr();
-				member_name=dtos.get(0).getMember_name();
-				member_hp=dtos.get(0).getMember_hp();
-			}else {
-				member_addr=req.getParameter("member_addr");
-				member_name=req.getParameter("member_name");
-				member_hp=req.getParameter("member_hp");
+			CartVO dto=new CartVO();
+			for(int i=0;i<disc_code.length;i++) {
+				map2.put("disc_code", disc_code[i]);
+				dto=HSDao.cheackCartList(map2);
+				dtos.add(dto);
 			}
-			System.out.println("2");
+			
+			HSDao.cartListDtos(map2);
+			
+			System.out.println("addr"+dtos);
 			Map<String,Object> map=new HashMap<String,Object>();
-			map.put("member_addr", member_addr);
-			map.put("member_name", member_name);
-			map.put("member_hp", member_hp);
-			System.out.println("3");
+			//주소 찾아오기
+			if(addrChange.equals("0")) {
+				//주소변경이 없으면
+				
+				map.put("member_name", mem.getMember_name());
+				map.put("member_addr", mem.getMember_addr());
+				map.put("member_hp", mem.getMember_hp());
+			}else if(addrChange.equals("1")){
+				//주소변경이 있으면
+				String del_name=req.getParameter("member_name");
+				String postNum=req.getParameter("postNum");
+				String addr1=req.getParameter("addr1");
+				String addr2=req.getParameter("addr2");
+				String del_addr="["+postNum+"]"+addr1+" "+addr2;
+				String del_hp=req.getParameter("member_hp");
+				System.out.println("del_name:"+del_name);
+				map.put("member_name", del_name);
+				map.put("member_addr", del_addr);
+				map.put("member_hp", del_hp);
+			}
+
 			//배송정보 추가
 			HSDao.insertdelevaryInfo(map);
 			System.out.println("4");
@@ -427,7 +455,11 @@ public class HSGuestServiceImp implements HSGuestService{
 			}
 			System.out.println("6");
 			//구매자의 장바구니 목록 제거
-			HSDao.cartDel(member_id);
+			
+			for(int i=0;i<disc_code.length;i++) {
+				map.put("disc_code", disc_code[i]);
+				HSDao.cartDel(map);
+			}
 			System.out.println("7");
 			req.setAttribute("Pay", 1);
 		}
@@ -628,5 +660,138 @@ public class HSGuestServiceImp implements HSGuestService{
 				
 				HSDao.insertTicket(map);
 			}
-	}	
+	}
+
+		@Override
+		public void directBuy(HttpServletRequest req, Model model) {
+			String member_id=(String)req.getSession().getAttribute("login_id");//구매자 id
+			int count=0;
+			count=Integer.parseInt(req.getParameter("count"));//구매하려는 갯수
+			int disc_code=Integer.parseInt(req.getParameter("disc_code"));//상품코드
+			System.out.println("1");
+			//1. 상품정보 가져오기
+			TcatPerDiscVO perVO=new TcatPerDiscVO();
+			perVO=HSDao.DiscInfo(disc_code);
+			System.out.println("2");
+			//2. member정보 가져오기
+			MemberVO memVO=new MemberVO();
+			memVO=HSDao.MemInfo(member_id);
+			System.out.println("3");
+			//3. 상품정보,member정보,구매수량을 넘기기
+			req.setAttribute("perVO", perVO);
+			req.setAttribute("memVO", memVO);
+			req.setAttribute("count", count);
+			System.out.println("4");
+		}
+
+		@Override
+		public void directPay(HttpServletRequest req, Model model) {
+			String member_id=(String)req.getSession().getAttribute("login_id");//구매자 id
+			
+			String count=req.getParameter("count");//구매하려는 갯수
+			System.out.println("count:"+count);
+			String disc_code=req.getParameter("disc_code");//상품코드
+			
+			String addrChange=null;
+			addrChange=req.getParameter("addrChange");
+			MemberVO mem=new MemberVO();
+			mem = HSDao.MemInfo(member_id);
+			Map<String,Object> map =new HashMap<String,Object>();
+			map.put("count", count);
+			map.put("disc_code", disc_code);
+			//재고갯수 감소시키기
+			System.out.println(
+					"disc_code"+disc_code+"\n"+
+					"addrChange"+addrChange+"\n"						
+			);
+			
+			HSDao.updateCount(map);
+			
+			//주소 찾아오기
+			if(addrChange.equals("0")) {
+				//주소변경이 없으면
+				
+				map.put("name", mem.getMember_name());
+				map.put("addr", mem.getMember_addr());
+				map.put("hp", mem.getMember_hp());
+			}else if(addrChange.equals("1")){
+				//주소변경이 있으면
+				String del_name=req.getParameter("member_name");
+				String postNum=req.getParameter("postNum");
+				String addr1=req.getParameter("addr1");
+				String addr2=req.getParameter("addr2");
+				String del_addr="["+postNum+"]"+addr1+" "+addr2;
+				String del_hp=req.getParameter("member_hp");
+				System.out.println("del_name:"+del_name);
+				map.put("name", del_name);
+				map.put("addr", del_addr);
+				map.put("hp", del_hp);
+			}
+			//배송정보 넣기
+			HSDao.insertdel(map);
+			//넣은 배송번호 가져오기
+			int del_num=HSDao.maxdel_num();
+			
+			map.put("del_num", del_num);
+			map.put("member_id",member_id);
+			if(mem.getRating().equals("D")) {
+				map.put("Rating", "없음");
+			}else {
+				map.put("Rating", mem.getRating());
+			}
+			map.put("buy_count", count);
+			
+			HSDao.insertStorePay(map);
+		}
+
+		@Override
+		public void changeCount(HttpServletRequest req, Model model) {
+			int count=Integer.parseInt(req.getParameter("count"));
+			int disc_code=Integer.parseInt(req.getParameter("disc_code"));
+			String member_id=(String)req.getSession().getAttribute("login_id");
+			//장바구니에 담긴 코드에 맞는 수량을 변경하기
+			Map<String,Object> map=new HashMap<String,Object>();
+			
+			map.put("count", count);
+			map.put("disc_code", disc_code);
+			map.put("member_id", member_id);
+			
+			HSDao.changeCount(map);
+		}
+
+		@Override
+		public void storePay(HttpServletRequest req, Model model,@RequestParam (value = "valueArrTest[]") List<String> valueArr) {
+			//고객 id로 체크한 값을 dtos에 넣기
+			String member_id=(String)req.getSession().getAttribute("login_id");
+			ArrayList<CartVO> dtos=new ArrayList<CartVO>();
+			Map<String,Object> map=new HashMap<String,Object>();
+			CartVO dto=new CartVO();
+			map.put("member_id", member_id);
+
+			for(int i=0;i<valueArr.size();i++) {
+
+				//장바구니 리스트에서 체크한 값 가져오기
+				map.put("disc_code", valueArr.get(i));
+	
+				
+				dto=HSDao.cheackCartList(map);
+				dtos.add(dto);
+			}
+			
+			req.setAttribute("dtos", dtos);
+		}
+
+		@Override
+		public void deleteCart(HttpServletRequest req, Model model) {
+			int disc_code=Integer.parseInt(req.getParameter("disc_code"));
+			String member_id=(String)req.getSession().getAttribute("login_id");
+			int deleteCart=0;
+			Map<String,Object> map=new HashMap<String,Object>();
+			map.put("disc_code", disc_code);
+			map.put("member_id", member_id);
+			
+			deleteCart=HSDao.deleteCart(map);
+			
+			req.setAttribute("deleteCart", deleteCart);
+		}
 }

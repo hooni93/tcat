@@ -16,13 +16,38 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 function pay(url){
+	 var checkArr = [];     // 배열 초기화
+	 $("input[name='seatCheck']:checked").each(function(i){
+	     checkArr.push($(this).val());    // 체크된 것만 값을 뽑아서 배열에 push
+	 });
+	 $.ajax({
+        url: url
+        , type: 'post'
+        , dataType: 'text'
+        , data: {
+            valueArrTest: checkArr
+        },
+        success :  function(msg) {
+            $('#result').html(msg);
+        }
+    });
 	 
-	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );
-	
+	 /*$( "#result" ).load( "${pageContext.request.contextPath}/"+url ); */
 }
 function error(){
 	alert("구매할 상품이 없습니다!");
 	return false;
+}
+function cheack(value,cart_count){
+	alert(value+" "+cart_count);
+}
+function deleteCart(disc_code){
+	$( "#result" ).load( "${pageContext.request.contextPath}/deleteCart?disc_code="+disc_code);
+}
+
+function changeCount(count,disc_code){
+
+	$( "#result" ).load( "${pageContext.request.contextPath}/changeCount?count="+count+"&disc_code="+disc_code);
 }
 </script>
 <style type="text/css">
@@ -37,9 +62,14 @@ body {
 		alert("구매되었습니다.");
 	</script>
 </c:if>
+<c:if test="${deleteCart==1}">
+	<script type="text/javascript">
+		alert("삭제되었습니다.");
+	</script>
+</c:if>
 <div class="container">
 	<div class="row">
-		<div class="col-xs-10">
+		<div class="col-xs-12">
 			<div class="panel panel-info">
 				<div class="panel-heading">
 					<div class="panel-title">
@@ -58,21 +88,22 @@ body {
 				<div class="panel-body">
 					<c:forEach var="vo" items="${dtos}" >
 					<!-- 데이터 -->
-					<div class="row">						
+					<div class="row">	
+						<div class="col-xs-1"><input type="checkbox" name="seatCheck" onclick="cheack(this.value,'${vo.cart_count}')" value="${vo.disc_code}"></div>
 						<div class="col-xs-2"><img class="img-responsive" src="${image}/store/${vo.disc_image}">
 						</div>
 						<div class="col-xs-4">
 							<h4 class="product-name"><strong>${vo.disc_title}</strong></h4><h4><small>${vo.disc_con}</small></h4>
 						</div>
-						<div class="col-xs-6">
+						<div class="col-xs-5">
 							<div class="col-xs-6 text-right">
 								<h6><strong>${vo.disc_price} <span class="text-muted">x</span></strong></h6>
 							</div>
 							<div class="col-xs-4">
-								<input type="number" class="form-control input-sm" value="${vo.cart_count}">
+								<input type="number" onclick="changeCount(this.value,'${vo.disc_code}')" class="form-control input-sm" id="cart_count" value="${vo.cart_count}">
 							</div>
 							<div class="col-xs-2">
-								<button type="button" class="btn btn-link btn-xs">
+								<button type="button" class="btn btn-link btn-xs" onclick="deleteCart('${vo.disc_code}');">
 									<span class="glyphicon glyphicon-trash"> </span>
 								</button>
 							</div>
@@ -112,7 +143,7 @@ body {
 						</div>
 						<div class="col-xs-3">
 							<%if(dtos!=null){ %>
-							<button type="button" id="myBtn" class="btn btn-success btn-block" onclick="load('storePay');">
+							<button type="button" id="myBtn" class="btn btn-success btn-block" onclick="pay('storePay');">
 								구입하기
 							</button>
 							<%} %>

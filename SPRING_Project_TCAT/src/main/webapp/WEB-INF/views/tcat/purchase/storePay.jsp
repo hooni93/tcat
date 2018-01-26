@@ -34,7 +34,10 @@
 		msg += "<table class='table table-striped' style='border-top:3px solid #bbbbbb;'>"+
 						"<tr>"+
 						"<th>배송지 </th>"+
-						"<td><input type='text' name='member_addr'>&nbsp<input type='button' onclick='addr();' value='기본배송지 이용'></td>"+
+						"<td><input type='text' name='postNum' id='sample6_postcode' placeholder='우편번호'>"+
+						"<input type='button' onclick='sample6_execDaumPostcode()' value='우편번호 찾기'>&nbsp<input type='button' onclick='addr();' value='기본배송지 이용'><br>"+
+						"<input type='text' name='addr1' id='sample6_address' placeholder='주소'>"+
+						"<input type='text' name='addr2' id='sample6_address2' placeholder='상세주소'></td>"+
 					"</tr>"+
 					"<tr>"+
 						"<th>이름</th>"+
@@ -46,6 +49,7 @@
 						"<td><input type='text' name='member_hp'></td>"+
 					"</tr>"+
 				"</table>";
+				$("input[name=addrD]").val("1");
 		addrInfo.innerHTML = msg;
 	}
 	function addr() {
@@ -54,31 +58,59 @@
 		msg += "<table class='table table-striped' style='border-top:3px solid #bbbbbb;' >"+
 						"<tr>"+
 						"<th>배송지 </th>"+
-						"<td>${dtos.get(0).getMember_addr()}&nbsp<input type='button' onclick='addrChange();' value='배송지변경'></td>"+
+						"<td>${memVO.getMember_addr()}&nbsp<input type='button' onclick='addrChange();' value='배송지변경'></td>"+
 					"</tr>"+
 					"<tr>"+
 						"<th>이름</th>"+
-						"<td>${dtos.get(0).getMember_name()}</td>"+
+						"<td>${memVO.getMember_name()}</td>"+
 					"</tr>"+
 					"<tr>"+
 						"<th>연락처</th>"+
-						"<td>${dtos.get(0).getMember_hp()}</td>"+
+						"<td>${memVO.getMember_hp()}</td>"+
 					"</tr>"+
 				"</table>";
+				$("input[name=addrD]").val("0");
 		addrInfo.innerHTML = msg;
 	}
 	function paySubmit(url) { /*AJAX submit  */
-		var formData = $("#delevaryForm").serialize();
-		$.ajax({
-			type : "POST",
-			url : url,
-			cache : false,
-			data : formData,
-			success : function(msg) {
-				$('#result').html(msg);
-			}
-		});
+		var formData = new FormData();
+		var checkArr ="";     // 배열 초기화
+		var a=1;
+		 $("input[name='disc_code']:checked").each(function(i){
+		 	if(a==1){
+		 		checkArr+=$(this).val();    	
+		 	}else{
+		 		checkArr=checkArr+","+$(this).val();
+		 	}
+		 	a++;
+			 // 체크된 것만 값을 뽑아서 배열에 push
+		 });
 		
+		formData.append("checkArr",checkArr);
+		var addrD=$("input[name=addrD]").val();
+		if(addrD==1){
+			formData.append("addrChange","1");
+			formData.append("postNum",$("input[name=postNum]").val());
+			formData.append("addr1",$("input[name=addr1]").val());
+			formData.append("addr2",$("input[name=addr2]").val());
+		}else if(addrD==0){
+			formData.append("addrChange","0");
+		}
+		alert("aa");
+		$.ajax({
+			url : url,
+			data : formData,
+			processData : false,
+			contentType : false,
+			type : 'POST',
+			success : function(data) {
+				$('#result').html(data);
+				alert("구매되었습니다.");
+			}, 
+			error : onError
+	   });
+		function onError(data, status){alert("error");}
+	   
 	}
 	// 모두체크하기
 
@@ -91,7 +123,8 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<form action="" name="delevaryForm" style="border-top:3px solid #bbbbbb">
-			
+				<input type="hidden" name="addrD" value="0">
+				
 				<h2>주문/결제</h2>
 				<hr>
 				<h4>주문상품 정보</h4>
@@ -106,8 +139,11 @@
 						<td>
 							<table class="table table-striped">
 							
-								<c:forEach var="vo" items="${dtos}" >	
+								<c:forEach var="vo" items="${dtos}" >
 									<tr>
+										<td>
+											<input type="checkbox" name="disc_code" value="${vo.disc_code}" checked>
+										</td>
 										<td>
 											<img src="${image}/store/${vo.disc_image}">
 										</td>

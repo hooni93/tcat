@@ -78,12 +78,13 @@ function next(form){
 		$("#menu2").removeClass("active");
 		$("#menu3").addClass("active");
 	}else if(nextBtn=="수령방법"){
+		var sale_div=$("input[name='sale_div']").val();
 		
-			document.all.nextBtn.value="결제방법";
-			$( "#Ticketing" ).load( "${pageContext.request.contextPath}/del");
-			$("#menu3").removeClass("active");
-			$("#menu4").addClass("active");
-		
+		document.all.nextBtn.value="결제방법";
+		$( "#Ticketing" ).load( "${pageContext.request.contextPath}/del");
+		$("#menu3").removeClass("active");
+		$("#menu4").addClass("active");
+	
 	
 	}else if(nextBtn=="결제방법"){
 		var addr=$("input[name='addr']").val();
@@ -256,7 +257,7 @@ function next(form){
 						</table>
 						<br>
 						<hr style="color:#fafafaf;margin:5px;">
-						<br>
+
 						<table style="color:white;margin:10px;">
 							<tr>
 								<th>할인구분</th>
@@ -275,7 +276,7 @@ function next(form){
 						<hr style="color:#fafafaf;margin:5px;">
 						<br>
 						최종결제금액  <input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="total">
-						<br><br><br><br><br>
+						<br><br>
 						<input type="button" class="TicketingButton" style="margin:5px; width:100%;"value="좌석선택" name="nextBtn" onclick="next(this.form);">
 						
 					</form>
