@@ -304,7 +304,7 @@ function detailOpen(category,id){
 	//핫리스트 업데이트
 	 function hotUpdate(hotListSize, per_id,url){
 		 alert(url);
-		 if(hotListSize<4){
+		 if(hotListSize<5){
 			 load('hotMenuUpdate?Hcnt='+per_id+'&url='+url);
 		 }else{
 			 alert("핫리스트가 꽉 찾습니다.");

@@ -155,6 +155,13 @@ select notice_title,writeDate,contents from notice where notice_div=1  order by 
 	(select * from notice where notice_div=#{_parameter} order by notice_num desc) where rownum<=4]]>
  </select>
  
+ <select id="categoryListCnt" parameterType="int" resultType="int">
+ 	select count(*) from notice where notice_div=#{_parameter}
+ </select>
+
+ 
+ 
+ 
    </mapper>
    
    

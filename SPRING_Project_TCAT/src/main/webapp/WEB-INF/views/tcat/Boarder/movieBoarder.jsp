@@ -68,8 +68,8 @@ $("#noMoMovieBoarder").click(function(){
 
 
 
-function MovieBoarderCommentWrite(member_id,notice_num,form){
-	  var contents=form.contents.value; 
+function MovieBoarderCommentWrite(member_id,notice_num,form,category){
+	  var contents=form.contents.value;
 	  var url="MovieBoarderCommentWrite?member_id="+member_id+"&notice_num="+notice_num+"&contents="+contents+"&category="+category;
 	$( "#result" ).load( "${pageContext.request.contextPath}/"+url );  
 }
@@ -83,7 +83,7 @@ function MovieBoarderCommentWrite(member_id,notice_num,form){
     <div class="col-md-12 h25"></div>
     <h4><b>공연 영상 게시판</b></h4>
 			<hr>
-    	<input type="hidden" name="categoryNum"	value="${category}">
+    	
     	<div class="col-md-2">
     		<c:if test="${sessionScope.login_id==null}">
     			<input type="button" data-toggle="modal" data-target="#login-modal" class="btn btn-primary w170" id="movieBoarderLogin" value="게시글 작성">    		
@@ -111,6 +111,7 @@ function MovieBoarderCommentWrite(member_id,notice_num,form){
 						<h6 class="floatL"><label>내용 : </label> ${vo.contents}</h6>
 					</div>
 					<hr>
+					<input type="hidden" name="categoryNum"	value="${vo.notice_div}">
 					<div class="m5 bf0f0f0">
 						 <c:forEach var="vo2" items="${dtos2}" >
 						 	<c:if test="${vo2.notice_title==vo.notice_num}"> 
@@ -123,7 +124,7 @@ function MovieBoarderCommentWrite(member_id,notice_num,form){
 						<tr>
 							<td><input type="text" class="form-control" name="contents" id="contents" maxlength="200" placeholder="답글을 작성해주세요"></td>
 								<c:if test="${sessionScope.login_id!=null}">
-									<td><button type="button" class="btn btn-info" onclick="MovieBoarderCommentWrite('${login_id}','${vo.notice_num}',this.form);">
+									<td><button type="button" class="btn btn-info" onclick="MovieBoarderCommentWrite('${login_id}','${vo.notice_num}',this.form,${vo.notice_div});">
 									작성하기<i class="fa fa-check spaceLeft"></i>
 									</button>					
 									</td>
@@ -138,7 +139,7 @@ function MovieBoarderCommentWrite(member_id,notice_num,form){
 				</table>
 				<c:if test="${sessionScope.login_id==vo.member_id}">
 				<input type="button" data-toggle="modal" data-target="#modify-modal" class="btn btn-info" value="수정">
-				<input type="button" class="btn btn-danger" value="삭제" onclick="load('movieBorderDelete?notice_num=${vo.notice_num}');" >
+				<input type="button" class="btn btn-danger" value="삭제" onclick="load('movieBorderDelete?notice_num=${vo.notice_num}&category=${vo.notice_div}');" >
 				</c:if>
 			</div>
 			</form>

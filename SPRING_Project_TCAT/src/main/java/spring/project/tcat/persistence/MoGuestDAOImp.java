@@ -218,6 +218,17 @@ public class MoGuestDAOImp implements MoGuestDAO{
 		 dtos=dao.categoryMovieList(category);
 		return dtos;
 	}
+
+	@Override
+	public int categoryListCnt(int category) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 cnt=dao.categoryListCnt(category);
+		return cnt;
+	}
+
+
 	
 	
 	

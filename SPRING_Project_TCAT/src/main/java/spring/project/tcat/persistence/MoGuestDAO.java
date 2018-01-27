@@ -48,6 +48,7 @@ public interface MoGuestDAO {
 		public ArrayList<TcatBoardVO> categoryPhotoList(int category);	
 	//카테고리별 게시판 영상메뉴	
 		public ArrayList<TcatBoardVO> categoryMovieList(int category);
+		public int categoryListCnt(int category);
 		
 		
 }

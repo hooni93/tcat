@@ -125,7 +125,7 @@ function commentList(url) {
 						style="border: 1px solid lightgrey; padding: 0;">
 						<!--사진  -->
 						<div class="col-md-4">
-							<img src="${image}concert/${perf.perf_Image}" class="p10">
+							<img src="${image}performance/${perf.perf_Image}" class="p10">
 						</div>
 
 						<div class="col-md-8">
@@ -223,7 +223,7 @@ function commentList(url) {
 
 					<ul class="nav nav-tabs" role="tablist">
 						<li role="presentation" class="active"><a href="#content" aria-controls="home" role="tab" data-toggle="tab">상세정보</a></li>
-						<li role="presentation"><a href="#review" aria-controls="profile" role="tab" data-toggle="tab" onclick="commentList('watchLatter?perf_title=${perf.perf_title}&per_id=${perf.per_id}');">관람후기</a></li>
+						<li role="presentation"><a href="#review" aria-controls="profile" role="tab" data-toggle="tab" onclick="commentList('watchLatter?per_id=${perf.per_id}');">관람후기</a></li>
 						<li role="presentation"><a href="cancelInfo" aria-controls="messages" role="tab" data-toggle="tab">취소/환불안내</a></li>
 					</ul>
 				</div>
@@ -243,7 +243,7 @@ function commentList(url) {
 									</h5>
 								</div>
 								<div class="col-md-12" style="padding: 0;">
-									<img src="${perf.getDetail_Image()}">
+									<img src="${image }performance/${perf.getDetail_Image()}">
 								</div>
 							</div>
 							<!--관람후기  -->

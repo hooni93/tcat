@@ -199,6 +199,12 @@
 
 
 	<!--/////////////////////////////// 18.01.16 명훈 시작///////////////////////////////////////////////// -->
+	<!-- 스토어 구매승인 -->
+	<update id="orderCon">
+	UPDATE 	discBuy
+	SET 	disc_buyStep = 2
+	WHERE 	disc_num = #{_parameter}
+	</update>
 	<!--출력할 공연상품 갯수 가져오기 --><!--1/25수정 -->
 	<select id="perProductCnt" resultType="int">
 		SELECT COUNT(*)

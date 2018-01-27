@@ -155,7 +155,10 @@ public class MoGuestServiceImp implements MoGuestService {
 		String member_id=req.getParameter("member_id");
 		int notice_num=Integer.parseInt(req.getParameter("notice_num"));
 		String contents=req.getParameter("contents");
-		int category=Integer.parseInt(req.getParameter("category"));
+		String strcategory=(String)req.getAttribute("category");
+		System.out.println(strcategory);
+		int category=Integer.parseInt(strcategory);
+		
 		int categoryComment=0;
 		if(category==31) {
 			categoryComment=311;
@@ -180,7 +183,6 @@ public class MoGuestServiceImp implements MoGuestService {
 		if(cnt!=0) {
 			System.out.println("답글 업로드 완료");
 		}
-		req.setAttribute("category", category);
 	}
 
 	
@@ -308,7 +310,6 @@ public class MoGuestServiceImp implements MoGuestService {
 			cnt=MGDao.noMoPhotoBoarder(vo);
 			if(cnt!=0) {
 				System.out.println("입력에 성공하셨습니다.");
-				req.setAttribute("category", req.getParameter("category"));
 			}
 		}
 		
@@ -519,12 +520,36 @@ public class MoGuestServiceImp implements MoGuestService {
 			String movieCategory=null;
 			photoCategory=(String)req.getAttribute("photocategory");
 			movieCategory=(String)req.getAttribute("moviecategory");
-			System.out.println(photoCategory);
-			System.out.println(movieCategory);
+			int photoCnt=0;
+			int movieCnt=0;
+			photoCnt=MGDao.categoryListCnt(Integer.parseInt(photoCategory));
+			movieCnt=MGDao.categoryListCnt(Integer.parseInt(movieCategory));
 			dtosPhoto=MGDao.categoryPhotoList(Integer.parseInt(photoCategory));
 			dtosMovie=MGDao.categoryMovieList(Integer.parseInt(movieCategory));
+			String category="뮤지컬";
+			ArrayList<TcatPerformanceVO> dtos=null;
+			dtos=MGDao.hotList(category);
+			model.addAttribute("dtos", dtos);
+			
 			model.addAttribute("dtosPhoto",dtosPhoto);
 			model.addAttribute("dtosMovie",dtosMovie);
+			model.addAttribute("photoCnt",photoCnt);
+			model.addAttribute("movieCnt",movieCnt);
+			
+			int pageSize = 5; // 한 페이지당 출력할 글 갯수
+			int pageBlock = 5; // 한 블럭당 페이지 갯수
+			int start = 0; // 현재 페이지 글시작번호
+			int end = 0; // 현재 페이지 글마지막번호
+			int number = 0; // 출력할 글번호
+			String pageNum = null; // 페이지번호
+			int currentPage = 0; // 현재페이지
+			int pageCount = 0; // 페이지 갯수
+			int startPage = 0; // 시작페이지
+			int endPage = 0; // 마지막 페이지
+			int cnt=0;
+			
+			
+			
 			
 		}
 		

@@ -236,4 +236,14 @@
 	<delete id="commentDeldaoS" parameterType="int">
 		delete notice where notice_num=#{notice_num}
 	</delete>
+	
+	<!-- 겟 아이디 -->
+	<select id="getperfTitlePlz" parameterType="int" resultType="String">
+		select perf_title from performanceinfo where per_id=#{_parameter}
+	</select>
+	<!-- 겟 아이디 -->
+	<select id="getListdisc_title" parameterType="int" resultType="String">
+		select DISC_TITLE from perdisc where disc_code=#{_parameter}
+	</select>
+	
 </mapper>

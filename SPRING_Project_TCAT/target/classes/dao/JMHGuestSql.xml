@@ -81,7 +81,7 @@
 		cat.category, cat.mDev,
 		cat.sDev, per.disc_title,
 		per.disc_image, per.disc_con, per.cateNum,
-		per.first_grade,
+		per.first_grade,per.disc_price,
 		per.disc_step, per.disc_count
 		FROM DiscBuy dis
 		JOIN sale
