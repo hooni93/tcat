@@ -204,6 +204,11 @@ public class HostDAOImp implements HostDAO {
 	
 	
 	//////////////////////////////////////18.01.16 명훈//////////////////////////////////////////////////
+	//스토어 구매스인
+		public void orderCon(String disc_num) {
+			HostDAO dao = Configuration.getMapper(HostDAO.class);
+			dao.orderCon(disc_num);
+		}
 	//출력할 공연상품 갯수 가져오기
 	@Override
 	public int perProductCnt(Map<String, Object> map) {

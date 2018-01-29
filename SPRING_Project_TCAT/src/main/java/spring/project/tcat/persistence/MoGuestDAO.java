@@ -15,13 +15,13 @@ public interface MoGuestDAO {
 	//좌석예매정보 가져오기
 		public ArrayList<TcatPerformanceVO> ticketPerformanceSeat(Map<String,Object> map);	
 	//사진게시판 리스트 숫자 가져오기
-		public int photoBoarderListCnt();
+		public int photoBoarderListCnt(int category);
 	//사진게시판 리스트 가져오기
 		public ArrayList<TcatBoardVO> photoBoarderList(Map<String,Object> map);
 	//사진게시판 답글 달기
 		public int photoBoarderCommentWrite(TcatBoardVO vo);
 	//사진게시판 답글 가져오기
-		public ArrayList<TcatBoardVO> photoBoarderComment();
+		public ArrayList<TcatBoardVO> photoBoarderComment(int categoryComment);
 	//사진게시판 업로드
 		public int insertPhotoBoarder(TcatBoardVO vo);
 	//사진게시판 삭제
@@ -29,11 +29,11 @@ public interface MoGuestDAO {
 	//사진게시판 수정
 		public int noMoPhotoBoarder(TcatBoardVO vo);
 	//영상게시판 리스트 숫자가져오기
-		public int movieBoarderListCnt();
+		public int movieBoarderListCnt(int category);
 	//영상게시판 리스트 가져오기
 		public ArrayList<TcatBoardVO> movieBoarderList(Map<String,Object> map);
 	//영상게시판 답글 가져오기
-		public ArrayList<TcatBoardVO> movieBoarderComment();
+		public ArrayList<TcatBoardVO> movieBoarderComment(int categoryComment);
 	//영상게시판 답글 달기
 		public int MovieBoarderCommentWrite(TcatBoardVO vo);	
 	//영상게시판 업로드
@@ -42,6 +42,13 @@ public interface MoGuestDAO {
 		public int noMoMovieBoarder(TcatBoardVO vo);
 	//메인 화면 후기 게시판
 		public ArrayList<TcatBoardVO> mainComentBoarderList();
+	//메인화면 공지사항 게시판
+		public ArrayList<TcatBoardVO> mainServiceBoardList();
+	//카테고리별 게시판 사진메뉴	
+		public ArrayList<TcatBoardVO> categoryPhotoList(int category);	
+	//카테고리별 게시판 영상메뉴	
+		public ArrayList<TcatBoardVO> categoryMovieList(int category);
+		public int categoryListCnt(int category);
 		
 		
 }

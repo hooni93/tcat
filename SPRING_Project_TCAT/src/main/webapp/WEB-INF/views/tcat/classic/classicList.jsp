@@ -86,7 +86,7 @@
 					<div class="col-sm-8 tm">
 						<div class="col-sm-3 p5">
 							<a onclick="contentPage(${perf.per_id})"> <img
-								src="${image}classic/${perf.perf_Image }" width="100%"
+								src="${image}performance/${perf.perf_Image }" width="100%"
 								height="80px">
 							</a>
 						</div>

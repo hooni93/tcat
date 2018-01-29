@@ -109,8 +109,8 @@
 
 .btn-plus {
 	margin: 100px 80px;
-	top:0;
-	left:0;
+	top: 0;
+	left: 0;
 	position: absolute;
 	text-align: center;
 	/* 추가된 부분 */
@@ -134,12 +134,12 @@
 				$('.tic').css('display', 'none').fadeIn('slow');
 			}
 		});
-		
-		$(".ticCancel").click(function(){
+
+		$(".ticCancel").click(function() {
 			var del_num = $(this).attr("name");
 			var bool = confirm("예매취소 하시겠습니까?");
-			if(bool){//결제취소
-				load("ticStepUpdate?del_num="+del_num+"&ticket_step=6");
+			if (bool) {//결제취소
+				load("ticStepUpdate?del_num=" + del_num + "&ticket_step=6");
 			}
 		});
 	});
@@ -153,63 +153,67 @@
 	<div class="col-md-12">
 		<div class="col-md-2"></div>
 		<div class="col-md-8 h50">
-			<div class="col-md-12 c fs18 pt17"><b>예매 중인 공연</b></div>
+			<div class="col-md-12 c fs18 pt17">
+				<b>예매 중인 공연</b>
+			</div>
 		</div>
 		<div class="col-md-2"></div>
 
 	</div>
 	<!--미래 티켓 갯수대로 출력  -->
-	<c:if test="${futureTicket_num ==null}">
+	<c:if test="${futureTicket_num == null}">
 		현재 예매하신 공연이 없습니다.
 	</c:if>
-	<c:forEach var="index" items="${futureTicket_num }">
-		<div class="ticket">
-			<div class="stub c"
-				style="background-image:url('${image}performance/${futureTicket.get(index).get(0).perf_Image}');  background-size: 100%;">
-				<div class="darkness"></div>
-				<div class="btn-plus">
-					<input type="button" class="btn btn-warning w80p ticCancel" value="예매취소" name="${index}">
-				</div>
-			</div>
-			<div class="check">
-				<div class="big">${futureTicket.get(index).get(0).perf_title}
-				</div>
-				<div class="big">
-					<br>
-					<fmt:formatDate
-						value="${futureTicket.get(index).get(0).ticet_date}"
-						pattern="yyyy년 MM월DD일" />
-					${futureTicket.get(index).get(0).remain_round.split("/")[1]}
-				</div>
-				<div class="number">${futureTicket.get(index).size()}매</div>
-				<div class="info">
-					<section>
-					<div class="title">${futureTicket.get(index).get(0).remain_round.split("/")[0]}</div>
-					<div>${futureTicket.get(index).get(0).remain_round.split("/")[1]}</div>
-					</section>
-					<br>
-					<section>
-					<div class="title">장소</div>
-					<div>${futureTicket.get(index).get(0).hall_name}</div>
-					</section>
-					<section>
-					<div class="title">티켓번호</div>
-					<div>${futureTicket.get(index).get(0).ticket_num}</div>
-					</section>
-					<section>
-					<div class="title">좌석</div>
-					<div>
-						<c:forEach var="tic" items="${futureTicket.get(index)}">
-						${tic.seat_type} - ${tic.seat_num}<br>
-						</c:forEach>
-
+	<c:if test="${futureTicket_num != null }">
+		<c:forEach var="index" items="${futureTicket_num }">
+			<div class="ticket">
+				<div class="stub c"
+					style="background-image:url('${image}performance/${futureTicket.get(index).get(0).perf_Image}');  background-size: 100%;">
+					<div class="darkness"></div>
+					<div class="btn-plus">
+						<input type="button" class="btn btn-warning w80p ticCancel"
+							value="예매취소" name="${index}">
 					</div>
-					</section>
+				</div>
+				<div class="check">
+					<div class="big">${futureTicket.get(index).get(0).perf_title}
+					</div>
+					<div class="big">
+						<br>
+						<fmt:formatDate
+							value="${futureTicket.get(index).get(0).ticet_date}"
+							pattern="yyyy년 MM월 dd일" />
+						${futureTicket.get(index).get(0).remain_round.split("/")[1]}
+					</div>
+					<div class="number">${futureTicket.get(index).size()}매</div>
+					<div class="info">
+						<section>
+						<div class="title">${futureTicket.get(index).get(0).remain_round.split("/")[0]}</div>
+						<div>${futureTicket.get(index).get(0).remain_round.split("/")[1]}</div>
+						</section>
+						<br>
+						<section>
+						<div class="title">장소</div>
+						<div>${futureTicket.get(index).get(0).hall_name}</div>
+						</section>
+						<section>
+						<div class="title">티켓번호</div>
+						<div>${futureTicket.get(index).get(0).ticket_num}</div>
+						</section>
+						<section>
+						<div class="title">좌석</div>
+						<div>
+							<c:forEach var="tic" items="${futureTicket.get(index)}">
+						${tic.seat_type} - ${tic.seat_num}<br>
+							</c:forEach>
+
+						</div>
+						</section>
+					</div>
 				</div>
 			</div>
-		</div>
-	</c:forEach>
-
+		</c:forEach>
+	</c:if>
 
 </div>
 
@@ -218,7 +222,9 @@
 	<div class="col-md-12">
 		<div class="col-md-2"></div>
 		<div class="col-md-8 h50">
-			<div class="col-md-12 c fs18 pt17"><b>내가 본 공연</b></div>
+			<div class="col-md-12 c fs18 pt17">
+				<b>내가 본 공연</b>
+			</div>
 		</div>
 		<div class="col-md-2"></div>
 
@@ -227,9 +233,10 @@
 		<hr>
 		<div class="col-md-2"></div>
 		<div class="col-md-8 h50">
-			
+
 			<div class="col-md-10 fs18">
-				<i class="glyphicon glyphicon-play "></i> 관람하신 공연 ${pastTicket.size()}개
+				<i class="glyphicon glyphicon-play "></i> 관람하신 공연
+				${pastTicket.size()}개
 			</div>
 			<div class="col-md-2">
 				<select class="w100p btn-filter form-control">
@@ -243,7 +250,7 @@
 		<div class="col-md-2"></div>
 	</div>
 	<br>
-	<c:if test="${pastTicket.size()==0}">
+	<c:if test="${pastTicket.size()==null}">
 		<div class="col-md-12">
 			<div class="col-md-2"></div>
 			<div class="col-md-8 c">
@@ -252,49 +259,50 @@
 			<div class="col-md-2"></div>
 		</div>
 	</c:if>
-	<c:forEach var="index" items="${past_nums }">
-		<div class="ticket tic"
-			data-status="<fmt:formatDate value="${pastTicket.get(index).get(0).ticet_date}" pattern="yyyy" />">
-			<div class="stub c"
-				style="background-image:url('${image}performance/${pastTicket.get(index).get(0).perf_Image}');  background-size: 100%;">
-			</div>
-			<div class="check">
-				<div class="big">${pastTicket.get(index).get(0).perf_title}</div>
-				<div class="big">
-					<br>
-					<fmt:formatDate value="${pastTicket.get(index).get(0).ticet_date}"
-						pattern="yyyy년 MM월DD일" />
-					${pastTicket.get(index).get(0).remain_round.split("/")[1]}
+	<c:if test="${pastTicket.size()!=null}">
+		<c:forEach var="index" items="${past_nums }">
+			<div class="ticket tic"
+				data-status="<fmt:formatDate value="${pastTicket.get(index).get(0).ticet_date}" pattern="yyyy" />">
+				<div class="stub c"
+					style="background-image:url('${image}performance/${pastTicket.get(index).get(0).perf_Image}');  background-size: 100%;">
 				</div>
-				<div class="number">${pastTicket.get(index).size()}매</div>
-				<div class="info">
-					<section>
-					<div class="title">${pastTicket.get(index).get(0).remain_round.split("/")[0]}</div>
-					<div>${pastTicket.get(index).get(0).remain_round.split("/")[1]}</div>
-					</section>
-					<br>
-					<section>
-					<div class="title">장소</div>
-					<div>${pastTicket.get(index).get(0).hall_name}</div>
-					</section>
-					<section>
-					<div class="title">티켓번호</div>
-					<div>${pastTicket.get(index).get(0).ticket_num}</div>
-					</section>
-					<section>
-					<div class="title">좌석</div>
-					<div>
-						<c:forEach var="tic" items="${pastTicket.get(index)}">
-						${tic.seat_type} - ${tic.seat_num}<br>
-						</c:forEach>
-
+				<div class="check">
+					<div class="big">${pastTicket.get(index).get(0).perf_title}</div>
+					<div class="big">
+						<br>
+						<fmt:formatDate value="${pastTicket.get(index).get(0).ticet_date}"
+							pattern="yyyy년 MM월 dd일" />
+						${pastTicket.get(index).get(0).remain_round.split("/")[1]}
 					</div>
-					</section>
+					<div class="number">${pastTicket.get(index).size()}매</div>
+					<div class="info">
+						<section>
+						<div class="title">${pastTicket.get(index).get(0).remain_round.split("/")[0]}</div>
+						<div>${pastTicket.get(index).get(0).remain_round.split("/")[1]}</div>
+						</section>
+						<br>
+						<section>
+						<div class="title">장소</div>
+						<div>${pastTicket.get(index).get(0).hall_name}</div>
+						</section>
+						<section>
+						<div class="title">티켓번호</div>
+						<div>${pastTicket.get(index).get(0).ticket_num}</div>
+						</section>
+						<section>
+						<div class="title">좌석</div>
+						<div>
+							<c:forEach var="tic" items="${pastTicket.get(index)}">
+						${tic.seat_type} - ${tic.seat_num}<br>
+							</c:forEach>
+
+						</div>
+						</section>
+					</div>
 				</div>
 			</div>
-		</div>
-	</c:forEach>
-
+		</c:forEach>
+	</c:if>
 
 
 	<!--더보기 -->

@@ -505,6 +505,15 @@ public class HostServiceImp implements HostService {
 
 	////////////////////////////////////// 18.01.16 명훈
 	////////////////////////////////////// 시작//////////////////////////////////////////////////
+	// 스토어 구매 승인
+	@Override
+	public void orderCon(HttpServletRequest req, Model model) {
+		System.out.println("HostServiceImp - productList");
+		String disc_num = req.getParameter("disc_num");
+		//구매승인
+		hDao.orderCon(disc_num);
+	}
+
 	// 상품목록 나열
 	@Override // 18.01.25 명훈 수정
 	public void productList(HttpServletRequest req, Model model) {
@@ -2193,7 +2202,7 @@ public class HostServiceImp implements HostService {
 	public void insertStore(MultipartHttpServletRequest req, Model model) {
 		MultipartFile file = req.getFile("disc_image");
 
-		String realDir = "E:\\Team_project\\projectGit\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\store\\";
+		String realDir = "C:\\Dev\\TCATworkspace\\git\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\store\\";
 		String saveDir = req.getRealPath("/resources/image/store/");
 		try {
 
@@ -2221,8 +2230,6 @@ public class HostServiceImp implements HostService {
 			String disc_step = "1";
 			int disc_count = Integer.parseInt(req.getParameter("disc_count"));
 
-			
-			
 			dto.setDisc_title(disc_title);
 			dto.setDisc_price(disc_price);
 			dto.setDisc_image(disc_image);
@@ -2267,9 +2274,9 @@ public class HostServiceImp implements HostService {
 		int pageCount = 0; // 페이지 갯수
 		int startPage = 0; // 시작 페이지
 		int endPage = 0; // 마지막 페이지
-		
-		String sDev = req.getParameter("sDev"); //분류
-		String keyword = req.getParameter("keyword"); //키워드
+
+		String sDev = req.getParameter("sDev"); // 분류
+		String keyword = req.getParameter("keyword"); // 키워드
 
 		if (sDev == null) {
 			sDev = "0";
@@ -2567,18 +2574,20 @@ public class HostServiceImp implements HostService {
 		req.setAttribute("deleteHost", deleteHost);
 
 	}
-	//상세페이지 정보 가져오기
+
+	// 상세페이지 정보 가져오기
 	@Override
 	public void detaillist(HttpServletRequest req, Model model) {
-		int detail_num=Integer.parseInt(req.getParameter("detail_num"));
-		
-		detailPageVO dto=new detailPageVO();
-		dto=hDao.detaillist(detail_num);
-		
-		model.addAttribute("dto",dto);
+		int detail_num = Integer.parseInt(req.getParameter("detail_num"));
+
+		detailPageVO dto = new detailPageVO();
+		dto = hDao.detaillist(detail_num);
+
+		model.addAttribute("dto", dto);
 		model.addAttribute("detail_num", detail_num);
-		
+
 	}
+
 	@Override
 	public void updateDetailStore(MultipartHttpServletRequest req, Model model) {
 		MultipartFile file = req.getFile("Detail_Image");
@@ -2600,14 +2609,14 @@ public class HostServiceImp implements HostService {
 			fis.close();
 			fos.close();
 
-			String per_ex=req.getParameter("per_ex");
-			String Detail_Image=file.getOriginalFilename();
-			int detail_num=Integer.parseInt(req.getParameter("detail_num"));
-			Map<String,Object> map = new HashMap<String,Object>();
+			String per_ex = req.getParameter("per_ex");
+			String Detail_Image = file.getOriginalFilename();
+			int detail_num = Integer.parseInt(req.getParameter("detail_num"));
+			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("per_ex", per_ex);
 			map.put("Detail_Image", Detail_Image);
 			map.put("detail_num", detail_num);
-			
+
 			hDao.updateDetail(map);
 
 		} catch (Exception e) {
@@ -2616,13 +2625,13 @@ public class HostServiceImp implements HostService {
 			req.setAttribute("error2", error);
 		}
 
-		
 	}
+
 	@Override
 	public void updateDetailPer(MultipartHttpServletRequest req, Model model) {
 		MultipartFile file = req.getFile("Detail_Image");
 
-		String realDir = "E:\\Team_project\\projectGit\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\performance\\";
+		String realDir = "C:\\Dev\\TCATworkspace\\git\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\performance\\\\";
 		String saveDir = req.getRealPath("/resources/image/performance/");
 		try {
 
@@ -2639,22 +2648,20 @@ public class HostServiceImp implements HostService {
 			fis.close();
 			fos.close();
 
-		
-			String per_ex=req.getParameter("per_ex");
-			String Detail_Image=file.getOriginalFilename();
-			int detail_num=Integer.parseInt(req.getParameter("detail_num"));
-			Map<String,Object> map = new HashMap<String,Object>();
+			String per_ex = req.getParameter("per_ex");
+			String Detail_Image = file.getOriginalFilename();
+			int detail_num = Integer.parseInt(req.getParameter("detail_num"));
+			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("per_ex", per_ex);
 			map.put("Detail_Image", Detail_Image);
 			map.put("detail_num", detail_num);
-			
+
 			hDao.updateDetail(map);
 
 		} catch (Exception e) {
-			
+
 		}
 
-		
 	}
 	//////////////////////////////////// 현석 1/11////////////////////////////////////
 
@@ -2886,7 +2893,8 @@ public class HostServiceImp implements HostService {
 		model.addAttribute("updateCnt", updateCnt);
 
 	}
-	//고객혜택관리
+
+	// 고객혜택관리
 	@Override
 	public void levelMember(HttpServletRequest req, Model model) {
 		int cnt = 0; // 글갯수
@@ -2944,64 +2952,69 @@ public class HostServiceImp implements HostService {
 			model.addAttribute("pageCount", pageCount);
 			model.addAttribute("currentPage", currentPage);
 		}
-		
+
 	}
-	//혜택삭제
+
+	// 혜택삭제
 	@Override
 	public void levelDelete(HttpServletRequest req, Model model) {
-		int deleteCnt=0;
-		String sale=req.getParameter("sale_div");
-		System.out.println("sale_div====="+sale);
+		int deleteCnt = 0;
+		String sale = req.getParameter("sale_div");
+		System.out.println("sale_div=====" + sale);
 		deleteCnt = hDao.levelDeleteCnt(sale);
 		model.addAttribute("deleteCnt", deleteCnt);
-		
+
 	}
-	//혜택상세
+
+	// 혜택상세
 	@Override
 	public void levelMemberForm(HttpServletRequest req, Model model) {
-		String sale_div=req.getParameter("sale_div");
-		ArrayList<SaleVO> dtos=hDao.levelMemberForm(sale_div);
+		String sale_div = req.getParameter("sale_div");
+		ArrayList<SaleVO> dtos = hDao.levelMemberForm(sale_div);
 		model.addAttribute("dtos", dtos);
-	
+
 	}
-	//혜택업데이트
+
+	// 혜택업데이트
 	@Override
 	public void levelMemberUpdate(HttpServletRequest req, Model model) {
-		int levelCnt=0;
-		String sale_div=req.getParameter("sale_div");
-		int sale_rate=Integer.parseInt(req.getParameter("sale_rate"));
-		
-		System.out.println("sale_div===="+sale_div);
-		System.out.println("sale_rate===="+sale_rate);
-		
-		Map<String,Object> map = new HashMap<String,Object>();
+		int levelCnt = 0;
+		String sale_div = req.getParameter("sale_div");
+		int sale_rate = Integer.parseInt(req.getParameter("sale_rate"));
+
+		System.out.println("sale_div====" + sale_div);
+		System.out.println("sale_rate====" + sale_rate);
+
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("sale_div", sale_div);
 		map.put("sale_rate", sale_rate);
-		levelCnt=hDao.levelUpdateCnt(map);
+		levelCnt = hDao.levelUpdateCnt(map);
 		model.addAttribute("levelCnt", levelCnt);
 	}
-	//혜택등록
+
+	// 혜택등록
 	@Override
 	public void levelAdd(HttpServletRequest req, Model model) {
-		int addCnt=0;
-		String sale_div=req.getParameter("sale_div");
-		int sale_rate=Integer.parseInt(req.getParameter("sale_rate"));
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("sale_div",sale_div);
-		map.put("sale_rate",sale_rate);
-		addCnt=hDao.levelAdd(map);
+		int addCnt = 0;
+		String sale_div = req.getParameter("sale_div");
+		int sale_rate = Integer.parseInt(req.getParameter("sale_rate"));
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sale_div", sale_div);
+		map.put("sale_rate", sale_rate);
+		addCnt = hDao.levelAdd(map);
 		model.addAttribute("addCnt", addCnt);
 	}
 
 	///////////// HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-23 성영민 ///////////////
-/////////////////////////////////// 영민1/25 start /////////////////////////////////
-	//상품수정 상세
+	/////////////////////////////////// 영민1/25 start
+	/////////////////////////////////// /////////////////////////////////
+	// 상품수정 상세
 	@Override
 	public void hostProForm(HttpServletRequest req, Model model) {
-		int per_id=Integer.parseInt(req.getParameter("per_id"));
-		System.out.println("per_id============"+per_id);
-		
-		ArrayList<TcatPerformanceVO> dtos=hDao.hostProCnt(per_id);
+		int per_id = Integer.parseInt(req.getParameter("per_id"));
+		System.out.println("per_id============" + per_id);
+
+		ArrayList<TcatPerformanceVO> dtos = hDao.hostProCnt(per_id);
 		ArrayList<CategoryVO> SDtos = hDao.cateList();
 
 		// 공연지역 가져오기
@@ -3011,13 +3024,14 @@ public class HostServiceImp implements HostService {
 		req.setAttribute("HDtos", HDtos);
 		model.addAttribute("dtos", dtos);
 	}
-	//상품업데이트
+
+	// 상품업데이트
 	@Override
 	public void hostProUpdate(MultipartHttpServletRequest req, Model model) {
 		MultipartFile file = req.getFile("perf_Image");
 
-		String realDir = "C:\\Dev\\TCATworkspace\\git\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\eventList\\";
-		String saveDir = req.getRealPath("/resources/image/eventList/");
+		String realDir = "C:\\Dev\\TCATworkspace\\git\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\performance\\";
+		String saveDir = req.getRealPath("/resources/image/performance/");
 		try {
 
 			file.transferTo(new File(saveDir + file.getOriginalFilename()));
@@ -3031,10 +3045,10 @@ public class HostServiceImp implements HostService {
 			}
 			fis.close();
 			fos.close();
-			int updateCnt1=0;
-			int updateCnt2=0;
-			int updateCnt3=0;
-			int per_id=Integer.parseInt(req.getParameter("per_id"));
+			int updateCnt1 = 0;
+			int updateCnt2 = 0;
+			int updateCnt3 = 0;
+			int per_id = Integer.parseInt(req.getParameter("per_id"));
 			String perf_title = req.getParameter("perf_title");
 			int cateNum = Integer.parseInt(req.getParameter("cateNum"));
 			String perf_Image = file.getOriginalFilename();
@@ -3069,17 +3083,16 @@ public class HostServiceImp implements HostService {
 			map1.put("S_seatPrice", S_seatPrice);
 			map1.put("A_seatPrice", A_seatPrice);
 			map1.put("B_seatPrice", B_seatPrice);
-			
+
 			Map<String, Object> map2 = new HashMap<String, Object>();
 			map2.put("cateNum", cateNum);
-			
+
 			Map<String, Object> map3 = new HashMap<String, Object>();
 			map3.put("hall_id", hall_id);
 
-			
-			updateCnt1=hDao.hostProUpdateCnt1(map1);
-			updateCnt2=hDao.hostProUpdateCnt2(map2);
-			updateCnt3=hDao.hostProUpdateCnt3(map3);
+			updateCnt1 = hDao.hostProUpdateCnt1(map1);
+			updateCnt2 = hDao.hostProUpdateCnt2(map2);
+			updateCnt3 = hDao.hostProUpdateCnt3(map3);
 			model.addAttribute("updateCnt1", updateCnt1);
 			model.addAttribute("updateCnt2", updateCnt2);
 			model.addAttribute("updateCnt3", updateCnt3);
@@ -3090,76 +3103,8 @@ public class HostServiceImp implements HostService {
 		}
 
 	}
-/////////////////////////////////// 영민1/25 end /////////////////////////////////
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/////////////////////////////////// 영민1/25 end /////////////////////////////////
+
 	/////////////////////// 동금 1/9 start ////////////////////////
 	// HOST/상품관리/상품삭제
 	@Override
@@ -3638,7 +3583,7 @@ public class HostServiceImp implements HostService {
 		if (commentManagerCate == null) {
 			commentManagerCate = "공연";
 		}
-		
+
 		System.out.println("Host 서비스 첫번째 출입니다. ");
 		if (commentManagerCate.equals("공연")) {
 			Hcnt = 1;
@@ -3651,13 +3596,13 @@ public class HostServiceImp implements HostService {
 		map.put("keyword", keyword);
 		map.put("sDev", sDev);
 		System.out.println("keyword" + map.get("keyword") + "\n" + "sDev" + sDev);
-		
+
 		if (commentManagerCate.equals("스토어")) {
 			cnt = hDao.commentCntS(map);
 		} else {
 			cnt = hDao.commentCnt(map);
 		}
-		
+
 		/* cnt = hDao.getStore(map); */
 
 		System.out.println("cnt :" + cnt);
@@ -3726,7 +3671,7 @@ public class HostServiceImp implements HostService {
 		model.addAttribute("category", category);
 		model.addAttribute("sDev", sDev);
 		model.addAttribute("keyword", keyword);
-		model.addAttribute("commentManagerCate",commentManagerCate); // cnt == 글 개수
+		model.addAttribute("commentManagerCate", commentManagerCate); // cnt == 글 개수
 		model.addAttribute("cnt", cnt); // cnt == 글 개수
 		model.addAttribute("Hcnt", Hcnt); // cnt == 글 개수
 		model.addAttribute("number", number); // number == 글번호
@@ -3756,6 +3701,7 @@ public class HostServiceImp implements HostService {
 		model.addAttribute("commentDel", commentDel);
 
 	}
+
 	// 환불 목록 - 공연
 	@Override
 	public void productRefundBoard(HttpServletRequest req, Model model) {
@@ -3772,7 +3718,7 @@ public class HostServiceImp implements HostService {
 		int pageCount = 0; // 페이지 개수
 		int startPage = 0; // 시작 페이지
 		int endPage = 0; // 마지막 페이지
-		
+
 		String sDev = "";
 		String keyword = "";
 
@@ -3784,9 +3730,8 @@ public class HostServiceImp implements HostService {
 		keyword = req.getParameter("keyword");
 		System.out.println("keyword -----> :" + keyword);
 
-		
 		String category = "";
-		
+
 		if (sDev == null) {
 			sDev = "0";
 		}
@@ -3794,18 +3739,17 @@ public class HostServiceImp implements HostService {
 		if (keyword == null) {
 			keyword = "";
 		}
-		
+
 		System.out.println("Host 서비스 첫번째 출입니다. ");
-	
+
 		System.out.println("TSGuset 관람후기관리 목록 서비스 첫번째 출입니다. ");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyword", keyword);
 		map.put("sDev", sDev);
 		System.out.println("keyword" + map.get("keyword") + "\n" + "sDev" + sDev);
-		
+
 		cnt = hDao.refundCnt(map);
 
-		
 		/* cnt = hDao.getStore(map); */
 
 		System.out.println("cnt :" + cnt);
@@ -3886,8 +3830,9 @@ public class HostServiceImp implements HostService {
 			model.addAttribute("currentPage", currentPage); // 현재 페이지
 
 		}
-		
+
 	}
+
 	// 환불 목록 - 스토어
 	@Override
 	public void productRefundBoardS(HttpServletRequest req, Model model) {
@@ -3916,7 +3861,7 @@ public class HostServiceImp implements HostService {
 		keyword = req.getParameter("keyword");
 		System.out.println("keyword -----> :" + keyword);
 		String category = "";
-		
+
 		if (sDev == null) {
 			sDev = "0";
 		}
@@ -3925,9 +3870,8 @@ public class HostServiceImp implements HostService {
 			keyword = "";
 		}
 
-		
 		System.out.println("Host 환불 (스토어) 서비스 첫번째 출입니다. ");
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyword", keyword);
 		map.put("sDev", sDev);
@@ -3993,7 +3937,7 @@ public class HostServiceImp implements HostService {
 		model.addAttribute("category", category);
 		model.addAttribute("sDev", sDev);
 		model.addAttribute("keyword", keyword);
-		
+
 		model.addAttribute("cnt", cnt); // cnt == 글 개수
 		model.addAttribute("Hcnt", Hcnt); // cnt == 글 개수
 		model.addAttribute("number", number); // number == 글번호
@@ -4007,52 +3951,52 @@ public class HostServiceImp implements HostService {
 			model.addAttribute("currentPage", currentPage); // 현재 페이지
 
 		}
-		
+
 	}
 
-	
-	//환불 승인 - 공연
+	// 환불 승인 - 공연
 	@Override
 	public void productRefundUpdate(HttpServletRequest req, Model model) {
 		int refundUpdate = 0;
-		
-		int	ticket_num = Integer.parseInt(req.getParameter("ticket_num"));
+
+		int ticket_num = Integer.parseInt(req.getParameter("ticket_num"));
 		refundUpdate = hDao.refundPerformanceOk(ticket_num);
-		
+
 		model.addAttribute("refundUpdate", refundUpdate);
 	}
-	//환불 취소 - 공연
+
+	// 환불 취소 - 공연
 	@Override
 	public void productRefundCancel(HttpServletRequest req, Model model) {
 		int refundDown = 0;
-		
-		int	ticket_num = Integer.parseInt(req.getParameter("ticket_num"));
+
+		int ticket_num = Integer.parseInt(req.getParameter("ticket_num"));
 		refundDown = hDao.refundPerformanceCancel(ticket_num);
-		
-		model.addAttribute("refundDown",refundDown);
+
+		model.addAttribute("refundDown", refundDown);
 	}
-	//환불 승인 - 스토어
+
+	// 환불 승인 - 스토어
 	@Override
 	public void productRefundUpdateS(HttpServletRequest req, Model model) {
 		int refundUpdateS = 0;
-		
-		int	disc_num = Integer.parseInt(req.getParameter("disc_num"));
+
+		int disc_num = Integer.parseInt(req.getParameter("disc_num"));
 		refundUpdateS = hDao.refundStoreOk(disc_num);
-		
+
 		model.addAttribute("refundUpdateS", refundUpdateS);
 	}
-		
-	
-	//환불 취소 - 스토어
+
+	// 환불 취소 - 스토어
 	@Override
 	public void productRefundCancelS(HttpServletRequest req, Model model) {
 		int refundDownS = 0;
-		
-		int	disc_num = Integer.parseInt(req.getParameter("disc_num"));
+
+		int disc_num = Integer.parseInt(req.getParameter("disc_num"));
 		refundDownS = hDao.refundStoreCancel(disc_num);
-		
-		model.addAttribute("refundDownS",refundDownS);
-		
+
+		model.addAttribute("refundDownS", refundDownS);
+
 	}
 
 }

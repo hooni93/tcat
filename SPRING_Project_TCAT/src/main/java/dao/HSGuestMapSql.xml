@@ -5,7 +5,7 @@
              
    <mapper namespace="spring.project.tcat.persistence.HSGuestDAO">
    		<select id="MemberIdCheack" parameterType="String" resultType="int">
-   			select count(*) from member
+   			select count(*) from member where member_id=#{member_id}
    		</select>
    		
    		<insert id="insertMember" parameterType="spring.project.tcat.VO.MemberVO">
@@ -184,7 +184,7 @@
    		</update>
    		
    		<update id="updateCount" parameterType="java.util.Map">
-   			update perDisc set disc_count=#{count} where disc_code=#{disc_code}
+   			update perDisc set disc_count=disc_count-#{count} where disc_code=#{disc_code}
    		</update>
    		
    		<update id="changeCount" parameterType="java.util.Map">

@@ -50,8 +50,9 @@
    
    
    <!-- 사진게시판 게시글 숫자 가져오기 -->
-   		<select id="photoBoarderListCnt" resultType="int">
-   			select count(*) from Notice WHERE notice_div=3
+   		<select id="photoBoarderListCnt" parameterType="int" resultType="int">
+   			select count(*) from Notice WHERE
+   			 notice_div=#{_parameter}
    		</select>
    
    <!-- 사진게시판 게시글  -->
@@ -59,24 +60,24 @@
    		<![CDATA[select * from 
 		 (select notice_num,notice_title,writeDate,contents,notice_image,notice_div,member_id,rownum rNum from 
 		 (select * from notice order by notice_num desc)
-			where notice_div=3)  WHERE rNum>=#{start} AND rNum<=#{end} ]]>
+			where notice_div=#{category})  WHERE rNum>=#{start} AND rNum<=#{end} ]]>
    	</select>
    	
    	<!-- 답글올리기 -->
    	<insert id="photoBoarderCommentWrite" parameterType="spring.project.tcat.VO.TcatBoardVO">
    		<![CDATA[INSERT INTO notice (notice_num,notice_title,writedate,contents,member_id,notice_div) 
-   		values (notice_seq.nextval,#{notice_num},sysdate,#{contents},#{member_id},31) ]]>
+   		values (notice_seq.nextval,#{notice_num},sysdate,#{contents},#{member_id},#{categoryComment}) ]]>
    	</insert>
    
    <!--사진게시판 답글 가져오기  -->
-   <select id="photoBoarderComment" resultType="spring.project.tcat.VO.TcatBoardVO">
-   		select notice_num,notice_title,writeDate,contents,member_id from notice where notice_div=31 order by notice_num
+   <select id="photoBoarderComment" parameterType="int" resultType="spring.project.tcat.VO.TcatBoardVO">
+   		select notice_num,notice_title,writeDate,contents,member_id from notice where notice_div=#{_parameter} order by notice_num
    </select>
    
    <!-- 사진게시판 업로드 -->
    <insert id="insertPhotoBoarder" parameterType="spring.project.tcat.VO.TcatBoardVO" >
    		<![CDATA[INSERT INTO notice (notice_num,notice_title,writeDate,contents,notice_image,notice_div,member_id)
-   		 values(notice_seq.nextval,#{notice_title},sysdate,#{contents},#{notice_image},3,#{member_id})]]>
+   		 values(notice_seq.nextval,#{notice_title},sysdate,#{contents},#{notice_image},#{category},#{member_id})]]>
    </insert>
    
    <!-- 사진게시판 삭제 -->
@@ -94,8 +95,8 @@
    </update>
     
      <!--  영상게시판 게시글 숫자 가져오기 -->
-   		<select id="movieBoarderListCnt" resultType="int">
-   			select count(*) from Notice WHERE notice_div=2
+   		<select id="movieBoarderListCnt" parameterType="int" resultType="int">
+   			select count(*) from Notice WHERE notice_div=#{_parameter}
    		</select>
    
      <!--  영상게시판 게시글  -->
@@ -103,24 +104,24 @@
    		<![CDATA[select * from 
 		 (select notice_num,notice_title,writeDate,contents,notice_addfile,notice_div,member_id,rownum rNum from 
 		 (select * from notice order by notice_num desc)
-			where notice_div=2)  WHERE rNum>=#{start} AND rNum<=#{end} ]]>
+			where notice_div=#{category})  WHERE rNum>=#{start} AND rNum<=#{end} ]]>
    	</select> 
     
      <!--  영상게시판 답글 가져오기  -->
-   <select id="movieBoarderComment" resultType="spring.project.tcat.VO.TcatBoardVO">
-   		select notice_num,notice_title,writeDate,contents,member_id from notice where notice_div=21 order by notice_num
+   <select id="movieBoarderComment" parameterType="int" resultType="spring.project.tcat.VO.TcatBoardVO">
+   		select notice_num,notice_title,writeDate,contents,member_id from notice where notice_div=#{_parameter} order by notice_num
    </select>
    
   	<!-- 답글올리기 -->
    	<insert id="MovieBoarderCommentWrite" parameterType="spring.project.tcat.VO.TcatBoardVO">
    		<![CDATA[INSERT INTO notice (notice_num,notice_title,writedate,contents,member_id,notice_div) 
-   		values (notice_seq.nextval,#{notice_num},sysdate,#{contents},#{member_id},21) ]]>
+   		values (notice_seq.nextval,#{notice_num},sysdate,#{contents},#{member_id},#{categoryComment}) ]]>
    	</insert> 
  
   	<!-- 영상게시판 업로드 -->
    <insert id="insertMovieBoarder" parameterType="spring.project.tcat.VO.TcatBoardVO" >
    		<![CDATA[INSERT INTO notice (notice_num,notice_title,writeDate,contents,notice_addfile,notice_div,member_id)
-   		 values(notice_seq.nextval,#{notice_title},sysdate,#{contents},#{notice_addfile},2,#{member_id})]]>
+   		 values(notice_seq.nextval,#{notice_title},sysdate,#{contents},#{notice_addfile},#{category},#{member_id})]]>
    </insert>
  
     <!-- 영상게시판 수정 -->
@@ -135,6 +136,30 @@
  		<![CDATA[select member_id,writeDate,contents,rownum from (
 		select member_id,writeDate,contents from notice where notice_div=4  order by notice_num desc) where rownum<=4]]>
  	</select>
+ 	
+ 	<!-- 메인화면 공지 게시판 -->
+ 	<select id="mainServiceBoardList" resultType="spring.project.tcat.VO.TcatBoardVO">
+ 			<![CDATA[select notice_title,writeDate,contents,rownum from (
+select notice_title,writeDate,contents from notice where notice_div=1  order by notice_num desc) where rownum<=4]]>
+ 	</select>
+ 
+ 	<!--카테고리별 게시판 사진메뉴  -->
+ <select id="categoryPhotoList" parameterType="int" resultType="spring.project.tcat.VO.TcatBoardVO">
+ 	<![CDATA[select notice_num,notice_title,writeDate,contents,notice_image,notice_div,member_id,rownum from 
+	(select * from notice where notice_div=#{_parameter} order by notice_num desc) where rownum<=4]]>
+ </select>
+
+ 	<!--카테고리별 게시판 영상메뉴  -->
+ <select id="categoryMovieList" parameterType="int" resultType="spring.project.tcat.VO.TcatBoardVO">
+ 	<![CDATA[select notice_num,notice_title,writeDate,contents,notice_addfile,notice_div,member_id,rownum from 
+	(select * from notice where notice_div=#{_parameter} order by notice_num desc) where rownum<=4]]>
+ </select>
+ 
+ <select id="categoryListCnt" parameterType="int" resultType="int">
+ 	select count(*) from notice where notice_div=#{_parameter}
+ </select>
+
+ 
  
  
    </mapper>

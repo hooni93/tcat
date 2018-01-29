@@ -30,6 +30,8 @@ public interface HostService {
 	
 
 	//////////////////////////////////////18.01.16 명훈//////////////////////////////////////////////////
+	//스토어 구매 승인
+	public void orderCon(HttpServletRequest req,Model model);
 	//상품목록 나열
 	public void productList(HttpServletRequest req,Model model);
 	//공연상품정보 가져오기

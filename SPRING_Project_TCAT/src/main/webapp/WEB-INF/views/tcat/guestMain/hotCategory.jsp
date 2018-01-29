@@ -20,9 +20,15 @@ function movieMainLoad(movieurl){
     	<c:forEach var="vo" items="${dtos}" >
 			<div class="col-sm-3 col-md-2">
 				<div class="thumbnail" >
+					<div class="w100p h270 overflow">
 					<a onclick="movieMainLoad('${vo.movie_url}');"><img src="${image}performance/${vo.perf_Image}" class="img-responsive"></a>
+					</div>
 					<div class="caption">
-						<h6 class="c"><label>${vo.perf_title}</label></h6>
+						<table class="table table-condensed" style="table-layout:fixed">
+							<tr>
+								<td style="text-overflow:ellipsis; overflow:hidden"><h6 class="c"><nobr><label>${vo.perf_title}</label></nobr></h6></td>
+							</tr>
+						</table>
 						<h6 class="c">${vo.hall_name}</h6>
 						<h6 class="c">
 							<c:set var="startdate" value="${fn:split(vo.startDate,' ')}"/>

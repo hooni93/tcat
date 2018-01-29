@@ -62,6 +62,8 @@ public interface HostDAO {
 	
 
 	//////////////////////////////////////18.01.16 명훈//////////////////////////////////////////////////
+	//스토어 구매스인
+	public void orderCon(String disc_num);
 	//출력할 공연상품 갯수 가져오기
 	public int perProductCnt(Map<String, Object> map);
 	//출력할 스토어상품 갯수 가져오기

@@ -48,11 +48,11 @@ public class MoGuestDAOImp implements MoGuestDAO{
 	
 	//사진게시판 리스트 숫자 가져오기
 	@Override
-	public int photoBoarderListCnt() {
+	public int photoBoarderListCnt(int category) {
 		// TODO Auto-generated method stub
 		int cnt=0;
 		MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
-		cnt=dao.photoBoarderListCnt();
+		cnt=dao.photoBoarderListCnt(category);
 		return cnt;
 	}
 
@@ -62,7 +62,7 @@ public class MoGuestDAOImp implements MoGuestDAO{
 	@Override
 	public ArrayList<TcatBoardVO> photoBoarderList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		 ArrayList<TcatBoardVO> dtos=null;
+		ArrayList<TcatBoardVO> dtos=null;
 		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
 		 dtos=dao.photoBoarderList(map);
 		 return dtos;
@@ -80,11 +80,11 @@ public class MoGuestDAOImp implements MoGuestDAO{
 
 	//사진게시판 답글 가져오기
 	@Override
-	public ArrayList<TcatBoardVO> photoBoarderComment() {
+	public ArrayList<TcatBoardVO> photoBoarderComment(int categoryComment) {
 		// TODO Auto-generated method stub
 		 ArrayList<TcatBoardVO> dtos=null;
 		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
-		 dtos=dao.photoBoarderComment();
+		 dtos=dao.photoBoarderComment(categoryComment);
 		 return dtos;
 	}
 
@@ -123,11 +123,11 @@ public class MoGuestDAOImp implements MoGuestDAO{
 
 	//영상게시판리스트 갯수 가져오기
 	@Override
-	public int movieBoarderListCnt() {
+	public int movieBoarderListCnt(int category) {
 		// TODO Auto-generated method stub
 		int cnt=0;
 		MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
-		cnt=dao.movieBoarderListCnt();
+		cnt=dao.movieBoarderListCnt(category);
 		return cnt;
 	}
 	
@@ -145,11 +145,11 @@ public class MoGuestDAOImp implements MoGuestDAO{
 
 	//영상게시판 답글 가져오기
 	@Override
-	public ArrayList<TcatBoardVO> movieBoarderComment() {
+	public ArrayList<TcatBoardVO> movieBoarderComment(int categoryComment) {
 		// TODO Auto-generated method stub
 		 ArrayList<TcatBoardVO> dtos=null;
 		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
-		 dtos=dao.movieBoarderComment();
+		 dtos=dao.movieBoarderComment(categoryComment);
 		 return dtos;
 	}
 
@@ -190,6 +190,48 @@ public class MoGuestDAOImp implements MoGuestDAO{
 		 dtos=dao.mainComentBoarderList();
 		return dtos;
 	}
+	//메인 화면 공지사항 게시판 
+
+	@Override
+	public ArrayList<TcatBoardVO> mainServiceBoardList() {
+		// TODO Auto-generated method stub
+		 ArrayList<TcatBoardVO> dtos=null;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 dtos=dao.mainServiceBoardList();
+		return dtos;
+	}
+	//카테고리별 게시판 사진메뉴
+	@Override
+	public ArrayList<TcatBoardVO> categoryPhotoList(int category) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatBoardVO> dtos=null;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 dtos=dao.categoryPhotoList(category);
+		return dtos;
+	}
+	//카테고리별 게시판 영상메뉴	
+	@Override
+	public ArrayList<TcatBoardVO> categoryMovieList(int category) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatBoardVO> dtos=null;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 dtos=dao.categoryMovieList(category);
+		return dtos;
+	}
+
+	@Override
+	public int categoryListCnt(int category) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 cnt=dao.categoryListCnt(category);
+		return cnt;
+	}
+
+
+	
+	
+	
 	
 	
 }

@@ -35,12 +35,14 @@ a {
 </style>
 <script type="text/javascript">
 function insertCart(cart_count,disc_code){
-
+	var disc_count="${str.disc_count}";
 
 	if((cart_count*1)>(disc_code*1)){
 		alert("구매수량을 초과하였습니다.");
 	}else if(cart_count==0){
 		alert("수량을 정해주세요!");
+	}else if(disc_count<=0){
+		alert("재고가 없습니다!");	
 	}else{
 	
 		var url="insertCart?cart_count="+cart_count+"&disc_code="+disc_code;
@@ -109,7 +111,10 @@ function directBuy(count,disc_code){
 		alert("구매수량을 초과하였습니다.");
 	}else if(count==0){
 		alert("수량을 정해주세요!");
+	}else if(disc_count<=0){
+		alert("재고가 없습니다!");	
 	}else{
+	
 	
 		var url="directBuy?count="+count+"&disc_code="+disc_code;
 		$("#result").load("${pageContext.request.contextPath}/"+url);
@@ -172,7 +177,7 @@ function commentListS(url) {
                               <b>구매수량</b>
                            </div>
                            <div class="col-md-9">
-                              <input type="number" name="count">
+                              <input type="number" name="count" value="0">
                            </div>
                         </div>
 
@@ -226,7 +231,7 @@ function commentListS(url) {
 							aria-controls="home" role="tab" data-toggle="tab">상세정보</a></li>
 						<li role="presentation"><a href="#review"
 							aria-controls="profile" role="tab" data-toggle="tab"
-							onclick="commentListS('watchLatterS?disc_title=${str.disc_title}&disc_code=${str.disc_code}');">상품후기</a></li>
+							onclick="commentListS('watchLatterS?disc_code=${str.disc_code}');">상품후기</a></li>
 						<li role="presentation"><a href="#cancelInfo"
 							aria-controls="messages" role="tab" data-toggle="tab">취소/환불안내</a></li>
 					</ul>

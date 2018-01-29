@@ -699,12 +699,12 @@ public class HSGuestServiceImp implements HSGuestService{
 			Map<String,Object> map =new HashMap<String,Object>();
 			map.put("count", count);
 			map.put("disc_code", disc_code);
-			//재고갯수 감소시키기
+			
 			System.out.println(
 					"disc_code"+disc_code+"\n"+
 					"addrChange"+addrChange+"\n"						
 			);
-			
+			//재고갯수 감소시키기
 			HSDao.updateCount(map);
 			
 			//주소 찾아오기

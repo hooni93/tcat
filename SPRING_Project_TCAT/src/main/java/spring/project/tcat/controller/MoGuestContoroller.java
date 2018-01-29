@@ -32,6 +32,9 @@ public class MoGuestContoroller {
 	@RequestMapping("musicalMain")
 	public String musicalMain(HttpServletRequest req,Model model) {
 		System.out.println("musicalMain");
+		req.setAttribute("moviecategory", "21");
+		req.setAttribute("photocategory", "31");
+		MGService.musicalCategoryMainList(req, model);
 		return "tcat/musical/musicalMain";
 	}
 	//콘서트 전체 메인 리스트 페이지 
@@ -76,6 +79,8 @@ public class MoGuestContoroller {
 	@RequestMapping("photoBoarder")
 	public String photoBoarder(HttpServletRequest req,Model model) {
 		System.out.println("photoBoarder");
+		req.setAttribute("category", req.getParameter("category"));
+		System.out.println(req.getParameter("category"));
 		MGService.photoBoarderList(req, model);
 		return "tcat/Boarder/photoBoarder";
 	}
@@ -83,14 +88,17 @@ public class MoGuestContoroller {
 	@RequestMapping("photoBoarderCommentWrite")
 	public String photoBoarderCommentWrite(HttpServletRequest req,Model model) {
 		System.out.println("photoBoarderCommentWrite");
+		req.setAttribute("category", req.getParameter("category"));
+		System.out.println(req.getParameter("category"));
 		MGService.photoBoarderCommentWrite(req, model);
-		photoBoarder(req, model);
+		MGService.photoBoarderList(req, model);
 		return "tcat/Boarder/photoBoarder";
 	}
 	//사진게시판 게시하기 
 	@RequestMapping("insertPhotoBoarder")
 	public String insertPhotoBoarder(MultipartHttpServletRequest req,Model model) {
 		System.out.println("insertPhotoBoarder");
+		req.setAttribute("category", req.getParameter("category"));
 		MGService.insertPhotoBoarder(req, model);
 		MGService.photoBoarderList(req, model);
 		return "tcat/Boarder/photoBoarder";
@@ -99,6 +107,7 @@ public class MoGuestContoroller {
 	@RequestMapping("photoBorderDelete")
 	public String photoBorderDelete(HttpServletRequest req,Model model) {
 		System.out.println("photoBorderDelete");
+		req.setAttribute("category", req.getParameter("category"));
 		MGService.photoBorderDelete(req, model);
 		MGService.photoBoarderList(req, model);
 		return "tcat/Boarder/photoBoarder";
@@ -108,6 +117,7 @@ public class MoGuestContoroller {
 	@RequestMapping("noMoPhotoBoarder")
 	public String noMoPhotoBoarder(MultipartHttpServletRequest req,Model model) {
 		System.out.println("noMoPhotoBoarder");
+		req.setAttribute("category", req.getParameter("category"));
 		MGService.noMoPhotoBoarder(req, model);
 		MGService.photoBoarderList(req, model);
 		return "tcat/Boarder/photoBoarder";
@@ -117,6 +127,7 @@ public class MoGuestContoroller {
 		@RequestMapping("movieBoarder")
 		public String movieBoarder(HttpServletRequest req,Model model) {
 			System.out.println("movieBoarder");
+			req.setAttribute("category", req.getParameter("category"));
 			MGService.movieBoarderList(req, model);
 			return "tcat/Boarder/movieBoarder";
 		}
@@ -125,6 +136,7 @@ public class MoGuestContoroller {
 	@RequestMapping("MovieBoarderCommentWrite")
 	public String MovieBoarderCommentWrite(HttpServletRequest req,Model model) {
 		System.out.println("MovieBoarderCommentWrite");
+		req.setAttribute("category", req.getParameter("category"));
 		MGService.MovieBoarderCommentWrite(req, model);
 		MGService.movieBoarderList(req, model);
 		return "tcat/Boarder/movieBoarder";
@@ -134,15 +146,26 @@ public class MoGuestContoroller {
 	@RequestMapping("insertMovieBoarder")
 	public String insertMovieBoarder(MultipartHttpServletRequest req,Model model) {
 		System.out.println("insertMovieBoarder");
+		req.setAttribute("category", req.getParameter("category"));
 		MGService.insertMovieBoarder(req, model);
 		MGService.movieBoarderList(req, model);
 		return "tcat/Boarder/movieBoarder";
 	}
+	//영상게시판 수정하기 
+	@RequestMapping("noMoMovieBoarder")
+	public String noMoMovieBoarder(MultipartHttpServletRequest req,Model model) {
+		System.out.println("noMoMovieBoarder");
+		req.setAttribute("category", req.getParameter("category"));
+		MGService.noMoMovieBoarder(req, model);
+		MGService.movieBoarderList(req, model);
+		return "tcat/Boarder/movieBoarder";
+	}
 	
-	//사진게시판 삭제
+	//영상게시판 삭제
 	@RequestMapping("movieBorderDelete")
 	public String movieBorderDelete(HttpServletRequest req,Model model) {
 		System.out.println("movieBorderDelete");
+		req.setAttribute("category", req.getParameter("category"));
 		MGService.movieBorderDelete(req, model);
 		MGService.movieBoarderList(req, model);
 		return "tcat/Boarder/movieBoarder";

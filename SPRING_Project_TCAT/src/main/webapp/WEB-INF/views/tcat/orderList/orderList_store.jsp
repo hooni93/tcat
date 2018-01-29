@@ -30,6 +30,12 @@
 	         	ajaxSubmit('orderList_store');
 	        }
    		 });
+		
+		//구매승인
+		$(".orderConfirm").click(function(){
+			var disc_num = $(this).attr("name");
+			load("orderCon?disc_num="+disc_num);
+		});
 	});
 </script>
 </head>
@@ -94,6 +100,7 @@
 				<td><b>구매상태</b></td>
 				<td><b>구매날짜</b></td>
 				<td><b>할인조건</b></td>
+				<td class="w10p"><b>구매승인</b></td>
 			</tr>
 			<c:if test="${orders!=null }">
 				<c:forEach var="order" items="${orders}">
@@ -118,11 +125,12 @@
 						</td>
 						<td>${order.disc_buyDate }</td>
 						<td>${order.sale_div } (${order.sale_rate }%)</td>
+						<td><input name="${order.disc_num }" type="button" value="구매승인" class="btn btn-primary orderConfirm"></td>
 					</tr>
 				</c:forEach>
 			</c:if>
 			<c:if test="${orders==null }">
-				<tr><td colspan="10" class="h550 ">
+				<tr><td colspan="11" class="h550 ">
 				<span class="tm fs15">검색결과가 없습니다.</span>
 				</td></tr>
 			</c:if>

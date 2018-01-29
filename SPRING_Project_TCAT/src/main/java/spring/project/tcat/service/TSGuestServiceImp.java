@@ -276,7 +276,8 @@ public class TSGuestServiceImp implements TSGuestService{
 			int startPage = 0; // 시작 페이지
 			int endPage = 0; // 마지막 페이지
 			
-			String perf_title = req.getParameter("perf_title");
+			String perf_title=tsGDAO.getperfTitlePlz(per_id);
+
 			System.out.println("perf_title--------서비스 단입니다-----> :"+perf_title);
 			
 		
@@ -416,7 +417,7 @@ public class TSGuestServiceImp implements TSGuestService{
 			int endPage = 0; // 마지막 페이지
 			
 			
-			String disc_title = req.getParameter("disc_title");
+			String disc_title =tsGDAO.getListdisc_title(disc_code);
 			System.out.println("disc_title--------서비스 단입니다-----> :"+disc_title);
 			// 검색추가(01/16)-------------------
 

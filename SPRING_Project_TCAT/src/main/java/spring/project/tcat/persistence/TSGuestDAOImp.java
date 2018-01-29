@@ -237,4 +237,37 @@ public class TSGuestDAOImp implements TSGuestDAO{
 			cnt = dao.commentDeldaoS(notice_num);
 			return cnt;
 		}
+
+
+
+
+		//게스트관람후기 타이틀 가져오기
+		@Override
+		public String getperfTitlePlz(int per_id) {
+			// TODO Auto-generated method stub
+			String title="";
+			TSGuestDAO dao = Configuration.getMapper(TSGuestDAO.class);
+			title = dao.getperfTitlePlz(per_id);
+			return title;
+	
+		}
+
+
+
+
+		//게스트스토어후기 타이틀 가져오기
+		@Override
+		public String getListdisc_title(int disc_code) {
+			// TODO Auto-generated method stub
+			String title="";
+			TSGuestDAO dao = Configuration.getMapper(TSGuestDAO.class);
+			title = dao.getListdisc_title(disc_code);
+			return title;
+		}
+		
+		
+		
+		
+		
+		
 }

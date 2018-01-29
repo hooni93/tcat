@@ -61,4 +61,9 @@ public interface TSGuestDAO {
 	public int commentsModifyS(TcatBoardVO vo);
 	// 게스트 후기 삭제 할수있게 - 스토어용
 	public int commentDeldaoS(int notice_num);
+	//게스트관람후기 타이틀 가져오기
+	public String getperfTitlePlz(int per_id);
+	//게스트스토어후기 타이틀 가져오기
+	public String getListdisc_title(int disc_code);
+	
 }
