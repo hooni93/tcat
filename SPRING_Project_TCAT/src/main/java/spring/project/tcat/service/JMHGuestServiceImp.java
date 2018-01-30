@@ -11,21 +11,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import spring.project.tcat.VO.ContentFavoriteVO;
 import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 import spring.project.tcat.VO.TcatTicketingVO;
 import spring.project.tcat.VO.WishListVO;
-import spring.project.tcat.persistence.HostDAO;
 import spring.project.tcat.persistence.JMHGuestDAO;
 
 @Service
 public class JMHGuestServiceImp implements JMHGuestService {
 	@Autowired
 	private JMHGuestDAO mhDAO;
-	@Autowired
-	private HostDAO hDAO;
 
 	// 아이디,비밀번호 찾기
 	@Override
@@ -361,6 +359,65 @@ public class JMHGuestServiceImp implements JMHGuestService {
 
 	}
 
+	// getFavorite 연령,성별 선호도
+	public void getFavorite(HttpServletRequest req, Model model) {
+		int per_id = Integer.parseInt(req.getParameter("per_id"));
+		ArrayList<ContentFavoriteVO> ages = mhDAO.getAge(per_id);
+		ArrayList<ContentFavoriteVO> genders = mhDAO.getGender(per_id);
+
+		// 성별 데이터 만들기
+		Map<String, Integer> ageData = new HashMap<String, Integer>();
+		ageData.put("10대", 0);
+		ageData.put("20대", 0);
+		ageData.put("30대", 0);
+		ageData.put("40대", 0);
+		ageData.put("50대 이상", 0);
+		for (int i = 0; i < ages.size(); i++) {
+			ContentFavoriteVO info = ages.get(i);
+			switch (info.getAges()) {
+			case 1:
+				ageData.replace("10대", info.getCnt());
+				break;
+			case 2:
+				ageData.replace("20대", info.getCnt());
+				break;
+			case 3:
+				ageData.replace("30대", info.getCnt());
+				break;
+			case 4:
+				ageData.replace("40대", info.getCnt());
+				break;
+			default:
+				int cnt = ageData.get("50대 이상") + info.getCnt();
+				ageData.replace("50대 이상", cnt);
+				break;
+			}
+		}
+
+		// 연령 데이터 만들기
+		Map<String, Integer> genderData = new HashMap<String, Integer>();
+		genderData.put("남자", 0);
+		genderData.put("여자", 0);
+		genderData.put("총합", 0);
+		for (int i = 0; i < genders.size(); i++) {
+			ContentFavoriteVO info = genders.get(i);
+			switch (info.getMember_gender()) {
+			case 1:
+				genderData.put("남자", info.getCnt());
+				int cnt = genderData.get("총합") + info.getCnt();
+				genderData.put("총합", cnt);
+				break;
+			default:
+				genderData.put("여자", info.getCnt());
+				cnt = genderData.get("총합") + info.getCnt();
+				genderData.put("총합", cnt);
+				break;
+			}
+		}
+		model.addAttribute("ageData", ageData);
+		model.addAttribute("genderData", genderData);
+	}
+
 	// 스토어 상세정보
 	public void getContent_store(HttpServletRequest req, Model model) {
 		int disc_code = Integer.parseInt(req.getParameter("disc_code"));
@@ -371,8 +428,67 @@ public class JMHGuestServiceImp implements JMHGuestService {
 			mhDAO.upHits(disc_code);
 		}
 		TcatPerDiscVO str = mhDAO.getContent_store(disc_code);
-			System.out.println(str.getDisc_title());
+		System.out.println(str.getDisc_title());
 		model.addAttribute("str", str);
+	}
+
+	// 연령별, 성별별 선호도 가져오기
+	public void getFavorite_store(HttpServletRequest req, Model model) {
+		int disc_code = Integer.parseInt(req.getParameter("disc_code"));
+		ArrayList<ContentFavoriteVO> ages = mhDAO.getAge_store(disc_code);
+		ArrayList<ContentFavoriteVO> genders = mhDAO.getGender_store(disc_code);
+
+		// 성별 데이터 만들기
+		Map<String, Integer> ageData = new HashMap<String, Integer>();
+		ageData.put("10대", 0);
+		ageData.put("20대", 0);
+		ageData.put("30대", 0);
+		ageData.put("40대", 0);
+		ageData.put("50대 이상", 0);
+		for (int i = 0; i < ages.size(); i++) {
+			ContentFavoriteVO info = ages.get(i);
+			switch (info.getAges()) {
+			case 1:
+				ageData.replace("10대", info.getCnt());
+				break;
+			case 2:
+				ageData.replace("20대", info.getCnt());
+				break;
+			case 3:
+				ageData.replace("30대", info.getCnt());
+				break;
+			case 4:
+				ageData.replace("40대", info.getCnt());
+				break;
+			default:
+				int cnt = ageData.get("50대 이상") + info.getCnt();
+				ageData.replace("50대 이상", cnt);
+				break;
+			}
+		}
+
+		// 연령 데이터 만들기
+		Map<String, Integer> genderData = new HashMap<String, Integer>();
+		genderData.put("남자", 0);
+		genderData.put("여자", 0);
+		genderData.put("총합", 0);
+		for (int i = 0; i < genders.size(); i++) {
+			ContentFavoriteVO info = genders.get(i);
+			switch (info.getMember_gender()) {
+			case 1:
+				genderData.put("남자", info.getCnt());
+				int cnt = genderData.get("총합") + info.getCnt();
+				genderData.put("총합", cnt);
+				break;
+			default:
+				genderData.put("여자", info.getCnt());
+				cnt = genderData.get("총합") + info.getCnt();
+				genderData.put("총합", cnt);
+				break;
+			}
+		}
+		model.addAttribute("ageData", ageData);
+		model.addAttribute("genderData", genderData);
 	}
 
 	// 위시 리스트
@@ -458,15 +574,14 @@ public class JMHGuestServiceImp implements JMHGuestService {
 			map.put("per_id", per_id);
 			wishResult = mhDAO.getWishListIn(map);
 		}
+		System.out.println("getWishListIn: "+wishResult);
 		model.addAttribute("wishResult", wishResult);
 	}
 
 	// 결제취소
 	public void buyCancel(HttpServletRequest req, Model model) {
 		int disc_num = Integer.parseInt(req.getParameter("disc_num"));
-
 		int buyCancelRs = mhDAO.buyCancel(disc_num);
-
 		model.addAttribute("buyCancelRs", buyCancelRs);
 	}
 
@@ -476,7 +591,13 @@ public class JMHGuestServiceImp implements JMHGuestService {
 		int perfRefundRs = mhDAO.perfRefund(disc_num);
 		model.addAttribute("perfRefundRs", perfRefundRs);
 	}
-
+	//perfChange 교환요청
+	public void perfChange(HttpServletRequest req,Model model) {
+		int disc_num = Integer.parseInt(req.getParameter("disc_num"));
+		int perfChangeRs = mhDAO.perfChange(disc_num);
+		model.addAttribute("perfChangeRs", perfChangeRs);
+	}
+	
 	// 호스트 로그인
 	public void host_loginPro(HttpServletRequest req, Model model) {
 		// 값 받기
@@ -499,52 +620,381 @@ public class JMHGuestServiceImp implements JMHGuestService {
 	// getTicketInfo예매 정보
 	public void getTicketInfo(HttpServletRequest req, Model model) {
 		String member_id = (String) req.getSession().getAttribute("login_id");
-		String year = (String) req.getParameter("year");	//기간 판정
+		String year = (String) req.getParameter("year"); // 기간 판정
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("member_id", member_id);
-		//미래 티켓
-		//배송번호 받아오기
-		map.put("date", "ticet_date	>=TO_DATE(SYSDATE,'yy/MM/dd')");//미래판정
+		// 미래 티켓
+		// 배송번호 받아오기
+		map.put("date", "ticet_date	>=TO_DATE(SYSDATE,'yy/MM/dd')");// 미래판정
 		ArrayList<Integer> del_nums = mhDAO.getDel_nums(map);
-		Map<Integer,ArrayList<TcatTicketingVO>> futureTicket = new HashMap<Integer, ArrayList<TcatTicketingVO>>();
-		
-		map.put("del_num", 0);//배송정보 초기화
-		if(del_nums.size()>0) {
-			for(int index=0;index<del_nums.size();index++) {
+		Map<Integer, ArrayList<TcatTicketingVO>> futureTicket = new HashMap<Integer, ArrayList<TcatTicketingVO>>();
+
+		map.put("del_num", 0);// 배송정보 초기화
+		if (del_nums.size() > 0) {
+			for (int index = 0; index < del_nums.size(); index++) {
 				map.replace("del_num", del_nums.get(index));
 				futureTicket.put(del_nums.get(index), mhDAO.getTickets(map));// 미래 티켓들의 티켓정보
 			}
 		}
-		//데이터 전송
+		// 데이터 전송
 		model.addAttribute("futureTicket_num", del_nums);
-		model.addAttribute("futureTicket",futureTicket);
-		
+		model.addAttribute("futureTicket", futureTicket);
+
 		/////////////////////////////////////////////////
-		//과거 기록
-		//배송번호 받아오기
-		map.replace("date", "ticet_date	< TO_DATE(SYSDATE,'yy/MM/dd')");//과거판정
+		// 과거 기록
+		// 배송번호 받아오기
+		map.replace("date", "ticet_date	< TO_DATE(SYSDATE,'yy/MM/dd')");// 과거판정
 		ArrayList<Integer> past_nums = mhDAO.getDel_nums(map);
-		Map<Integer,ArrayList<TcatTicketingVO>> pastTicket = new HashMap<Integer, ArrayList<TcatTicketingVO>>();
-		if(past_nums.size()>0) {
-			for(int index=0;index<past_nums.size();index++) {
+		Map<Integer, ArrayList<TcatTicketingVO>> pastTicket = new HashMap<Integer, ArrayList<TcatTicketingVO>>();
+		if (past_nums.size() > 0) {
+			for (int index = 0; index < past_nums.size(); index++) {
 				map.replace("del_num", past_nums.get(index));
 				pastTicket.put(past_nums.get(index), mhDAO.getTickets(map));// 미래 티켓들의 티켓정보
 			}
 		}
-		//데이터 전송
+		// 데이터 전송
 		model.addAttribute("past_nums", past_nums);
-		model.addAttribute("pastTicket",pastTicket);
-				
+		model.addAttribute("pastTicket", pastTicket);
+
 	}
-	
-	//예매취소 ticCancel
-	public void ticStepUpdate(HttpServletRequest req,Model model) {
+
+	// 예매취소 ticCancel
+	public void ticStepUpdate(HttpServletRequest req, Model model) {
 		int del_num = Integer.parseInt(req.getParameter("del_num"));
 		int ticket_step = Integer.parseInt(req.getParameter("ticket_step"));
-		Map<String,Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("del_num", del_num);
 		map.put("ticket_step", ticket_step);
 		int ticStepUpdateRs = mhDAO.ticStepUpdate(map);
 		model.addAttribute("ticStepUpdateRs", ticStepUpdateRs);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// HOST
+	// getAgeAnalysis 연령별 분석
+	public void getAgeAnalysis(HttpServletRequest req, Model model) {
+		// 총 예매량 카운트
+		ArrayList<ContentFavoriteVO> ages = mhDAO.getAgeHostCount();
+		// 총 예매량 차트 데이터 생성
+		Map<String, Integer> ageData = new HashMap<String, Integer>();
+		ageData.put("10대", 0);
+		ageData.put("20대", 0);
+		ageData.put("30대", 0);
+		ageData.put("40대", 0);
+		ageData.put("50대 이상", 0);
+		int sum = 0;
+		for (int i = 0; i < ages.size(); i++) {
+			ContentFavoriteVO info = ages.get(i);
+			sum += info.getCnt();
+			switch (info.getAges()) {
+			case 1:
+				ageData.replace("10대", info.getCnt());
+				break;
+			case 2:
+				ageData.replace("20대", info.getCnt());
+				break;
+			case 3:
+				ageData.replace("30대", info.getCnt());
+				break;
+			case 4:
+				ageData.replace("40대", info.getCnt());
+				break;
+			default:
+				int cnt = ageData.get("50대 이상") + info.getCnt();
+				ageData.replace("50대 이상", cnt);
+				break;
+			}
+		}
+		ageData.put("sum", sum);
+		model.addAttribute("ageData", ageData);
+
+		// 연령 선호 장르
+		// 장르 정보 가져오기 & 데이터 초기화
+		Map<String, Integer> ages10 = new HashMap<String, Integer>();
+		Map<String, Integer> ages20 = new HashMap<String, Integer>();
+		Map<String, Integer> ages30 = new HashMap<String, Integer>();
+		Map<String, Integer> ages40 = new HashMap<String, Integer>();
+		Map<String, Integer> ages50 = new HashMap<String, Integer>();
+		String mDev[] = { "뮤지컬", "무용", "콘서트", "클래식", "연극" };
+		for (String dev : mDev) { // 초기화
+			ages10.put(dev, 0);
+			ages20.put(dev, 0);
+			ages30.put(dev, 0);
+			ages40.put(dev, 0);
+			ages50.put(dev, 0);
+		}
+		// 데이터 가져오기
+		// 총 예매량 카운트
+		ArrayList<ContentFavoriteVO> ageGenre = mhDAO.getAgeGenre();
+		for (int i = 0; i < ageGenre.size(); i++) {
+			ContentFavoriteVO info = ageGenre.get(i);
+			switch (info.getAges()) {
+			case 1:
+				ages10.replace(info.getmDev(), info.getCnt());
+				break;
+			case 2:
+				ages20.replace(info.getmDev(), info.getCnt());
+				break;
+			case 3:
+				ages30.replace(info.getmDev(), info.getCnt());
+				break;
+			case 4:
+				ages40.replace(info.getmDev(), info.getCnt());
+				break;
+			default:
+				int cnt = ages50.get(info.getmDev()) + info.getCnt();
+				ages50.replace(info.getmDev(), cnt);
+				break;
+			}
+		}
+		ArrayList<Map<String, Integer>> ageGenreList = new ArrayList<Map<String, Integer>>();
+		ageGenreList.add(ages10);
+		ageGenreList.add(ages20);
+		ageGenreList.add(ages30);
+		ageGenreList.add(ages40);
+		ageGenreList.add(ages50);
+		model.addAttribute("ageGenreList", ageGenreList);
+
+		// 연령 선호 작품 top5
+		// 데이터 가져오기
+		ArrayList<ContentFavoriteVO> agePerf10 = mhDAO.getAgePerf(1);
+		ArrayList<ContentFavoriteVO> agePerf20 = mhDAO.getAgePerf(2);
+		ArrayList<ContentFavoriteVO> agePerf30 = mhDAO.getAgePerf(3);
+		ArrayList<ContentFavoriteVO> agePerf40 = mhDAO.getAgePerf(4);
+		ArrayList<ContentFavoriteVO> agePerf50 = mhDAO.getAgePerf(5);
+		model.addAttribute("agePerf10", agePerf10);
+		model.addAttribute("agePerf20", agePerf20);
+		model.addAttribute("agePerf30", agePerf30);
+		model.addAttribute("agePerf40", agePerf40);
+		model.addAttribute("agePerf50", agePerf50);
+
+	}
+
+	// 연령별 분석 스토어
+	public void getAgeAnalysis_store(HttpServletRequest req, Model model) {
+		// 총 예매량 카운트
+		ArrayList<ContentFavoriteVO> ages = mhDAO.getAgeHostCount_store();
+		// 총 예매량 차트 데이터 생성
+		Map<String, Integer> ageData = new HashMap<String, Integer>();
+		ageData.put("10대", 0);
+		ageData.put("20대", 0);
+		ageData.put("30대", 0);
+		ageData.put("40대", 0);
+		ageData.put("50대 이상", 0);
+		int sum = 0;
+		for (int i = 0; i < ages.size(); i++) {
+			ContentFavoriteVO info = ages.get(i);
+			sum += info.getCnt();
+			switch (info.getAges()) {
+			case 1:
+				ageData.replace("10대", info.getCnt());
+				break;
+			case 2:
+				ageData.replace("20대", info.getCnt());
+				break;
+			case 3:
+				ageData.replace("30대", info.getCnt());
+				break;
+			case 4:
+				ageData.replace("40대", info.getCnt());
+				break;
+			default:
+				int cnt = ageData.get("50대 이상") + info.getCnt();
+				ageData.replace("50대 이상", cnt);
+				break;
+			}
+		}
+		ageData.put("sum", sum);
+		model.addAttribute("ageData", ageData);
+
+		// 연령 선호 장르
+		// 장르 정보 가져오기 & 데이터 초기화
+		Map<String, Integer> ages10 = new HashMap<String, Integer>();
+		Map<String, Integer> ages20 = new HashMap<String, Integer>();
+		Map<String, Integer> ages30 = new HashMap<String, Integer>();
+		Map<String, Integer> ages40 = new HashMap<String, Integer>();
+		Map<String, Integer> ages50 = new HashMap<String, Integer>();
+		String sDev[] = { "뮤지컬OST", "콘서트LIVE", "클래식LIVE", "전시컬렉션" };
+		for (String dev : sDev) { // 초기화
+			ages10.put(dev, 0);
+			ages20.put(dev, 0);
+			ages30.put(dev, 0);
+			ages40.put(dev, 0);
+			ages50.put(dev, 0);
+		}
+		// 데이터 가져오기
+		// 총 예매량 카운트
+		ArrayList<ContentFavoriteVO> ageGenre = mhDAO.getAgeGenre_store();
+		for (int i = 0; i < ageGenre.size(); i++) {
+			ContentFavoriteVO info = ageGenre.get(i);
+			System.out.println(info.getsDev() + "-" + info.getCnt());
+
+			switch (info.getAges()) {
+			case 1:
+				ages10.replace(info.getsDev(), info.getCnt());
+				break;
+			case 2:
+				ages20.replace(info.getsDev(), info.getCnt());
+				break;
+			case 3:
+				ages30.replace(info.getsDev(), info.getCnt());
+				break;
+			case 4:
+				ages40.replace(info.getsDev(), info.getCnt());
+				break;
+			default:
+				int cnt = ages50.get(info.getsDev()) + info.getCnt();
+				ages50.replace(info.getsDev(), cnt);
+				break;
+			}
+		}
+		ArrayList<Map<String, Integer>> ageGenreList = new ArrayList<Map<String, Integer>>();
+		ageGenreList.add(ages10);
+		ageGenreList.add(ages20);
+		ageGenreList.add(ages30);
+		ageGenreList.add(ages40);
+		ageGenreList.add(ages50);
+		System.out.println(ageGenreList.get(0));
+		System.out.println(ageGenreList.get(1));
+		System.out.println(ageGenreList.get(2));
+		System.out.println(ageGenreList.get(3));
+		System.out.println(ageGenreList.get(4));
+		model.addAttribute("ageGenreList", ageGenreList);
+
+		// 연령 선호 작품 top5
+		// 데이터 가져오기
+		ArrayList<ContentFavoriteVO> agePerf10 = mhDAO.getAgePerf_store(1);
+		ArrayList<ContentFavoriteVO> agePerf20 = mhDAO.getAgePerf_store(2);
+		ArrayList<ContentFavoriteVO> agePerf30 = mhDAO.getAgePerf_store(3);
+		ArrayList<ContentFavoriteVO> agePerf40 = mhDAO.getAgePerf_store(4);
+		ArrayList<ContentFavoriteVO> agePerf50 = mhDAO.getAgePerf_store(5);
+		model.addAttribute("agePerf10", agePerf10);
+		model.addAttribute("agePerf20", agePerf20);
+		model.addAttribute("agePerf30", agePerf30);
+		model.addAttribute("agePerf40", agePerf40);
+		model.addAttribute("agePerf50", agePerf50);
+	}
+
+	// getGenderAnalysis 성별 예약 분석
+	public void getGenderAnalysis(HttpServletRequest req, Model model) {
+		// 총 예매량 카운트
+		ArrayList<ContentFavoriteVO> genders = mhDAO.getGenderHostCount();
+		// 총 예매량 차트 데이터 생성
+		Map<String, Integer> genderData = new HashMap<String, Integer>();
+		genderData.put("남자", 0);
+		genderData.put("여자", 0);
+		int sum = 0;
+		for (int i = 0; i < genders.size(); i++) {
+			ContentFavoriteVO info = genders.get(i);
+			sum += info.getCnt();
+			switch (info.getMember_gender()) {
+			case 1:
+				genderData.replace("남자", info.getCnt());
+				break;
+			case 2:
+				genderData.replace("여자", info.getCnt());
+				break;
+			}
+		}
+		genderData.put("sum", sum);
+		model.addAttribute("genderData", genderData);
+
+		// 연령 선호 장르
+		// 장르 정보 가져오기 & 데이터 초기화
+		Map<String, Integer> manGenre = new HashMap<String, Integer>();
+		Map<String, Integer> womanGenre = new HashMap<String, Integer>();
+		String mDev[] = { "뮤지컬", "무용", "콘서트", "클래식", "연극" };
+		for (String dev : mDev) { // 초기화
+			manGenre.put(dev, 0);
+			womanGenre.put(dev, 0);
+		}
+		// 데이터 가져오기
+		// 총 예매량 카운트
+		ArrayList<ContentFavoriteVO> ageGenre = mhDAO.getGenderGenre();
+		for (int i = 0; i < ageGenre.size(); i++) {
+			ContentFavoriteVO info = ageGenre.get(i);
+			switch (info.getMember_gender()) {
+			case 1:
+				manGenre.replace(info.getmDev(), info.getCnt());
+				break;
+			case 2:
+				womanGenre.replace(info.getmDev(), info.getCnt());
+				break;
+			}
+		}
+		ArrayList<Map<String, Integer>> genderGenreList = new ArrayList<Map<String, Integer>>();
+		genderGenreList.add(manGenre);
+		genderGenreList.add(womanGenre);
+		model.addAttribute("genderGenreList", genderGenreList);
+
+		// 연령 선호 작품 top5
+		// 데이터 가져오기
+		ArrayList<ContentFavoriteVO> manPerf = mhDAO.getGenderPerf(1);
+		ArrayList<ContentFavoriteVO> womanPerf = mhDAO.getGenderPerf(2);
+		model.addAttribute("manPerf", manPerf);
+		model.addAttribute("womanPerf", womanPerf);
+	}
+	
+	//getGenderAnalysis_store 성별 스토어 분석
+	public void  getGenderAnalysis_store(HttpServletRequest req,Model model) {
+		// 총 예매량 카운트
+		ArrayList<ContentFavoriteVO> ages = mhDAO.getGenderHostCount_store();
+		// 총 예매량 차트 데이터 생성
+		Map<String, Integer> genderData = new HashMap<String, Integer>();
+		genderData.put("남자", 0);
+		genderData.put("여자", 0);
+		int sum = 0;
+		for (int i = 0; i < ages.size(); i++) {
+			ContentFavoriteVO info = ages.get(i);
+			sum += info.getCnt();
+			switch (info.getMember_gender()) {
+			case 1:
+				genderData.replace("남자", info.getCnt());
+				break;
+			case 2:
+				genderData.replace("여자", info.getCnt());
+				break;
+			}
+		}
+		genderData.put("sum", sum);
+		model.addAttribute("genderData", genderData);
+
+		// 연령 선호 장르
+		// 장르 정보 가져오기 & 데이터 초기화
+		Map<String, Integer> manGenre = new HashMap<String, Integer>();
+		Map<String, Integer> womanGenre = new HashMap<String, Integer>();
+		String sDev[] = { "뮤지컬OST", "콘서트LIVE", "클래식LIVE", "전시컬렉션" };
+		for (String dev : sDev) { // 초기화
+			manGenre.put(dev, 0);
+			womanGenre.put(dev, 0);
+		}
+		// 데이터 가져오기
+		// 총 예매량 카운트
+		ArrayList<ContentFavoriteVO> ageGenre = mhDAO.getGenderGenre_store();
+		for (int i = 0; i < ageGenre.size(); i++) {
+			ContentFavoriteVO info = ageGenre.get(i);
+			System.out.println(info.getsDev() + "-" + info.getCnt());
+
+			switch (info.getMember_gender()) {
+			case 1:
+				manGenre.replace(info.getsDev(), info.getCnt());
+				break;
+			case 2:
+				womanGenre.replace(info.getsDev(), info.getCnt());
+				break;
+			}
+		}
+		ArrayList<Map<String, Integer>> ageGenreList = new ArrayList<Map<String, Integer>>();
+		ageGenreList.add(manGenre);
+		ageGenreList.add(womanGenre);
+		System.out.println(ageGenreList.get(0));
+		System.out.println(ageGenreList.get(1));
+		model.addAttribute("ageGenreList", ageGenreList);
+		// 연령 선호 작품 top5
+		// 데이터 가져오기
+		ArrayList<ContentFavoriteVO> agePerf10 = mhDAO.getGenderPerf_store(1);
+		ArrayList<ContentFavoriteVO> agePerf20 = mhDAO.getGenderPerf_store(2);
+		model.addAttribute("agePerf10", agePerf10);
+		model.addAttribute("agePerf20", agePerf20);
 	}
 }

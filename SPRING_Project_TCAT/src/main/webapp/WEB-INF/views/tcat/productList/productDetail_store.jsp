@@ -60,7 +60,7 @@
 				<td class="bg-primary" colspan="2"><b>상품소개</b></td>
 			</tr>
 			<tr>
-				<td colspan="2"><b>${disc.disc_con }</b></td>
+				<td colspan="2"><pre>${disc.disc_con }</pre></td>
 			</tr>
 			<tr>
 				<td class="bg-primary" colspan="2"><b>상세이미지</b></td>

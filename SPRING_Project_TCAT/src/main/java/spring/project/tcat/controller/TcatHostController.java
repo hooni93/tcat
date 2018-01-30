@@ -888,407 +888,716 @@ public class TcatHostController {
 	//////////////////////////////////// 현석 1/11 end/
 	//////////////////////////////////// /////////////////////////////////////////
 
-	/////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민
-	/////////////////// //////////////////////////////
-	@RequestMapping("hotMusical_side")
-	public String hotMusical_side(HttpServletRequest req, Model model) {
-		System.out.println("hotMusical_side");
-		return "tcat/productList/hotMusical_side";
+/////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민
+/////////////////// //////////////////////////////
+@RequestMapping("hotMusical_side")
+public String hotMusical_side(HttpServletRequest req, Model model) {
+System.out.println("hotMusical_side");
+return "tcat/productList/hotMusical_side";
+}
+
+// 뮤지컬 핫카테고리 5개 출력 전체 출력
+@RequestMapping("hotMusical")
+public String hotMusical(HttpServletRequest req, Model model) {
+req.setAttribute("url", "hotMusical");
+hService.hotMenu(req, model);
+System.out.println("2");
+return "tcat/productList/hotMusical";
+}
+
+// 핫리스트 제거
+@RequestMapping("hotMenuDelete")
+public String hotDelete(HttpServletRequest req, Model model) {
+System.out.println("hotMenuDelete");
+String url = "";
+url = req.getParameter("url");
+
+System.out.println("222url" + url);
+req.setAttribute("url", url);
+hService.hotMenuDelete(req, model);
+hService.hotMenu(req, model);
+
+System.out.println("url" + url);
+
+return "tcat/productList/" + url;
+}
+
+// 핫리스트 추가
+@RequestMapping("hotMenuUpdate")
+public String hotUpdate(HttpServletRequest req, Model model) {
+System.out.println("hotMenuUpdate");
+String url = "";
+url = req.getParameter("url");
+System.out.println("1111url" + url);
+
+req.setAttribute("url", url);
+
+hService.hotMenuUpdate(req, model);
+hService.hotMenu(req, model);
+System.out.println("url" + url);
+return "tcat/productList/" + url;
+}
+
+@RequestMapping("hotConcert")
+public String hotConcert(HttpServletRequest req, Model model) {
+System.out.println("hotConcert");
+req.setAttribute("url", "hotConcert");
+hService.hotMenu(req, model);
+
+return "tcat/productList/hotConcert";
+}
+
+@RequestMapping("hotDrama")
+public String hotDrama(HttpServletRequest req, Model model) {
+System.out.println("hotDrama");
+req.setAttribute("url", "hotDrama");
+hService.hotMenu(req, model);
+return "tcat/productList/hotDrama";
+}
+
+@RequestMapping("hotClassic")
+public String hotClassic(HttpServletRequest req, Model model) {
+System.out.println("hotClassic");
+req.setAttribute("url", "hotClassic");
+hService.hotMenu(req, model);
+return "tcat/productList/hotClassic";
+}
+@RequestMapping("hotDance")
+public String hotDance(HttpServletRequest req, Model model) {
+System.out.println("hotDance");
+req.setAttribute("url", "hotDance");
+hService.hotMenu(req, model);
+return "tcat/productList/hotDance";
+}
+//핫스토어
+@RequestMapping("hotStore")
+public String hotStore(HttpServletRequest req, Model model) {
+System.out.println("hotStore");
+req.setAttribute("url", "hotStore");
+hService.hotStore(req, model);
+return "tcat/productList/hotStore";
+}
+// 핫스토어 제거
+@RequestMapping("hotStoreMenuDelete")
+public String hotStoreDelete(HttpServletRequest req, Model model) {
+System.out.println("hotStoreMenuDelete");
+String url = "";
+url = req.getParameter("url");
+
+System.out.println("222url" + url);
+req.setAttribute("url", url);
+hService.hotStoreMenuDelete(req, model);
+hService.hotStore(req, model);
+
+System.out.println("url" + url);
+
+return "tcat/productList/" + url;
+}
+
+// 핫스토어 추가
+@RequestMapping("hotStoreMenuUpdate")
+public String hotStoreUpdate(HttpServletRequest req, Model model) {
+System.out.println("hotStoreMenuUpdate");
+String url = "";
+url = req.getParameter("url");
+System.out.println("1111url" + url);
+
+req.setAttribute("url", url);
+
+hService.hotStoreMenuUpdate(req, model);
+hService.hotStore(req, model);;
+System.out.println("url" + url);
+return "tcat/productList/" + url;
+}
+@Autowired
+YMGuestService YMService;
+
+// 이벤트 사이트
+@RequestMapping("eventHost_side")
+public String eventHost_side(HttpServletRequest req, Model model) {
+System.out.println("eventHost_side");
+return "tcat/borderManager/eventHost_side";
+}
+
+// 이벤트 호스트
+@RequestMapping("eventHost")
+public String eventHost(HttpServletRequest req, Model model) {
+System.out.println("eventHost");
+YMService.eventGuest(req, model);
+return "tcat/borderManager/eventHost";
+}
+
+/////////////////// HOST/상품관리/공연정보 수정-2018-01-25 성영민  //////////////////////////////
+// 이벤트수정
+@RequestMapping("eventUpdate")
+public String eventUpdate(HttpServletRequest req, Model model) {
+System.out.println("eventUpdate");
+YMService.eventForm(req, model);
+return "tcat/borderManager/eventUpdate";
+}
+
+// 이벤트등록
+@RequestMapping("eventAdd")
+public String eventAdd(MultipartHttpServletRequest req, Model model) {
+System.out.println("eventAdd");
+YMService.eventAdd(req, model);
+YMService.eventGuest(req, model);
+return "tcat/borderManager/eventHost";
+}
+
+// 구매승인사이트바
+@RequestMapping("provalMain_side")
+public String provalMain_side(HttpServletRequest req, Model model) {
+System.out.println("provalMain_side");
+return "tcat/proval/provalMain_side";
+}
+
+// 구매승인
+@RequestMapping("provalMain")
+public String provalMain(HttpServletRequest req, Model model) {
+System.out.println("provalMain");
+hService.provalHost(req, model);
+return "tcat/proval/provalMain";
+}
+
+// 구매승인
+@RequestMapping("provalUpdate")
+public String provalUpdate(HttpServletRequest req, Model model) {
+System.out.println("provalUpdate");
+hService.provalUpdate(req, model);
+hService.provalHost(req, model);
+return "tcat/proval/provalMain";
+}
+
+// 회원혜택관리
+@RequestMapping("levelMember_side")
+public String levelMember_side(HttpServletRequest req, Model model) {
+System.out.println("levelMember_side");
+return "tcat/memberManage/levelMember_side";
+}
+
+// 회원혜택관리
+@RequestMapping("levelMember")
+public String levelMember(HttpServletRequest req, Model model) {
+System.out.println("levelMember");
+hService.levelMember(req, model);
+return "tcat/memberManage/levelMember";
+}
+
+// 혜택삭제
+@RequestMapping("levelDelete")
+public String levelDelete(HttpServletRequest req, Model model) {
+System.out.println("levelDelete");
+hService.levelDelete(req, model);
+hService.levelMember(req, model);
+return "tcat/memberManage/levelMember";
+}
+
+// 혜택수정
+@RequestMapping("levelMemberForm")
+public String levelMemberForm(HttpServletRequest req, Model model) {
+System.out.println("levelMemberForm");
+hService.levelMemberForm(req, model);
+return "tcat/memberManage/levelMemberForm";
+}
+
+// 혜택업데이트
+@RequestMapping("levelMemberUpdate")
+public String levelMemberUpdate(HttpServletRequest req, Model model) {
+System.out.println("levelMemberUpdate");
+hService.levelMemberUpdate(req, model);
+hService.levelMember(req, model);
+return "tcat/memberManage/levelMember";
+}
+
+// 혜택등록
+@RequestMapping("levelAdd")
+public String levelAdd(MultipartHttpServletRequest req, Model model) {
+System.out.println("levelAdd");
+hService.levelAdd(req, model);
+hService.levelMember(req, model);
+return "tcat/borderManager/levelMember";
+}
+
+// 등급분석사이드
+@RequestMapping("infoLevel_side")
+public String infoLevel_side(HttpServletRequest req, Model model) {
+System.out.println("infoLevel_side");
+return "tcat/memberAnalysis/infoLevel_side";
+}
+
+// 등급분석사이드
+@RequestMapping("infoLevel")
+public String infoLevel(HttpServletRequest req, Model model) {
+System.out.println("infoLevel");
+return "tcat/memberAnalysis/infoLevel";
+}
+
+/////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민
+/////////////////// //////////////////////////////
+/////////////////// HOST/상품관리/공연정보 수정-2018-01-25 성영민
+/////////////////// //////////////////////////////
+// 공연정보 수정 사이드
+@RequestMapping("hostProModify_side")
+public String hostProModify_side(HttpServletRequest req, Model model) {
+System.out.println("hostProModify_side");
+return "tcat/productList/hostProModify_side";
+}
+
+
+
+// 공연정보 수정
+@RequestMapping("hostProModify")
+public String hostProModify(HttpServletRequest req, Model model) {
+System.out.println("hostProModify");
+// 공연정보 목록 가져오기
+hService.performanceList(req, model);
+return "tcat/productList/hostProModify";
+}
+
+// 상품수정 폼
+@RequestMapping("hostProForm")
+public String hostProForm(HttpServletRequest req, Model model) {
+System.out.println("hostProForm");
+hService.hostProForm(req, model);
+return "tcat/productList/hostProForm";
+}
+
+// 상품수정
+@RequestMapping("hostProUpdate")
+public String hostProUpdate(MultipartHttpServletRequest req, Model model) {
+System.out.println("hostProUpdate");
+hService.hostProUpdate(req, model);
+hService.performanceList(req, model);
+return "tcat/productList/hostProModify";
+}
+//////////////////////////////////////////////////////////////////////////////
+// 스토어 수정
+@RequestMapping("hostProStore")
+public String hostProStore(HttpServletRequest req, Model model) {
+System.out.println("hostProStore");
+// 공연정보 목록 가져오기
+hService.storeList(req, model);
+return "tcat/productList/hostProStore";
+}
+// 스토어수정 폼
+@RequestMapping("hostProStoreForm")
+public String hostProStoreForm(HttpServletRequest req, Model model) {
+System.out.println("hostProForm");
+hService.hostProStoreForm(req, model);
+return "tcat/productList/hostProStoreForm";
+}
+// 스토어수정 
+	@RequestMapping("hostProStoreUpdate")
+	public String hostProStoreUpdate(MultipartHttpServletRequest req, Model model) {
+		System.out.println("hostProStoreUpdate");
+		hService.hostProStoreUpdate(req, model);
+		hService.storeList(req, model);
+		return "tcat/productList/hostProStore";
 	}
+/////////////////// HOST/상품관리/공연정보 수정-2018-01-25 성영민
+/////////////////// //////////////////////////////
 
-	// 뮤지컬 핫카테고리 5개 출력 전체 출력
-	@RequestMapping("hotMusical")
-	public String hotMusical(HttpServletRequest req, Model model) {
-		req.setAttribute("url", "hotMusical");
-		hService.hotMenu(req, model);
-		System.out.println("2");
-		return "tcat/productList/hotMusical";
-	}
+// 이벤트삭제
+@RequestMapping("eventDelete")
+public String eventDelete(HttpServletRequest req, Model model) {
+System.out.println("eventDelete");
+YMService.eventDelete(req, model);
+YMService.eventGuest(req, model);
+return "tcat/borderManager/eventHost";
+}
 
-	// 핫리스트 제거
-	@RequestMapping("hotMenuDelete")
-	public String hotDelete(HttpServletRequest req, Model model) {
-		System.out.println("hotMenuDelete");
-		String url = "";
-		url = req.getParameter("url");
+// 이벤트수정
+@RequestMapping("eventUpdateList")
+public String eventUpdateList(MultipartHttpServletRequest req, Model model) {
+System.out.println("eventUpdateList");
+YMService.eventUpdateList(req, model);
+YMService.eventGuest(req, model);
+return "tcat/borderManager/eventHost";
+}
 
-		System.out.println("222url" + url);
-		req.setAttribute("url", url);
-		hService.hotMenuDelete(req, model);
-		hService.hotMenu(req, model);
+/////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민
+/////////////////////// 동금 1/9 start ////////////////////////
+// HOST/상품관리/상품삭제
+@RequestMapping("stockDelete_musical_side")
+public String stockDelete_musical_side(HttpServletRequest req, Model model) {
+System.out.println("stockDelete_musical_side");
 
-		System.out.println("url" + url);
+return "tcat/productList/stockDelete_musical_side";
+}
 
-		return "tcat/productList/" + url;
-	}
+// @SuppressWarnings("null")
+// 뮤지컬상품삭제
+@RequestMapping("stockDelete_musical")
+public String stockDelete_musical(HttpServletRequest req, Model model) {
+System.out.println("stockDelete_musical");
+req.setAttribute("url", "stockDelete_musical");// mDev 결정 -> service
+hService.stockDelete(req, model);
+return "tcat/productList/stockDelete_musical";
+}
 
-	// 핫리스트 추가
-	@RequestMapping("hotMenuUpdate")
-	public String hotUpdate(HttpServletRequest req, Model model) {
-		System.out.println("hotMenuUpdate");
-		String url = "";
-		url = req.getParameter("url");
-		System.out.println("1111url" + url);
+// 콘서트상품삭제
+@RequestMapping("stockDelete_concert")
+public String stockDelete_concert(HttpServletRequest req, Model model) {
+System.out.println("stockDelete_concert");
+req.setAttribute("url", "stockDelete_concert");
+hService.stockDelete(req, model);
+return "tcat/productList/stockDelete_concert";
+}
 
-		req.setAttribute("url", url);
+// 연극상품삭제
+@RequestMapping("stockDelete_drama")
+public String stockDelete_drama(HttpServletRequest req, Model model) {
+System.out.println("stockDelete_drama");
+req.setAttribute("url", "stockDelete_drama");
+hService.stockDelete(req, model);
+return "tcat/productList/stockDelete_drama";
+}
 
-		hService.hotMenuUpdate(req, model);
-		hService.hotMenu(req, model);
-		System.out.println("url" + url);
-		return "tcat/productList/" + url;
-	}
+// 클래식상품삭제
+@RequestMapping("stockDelete_classic")
+public String stockDelete_classic(HttpServletRequest req, Model model) {
+System.out.println("stockDelete_classic");
+req.setAttribute("url", "stockDelete_classic");
+hService.stockDelete(req, model);
+return "tcat/productList/stockDelete_classic";
+}
 
-	@RequestMapping("hotConcert")
-	public String hotConcert(HttpServletRequest req, Model model) {
-		System.out.println("hotConcert");
-		req.setAttribute("url", "hotConcert");
-		hService.hotMenu(req, model);
+// 스토어상품삭제
+@RequestMapping("stockDelete_store")
+public String stockDelete_store(HttpServletRequest req, Model model) {
+System.out.println("stockDelete_store");
+req.setAttribute("url", "stockDelete_store");
+hService.storeDelete(req, model);
+return "tcat/productList/stockDelete_store";
+}
 
-		return "tcat/productList/hotConcert";
-	}
+// 상품삭제alert
+@RequestMapping("stockDelete_Pro")
+public String stockDelete_Pro(HttpServletRequest req, Model model) {
+System.out.println("stockDelete_Pro");
+String url = req.getParameter("url");
+hService.stockDeletePro(req, model);
+if (url.equals("stockDelete_musical")) {
+stockDelete_musical(req, model);
+} else if (url.equals("stockDelete_concert")) {
+stockDelete_concert(req, model);
+} else if (url.equals("stockDelete_drama")) {
+stockDelete_drama(req, model);
+} else if (url.equals("stockDelete_classic")) {
+stockDelete_classic(req, model);
+}
 
-	@RequestMapping("hotDrama")
-	public String hotDrama(HttpServletRequest req, Model model) {
-		System.out.println("hotDrama");
-		req.setAttribute("url", "hotDrama");
-		hService.hotMenu(req, model);
-		return "tcat/productList/hotDrama";
-	}
+return "tcat/productList/" + url;
+}
 
-	@RequestMapping("hotClassic")
-	public String hotClassic(HttpServletRequest req, Model model) {
-		System.out.println("hotClassic");
-		req.setAttribute("url", "hotClassic");
-		hService.hotMenu(req, model);
-		return "tcat/productList/hotClassic";
-	}
+// 스토어상품삭제alert
+@RequestMapping("storeDelete_Pro")
+public String storeDelete_Pro(HttpServletRequest req, Model model) {
+System.out.println("storeDelete_Pro");
+String url = req.getParameter("url");
+hService.storeDeletePro(req, model);
+stockDelete_store(req, model);
 
-	@RequestMapping("hotStore")
-	public String hotStore(HttpServletRequest req, Model model) {
-		System.out.println("hotStore");
+return "tcat/productList/" + url;
+}
 
-		return "tcat/productList/hotStore";
-	}
+// 품절상품관리
+@RequestMapping("stockOutOf_musical_side")
+public String stockOutOf(HttpServletRequest req, Model model) {
+System.out.println("stockOutOf_musical_side");
 
-	@Autowired
-	YMGuestService YMService;
+return "tcat/productList/stockOutOf_musical_side";
+}
 
-	// 이벤트 사이트
-	@RequestMapping("eventHost_side")
-	public String eventHost_side(HttpServletRequest req, Model model) {
-		System.out.println("eventHost_side");
-		return "tcat/borderManager/eventHost_side";
-	}
+//공연상품품절관리
+@RequestMapping("stockOutOf_musical")
+public String stockOutOf_musical(HttpServletRequest req, Model model) {
+System.out.println("stockOutOf_musical");
 
-	// 이벤트 호스트
-	@RequestMapping("eventHost")
-	public String eventHost(HttpServletRequest req, Model model) {
-		System.out.println("eventHost");
-		YMService.eventGuest(req, model);
-		return "tcat/borderManager/eventHost";
-	}
+hService.productList(req, model);
 
-	// 이벤트수정
-	@RequestMapping("eventUpdate")
-	public String eventUpdate(HttpServletRequest req, Model model) {
-		System.out.println("eventUpdate");
-		YMService.eventForm(req, model);
-		return "tcat/borderManager/eventUpdate";
-	}
+return "tcat/productList/stockOutOf_musical";
+}
 
-	// 이벤트등록
-	@RequestMapping("eventAdd")
-	public String eventAdd(MultipartHttpServletRequest req, Model model) {
-		System.out.println("eventAdd");
-		YMService.eventAdd(req, model);
-		YMService.eventGuest(req, model);
-		return "tcat/borderManager/eventHost";
-	}
+// 공연판매중단하기
+@RequestMapping("perfstoreSale_stop")
+public String perfstoreSale_stop(HttpServletRequest req, Model model) {
+System.out.println("perfstoreSale_stop");
+String url = req.getParameter("url");
+System.out.println(url);
+hService.perfSale_stop(req, model);
+hService.productList(req, model);
+return "tcat/productList/stockOutOf_musical";
+}
 
-	// 구매승인사이트바
-	@RequestMapping("provalMain_side")
-	public String provalMain_side(HttpServletRequest req, Model model) {
-		System.out.println("provalMain_side");
-		return "tcat/proval/provalMain_side";
-	}
+// 공연판매중단해제하기
+@RequestMapping("perfstoreSale_Release")
+public String perfstoreSale_Release(HttpServletRequest req, Model model) {
+System.out.println("perfstoreSale_Release");
+String url = req.getParameter("url");
+hService.perfSale_Release(req, model);
+hService.productList(req, model);
+return "tcat/productList/" + url;
 
-	// 구매승인
-	@RequestMapping("provalMain")
-	public String provalMain(HttpServletRequest req, Model model) {
-		System.out.println("provalMain");
-		hService.provalHost(req, model);
-		return "tcat/proval/provalMain";
-	}
+}
 
-	// 구매승인
-	@RequestMapping("provalUpdate")
-	public String provalUpdate(HttpServletRequest req, Model model) {
-		System.out.println("provalUpdate");
-		hService.provalUpdate(req, model);
-		hService.provalHost(req, model);
-		return "tcat/proval/provalMain";
-	}
+// 스토어상품품절관리
+@RequestMapping("stockOutOf_store")
+public String stockOutOf_store(HttpServletRequest req, Model model) {
+System.out.println("stockOutOf_store");
+// int disc_count = Integer.parseInt(req.getParameter("disc_count"));
+req.setAttribute("url", "stockOutOf_store");
+hService.storeOutOf(req, model);
 
-	// 회원혜택관리
-	@RequestMapping("levelMember_side")
-	public String levelMember_side(HttpServletRequest req, Model model) {
-		System.out.println("levelMember_side");
-		return "tcat/memberManage/levelMember_side";
-	}
 
-	// 회원혜택관리
-	@RequestMapping("levelMember")
-	public String levelMember(HttpServletRequest req, Model model) {
-		System.out.println("levelMember");
-		hService.levelMember(req, model);
-		return "tcat/memberManage/levelMember";
-	}
+return "tcat/productList/stockOutOf_store";
+}
 
-	// 혜택삭제
-	@RequestMapping("levelDelete")
-	public String levelDelete(HttpServletRequest req, Model model) {
-		System.out.println("levelDelete");
-		hService.levelDelete(req, model);
-		hService.levelMember(req, model);
-		return "tcat/memberManage/levelMember";
-	}
+// 판매중단하기
+@RequestMapping("storeSale_stop")
+public String storeSale_stop(HttpServletRequest req, Model model) {
+System.out.println("storeSale_stop");
+String url = req.getParameter("url");
+hService.storeSale_stop(req, model);
+stockOutOf_store(req, model);
+return "tcat/productList/" + url;
+}
 
-	// 혜택수정
-	@RequestMapping("levelMemberForm")
-	public String levelMemberForm(HttpServletRequest req, Model model) {
-		System.out.println("levelMemberForm");
-		hService.levelMemberForm(req, model);
-		return "tcat/memberManage/levelMemberForm";
-	}
+// 판매중단해제하기
+@RequestMapping("storeSale_Release")
+public String storeSale_Release(HttpServletRequest req, Model model) {
+System.out.println("storeSale_Release");
+String url = req.getParameter("url");
+hService.storeSale_Release(req, model);
+stockOutOf_store(req, model);
 
-	// 혜택업데이트
-	@RequestMapping("levelMemberUpdate")
-	public String levelMemberUpdate(HttpServletRequest req, Model model) {
-		System.out.println("levelMemberUpdate");
-		hService.levelMemberUpdate(req, model);
-		hService.levelMember(req, model);
-		return "tcat/memberManage/levelMember";
-	}
+return "tcat/productList/" + url;
 
-	// 혜택등록
-	@RequestMapping("levelAdd")
-	public String levelAdd(MultipartHttpServletRequest req, Model model) {
-		System.out.println("levelAdd");
-		hService.levelAdd(req, model);
-		hService.levelMember(req, model);
-		return "tcat/borderManager/levelMember";
-	}
+}
 
-	// 등급분석사이드
-	@RequestMapping("infoLevel_side")
-	public String infoLevel_side(HttpServletRequest req, Model model) {
-		System.out.println("infoLevel_side");
-		return "tcat/memberAnalysis/infoLevel_side";
-	}
+////////////////공지사항 게시판////////////
+//공지사항 게시판 관리 사이드바
+@RequestMapping("noticeManager_side")
+public String noticeManager_side(HttpServletRequest req, Model model) {
+System.out.println("noticeManager_side");
 
-	// 등급분석사이드
-	@RequestMapping("infoLevel")
-	public String infoLevel(HttpServletRequest req, Model model) {
-		System.out.println("infoLevel");
-		return "tcat/memberAnalysis/infoLevel";
-	}
 
-	/////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민
-	/////////////////// //////////////////////////////
-	/////////////////// HOST/상품관리/공연정보 수정-2018-01-25 성영민
-	/////////////////// //////////////////////////////
-	// 공연정보 수정 사이드
-	@RequestMapping("hostProModify_side")
-	public String hostProModify_side(HttpServletRequest req, Model model) {
-		System.out.println("hostProModify_side");
-		return "tcat/productList/hostProModify_side";
-	}
+return "tcat/borderManager/noticeManager_side";
 
-	// 공연정보 수정
-	@RequestMapping("hostProModify")
-	public String hostProModify(HttpServletRequest req, Model model) {
-		System.out.println("hostProModify");
-		// 공연정보 목록 가져오기
-		hService.performanceList(req, model);
-		return "tcat/productList/hostProModify";
-	}
+}
+//공지사항 게시판 관리
+@RequestMapping("noticeManager")
+public String noticeManager(HttpServletRequest req, Model model) {
+System.out.println("noticeManager");
+//String url = req.getParameter("url");
+req.setAttribute("url", "noticeManager");
+hService.noticeManager(req, model);
 
-	// 상품수정 폼
-	@RequestMapping("hostProForm")
-	public String hostProForm(HttpServletRequest req, Model model) {
-		System.out.println("hostProForm");
-		hService.hostProForm(req, model);
-		return "tcat/productList/hostProForm";
-	}
+return "tcat/borderManager/noticeManager";
+}
 
-	// 상품수정 폼
-	@RequestMapping("hostProUpdate")
-	public String hostProUpdate(MultipartHttpServletRequest req, Model model) {
-		System.out.println("hostProUpdate");
-		hService.hostProUpdate(req, model);
-		return "tcat/productList/hostProModify";
-	}
+//공지사항 게시판 게시글 작성
+@RequestMapping("noticeManagerWrite")
+public String noticeManagerWrite(HttpServletRequest req, Model model) {
+System.out.println("noticeManagerWrite");
 
-	/////////////////// HOST/상품관리/공연정보 수정-2018-01-25 성영민
-	/////////////////// //////////////////////////////
-	// 이벤트삭제
-	@RequestMapping("eventDelete")
-	public String eventDelete(HttpServletRequest req, Model model) {
-		System.out.println("eventDelete");
-		YMService.eventDelete(req, model);
-		YMService.eventGuest(req, model);
-		return "tcat/borderManager/eventHost";
-	}
+return "tcat/borderManager/noticeManagerWrite";
+}
 
-	// 이벤트수정
-	@RequestMapping("eventUpdateList")
-	public String eventUpdateList(MultipartHttpServletRequest req, Model model) {
-		System.out.println("eventUpdateList");
-		YMService.eventUpdateList(req, model);
-		YMService.eventGuest(req, model);
-		return "tcat/borderManager/eventHost";
-	}
+//공지사항 게시판 게시글 작성처리페이지(사진이미지등록)
+@RequestMapping("noticeManagerWritePro")
+public String noticeManagerWritePro(MultipartHttpServletRequest req, Model model) {
+System.out.println("noticeManagerWritePro");
+//req.setAttribute("url", "noticeManagerWritePro");
+hService.noticeManagerWritePro(req, model);
 
-	/////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민
+return "tcat/borderManager/noticeManagerWritePro";
+}
 
-	/////////////////////// 동금 1/9 start ////////////////////////
-	// HOST/상품관리/상품삭제
-	@RequestMapping("stockDelete_musical_side")
-	public String stockDelete_musical_side(HttpServletRequest req, Model model) {
-		System.out.println("stockDelete_musical_side");
+//공지사항 게시판 게시글 삭제
+@RequestMapping("noticeManagerListDelete")
+public String noticeManagerListDelete(HttpServletRequest req, Model model) {
+System.out.println("noticeManagerListDelete");
+//String url = req.getParameter("url");
+hService.noticeManagerListDelete(req, model);
+return "tcat/borderManager/noticeManagerListDeletePro";
+}
 
-		return "tcat/productList/stockDelete_musical_side";
-	}
+//공지사항 게시판 게시글 수정페이지
+@RequestMapping("noticeManagerListUpdate")
+public String noticeManagerListUpdate(HttpServletRequest req, Model model) {
+System.out.println("noticeManagerListUpdate");
+int notice_num = Integer.parseInt(req.getParameter("notice_num"));
+model.addAttribute("notice_num", notice_num);
 
-	// @SuppressWarnings("null")
-	// 뮤지컬상품삭제
-	@RequestMapping("stockDelete_musical")
-	public String stockDelete_musical(HttpServletRequest req, Model model) {
-		System.out.println("stockDelete_musical");
-		req.setAttribute("url", "stockDelete_musical");// mDev 결정 -> service
-		hService.stockDelete(req, model);
-		return "tcat/productList/stockDelete_musical";
-	}
+return "tcat/borderManager/noticeManagerUpdate";
+}
 
-	// 콘서트상품삭제
-	@RequestMapping("stockDelete_concert")
-	public String stockDelete_concert(HttpServletRequest req, Model model) {
-		System.out.println("stockDelete_concert");
-		req.setAttribute("url", "stockDelete_concert");
-		hService.stockDelete(req, model);
-		return "tcat/productList/stockDelete_concert";
-	}
 
-	// 연극상품삭제
-	@RequestMapping("stockDelete_drama")
-	public String stockDelete_drama(HttpServletRequest req, Model model) {
-		System.out.println("stockDelete_drama");
-		req.setAttribute("url", "stockDelete_drama");
-		hService.stockDelete(req, model);
-		return "tcat/productList/stockDelete_drama";
-	}
+//공지사항 게시판 게시글 수정처리페이지
+@RequestMapping("noticeManagerListUpdatePro")
+public String noticeManagerListUpdate(MultipartHttpServletRequest req, Model model) {
+System.out.println("noticeManagerListUpdate");
+hService.noticeManagerListUpdatePro(req, model);
+return "tcat/borderManager/noticeManagerListUpdatePro";
+}
 
-	// 클래식상품삭제
-	@RequestMapping("stockDelete_classic")
-	public String stockDelete_classic(HttpServletRequest req, Model model) {
-		System.out.println("stockDelete_classic");
-		req.setAttribute("url", "stockDelete_classic");
-		hService.stockDelete(req, model);
-		return "tcat/productList/stockDelete_classic";
-	}
+//공지사항 상세페이지
+@RequestMapping("noticeManagerContent")
+public String noticeManagerContent(HttpServletRequest req, Model model) {
+System.out.println("noticeManagerContent");
 
-	// 스토어상품삭제
-	@RequestMapping("stockDelete_store")
-	public String stockDelete_store(HttpServletRequest req, Model model) {
-		System.out.println("stockDelete_store");
-		req.setAttribute("url", "stockDelete_store");
-		hService.storeDelete(req, model);
-		return "tcat/productList/stockDelete_store";
-	}
+hService.noticeManagerContent(req, model);
 
-	// 상품삭제alert
-	@RequestMapping("stockDelete_Pro")
-	public String stockDelete_Pro(HttpServletRequest req, Model model) {
-		System.out.println("stockDelete_Pro");
-		String url = req.getParameter("url");
-		hService.stockDeletePro(req, model);
-		if (url.equals("stockDelete_musical")) {
-			stockDelete_musical(req, model);
-		} else if (url.equals("stockDelete_concert")) {
-			stockDelete_concert(req, model);
-		} else if (url.equals("stockDelete_drama")) {
-			stockDelete_drama(req, model);
-		} else if (url.equals("stockDelete_classic")) {
-			stockDelete_classic(req, model);
-		}
+return "tcat/borderManager/noticeManagerContent";
+}
 
-		return "tcat/productList/" + url;
-	}
+////////////////qna 게시판////////////
+//qna게시판 관리 사이드바
+@RequestMapping("qnaManager_side")
+public String qnaManager_side(HttpServletRequest req, Model model) {
+System.out.println("qnaManager_side");
 
-	// 스토어상품삭제alert
-	@RequestMapping("storeDelete_Pro")
-	public String storeDelete_Pro(HttpServletRequest req, Model model) {
-		System.out.println("storeDelete_Pro");
-		String url = req.getParameter("url");
-		hService.storeDeletePro(req, model);
-		stockDelete_store(req, model);
 
-		return "tcat/productList/" + url;
-	}
+return "tcat/borderManager/qnaManager_side";
 
-	// 품절상품관리
-	@RequestMapping("stockOutOf_musical_side")
-	public String stockOutOf(HttpServletRequest req, Model model) {
-		System.out.println("stockOutOf_musical_side");
+}
 
-		return "tcat/productList/stockOutOf_musical_side";
-	}
+//qna 게시판 관리
+@RequestMapping("qnaManager")
+public String qnaManager(HttpServletRequest req, Model model) {
+System.out.println("qnaManager");
+//String url = req.getParameter("url");
+//req.setAttribute("url", "noticeManager");
+hService.qnaManager(req, model);
 
-	@RequestMapping("stockOutOf_musical")
-	public String stockOutOf_musical(HttpServletRequest req, Model model) {
-		System.out.println("stockOutOf_musical");
+return "tcat/borderManager/qnaManager";
+}
 
-		return "tcat/productList/stockOutOf_musical";
-	}
+//qna게시판 게시글 삭제
+@RequestMapping("qnaManagerListDelete")
+public String qnaManagerListDelete(HttpServletRequest req, Model model) {
+System.out.println("qnaManagerListDelete");
+//String url = req.getParameter("url");
+hService.qnaManagerListDelete(req, model);
+return "tcat/borderManager/qnaManagerListDeletePro";
+}
 
-	// 스토어상품품절관리
-	@RequestMapping("stockOutOf_store")
-	public String stockOutOf_store(HttpServletRequest req, Model model) {
-		System.out.println("stockOutOf_store");
-		// int disc_count = Integer.parseInt(req.getParameter("disc_count"));
-		req.setAttribute("url", "stockOutOf_store");
-		hService.storeOutOf(req, model);
-		/*
-		 * if(disc_count==0) { hService.storeSale_stop(req, model); }
-		 */
+//Q&A게시판 상세보기
+@RequestMapping("qnaManagerContent")
+public String qnaManagerContent(HttpServletRequest req, Model model) {
+System.out.println("qnaManagerContent");
+//상세글
+hService.qnaManagerContent(req, model);
+//댓글
+hService.qnaManagerComment(req, model);
 
-		return "tcat/productList/stockOutOf_store";
-	}
+return "tcat/borderManager/qnaManagerContent";
+}
 
-	// 판매중단하기
-	@RequestMapping("storeSale_stop")
-	public String storeSale_stop(HttpServletRequest req, Model model) {
-		System.out.println("storeSale_stop");
-		String url = req.getParameter("url");
-		hService.storeSale_stop(req, model);
-		stockOutOf_store(req, model);
-		return "tcat/productList/" + url;
-	}
+//댓글달기
+@RequestMapping("qnaManagerCommentWrite")
+public String qnaManagerCommentWrite(HttpServletRequest req, Model model) {
+System.out.println("qnaManagerCommentWrite");
+//댓글작성
+hService.qnaManagerWrite(req, model);
+//상세글
+hService.qnaManagerContent(req, model);
+//댓글
+hService.qnaManagerComment(req, model);
 
-	// 판매중단해제하기
-	@RequestMapping("storeSale_Release")
-	public String storeSale_Release(HttpServletRequest req, Model model) {
-		System.out.println("storeSale_Release");
-		String url = req.getParameter("url");
-		hService.storeSale_Release(req, model);
-		stockOutOf_store(req, model);
+return "tcat/borderManager/qnaManagerContent";
+}
 
-		return "tcat/productList/" + url;
 
-	}
+//댓글삭제
+@RequestMapping("deleteManagerComment")
+public String deleteManagerComment(HttpServletRequest req,Model model) {
+System.out.println("deleteManagerComment");
+//댓글삭제
+hService.commentmanagerDelete(req, model);
+//상세글불러오기
+hService.qnaManagerContent(req, model);
+//댓글
+hService.qnaManagerComment(req, model);
 
-	/////////////////////// 동금 1/17 end ///////////////////////////
+return "tcat/borderManager/qnaManagerContent";
+}
 
+//1:1게시판 관리 사이드바
+@RequestMapping("oneManager_side")
+public String oneManager_side(HttpServletRequest req, Model model) {
+System.out.println("oneManager_side");
+
+
+return "tcat/borderManager/oneManager_side";
+
+}
+
+//1:1 게시판 관리
+@RequestMapping("oneManager")
+public String oneManager(HttpServletRequest req, Model model) {
+System.out.println("oneManager");
+//String url = req.getParameter("url");
+//req.setAttribute("url", "noticeManager");
+hService.oneManager(req, model);
+
+return "tcat/borderManager/oneManager";
+}
+
+//1:1게시판 게시글 삭제
+@RequestMapping("oneManagerListDelete")
+public String oneManagerListDelete(HttpServletRequest req, Model model) {
+System.out.println("oneManagerListDelete");
+//String url = req.getParameter("url");
+hService.oneManagerListDelete(req, model);
+return "tcat/borderManager/oneManagerListDeletePro";
+}
+
+//1:1게시판 상세보기
+@RequestMapping("oneManagerContent")
+public String oneManagerContent(HttpServletRequest req, Model model) {
+System.out.println("oneManagerContent");
+//상세글
+hService.oneManagerContent(req, model);
+//댓글
+hService.oneManagerComment(req, model);
+
+return "tcat/borderManager/oneManagerContent";
+}
+
+//댓글달기
+@RequestMapping("oneManagerCommentWrite")
+public String oneManagerCommentWrite(HttpServletRequest req, Model model) {
+System.out.println("oneManagerCommentWrite");
+//댓글작성
+hService.oneManagerWrite(req, model);
+//상세글
+hService.oneManagerContent(req, model);
+//댓글
+hService.oneManagerComment(req, model);
+
+return "tcat/borderManager/oneManagerContent";
+}
+
+//댓글삭제
+@RequestMapping("deleteOneManagerComment")
+public String deleteOneManagerComment(HttpServletRequest req,Model model) {
+System.out.println("deleteOneManagerComment");
+//댓글삭제
+hService.commentOnemanagerDelete(req, model);
+//상세글불러오기
+hService.oneManagerContent(req, model);
+//댓글
+hService.oneManagerComment(req, model);
+
+return "tcat/borderManager/oneManagerContent";
+}
+
+
+
+/////////////////////// 동금 1/17 end ///////////////////////////
 	////////////////////// 태성 1/21 start////////////////////////////
 	// 관람/상품 후기 관리 게시판 목록
 	@RequestMapping("commentManager")
@@ -1395,5 +1704,117 @@ public class TcatHostController {
 		return "tcat/productManager/productRefundS";
 	}
 	////////////////////// 태성 1/23 end////////////////////////////
+	///////////////////// 태성 1/30 start//////////////////////////
 
+	// 사진관리 게시판
+	@RequestMapping("photoManager")
+	public String photoManager(HttpServletRequest req, Model model) {
+
+		System.out.println("photoManager");
+
+		hService.photoManagerList(req, model);
+
+		return "tcat/borderManager/photoManager";
+
+	}
+
+	// 사진관리 게시판_side
+	@RequestMapping("photoManager_side")
+	public String photoManager_side(HttpServletRequest req, Model model) {
+		System.out.println("photoManager_side");
+		return "tcat/borderManager/photoManager_side";
+	}
+
+	// 사진관리 게시판 - 수정
+	@RequestMapping("photoManagerNomo")
+	public String photoManagerNomo(MultipartHttpServletRequest req, Model model) {
+
+		System.out.println("photoManagerNomo");
+
+		hService.photoManagerNomoService(req, model);
+		hService.photoManagerList(req, model);
+
+		return "tcat/borderManager/photoManager";
+
+	}
+
+	// 사진관리 게시판 - 삭제
+	@RequestMapping("photoManagerDelete")
+	public String photoManagerDelete(HttpServletRequest req, Model model) {
+
+		System.out.println("photoManagerDelete");
+
+		req.setAttribute("category", req.getParameter("category"));
+		hService.photoManagerDeleteService(req, model);
+		hService.photoManagerList(req, model);
+
+		return "tcat/borderManager/photoManager";
+
+	}
+
+	// 영상관리 게시판
+	@RequestMapping("movieManager")
+	public String movieManager(HttpServletRequest req, Model model) {
+
+		System.out.println("movieManager");
+		hService.movieManagerList(req, model);
+		
+		return "tcat/borderManager/movieManager";
+	}
+
+	// 영상관리 게시판 - side
+	@RequestMapping("movieManager_side")
+	public String movieManager_side(HttpServletRequest req, Model model) {
+
+		System.out.println("movieManager_side");
+
+		return "tcat/borderManager/movieManager_side";
+	}
+	// 영상관리 게시판 - 수정
+		@RequestMapping("movieManagerNomo")
+		public String movieManagerNomo(MultipartHttpServletRequest req, Model model) {
+
+			System.out.println("movieManagerNomo");
+
+			hService.movieManagerNomoService(req, model);
+			hService.movieManagerList(req, model);
+
+			return "tcat/borderManager/movieManager";
+
+		}
+
+		// 영상관리 게시판 - 삭제
+		@RequestMapping("movieManagerDelete")
+		public String movieManagerDelete(HttpServletRequest req, Model model) {
+
+			System.out.println("movieManagerDelete");
+
+			req.setAttribute("category", req.getParameter("category"));
+			hService.movieManagerDeleteService(req, model);
+			hService.movieManagerList(req, model);
+
+			return "tcat/borderManager/movieManager";
+
+		}
+		// 스토어 반품 - 목록
+		@RequestMapping("productReturn")
+		public String productReturn(HttpServletRequest req, Model model) {
+
+			System.out.println("productReturn");
+			hService.productReturn(req, model);
+
+			return "tcat/productManager/productReturn";
+		}
+
+		// 스토어 반품 - 승인
+		@RequestMapping("productReturnUpdateS")
+		public String productReturnUpdateS(HttpServletRequest req, Model model) {
+
+			System.out.println("productReturnUpdateS");
+			hService.productReturnUpdateS(req, model);
+			hService.productReturn(req, model);
+
+			return "tcat/productManager/productReturn";
+		}
+	///////////////////// 태성 1/30 end//////////////////////////
 }

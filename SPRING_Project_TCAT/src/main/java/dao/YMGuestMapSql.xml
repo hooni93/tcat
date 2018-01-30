@@ -95,7 +95,7 @@
 	<insert id="eventAddCnt" parameterType="java.util.Map">
 	<![CDATA[
 		INSERT INTO Notice (notice_num, notice_title, writeDate, contents, notice_image,notice_div,notice_addfile, member_id) 
-		VALUES (Notice_SEQ.nextval,  #{notice_title},#{writeDate},#{contents},#{notice_image},#{notice_div},#{notice_addfile},#{member_id})
+		VALUES (Notice_SEQ.nextval,  #{notice_title},#{writeDate},#{contents},#{notice_image},5,#{notice_addfile},#{member_id})
 		]]>
 	</insert>
    </mapper>

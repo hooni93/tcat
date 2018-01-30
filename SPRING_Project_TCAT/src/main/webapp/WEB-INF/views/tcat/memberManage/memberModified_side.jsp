@@ -11,7 +11,6 @@
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h50"></li>
 				<li class="b400040"><a onclick="">회원정보 조회 리스트</a></li>
-				<li class="b400040"><a onclick="">회원정보 상세</a></li>
 			</ul>
 </body>
 </html>

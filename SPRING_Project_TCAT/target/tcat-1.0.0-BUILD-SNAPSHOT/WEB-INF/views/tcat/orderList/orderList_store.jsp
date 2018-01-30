@@ -27,9 +27,16 @@
 		//ajax submit enter
 		$('#ajaxSubmitForm').keydown(function(e) {
 	        if (e.keyCode == 13) {
-	          ajaxSubmit('orderList_store');
+	         	ajaxSubmit('orderList_store');
 	        }
    		 });
+		
+		//구매승인
+		$(".orderConfirm").click(function(){
+			var disc_num = $(this).attr("name");
+			var pageInfo = $(this).attr("id");
+			load("orderCon?disc_num="+disc_num+pageInfo);
+		});
 	});
 </script>
 </head>
@@ -52,7 +59,7 @@
 					<option  value="2">구매승인</option>
 					<option   value="3">배송시작</option>
 					<option   value="4">배송중</option>
-					<option   value="5">구매완료</option>
+					<option   value="5">배송완료</option>
 					<option value="6">환불요청</option>
 					<option  value="7">환불승인</option>
 					<option   value="8">교환</option>
@@ -69,7 +76,7 @@
 				<!--키워드 카테고리  -->
 				<select name="searchCondition" class="btn btn-default">
 					<option value="">전체</option>
-					<option value="del_num">구매번호</option>
+					<option value="disc_num">구매번호</option>
 					<option value="member_id">구매자 아이디</option>
 					<option value="disc_title">상품명</option>
 					<option value="del_name">이름</option>
@@ -94,11 +101,12 @@
 				<td><b>구매상태</b></td>
 				<td><b>구매날짜</b></td>
 				<td><b>할인조건</b></td>
+				<td class="w10p"><b>구매승인</b></td>
 			</tr>
 			<c:if test="${orders!=null }">
 				<c:forEach var="order" items="${orders}">
 					<tr>
-						<td>${order.del_num }</td>
+						<td>${order.disc_num }</td>
 						<td>${order.member_id }</td>
 						<td>${order.disc_title }</td>
 						<td>${order.del_name }</td>
@@ -118,11 +126,18 @@
 						</td>
 						<td>${order.disc_buyDate }</td>
 						<td>${order.sale_div } (${order.sale_rate }%)</td>
+						<td>
+							<c:if test="${order.disc_buyStep==1}">
+								<input name="${order.disc_num }" type="button" value="구매승인"
+								id="&searchCondition=${searchCondition }&disc_buyStep=${disc_buyStep}&keyword=${keyword}&mDev=${mDev}&sDev=${sDev}&pageNum=${currentPage}"
+								class="btn btn-primary orderConfirm">
+							</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 			</c:if>
 			<c:if test="${orders==null }">
-				<tr><td colspan="10" class="h550 ">
+				<tr><td colspan="11" class="h550 ">
 				<span class="tm fs15">검색결과가 없습니다.</span>
 				</td></tr>
 			</c:if>

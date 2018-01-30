@@ -40,4 +40,8 @@ public interface HSGuestService {
 	public void storePay(HttpServletRequest req,Model model,@RequestParam (value = "valueArrTest[]") List<String> valueArr);
 	//스토어 장바구니 삭제
 	public void deleteCart(HttpServletRequest req,Model model);
+	//메인 검색 공연리스트
+	public void searchPerList(HttpServletRequest req,Model model);
+	//메인 검색 스토어리스트
+	public void searchStoreList(HttpServletRequest req,Model model);
 }

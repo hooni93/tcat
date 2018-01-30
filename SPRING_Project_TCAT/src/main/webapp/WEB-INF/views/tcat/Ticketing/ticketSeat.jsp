@@ -10,6 +10,21 @@
 <script type="text/javascript">
 
 $(document).ready(function(){ 
+	 
+	
+	if($("input[name='seat_type']")!=0){
+		
+		var seat_type=$("input[name='seat_type']").val();
+		var seat_type=seat_type.split(",");
+
+		for(var i=0;i<seat_type.length;i++){
+			var a=seat_type[i].split(".");
+			var seat="#"+a[1];
+			$(seat).addClass("active");
+			$(seat).addClass("selected");
+		}
+	}	  
+
     $('.checkButton').click(function(e){
     	var id="#";
         id +=e.target.getAttribute('id');
@@ -25,6 +40,8 @@ $(document).ready(function(){
     		 if(idArr.length==1){
     			 $("input[name='seat_type']").val("0");
     			 $("input[name='price']").val(0);
+    			 $("input[name='totalPrice']").val(0);
+    			 
     		 }else{
     	   	idvalue="";
     	   	var idclick=$(id).val();

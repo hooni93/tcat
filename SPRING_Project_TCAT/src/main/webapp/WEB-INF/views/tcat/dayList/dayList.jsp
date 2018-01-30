@@ -14,54 +14,62 @@
 <link href="${css}style.css" rel="stylesheet" type="text/css">
  <link href="${css}bootstrap_tcatMain.css" rel="stylesheet">
 <script src="${script}ajax/request.js"></script>
-
-<script type="text/javascript">
-
-	$(function() {
-
-		$('#datepicker').datepicker({
-			dateFormat: 'yy-mm-dd',//데이터 형식 변경
-			 changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
-			  changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
-		    onSelect: function(dateText, inst) { //선택한 데이터를 input박스에 넣기
-		    	$( ".thumbnail" ).load( "${pageContext.request.contextPath}/daySearch?date="+dateText );
-			    
-		    }
-		});
-	});
-	
-
-</script>
 </head>
 <body>
-<div class="row">
-    	<div class="col-md-2"></div>
-    	<div class="col-md-8">
-		<c:forEach var="vo" items="${dtos}" >
-			<div class="col-sm-3 col-md-2">
-				<div class="thumbnail" >
-					<img src="${image}performance/${vo.perf_Image}" style="width:150px;height:200px" class="img-responsive">
-					<div class="caption">
-						<h6 class="c"><label>${vo.perf_title}</label></h6>
-						<h6 class="c">${vo.hall_name}</h6>
-						<h6 class="c">
-							<c:set var="startdate" value="${fn:split(vo.startDate,' ')}"/>
-							${startdate[0]}
-						</h6>
-						<h6 class="c">
-							<c:set var="enddate" value="${fn:split(vo.endDate,' ')}"/>
-							<span> ~ </span> ${enddate[0]}
-						</h6>
+<!--리스트 시작  -->
+<!-- ss -->
+			<div class="col-sm-12 c bf0f0f0 pt5"
+				style="border: 1px solid #d0d0d0; border-top: 2px solid #534556; height: 30px;">
+				<div class="col-sm-8 ">
+					<b>공연명</b>
+				</div>
+				<div class="col-sm-2 "
+					style="border: 1px solid lightgrey; border-bottom: none; border-top: none;">
+					<b>일시</b>
+				</div>
+				<div class="col-sm-2 ">
+					<b>장소</b>
+				</div>
+			</div>
+			<c:forEach var="perf" items="${dtos}">
+				<div class="col-sm-12 c" style="border-bottom: 1px solid #d0d0d0; ">
+					<div class="col-sm-8 tm">
+						<div class="col-sm-3 p5">
+							<a onclick="contentPage(${perf.per_id})"> <img src="${image}performance/${perf.perf_Image}" width="130px">
+							</a>
+						</div>
+						<div class="col-sm-9 pt18">
+							<b class="floatL"> <a onclick="contentPage(${perf.per_id})" style="color: black">
+									${perf.perf_title } </a>
+							</b>
+						</div>
 					</div>
-					<div class="c m5">
-						<a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a> 
-						<a href="#" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> 예매</a>
+					<div class="col-sm-2 pt5">
+						<fmt:formatDate value="${perf.startDate }" pattern="yyyy년 MM월 dd일" />
+						~
+						<fmt:formatDate value="${perf.endDate }" pattern="yyyy년 MM월 dd일" />
 					</div>
-					</div><!-- outline -->
-				</div><!-- md2 -->
-		</c:forEach>
-		</div>
-		<div class="col-md-2"></div>
-		</div>
+					<div class="col-sm-2 pt5">${perf.province}${perf.city}</div>
+				</div>
+			</c:forEach>
+			<!--리스트 끝  -->
+
+			<!--페이지 컨트롤러  -->
+			<div class="col-sm-12 c">
+
+				<ul class="pagination">
+					<c:if test="${currentPage!=1}">
+						<li><a onclick="dayList('daySearch?date=${date}&pageNum=1');">《</a></li>
+						<li><a onclick="dayList('daySearch?date=${date}&pageNum=${currentPage-1}');">〈</a></li>
+					</c:if>
+					<c:forEach var="i" begin="${startPage}" end="${endPage}">
+						<li id="${i }"><a onclick="dayList('daySearch?date=${date}&pageNum=${i}');">${i }</a></li>
+					</c:forEach>
+					<c:if test="${currentPage!=pageCnt}">
+						<li><a onclick="dayList('daySearch?date=${date}&pageNum=${currentPage+1}');">〉</a></li>
+						<li><a onclick="dayList('daySearch?date=${date}&pageNum=${pageCnt}');">》</a></li>
+					</c:if>
+				</ul>
+			</div>
 </body>
 </html>

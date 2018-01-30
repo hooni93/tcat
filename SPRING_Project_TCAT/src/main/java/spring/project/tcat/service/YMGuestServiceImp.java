@@ -110,12 +110,18 @@ public class YMGuestServiceImp implements YMGuestService {
 			Date yesterDay=new Date();
 			 today.setTime(today.getTime()+((long) 1000*60*60*24)); //365 년
 			 yesterDay.setTime(today.getTime()-((long) 1000*60*60*24*365)); //작년 365
+			 
 			 String todayStr=date.format(today); //date.format 궁굼
 			 String yesterDayStr=date.format(yesterDay);
+			 
+			 
+			
+			 
+			
 			 map.put("today", todayStr);
 			 map.put("yesterday", yesterDayStr);
 			 sRank=YMDao.dayCnt(map);
-			 Rating="A";
+			 	Rating="A";
 				nextRating="S";
 				max=10;
 				p=sRank*max;
@@ -124,9 +130,16 @@ public class YMGuestServiceImp implements YMGuestService {
 				model.addAttribute("sRank", sRank);
 				model.addAttribute("p", p);
 				model.addAttribute("cnt", cnt);
-				model.addAttribute("today", today);
-				model.addAttribute("yesterDay", yesterDay);
+				model.addAttribute("todayStr", todayStr);
+				model.addAttribute("yesterDayStr", yesterDayStr);
 			 System.out.println("1");
+			 
+			 	String sDate[] = todayStr.split("/");
+				todayStr = sDate[2] + "/" + sDate[0] + "/" + sDate[1];
+				String eDate[] = yesterDayStr.split("/");
+				yesterDayStr = eDate[2] + "/" + eDate[0] + "/" + eDate[1];
+			
+				
 			if(sRank>=10) {
 				System.out.println("3");
 				map.put("compare", 4);
@@ -140,8 +153,8 @@ public class YMGuestServiceImp implements YMGuestService {
 				model.addAttribute("nextRating", nextRating);
 				model.addAttribute("cnt", cnt);
 				model.addAttribute("sRank", sRank);
-				model.addAttribute("today", today);
-				model.addAttribute("yesterDay", yesterDay);
+				model.addAttribute("todayStr", todayStr);
+				model.addAttribute("yesterDayStr", yesterDayStr);
 				model.addAttribute("p", p);
 				vRank=YMDao.dayCnt1(map);
 				if(vRank>=20) {
@@ -304,7 +317,6 @@ public class YMGuestServiceImp implements YMGuestService {
 			String contents= req.getParameter("contents");
 			String writeDate= req.getParameter("writeDate");
 			String member_id= req.getParameter("member_id");
-			int notice_div=Integer.parseInt(req.getParameter("notice_div"));
 			String notice_addfile =req.getParameter("notice_addfile");
 			
 			String sDate[] = writeDate.split("/");
@@ -314,7 +326,6 @@ public class YMGuestServiceImp implements YMGuestService {
 			System.out.println("notice_image======="+notice_image);
 			System.out.println("contents======="+contents);
 			System.out.println("writeDate======="+writeDate);
-			System.out.println("notice_div======="+notice_div);
 			System.out.println("member_id======="+member_id);
 			
 			Map<String,Object> map=new HashMap<String, Object>();
@@ -323,7 +334,6 @@ public class YMGuestServiceImp implements YMGuestService {
 			map.put("writeDate", writeDate);
 			map.put("contents", contents);
 			map.put("member_id", member_id);
-			map.put("notice_div", notice_div);
 			map.put("notice_addfile", notice_addfile);
 			addCnt=YMDao.eventAddCnt(map);
 			

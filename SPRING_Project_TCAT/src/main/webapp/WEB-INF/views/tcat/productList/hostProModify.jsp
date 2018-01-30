@@ -25,12 +25,11 @@ function seatPrice(title,hall_name,vip,r,s,a,b){
 					<h4>
 						<b>상품정보 수정</b>
 					</h4>
+					<hr>
 					<div>
-						<hr>
-					<br> <br>
-					<h3>상품 전체리스트</h3>
+					
 					<div>
-						<hr>
+					
 						<!-- 상품 전체리스트 -->
 						<table
 							class="table table-hover table-bordered table-condensed c fs10">
@@ -116,7 +115,8 @@ function seatPrice(title,hall_name,vip,r,s,a,b){
 				<!--리스트목록 끝  -->
 				</div>
 				<div class="col-md-1"></div>
-			</div>
+				</div>
+				</div>
 			</div>
 			</div>
 	</div>

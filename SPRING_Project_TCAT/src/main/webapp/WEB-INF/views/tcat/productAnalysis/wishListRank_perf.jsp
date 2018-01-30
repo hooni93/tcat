@@ -4,31 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript">
-$(document).ready(function(){
-	// add button style 
-	$("[name='poll_bar'").addClass("btn btn-default");
-	// Add button style with alignment to left with margin.
-	$("[name='poll_bar'").css({"text-align":"left","margin":"5px"});		
-	//loop 
-	$("[name='poll_bar'").each(
-			function(i){			
-			  //get poll value 	
-				var bar_width = (parseFloat($("[name='poll_val'").eq(i).text())/2).toString();
-				bar_width = bar_width*3 + "%"; //add percentage sign.										
-				//set bar button width as per poll value mention in span.
-				$("[name='poll_bar'").eq(i).width(bar_width);					
-				//Define rules.
-				var bar_width_rule = parseFloat($("[name='poll_val'").eq(i).text());					 
-				if(bar_width_rule >= 40){$("[name='poll_bar'").eq(i).addClass("btn btn-sm btn-success")}
-				if(bar_width_rule <  40){$("[name='poll_bar'").eq(i).addClass("btn btn-sm btn-warning")}
-				if(bar_width_rule <= 10){$("[name='poll_bar'").eq(i).addClass("btn btn-sm btn-danger")}	
-				//Hide dril down divs
-				$("#" + $("[name='poll_bar'").eq(i).text()).hide();
-  });
-});
-</script>
 </head>
 <br>
 <br>
@@ -40,24 +15,60 @@ $(document).ready(function(){
     </h3>    
   </div>     
 	<div class="panel-body"  style="margin:0px; width:100%;">
-	  	<div id="Main">
-	  		<c:set var="sum" value="0" />
-	  		<c:forEach var="rank" items="${ranks}">
-	  			<c:if test="${rank.rNum<=5 }">
-	  				<c:set var="sum" value="${sum + rank.sellCnt }" />
-	  			</c:if>
-	  		</c:forEach>
-	  		<c:forEach var="rank" items="${ranks}">
-	  			<c:if test="${rank.rNum<=5 }"> 
-		     		<a name="poll_bar">${rank.perf_title } </a> 
-		     		<span name="poll_val"><fmt:formatNumber value="${rank.sellCnt*100/sum}" pattern=".00"/>%</span><br/>
-		     	</c:if>
-		    </c:forEach>
-    	</div>
+		<canvas id="chartjs-1" class="chartjs" width="800" height="400"
+				style="display: block; height: 320px; width: 640px;">
+			</canvas>
+			<script type="text/javascript">
+				var labels = new Array; 
+				var data  = new Array;
+			</script>
+			<c:forEach var="rank" items="${ranks}" begin="0" end="4">
+				<script type="text/javascript">
+					labels.push("code.${rank.per_id}");
+					data.push(${rank.sellCnt});
+				</script>
+			</c:forEach>
+			<script type="text/javascript">
+				new Chart(document.getElementById("chartjs-1"),
+						{
+							"type" : "bar",
+							"data" : {
+								"labels" : labels,
+								"datasets" : [ {
+									"label" : "위시리스트 Top5",
+									"data" : data,
+									"fill" : false,
+									"backgroundColor" : [
+											"rgba(255, 99, 132, 0.2)",
+											"rgba(255, 159, 64, 0.2)",
+											"rgba(255, 205, 86, 0.2)",
+											"rgba(75, 192, 192, 0.2)",
+											"rgba(201, 203, 207, 0.2)" ],
+									"borderColor" : [ 	"rgb(255, 99, 132)",
+														"rgb(255, 159, 64)",
+														"rgb(255, 205, 86)",
+														"rgb(75, 192, 192)",
+														"rgb(201, 203, 207)" ],
+									"borderWidth" : 3
+								} ]
+							},
+							"options" : {
+								"scales" : {
+									"yAxes" : [ {
+										"ticks" : {
+											"beginAtZero" : true
+										}
+									} ]
+								}
+							}
+						});
+			</script>
+	
+	
 	</div>  
 </div>
 </div>
-<table class="table table-inbox table-hover">
+<table class="table table-inbox table-hover fs12px">
 	<tbody>
 	<c:forEach var="rank" items="${ranks }">
 		<c:if test="${rank.rNum > 5 }"><tr onclick="detailOpen('performance','${rank.per_id}')"></c:if>

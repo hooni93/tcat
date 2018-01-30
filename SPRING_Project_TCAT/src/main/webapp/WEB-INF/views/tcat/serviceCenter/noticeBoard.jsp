@@ -47,9 +47,9 @@ function qnawrite(){
 					class="table table-hover table-bordered table-condensed c fs12">
 					<tr class="bg-primary">
 						<td><b>번호</b></td>
-						<td><b>구분<b></td>
-						<td><b>제목</b></td>
-						<td><b>작성자</b></td>
+						<td style="width: 15%"><b>제목<b></td>
+						<td style="width: 20%"><b>이미지</b></td>
+						<td style="width: 15%"><b>내용</b></td>
 						<td><b>조회수</b></td>
 						<td><b>날짜</b></td>
 						
@@ -59,6 +59,13 @@ function qnawrite(){
 						<c:forEach var="dto" items="${dtos}">
 							<tr>
 								<td>${dto.notice_num}</td>
+								<td><a onclick="loadBoard('noticeContent?notice_num=${dto.notice_num}');">${dto.notice_title}</a></td>
+							    <td>
+								    <img src="/tcat/resources/image/Boarder/${dto.notice_image}" 
+								         style="width: 200px; height: 200px;">
+							    </td>
+								
+								<%-- 
 								<td>
 									<c:if test="${dto.notice_div==1}">
 									 	공지사항
@@ -68,10 +75,10 @@ function qnawrite(){
 									 </c:if>
 									 <c:if test="${dto.notice_div==3}">
 									 	사진컨텐츠 게시판
-									 </c:if>
-								</td>
-								<td><a onclick="loadBoard('noticeContent?notice_num=${dto.notice_num}');">${dto.notice_title}</a></td>
-								<td>${dto.member_id}</td>
+									 </c:if> 
+								</td>--%>
+								<%-- <td><a onclick="loadBoard('noticeContent?notice_num=${dto.notice_num}');">${dto.notice_title}</a></td> --%>
+								<td>${dto.contents}</td>
 								<td>
 									${dto.refNum}
 								</td>
@@ -121,7 +128,7 @@ function qnawrite(){
 					<select id="cDev" name="cDev" class="m10 p5">
 						<!-- <option value="0">분류</option> -->
 						<option value="1">제목</option>
-						<option value="2">구분</option>
+						<option value="2">내용</option>
 						<option value="3">번호</option>
 						
 					</select>

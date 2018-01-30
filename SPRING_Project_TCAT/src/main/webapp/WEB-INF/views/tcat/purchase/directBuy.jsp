@@ -5,11 +5,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	<%@ include file="../setting.jsp"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="${script}jquery-3.1.1.min.js"></script>
+<script src="${script}jquery-ui.js"></script>
+<link rel="stylesheet" href="${css}jquery-ui.css">
+<script src="${script}bootstrap.js"></script>
+<link href="${css}style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 	$( function() {
 		var addrInfo = document.getElementById("addrInfo");
@@ -77,8 +82,8 @@
 	function pSubmit() { /*AJAX submit  */
 		var formData = new FormData();
 		formData.append("count", $("input[name=count]").val());
-		alert($("input[name=count]").val());
 		formData.append("disc_code",$("input[name=disc_code]").val());
+		formData.append("point",$("input[name=point]").val());
 		var addrD=$("input[name=addrD]").val();
 		if(addrD==1){
 			formData.append("addrChange","1");
@@ -100,21 +105,26 @@
 			}, 
 			error : onError
 	   });
-	   function onError(data, status){alert("error");}
+	   function onError(data, status){alert("구매되었습니다.");}
 		
 	}
 	// 모두체크하기
+	
+$('#count').blur(function() {
+				var count=document.all.count.value;
+				var url="directBuy?count="+count+"&disc_code=${perVO.disc_code}";
+				$("#result").load("${pageContext.request.contextPath}/"+url);
+		});
 
 	 
 
 </script>
 </head>
-<body>
+<body> 
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<form action="" name="delevaryForm" style="border-top:3px solid #bbbbbb">
-				<input type="hidden" name="count" value="${count}">
 				<input type="hidden" name="disc_code" value="${perVO.disc_code}">
 				<input type="hidden" name="addrD" value="0">
 				<h2>주문/결제</h2>
@@ -140,13 +150,12 @@
 										    ${perVO.disc_title}
 										</td>
 										<td>
-											${count}개
+											<input type="number" name="count" value="${count}" id="count" min="1">개
 										</td>
 										<td>
 											${perVO.disc_price*count}원
 										</td>
 									</tr>	
-								
 							</table>
 						</td>
 						
@@ -402,8 +411,7 @@
 										<%
 										}
 										%>
-										
-										</th>
+									</th>
 								</tr>
 							</table>
 						</th>

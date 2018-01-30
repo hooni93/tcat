@@ -52,7 +52,7 @@
 					<option value="2">구매승인</option>
 					<option value="3">배송시작</option>
 					<option value="4">배송중</option>
-					<option value="5">구매완료</option>
+					<option value="5">구매(배송)완료</option>
 					<option value="6">환불요청</option>
 					<option value="7">환불승인</option>
 					<option value="8">교환</option>

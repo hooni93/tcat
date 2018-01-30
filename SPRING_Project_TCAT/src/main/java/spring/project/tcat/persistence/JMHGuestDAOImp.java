@@ -8,6 +8,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Repository;
 
+import spring.project.tcat.VO.ContentFavoriteVO;
 import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
@@ -127,6 +128,32 @@ public class JMHGuestDAOImp implements JMHGuestDAO {
 		return perf;
 	}
 
+	// getAge 연령별 선호도
+	public ArrayList<ContentFavoriteVO> getAge(int per_id) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<ContentFavoriteVO> fav = dao.getAge(per_id);
+		return fav;
+	}
+
+	// 성별별 선호도
+	public ArrayList<ContentFavoriteVO> getGender(int per_id) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<ContentFavoriteVO> fav = dao.getGender(per_id);
+		return fav;
+	}
+
+	public ArrayList<ContentFavoriteVO> getAge_store(int disc_code) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<ContentFavoriteVO> fav = dao.getAge_store(disc_code);
+		return fav;
+	}
+
+	public ArrayList<ContentFavoriteVO> getGender_store(int disc_code) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<ContentFavoriteVO> fav = dao.getGender_store(disc_code);
+		return fav;
+	}
+
 	// getContent_store 스토어 상세페이지
 	public TcatPerDiscVO getContent_store(int disc_code) {
 		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
@@ -180,23 +207,118 @@ public class JMHGuestDAOImp implements JMHGuestDAO {
 		return cnt;
 	}
 
+	// 교환 요청
+	public int perfChange(int disc_num) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		int cnt = dao.perfChange(disc_num);
+		return cnt;
+	}
+
 	// 티켓 배송번호 가져오기
 	public ArrayList<Integer> getDel_nums(Map<String, Object> map) {
 		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
 		ArrayList<Integer> cnt = dao.getDel_nums(map);
 		return cnt;
 	}
-	//배송번호에 해당하는 티켓 정보 가져오기
-	public ArrayList<TcatTicketingVO> getTickets(Map<String, Object> map){
+
+	// 배송번호에 해당하는 티켓 정보 가져오기
+	public ArrayList<TcatTicketingVO> getTickets(Map<String, Object> map) {
 		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
 		ArrayList<TcatTicketingVO> cnt = dao.getTickets(map);
 		return cnt;
 	}
-	
-	//예매 스텝 업데이트
+
+	// 예매 스텝 업데이트
 	public int ticStepUpdate(Map<String, Object> map) {
 		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
 		int cnt = dao.ticStepUpdate(map);
 		return cnt;
 	}
+
+	/////////////////////////////////////////////////////////////////////////
+	// HOST
+	// 연령별 총 판매량
+	public ArrayList<ContentFavoriteVO> getAgeHostCount() {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<ContentFavoriteVO> fav = dao.getAgeHostCount();
+		return fav;
+	}
+
+	// 연령별 선호 장르
+	public ArrayList<ContentFavoriteVO> getAgeGenre() {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<ContentFavoriteVO> fav = dao.getAgeGenre();
+		return fav;
+	}
+
+	// 연령별 선호 작품
+	public ArrayList<ContentFavoriteVO> getAgePerf(int ages) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<ContentFavoriteVO> fav = dao.getAgePerf(ages);
+		return fav;
+	}
+
+	// getAgeHostCount_store
+	public ArrayList<ContentFavoriteVO> getAgeHostCount_store() {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<ContentFavoriteVO> fav = dao.getAgeHostCount_store();
+		return fav;
+	}
+
+	// getAgeGenre_store
+	public ArrayList<ContentFavoriteVO> getAgeGenre_store() {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<ContentFavoriteVO> fav = dao.getAgeGenre_store();
+		return fav;
+	}
+
+	// getAgePerf_store
+	public ArrayList<ContentFavoriteVO> getAgePerf_store(int ages) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<ContentFavoriteVO> fav = dao.getAgePerf_store(ages);
+		return fav;
+	}
+
+	// 성별 총 판매량
+	public ArrayList<ContentFavoriteVO> getGenderHostCount() {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<ContentFavoriteVO> fav = dao.getGenderHostCount();
+		return fav;
+	}
+
+	// 성별 장르 선호
+	public ArrayList<ContentFavoriteVO> getGenderGenre() {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<ContentFavoriteVO> fav = dao.getGenderGenre();
+		return fav;
+	}
+
+	// 성별 작품 선호
+	public ArrayList<ContentFavoriteVO> getGenderPerf(int ages) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<ContentFavoriteVO> fav = dao.getGenderPerf(ages);
+		return fav;
+	}
+
+	// getGenderHostCount_store 성별 스토어 총 판매량
+	public ArrayList<ContentFavoriteVO> getGenderHostCount_store() {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<ContentFavoriteVO> fav = dao.getGenderHostCount_store();
+		return fav;
+	}
+
+	// getGenderGenre_store 성별 스토어 장르 선호도
+	public ArrayList<ContentFavoriteVO> getGenderGenre_store() {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<ContentFavoriteVO> fav = dao.getGenderGenre_store();
+		return fav;
+	}
+
+	// 성별 스토어 선호 제품
+	public ArrayList<ContentFavoriteVO> getGenderPerf_store(int gender) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<ContentFavoriteVO> fav = dao.getGenderPerf_store(gender);
+		return fav;
+	}
+
 }

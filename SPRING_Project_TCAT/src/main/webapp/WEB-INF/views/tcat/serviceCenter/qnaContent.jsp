@@ -15,11 +15,18 @@
 } */
 
 function qnacomment(service_num,service_div,service_title,member_id,QuestionCon,form){
-	var content= form.content.value;
-	var url="qnaCommentWrite?service_num="+service_num+"&service_div="+service_div
-					+"&service_title="+service_title+"&member_id="+member_id
-					+"&QuestionCon="+QuestionCon+"&AnsersCon="+content;
-	$( "#result2" ).load( "${pageContext.request.contextPath}/"+url );
+	   var formData = $("#commentGWrite").serialize();
+	   $.ajax({
+	               type : "POST",
+	               url : "qnaCommentWrite",
+	               cache : false,
+	               data : formData,
+	               success :  function(msg) {
+	                  $('#result2').html(msg);
+	               }, 
+	               error : onError
+	   });
+	   function onError(data, status){alert("error");}
 }
 
  
@@ -163,16 +170,18 @@ function qnacomment(service_num,service_div,service_title,member_id,QuestionCon,
             <form action="" name="commentGWrite" id="commentGWrite">
            	<div>      
             <table class="table table-hover table-bordered table-condensed c fs12">
+           	 <input type="hidden" value="${dto.service_num}" name="service_num">
+           	 <input type="hidden" value="${dto.service_div}" name="service_div">
+           	 <input type="hidden" value="${dto.getQuestionCon()}" name="QuestionCon">
                   <tr>
                      <td class=w600>
-                     	<input type="text" class="form-control" name="content" id="content" maxlength="200" placeholder="답글을 작성해주세요">
+                     	<input type="text" class="form-control" name="AnsersCon" id="content" maxlength="200" placeholder="답글을 작성해주세요">
                      </td>
                      <td>
 	                 	 <button type="reset" class="btn btn-warning">
 		                     	취소하기<i class="fa fa-check spaceLeft"></i>
 		                 </button>   
-		                 <button type="button" class="btn btn-info" onclick="qnacomment('${dto.service_num}','${dto.service_div}',
-		                 							'${dto.service_title}','${dto.member_id}','${dto.getQuestionCon()}',this.form);">
+		                 <button type="button" class="btn btn-info" onclick="qnacomment();">
 		                     	작성하기<i class="fa fa-check spaceLeft"></i>
 		                 </button>
                 	 </td>

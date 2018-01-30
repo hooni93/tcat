@@ -10,6 +10,16 @@
 $(function() {
 	$("#eventUp").click(function() {
 		var formData = new FormData();
+		if(!$("input[name=notice_title]").val()){
+			alert("이벤트제목을 입력해주세요!");
+			$("input[name=notice_title]").focus();
+		}else if(!$("input[name=notice_image]")[0].files[0]){			
+			alert("이벤트이미지를 입력해주세요!");
+			$("input[name=notice_image]").focus();
+		}else if(!$("input[name=contents]").val()){			
+			alert("이벤트내용을 선택해주세요!");
+			$("input[name=contents]").focus();
+		}else{
 			formData.append("notice_num", $("input[name=notice_num]").val());
 			formData.append("notice_title",$("input[name=notice_title]").val());
 			formData.append("contents", $("input[name=contents]").val());
@@ -26,6 +36,7 @@ $(function() {
 					$('#result').html(data);
 				}
 			});	
+		}
 	});
 });
 </script>

@@ -1,6 +1,5 @@
 package spring.project.tcat.service;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -468,7 +467,7 @@ public class DKGuestServiceImpl implements DKGuestService{
 		String cDev = req.getParameter("cDev");
 		System.out.println(cDev);
 		String keyword = req.getParameter("keyword");
-		String login_id = (String)req.getSession().getAttribute("login_id");
+		//String login_id = (String)req.getSession().getAttribute("login_id");
 		System.out.println("url: "+url);
 		if(cDev==null) {
 			cDev="0";
@@ -478,20 +477,6 @@ public class DKGuestServiceImpl implements DKGuestService{
 		
 		System.out.println(keyword);
 		
-		/*if(url.equals("qnaOneToOneboard")) {
-			service_div = "1:1게시판";
-			System.out.println("service_div : "+service_div);
-		}*/
-		/*else if(url.equals("stockDelete_concert")) {
-			mDev= "콘서트";
-			System.out.println("mDev:"+mDev);
-		}else if(url.equals("stockDelete_classic")) {
-			mDev= "클래식";
-			System.out.println("mDev:"+mDev);
-		}else if(url.equals("stockDelete_drama")) {
-			mDev= "연극";
-			System.out.println("mDev:"+mDev);
-		}*/
 		
 		int pageSize = 9;    //한 페이지당 출력할 글 갯수
 		int pageBlock = 3;   //한 블럭당 페이지 갯수

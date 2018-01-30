@@ -12,6 +12,37 @@
 $(function() {
 	$("#hostProUp").click(function() {
 		var formData = new FormData();
+		if(!$("input[name=perf_title]").val()){
+			alert("공연제목을 입력해주세요!");
+			$("input[name=perf_title]").focus();
+		}else if($("select[name=cateNum]").val()==0){
+			alert("카테고리를 선택해주세요!");
+			$("select[name=cateNum]").focus();
+		}else if(!$("input[name=perf_Image]")[0].files[0]){			
+			alert("공연이미지를 입력해주세요!");
+			$("input[name=perf_Image]").focus();
+		}else if(!$("input[name=startDate]").val()){			
+			alert("공연시작일자를 선택해주세요!");
+			$("input[name=startDate]").focus();
+		}else if(!$("input[name=endDate]").val()){			
+			alert("공연종료일자를 선택해주세요!");
+			$("input[name=endDate]").focus();
+		}else if($("select[name=hall_id]").val()==0){			
+			alert("공연장을 선택해주세요!");
+			$("select[name=hall_id]").focus();
+		}else if($("select[name=first_grade]").val()==0){			
+			alert("우선순위를 선택해주세요!");
+			$("select[name=first_grade]").focus();
+		}else if(!$("input[name=remain_round]").val()){			
+			alert("회차를 선택해주세요!");
+			$("input[name=remain_round]").focus();
+		}else if(!$("input[name=possible_age]").val()){			
+			alert("관람가능 연령을 선택해주세요!");
+			$("input[name=possible_age]").focus();
+		}else if(!$("input[name=seatPrice]").val()){			
+			alert("좌석정보를 선택해주세요!");
+			$("input[name=seatPrice]").focus();
+		}else{
 			formData.append("per_id", $("input[name=per_id]").val());
 			formData.append("perf_title", $("input[name=perf_title]").val());
 			formData.append("cateNum",$("select[name=cateNum]").val());
@@ -37,6 +68,7 @@ $(function() {
 					$('#result').html(data);
 				}
 			});	
+		}
 	});
 });
 

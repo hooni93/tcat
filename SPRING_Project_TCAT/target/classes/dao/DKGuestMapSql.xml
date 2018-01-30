@@ -185,13 +185,13 @@
 		<select id="getNoticeCnt" resultType="int" parameterType="java.util.Map">
 			SELECT COUNT(*)
 			FROM Notice 
-			WHERE 1=1
+			WHERE notice_div=1
 			<choose>
 	  			<when test="cDev==1">
 	  				AND notice_title LIKE '%${keyword}%'
 	  			</when>
 	  			<when test="cDev==2">
-	  				AND notice_div LIKE '%${keyword}%'
+	  				AND contents LIKE '%${keyword}%'
 	  			</when>
 	  			<when test="cDev==3">
 	  				AND notice_num LIKE '%${keyword}%'
@@ -207,13 +207,13 @@
 				(select notice_num, notice_title, writeDate, refNum, contents, notice_image,
 				       notice_addfile, notice_div, member_id, per_id, disc_code, rownum rNum
 				from Notice
-				WHERE 1=1
+				WHERE notice_div=1
 				<choose>
 		  			<when test="cDev==1">
 		  				AND notice_title LIKE '%${keyword}%'
 		  			</when>
 		  			<when test="cDev==2">
-		  				AND notice_div LIKE '%${keyword}%'
+		  				AND contents LIKE '%${keyword}%'
 		  			</when>
 		  			<when test="cDev==3">
 		  				AND notice_num LIKE '%${keyword}%'

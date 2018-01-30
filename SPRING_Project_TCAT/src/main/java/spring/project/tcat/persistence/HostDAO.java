@@ -257,156 +257,184 @@ public interface HostDAO {
 	public detailPageVO detaillist(int detail_num);
 	//상세페이지 수정
 	public void updateDetail(Map<String,Object> map);
+	//동영상 추가
+	public void updatePer(Map<String,Object> map);
 	
 	////////////////////////////////////현석 1/11 end //////////////////////////////////////////
 
 
-	////////////////////////////////////영민 1/10 start ///////////////////////////////////////
-	
-	//핫리스트 5개 출력
-	public ArrayList <TcatPerformanceVO>hotList();
-	//핫리스트 갯수
-	public int hotArticleCnt();
-	//핫리스트 아닌 갯수
-	public int hotNoArticleCnt(Map<String,Object> map);
-	//업데이트
-	public int hotUpdate(int per_id);
-	//전체 리스트
-	public ArrayList <TcatPerformanceVO>hotLast(Map<String,Object> map);
-	
-	//hot 카테고리 내리기
-	public int hotDeleteList(int strPer_id);
-	
-	//hot 카테고리 올리기
-	public int hotUpdateList(int strPer_id);
-	
-	//구매요청 갯수
-	public int provalCnt();
-	//구매요청 리스트
-	public ArrayList <TcatTicketingVO>provalList(Map<String,Object> map);
-	
-	//구매요청
-	public int provalUpdateCnt(int num);
-	//혜택 갯수
-	public int levelCnt();
-	//혜택 리스트
-	public ArrayList <SaleVO>levelList(Map<String,Object> map);
-	//혜택삭제
-	public int levelDeleteCnt(String sale);
-	//혜택 상세
-	public ArrayList<SaleVO> levelMemberForm(String sale_div);
-	//혜택 수정
-	public int levelUpdateCnt(Map<String,Object> map);
-	//혜택등록
-	public int levelAdd(Map<String,Object> map);
-	//상품상세
-	public ArrayList<TcatPerformanceVO> hostProCnt(int per_id);
-	//상품 수정
-	public int hostProUpdateCnt1(Map<String,Object> map1);
-	public int hostProUpdateCnt2(Map<String,Object> map2);
-	public int hostProUpdateCnt3(Map<String,Object> map3);
-	
-	////////////////////////////////////영민 1/10 end ///////////////////////////////////////
-	///////////////////////  동금 1/11  ///////////////////////////
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//상품갯수 불러오기
-	public int getPerfoCnt(Map<String, Object> map);
-	
-	//상품리스트 불러오기
-	public ArrayList<TcatPerformanceVO> getPerfoDeleteList(Map<String, Object> map);
-	
-	//스토어상품갯수 불러오기
-	public int getStoreCnt(Map<String, Object> map);
-	
-	//스토어상품리스트 불러오기
-	public ArrayList<TcatPerDiscVO> getStoreDeleteList(Map<String, Object> map);
-	
-	//상품삭제 처리페이지
-	public int registerDel(int per_id);
-	
-	//스토어상품삭제 처리페이지
-	public int storeRegisterDel(int disc_code);
-	
-	////////품절관리/////////
-	//스토어상품갯수불러오기
-	public int storeOutOfCnt(Map<String, Object> map);
-	
-	//스토어상품리스트불러오기
-	public ArrayList<TcatPerDiscVO> storeOutOfList(Map<String, Object> map);
-	
-	//스토어판매중단
-	public int storeSaleStop(int disc_code);
-	
-	//스토어판매중단해제하기
-	public int storeSaleStopRelease(int disc_code);
-	
-	//스토어수량0개일때 step=>3
-	public void storediscCount();
-	
-	///////////////////////  동금 1/15 end ///////////////////////////
+////////////////////////////////////영민 1/10 start ///////////////////////////////////////
+	
+//핫리스트 5개 출력
+public ArrayList <TcatPerformanceVO>hotList();
+//핫리스트 갯수
+public int hotArticleCnt();
+//핫리스트 아닌 갯수
+public int hotNoArticleCnt(Map<String,Object> map);
+//업데이트
+public int hotUpdate(int per_id);
+//전체 리스트
+public ArrayList <TcatPerformanceVO>hotLast(Map<String,Object> map);
+
+//hot 카테고리 내리기
+public int hotDeleteList(int strPer_id);
+
+//hot 카테고리 올리기
+public int hotUpdateList(int strPer_id);
+
+//스토어 핫리스트
+public int hotStoreCnt();
+//스토어리스트
+public int hotNoStoreCnt(Map<String,Object> map);
+//스토어 전체리스트
+public ArrayList <TcatPerDiscVO>hotStore(Map<String,Object> map);
+//hot 스토어 내리기
+public int hotStoreDeleteList(int disc_code);
+//hot 스토어 올리기
+public int hotStoreUpdateList(int disc_code);
+
+//구매요청 갯수
+public int provalCnt();
+//구매요청 리스트
+public ArrayList <TcatTicketingVO>provalList(Map<String,Object> map);
+
+//구매요청
+public int provalUpdateCnt(int num);
+//혜택 갯수
+public int levelCnt();
+//혜택 리스트
+public ArrayList <SaleVO>levelList(Map<String,Object> map);
+//혜택삭제
+public int levelDeleteCnt(String sale);
+//혜택 상세
+public ArrayList<SaleVO> levelMemberForm(String sale_div);
+//혜택 수정
+public int levelUpdateCnt(Map<String,Object> map);
+//혜택등록
+public int levelAdd(Map<String,Object> map);
+//상품상세
+public ArrayList<TcatPerformanceVO> hostProCnt(int per_id);
+//상품 수정
+public int hostProUpdateCnt1(Map<String,Object> map1);
+public int hostProUpdateCnt2(Map<String,Object> map2);
+public int hostProUpdateCnt3(Map<String,Object> map3);
+
+//스토어 상세
+public ArrayList<TcatPerDiscVO> hostStoreCnt(int disc_code);
+public int hostProStoreUpdateCnt1(Map<String,Object> map1);
+public int hostProStoreUpdateCnt2(Map<String,Object> map2);
+
+////////////////////////////////////영민 1/10 end ///////////////////////////////////////
+///////////////////////  동금 1/11  ///////////////////////////
+	
+//상품갯수 불러오기
+public int getPerfoCnt(Map<String, Object> map);
+
+//상품리스트 불러오기
+public ArrayList<TcatPerformanceVO> getPerfoDeleteList(Map<String, Object> map);
+
+//스토어상품갯수 불러오기
+public int getStoreCnt(Map<String, Object> map);
+
+//스토어상품리스트 불러오기
+public ArrayList<TcatPerDiscVO> getStoreDeleteList(Map<String, Object> map);
+
+//상품삭제 처리페이지
+public int registerDel(int per_id);
+
+//스토어상품삭제 처리페이지
+public int storeRegisterDel(int disc_code);
+
+////////품절관리/////////
+//스토어상품갯수불러오기
+public int storeOutOfCnt(Map<String, Object> map);
+
+//스토어상품리스트불러오기
+public ArrayList<TcatPerDiscVO> storeOutOfList(Map<String, Object> map);
+
+//스토어판매중단
+public int storeSaleStop(int disc_code);
+
+//스토어판매중단해제하기
+public int storeSaleStopRelease(int disc_code);
+
+//스토어수량0개일때 step=>3
+public void storediscCount();
+
+//공연판매중단
+public int perfSaleStop(int disc_code);
+
+//공연판매중단해제하기
+public int perfSaleStopRelease(int disc_code);
+
+//스토어수량0개일때 step=>3
+public void perfdiscCount();
+
+//////////////////게시판 관리//////////////////////
+//공지사항 게시판 갯수불러오기
+public int noticeManagerCnt(Map<String, Object> map);
+
+//공지사항 게시판 리스트 불러오기
+public ArrayList<TcatBoardVO> noticeManagerList(Map<String, Object> map);
+
+//공지사항 업로드
+public int insertNoticeBoardImage(Map<String, Object> map);
+
+//공지사항 게시판 게시글 삭제
+public int deleteNoticeList(int notice_num);
+
+//공지사항 게시판 게시글 수정
+public int updateNoticeBoardImage(Map<String, Object> map);
+
+//공지사항 상세페이지 불러오기
+public TcatBoardVO noticeManagerContent(int notice_num);
+
+//Q&A게시판 갯수불러오기
+public int qnaManagerCnt(Map<String, Object> map);
+
+//Q&A게시판 리스트 불러오기
+public ArrayList<TcatBoardVO> qnaManagerList(Map<String, Object> map);
+
+//Q&A게시판 게시글 삭제
+public int deleteQnaList(int service_num);
+
+//Q&A게시판 상세보기
+public TcatBoardVO qnaManagerContent(int service_num);
+
+//Q&A게시판 상세보기 댓글
+public ArrayList<TcatBoardVO> qnaManagerComment(String service_num);
+
+//댓글달기
+public int qnaManagerCommentWrite(Map<String, Object> map);
+//답변상태 update
+public void serviceManagerUpdate(int service_num);
+//답글삭제
+public int commentManagerDelete(int service_num);
+
+//1:1게시판 갯수불러오기
+public int oneManagerCnt(Map<String, Object> map);
+
+//1:1게시판 리스트 불러오기
+public ArrayList<TcatBoardVO> oneManagerList(Map<String, Object> map);
+
+//1:1게시판 게시글 삭제
+public int deleteOneList(int service_num);
+
+//1:1게시판 상세보기
+public TcatBoardVO oneManagerContent(int service_num);
+
+//1:1게시판 상세보기 댓글
+public ArrayList<TcatBoardVO> oneManagerComment(String service_num);
+
+//댓글달기
+public int oneManagerCommentWrite(Map<String, Object> map);
+//답변상태 update
+//public void serviceManagerUpdate(int service_num);
+//답글삭제
+public int commentOneManagerDelete(int service_num);
+
+
+///////////////////////  동금 1/15 end ///////////////////////////
 		
 ///////////////////////  태성 1/21 start ///////////////////////////
 	// 관람 후기 개수
@@ -443,9 +471,41 @@ public interface HostDAO {
 	public int refundPerformanceCancel(int refundDown);
 	
 	// 환불 승인 - 스토어
-	public int refundStoreOk(int refundUpdateS);
+	public int refundStoreOk(Map<String, Object> map);
+	// 환불 승인시 - 수량 추가
+	public int refundCount(Map<String, Object> map);
 	// 환불 취소 - 스토어
 	public int refundStoreCancel(int refundDownS);
 	
 ///////////////////////  태성 1/21 end ///////////////////////////
+///////////////////////  태성 1/30 start ///////////////////////////
+	//사진게시판 게시글 개수
+	public int photoManagerCnt();
+	//사진게시판 게시글 목록
+	public ArrayList<TcatBoardVO> photoManagerList(Map<String,Object> map);
+	//사진게시판 답글 가져오기
+	public ArrayList<TcatBoardVO> photoManagerComment();
+	//사진게시판 수정
+	public int photoManagerNomoDao(TcatBoardVO vo);
+	//사진게시판 삭제
+	public int photoManagerDeleteDao(int notice_num);
+	
+	//영상게시판 게시글 개수
+	public int movieManagerCnt();
+	//영상게시판 게시글 목록
+	public ArrayList<TcatBoardVO> movieManagerList(Map<String,Object> map);
+	//영상게시판 답글 가져오기
+	public ArrayList<TcatBoardVO> movieManagerComment();
+	//영상게시판 수정
+	public int movieManagerNomoDao(TcatBoardVO vo);
+	//영상게시판 삭제
+	public int movieManagerDeleteDao(int notice_num);
+	//교환 목록 개수
+	public int returnCnt(Map<String,Object> map);
+	//교환 목록
+	public ArrayList<TcatDiscBuyVO> returnList(Map<String, Object> map);
+	//교환 승인
+	public int returnStoreOk(int returnUpdate);
+///////////////////////  태성 1/30 end ///////////////////////////
+	
 }

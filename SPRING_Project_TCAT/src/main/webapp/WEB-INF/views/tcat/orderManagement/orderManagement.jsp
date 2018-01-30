@@ -104,7 +104,7 @@
 				<td><b>좌석</b></td>
 				<td><b>공연날짜</b></td>
 				<td><b>할인조건</b></td>
-				<td><b>배송준비/환불처리</b></td>
+				<td style="width:10%"><b>배송준비/환불처리</b></td>
 			</tr>
 			<c:if test="${orders!=null }">
 				<c:forEach var="order" items="${orders}">

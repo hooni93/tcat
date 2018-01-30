@@ -311,4 +311,50 @@ public class HSGuestDAOImpl implements HSGuestDAO{
 		return cnt;
 	}
 
+	@Override
+	public void memberPoint(Map<String, Object> map){
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dao.memberPoint(map);
+	}
+
+	@Override
+	public int getCount(Map<String, Object> map) {
+		int count=0;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		count=dao.getCount(map);
+		return count;		
+	}
+
+	@Override
+	public int searchPerCnt(String search) {
+		int searchCnt=0;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		searchCnt=dao.searchPerCnt(search);
+		return searchCnt;
+	}
+
+	@Override
+	public ArrayList<TcatPerformanceVO> searchPerList(Map<String, Object> map) {
+		ArrayList<TcatPerformanceVO> dtos=null;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dtos=dao.searchPerList(map);
+		return dtos;
+	}
+
+	@Override
+	public int searchStoreCnt(String search) {
+		int searchCnt=0;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		searchCnt=dao.searchStoreCnt(search);
+		return searchCnt;
+	}
+
+	@Override
+	public ArrayList<TcatPerDiscVO> searchStoreList(Map<String, Object> map) {
+		ArrayList<TcatPerDiscVO> dtos=null;
+		HSGuestDAO dao=Configuration.getMapper(HSGuestDAO.class);
+		dtos=dao.searchStoreList(map);
+		return dtos;
+	}
+
 }

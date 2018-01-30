@@ -9,13 +9,27 @@
 $(function() {
 	$("#eventcheck").click(function() {
 		var formData = new FormData();
-		//notice_num =nextval ,writeDate=sysdate
+		if(!$("input[name=notice_title]").val()){
+			alert("이벤트제목을 입력해주세요!");
+			$("input[name=notice_title]").focus();
+		}else if(!$("input[name=notice_image]")[0].files[0]){			
+			alert("이벤트이미지를 입력해주세요!");
+			$("input[name=notice_image]").focus();
+		}else if(!$("input[name=writeDate]").val()){			
+			alert("이벤트시작일자를 선택해주세요!");
+			$("input[name=writeDate]").focus();
+		}else if(!$("input[name=contents]").val()){			
+			alert("이벤트내용 선택해주세요!");
+			$("input[name=contents]").focus();
+		}else if(!$("input[name=member_id]").val()){			
+			alert("작성자를 입력해주세요!");
+			$("input[name=member_id]").focus();
+		}else{
 			formData.append("notice_title",$("input[name=notice_title]").val());
 			formData.append("notice_image", $("input[name=notice_image]")[0].files[0]);
 			formData.append("writeDate", $("input[name=writeDate]").val());
 			formData.append("contents", $("input[name=contents]").val());
 			formData.append("member_id", $("input[name=member_id]").val());
-			formData.append("notice_div", $("input[name=notice_div]").val());
 			formData.append("notice_addfile", $("select[name=notice_addfile]").val());
 			$.ajax({
 				url : 'eventAdd',
@@ -27,6 +41,7 @@ $(function() {
 					$('#result').html(data);
 				}
 			});	
+		}
 	});
 });
 </script>
@@ -95,12 +110,6 @@ $(function() {
 								</td>
 							</tr>
 							<tr>
-								<th><h5>구분</h5></th>
-								<td>
-								<input type="number" name="notice_div" class="form-control">
-								</td>
-							</tr>
-							<tr>
 								<th><h5>분류</h5></th>
 								<td><h5><select name="notice_addfile" style="width: 100%">
 										<option value="0"></option>
@@ -150,6 +159,9 @@ $(function() {
 								</tr>
 							</c:if>
 						</table>
+						
+						<div class="col-md-5"></div>
+						<div class="col-md-6">
 						<table style="width: 1000px" align="center">
 							<tr>
 								<th align="center"><c:if test="${cnt > 0}">
@@ -176,7 +188,8 @@ $(function() {
 											<a
 												onclick="load('eventHost?pageNum=${pageCount}');">[▶▶]</a>
 										</c:if>
-									</c:if></th>
+									</c:if>
+									</th>
 							</tr>
 						</table>
 					</div>
@@ -184,7 +197,7 @@ $(function() {
 				<div class="col-md-1"></div>
 				<!--리스트목록 끝  -->
 					</div>
-			</div>
+					</div>
 			<br> <br> <br> <br> <br>
 		</div>
 		<div class="col-md-1"></div>

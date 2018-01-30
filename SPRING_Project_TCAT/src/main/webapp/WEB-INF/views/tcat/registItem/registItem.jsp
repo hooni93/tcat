@@ -60,6 +60,7 @@
 				formData.append("S_seatPrice", $("input[name=S_seatPrice]").val());
 				formData.append("A_seatPrice", $("input[name=A_seatPrice]").val());
 				formData.append("B_seatPrice", $("input[name=B_seatPrice]").val());
+				
 				$.ajax({
 					url : 'insertPerformance',
 					data : formData,
@@ -139,10 +140,10 @@
 		window.open("cheackSeatPrice", "confirm", "menubar=no, width=500, height=330");
 	}
 	function detailPer(detail_num){
-		window.open("detailPer?detail_num="+detail_num, "confirm", "menubar=no, width=500, height=330");
+		window.open("detailPer?detail_num="+detail_num, "confirm", "menubar=no, width=950, height=630");
 	}
 	function detailStore(detail_num){
-		window.open("detailStore?detail_num="+detail_num, "confirm", "menubar=no, width=500, height=330");
+		window.open("detailStore?detail_num="+detail_num, "confirm", "menubar=no, width=950, height=630");
 	}
 </script>
 </head>
@@ -292,7 +293,7 @@
 									<td>${dto.first_grade}</td>
 									<td>${dto.per_step}</td>
 									<td>${dto.remain_round}</td>
-									<td>${dto.possible_age}</td> 
+									<td>${dto.possible_age}</td>
 									<td><input type="button" value="상세페이지수정" onclick="detailPer('${dto.detail_num}')">
 								</tr>
 							</c:forEach> 

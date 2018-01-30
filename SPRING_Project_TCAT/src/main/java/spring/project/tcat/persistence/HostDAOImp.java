@@ -906,411 +906,639 @@ public class HostDAOImp implements HostDAO {
 			HostDAO dao=Configuration.getMapper(HostDAO.class);
 			dao.updateDetail(map);
 		}
+		
+		@Override
+		public void updatePer(Map<String, Object> map) {
+			HostDAO dao=Configuration.getMapper(HostDAO.class);
+			dao.updatePer(map);
+		}
 		////////////////////////////////////현석 1/11  end//////////////////////////////////////////
 		
-	
-	////////////////  HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  ///////////////
-	
-	//hot 갯수 출력
-	@Override
-	public int hotArticleCnt() {
-		int hotCnt=0;
-		HostDAO dao= Configuration.getMapper(HostDAO.class);
-		hotCnt=dao.hotArticleCnt();
-	
-		return hotCnt;
-	}
-	//예매 갯수 출력
-	@Override
-	public int hotNoArticleCnt(Map<String,Object> map2) {
-		int cnt=0;
-		HostDAO dao= Configuration.getMapper(HostDAO.class);
-		cnt=dao.hotNoArticleCnt(map2);
-		return cnt;
-	}
-	//hotlist
-		@Override
-		public ArrayList<TcatPerformanceVO> hotList() {
-			ArrayList<TcatPerformanceVO> dtos=null;
-			
-			System.out.println("hotDao");
-			HostDAO dao= Configuration.getMapper(HostDAO.class);
-			dtos=dao.hotList();
-			return dtos;
-		}
-	//hotUpdate
-		@Override
-		public int hotUpdate(int per_id) {
-			int cnt =0;
-			HostDAO dao = Configuration.getMapper(HostDAO.class);
-			
-			cnt=dao.hotUpdate(per_id);
-			return cnt;
-			
-		}
-		//hotLast
-		@Override
-		public ArrayList<TcatPerformanceVO> hotLast(Map<String,Object> map) {
+////////////////HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  ///////////////
+		
+//hot 갯수 출력
+@Override
+public int hotArticleCnt() {
+int hotCnt=0;
+HostDAO dao= Configuration.getMapper(HostDAO.class);
+hotCnt=dao.hotArticleCnt();
 
-			ArrayList<TcatPerformanceVO> vo=null;
-			HostDAO dao=Configuration.getMapper(HostDAO.class);
-			
-			vo=dao.hotLast(map);
-			
-		//int a=(int)vo.get(1).getPer_id();
-			
-			System.out.println("===================");
-			return vo;
-			
-		}
-		//hot카테고리 내리기
-		@Override
-		public int hotDeleteList(int strPer_id) {
-			int deleteCnt=0;
-			HostDAO dao=Configuration.getMapper(HostDAO.class);
-			deleteCnt=dao.hotDeleteList(strPer_id);
-			return deleteCnt;
-		}
-		//hot카테고리 올리기
-		@Override
-		public int hotUpdateList(int strPer_id) {
-			int updateCnt=0;
-
-			HostDAO dao=Configuration.getMapper(HostDAO.class);
-			updateCnt=dao.hotUpdateList(strPer_id);
-			return updateCnt;
-		}
+return hotCnt;
+}
+//예매 갯수 출력
+@Override
+public int hotNoArticleCnt(Map<String,Object> map2) {
+int cnt=0;
+HostDAO dao= Configuration.getMapper(HostDAO.class);
+cnt=dao.hotNoArticleCnt(map2);
+return cnt;
+}
+//hotlist
+@Override
+public ArrayList<TcatPerformanceVO> hotList() {
+	ArrayList<TcatPerformanceVO> dtos=null;
 	
-	//////////////// HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  //////////////
-////////////////HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-23 성영민  //////////////
-		//구매요청 갯수
-		@Override
-		public int provalCnt() {
-			int cnt=0;
-			HostDAO dao=Configuration.getMapper(HostDAO.class);
-			cnt=dao.provalCnt();
-			return cnt;
-		}
-		//구매요청리스트
-		@Override
-		public ArrayList<TcatTicketingVO> provalList(Map<String, Object> map) {
-			ArrayList<TcatTicketingVO> dtos = null;
-			HostDAO dao= Configuration.getMapper(HostDAO.class);
-			dtos=dao.provalList(map);
-			System.out.println("maps"+map);
-			return dtos;
-		}
-		//구매요청 업데이트
-		@Override
-		public int provalUpdateCnt(int num) {
-			int updateCnt=0;
-			HostDAO dao=Configuration.getMapper(HostDAO.class);
-			updateCnt=dao.provalUpdateCnt(num);
-			return updateCnt;
-		}
-		//혜택갯수
-		@Override
-		public int levelCnt() {
-			int cnt=0;
-			HostDAO dao=Configuration.getMapper(HostDAO.class);
-			cnt=dao.levelCnt();
-			return cnt;
-		}
-		//혜택리스트
-		@Override
-		public ArrayList<SaleVO> levelList(Map<String, Object> map) {
-			ArrayList<SaleVO> dtos = null;
-			HostDAO dao= Configuration.getMapper(HostDAO.class);
-			dtos=dao.levelList(map);
-			System.out.println("maps"+map);
-			return dtos;
-		}
-		//혜택삭제
-		@Override
-		public int levelDeleteCnt(String sale) {
-			int deleteCnt=0;
-			HostDAO dao=Configuration.getMapper(HostDAO.class);
-			deleteCnt=dao.levelDeleteCnt(sale);
-			return deleteCnt;
-		}
-		//혜택상세
-		@Override
-		public ArrayList<SaleVO> levelMemberForm(String sale_div) {
-			ArrayList<SaleVO> dto = null;
-			HostDAO dao= Configuration.getMapper(HostDAO.class);
-			dto=dao.levelMemberForm(sale_div);
-			return dto;
-		}
-		//혜택수정
-		@Override
-		public int levelUpdateCnt(Map<String, Object> map) {
-			int cnt=0;
-			HostDAO dao= Configuration.getMapper(HostDAO.class);
-			cnt=dao.levelUpdateCnt(map);
-			return cnt;
-		}
-		//혜택등록
-		@Override
-		public int levelAdd(Map<String, Object> map) {
-			int cnt=0;
-			HostDAO dao=Configuration.getMapper(HostDAO.class);
-			cnt=dao.levelAdd(map);
-			return cnt;
-		}
-////////////////HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-23 성영민  //////////////
-///////////////////////  영민 1/25  //////////////////////////////////////////////
-		//수정상품상세
-		@Override
-		public ArrayList<TcatPerformanceVO> hostProCnt(int per_id) {
-			ArrayList<TcatPerformanceVO> dto = null;
-			HostDAO dao= Configuration.getMapper(HostDAO.class);
-			dto=dao.hostProCnt(per_id);
-			return dto;
-		}
-		//수정상품업데이트1
-		@Override
-		public int hostProUpdateCnt1(Map<String, Object> map1) {
-			int cnt=0;
-			HostDAO dao= Configuration.getMapper(HostDAO.class);
-			cnt=dao.hostProUpdateCnt1(map1);
-			return cnt;
-		}
-		//수정상품업데이트2
-		@Override
-		public int hostProUpdateCnt2(Map<String, Object> map2) {
-			int cnt=0;
-			HostDAO dao= Configuration.getMapper(HostDAO.class);
-			cnt=dao.hostProUpdateCnt2(map2);
-			return cnt;
-		}
-		//수정상품업데이트3
-		@Override
-		public int hostProUpdateCnt3(Map<String, Object> map3) {
-			int cnt=0;
-			HostDAO dao= Configuration.getMapper(HostDAO.class);
-			cnt=dao.hostProUpdateCnt3(map3);
-			return cnt;
-		}
-///////////////////////  영민 1/25  //////////////////////////////////////////////
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	///////////////////////  동금 1/9  ///////////////////////////
-	//상품갯수 불러오기
-	@Override
-	public int getPerfoCnt(Map<String, Object> map) {
-	int cnt=0;
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	System.out.println("===================================");
-	cnt = dao.getPerfoCnt(map);
-	System.out.println("===================================");
-	
-	return cnt;
-	}
-	
-	//상품리스트 불러오기
-	@Override
-	public ArrayList<TcatPerformanceVO> getPerfoDeleteList(Map<String, Object> map) {
-	System.out.println("stockDelete11");
-	ArrayList<TcatPerformanceVO> dtos = null;
-	System.out.println("stockDelete12");
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	dtos = dao.getPerfoDeleteList(map);
-	System.out.println("stockDelete13");
-	
+	System.out.println("hotDao");
+	HostDAO dao= Configuration.getMapper(HostDAO.class);
+	dtos=dao.hotList();
 	return dtos;
-	}
-	
-	//스토어상품갯수 불러오기
-	@Override
-	public int getStoreCnt(Map<String, Object> map) {
-	int cnt = 0;
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	cnt = dao.getStoreCnt(map);
-	
-	return cnt;
-	}
-	
-	//스토어상품리스트 불러오기
-	@Override
-	public ArrayList<TcatPerDiscVO> getStoreDeleteList(Map<String, Object> map) {
-	ArrayList<TcatPerDiscVO> dtos = null;
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	dtos = dao.getStoreDeleteList(map);
-	return dtos;
-	}
-	
-	//상품삭제 처리페이지
-	@Override
-	public int registerDel(int per_id) {
+}
+//hotUpdate
+@Override
+public int hotUpdate(int per_id) {
 	int cnt =0;
-	
 	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	cnt = dao.registerDel(per_id);
 	
+	cnt=dao.hotUpdate(per_id);
 	return cnt;
-	}
 	
-	//스토어상품삭제 처리페이지
-	@Override
-	public int storeRegisterDel(int disc_code) {
-	int cnt = 0;
+}
+//hotLast
+@Override
+public ArrayList<TcatPerformanceVO> hotLast(Map<String,Object> map) {
+
+	ArrayList<TcatPerformanceVO> vo=null;
+	HostDAO dao=Configuration.getMapper(HostDAO.class);
 	
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	cnt = dao.storeRegisterDel(disc_code);
+	vo=dao.hotLast(map);
 	
+//int a=(int)vo.get(1).getPer_id();
+	
+	System.out.println("===================");
+	return vo;
+	
+}
+//hot카테고리 내리기
+@Override
+public int hotDeleteList(int strPer_id) {
+	int deleteCnt=0;
+	HostDAO dao=Configuration.getMapper(HostDAO.class);
+	deleteCnt=dao.hotDeleteList(strPer_id);
+	return deleteCnt;
+}
+//hot카테고리 올리기
+@Override
+public int hotUpdateList(int strPer_id) {
+	int updateCnt=0;
+
+	HostDAO dao=Configuration.getMapper(HostDAO.class);
+	updateCnt=dao.hotUpdateList(strPer_id);
+	return updateCnt;
+}
+//스토어 리스트
+@Override
+public int hotNoStoreCnt(Map<String, Object> map) {
+	int cnt=0;
+	HostDAO dao= Configuration.getMapper(HostDAO.class);
+	cnt=dao.hotNoStoreCnt(map);
 	return cnt;
-	}
+}
+//스토어 핫 
+@Override
+public int hotStoreCnt() {
+	int hotCnt=0;
+	HostDAO dao= Configuration.getMapper(HostDAO.class);
+	hotCnt=dao.hotStoreCnt();
+
+	return hotCnt;
+}
+//스토어 전체
+@Override
+public ArrayList<TcatPerDiscVO> hotStore(Map<String, Object> map) {
+	ArrayList<TcatPerDiscVO> vo=null;
+	HostDAO dao=Configuration.getMapper(HostDAO.class);
 	
-	//스토어상품갯수불러오기
-	@Override
-	public int storeOutOfCnt(Map<String, Object> map) {
-	int cnt = 0;
+	vo=dao.hotStore(map);
 	
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	cnt = dao.storeOutOfCnt(map);
-	
+	System.out.println("===================");
+	return vo;
+}
+//핫 스토어 삭제
+@Override
+public int hotStoreDeleteList(int disc_code) {
+	int deleteCnt=0;
+	HostDAO dao=Configuration.getMapper(HostDAO.class);
+	deleteCnt=dao.hotStoreDeleteList(disc_code);
+	return deleteCnt;
+}
+//핫 스토어 수정
+@Override
+public int hotStoreUpdateList(int disc_code) {
+	int updateCnt=0;
+
+	HostDAO dao=Configuration.getMapper(HostDAO.class);
+	updateCnt=dao.hotStoreUpdateList(disc_code);
+	return updateCnt;
+}
+
+//////////////// HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-11 성영민  //////////////
+////////////////HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-23 성영민  //////////////
+//구매요청 갯수
+@Override
+public int provalCnt() {
+	int cnt=0;
+	HostDAO dao=Configuration.getMapper(HostDAO.class);
+	cnt=dao.provalCnt();
 	return cnt;
-	}
-	
-	//스토어상품리스트불러오기
-	@Override
-	public ArrayList<TcatPerDiscVO> storeOutOfList(Map<String, Object> map) {
-	ArrayList<TcatPerDiscVO> dtos = null;
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	dtos = dao.storeOutOfList(map);
+}
+//구매요청리스트
+@Override
+public ArrayList<TcatTicketingVO> provalList(Map<String, Object> map) {
+	ArrayList<TcatTicketingVO> dtos = null;
+	HostDAO dao= Configuration.getMapper(HostDAO.class);
+	dtos=dao.provalList(map);
+	System.out.println("maps"+map);
 	return dtos;
-	}
-	
-	//스토어판매중단
-	@Override
-	public int storeSaleStop(int disc_code) {
-	int cnt = 0;
-	
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	cnt = dao.storeSaleStop(disc_code);
-	
+}
+//구매요청 업데이트
+@Override
+public int provalUpdateCnt(int num) {
+	int updateCnt=0;
+	HostDAO dao=Configuration.getMapper(HostDAO.class);
+	updateCnt=dao.provalUpdateCnt(num);
+	return updateCnt;
+}
+//혜택갯수
+@Override
+public int levelCnt() {
+	int cnt=0;
+	HostDAO dao=Configuration.getMapper(HostDAO.class);
+	cnt=dao.levelCnt();
 	return cnt;
-	}
-	
-	//스토어판매중단해제하기
-	@Override
-	public int storeSaleStopRelease(int disc_code) {
-	int cnt = 0;
-	
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	cnt = dao.storeSaleStopRelease(disc_code);
-	
+}
+//혜택리스트
+@Override
+public ArrayList<SaleVO> levelList(Map<String, Object> map) {
+	ArrayList<SaleVO> dtos = null;
+	HostDAO dao= Configuration.getMapper(HostDAO.class);
+	dtos=dao.levelList(map);
+	System.out.println("maps"+map);
+	return dtos;
+}
+//혜택삭제
+@Override
+public int levelDeleteCnt(String sale) {
+	int deleteCnt=0;
+	HostDAO dao=Configuration.getMapper(HostDAO.class);
+	deleteCnt=dao.levelDeleteCnt(sale);
+	return deleteCnt;
+}
+//혜택상세
+@Override
+public ArrayList<SaleVO> levelMemberForm(String sale_div) {
+	ArrayList<SaleVO> dto = null;
+	HostDAO dao= Configuration.getMapper(HostDAO.class);
+	dto=dao.levelMemberForm(sale_div);
+	return dto;
+}
+//혜택수정
+@Override
+public int levelUpdateCnt(Map<String, Object> map) {
+	int cnt=0;
+	HostDAO dao= Configuration.getMapper(HostDAO.class);
+	cnt=dao.levelUpdateCnt(map);
 	return cnt;
-	}
-	
-	//스토어수량0개일때 step=>3
-	@Override
-	public void storediscCount() {
-	
-	HostDAO dao = Configuration.getMapper(HostDAO.class);
-	dao.storediscCount();
-	
-	}
+}
+//혜택등록
+@Override
+public int levelAdd(Map<String, Object> map) {
+	int cnt=0;
+	HostDAO dao=Configuration.getMapper(HostDAO.class);
+	cnt=dao.levelAdd(map);
+	return cnt;
+}
+////////////////HOST/상품관리/핫카테고리 상품진열관리 시작-2018-01-23 성영민  //////////////
+///////////////////////  영민 1/25  //////////////////////////////////////////////
+//수정상품상세
+@Override
+public ArrayList<TcatPerformanceVO> hostProCnt(int per_id) {
+	ArrayList<TcatPerformanceVO> dto = null;
+	HostDAO dao= Configuration.getMapper(HostDAO.class);
+	dto=dao.hostProCnt(per_id);
+	return dto;
+}
+//수정상품업데이트1
+@Override
+public int hostProUpdateCnt1(Map<String, Object> map1) {
+	int cnt=0;
+	HostDAO dao= Configuration.getMapper(HostDAO.class);
+	cnt=dao.hostProUpdateCnt1(map1);
+	return cnt;
+}
+//수정상품업데이트2
+@Override
+public int hostProUpdateCnt2(Map<String, Object> map2) {
+	int cnt=0;
+	HostDAO dao= Configuration.getMapper(HostDAO.class);
+	cnt=dao.hostProUpdateCnt2(map2);
+	return cnt;
+}
+//수정상품업데이트3
+@Override
+public int hostProUpdateCnt3(Map<String, Object> map3) {
+	int cnt=0;
+	HostDAO dao= Configuration.getMapper(HostDAO.class);
+	cnt=dao.hostProUpdateCnt3(map3);
+	return cnt;
+}
+//스토어 갯수
+@Override
+public ArrayList<TcatPerDiscVO> hostStoreCnt(int disc_code) {
+	ArrayList<TcatPerDiscVO> dto = null;
+	HostDAO dao= Configuration.getMapper(HostDAO.class);
+	dto=dao.hostStoreCnt(disc_code);
+	return dto;
+}
+//스토어 수정
+@Override
+public int hostProStoreUpdateCnt1(Map<String, Object> map1) {
+	int cnt=0;
+	HostDAO dao= Configuration.getMapper(HostDAO.class);
+	cnt=dao.hostProStoreUpdateCnt1(map1);
+	return cnt;
+}
+@Override
+public int hostProStoreUpdateCnt2(Map<String, Object> map2) {
+	int cnt=0;
+	HostDAO dao= Configuration.getMapper(HostDAO.class);
+	cnt=dao.hostProStoreUpdateCnt2(map2);
+	return cnt;
+}
+///////////////////////  영민 1/25  //////////////////////////////////////////////
+		
+///////////////////////  동금 1/9  ///////////////////////////
+//상품갯수 불러오기
+@Override
+public int getPerfoCnt(Map<String, Object> map) {
+int cnt=0;
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+System.out.println("===================================");
+cnt = dao.getPerfoCnt(map);
+System.out.println("===================================");
+
+return cnt;
+}
+
+//상품리스트 불러오기
+@Override
+public ArrayList<TcatPerformanceVO> getPerfoDeleteList(Map<String, Object> map) {
+System.out.println("stockDelete11");
+ArrayList<TcatPerformanceVO> dtos = null;
+System.out.println("stockDelete12");
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+dtos = dao.getPerfoDeleteList(map);
+System.out.println("stockDelete13");
+
+return dtos;
+}
+
+//스토어상품갯수 불러오기
+@Override
+public int getStoreCnt(Map<String, Object> map) {
+int cnt = 0;
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.getStoreCnt(map);
+
+return cnt;
+}
+
+//스토어상품리스트 불러오기
+@Override
+public ArrayList<TcatPerDiscVO> getStoreDeleteList(Map<String, Object> map) {
+ArrayList<TcatPerDiscVO> dtos = null;
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+dtos = dao.getStoreDeleteList(map);
+return dtos;
+}
+
+//상품삭제 처리페이지
+@Override
+public int registerDel(int per_id) {
+int cnt =0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.registerDel(per_id);
+
+return cnt;
+}
+
+//스토어상품삭제 처리페이지
+@Override
+public int storeRegisterDel(int disc_code) {
+int cnt = 0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.storeRegisterDel(disc_code);
+
+return cnt;
+}
+
+//스토어상품갯수불러오기
+@Override
+public int storeOutOfCnt(Map<String, Object> map) {
+int cnt = 0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.storeOutOfCnt(map);
+
+return cnt;
+}
+
+//스토어상품리스트불러오기
+@Override
+public ArrayList<TcatPerDiscVO> storeOutOfList(Map<String, Object> map) {
+ArrayList<TcatPerDiscVO> dtos = null;
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+dtos = dao.storeOutOfList(map);
+return dtos;
+}
+
+//스토어판매중단
+@Override
+public int storeSaleStop(int disc_code) {
+int cnt = 0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.storeSaleStop(disc_code);
+
+return cnt;
+}
+
+//스토어판매중단해제하기
+@Override
+public int storeSaleStopRelease(int disc_code) {
+int cnt = 0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.storeSaleStopRelease(disc_code);
+
+return cnt;
+}
+
+//스토어수량0개일때 step=>3
+@Override
+public void storediscCount() {
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+dao.storediscCount();
+
+}
+//공연판매중단
+@Override
+public int perfSaleStop(int per_id) {
+int cnt = 0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.perfSaleStop(per_id);
+
+return cnt;
+}
+
+//공연판매중단해제하기
+@Override
+public int perfSaleStopRelease(int per_id) {
+int cnt = 0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.perfSaleStopRelease(per_id);
+
+return cnt;
+}
+
+//공연상품0개
+@Override
+public void perfdiscCount() {
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+dao.perfdiscCount();
+
+}
+
+
+
+///////////게시판 관리/////////////
+//공지사항 게시판 갯수
+@Override
+public int noticeManagerCnt(Map<String, Object> map) {
+int cnt =0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.noticeManagerCnt(map);
+
+return cnt;
+}
+//공지사항 게시판 리스트 불러오기
+@Override
+public ArrayList<TcatBoardVO> noticeManagerList(Map<String, Object> map) {
+ArrayList<TcatBoardVO> dtos = null;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+dtos = dao.noticeManagerList(map);
+
+return dtos;
+}
+
+//공지사항 업로드
+@Override
+public int insertNoticeBoardImage(Map<String, Object> map) {
+int cnt =0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.insertNoticeBoardImage(map);
+
+return cnt;
+}
+
+//공지사항 게시판 게시글 삭제
+@Override
+public int deleteNoticeList(int notice_num) {
+int cnt =0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.deleteNoticeList(notice_num);
+
+return cnt;
+}
+
+//공지사항 게시판 게시글 수정
+@Override
+public int updateNoticeBoardImage(Map<String, Object> map) {
+int cnt =0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.updateNoticeBoardImage(map);
+
+return cnt;
+}
+
+//공지사항 상세페이지 불러오기
+@Override
+public TcatBoardVO noticeManagerContent(int notice_num) {
+TcatBoardVO dto = null;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+dto = dao.noticeManagerContent(notice_num);
+
+return dto;
+}
+
+//Q&A게시판 갯수불러오기
+@Override
+public int qnaManagerCnt(Map<String, Object> map) {
+int cnt =0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.qnaManagerCnt(map);
+
+return cnt;
+}
+
+//Q&A게시판 리스트 불러오기
+@Override
+public ArrayList<TcatBoardVO> qnaManagerList(Map<String, Object> map) {
+ArrayList<TcatBoardVO> dtos = null;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+dtos = dao.qnaManagerList(map);
+
+return dtos;
+}
+
+//Q&A게시판 게시글 삭제
+@Override
+public int deleteQnaList(int service_num) {
+int cnt =0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.deleteQnaList(service_num);
+
+return cnt;
+}
+
+//Q&A게시판 상세보기
+@Override
+public TcatBoardVO qnaManagerContent(int service_num) {
+TcatBoardVO dto = null;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+dto = dao.qnaManagerContent(service_num);
+
+return dto;
+}
+
+//Q&A게시판 상세보기 댓글
+@Override
+public ArrayList<TcatBoardVO> qnaManagerComment(String service_num) {
+ArrayList<TcatBoardVO> dtos = null;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+dtos = dao.qnaManagerComment(service_num);
+
+return dtos;
+}
+//댓글달기
+@Override
+public int qnaManagerCommentWrite(Map<String, Object> map) {
+int cnt=0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.qnaManagerCommentWrite(map);
+
+return cnt;
+}
+
+@Override
+public void serviceManagerUpdate(int service_num) {
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+dao.serviceManagerUpdate(service_num);
+}
+
+//댓글삭제
+@Override
+public int commentManagerDelete(int service_num) {
+int cnt = 0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt= dao.commentManagerDelete(service_num);
+
+return cnt;
+}
+
+//1:1게시판 갯수불러오기
+@Override
+public int oneManagerCnt(Map<String, Object> map) {
+int cnt =0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.oneManagerCnt(map);
+
+return cnt;
+}
+
+//1:1게시판 리스트 불러오기
+@Override
+public ArrayList<TcatBoardVO> oneManagerList(Map<String, Object> map) {
+ArrayList<TcatBoardVO> dtos = null;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+dtos = dao.oneManagerList(map);
+
+return dtos;
+}
+
+//1:1게시판 게시글 삭제
+@Override
+public int deleteOneList(int service_num) {
+int cnt =0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.deleteOneList(service_num);
+
+return cnt;
+}
+
+//1:1게시판 상세보기
+@Override
+public TcatBoardVO oneManagerContent(int service_num) {
+TcatBoardVO dto = null;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+dto = dao.oneManagerContent(service_num);
+
+return dto;
+}
+
+//1:1게시판 상세보기 댓글
+@Override
+public ArrayList<TcatBoardVO> oneManagerComment(String service_num) {
+ArrayList<TcatBoardVO> dtos = null;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+dtos = dao.oneManagerComment(service_num);
+
+return dtos;
+}
+//댓글달기
+@Override
+public int oneManagerCommentWrite(Map<String, Object> map) {
+int cnt=0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt = dao.oneManagerCommentWrite(map);
+
+return cnt;
+}
+@Override
+public int commentOneManagerDelete(int service_num) {
+int cnt = 0;
+
+HostDAO dao = Configuration.getMapper(HostDAO.class);
+cnt= dao.commentOneManagerDelete(service_num);
+
+return cnt;
+}
+
+
+
 ///////////////////////  동금 1/17  ///////////////////////////
 ///////////////////////  태성 1/21 start ///////////////////////////
 	// 관리자 - 관람후기 목록 개수
@@ -1445,10 +1673,19 @@ public class HostDAOImp implements HostDAO {
 	}
 	//환불 승인 - 스토어
 	@Override
-	public int refundStoreOk(int refundUpdateS) {
+	public int refundStoreOk(Map<String, Object> map) {
 		int cnt = 0;
 		HostDAO dao = Configuration.getMapper(HostDAO.class);
-		cnt = dao.refundStoreOk(refundUpdateS);
+		cnt = dao.refundStoreOk(map);
+		
+		return cnt;
+	}
+	//환불승인시 수량 추가 
+	@Override
+	public int refundCount(Map<String, Object> map) {
+		int cnt = 0 ;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.refundCount(map);
 		return cnt;
 	}
 	//환불 취소 - 스토어
@@ -1459,5 +1696,121 @@ public class HostDAOImp implements HostDAO {
 		cnt = dao.refundStoreCancel(refundDownS);
 		return cnt;
 	}
+	//사진게시판 게시글 개수
+	@Override
+	public int photoManagerCnt() {
+		int cnt = 0;
+		
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.photoManagerCnt();
+		
+		return cnt;
+	}
+	//사진게시판 게시글 목록
+	@Override
+	public ArrayList<TcatBoardVO> photoManagerList(Map<String, Object> map) {
+		ArrayList<TcatBoardVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos= dao.photoManagerList(map);
+		return dtos;
+	}
+	//사진게시판 댓글 목록
+	@Override
+	public ArrayList<TcatBoardVO> photoManagerComment() {
+		ArrayList<TcatBoardVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos = dao.photoManagerComment();
+		return dtos;
+	}
+	//사진게시판 게시글 수정
+	@Override
+	public int photoManagerNomoDao(TcatBoardVO vo) {
+		int cnt =0;
+		
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.photoManagerNomoDao(vo);
+		
+		return cnt;
+	}
+	//사진게시판 게시글 삭제
+	@Override
+	public int photoManagerDeleteDao(int notice_num) {
+		int cnt = 0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.photoManagerDeleteDao(notice_num);
+		return cnt ;
+	}
+	//영상게시판 게시글 개수
+	@Override
+	public int movieManagerCnt() {
+		int cnt = 0;
+		
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.movieManagerCnt();
+			
+		return cnt;
+	}
+	//영상게시판 게시글 목록
+	@Override
+	public ArrayList<TcatBoardVO> movieManagerList(Map<String, Object> map) {
+		ArrayList<TcatBoardVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos = dao.movieManagerList(map);
+		return dtos;
+	}
+	//영상게시판 댓글 목록
+	@Override
+	public ArrayList<TcatBoardVO> movieManagerComment() {
+		ArrayList<TcatBoardVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos = dao.movieManagerComment();
+		return dtos;
+	}
+	//영상게시판 게시글 수정
+	@Override
+	public int movieManagerNomoDao(TcatBoardVO vo) {
+		int cnt = 0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.movieManagerNomoDao(vo);
+		return cnt;
+	}
+	//영상게시판 게시글 삭제
+	@Override
+	public int movieManagerDeleteDao(int notice_num) {
+		int cnt = 0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.movieManagerDeleteDao(notice_num);
+		return cnt;
+	}
+	//교환 개수
+	@Override
+	public int returnCnt(Map<String, Object> map) {
+		int cnt = 0;
+		
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.returnCnt(map);
+		
+		return cnt;
+	}
+	//교환 목록
+	@Override
+	public ArrayList<TcatDiscBuyVO> returnList(Map<String, Object> map) {
+		ArrayList<TcatDiscBuyVO> dtos = null; // 큰 바구니
+		
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos = dao.returnList(map);
+		
+		return dtos;
+	}
+	//교환 승인
+	@Override
+	public int returnStoreOk(int returnUpdate) {
+		int cnt = 0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.returnStoreOk(returnUpdate);
+		return cnt;
+	}
+	
+
 
 }

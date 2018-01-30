@@ -19,12 +19,12 @@
 			<hr>
 			<div>
 				<table
-				class="table table-hover table-bordered table-condensed c fs10">
+				class="table table-hover table-bordered table-condensed c fs12">
 				<tr class="bg-primary">
 					<td><b>상품코드</b></td>
-					<td><b>상품이름<b></td>
-					<td><b>상품이미지</b></td>
-					<td><b>상품설명</b></td>
+					<td style="width: 15%"><b>상품이름<b></td>
+					<td style="width: 20%"><b>상품이미지</b></td>
+					
 					<td><b>상품가격</b></td>
 					<td><b>상품수량</b></td>
 					<td><b>카테고리</b></td>
@@ -37,9 +37,12 @@
 					<c:forEach var="dto" items="${dtos}">
 						<tr>
 							<td>${dto.disc_code}</td>
-							<td>${dto.disc_title}</td>
-							<td>${dto.disc_image}</td>
-							<td>${dto.disc_con}</td>
+							<td><a onclick="detailOpen('store',${dto.disc_code});">${dto.disc_title}</td>
+							<td>
+								<img src="/tcat/resources/image/store/${dto.disc_image}" 
+								     style="width: 200px; height: 200px;">
+							</td>
+							
 							<td>${dto.disc_price}</td>
 							<td>${dto.disc_count}
 								<%-- <input type="hidden" name="disc_count" value="${dto.disc_count}"> --%>							
@@ -69,8 +72,8 @@
 						<c:if test="${cnt > 0}">
 							<!-- 처음[◀◀] / 이전블록[◀] 특수문자 : ㅁ한자키 -->
 							<c:if test="${startPage > pageBlock}">
-								<a onclick="stockOutOf_store">[◀◀]</a>
-								<a href="stockOutOf_store?pageNum=${startPage - pageBlock}">[◀]</a>
+								<a onclick="load('stockOutOf_store?cDev=${cDev}&keyword=${keyword}');">[◀◀]</a>
+								<a onclick="load('stockOutOf_store?pageNum=${startPage - pageBlock}&cDev=${cDev}&keyword=${keyword}');">[◀]</a>
 							</c:if>
 		
 							<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -80,14 +83,14 @@
 								</c:if>
 		
 								<c:if test="${i != currentPage}">
-									<a href="stockOutOf_store?pageNum=${i}">[${i}]</a>
+									<a onclick="load('stockOutOf_store?pageNum=${i}&cDev=${cDev}&keyword=${keyword}');">[${i}]</a>
 								</c:if>
 							</c:forEach>
 		
 							<!-- 다음블록[▶] / 끝[▶▶] -->
 							<c:if test="${pageCount > endPage}">
-								<a href="stockOutOf_store?pageNum=${startPage + pageBlock}">[▶]</a>
-								<a href="stockOutOf_store?pageNum=${pageCount}">[▶▶]</a>
+								<a onclick="load('stockOutOf_store?pageNum=${startPage + pageBlock}&cDev=${cDev}&keyword=${keyword}');">[▶]</a>
+								<a onclick="load('stockOutOf_store?pageNum=${pageCount}&cDev=${cDev}&keyword=${keyword}');">[▶▶]</a>
 							</c:if>
 						</c:if>
 					</table>

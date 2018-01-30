@@ -41,18 +41,18 @@
 		<div><span>'${dto.notice_title}' 의 상세 정보</span></div>
 		<hr><br>
 		
-		<table class="table table-hover table-bordered table-condensed c fs12">
+		 <%-- <table class="table table-hover table-bordered table-condensed c fs12">
 		
 			<tr>
 				<td class="bg-primary"><b>번호</b></td>
 				<td>
 					${dto.notice_num}
-					<%-- <input type="hidden" value="${dto.service_num}" name="service_num"> --%>
+					<input type="hidden" value="${dto.service_num}" name="service_num">
 				</td>
 				<td class="bg-primary"><b>구분</b></td>
 				<td>
-					<%-- ${dto.notice_div} --%>
-					<%-- <input type="hidden" value="${dto.service_div}" name="service_div"> --%>
+					${dto.notice_div}
+					<input type="hidden" value="${dto.service_div}" name="service_div">
 					<c:if test="${dto.notice_div==1}">
 					 	공지사항
 					 </c:if>
@@ -64,15 +64,15 @@
 					 </c:if>
 				</td>
 			</tr>
-			<%-- <tr>
+			<tr>
 				<td class="bg-primary"><b>구분</b></td>
 				<td>${dto.service_div}</td>
-			</tr> --%>
+			</tr>
 			<tr>
 				<td class="bg-primary"><b>작성자</b></td>
 				<td>
 					${dto.member_id}
-					<%-- <input type="hidden" value="${dto.member_id}" name="login_id"> --%>
+					<input type="hidden" value="${dto.member_id}" name="login_id">
 				</td>
 				<td class="bg-primary"><b>작성일</b></td>
 				<td>${dto.writeDate}</td>
@@ -81,7 +81,7 @@
 				<td class="bg-primary"><b>제목</b></td>
 				<td colspan=3>
 					${dto.notice_title}
-				<%-- <input type="hidden" value="${dto.service_title}" name="service_title"> --%>
+				<input type="hidden" value="${dto.service_title}" name="service_title">
 				</td>
 				
 			</tr>
@@ -89,10 +89,26 @@
 				<td class="bg-primary"><b>내용</b></td>
 				<td colspan=3>
 					${dto.contents}
-				<%-- <input type="hidden" value="${dto.getQuestionCon()}" name="QuestionCon"> --%>	
+				<input type="hidden" value="${dto.getQuestionCon()}" name="QuestionCon">	
 				</td>
 			</tr>
-		</table>
+		</table> --%> 
+		<div class="thumbnail c" >
+			<div class="disInline ">						
+				<h6 class="floatL mr20 ml15"><label>번호 : </label> ${dto.notice_num}</h6>
+				<h6 class="floatL mr20"><label>제목 : </label> ${dto.notice_title}</h6>
+				<h6 class="floatL mr20"><label>작성자 : </label> ${dto.member_id}</h6>
+				<h6 class="floatL mr20"><label>작성일 : </label> ${dto.writeDate}</h6>
+			</div>
+			<hr>				
+			<img src="${image}Boarder/${dto.notice_image}" class="img-responsive ">
+			<div class="caption">
+				<h6 class="floatL"><label>내용 : </label> ${dto.contents}</h6>
+				
+			</div><br>
+			<hr>
+	   </div>
+		
 		<div class="navbar-form navbar-right">
 			 <input type="button" value="목록보기" class="btn btn-primary btn-sm btn btn-info" 
 			        onclick="loadBoard('noticeBoard');">

@@ -116,7 +116,7 @@
 					success : function(data) {
 						$('#result').html(data);
 					}
-				});	
+				});
 			}
 			
 		});
@@ -137,6 +137,12 @@
 	
 	function cheackSeatPrice(){
 		window.open("cheackSeatPrice", "confirm", "menubar=no, width=500, height=330");
+	}
+	function detailPer(detail_num){
+		window.open("detailPer?detail_num="+detail_num, "confirm", "menubar=no, width=500, height=330");
+	}
+	function detailStore(detail_num){
+		window.open("detailStore?detail_num="+detail_num, "confirm", "menubar=no, width=500, height=330");
 	}
 </script>
 </head>
@@ -185,6 +191,7 @@
 								<th style="width: 8%">관람가능연령</th>
 								<th style="width: 4%"></th>
 							</tr>
+							
 							<tr>
 								<td><input type="text" name="perf_title"
 									style="width: 100%"></td>
@@ -266,6 +273,7 @@
 							<td><b>공연스텝</b></td>
 							<td><b>회차(하루간 공연회차)</b></td>
 							<td><b>관람가능연령</b></td>
+							<td><b>상세페이지 수정</b></td>
 						</tr>
 						<c:if test="${cnt>0}">
 							<c:forEach var="dto" items="${dtos}">
@@ -285,6 +293,7 @@
 									<td>${dto.per_step}</td>
 									<td>${dto.remain_round}</td>
 									<td>${dto.possible_age}</td> 
+									<td><input type="button" value="상세페이지수정" onclick="detailPer('${dto.detail_num}')">
 								</tr>
 							</c:forEach> 
 						</c:if>
@@ -407,6 +416,7 @@
 							<th>카테고리</th>
 							<th>상품우선순위</th>
 							<th>상품수량</th>
+							<th>상세페이지 수정</th>
 						</tr>
 						<c:if test="${cnt>0}">
 							<c:forEach var="dto" items="${dtos}">
@@ -423,6 +433,7 @@
 									<td>${dto.mDev}&nbsp${dto.sDev}</td>
 									<td>${dto.first_grade}</td>
 									<td>${dto.disc_count}</td>
+									<td><input type="button" value="상세페이지 수정" onclick="detailStore('${dto.detail_num}');"> 
 								</tr>
 							</c:forEach>
 						</c:if>

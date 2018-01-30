@@ -3,6 +3,7 @@ package spring.project.tcat.persistence;
 import java.util.ArrayList;
 import java.util.Map;
 
+import spring.project.tcat.VO.ContentFavoriteVO;
 import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerDiscVO;
@@ -23,7 +24,8 @@ public interface JMHGuestDAO {
 
 	// 로그인 처리
 	public int loginPro(Map<String, String> map);
-	//호스트 로그인
+
+	// 호스트 로그인
 	public int host_loginPro(Map<String, String> map);
 
 	// 접속일 갱신
@@ -49,34 +51,83 @@ public interface JMHGuestDAO {
 
 	// getContent 공연 상세정보 가져오기
 	public TcatPerformanceVO getContent(int per_id);
-	//getContent_store 스토어 상세페이지
+
+	// getAge 연령별 선호도
+	public ArrayList<ContentFavoriteVO> getAge(int per_id);
+
+	public ArrayList<ContentFavoriteVO> getGender(int per_id);
+
+	public ArrayList<ContentFavoriteVO> getAge_store(int disc_code);
+
+	public ArrayList<ContentFavoriteVO> getGender_store(int disc_code);
+
+	// getContent_store 스토어 상세페이지
 	public TcatPerDiscVO getContent_store(int disc_code);
 
-	//getWishList 위시리스트
+	// getWishList 위시리스트
 	public ArrayList<WishListVO> getWishList(Map<String, Object> map);
+
 	// addWishList 위시리스트 추가
 	public void addWishList(Map<String, Object> map);
+
 	// delWishList
 	public void delWishList(Map<String, Object> map);
 
 	// getWishListIn 위시리스트 존배여부
 	public int getWishListIn(Map<String, Object> map);
-	
-	//로그인 후 상세페이지 조회시 조회수 업
+
+	// 로그인 후 상세페이지 조회시 조회수 업
 	public void upHits(int per_id);
+
+	// buyCancel 결제 취소
+	public int buyCancel(int disc_num);
+
+	// 환불요청
+	public int perfRefund(int disc_num);
 	
-	//buyCancel 결제 취소
-	public int  buyCancel(int disc_num);
-	
-	//환불요청
-	public int  perfRefund(int disc_num);
-	
-	//티켓 배송번호 가져오기
+	//교환 요청
+	public int perfChange(int disc_num);
+
+	// 티켓 배송번호 가져오기
 	public ArrayList<Integer> getDel_nums(Map<String, Object> map);
-	//배송번호에 해당하는 티켓 정보 가져오기
+
+	// 배송번호에 해당하는 티켓 정보 가져오기
 	public ArrayList<TcatTicketingVO> getTickets(Map<String, Object> map);
-	
-	//예매 스텝 업데이트
+
+	// 예매 스텝 업데이트
 	public int ticStepUpdate(Map<String, Object> map);
 
+	/////////////////////////////////////////////////////////////////////////
+	// HOST
+	// 연령별 총 판매량
+	public ArrayList<ContentFavoriteVO> getAgeHostCount();
+
+	// 연령별 선호 장르
+	public ArrayList<ContentFavoriteVO> getAgeGenre();
+
+	// 연령별 선호 작품
+	public ArrayList<ContentFavoriteVO> getAgePerf(int ages);
+
+	// getAgeHostCount_store
+	public ArrayList<ContentFavoriteVO> getAgeHostCount_store();
+
+	// getAgeGenre_store
+	public ArrayList<ContentFavoriteVO> getAgeGenre_store();
+
+	// getAgePerf_store
+	public ArrayList<ContentFavoriteVO> getAgePerf_store(int ages);
+	
+	//성별 총 판매량
+	public ArrayList<ContentFavoriteVO> getGenderHostCount();
+	//성별 장르 선호
+	public ArrayList<ContentFavoriteVO> getGenderGenre();
+	//성별 작품 선호
+	public ArrayList<ContentFavoriteVO> getGenderPerf(int ages);
+	
+	//getGenderHostCount_store 성별 스토어 총 판매량
+	public ArrayList<ContentFavoriteVO> getGenderHostCount_store();
+	//getGenderGenre_store 성별 스토어 장르 선호도
+	public ArrayList<ContentFavoriteVO> getGenderGenre_store();
+	// 성별 스토어 선호 제품
+	public ArrayList<ContentFavoriteVO>  getGenderPerf_store(int gender);
 }

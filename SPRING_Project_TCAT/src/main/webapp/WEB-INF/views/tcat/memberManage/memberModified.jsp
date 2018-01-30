@@ -13,9 +13,10 @@
 	function page(url, pageNum) {
 		$("#result").load("${pageContext.request.contextPath}/" + url + "?pageNum="	+ pageNum);
 	}
-	function detailMember(member_id){
-		 window.open("detailMember?member_id="+member_id, "confirm", "menubar=no, width=450, height=570");
-	}
+	function detailMember(member_id,url){
+		 alert(url);
+		load('detailMember?member_id='+member_id+'&url='+url);
+	 }
 </script>
 
 </head>
@@ -38,11 +39,12 @@
 						<th>마지막 접속일</th>
 						<th>등급</th>
 						<th>회원가입 날짜</th>
+						<th>수정</th>
 					</tr>
 					<c:if test="${cnt>0}">
 						<c:forEach var="dto" items="${dtos}">
 							<!-- items : dtos(ArrayList)의 배열만큼 반복된다. -->
-							<tr onclick="detailMember('${dto.member_id}');">
+							<tr>
 								<td>${number}<c:set var="number" value="${number-1}" /></td>
 								<td>${dto.member_id}</td>
 								<td>${dto.member_name}</td>
@@ -51,6 +53,8 @@
 								<td>${dto.lastDate}</td>
 								<td>${dto.getRating()}</td>
 								<td>${dto.member_joindate}</td>
+								<td><button type="button" class="btn btn-primary"
+											onclick="detailMember('${dto.member_id}','detailMember');">수정</button></td>
 							</tr>
 						</c:forEach>
 					</c:if>
@@ -61,6 +65,8 @@
 						</tr>
 					</c:if>
 				</table>
+				<div class="col-md-5"></div>
+						<div class="col-md-6">
 				<!-- 페이지 컨트롤 -->
 				<table style="width: 1000px" align="center">
 					<th align="center"><c:if test="${cnt>0}">
@@ -106,6 +112,7 @@
 								onclick="ajaxSubmit('memberModified')">검색</button>
 				
 						</form>
+						</div>
 			</div>
 			<div class="col-md-1"></div>
 		</div>

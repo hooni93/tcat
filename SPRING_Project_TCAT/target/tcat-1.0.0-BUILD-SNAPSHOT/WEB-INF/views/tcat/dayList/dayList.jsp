@@ -16,12 +16,7 @@
 <script src="${script}ajax/request.js"></script>
 
 <script type="text/javascript">
-	function test(){
-		var date=document.all.something.value;
 
-		$( "#result" ).load( "${pageContext.request.contextPath}/daySearch?date="+date );
-		document.all.something2.focus();
-	}
 	$(function() {
 
 		$('#datepicker').datepicker({
@@ -29,8 +24,7 @@
 			 changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
 			  changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
 		    onSelect: function(dateText, inst) { //선택한 데이터를 input박스에 넣기
-		      $("input[name='something']").val(dateText);
-		      $("input[name='something']").focus();
+		    	$( ".thumbnail" ).load( "${pageContext.request.contextPath}/daySearch?date="+dateText );
 			    
 		    }
 		});
@@ -40,20 +34,13 @@
 </script>
 </head>
 <body>
-		<div id="datepicker"></div>
-		<input type="text" name="something" onfocus="test()">
-		<input type="text" name="something2">
-<div class="thumbnail">
-
-<!-- 핫리스트 -->
-<div class="container">
-    <div class="row">
-    	<div class="col-md-12">
-    	<div class="col-md-1"></div>
-    	<c:forEach var="vo" items="${dtos}" >
+<div class="row">
+    	<div class="col-md-2"></div>
+    	<div class="col-md-8">
+		<c:forEach var="vo" items="${dtos}" >
 			<div class="col-sm-3 col-md-2">
 				<div class="thumbnail" >
-					<img src="${image}performance/${vo.perf_Image}" class="img-responsive">
+					<img src="${image}performance/${vo.perf_Image}" style="width:150px;height:200px" class="img-responsive">
 					<div class="caption">
 						<h6 class="c"><label>${vo.perf_title}</label></h6>
 						<h6 class="c">${vo.hall_name}</h6>
@@ -73,12 +60,8 @@
 					</div><!-- outline -->
 				</div><!-- md2 -->
 		</c:forEach>
-		</div><!-- md12 -->
-
-        <div class="col-md-1"></div>
-	</div><!--row 끝  -->
-</div><!-- 컨테이너 끝 -->
-</div><!-- 핫리스트 끝 -->
-
+		</div>
+		<div class="col-md-2"></div>
+		</div>
 </body>
 </html>

@@ -18,11 +18,11 @@
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
 				<table
-					class="table table-hover table-bordered table-condensed c fs12">
+					class="table table-hover table-bordered table-condensed c fs11">
 					<tr class="danger">
 						<td width="100px"><b>후기번호</b></td>
 						<td width="200px"><b>공연제목</b></td>
-						<td width="600px"><b>내용</b></td>
+						<td width="700px"><b>내용</b></td>
 						<td width="400px"><b>작성자</b></td>
 						<td width="200px"><b>작성일</b></td>
 						<td><b>삭제</b></td>
@@ -106,11 +106,11 @@
 			<div class="col-md-1"></div>
 				<div class="col-md-10">
 				<table
-					class="table table-hover table-bordered table-condensed c fs12">
+					class="table table-hover table-bordered table-condensed c fs11">
 					<tr class="warning">
 						<td width="100px"><b>후기번호</b></td>
 						<td width="200px"> <b>상품명</b></td>
-						<td width="600px"><b>내용</b></td>
+						<td width="700px"><b>내용</b></td>
 						<td width="400px"><b>작성자</b></td>
 						<td width="200px"><b>작성일</b></td>
 						<td><b>삭제</b></td>

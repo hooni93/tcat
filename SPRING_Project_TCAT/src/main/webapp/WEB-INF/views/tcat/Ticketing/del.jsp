@@ -41,6 +41,8 @@
 		 var total=b;
 		 $("input[name='totalPrice']").val(total);
 		
+		 $("input[name='addr']").val(1);
+		 $('.delAddr').css('display','none');
 	});
 	$("#2").click(function(){
 		$("input[name='delpay']").val(2500);
@@ -48,9 +50,9 @@
 		 var b=$("input[name='price']").val();
 		 var total=(a*1+b*1);
 		 $("input[name='totalPrice']").val(total);
-		 var msg="";
-		 var result = document.getElementById("del");
-		result.innerHTML=msg;
+
+		$("input[name='addr']").val(0);
+		$('.delAddr').css('display','inline');
 	});
 	
 	$('#input_name').blur(function(){
@@ -61,11 +63,12 @@
 		var hp=$('#input_hp').val();
 		$("input[name='hp']").val(hp);
 	});
-	$('#sample6_address2').blur(function(){
+	$("input[name='addr2']").blur(function(){
 		var addr1=$('#sample6_address').val();
 		var addr2=$('#sample6_address2').val();
 		var postNum=$('#sample6_postcode').val();
 		var addr="["+postNum+"]"+addr1+" "+addr2;
+
 		$("input[name='addr']").val(addr);
 	});
 	
@@ -93,6 +96,7 @@
 					<td>
 						
 							<!-- 주문자 확인 현장수령일때는 이름,연락처만 받고/배송일때는 주소까지 받는다. -->
+
 							<table>
 								<tr>
 									<th>이름</th>
@@ -105,10 +109,10 @@
 								<tr>
 									<th>주소</th>
 							 		<td>
-								 		<input type='text' id='sample6_postcode' name='postNum' placeholder='우편번호'>
-										<input type='button' onclick='sample6_execDaumPostcode()' value='우편번호 찾기'><br>
-										<input type='text' id='sample6_address' name='addr1'placeholder='주소'>
-										<input type='text' id='sample6_address2' name='addr2' placeholder='상세주소'>
+							 			<input type='text' class="delAddr" id='sample6_postcode' name='postNum' placeholder='우편번호'>
+										<input type='button' class="delAddr" onclick='sample6_execDaumPostcode()' value='우편번호 찾기'><br>
+										<input type='text' class="delAddr" id='sample6_address' name='addr1'placeholder='주소'>
+										<input type='text' class="delAddr" id='sample6_address2' name='addr2' placeholder='상세주소'>
 									</td>
 								</tr>
 							</table>

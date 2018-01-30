@@ -97,41 +97,40 @@
 								</tr>
 							</c:if>
 						</table>
-						<table style="width: 1000px" align="center">
-							<tr>
-								<th align="center"><c:if test="${cnt > 0}">
-										<!-- 처음[◀◀] / 이전 블록[◀] -->
-										<c:if test="${startPage > pageBlock}">
-											<a
-												onclick="load('hotClassic?pageNum=${startPage - pageBlock}');">[◀]</a>
-										</c:if>
-
-										<c:forEach var="i" begin="${startPage}" end="${endPage}">
-											<c:if test="${i == currentPage}">
-												<span><b>[${i}]</b></span>
-											</c:if>
-
-											<c:if test="${i != currentPage}">
+						<div class="col-md-5"></div>
+						<div class="col-md-6">
+							<table style="width: 1000px" align="center">
+								<tr>
+									<th align="center"><c:if test="${cnt > 0}">
+											<!-- 처음[◀◀] / 이전 블록[◀] -->
+											<c:if test="${startPage > pageBlock}">
 												<a
-													onclick="load('hotClassic=pageNum=${i}');">[${i}]</a>
+													onclick="load('hotClassic?pageNum=${startPage - pageBlock}');">[◀]</a>
 											</c:if>
-										</c:forEach>
 
-										<!-- 다음[▶] / 끝[▶▶] -->
-										<c:if test="${pageCount > endPage}">
-											<a
-												onclick="load('hotClassic?pageNum=${startPage + pageBlock}');">[▶]</a>
-											<a
-												onclick="load('hotClassic?pageNum=${pageCount}');">[▶▶]</a>
-										</c:if>
-									</c:if></th>
-							</tr>
-						</table>
+											<c:forEach var="i" begin="${startPage}" end="${endPage}">
+												<c:if test="${i == currentPage}">
+													<span><b>[${i}]</b></span>
+												</c:if>
 
+												<c:if test="${i != currentPage}">
+													<a onclick="load('hotClassic=pageNum=${i}');">[${i}]</a>
+												</c:if>
+											</c:forEach>
+
+											<!-- 다음[▶] / 끝[▶▶] -->
+											<c:if test="${pageCount > endPage}">
+												<a
+													onclick="load('hotClassic?pageNum=${startPage + pageBlock}');">[▶]</a>
+												<a onclick="load('hotClassic?pageNum=${pageCount}');">[▶▶]</a>
+											</c:if>
+										</c:if></th>
+								</tr>
+							</table>
+						</div>
 						<form class="navbar-form navbar-right" role="search"
 							id="ajaxSubmitForm" onsubmit="return false">
-							카테고리 
-							<select id="sDev" name="sDev" class="m10 p5">
+							카테고리 <select id="sDev" name="sDev" class="m10 p5">
 								<option value="0">분류</option>
 								<option value="1">공연번호</option>
 								<option value="2">제목</option>
@@ -144,7 +143,7 @@
 							</div>
 							<button type="button" class="btn btn-default"
 								onclick="ajaxSubmit('hotClassic')">검색</button>
-				
+
 						</form>
 
 					</div>

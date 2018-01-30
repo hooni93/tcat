@@ -1,16 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ include file="../setting.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="${css}style.css" rel="stylesheet" type="text/css">
+<link href="${css}bootstrap_tcatMain.css" rel="stylesheet">
+<script src="${script}ajax/request.js"></script>
+<script src="${script}jquery-3.1.1.min.js"></script>
+<script src="${script}bootstrap.js"></script>
+<script src="${script}jquery-ui.js"></script>
+<link rel="stylesheet" href="${css}jquery-ui.css">
 <script type="text/javascript">
 $("#login2").click(function(){
 	$("#modal_result").load("${pageContext.request.contextPath}/memberLogin");
 });
 function payPerformence(url){
-	alert("url:"+url);
     window.open(url, "confirm", "menubar=no, width=1400, height=830");
 }
 $(document).ready(function(){
@@ -171,7 +178,7 @@ $(document).ready(function(){
 		<div class="col-md-10">
 			<div class="w100p">
 				<span class="trgothic fs15 floatL">공지사항</span>
-				<span class="glyphicon glyphicon-plus floatR hand" onclick=""></span>
+				<span class="glyphicon glyphicon-plus floatR hand" onclick="load('noticeBoard');"></span>
 			</div>
 			<table class="table table-condensed" style="table-layout:fixed">
 			<c:forEach var="borderVo2" items="${borderDtos2}">
@@ -206,16 +213,10 @@ $(document).ready(function(){
 				</tr>
 			</c:forEach>
 			</table>
-			
-			
 		</div>
 		<div class="col-md-1"></div>
 	</div>
 	<div class="col-md-1"></div>
 </div>
-
-
-
-
 </body>
 </html>

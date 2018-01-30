@@ -16,6 +16,7 @@
 <script src="${script}jquery-ui.js"></script>
 <link rel="stylesheet" href="${css}jquery-ui.css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -60,6 +61,45 @@
     }
 </script>
 <script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+<script>
 /*0125 장명훈  */
 $(document).ready(function(){
 	var host_chk = ${host_id==null};
@@ -67,7 +107,6 @@ $(document).ready(function(){
 		alert("올바른 접속이 아닙니다.");
 		window.location = "guestPage";
 	}
-	
 	//새로고침
 	if (history.state == null) { //2-2: 만약 처음 들어온 경우, 즉 push를 한 적이 없으면 게스트 메인을 뿌려준다.
 		load("hostMain");
@@ -105,6 +144,15 @@ $(document).ready(function(){
 				
 				//event.originalEvent.state.page: 푸시해 놓았던 데이터의 page(key값)에 따라 url을 받음
 			});
+	
+	$("body").keydown(function(e) {
+		if (e.keyCode == 27) {
+			var bool = confirm("Host 로그아웃 하시겠습니까?");
+			if(bool){
+				window.location="host_logout";
+			}
+		}
+	});
  });
 /*0125 장명훈  끝*/
 /* 0111 현석 */
@@ -240,10 +288,11 @@ function detailOpen(category,id){
 			//url:  아무 의미 없이 url만 변경, 현 방식을 한 이유는 새로고침시 입력되있는 주소에 따라 페이지 전송을 하는데 ajax이기 때문에 새로고침시 guestPage로 이동을 해야하기 때문에 비워둠
 		});	//hostPage의 오른쪽 result에 결과를 뿌려준다.
 	 if(url=="hostMain" || url=="join_retireMember" || url=="hotMusical" || url=="sleepMember" || url=="stockDelete_musical" || url=="stockOutOf_musical"
-		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" || url=="salseGraph"
-
-		 || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified" 
-		 || url =="commentManager"|| url =="eventHost"|| url =="provalMain" || url =="orderManagement" || url=="productRefund"){
+		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList"  || url=="infoLevelMain"
+		 || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified" || url=="infoLocationMain" || url=="useDateMain"
+		 || url =="commentManager"|| url =="eventHost"|| url =="provalMain" || url =="orderManagement" || url=="productRefund"
+		 || url=="salseGraph"     ||url=="ageAnalysis" || url =="noticeManager"|| url =="qnaManager"|| url =="oneManager"  ||url=="hostProModify"|| url=="levelMember"
+		 || url =="photoManager"  || url =="movieManager"){
 
 	 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side",function(msg) {
 			history.pushState({side : url+"_side",page : url}, null);	//들어오는 url이 if조건에 만족할때 그에맞는 사이드페이지를 hostPage의 왼쪽 side_result쪽에 뿌려준다.
@@ -286,6 +335,33 @@ function detailOpen(category,id){
 	 }
  }
 
+ //공지사항삭제
+function noticeManagerDel(notice_num){  //, url 
+	if(confirm("게시글을 삭제하시겠습니까?")==true){
+		 load("noticeManagerListDelete?notice_num="+notice_num); //+"&url="+url 
+	 }else{
+		 return;
+	 }
+}
+//공지사항수정
+function noticeManagerUpdate(notice_num){  //, url 
+	if(confirm("게시글을 수정하시겠습니까?")==true){
+		 load("noticeManagerListUpdate?notice_num="+notice_num); //+"&url="+url 
+	 }else{
+		 return;
+	 }
+}
+
+//qna게시판 삭제
+function qnaManagerDel(service_num){
+	if(confirm("게시글을 삭제하시겠습니까?")==true){
+		 load("qnaManagerListDelete?service_num="+service_num); //+"&url="+url 
+	}else{
+		 return;
+	}
+}
+
+
  /* 동금이 제작 */
  
  
@@ -312,6 +388,30 @@ function detailOpen(category,id){
 			 return false;
 		 } 
 	 }
+	//////////////////////////
+	//핫스토어 삭제
+	 function hotStoreDelete(hotListSize, disc_code,url){
+		 alert(url);
+		 if(hotListSize>1){
+			 load('hotStoreMenuDelete?disc_code='+disc_code+'&url='+url);
+		 }else{
+			 alert("핫리스트가 1건 입니다.");
+			 alert("삭제할 수 없습니다.");
+			 return false;
+		 } 
+	 }
+	//핫스토어 업데이트
+	 function hotStoreUpdate(hotListSize, disc_code,url){
+		 alert(url);
+		 if(hotListSize<5){
+			 load('hotStoreMenuUpdate?disc_code='+disc_code+'&url='+url);
+		 }else{
+			 alert("핫리스트가 꽉 찾습니다.");
+			 alert("추가할 수 없습니다.");
+			 return false;
+		 } 
+	 }
+	//////////////////////////
 	//이벤트 삭제
 	function eventDelete(notice_num,url){
 		 alert(url);
@@ -347,6 +447,11 @@ function detailOpen(category,id){
 	function hostProForm(per_id,url){
 		alert(url);
 		load('hostProForm?per_id='+per_id+'&url='+url);
+	}
+	//스토어수정 상세
+	function hostProStoreForm(disc_code,url){
+		alert(url);
+		load('hostProStoreForm?disc_code='+disc_code+'&url='+url);
 	}
 	 /* 영민이 제작 */
 	 /* 태성이 제작 */
@@ -424,7 +529,7 @@ location.reload();
 						<li><a onclick="load('provalMain')">주문승인관리</a></li>
 						<li><a onclick="load('orderManagement')">배송관리</a></li>
 						<li class="divider"></li>
-						<li><a onclick="load('productRefund')">환불관리</a></li>
+						<li><a onclick="load('productRefund')">환불/반품관리</a></li>
 						<li class="divider"></li>
 						<li><a href="#">자동입금확인 관리</a></li>
 					</ul></li>
@@ -446,17 +551,17 @@ location.reload();
 					data-toggle="dropdown" role="button" aria-expanded="false">게시판관리<span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">공지사항 게시판관리</a></li>
+						<li><a onclick="load('noticeManager');">공지사항 게시판관리</a></li>
 						<li><a onclick="load('eventHost');">이벤트 게시판관리</a></li>
 						<li><a href="#">SNS후기 게시판관리</a></li>
 						<li class="divider"></li>
-						<li><a href="#">QnA 게시판관리</a></li>
-						<li><a href="#">1 : 1 게시판관리</a></li>
+						<li><a onclick="load('qnaManager');">QnA 게시판관리</a></li>
+						<li><a onclick="load('oneManager');">1 : 1 게시판관리</a></li>
 						<li class="divider"></li>
 						<li><a onclick="load('commentManager');">관람/상품후기 게시판관리</a></li>
 						<li class="divider"></li>
-						<li><a href="#">영상 게시판관리</a></li>
-						<li><a href="#">사진 게시판관리</a></li>
+						<li><a onclick="load('movieManager');">영상 게시판관리</a></li>
+						<li><a onclick="load('photoManager');">사진 게시판관리</a></li>
 					</ul></li>
 			</ul>
 
@@ -470,14 +575,15 @@ location.reload();
 						<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">요일별분석</a></li>
+						<li><a onclick="load('useDateMain');">요일별분석</a></li>
 						<li><a href="#">시간별분석</a></li>
 						<li class="divider"></li>
-						<li><a onclick="load('infoLevel');">등급별분석</a></li>
+						<li><a onclick="load('infoLevelMain');">등급별분석</a></li>
 						<li class="divider"></li>
-						<li><a href="#">지역별분석</a></li>
+						<li><a onclick="load('infoLocationMain');">지역별분석</a></li>
 						<li><a href="#">성별분석</a></li>
 						<li><a href="#">연령분석</a></li>
+						<li><a onclick="load('ageAnalysis')">성별.연령별분석</a></li>
 					</ul></li>
 			</ul>
 		</div>
@@ -486,6 +592,5 @@ location.reload();
 	<!-- /.container-fluid --> </nav>
 
 	<div class="w100p h50"></div>
-
 </body>
 </html>

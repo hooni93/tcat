@@ -11,12 +11,14 @@
 
 
 			<ul class="nav nav-pills nav-stacked">
-				<li class="b400040 h50 c"><span class="fs15 aaaaaa">핫카테고리</span></li>
+				<li class="b400040 h50 c"><span class="fs15 aaaaaa">공연</span></li>
 	            <li class="b400040"><a onclick="load('hotMusical');">뮤지컬</a></li>
 				<li class="b400040"><a onclick="load('hotConcert');">콘서트</a></li>
 	            <li class="b400040"><a onclick="load('hotDrama');">연극</a></li>
 	            <li class="b400040"><a onclick="load('hotClassic');">클래식</a></li>
-	            <li class="b400040"><a onclick="load('hotStore');">스토어</a></li>	            
+	            <li class="b400040"><a onclick="load('hotDance');">무용</a></li>
+	            <li class="b400040 h50 c"><span class="fs15 aaaaaa">스토어</span></li>
+	            <li class="b400040"><a onclick="load('hotStore');">스토어</a></li>          
 			</ul>
 </body>
 </html>

@@ -64,6 +64,9 @@
 	}
 </script>
 <script>
+	function searchMain(search){
+		$("#result").load("${pageContext.request.contextPath}/searchMain?search="+search);
+	}
 	function memberSubmit(url) { /*AJAX submit  */
 		var formData = $("#memberForm").serialize();
 		$.ajax({
@@ -110,7 +113,7 @@
 					$("#modal_result").load(
 							"${pageContext.request.contextPath}/memberLogin");
 				});
-
+	
 	});
 	//by명훈
 	function findId() {
@@ -174,6 +177,23 @@
 											+ event.originalEvent.state.page);
 							//event.originalEvent.state.page: 푸시해 놓았던 데이터의 page(key값)에 따라 url을 받음
 						});
+				
+				
+				
+				$(window).scroll(function() {
+		            if ($(this).scrollTop() > 400) {
+		                $('#topMove').fadeIn();
+		            } else {
+		                $('#topMove').fadeOut();
+		            }
+		        });
+		        
+		        $("#topMove").click(function() {
+		            $('html, body').animate({
+		                scrollTop : 0
+		            }, 400);
+		            return false;
+		        });
 			});
 
 	//공연 상세페이지 onclick시
@@ -227,10 +247,9 @@
 				</div>
 				<div class="col-md-2">
 					<div class="input-group w200 floatL pt3" id="searchGuestTop">
-						<input type="text" class="form-control"
-							placeholder="Search for..."> <span
-							class="input-group-btn">
-							<button class="btn btn-default" type="button">Go!</button>
+						<input type="text" class="form-control" name="searchMain" placeholder="Search for..."> 
+						<span class="input-group-btn">
+							<button class="btn btn-default" onclick="searchMain(document.all.searchMain.value);" type="button">Go!</button>
 						</span>
 					</div>
 				</div>
@@ -286,7 +305,7 @@
 						<li><a class="trgothic ffffff fs14px b mr20 guestMenuHover"
 							onclick="load('dayListMain')">날짜</a></li>
 						<li><a class="trgothic ffffff fs14px b mr20 guestMenuHover"
-							onclick="load('placeList')">지역</a></li>
+							onclick="load('placeListMain')">지역</a></li>
 
 					</ul>
 
@@ -313,4 +332,8 @@
 
 
 </body>
+<!--탑 이동  -->
+<div  id="topMove" style="position: fixed; bottom:20px;right:30px;  z-index: 99; width: 100px; display: none; ">
+	<a href="#"><img src="${image}bar/topcat.png" ></a>
+</div>
 </html>

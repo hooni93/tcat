@@ -28,7 +28,7 @@
 		<table class="table table-hover table-bordered table-condensed c fs10">
 			<tr>
 				<td class="bg-primary"><b>제품이미지</b></td>
-				<td><b>${disc.disc_image } 이미지 안불러옴</b></td>
+				<td><b><img src="${image}store/${disc.disc_image }" class="w30p"></b></td>
 			</tr>
 			<tr>
 				<td class="bg-primary"><b>제품코드</b></td>
@@ -61,6 +61,12 @@
 			</tr>
 			<tr>
 				<td colspan="2"><b>${disc.disc_con }</b></td>
+			</tr>
+			<tr>
+				<td class="bg-primary" colspan="2"><b>상세이미지</b></td>
+			</tr>
+			<tr>
+				<td colspan="2"><b><img src="${image}store/${disc.getDetail_Image()}"></b></td>
 			</tr>
 		</table>
 	</div>

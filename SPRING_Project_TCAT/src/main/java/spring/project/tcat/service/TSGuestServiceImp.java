@@ -509,6 +509,7 @@ public class TSGuestServiceImp implements TSGuestService{
 		@Override
 		public void commentWriteS(HttpServletRequest req, Model model) {
 			int cnt = 0;
+			
 			int disc_code = Integer.parseInt(req.getParameter("disc_code"));
 			System.out.println("---서비스단-----disc_code-------> :"+disc_code);
 			

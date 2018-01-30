@@ -39,9 +39,17 @@ public class TcatPerDiscVO {
     int refNum;				//조회수
     String per_ex;			//상품상세소개
     String Detail_Image; 	//추가 이미지
+    int total;
+    
     
 
-    public int getDetail_num() {
+    public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
+	public int getDetail_num() {
 		return detail_num;
 	}
 	public void setDetail_num(int detail_num) {

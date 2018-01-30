@@ -9,13 +9,17 @@
 <body>
 	<ul class="nav nav-pills nav-stacked">
 		<li class="b400040 h50"></li>
-		<li class="b400040"><a onclick="load('stockOutOf_musical');">뮤지컬품절상품관리</a></li>
+		<li class="b400040 h50 c"><span class="fs15 aaaaaa">품절상품관리</span></li>
+		
+		<!-- <li class="b400040"><a onclick="load('stockOutOf_musical');">뮤지컬품절상품관리</a></li>
 		<li class="b400040"><a onclick="load('stockOutOf_concert');">콘서트품절상품관리</a></li>
 		<li class="b400040"><a onclick="load('stockOutOf_drama');">연극품절상품관리</a></li>
-		<li class="b400040"><a onclick="load('stockOutOf_classic');">클래식품절상품관리</a></li>
+		<li class="b400040"><a onclick="load('stockOutOf_classic');">클래식품절상품관리</a></li> -->
+		
+		<li class="b400040"><a onclick="load('stockOutOf_musical');">공연품절상품관리</a></li>
         <li class="b400040"><a onclick="load('stockOutOf_store');">스토어품절상품관리</a></li>
-        <!-- <li class="b400040"><a onclick="load('stockOutOf_store_release');">-스토어판매중단해제</a></li> -->
 		<li class="b400040 h50"></li>
+		
 		<!-- <li class="b400040"><a onclick="load('stockOutOf_musical');">뮤지컬판매중단해제</a></li>
 		<li class="b400040"><a onclick="load('stockOutOf_concert');">콘서트판매중단해제</a></li>
 		<li class="b400040"><a onclick="load('stockOutOf_drama');">연극판매중단해제</a></li>

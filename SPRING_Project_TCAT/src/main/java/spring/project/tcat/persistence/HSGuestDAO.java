@@ -82,5 +82,16 @@ public interface HSGuestDAO {
 	public CartVO cheackCartList(Map<String,Object> map);
 	//장바구니 삭제
 	public int deleteCart(Map<String,Object> map);
-	
+	//고객 포인트 증가
+	public void memberPoint(Map<String, Object> map);
+	//스토어 재고수량 가져오기
+	public int getCount(Map<String, Object> map);
+	//공연정보에서 검색한 갯수 가져오기
+	public int searchPerCnt(String search);
+	//공연정보에서 검색한 리스트 가져오기
+	public ArrayList<TcatPerformanceVO> searchPerList(Map<String, Object> map);
+	//스토어정보에서 검색한 갯수 가져오기
+	public int searchStoreCnt(String search);
+	//스토어정보에서 검색한 리스트 가져오기
+	public ArrayList<TcatPerDiscVO> searchStoreList(Map<String, Object> map);
 }
