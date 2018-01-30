@@ -67,7 +67,6 @@ $(document).ready(function(){
 		alert("올바른 접속이 아닙니다.");
 		window.location = "guestPage";
 	}
-	
 	//새로고침
 	if (history.state == null) { //2-2: 만약 처음 들어온 경우, 즉 push를 한 적이 없으면 게스트 메인을 뿌려준다.
 		load("hostMain");
@@ -105,6 +104,15 @@ $(document).ready(function(){
 				
 				//event.originalEvent.state.page: 푸시해 놓았던 데이터의 page(key값)에 따라 url을 받음
 			});
+	
+	$("body").keydown(function(e) {
+		if (e.keyCode == 27) {
+			var bool = confirm("Host 로그아웃 하시겠습니까?");
+			if(bool){
+				window.location="host_logout";
+			}
+		}
+	});
  });
 /*0125 장명훈  끝*/
 /* 0111 현석 */
@@ -243,7 +251,7 @@ function detailOpen(category,id){
 		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" 
 
 		 || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified" 
-		 || url =="commentManager"|| url =="eventHost"|| url =="provalMain" || url =="orderManagement" || url=="productRefund"){
+		 || url =="commentManager"|| url =="eventHost"|| url =="provalMain" || url =="orderManagement" || url=="productRefund"||url=="ageAnalysis"){
 
 	 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side",function(msg) {
 			history.pushState({side : url+"_side",page : url}, null);	//들어오는 url이 if조건에 만족할때 그에맞는 사이드페이지를 hostPage의 왼쪽 side_result쪽에 뿌려준다.
@@ -484,9 +492,7 @@ location.reload();
 						<li class="divider"></li>
 						<li><a onclick="load('infoLevel');">등급별분석</a></li>
 						<li class="divider"></li>
-						<li><a href="#">지역별분석</a></li>
-						<li><a href="#">성별분석</a></li>
-						<li><a href="#">연령분석</a></li>
+						<li><a onclick="load('ageAnalysis')">성별.연령별분석</a></li>
 					</ul></li>
 			</ul>
 		</div>
@@ -495,6 +501,5 @@ location.reload();
 	<!-- /.container-fluid --> </nav>
 
 	<div class="w100p h50"></div>
-
 </body>
 </html>

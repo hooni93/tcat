@@ -90,16 +90,6 @@ input {
 </style>
 </head>
 <body>
-	<c:if test="${cnt>0}">
-		<script type="text/javascript">
-			alert("수정되었습니다.");
-		</script>
-	</c:if>
-	<c:if test="${cnt==0}">
-		<script type="text/javascript">
-			alert("수정에 실패하였습니다.");
-		</script>
-	</c:if>
 	<div class="container">
 		<div class="row">
 			<div
@@ -118,48 +108,42 @@ input {
 										<tr>
 											<th>아이디</th>
 											<th>:</th>
-											<td>${dto.member_id}<input type="hidden" name="member_id" value="${dto.member_id}"></td>
+											<td>${dto.member_id}</td>
 										</tr>
 										<tr>
 											<th>비밀번호</th>
 											<th>:</th>
-											<td><input type="text" name="member_pwd"
-												value="${dto.member_pwd}"></td>
+											<td>${dto.member_pwd}</td>
 										</tr>
 										<tr>
 											<th>연락처</th>
 											<th>:</th>
-											<td><input type="text" name="member_hp"
-												value="${dto.member_hp}"></td>
+											<td>${dto.member_hp}</td>
 										</tr>
 										<tr>
 											<th>이메일</th>
 											<th>:</th>
-											<td><input type="text" name="member_email"
-												value="${dto.member_email}"></td>
+											<td>${dto.member_email}</td>
 										</tr>
 										<tr>
 											<th>이름</th>
 											<th>:</th>
-											<td><input type="text" name="member_name"
-												value="${dto.member_name}"></td>
+											<td>${dto.member_name}</td>
 										</tr>
 										<tr>
 											<th>등급</th>
 											<th>:</th>
-											<td><input type="text" name="Rating"
-												value="${dto.getRating()}"></td>
+											<td>${dto.getRating()}</td>
 										</tr>
 										<tr>
 											<th>포인트</th>
 											<th>:</th>
-											<td><input type="text" name="point" value="${dto.point}"></td>
+											<td>${dto.point}</td>
 										</tr>
 										<tr>
 											<th>주소</th>
 											<th>:</th>
-											<td><input type="text" name="member_addr"
-												value="${dto.member_addr}"></td>
+											<td>${dto.member_addr}</td>
 										</tr>
 										<tr>
 											<th>생년월일</th>
@@ -185,9 +169,8 @@ input {
 											<th><br></th>
 										</tr>
 										<tr>
-											<td colspan="3" style="align: center"><input
-												type="submit" value="수정" style="width: 100px;"> <input
-												type="button" value="취소" onclick="self.close();"
+											<td colspan="2" style="align: center">
+											<input type="button" value="취소" onclick="self.close();"
 												style="width: 100px;"></td>
 										</tr>
 									</table>

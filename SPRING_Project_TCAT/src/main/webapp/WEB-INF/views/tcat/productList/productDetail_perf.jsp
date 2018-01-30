@@ -101,7 +101,7 @@
 				<td class="bg-primary" colspan="2"><b>상품소개</b></td>
 			</tr>
 			<tr>
-				<td colspan="2"><b>${perf.per_ex }</b></td>
+				<td colspan="2"><pre>${perf.per_ex }</pre></td>
 			</tr>
 			<tr>
 				<td class="bg-primary" colspan="2"><b>추가 이미지</b></td>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="../setting.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ include file="../setting.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link href="${css}style.css" rel="stylesheet" type="text/css">
- <link href="${css}bootstrap_tcatMain.css" rel="stylesheet">
+<link href="${css}bootstrap_tcatMain.css" rel="stylesheet">
 <script src="${script}ajax/request.js"></script>
 <script src="${script}jquery-3.1.1.min.js"></script>
 <script src="${script}bootstrap.js"></script>
@@ -60,6 +60,53 @@
     }
 </script>
 <script>
+/*0125 장명훈  */
+$(document).ready(function(){
+	var host_chk = ${host_id==null};
+	if(host_chk){
+		alert("올바른 접속이 아닙니다.");
+		window.location = "guestPage";
+	}
+	
+	//새로고침
+	if (history.state == null) { //2-2: 만약 처음 들어온 경우, 즉 push를 한 적이 없으면 게스트 메인을 뿌려준다.
+		load("hostMain");
+	} 
+	else { //2-1: 새로고침한 페이지 에 따라 pushState의 state를 가져와 ajax  결과에 뿌려준다.
+		var url =  history.state.page;
+		var side = history.state.side;
+		var side_html = history.state.side_html;
+		$("#result").load(
+				"${pageContext.request.contextPath}/"
+						+ url); 
+		if(side == null){
+			$( "#side_result" ).html(side_html);
+		}else{
+			$( "#side_result" ).load( "${pageContext.request.contextPath}/"+side );
+		}
+		/* $("#result").load("${pageContext.request.contextPath}/"+ url);
+		$( "#side_result" ).load( "${pageContext.request.contextPath}/"+side );	 */
+		//들어오는 url이 if조건에 만족할때 그에맞는 사이드페이지를 hostPage의 왼쪽 side_result쪽에 뿌려준다.
+	}
+	//뒤로 갈때 
+	$(window).bind('popstate',function(event) {
+				//2-뒤로가거나 앞으로 갔을경우  1에서 푸쉬해놓았던 url 데이터를 받아 ajax 결과에 뿌린다.
+				var url = event.originalEvent.state.page;
+				var side  = event.originalEvent.state.side;
+				var side_html = event.originalEvent.state.side_html;
+				$("#result").load(
+						"${pageContext.request.contextPath}/"
+								+ event.originalEvent.state.page); 
+				if(side == null){
+					$( "#side_result" ).html(side_html);
+				}else{
+					$( "#side_result" ).load( "${pageContext.request.contextPath}/"+side );
+				}
+				
+				//event.originalEvent.state.page: 푸시해 놓았던 데이터의 page(key값)에 따라 url을 받음
+			});
+ });
+/*0125 장명훈  끝*/
 /* 0111 현석 */
 $( function() {
     $( "#d1" ).datepicker();
@@ -170,15 +217,39 @@ function detailOpen(category,id){
 
  //모든 결과를 콜백되는 load쪽으로 뿌려준다.
  //첫 페이지 hostMain [그후부터 들어오는 url에따라 result와 side_result를 바꿔준다.]
+ function divSeatload(){	 
+	var row=document.all.seatrow.value;
+	var column=document.all.seatcolumn.value;
+	var vip=document.all.VIPseat.value;
+	var r=document.all.Rseat.value;
+	var s=document.all.Sseat.value;
+	var a=document.all.Aseat.value;
+	var b=document.all.Bseat.value; 
+	var url="seat_result?row="+row+"&column="+column+"&vip="+vip+"&r="+r+"&s="+s+"&a="+a+"&b="+b;
+	 $( "#seat_result1" ).load( "${pageContext.request.contextPath}/"+url );
+}
+ 
  
  function load(url){
-	 
-	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url );	//hostPage의 오른쪽 result에 결과를 뿌려준다.
-	 
+	 $( "#result" ).load( "${pageContext.request.contextPath}/"+url ,function(msg) {
+		 	var s = $( "#side_result" ).html();
+			history.pushState({page : url,side : null,side_html:s}, null);//1. history에 pushState로  page를 저장 이때 url에 get방식을 쓰면 그 파라미터도 같이 넘어감
+			//history.pushState(state,title,url);
+			//state:key와 value 형태의 데이터를 여러개 넘길수 있다 너무 클경우 불가는 640k로 제한되어있다.
+			//title: 웹페이지 상단에 띄울 제목 null이나 "" 를 줘도 상관 없다.
+			//url:  아무 의미 없이 url만 변경, 현 방식을 한 이유는 새로고침시 입력되있는 주소에 따라 페이지 전송을 하는데 ajax이기 때문에 새로고침시 guestPage로 이동을 해야하기 때문에 비워둠
+		});	//hostPage의 오른쪽 result에 결과를 뿌려준다.
 	 if(url=="hostMain" || url=="join_retireMember" || url=="hotMusical" || url=="sleepMember" || url=="stockDelete_musical" || url=="stockOutOf_musical"
-		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified"){
-	 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side" );	//들어오는 url이 if조건에 만족할때 그에맞는 사이드페이지를 hostPage의 왼쪽 side_result쪽에 뿌려준다.
-	 }
+		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" 
+
+		 || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified" 
+		 || url =="commentManager"|| url =="eventHost"|| url =="provalMain" || url =="orderManagement" || url=="productRefund"||url=="ageAnalysis"){
+
+	 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side",function(msg) {
+			history.pushState({side : url+"_side",page : url}, null);	//들어오는 url이 if조건에 만족할때 그에맞는 사이드페이지를 hostPage의 왼쪽 side_result쪽에 뿌려준다.
+	 });
+
+ }
  }
  
 /* 동금이 제작 */
@@ -214,11 +285,12 @@ function detailOpen(category,id){
 		 return;
 	 }
  }
+
  /* 동금이 제작 */
  
  
  /* 영민이 제작 */
-	//핫리스트 조건
+	//핫리스트 삭제
 	 function hotDelete(hotListSize, per_id,url){
 		 alert(url);
 		 if(hotListSize>1){
@@ -229,10 +301,10 @@ function detailOpen(category,id){
 			 return false;
 		 } 
 	 }
-	
+	//핫리스트 업데이트
 	 function hotUpdate(hotListSize, per_id,url){
 		 alert(url);
-		 if(hotListSize<4){
+		 if(hotListSize<5){
 			 load('hotMenuUpdate?Hcnt='+per_id+'&url='+url);
 		 }else{
 			 alert("핫리스트가 꽉 찾습니다.");
@@ -240,141 +312,187 @@ function detailOpen(category,id){
 			 return false;
 		 } 
 	 }
+	//이벤트 삭제
+	function eventDelete(notice_num,url){
+		 alert(url);
+		load('eventDelete?notice_num='+notice_num+'&url='+url);
+	 }
+	//이벤트 수정상세
+	function eventUpdate(notice_num,url){
+		 alert(url);
+		load('eventUpdate?notice_num='+notice_num+'&url='+url);
+	 }
+	//이벤트 수정
+	function eventUpdateList(notice_num,contents,notice_title,notice_image,url){
+		 alert(url);
+		load('eventUpdateList?notice_num='+notice_num+'&notice_title='+notice_title+'&contents='+contents+'&notice_image='+notice_image+'&url='+url);
+	 }
+
+	//구매요청
+	 function provalUpdate(ticket_num,url){
+		 alert(url);
+		load('provalUpdate?ticket_num='+ticket_num+'&url='+url);
+	 }
+	//이벤트 삭제
+	function levelDelete(sale_div,url){
+		alert(url);
+		load('levelDelete?sale_div='+sale_div+'&url='+url);
+	}
+	//이벤트 상세
+	function levelMemberForm(sale_div,url){
+		alert(url);
+		load('levelMemberForm?sale_div='+sale_div+'&url='+url);
+	}
+	//수정 상세
+	function hostProForm(per_id,url){
+		alert(url);
+		load('hostProForm?per_id='+per_id+'&url='+url);
+	}
 	 /* 영민이 제작 */
 	 /* 태성이 제작 */
-	 function Cfirst_grade(url,category,id,first_grade){
+	function Cfirst_grade(url,category,id,first_grade){
 	var params="id="+id+"&category="+category+"&first_grade="+first_grade;
  	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
- }
-function Sfirst_grade(url,category,disc_code,first_grade){
+	 }
+	function Sfirst_grade(url,category,disc_code,first_grade){
 	var params="disc_code="+disc_code+"&category="+category+"&first_grade="+first_grade;
  	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
-}
-function Cstep(url,category,id,per_step){
+	}
+	function Cstep(url,category,id,per_step){
 	var params="id="+id+"&category="+category+"&per_step="+per_step;
  	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
- }
-function Sstep(url,category,disc_code,disc_step){
+	 }
+	function Sstep(url,category,disc_code,disc_step){
 	var params="disc_code="+disc_code+"&category="+category+"&disc_step="+disc_step;
  	$( "#result" ).load( "${pageContext.request.contextPath}/"+url+"?"+params);	
+	}
+///////////////////태성 01/22 start/////////////////////////////
+//관람/상품 후기 삭제 
+function commentDelete(notice_num,url){
+if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+		load("commentDelete?notice_num="+notice_num+"&url="+url);
+	}else{   //취소
+	    return;
+	}	
+location.reload();
 }
- 
+///////////////////태성 01/22 end///////////////////////////// 
 	 
 </script>
 
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" onclick="load('hostMain');"><b>TCAT 관리자센터</b></a>
-    </div>
+	<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" onclick="load('hostMain');"><b>TCAT
+					관리자센터</b></a>
+		</div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">상품관리<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a onclick="load('productList')">상품목록</a></li>
-            <li class="divider"></li>
-           <li><a onclick="load('categoryList');">카테고리별 상품진열관리</a></li>
-            <li><a onclick="load('hotMusical');">핫카테고리 상품진열관리</a></li>
-            <li class="divider"></li>
-            <li><a onclick="load('registItem');">상품등록</a></li>
-            <li><a href="#">상품등록수정</a></li>
-            <li><a onclick="load('stockDelete_musical');">상품삭제</a></li>
-            <li class="divider"></li>
-            <li><a onclick="load('stockManagement');">상품재고관리</a></li>
-             <li><a onclick="load('stockOutOf_musical');">품절상품관리</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">주문관리<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-           <li><a onclick="load('orderList')">전체 주문 목록조회</a></li>
-            <li><a href="#">주문승인관리</a></li>
-            <li><a href="#">배송관리</a></li>
-            <li class="divider"></li>
-            <li><a href="#">취소/교환/반품/환불관리</a></li>
-            <li class="divider"></li>
-            <li><a href="#">자동입금확인 관리</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">고객관리<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a onclick="load('memberModified');">회원정보조회/수정</a></li>
-            <li class="divider"></li>
-            <li><a href="#">회원등급관리</a></li>
-            <li><a href="#">회원혜택관리</a></li>
-            <li class="divider"></li>
-            <li><a onclick="load('join_retireMember');">회원가입/탈퇴관리</a></li>
-            <li class="divider"></li>
-            <li><a onclick="load('sleepMember');">휴면회원관리</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a  onclick="load('hallAdd');" role="button" aria-expanded="false">공연장 관리</a>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">게시판관리<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">공지사항 게시판관리</a></li>
-            <li><a href="#">SNS후기 게시판관리</a></li>
-            <li class="divider"></li>
-            <li><a href="#">QnA 게시판관리</a></li>
-            <li><a href="#">1 : 1 게시판관리</a></li>
-            <li class="divider"></li>
-            <li><a href="#">관람/상품후기 게시판관리</a></li>
-            <li class="divider"></li>
-            <li><a href="#">영상 게시판관리</a></li>
-            <li><a href="#">사진 게시판관리</a></li>
-          </ul>
-        </li>
-      </ul>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false">상품관리<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a onclick="load('productList')">상품목록</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('categoryList');">카테고리별 상품진열관리</a></li>
+						<li><a onclick="load('hotMusical');">핫카테고리 상품진열관리</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('registItem');">상품등록</a></li>
+						<li><a onclick="load('hostProModify');">상품수정</a></li>
+						<li><a onclick="load('stockDelete_musical');">상품삭제</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('stockManagement');">상품재고관리</a></li>
+						<li><a onclick="load('stockOutOf_musical');">품절상품관리</a></li>
+					</ul></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false">주문관리<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a onclick="load('orderList')">전체 주문 목록조회</a></li>
+						<li><a onclick="load('provalMain')">주문승인관리</a></li>
+						<li><a onclick="load('orderManagement')">배송관리</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('productRefund')">환불관리</a></li>
+						<li class="divider"></li>
+						<li><a href="#">자동입금확인 관리</a></li>
+					</ul></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false">고객관리<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a onclick="load('memberModified');">회원정보조회</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('levelMember');">회원혜택관리</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('join_retireMember');">회원가입/탈퇴관리</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('sleepMember');">휴면회원관리</a></li>
+					</ul></li>
+				<li class="dropdown"><a onclick="load('hallAdd');"
+					role="button" aria-expanded="false">공연장 관리</a></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false">게시판관리<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">공지사항 게시판관리</a></li>
+						<li><a onclick="load('eventHost');">이벤트 게시판관리</a></li>
+						<li><a href="#">SNS후기 게시판관리</a></li>
+						<li class="divider"></li>
+						<li><a href="#">QnA 게시판관리</a></li>
+						<li><a href="#">1 : 1 게시판관리</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('commentManager');">관람/상품후기 게시판관리</a></li>
+						<li class="divider"></li>
+						<li><a href="#">영상 게시판관리</a></li>
+						<li><a href="#">사진 게시판관리</a></li>
+					</ul></li>
+			</ul>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">매출분석 <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">일별매출</a></li>
-            <li><a href="#">주별매출</a></li>
-            <li><a href="#">월별매출</a></li>
-            <li class="divider"></li>
-            <li><a href="#">매출집계</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a onclick="load('productRank');" role="button" aria-expanded="false">상품분석</a>
-         
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">고객분석 <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">요일별분석</a></li>
-            <li><a href="#">시간별분석</a></li>
-            <li class="divider"></li>
-            <li><a href="#">등급별분석</a></li>
-            <li class="divider"></li>
-            <li><a href="#">지역별분석</a></li>
-            <li><a href="#">성별분석</a></li>
-            <li><a href="#">연령분석</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false">매출분석
+						<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">일별매출</a></li>
+						<li><a href="#">주별매출</a></li>
+						<li><a href="#">월별매출</a></li>
+						<li class="divider"></li>
+						<li><a href="#">매출집계</a></li>
+					</ul></li>
+				<li class="dropdown"><a onclick="load('productRank');"
+					role="button" aria-expanded="false">상품분석</a></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false">고객분석
+						<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">요일별분석</a></li>
+						<li><a href="#">시간별분석</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('infoLevel');">등급별분석</a></li>
+						<li class="divider"></li>
+						<li><a onclick="load('ageAnalysis')">성별.연령별분석</a></li>
+					</ul></li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container-fluid --> </nav>
 
-<div class="w100p h50"></div>
+	<div class="w100p h50"></div>
 
 </body>
 </html>

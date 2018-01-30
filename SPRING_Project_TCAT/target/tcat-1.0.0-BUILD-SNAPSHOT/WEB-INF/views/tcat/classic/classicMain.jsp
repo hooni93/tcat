@@ -14,17 +14,17 @@
 <div class="row">
 	<div class="col-md-1"></div>
 	<div class="col-md-10">
-		<div class="row pt5">
+		<div class="row pt5 h100p">
 			<div class="col-md-2 thumbnail mr15 h300">
 				<div class="list-group pt20">
 				  <a href="#" class="list-group-item disabled">
 				    <span class="text-warning">클래식</span>
 				  </a>
-				  <a href="#" class="list-group-item">클래식</a>
-				  <a href="#" class="list-group-item">국악</a>
+				  <a onclick="load('classicList?sDev=클래식&order=startDate');" class="list-group-item">클래식</a>
+				  <a onclick="load('classicList?sDev=국악&order=startDate');" class="list-group-item">국악</a>
 				</div>
 			</div>
-			<div class="col-md-7 thumbnail mr15 h300">
+			<div class="col-md-7 thumbnail mr15 w100p">
 			<!-- 슬라이드 -->
 				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 				  <!-- Indicators -->
@@ -70,7 +70,7 @@
 				<!-- 슬라이드 끝 -->
 			
 			</div>
-			<div class="col-md-2 thumbnail">
+			<div class="col-md-2 h300 thumbnail">
 				<div class="list-group pt11">
 				  <div class="pt11"><p class="686868 b m10"><span class="glyphicon glyphicon-star"></span> 랭킹</p></div>
 				  <a href="#" class="list-group-item">1. 빌하모니</a>

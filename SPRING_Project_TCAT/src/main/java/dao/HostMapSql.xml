@@ -497,29 +497,28 @@
 	<select id="getProductRank_storeCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM(
-		SELECT per.disc_code,COUNT(*) sellCnt, per.disc_title
-		FROM perDisc per
-		JOIN DiscBuy dis
-		ON per.disc_code = dis.disc_code
-		WHERE dis.disc_buyStep =5
-		GROUP BY per.disc_code, per.disc_title
-		ORDER BY sellCnt desc
+			SELECT      per.disc_code,per.disc_title,SUM(dis.buy_count) sellCnt
+			FROM        DiscBuy dis
+			JOIN        perDisc per
+			ON          per.disc_code = dis.disc_code
+			GROUP BY    per.disc_code, per.disc_title
+			ORDER BY    sellCnt desc
 		)
 	</select>
 	<!--스토어 판매분석 -->
 	<select id="productRank_store" resultType="spring.project.tcat.VO.ProductRankVO">
 		SELECT *
 		FROM(
-		SELECT disc_code, sellCnt,disc_title, rownum rNum
-		FROM(
-		SELECT per.disc_code,COUNT(*) sellCnt, per.disc_title
-		FROM perDisc per
-		JOIN DiscBuy dis
-		ON per.disc_code = dis.disc_code
-		WHERE dis.disc_buyStep =5
-		GROUP BY per.disc_code, per.disc_title
-		ORDER BY sellCnt desc
-		)
+			SELECT disc_code, sellCnt, disc_title, rownum rNum
+			FROM(
+				SELECT      per.disc_code,per.disc_title,SUM(dis.buy_count) sellCnt
+				FROM        DiscBuy dis
+				JOIN        perDisc per
+				ON          per.disc_code = dis.disc_code
+				WHERE 		dis.disc_buyStep = 5
+				GROUP BY    per.disc_code, per.disc_title
+				ORDER BY    sellCnt desc
+			)
 		)
 		WHERE rNum &gt;= 1 AND rNum &lt;=#{_parameter}
 	</select>
@@ -529,61 +528,57 @@
 	<select id="mDevRank" resultType="spring.project.tcat.VO.ProductRankVO">
 		SELECT mDev,sellCnt,rowNum rNum
 		FROM(
-		SELECT cat.mDev mDev ,COUNT(*) sellCnt
-		FROM performanceInfo per
-		JOIN Ticketing tic
-		ON per.per_id = tic.per_id
-		JOIN category cat
-		ON
-		cat.cateNum = per.cateNum
-		WHERE tic.ticket_step =5
-		GROUP BY cat.mDev
-		ORDER BY sellCnt desc
+			SELECT cat.mDev mDev ,COUNT(*) sellCnt
+			FROM performanceInfo per
+			JOIN Ticketing tic
+			ON per.per_id = tic.per_id
+			JOIN category cat
+			ON
+			cat.cateNum = per.cateNum
+			WHERE tic.ticket_step =5
+			GROUP BY cat.mDev
+			ORDER BY sellCnt desc
 		)
 	</select>
 	<!--소분류 판매 랭크 -->
 	<select id="sDevRank" resultType="spring.project.tcat.VO.ProductRankVO">
-		SELECT cat.sDev sDev ,COUNT(*)
-		sellCnt
-		FROM performanceInfo per
-		JOIN Ticketing tic
-		ON per.per_id = tic.per_id
-		JOIN category cat
-		ON
-		cat.cateNum = per.cateNum
-		WHERE tic.ticket_step =5
-		AND mDev =
-		#{_parameter}
+		SELECT 	cat.sDev sDev ,COUNT(*) sellCnt
+		FROM 	performanceInfo per
+				JOIN Ticketing tic
+				ON per.per_id = tic.per_id
+				JOIN category cat
+				ON
+				cat.cateNum = per.cateNum
+		WHERE 	tic.ticket_step =5
+		AND mDev = #{_parameter}
 		GROUP BY cat.sDev
 		ORDER BY sellCnt desc
 	</select>
-
 	<!--스토어 중분류 분석 -->
 	<select id="mDevRank_store" resultType="spring.project.tcat.VO.ProductRankVO">
-		SELECT
-		mDev,sellCnt,rownum rNum
+		SELECT	mDev,sellCnt,rownum rNum
 		FROM(
-		SELECT cat.mDev, COUNT(*) sellCnt
-		FROM perDisc per
-		JOIN DiscBuy dis
-		ON per.disc_code = dis.disc_code
-		JOIN category cat
-		ON cat.cateNum = per.cateNum
-		WHERE dis.disc_buyStep = 5
-		GROUP BY cat.mDev
-		ORDER BY sellCnt desc
+				SELECT cat.mDev, SUM(buy_count) sellCnt
+				FROM perDisc per
+				JOIN DiscBuy dis
+				ON per.disc_code = dis.disc_code
+				JOIN category cat
+				ON cat.cateNum = per.cateNum
+				WHERE dis.disc_buyStep = 5
+				GROUP BY cat.mDev
+				ORDER BY sellCnt desc
 		)
 	</select>
 	<!--소분류 판매 랭크 -->
 	<select id="sDevRank_store" resultType="spring.project.tcat.VO.ProductRankVO">
-		SELECT cat.sDev, COUNT(*) sellCnt
-		FROM perDisc per
-		JOIN DiscBuy dis
-		ON per.disc_code = dis.disc_code
-		JOIN category cat
-		ON cat.cateNum = per.cateNum
-		WHERE dis.disc_buyStep = 5
-		AND mDev = #{_parameter}
+		SELECT 	cat.sDev, SUM(buy_count) sellCnt
+		FROM 	perDisc per
+		JOIN 	DiscBuy dis
+		ON 		per.disc_code = dis.disc_code
+		JOIN 	category cat
+		ON 		cat.cateNum = per.cateNum
+		WHERE 	dis.disc_buyStep = 5
+		AND 	mDev = #{_parameter}
 		GROUP BY cat.sDev
 		ORDER BY sellCnt desc
 	</select>
@@ -594,44 +589,44 @@
 	<select id="returnRank_perfCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM(
-		SELECT per.per_id,COUNT(ticket_num) saleCnt
-		FROM performanceInfo per
-		JOIN Ticketing tic
-		ON per.per_id = tic.per_id
-		WHERE tic.ticket_step = 7
-		GROUP BY per.per_id
-		ORDER BY saleCnt desc
+				SELECT 	per.per_id,COUNT(ticket_num) saleCnt
+				FROM 	performanceInfo per
+				JOIN 	Ticketing tic
+				ON 		per.per_id = tic.per_id
+				WHERE 	tic.ticket_step = 7
+				GROUP BY per.per_id
+				ORDER BY saleCnt desc
 		)
 	</select>
 	<select id="returnRank_perf" resultType="spring.project.tcat.VO.ProductRankVO">
 		SELECT *
 		FROM(
-		SELECT per_id, sellCnt,perf_title, rownum rNum
-		FROM(
-		SELECT per.per_id, COUNT(ticket_num) sellCnt, per.perf_title
-		FROM performanceInfo per
-		JOIN Ticketing tic
-		ON per.per_id = tic.per_id
-		WHERE tic.ticket_step = 7
-		GROUP BY per.per_id, per.perf_title
-		ORDER BY sellCnt desc
-		)
+			SELECT per_id, sellCnt,perf_title, rownum rNum
+			FROM(
+					SELECT per.per_id, COUNT(ticket_num) sellCnt, per.perf_title
+					FROM performanceInfo per
+					JOIN Ticketing tic
+					ON per.per_id = tic.per_id
+					WHERE tic.ticket_step = 7
+					GROUP BY per.per_id, per.perf_title
+					ORDER BY sellCnt desc
+			)
 		)
 		WHERE rNum &gt;= 1 AND rNum &lt;=#{_parameter}
 	</select>
 
 
-	<!--스토어 랭크 총갯수 -->
+	<!--스토어 환불 총갯수 -->
 	<select id="returnRank_storeCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM(
-		SELECT per.disc_code,COUNT(*) sellCnt, per.disc_title
-		FROM perDisc per
-		JOIN DiscBuy dis
-		ON per.disc_code = dis.disc_code
-		WHERE dis.disc_buyStep =7
-		GROUP BY per.disc_code, per.disc_title
-		ORDER BY sellCnt desc
+				SELECT 	per.disc_code,SUM(buy_count) sellCnt, per.disc_title
+				FROM 	perDisc per
+				JOIN 	DiscBuy dis
+				ON 		per.disc_code = dis.disc_code
+				WHERE 	dis.disc_buyStep =7
+				GROUP BY per.disc_code, per.disc_title
+				ORDER BY sellCnt desc
 		)
 	</select>
 	<!--스토어 판매분석 -->
@@ -640,7 +635,7 @@
 		FROM(
 		SELECT disc_code, sellCnt,disc_title, rownum rNum
 		FROM(
-		SELECT per.disc_code,COUNT(*) sellCnt, per.disc_title
+		SELECT per.disc_code,SUM(buy_count) sellCnt, per.disc_title
 		FROM perDisc per
 		JOIN DiscBuy dis
 		ON per.disc_code = dis.disc_code
@@ -657,7 +652,7 @@
 	<select id="cartRankCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM (
-		SELECT per.disc_code, COUNT(*) sellCnt, per.disc_title
+		SELECT per.disc_code,sum(cart_count) sellCnt, per.disc_title
 		FROM perDisc per
 		JOIN cart car
 		ON per.disc_code = car.disc_code
@@ -670,12 +665,12 @@
 		FROM(
 		SELECT disc_code, sellCnt, disc_title, rownum rNum
 		FROM (
-		SELECT per.disc_code, COUNT(*) sellCnt, per.disc_title
-		FROM perDisc per
-		JOIN cart car
-		ON per.disc_code = car.disc_code
-		GROUP BY per.disc_code, per.disc_title
-		ORDER BY sellCnt desc
+				SELECT 	per.disc_code, sum(cart_count) sellCnt, per.disc_title
+				FROM 	perDisc per
+				JOIN 	cart car
+				ON 		per.disc_code = car.disc_code
+				GROUP BY per.disc_code, per.disc_title
+				ORDER BY sellCnt desc
 		)
 		)
 		WHERE rNum &gt;= 1 AND rNum &lt;=#{_parameter}
@@ -684,27 +679,27 @@
 	<select id="wishListRank_perfCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM (
-		SELECT per.per_id,per.perf_title,COUNT(*) sellCnt
-		FROM performanceInfo per
-		JOIN wishList wis
-		ON per.per_id = wis.per_id
-		GROUP BY per.per_id, per.perf_title
-		ORDER BY sellCnt desc
+			SELECT per.per_id,per.perf_title,COUNT(*) sellCnt
+			FROM performanceInfo per
+			JOIN wishList wis
+			ON per.per_id = wis.per_id
+			GROUP BY per.per_id, per.perf_title
+			ORDER BY sellCnt desc
 		)
 
 	</select>
 	<select id="wishListRank_perf" resultType="spring.project.tcat.VO.ProductRankVO">
 		SELECT *
 		FROM(
-		SELECT per_id,perf_title,sellCnt,rownum rNum
-		FROM (
-		SELECT per.per_id,per.perf_title,COUNT(*) sellCnt
-		FROM performanceInfo per
-		JOIN wishList wis
-		ON per.per_id = wis.per_id
-		GROUP BY per.per_id, per.perf_title
-		ORDER BY sellCnt desc
-		)
+				SELECT per_id,perf_title,sellCnt,rownum rNum
+				FROM (
+						SELECT per.per_id,per.perf_title,COUNT(*) sellCnt
+						FROM performanceInfo per
+						JOIN wishList wis
+						ON per.per_id = wis.per_id
+						GROUP BY per.per_id, per.perf_title
+						ORDER BY sellCnt desc
+				)
 		)
 		WHERE rNum &gt;= 1 AND rNum &lt;=#{_parameter}
 	</select>
@@ -712,12 +707,12 @@
 	<select id="wishListRank_storeCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM (
-		SELECT per.disc_code, per.disc_title,COUNT(*) sellCnt
-		FROM perDisc per
-		JOIN wishList wis
-		ON per.disc_code = wis.disc_code
-		GROUP BY per.disc_code, per.disc_title
-		ORDER BY sellCnt desc
+			SELECT per.disc_code, per.disc_title,COUNT(*) sellCnt
+			FROM perDisc per
+			JOIN wishList wis
+			ON per.disc_code = wis.disc_code
+			GROUP BY per.disc_code, per.disc_title
+			ORDER BY sellCnt desc
 		)
 	</select>
 	<select id="wishListRank_store" resultType="spring.project.tcat.VO.ProductRankVO">

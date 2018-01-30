@@ -139,27 +139,17 @@ function setPer_id(wish_num){
 					<div class="col-md-4">
 						<div class="ui centered fluid card"
 							style="border: 1px solid #d0d0d0; border-radius: 5px; margin-bottom: 20px;">
-							<div class="image">
-								<c:choose>
-									<c:when test="${wish.mDev.equals('뮤지컬') }">
-										<c:set var="folder" value="musical/" />
-									</c:when>
-									<c:when test="${wish.mDev.equals('콘서트') }">
-										<c:set var="folder" value="concert/" />
-									</c:when>
-									<c:when test="${wish.mDev.equals('연극') }">
-										<c:set var="folder" value="drama/" />
-									</c:when>
-									<c:when test="${wish.mDev.equals('클래식') }">
-										<c:set var="folder" value="classic/" />
-									</c:when>
-								</c:choose>
-								<a onclick="contentPage(${wish.per_id})"> <img
-									src="${image}${folder}${wish.getPerf_Image()}" />
+							<div class="image overflow w100p" style="height: 200px">
+								<a onclick="contentPage(${wish.per_id})"> <img class="w100p"
+									src="${image}performance/${wish.getPerf_Image()}" />
 								</a>
 							</div>
-							<div class="content">
-								<a class="header" onclick="contentPage(${wish.per_id})">${wish.perf_title }</a>
+							<div class="content overflow w100p"
+								style="text-overflow: ellipsis;">
+								<div class="content overflow h15"
+									style="text-overflow: ellipsis; height: 15px">
+									<a class="header w100" onclick="contentPage(${wish.per_id})">${wish.perf_title }</a>
+								</div>
 								<div class="meta">
 									<span class="date"> <fmt:formatDate
 											value="${wish.startDate }" pattern="yyyy.MM.dd" /> ~ <fmt:formatDate
@@ -170,8 +160,8 @@ function setPer_id(wish_num){
 							</div>
 							<div class="extra content">
 								<!--좋아요 추가하기 위한 데이터  -->
-								<input type="hidden" name="${wish.wish_num}_per_id" value="${wish.per_id }">
-								<span class="right floated"><i
+								<input type="hidden" name="${wish.wish_num}_per_id"
+									value="${wish.per_id }"> <span class="right floated"><i
 									class="glyphicon glyphicon-heart wish active ${wish.wish_num} "
 									onclick="setPer_id(${wish.wish_num})"></i>좋아요</span>
 							</div>

@@ -938,12 +938,26 @@ public class HostServiceImp implements HostService {
 		if (allcnt < productNum)
 			productNum = allcnt; // 더보기 시 리스트 양보다 많으면 리스트 갯수까지만 출력
 		System.out.println("productNum: " + productNum);
-
 		// 가져오기
 		ArrayList<ProductRankVO> ranks = hDao.productRank_perf(productNum);
 		System.out.println("ranks: " + ranks.size());
+		
+		
+		//그래프 데이터 생성
+		int sum = 0;
+		Map<String, Integer> graphs = new HashMap<String, Integer>();
+		for(int index = 0; index < allcnt; index++) {
+			if(index <= 5) {
+				graphs.put(ranks.get(index).getDisc_title(), ranks.get(index).getSellCnt());
+			}else {
+				//etcSum += ranks.get(index).getSellCnt();
+				//graphs.put("기타", etcSum);
+			}
+			//sum +=  ranks.get(index).getSellCnt();
+		}
+		graphs.put("sum", sum);// 총판매량 띄우기
 		// 띄우기
-
+		model.addAttribute("graphs",graphs);
 		model.addAttribute("ranks", ranks); // 리스트
 		model.addAttribute("productNum", productNum); // 보여줄 리스트 갯수
 		model.addAttribute("allCnt", allcnt); // 총 리스트 갯수

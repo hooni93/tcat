@@ -19,17 +19,19 @@ function load(){
 	var msg ="";
 	for(var i=0;i<(remain_round*1);i++){
 		msg += "<select name='remain_time"+(i+1)+"'>"+
-		   "	<option value='(12:00)'>(12:00)</option>"+
-		   "	<option value='(13:00)'>(13:00)</option>"+
-		   "	<option value='(14:00)'>(14:00)</option>"+
-		   "	<option value='(15:00)'>(15:00)</option>"+
-		   "	<option value='(16:00)'>(16:00)</option>"+
-		   "	<option value='(17:00)'>(17:00)</option>"+
-		   "	<option value='(18:00)'>(18:00)</option>"+
-		   "	<option value='(19:00)'>(19:00)</option>"+
+		   "	<option value='/09:00'>(09:00)</option>"+
+		   "	<option value='/10:00'>(10:00)</option>"+
+		   "	<option value='/11:00'>(11:00)</option>"+
+		   "	<option value='/12:00'>(12:00)</option>"+
+		   "	<option value='/13:00'>(13:00)</option>"+
+		   "	<option value='/14:00'>(14:00)</option>"+
+		   "	<option value='/15:00'>(15:00)</option>"+
+		   "	<option value='/16:00'>(16:00)</option>"+
+		   "	<option value='/17:00'>(17:00)</option>"+
+		   "	<option value='/18:00'>(18:00)</option>"+
+		   "	<option value='/19:00'>(19:00)</option>"+
 	   	   "</select><br>";
 	}
-
 	result.innerHTML=msg;
 	
 }
@@ -40,27 +42,27 @@ function load(){
 		switch(i){
 		case 0:
 			var a=document.all.remain_time1.value;
-			ed+=(i+1)+"회차 "+a;
+			ed+=(i+1)+"회차"+a;
 			break;
 		case 1:
 			var a=document.all.remain_time2.value;
-			ed+=","+(i+1)+"회차 "+a;
+			ed+=","+(i+1)+"회차"+a;
 			break;
 		case 2:
 			var a=document.all.remain_time3.value;
-			ed+=","+(i+1)+"회차 "+a;
+			ed+=","+(i+1)+"회차"+a;
 			break;
 		case 3:
 			var a=document.all.remain_time4.value;
-			ed+=","+(i+1)+"회차 "+a;
+			ed+=","+(i+1)+"회차"+a;
 			break;
 		case 4:
 			var a=document.all.remain_time5.value;
-			ed+=","+(i+1)+"회차 "+a;
+			ed+=","+(i+1)+"회차"+a;
 			break;
 		case 5:
 			var a=document.all.remain_time6.value;
-			ed+=","+(i+1)+"회차 "+a;
+			ed+=","+(i+1)+"회차"+a;
 			break;
 		}
 		

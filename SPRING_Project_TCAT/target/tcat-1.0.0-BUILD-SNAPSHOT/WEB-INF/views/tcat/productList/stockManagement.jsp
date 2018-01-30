@@ -13,44 +13,25 @@ function stockManagement_modify(code){
 </script>
 </head>
 <body>
+<div class="col-md-1"></div>
 	<br>
 	<hr>
-	<h3>스토어 재고 확인 및 변경</h3>
-	<h5>(수량변경할 상품을 클릭하세요!)</h5>
+	<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;스토어 재고 확인 및 변경</h3>
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(수량변경할 상품을 클릭하세요!)</h5>
 	<hr>
 	<!-- <div class="catagory" align="center">
 		<button type="button" class="btn btn-warning"
 			onclick="productGet('stockManagement','스토어');">스토어</button>
 	</div> -->
 	<br>
-
+	<div class="col-md-12 h25"></div>
 	<c:if test="${category=='스토어'}">
-		<!--검색  -->
-		<form class="navbar-form navbar-center" role="search"
-			id="ajaxSubmitForm" onsubmit="return false">
-			<input type="hidden" name="category" value=${category}>
-			<!--카테고리  -->
-			<select id="sDev" name="sDev" class="m10 p5">
-				<option value="0">분류</option>
-				<option value="1">상품코드</option>
-				<option value="2">상품이름</option>
-				<option value="3">스텝</option>
-			</select>
-
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Search"
-					name="keyword">
-			</div>
-			<button type="button" class="btn btn-default"
-				onclick="ajaxSubmit('stockManagement')">검색</button>
-			<!-- stocksearch(); -->
-		</form>
 		<!-- 스토어 -->
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
 				<table
-					class="table table-hover table-bordered table-condensed c fs10">
+					class="table table-hover table-bordered table-condensed c fs12">
 					<tr class="warning">
 						<td><b>상품코드</b></td>
 						<td><b>상품이름</b></td>
@@ -77,11 +58,17 @@ function stockManagement_modify(code){
 					</c:forEach>
 
 				</table>
-			</div>
 			<div class="col-md-1"></div>
-		</div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+			
+			<div class="col-md-1"></div>
+		<br>
 		<hr>
 		<!-- 페이지 컨트롤 -->
+		<div class="col-md-5"></div>
+		<div class="col-md-6">
 		<table style="width: 1000px" align="center">
 			<tr>
 				<th align="center"><c:if test="${cnt > 0}">
@@ -108,7 +95,29 @@ function stockManagement_modify(code){
 						</c:if>
 					</c:if></th>
 			</tr>
-		</table>
+		</table></div>
+			<!--검색  -->
+		<form class="navbar-form navbar-right" role="search"
+			id="ajaxSubmitForm" onsubmit="return false">
+			<input type="hidden" name="category" value=${category}>
+			<!--카테고리  -->
+			<select id="sDev" name="sDev" class="m10 p5">
+				<option value="0">분류</option>
+				<option value="1">상품코드</option>
+				<option value="2">상품이름</option>
+				<option value="3">스텝</option>
+			</select>
+
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search"
+					name="keyword">
+			</div>
+			<button type="button" class="btn btn-default"
+				onclick="ajaxSubmit('stockManagement')">검색</button>
+			<!-- stocksearch(); -->
+		</form>
+		<div class="col-md-1"></div>
+            </div></div>
 	</c:if>
 
 </body>
