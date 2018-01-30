@@ -223,4 +223,24 @@ public interface HostService {
 	// 환불 취소 - 스토어
 	public void productRefundCancelS(HttpServletRequest req, Model model);
 	///////////////////////  태성 1/21 end ///////////////////////////
+///////////////////////  태성 1/30 start ///////////////////////////
+	//사진관리 게시판 목록 불러오기
+	public void photoManagerList(HttpServletRequest req, Model model);
+	//사진관리 게시물 수정하기
+	public void photoManagerNomoService(MultipartHttpServletRequest req, Model model);
+	//사진관리 게시물 삭제하기
+	public void  photoManagerDeleteService(HttpServletRequest req, Model model);
+	
+	//영상 관리 게시판 목록 불러오기
+	public void movieManagerList(HttpServletRequest req, Model model);
+	//영상 관리 게시물 수정하기
+	public void movieManagerNomoService(MultipartHttpServletRequest req, Model model);
+	//영상 관리 게시물 삭제하기
+	public void movieManagerDeleteService(HttpServletRequest req, Model model);
+	
+	//스토어 반품 목록 불러오기
+	public void productReturn(HttpServletRequest req, Model model);
+	// 환불 승인 - 스토어
+	public void productReturnUpdateS(HttpServletRequest req, Model model);
+///////////////////////  태성 1/30 end ///////////////////////////
 }

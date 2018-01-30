@@ -410,9 +410,41 @@ public interface HostDAO {
 	public int refundPerformanceCancel(int refundDown);
 	
 	// 환불 승인 - 스토어
-	public int refundStoreOk(int refundUpdateS);
+	public int refundStoreOk(Map<String, Object> map);
+	// 환불 승인시 - 수량 추가
+	public int refundCount(Map<String, Object> map);
 	// 환불 취소 - 스토어
 	public int refundStoreCancel(int refundDownS);
 	
 ///////////////////////  태성 1/21 end ///////////////////////////
+///////////////////////  태성 1/30 start ///////////////////////////
+	//사진게시판 게시글 개수
+	public int photoManagerCnt();
+	//사진게시판 게시글 목록
+	public ArrayList<TcatBoardVO> photoManagerList(Map<String,Object> map);
+	//사진게시판 답글 가져오기
+	public ArrayList<TcatBoardVO> photoManagerComment();
+	//사진게시판 수정
+	public int photoManagerNomoDao(TcatBoardVO vo);
+	//사진게시판 삭제
+	public int photoManagerDeleteDao(int notice_num);
+	
+	//영상게시판 게시글 개수
+	public int movieManagerCnt();
+	//영상게시판 게시글 목록
+	public ArrayList<TcatBoardVO> movieManagerList(Map<String,Object> map);
+	//영상게시판 답글 가져오기
+	public ArrayList<TcatBoardVO> movieManagerComment();
+	//영상게시판 수정
+	public int movieManagerNomoDao(TcatBoardVO vo);
+	//영상게시판 삭제
+	public int movieManagerDeleteDao(int notice_num);
+	//교환 목록 개수
+	public int returnCnt(Map<String,Object> map);
+	//교환 목록
+	public ArrayList<TcatDiscBuyVO> returnList(Map<String, Object> map);
+	//교환 승인
+	public int returnStoreOk(int returnUpdate);
+///////////////////////  태성 1/30 end ///////////////////////////
+	
 }

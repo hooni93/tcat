@@ -243,7 +243,8 @@ function detailOpen(category,id){
 		 || url=="productList" || url=="orderList" || url == "productRank" || url=="categoryList" 
 
 		 || url=="stockManagement" || url=="hallAdd" || url=="registItem" || url=="memberModified" 
-		 || url =="commentManager"|| url =="eventHost"|| url =="provalMain" || url =="orderManagement" || url=="productRefund"){
+		 || url =="commentManager"|| url =="eventHost"|| url =="provalMain" || url =="orderManagement" || url=="productRefund"
+		 || url =="photoManager" || url =="movieManager"){
 
 	 $( "#side_result" ).load( "${pageContext.request.contextPath}/"+url+"_side",function(msg) {
 			history.pushState({side : url+"_side",page : url}, null);	//들어오는 url이 if조건에 만족할때 그에맞는 사이드페이지를 hostPage의 왼쪽 side_result쪽에 뿌려준다.
@@ -424,7 +425,7 @@ location.reload();
 						<li><a onclick="load('provalMain')">주문승인관리</a></li>
 						<li><a onclick="load('orderManagement')">배송관리</a></li>
 						<li class="divider"></li>
-						<li><a onclick="load('productRefund')">환불관리</a></li>
+						<li><a onclick="load('productRefund')">환불/반품관리</a></li>
 						<li class="divider"></li>
 						<li><a href="#">자동입금확인 관리</a></li>
 					</ul></li>
@@ -455,8 +456,8 @@ location.reload();
 						<li class="divider"></li>
 						<li><a onclick="load('commentManager');">관람/상품후기 게시판관리</a></li>
 						<li class="divider"></li>
-						<li><a href="#">영상 게시판관리</a></li>
-						<li><a href="#">사진 게시판관리</a></li>
+						<li><a onclick="load('movieManager');">영상 게시판관리</a></li>
+						<li><a onclick="load('photoManager');">사진 게시판관리</a></li>
 					</ul></li>
 			</ul>
 

@@ -1306,10 +1306,19 @@ public class HostDAOImp implements HostDAO {
 	}
 	//환불 승인 - 스토어
 	@Override
-	public int refundStoreOk(int refundUpdateS) {
+	public int refundStoreOk(Map<String, Object> map) {
 		int cnt = 0;
 		HostDAO dao = Configuration.getMapper(HostDAO.class);
-		cnt = dao.refundStoreOk(refundUpdateS);
+		cnt = dao.refundStoreOk(map);
+		
+		return cnt;
+	}
+	//환불승인시 수량 추가 
+	@Override
+	public int refundCount(Map<String, Object> map) {
+		int cnt = 0 ;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.refundCount(map);
 		return cnt;
 	}
 	//환불 취소 - 스토어
@@ -1320,5 +1329,120 @@ public class HostDAOImp implements HostDAO {
 		cnt = dao.refundStoreCancel(refundDownS);
 		return cnt;
 	}
+	//사진게시판 게시글 개수
+	@Override
+	public int photoManagerCnt() {
+		int cnt = 0;
+		
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.photoManagerCnt();
+		
+		return cnt;
+	}
+	//사진게시판 게시글 목록
+	@Override
+	public ArrayList<TcatBoardVO> photoManagerList(Map<String, Object> map) {
+		ArrayList<TcatBoardVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos= dao.photoManagerList(map);
+		return dtos;
+	}
+	//사진게시판 댓글 목록
+	@Override
+	public ArrayList<TcatBoardVO> photoManagerComment() {
+		ArrayList<TcatBoardVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos = dao.photoManagerComment();
+		return dtos;
+	}
+	//사진게시판 게시글 수정
+	@Override
+	public int photoManagerNomoDao(TcatBoardVO vo) {
+		int cnt =0;
+		
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.photoManagerNomoDao(vo);
+		
+		return cnt;
+	}
+	//사진게시판 게시글 삭제
+	@Override
+	public int photoManagerDeleteDao(int notice_num) {
+		int cnt = 0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.photoManagerDeleteDao(notice_num);
+		return cnt ;
+	}
+	//영상게시판 게시글 개수
+	@Override
+	public int movieManagerCnt() {
+		int cnt = 0;
+		
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.movieManagerCnt();
+			
+		return cnt;
+	}
+	//영상게시판 게시글 목록
+	@Override
+	public ArrayList<TcatBoardVO> movieManagerList(Map<String, Object> map) {
+		ArrayList<TcatBoardVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos = dao.movieManagerList(map);
+		return dtos;
+	}
+	//영상게시판 댓글 목록
+	@Override
+	public ArrayList<TcatBoardVO> movieManagerComment() {
+		ArrayList<TcatBoardVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos = dao.movieManagerComment();
+		return dtos;
+	}
+	//영상게시판 게시글 수정
+	@Override
+	public int movieManagerNomoDao(TcatBoardVO vo) {
+		int cnt = 0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.movieManagerNomoDao(vo);
+		return cnt;
+	}
+	//영상게시판 게시글 삭제
+	@Override
+	public int movieManagerDeleteDao(int notice_num) {
+		int cnt = 0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.movieManagerDeleteDao(notice_num);
+		return cnt;
+	}
+	//교환 개수
+	@Override
+	public int returnCnt(Map<String, Object> map) {
+		int cnt = 0;
+		
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.returnCnt(map);
+		
+		return cnt;
+	}
+	//교환 목록
+	@Override
+	public ArrayList<TcatDiscBuyVO> returnList(Map<String, Object> map) {
+		ArrayList<TcatDiscBuyVO> dtos = null; // 큰 바구니
+		
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos = dao.returnList(map);
+		
+		return dtos;
+	}
+	//교환 승인
+	@Override
+	public int returnStoreOk(int returnUpdate) {
+		int cnt = 0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt = dao.returnStoreOk(returnUpdate);
+		return cnt;
+	}
+	
 
 }
