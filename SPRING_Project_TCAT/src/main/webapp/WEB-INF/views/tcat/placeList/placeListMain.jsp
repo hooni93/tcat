@@ -6,18 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- 설정파일 연결 3개 -->
-<script src="${script}jquery-3.1.1.min.js"></script>
-<script src="${script}jquery-ui.js"></script>
-<link rel="stylesheet" href="${css}jquery-ui.css">
-<script src="${script}bootstrap.js"></script>
-<link href="${css}style.css" rel="stylesheet" type="text/css">
- <link href="${css}bootstrap_tcatMain.css" rel="stylesheet">
-<script src="${script}ajax/request.js"></script>
 
 <script type="text/javascript">
 $(function() {
-	$(".placeList").load("${pageContext.request.contextPath}/placeList");
+	$(".placeList").load("${pageContext.request.contextPath}/placeList?place=경기");
+	var result = document.getElementById("Map");
+	var msg="";
+	msg="<img src='${image}/place/경기.PNG'>"
+	result.innerHTML=msg;
 });
 function place(url,place){
 	var result = document.getElementById("Map");

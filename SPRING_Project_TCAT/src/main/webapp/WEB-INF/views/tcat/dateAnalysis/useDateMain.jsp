@@ -5,14 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="${script}jquery-3.1.1.min.js"></script>
-<script src="${script}jquery-ui.js"></script>
-<link rel="stylesheet" href="${css}jquery-ui.css">
-<script src="${script}bootstrap.js"></script>
-<link href="${css}style.css" rel="stylesheet" type="text/css">
-
 <title>Insert title here</title>
-
 <script type="text/javascript">
 	$(function() {
 		$('#datepicker').datepicker({
@@ -34,24 +27,18 @@
 </script>
 </head>
 <body>
+
+	<div id="datepicker" align="center" style="margin-left:20px;float:left;border:1px solid #dddddd; margin-top:10px; padding:5px;"></div>
+
 <div class="row">
-		<div class="col-md-11">
+		<div class="col-md-9">
 			<div class="row">
-				<div class="col-md-2" style=" margin-top:10px; padding:5px;">
-					<h3 align="center">날짜선택</h3>
-					<hr style="border:2px solid #dddddd">
-					<div id="datepicker" align="center"></div>
-				</div>
-				<div class="col-md-10" style="margin-top:10px">
+				<div class="col-md-12" style="margin-top:10px">
 					<div class="dayList"></div>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-1"></div>
+		
 	</div>
-<div id="myChart"></div>
-
-
-
 </body>
 </html>
