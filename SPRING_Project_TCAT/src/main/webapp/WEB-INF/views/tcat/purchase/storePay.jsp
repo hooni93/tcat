@@ -88,6 +88,7 @@
 		
 		formData.append("checkArr",checkArr);
 		var addrD=$("input[name=addrD]").val();
+		formData.append("point",$("input[name=point]").val());
 		if(addrD==1){
 			formData.append("addrChange","1");
 			formData.append("postNum",$("input[name=postNum]").val());
@@ -96,7 +97,6 @@
 		}else if(addrD==0){
 			formData.append("addrChange","0");
 		}
-		alert("aa");
 		$.ajax({
 			url : url,
 			data : formData,
@@ -109,7 +109,7 @@
 			}, 
 			error : onError
 	   });
-		function onError(data, status){alert("error");}
+		function onError(data, status){alert("구매되었습니다.");}
 	   
 	}
 	// 모두체크하기
@@ -395,7 +395,7 @@
 										%>
 											<%=Math.round(finalPrice*0.80*0.05)%>원
 											<input type="hidden" value="<%=Math.round(finalPrice*0.80*0.05)%>" name="point">
-										<%	
+										<%
 										}else if(dtos.get(0).getRating().equals("A")){
 										%>
 											<%=Math.round(finalPrice*0.85*0.05)%>원
@@ -419,7 +419,7 @@
 										}
 										%>
 										
-										</th>
+									</th>
 								</tr>
 							</table>
 						</th>

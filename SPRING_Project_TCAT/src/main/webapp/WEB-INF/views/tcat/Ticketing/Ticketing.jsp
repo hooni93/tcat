@@ -67,12 +67,29 @@ $( function() {
 });
 function next(form){
 	var nextBtn=document.all.nextBtn.value;
-	if(nextBtn=="좌석선택"){
-		document.all.nextBtn.value="할인/쿠폰";
-		$( "#Ticketing" ).load( "${pageContext.request.contextPath}/ticketSeat?per_id=${vo.per_id}&ticet_date="+form.ticet_date.value+"&round="+form.round.value);
-		$("#menu1").removeClass("active");
-		$("#menu2").addClass("active");
+	
+	var td=$("input[name='ticet_date']").val();
+	var rd=$("input[name='round']").val();
+	if(td==0){
+		alert("날짜를 선택해주세요!");
+	}else if(rd==0){
+		alert("회차를 선택해주세요!");
+	}else if(nextBtn=="좌석선택"){
+		
+			document.all.nextBtn.value="할인/쿠폰";
+			$( "#Ticketing" ).load( "${pageContext.request.contextPath}/ticketSeat?per_id=${vo.per_id}&ticet_date="+form.ticet_date.value+"&round="+form.round.value);
+			$("#menu1").removeClass("active");
+			$("#menu2").addClass("active");
+			
+			playAlert = setInterval(function() {
+				$( "#Ticketing" ).load( "${pageContext.request.contextPath}/ticketSeat?per_id=${vo.per_id}&ticet_date="+form.ticet_date.value+"&round="+form.round.value);
+				}, 5000);	
+		
+	}else if($("input[name='seat_type']").val()==0){
+		alert("좌석을 선택해주세요!");
 	}else if(nextBtn=="할인/쿠폰"){
+	
+		clearInterval(playAlert);
 		document.all.nextBtn.value="수령방법";
 		$( "#Ticketing" ).load( "${pageContext.request.contextPath}/sale");
 		$("#menu2").removeClass("active");
@@ -81,7 +98,7 @@ function next(form){
 		var sale_div=$("input[name='sale_div']").val();
 		
 		document.all.nextBtn.value="결제방법";
-		$( "#Ticketing" ).load( "${pageContext.request.contextPath}/del");
+		$("#Ticketing").load( "${pageContext.request.contextPath}/del");
 		$("#menu3").removeClass("active");
 		$("#menu4").addClass("active");
 	
@@ -183,7 +200,7 @@ function next(form){
 			<a href="#" class="navbar-brand">예매</a>
 			<button class="navbar-toggle" data-toggle="collapse"
 				data-target=".navHeaderCollapse"></button>
-
+			<div id="b"></div>
 			<div class="collapse navbar-collapse navHeaderCollapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li id="menu1" class="active"><a href="#">관람일/회차</a></li>
@@ -232,7 +249,7 @@ function next(form){
 								<td><input type="text" style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"value="0" name="round" readonly></td>
 							</tr>
 							<tr>
-								<th>좌석타입</th>
+								<th>좌석</th>
 								<td><input type="text" style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"value="0" name="seat_type" readonly></td>
 							</tr>
 							
@@ -244,15 +261,15 @@ function next(form){
 						<table style="color:white;margin:10px;">
 							<tr>
 								<th>티켓금액</th>
-								<td><input  style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="price"></td>
+								<td><input  style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="price" readonly></td>
 							</tr>
 							<tr>
 								<th>배송료</th>
-								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="delpay"></td>
+								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="delpay" readonly></td>
 							</tr>
 							<tr>
 								<th>총금액</th>
-								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="totalPrice"></td>
+								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="totalPrice" readonly></td>
 							</tr>
 						</table>
 						<br>
@@ -261,21 +278,21 @@ function next(form){
 						<table style="color:white;margin:10px;">
 							<tr>
 								<th>할인구분</th>
-								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="sale_div"></td>
+								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="sale_div" readonly></td>
 							</tr>
 							<tr>
 								<th>할인율</th>
-								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="sale_rate"></td>
+								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="sale_rate" readonly></td>
 							</tr>							
 							<tr>
 								<th>총 할인금액</th>
-								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="totalSale"></td>
+								<td><input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="totalSale" readonly></td>
 							</tr>
 						</table>
 						<br>
 						<hr style="color:#fafafaf;margin:5px;">
 						<br>
-						최종결제금액  <input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="total">
+						최종결제금액  <input style="width:100px;margin-left:10px;border:none;background-color:black;color:white;"type="text" value="0" name="total" readonly>
 						<br><br>
 						<input type="button" class="TicketingButton" style="margin:5px; width:100%;"value="좌석선택" name="nextBtn" onclick="next(this.form);">
 						

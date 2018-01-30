@@ -103,6 +103,14 @@ public class HSGuestController {
 			return "tcat/dayList/dayListMain";
 		}
 	//장소별 공연 가져오기
+	@RequestMapping("placeListMain")
+	public String placeListMain(HttpServletRequest req, Model model) {
+		System.out.println("placeList");
+		
+		
+		return "tcat/placeList/placeListMain";
+	}
+	
 	@RequestMapping("placeList")
 	public String placeList(HttpServletRequest req, Model model) {
 		System.out.println("placeList");
@@ -225,7 +233,7 @@ public class HSGuestController {
 		
 		HSGservice.changeCount(req,model);
 		HSGservice.cartList(req,model);
-		System.out.println("11");
+
 		return "tcat/purchase/cart";
 	}
 	@RequestMapping("deleteCart")
@@ -237,4 +245,30 @@ public class HSGuestController {
 		return "tcat/purchase/cart";
 	}
 	
+	@RequestMapping("searchMain")
+	public String searchMain(HttpServletRequest req, Model model) {
+		System.out.println("searchMain");
+		
+		String search=req.getParameter("search");
+		req.setAttribute("search", search);
+		
+		return "tcat/searchMain/searchMain";
+	}
+	@RequestMapping("searchPerList")
+	public String searchPerList(HttpServletRequest req, Model model) {
+		System.out.println("searchPerList");
+		
+		HSGservice.searchPerList(req,model);
+		
+		return "tcat/searchMain/searchPerList";
+	}
+	
+	@RequestMapping("searchStoreList")
+	public String searchStoreList(HttpServletRequest req, Model model) {
+		System.out.println("searchStoreList");
+		
+		HSGservice.searchStoreList(req,model);
+		
+		return "tcat/searchMain/searchStoreList";
+	}
 }

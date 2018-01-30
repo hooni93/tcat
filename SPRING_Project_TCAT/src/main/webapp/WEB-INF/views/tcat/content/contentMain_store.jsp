@@ -177,7 +177,7 @@ function commentListS(url) {
                               <b>구매수량</b>
                            </div>
                            <div class="col-md-9">
-                              <input type="number" name="count" value="0">
+                              <input type="number"  min="0" name="count" value="0">
                            </div>
                         </div>
 

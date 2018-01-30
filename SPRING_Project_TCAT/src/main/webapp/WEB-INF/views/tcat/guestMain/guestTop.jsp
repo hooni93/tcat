@@ -64,6 +64,9 @@
 	}
 </script>
 <script>
+	function searchMain(search){
+		$("#result").load("${pageContext.request.contextPath}/searchMain?search="+search);
+	}
 	function memberSubmit(url) { /*AJAX submit  */
 		var formData = $("#memberForm").serialize();
 		$.ajax({
@@ -223,10 +226,9 @@
 				</div>
 				<div class="col-md-2">
 					<div class="input-group w200 floatL pt3" id="searchGuestTop">
-						<input type="text" class="form-control"
-							placeholder="Search for..."> <span
-							class="input-group-btn">
-							<button class="btn btn-default" type="button">Go!</button>
+						<input type="text" class="form-control" name="searchMain" placeholder="Search for..."> 
+						<span class="input-group-btn">
+							<button class="btn btn-default" onclick="searchMain(document.all.searchMain.value);" type="button">Go!</button>
 						</span>
 					</div>
 				</div>
@@ -282,7 +284,7 @@
 						<li><a class="trgothic ffffff fs14px b mr20 guestMenuHover"
 							onclick="load('dayListMain')">날짜</a></li>
 						<li><a class="trgothic ffffff fs14px b mr20 guestMenuHover"
-							onclick="load('placeList')">지역</a></li>
+							onclick="load('placeListMain')">지역</a></li>
 
 					</ul>
 

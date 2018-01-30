@@ -1,10 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ include file="../setting.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="${css}style.css" rel="stylesheet" type="text/css">
+<link href="${css}bootstrap_tcatMain.css" rel="stylesheet">
+<script src="${script}ajax/request.js"></script>
+<script src="${script}jquery-3.1.1.min.js"></script>
+<script src="${script}bootstrap.js"></script>
+<script src="${script}jquery-ui.js"></script>
+<link rel="stylesheet" href="${css}jquery-ui.css">
 <script type="text/javascript">
 $("#login2").click(function(){
 	$("#modal_result").load("${pageContext.request.contextPath}/memberLogin");
@@ -207,16 +215,10 @@ $(document).ready(function(){
 				</tr>
 			</c:forEach>
 			</table>
-			
-			
 		</div>
 		<div class="col-md-1"></div>
 	</div>
 	<div class="col-md-1"></div>
 </div>
-
-
-
-
 </body>
 </html>

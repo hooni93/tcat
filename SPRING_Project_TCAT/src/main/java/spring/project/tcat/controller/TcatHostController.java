@@ -1039,18 +1039,13 @@ public class TcatHostController {
 	}
 
 	// 등급분석사이드
-	@RequestMapping("infoLevel_side")
+	@RequestMapping("infoLevelMain_side")
 	public String infoLevel_side(HttpServletRequest req, Model model) {
-		System.out.println("infoLevel_side");
-		return "tcat/memberAnalysis/infoLevel_side";
+		System.out.println("infoLevelMain_side");
+		return "tcat/memberAnalysis/infoLevelMain_side";
 	}
 
-	// 등급분석사이드
-	@RequestMapping("infoLevel")
-	public String infoLevel(HttpServletRequest req, Model model) {
-		System.out.println("infoLevel");
-		return "tcat/memberAnalysis/infoLevel";
-	}
+
 
 	/////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민
 	/////////////////// //////////////////////////////

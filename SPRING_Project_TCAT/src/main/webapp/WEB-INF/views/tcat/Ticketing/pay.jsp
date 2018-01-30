@@ -41,20 +41,37 @@
 		</tr>
 		<tr>
 			<td>
-				<table class="table">
+				<table class="table table-striped ">
 					<tr>
-						<td>YES머니</td>
+						<td>TCAT머니</td>
 						<td><input type="text" value="0">원</td>
-						<td><input type="checkbox">전액사용(총 0원)
+						<td><input type="checkbox">전액사용(총 0원)</td>
 					</tr>
 					<tr>
-						<td>YES포인트</td>
+						<td>TCAT포인트</td>
 						<td align="right">0 원</td>
-						<td><input type="button" value="YES머니로 전환"></td>
-						<td>
+						<td><input type="button" value="YES머니로 환전"> TCAT포인트 5,000원 이상이면 TCAT머니로 환전가능</td>
+					</tr>
+					<tr>
+						<td>예치금</td>
+						<td><input type="text" value="0">원</td>
+						<td><input type="checkbox">전액사용(총 0원)</td>
+					</tr>
+					<tr>
+						<td>TCAT상품권</td>
+						<td><input type="text" value="0">원</td>
+						<td><input type="button" value="사용하기">(총 0원/사용가능 0장)</td>
+					</tr>
+					<tr>
+						<td>공연예매권</td>
+						<td>사용가능 예매권[총 0장]</td>
+						<td><input type="button" value="예매권 번호 등록/사용"></td>
 					</tr>
 				</table>
 			</td>
+		</tr>
+		<tr>
+			<th><hr><th>
 		</tr>
 	</table>
 </body>

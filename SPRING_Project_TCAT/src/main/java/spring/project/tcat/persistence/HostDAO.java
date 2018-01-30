@@ -224,6 +224,8 @@ public interface HostDAO {
 	public detailPageVO detaillist(int detail_num);
 	//상세페이지 수정
 	public void updateDetail(Map<String,Object> map);
+	//동영상 추가
+	public void updatePer(Map<String,Object> map);
 	
 	////////////////////////////////////현석 1/11 end //////////////////////////////////////////
 
@@ -275,70 +277,7 @@ public interface HostDAO {
 	
 	////////////////////////////////////영민 1/10 end ///////////////////////////////////////
 	///////////////////////  동금 1/11  ///////////////////////////
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	//상품갯수 불러오기
 	public int getPerfoCnt(Map<String, Object> map);
 	

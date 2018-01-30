@@ -9,9 +9,8 @@
 
 	<ul class="nav nav-pills nav-stacked">
 		<li class="b400040 h20"></li>
-		<li class="b400040 h50 c"><span class="fs15 aaaaaa">등급별분석</span></li>
-		<li class="b400040"><a onclick="load('infoLevel');">등급별분석</a></li>
-	
+		<li class="b400040 h50 c"><span class="fs15 aaaaaa">등급 카테고리별 구매율</span></li>
+		
 	</ul>
 
 </body>

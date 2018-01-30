@@ -767,6 +767,12 @@ public class HostDAOImp implements HostDAO {
 			HostDAO dao=Configuration.getMapper(HostDAO.class);
 			dao.updateDetail(map);
 		}
+		
+		@Override
+		public void updatePer(Map<String, Object> map) {
+			HostDAO dao=Configuration.getMapper(HostDAO.class);
+			dao.updatePer(map);
+		}
 		////////////////////////////////////현석 1/11  end//////////////////////////////////////////
 		
 	
@@ -1320,5 +1326,6 @@ public class HostDAOImp implements HostDAO {
 		cnt = dao.refundStoreCancel(refundDownS);
 		return cnt;
 	}
+
 
 }

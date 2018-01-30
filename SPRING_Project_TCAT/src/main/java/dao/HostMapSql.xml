@@ -1009,8 +1009,7 @@
 	</select>
 
 	<insert id="insertPerformance" parameterType="java.util.Map">
-		insert into performanceInfo(per_id, perf_title, cateNum, perf_Image,
-		startDate, endDate, hall_id, first_grade, per_step, remain_round,
+		insert into performanceInfo(per_id, perf_title, cateNum, perf_Image,startDate, endDate, hall_id, first_grade, per_step, remain_round,
 		possible_age,detail_num,VIP_seatPrice,R_seatPrice,S_seatPrice,A_seatPrice,B_seatPrice)
 		values(performanceInfo_SEQ.NEXTVAL,#{perf_title},#{cateNum},#{perf_Image},#{startDate},#{endDate},#{hall_id},#{first_grade},1,#{remain_round},#{possible_age},DetailPage_SEQ.NEXTVAL,#{VIP_seatPrice},#{R_seatPrice},#{S_seatPrice},#{A_seatPrice},#{B_seatPrice})
 
@@ -1178,9 +1177,13 @@
 		select * from detailpage where detail_num=#{detail_num}
 	</select>
 
-	<update id="updateDetail">
+	<update id="updateDetail" parameterType="java.util.Map">
 		update detailpage set per_ex=#{per_ex},detail_Image=#{Detail_Image} where
 		detail_num=#{detail_num}
+	</update>
+	
+	<update id="updatePer" parameterType="java.util.Map">
+		update performanceInfo set movie_url=#{movie_url} where detail_num=#{detail_num}
 	</update>
 	<!-- 18.01.11 현석 수정 끝 -->
 

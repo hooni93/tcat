@@ -2052,7 +2052,8 @@ public class HostServiceImp implements HostService {
 			}
 			fis.close();
 			fos.close();
-
+			
+			
 			String perf_title = req.getParameter("perf_title");
 			int cateNum = Integer.parseInt(req.getParameter("cateNum"));
 			String perf_Image = file.getOriginalFilename();
@@ -2088,7 +2089,8 @@ public class HostServiceImp implements HostService {
 			map.put("S_seatPrice", S_seatPrice);
 			map.put("A_seatPrice", A_seatPrice);
 			map.put("B_seatPrice", B_seatPrice);
-
+			
+			
 			System.out.println("=======================================\n" + "perf_title=" + map.get("perf_title")
 					+ "\n" + "cateNum=" + map.get("cateNum") + "\n" + "perf_Image=" + map.get("perf_Image") + "\n"
 					+ "startDate=" + map.get("startDate") + "\n" + "endDate=" + map.get("endDate") + "\n" + "hall_id="
@@ -2493,7 +2495,7 @@ public class HostServiceImp implements HostService {
 		int endPage = 0; // 마지막 페이지
 
 		// 글갯수 구하기
-
+		System.out.println("111");
 		cnt = hDao.HostMemberListCnt();
 		System.out.println("cnt:" + cnt);
 
@@ -2621,35 +2623,8 @@ public class HostServiceImp implements HostService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			int error = 1;
-			req.setAttribute("error2", error);
-		}
-
-	}
-
-	@Override
-	public void updateDetailPer(MultipartHttpServletRequest req, Model model) {
-		MultipartFile file = req.getFile("Detail_Image");
-
-		String realDir = "C:\\Dev\\TCATworkspace\\git\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\performance\\\\";
-		String saveDir = req.getRealPath("/resources/image/performance/");
-		try {
-
-			file.transferTo(new File(saveDir + file.getOriginalFilename()));
-
-			FileInputStream fis = new FileInputStream(saveDir + file.getOriginalFilename());
-			FileOutputStream fos = new FileOutputStream(realDir + file.getOriginalFilename());
-
-			int data = 0;
-
-			while ((data = fis.read()) != -1) {
-				fos.write(data);
-			}
-			fis.close();
-			fos.close();
-
 			String per_ex = req.getParameter("per_ex");
-			String Detail_Image = file.getOriginalFilename();
+			String Detail_Image = "0";
 			int detail_num = Integer.parseInt(req.getParameter("detail_num"));
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("per_ex", per_ex);
@@ -2657,9 +2632,69 @@ public class HostServiceImp implements HostService {
 			map.put("detail_num", detail_num);
 
 			hDao.updateDetail(map);
+		}
+
+	}
+
+	@Override
+	public void updateDetailPer(MultipartHttpServletRequest req, Model model) {
+		
+			MultipartFile file = req.getFile("Detail_Image");
+	
+			String realDir = "E:\\Team_project\\projectGit\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\performance\\";
+			String saveDir = req.getRealPath("/resources/image/performance/");
+			try {
+
+			file.transferTo(new File(saveDir + file.getOriginalFilename()));
+
+			FileInputStream fis = new FileInputStream(saveDir + file.getOriginalFilename());
+			FileOutputStream fos = new FileOutputStream(realDir + file.getOriginalFilename());
+
+			int data = 0;
+			
+			while ((data = fis.read()) != -1) {
+				fos.write(data);
+			}
+			fis.close();
+			fos.close();
+			
+			String move_url=req.getParameter("move_url");
+			String per_ex = req.getParameter("per_ex");
+			String Detail_Image = file.getOriginalFilename();
+			int detail_num = Integer.parseInt(req.getParameter("detail_num"));
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("per_ex", per_ex);
+			map.put("Detail_Image", Detail_Image);
+			map.put("detail_num", detail_num);
+			map.put("movie_url", move_url);
+			System.out.println("movie_url:"+move_url);
+			System.out.println("per_ex:"+per_ex);
+			System.out.println("Detail_Image:"+Detail_Image);
+			System.out.println("detail_num:"+detail_num);
+			
+			req.setAttribute("movie_url", move_url);
+			hDao.updatePer(map);
+			hDao.updateDetail(map);
 
 		} catch (Exception e) {
-
+			e.printStackTrace();
+			String move_url=req.getParameter("move_url");
+			String per_ex = req.getParameter("per_ex");
+			String Detail_Image = "0";
+			int detail_num = Integer.parseInt(req.getParameter("detail_num"));
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("per_ex", per_ex);
+			map.put("Detail_Image", Detail_Image);
+			map.put("detail_num", detail_num);
+			map.put("movie_url", move_url);
+			System.out.println("movie_url:"+move_url);
+			System.out.println("per_ex:"+per_ex);
+			System.out.println("Detail_Image:"+Detail_Image);
+			System.out.println("detail_num:"+detail_num);
+			
+			hDao.updatePer(map);
+			hDao.updateDetail(map);
+			req.setAttribute("movie_url", move_url);
 		}
 
 	}
