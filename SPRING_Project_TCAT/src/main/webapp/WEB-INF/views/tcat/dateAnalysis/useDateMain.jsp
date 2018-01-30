@@ -27,21 +27,18 @@
 </script>
 </head>
 <body>
+
+	<div id="datepicker" align="center" style="margin-left:20px;float:left;border:1px solid #dddddd; margin-top:10px; padding:5px;"></div>
+
 <div class="row">
-		<div class="col-md-11">
+		<div class="col-md-9">
 			<div class="row">
-				<div class="col-md-2" style=" margin-top:10px; padding:5px;">
-					<h3 align="center">날짜선택</h3>
-					<hr style="border:2px solid #dddddd">
-					<div id="datepicker" align="center"></div>
-				</div>
-				<div class="col-md-10" style="margin-top:10px">
+				<div class="col-md-12" style="margin-top:10px">
 					<div class="dayList"></div>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-1"></div>
+		
 	</div>
-<div id="myChart"></div>
 </body>
 </html>

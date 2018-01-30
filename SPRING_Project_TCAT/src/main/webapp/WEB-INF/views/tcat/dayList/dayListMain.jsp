@@ -41,15 +41,14 @@
 </script>
 </head>
 <body>
-	<div class="row">
+
+	<div id="datepicker" align="center" style="margin-left:20px;float:left;border:1px solid #dddddd; margin-top:10px; padding:5px;"></div>				
+
+	<div class="row" >
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
 			<div class="row">
-				<div class="col-md-2" style="border:1px solid #dddddd; margin-top:10px; padding:5px;">
 				
-					<hr style="border:2px solid #dddddd">
-					<div id="datepicker" align="center"></div>
-				</div>
 				<div class="col-md-10" style="margin-top:10px">
 					<div class="dayList"></div>
 				</div>
