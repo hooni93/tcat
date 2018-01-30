@@ -20,9 +20,11 @@
 				<li class="b400040"><a
 					onclick="load('categoryList?category=콘서트');">콘서트</a></li>
 				<li class="b400040"><a
+					onclick="load('categoryList?category=클래식');">클래식/국악</a></li>
+				<li class="b400040"><a
+					onclick="load('categoryList?category=무용');">무용/발레</a></li>
+				<li class="b400040"><a
 					onclick="load('categoryList?category=스토어');">스토어</a></li>
-				<!-- <li class="b400040"><a
-					onclick="productGet('step_4','step4');">판매불가</a></li>	 -->
 			</ul>
 		</div>
 	</div>

@@ -4,17 +4,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>관리자페이지</title>
+<title>Insert title here</title>
 </head>
-<body>
+<body class="b400040">
 
+ 	<div class="row">
+		<div class="col-md-7" >
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h50"></li>
-				<li class="b400040"><a onclick="load('hostMain');">TCAT 현재상태</a></li>
-	            <li class="b400040"><a href="#">메인 화면설정</a></li>
-
-	            
+				<li class="b400040"><a
+					href="#">사진관리 게시판</a></li>
 			</ul>
+		</div>
+		</div>
+
 
 </body>
 </html>

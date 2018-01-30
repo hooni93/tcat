@@ -7,7 +7,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -503,6 +505,336 @@ public class HostServiceImp implements HostService {
 
 	}
 
+	//일별 결산
+	@Override
+	public void dayslse(HttpServletRequest req, Model model) {
+		// TODO Auto-generated method stub
+		System.out.println("HostServiceImp - dayslse");
+		SimpleDateFormat date = new SimpleDateFormat("yy/MM/dd");
+		Date today = new Date();
+		Date yesterDay = new Date();		
+		today.setTime(today.getTime() - ((long) 1000 * 60 * 60 * 24 * 1)); // 작년 365
+		yesterDay.setTime(today.getTime() - ((long) 1000 * 60 * 60 * 24 * 6)); // 작년 365
+		String todayStr = date.format(today);
+		String yesterDayStr = date.format(yesterDay);
+		System.out.println(todayStr);
+		System.out.println(yesterDayStr);
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("today", todayStr);
+		map.put("yesterday", yesterDayStr);
+		ArrayList<TcatPerformanceVO> discbuyCountVo=null;
+		discbuyCountVo = hDao.dayslseCount(map);
+		ArrayList<TcatPerformanceVO> discbuyPriceVo=null;
+		discbuyPriceVo=hDao.dayslsePerPrice(map);
+		ArrayList<TcatDiscBuyVO> dayStoreCountVo=null;
+		dayStoreCountVo=hDao.dayStoreCount(map);
+		ArrayList<TcatDiscBuyVO> dayStorePriceVo=null;
+		dayStorePriceVo=hDao.dayStorePrice(map);
+		
+		ArrayList<SaleVO> dtos=new ArrayList<SaleVO>();
+		
+		for(int i=0;i<7;i++) {
+			SaleVO vo=new SaleVO();
+			System.out.println(yesterDayStr);
+			vo.setBuyDate(yesterDayStr);
+		for(int j=0;j<discbuyCountVo.size();j++) {
+			System.out.println("============"+discbuyCountVo.get(j).getBuydate());
+			if(yesterDayStr.equals(discbuyCountVo.get(j).getBuydate())) {
+				System.out.println("--------------"+discbuyCountVo.get(j).getCount());
+				vo.setPerCount(discbuyCountVo.get(j).getCount());
+				break;
+				}
+			}//for
+		int dayPerSumPrice=0;
+		for(int k=0;k<discbuyPriceVo.size();k++) {
+			if(yesterDayStr.equals(discbuyPriceVo.get(k).getBuydate())) {
+				if(discbuyPriceVo.get(k).getSeat_type().equals("VIP")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getVIP_seatPrice();
+				}
+				else if(discbuyPriceVo.get(k).getSeat_type().equals("R")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getR_seatPrice();
+				}
+				else if(discbuyPriceVo.get(k).getSeat_type().equals("S")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getS_seatPrice();
+				}
+				else if(discbuyPriceVo.get(k).getSeat_type().equals("A")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getA_seatPrice();
+				}
+				else if(discbuyPriceVo.get(k).getSeat_type().equals("B")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getB_seatPrice();
+				}
+				System.out.println(dayPerSumPrice);
+			}
+		}
+		vo.setPerPrice(dayPerSumPrice);
+		System.out.println("==============================");
+		System.out.println(dayPerSumPrice);
+		for(int m=0;m<dayStoreCountVo.size();m++) {
+			if(yesterDayStr.equals(dayStoreCountVo.get(m).getBuydate())) {
+				vo.setStoreCount(dayStoreCountVo.get(m).getCount());
+				break;
+			}
+		}
+		int dayStorePrice=0;
+		for(int n=0;n<dayStorePriceVo.size();n++) {
+			if(yesterDayStr.equals(dayStorePriceVo.get(n).getBuydate())) {
+				dayStorePrice+=dayStorePriceVo.get(n).getDisc_price();
+				break;
+			}
+		}
+		System.out.println(dayStorePrice);
+		vo.setStorePrice(dayStorePrice);
+		vo.setTotalPrice(dayPerSumPrice+dayStorePrice);
+		yesterDay.setTime(today.getTime() - ((long) 1000 * 60 * 60 * 24 * (6-(i+1))));
+		yesterDayStr = date.format(yesterDay);
+		System.out.println(yesterDayStr);
+		dtos.add(i, vo);
+		}//for
+		model.addAttribute("dtos",dtos);
+	}
+	
+	//주별 결산
+	@Override
+	public void weekendSalse(HttpServletRequest req, Model model) {
+		// TODO Auto-generated method stub
+		System.out.println("HostServiceImp - dayslse");
+		SimpleDateFormat date = new SimpleDateFormat("yy/MM/dd");
+		Date today = new Date();
+		Date yesterDay = new Date();		
+		Date yesterDay2 = new Date();		
+		today.setTime(today.getTime() - ((long) 1000 * 60 * 60 * 24 * 1)); // 작년 365
+		yesterDay.setTime(today.getTime() - ((long) 1000 * 60 * 60 * 24 * 6)); // 작년 365
+		yesterDay2.setTime(yesterDay2.getTime() - ((long) 1000 * 60 * 60 * 24 * 1));
+		
+		String todayStr = date.format(today);
+		String yesterDayStr = date.format(yesterDay);
+		String yesterDay2Str = date.format(yesterDay2);
+		
+		System.out.println(todayStr);
+		System.out.println(yesterDayStr);
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("today", todayStr);
+		map.put("yesterday", yesterDayStr);
+		ArrayList<TcatPerformanceVO> discbuyCountVo=null;
+		discbuyCountVo = hDao.dayslseCount(map);
+		ArrayList<TcatPerformanceVO> discbuyPriceVo=null;
+		discbuyPriceVo=hDao.dayslsePerPrice(map);
+		ArrayList<TcatDiscBuyVO> dayStoreCountVo=null;
+		dayStoreCountVo=hDao.dayStoreCount(map);
+		ArrayList<TcatDiscBuyVO> dayStorePriceVo=null;
+		dayStorePriceVo=hDao.dayStorePrice(map);
+		
+		ArrayList<SaleVO> dtos=new ArrayList<SaleVO>();
+		for(int w=0;w<4;w++) {
+		int weekPerCount=0;
+		int weekPerPrice=0;
+		int weekStoreCount=0;
+		int weekStorePrice=0;
+		int weekTotalPrice=0;
+		String weekDate="";
+		SaleVO vo=new SaleVO();
+		yesterDayStr = date.format(yesterDay);
+		yesterDay2Str = date.format(yesterDay2);
+		weekDate=yesterDayStr+" ~ "+yesterDay2Str;
+		vo.setBuyDate(weekDate);
+		System.out.println(weekDate);
+		for(int i=0;i<7;i++) {
+			System.out.println(yesterDayStr);
+			for(int j=0;j<discbuyCountVo.size();j++) {
+				System.out.println("============"+discbuyCountVo.get(j).getBuydate());
+				if(yesterDayStr.equals(discbuyCountVo.get(j).getBuydate())) {
+					System.out.println("--------------"+discbuyCountVo.get(j).getCount());
+					weekPerCount+=discbuyCountVo.get(j).getCount();
+					break;
+				}
+			}//for
+			int dayPerSumPrice=0;
+			for(int k=0;k<discbuyPriceVo.size();k++) {
+				if(yesterDayStr.equals(discbuyPriceVo.get(k).getBuydate())) {
+					if(discbuyPriceVo.get(k).getSeat_type().equals("VIP")) {
+						dayPerSumPrice+=discbuyPriceVo.get(k).getVIP_seatPrice();
+					}
+					else if(discbuyPriceVo.get(k).getSeat_type().equals("R")) {
+						dayPerSumPrice+=discbuyPriceVo.get(k).getR_seatPrice();
+					}
+					else if(discbuyPriceVo.get(k).getSeat_type().equals("S")) {
+						dayPerSumPrice+=discbuyPriceVo.get(k).getS_seatPrice();
+					}
+					else if(discbuyPriceVo.get(k).getSeat_type().equals("A")) {
+						dayPerSumPrice+=discbuyPriceVo.get(k).getA_seatPrice();
+					}
+					else if(discbuyPriceVo.get(k).getSeat_type().equals("B")) {
+						dayPerSumPrice+=discbuyPriceVo.get(k).getB_seatPrice();
+					}
+					System.out.println(dayPerSumPrice);
+				}
+			}
+			weekPerPrice+=dayPerSumPrice;
+			
+			for(int m=0;m<dayStoreCountVo.size();m++) {
+				if(yesterDayStr.equals(dayStoreCountVo.get(m).getBuydate())) {
+					weekStoreCount+=dayStoreCountVo.get(m).getCount();
+					break;
+				}
+			}
+			int dayStorePrice=0;
+			for(int n=0;n<dayStorePriceVo.size();n++) {
+				if(yesterDayStr.equals(dayStorePriceVo.get(n).getBuydate())) {
+					dayStorePrice+=dayStorePriceVo.get(n).getDisc_price();
+					break;
+				}
+			}
+			System.out.println(dayStorePrice);
+			weekStorePrice+=dayStorePrice;
+			weekTotalPrice+=dayPerSumPrice+dayStorePrice;
+			yesterDay.setTime(yesterDay2.getTime() - ((long) 1000 * 60 * 60 * 24 * (6-(i+1))));
+			yesterDayStr = date.format(yesterDay);
+			System.out.println(yesterDayStr);	
+		}//for
+		yesterDay2.setTime(today.getTime() - ((long) 1000 * 60 * 60 * 24 * (7*(w+1))));
+		yesterDay.setTime(yesterDay2.getTime() - ((long) 1000 * 60 * 60 * 24 * 6));
+		vo.setPerCount(weekPerCount);
+		vo.setPerPrice(weekPerPrice);
+		vo.setStoreCount(weekStoreCount);
+		vo.setStorePrice(weekStorePrice);
+		vo.setTotalPrice(weekTotalPrice);
+		dtos.add(w, vo);
+		}//for4
+		model.addAttribute("weekDtos",dtos);
+	}
+	
+	//월별 결산
+	@Override
+	public void monthSalse(HttpServletRequest req, Model model) {
+		// TODO Auto-generated method stub
+		System.out.println("HostServiceImp - dayslse");
+		
+
+		GregorianCalendar today = new GregorianCalendar ( );
+		today.setTime(new Date());
+		today.add(Calendar.MONTH, 0); // 한달을 더한다.
+		SimpleDateFormat date = new SimpleDateFormat("yy/MM");	
+		String dayStr=date.format(today.getTime());
+		System.out.println(dayStr);
+				
+		ArrayList<SaleVO> dtos=new ArrayList<SaleVO>();
+		for(int i=0;i<12;i++) {
+			today.add(Calendar.MONTH, -1); // 한달을 더한다.
+			dayStr=date.format(today.getTime());
+			SaleVO vo=new SaleVO();
+			vo.setBuyDate(dayStr);
+			String searchDate="%"+dayStr+"%";
+			System.out.println(searchDate);
+			ArrayList<TcatPerformanceVO> discbuyCountVo=null;
+			discbuyCountVo = hDao.monthSalsePerCount(searchDate);
+			ArrayList<TcatPerformanceVO> discbuyPriceVo=null;
+			discbuyPriceVo=hDao.monthSalsePerPrice(searchDate);
+			ArrayList<TcatDiscBuyVO> dayStoreCountVo=null;
+			dayStoreCountVo=hDao.monthSalseStoreCount(searchDate);
+			ArrayList<TcatDiscBuyVO> dayStorePriceVo=null;
+			dayStorePriceVo=hDao.monthSalseStorePrice(searchDate);
+			System.out.println(dayStr);
+			int perCount=0;
+			int dayPerSumPrice=0;
+		for(int j=0;j<discbuyCountVo.size();j++) {
+				perCount+=discbuyCountVo.get(j).getCount();
+			}//for
+		
+		for(int k=0;k<discbuyPriceVo.size();k++) {
+				if(discbuyPriceVo.get(k).getSeat_type().equals("VIP")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getVIP_seatPrice();
+				}
+				else if(discbuyPriceVo.get(k).getSeat_type().equals("R")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getR_seatPrice();
+				}
+				else if(discbuyPriceVo.get(k).getSeat_type().equals("S")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getS_seatPrice();
+				}
+				else if(discbuyPriceVo.get(k).getSeat_type().equals("A")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getA_seatPrice();
+				}
+				else if(discbuyPriceVo.get(k).getSeat_type().equals("B")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getB_seatPrice();
+				}
+				System.out.println(dayPerSumPrice);
+			}
+		
+		int storeCount=0;
+		System.out.println("==============================");
+		for(int m=0;m<dayStoreCountVo.size();m++) {
+			storeCount+=dayStoreCountVo.get(m).getCount();
+		}
+		int dayStorePrice=0;
+		for(int n=0;n<dayStorePriceVo.size();n++) {
+				dayStorePrice+=dayStorePriceVo.get(n).getDisc_price();
+		}
+		System.out.println(dayStorePrice);
+		vo.setPerCount(perCount);
+		vo.setStoreCount(storeCount);
+		vo.setPerPrice(dayPerSumPrice);
+		vo.setStorePrice(dayStorePrice);
+		vo.setTotalPrice(dayPerSumPrice+dayStorePrice);
+		
+		dtos.add(i, vo);
+		
+		}//for
+		model.addAttribute("monDtos",dtos);
+	}
+	
+	//메인인포
+	@Override
+	public void hostMainInfo(HttpServletRequest req, Model model) {
+		// TODO Auto-generated method stub
+		System.out.println("HostServiceImp - hostMainInfo");
+		GregorianCalendar today = new GregorianCalendar ( );
+		today.setTime(new Date());
+		SimpleDateFormat date = new SimpleDateFormat("yy/MM/dd");	
+		String dayStr=date.format(today.getTime());
+		System.out.println(dayStr);
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("buydate", dayStr);
+		int[] orderPerInfoMain=new int[8];
+		int[] orderStoreInfoMain=new int[8];
+		int[] orderInfoMain=new int[8];
+		int cartMainInfoCount=0;
+		int boarderMainInfoCount=0;
+		int comentMainInfoCount=0;
+		int qnaMainInfoCount=0;
+		int one_1MainInfoCount=0;
+		for(int i=0;i<8;i++) {
+			map.put("ticket_step", i+1);
+			orderPerInfoMain[i]=hDao.orderInfoMain(map);
+			orderStoreInfoMain[i]=hDao.orderStoreInfoMain(map);
+			orderInfoMain[i]=orderPerInfoMain[i]+orderStoreInfoMain[i];
+		}
+		cartMainInfoCount=hDao.cartMainInfoCount(dayStr);
+		boarderMainInfoCount=hDao.boarderMainInfoCount(dayStr);
+		comentMainInfoCount=hDao.comentMainInfoCount(dayStr);
+		qnaMainInfoCount=hDao.qnaMainInfoCount(dayStr);
+		one_1MainInfoCount=hDao.one_1MainInfoCount(dayStr);
+		System.out.println(cartMainInfoCount);
+		System.out.println(boarderMainInfoCount);
+		System.out.println(comentMainInfoCount);
+		System.out.println(qnaMainInfoCount);
+		System.out.println(one_1MainInfoCount);
+		
+		model.addAttribute("orderInfoMain",orderInfoMain);
+		model.addAttribute("cartMainInfoCount",cartMainInfoCount);
+		model.addAttribute("boarderMainInfoCount",boarderMainInfoCount);
+		model.addAttribute("comentMainInfoCount",comentMainInfoCount);
+		model.addAttribute("qnaMainInfoCount",qnaMainInfoCount);
+		model.addAttribute("one_1MainInfoCount",one_1MainInfoCount);
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 	////////////////////////////////////// 18.01.16 명훈
 	////////////////////////////////////// 시작//////////////////////////////////////////////////
 	// 스토어 구매 승인
@@ -513,6 +845,7 @@ public class HostServiceImp implements HostService {
 		//구매승인
 		hDao.orderCon(disc_num);
 	}
+
 
 	// 상품목록 나열
 	@Override // 18.01.25 명훈 수정
@@ -1469,7 +1802,7 @@ public class HostServiceImp implements HostService {
 	@Override
 	public void categoryList(HttpServletRequest req, Model model) {
 
-		int pageSize = 5; // 한 페이지당 출력할 글 개수
+		int pageSize = 10; // 한 페이지당 출력할 글 개수
 		int pageBlock = 3; // 한 블럭당 페이지 개수
 
 		int cnt = 0; // 글 개수
@@ -1518,8 +1851,12 @@ public class HostServiceImp implements HostService {
 			Hcnt = 2;
 		} else if (category.equals("콘서트")) {
 			Hcnt = 3;
-		} else if (category.equals("스토어")) {
+		} else if (category.equals("클래식")) {
 			Hcnt = 4;
+		} else if (category.equals("무용")) {
+			Hcnt = 5;
+		} else if (category.equals("스토어")) {
+			Hcnt = 6;
 		}
 
 		HostDAO hDao = new HostDAOImp();
@@ -1622,7 +1959,6 @@ public class HostServiceImp implements HostService {
 
 		}
 	}
-
 	//////////////////////////////////// 태성 1/9 end/ ///////////////////////////////
 
 	/////////////////////////////////// 태성 1/10 start /////////////////////////////
@@ -1699,7 +2035,7 @@ public class HostServiceImp implements HostService {
 	/////////////////////// 태성 1/12 start ///////////////////////////
 	@Override
 	public void stockManagementList(HttpServletRequest req, Model model) {
-		int pageSize = 5; // 한 페이지당 출력할 글 개수
+		int pageSize = 10; // 한 페이지당 출력할 글 개수
 		int pageBlock = 3; // 한 블럭당 페이지 개수
 
 		int cnt = 0; // 글 개수
@@ -3756,7 +4092,6 @@ public class HostServiceImp implements HostService {
 
 		System.out.println("Host 서비스 첫번째 출입니다. ");
 
-		System.out.println("TSGuset 관람후기관리 목록 서비스 첫번째 출입니다. ");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyword", keyword);
 		map.put("sDev", sDev);
@@ -3993,12 +4328,22 @@ public class HostServiceImp implements HostService {
 	// 환불 승인 - 스토어
 	@Override
 	public void productRefundUpdateS(HttpServletRequest req, Model model) {
-		int refundUpdateS = 0;
 
 		int disc_num = Integer.parseInt(req.getParameter("disc_num"));
-		refundUpdateS = hDao.refundStoreOk(disc_num);
-
-		model.addAttribute("refundUpdateS", refundUpdateS);
+		int buy_count = Integer.parseInt(req.getParameter("buy_count"));
+		int disc_code = Integer.parseInt(req.getParameter("disc_code"));
+		
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("disc_num", disc_num);
+		map.put("buy_count", buy_count);
+		map.put("disc_code", disc_code);
+		
+		hDao.refundStoreOk(map);
+		hDao.refundCount(map);
+		
+		model.addAttribute("disc_num", disc_num);
+		model.addAttribute("buy_count", buy_count);
+		model.addAttribute("disc_code", disc_code);
 	}
 
 	// 환불 취소 - 스토어
@@ -4012,6 +4357,373 @@ public class HostServiceImp implements HostService {
 		model.addAttribute("refundDownS", refundDownS);
 
 	}
+	//사진관리 게시판
+	@Override
+	public void photoManagerList(HttpServletRequest req, Model model) {
+		int pageSize = 5; // 한 페이지당 출력할 글 갯수
+		int pageBlock = 5; // 한 블럭당 페이지 갯수
+		int start = 0; // 현재 페이지 글시작번호
+		int end = 0; // 현재 페이지 글마지막번호
+		int number = 0; // 출력할 글번호
+		String pageNum = null; // 페이지번호
+		int currentPage = 0; // 현재페이지
+		int pageCount = 0; // 페이지 갯수
+		int startPage = 0; // 시작페이지
+		int endPage = 0; // 마지막 페이지
+		int cnt=0;
+		
+		cnt=hDao.photoManagerCnt();
+		pageNum = req.getParameter("pageNum");
+		
+		if (pageNum == null) {
+		pageNum = "1"; // 첫페이지 1페이지로 설정
+		}
+		currentPage = (Integer.parseInt(pageNum)); // 현재페이지
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+		start = (currentPage - 1) * pageSize + 1; // 현재페이지 시작번호
+		end = start + pageSize - 1; // 현재페이지 끝번호
+		if (end > cnt) {
+		end = cnt;
+		}
+		number = cnt - (currentPage - 1) * pageSize;
+		if (cnt > 0) {
+		// 게시글 목록 조회
+			Map<String,Object> map=new HashMap<String,Object>();
+			map.put("start", start);
+			map.put("end", end);
+			
+			ArrayList<TcatBoardVO> dtos=hDao.photoManagerList(map);
+			model.addAttribute("dtos", dtos);
+		}
+		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5/3) * 3 + 1 = 4
+		if (currentPage % pageBlock == 0) {
+		startPage -= pageBlock; // (5%3) == 0
+		}
+		endPage = startPage + pageBlock - 1; // 4 + 3 - 1 = 6
+		if (endPage > pageCount) {
+		endPage = pageCount;
+		}	
+		
+		//사진게시판 답글 가져오기
+		ArrayList<TcatBoardVO> dtos2=hDao.photoManagerComment();
+		model.addAttribute("dtos2",dtos2);
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("number", number);
+		model.addAttribute("pageNum", pageNum);
+		
+		if (cnt > 0) {
 
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("pageBlock", pageBlock);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("currentPage", currentPage);
+		}
+	}
+	//사진관리 게시판 - 게시글 수정
+	@Override
+	public void photoManagerNomoService(MultipartHttpServletRequest req, Model model) {
+		// TODO Auto-generated method stub
+					MultipartFile file = null;
+					file = req.getFile("HnoMoboard_Image");
+					
+					if(file!=null) {
+					String realDir = "C:\\Dev\\TCATworkspace\\git\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\Boarder\\";
+					      
+					String saveDir = req.getRealPath("/resources/image/Boarder/");
+					try {
+
+						file.transferTo(new File(saveDir + file.getOriginalFilename()));
+
+						FileInputStream fis = new FileInputStream(saveDir + file.getOriginalFilename());
+						FileOutputStream fos = new FileOutputStream(realDir + file.getOriginalFilename());
+
+						int data = 0;
+
+						while ((data = fis.read()) != -1) {
+							fos.write(data);
+						}
+						fis.close();
+						fos.close();
+						TcatBoardVO vo=new TcatBoardVO();
+						String notice_title=req.getParameter("noMo_title");
+						int notice_num=Integer.parseInt(req.getParameter("monotice_num"));
+						String contents=req.getParameter("noMo_content");
+						String notice_image=file.getOriginalFilename();
+						System.out.println(notice_image);
+						
+						vo.setNotice_num(notice_num);
+						vo.setNotice_title(notice_title);
+						vo.setContents(contents);
+						vo.setNotice_image(notice_image);
+						int cnt=0;
+						cnt=hDao.photoManagerNomoDao(vo);
+						if(cnt!=0) {
+							System.out.println("입력에 성공하셨습니다.");
+						}
+						
+					}catch(Exception e) {
+						e.printStackTrace();
+						int error=1;
+						req.setAttribute("error2", error);
+					}
+					
+					
+				}else{
+					TcatBoardVO vo=new TcatBoardVO();
+					String notice_title=req.getParameter("noMo_title");
+					String contents=req.getParameter("noMo_content");	
+					int notice_num=Integer.parseInt(req.getParameter("monotice_num"));
+					vo.setNotice_title(notice_title);
+					vo.setContents(contents);
+					vo.setNotice_num(notice_num);
+					int cnt=0;
+					cnt=hDao.photoManagerNomoDao(vo);
+					if(cnt!=0) {
+						System.out.println("입력에 성공하셨습니다.");
+					}
+				}
+				
+				}
+
+	//사진관리 게시판 - 게시글 삭제
+	@Override
+	public void photoManagerDeleteService(HttpServletRequest req, Model model) {
+		int notice_num=Integer.parseInt(req.getParameter("notice_num"));
+		int cnt=0;
+		cnt=hDao.photoManagerDeleteDao(notice_num);
+		if(cnt!=0) {
+			System.out.println("삭제성공");
+		}
+		
+	}
+	//영상게시판 답글 달기
+	@Override
+	public void movieManagerList(HttpServletRequest req, Model model) {
+		int pageSize = 5; // 한 페이지당 출력할 글 갯수
+		int pageBlock = 5; // 한 블럭당 페이지 갯수
+		int start = 0; // 현재 페이지 글시작번호
+		int end = 0; // 현재 페이지 글마지막번호
+		int number = 0; // 출력할 글번호
+		String pageNum = null; // 페이지번호
+		int currentPage = 0; // 현재페이지
+		int pageCount = 0; // 페이지 갯수
+		int startPage = 0; // 시작페이지
+		int endPage = 0; // 마지막 페이지
+		int cnt=0;
+		
+		
+		cnt=hDao.movieManagerCnt();
+		pageNum = req.getParameter("pageNum");
+		
+		if (pageNum == null) {
+		pageNum = "1"; // 첫페이지 1페이지로 설정
+		}
+		currentPage = (Integer.parseInt(pageNum)); // 현재페이지
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+		start = (currentPage - 1) * pageSize + 1; // 현재페이지 시작번호
+		end = start + pageSize - 1; // 현재페이지 끝번호
+		if (end > cnt) {
+		end = cnt;
+		}
+		number = cnt - (currentPage - 1) * pageSize;
+		if (cnt > 0) {
+		// 게시글 목록 조회
+			Map<String,Object> map=new HashMap<String,Object>();
+			map.put("start", start);
+			map.put("end", end);
+			
+			ArrayList<TcatBoardVO> dtos=hDao.movieManagerList(map);
+			model.addAttribute("dtos", dtos);
+		}
+		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5/3) * 3 + 1 = 4
+		if (currentPage % pageBlock == 0) {
+		startPage -= pageBlock; // (5%3) == 0
+		}
+		endPage = startPage + pageBlock - 1; // 4 + 3 - 1 = 6
+		if (endPage > pageCount) {
+		endPage = pageCount;
+		}
+	
+		//사진게시판 답글 가져오기
+		ArrayList<TcatBoardVO> dtos2=hDao.movieManagerComment();
+		model.addAttribute("dtos2",dtos2);
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("number", number);
+		model.addAttribute("pageNum", pageNum);
+		
+		if (cnt > 0) {
+
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("pageBlock", pageBlock);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("currentPage", currentPage);
+		}
+	}
+
+	//영상관리 - 게시글 수정
+	@Override
+	public void movieManagerNomoService(MultipartHttpServletRequest req, Model model) {
+	
+		
+		TcatBoardVO vo=new TcatBoardVO();
+		String notice_title=req.getParameter("noMo_title");
+		int notice_num=Integer.parseInt(req.getParameter("monotice_num"));
+		String contents=req.getParameter("noMo_content");
+		String notice_addfile=req.getParameter("HnoMoboard_videoSrc");
+		
+		vo.setNotice_num(notice_num);
+		vo.setNotice_title(notice_title);
+		vo.setContents(contents);
+		vo.setNotice_addfile(notice_addfile);
+		int cnt=0;
+		cnt=hDao.movieManagerNomoDao(vo);
+		if(cnt!=0) {
+			System.out.println("입력에 성공하셨습니다.");
+		}
+		
+	}
+	//영상관리 - 게시글 삭제
+	@Override
+	public void movieManagerDeleteService(HttpServletRequest req, Model model) {
+		// TODO Auto-generated method stub
+		int notice_num=Integer.parseInt(req.getParameter("notice_num"));
+		int cnt=0;
+		cnt=hDao.movieManagerDeleteDao(notice_num);
+		if(cnt!=0) {
+			System.out.println("삭제성공");
+		}
+}
+	//반품 목록 출력
+	@Override
+	public void productReturn(HttpServletRequest req, Model model) {
+		int pageSize = 10; // 한 페이지당 출력할 글 개수
+		int pageBlock = 3; // 한 블럭당 페이지 개수
+
+		int cnt = 0; // 글 개수
+		int start = 0; // 현재 페이지 글시작번호
+		int end = 0; // 현재 페이지 글마지막 번호
+		int number = 0; // 출력할 글 번호
+		String pageNum = null; // 페이지 번호
+		int currentPage = 0; // 현재 페이지
+
+		int pageCount = 0; // 페이지 개수
+		int startPage = 0; // 시작 페이지
+		int endPage = 0; // 마지막 페이지
+		int Hcnt = 0;
+		String sDev = "";
+		String keyword = "";
+
+		// 검색추가(01/16)-------------------
+
+		sDev = req.getParameter("sDev");
+		System.out.println("sDev -----> :" + sDev);
+
+		keyword = req.getParameter("keyword");
+		System.out.println("keyword -----> :" + keyword);
+		String category = "";
+
+		if (sDev == null) {
+			sDev = "0";
+		}
+
+		if (keyword == null) {
+			keyword = "";
+		}
+
+		System.out.println("Host 반품 (스토어) 서비스 첫번째 출입니다. ");
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyword", keyword);
+		map.put("sDev", sDev);
+		System.out.println("keyword" + map.get("keyword") + "\n" + "sDev" + sDev);
+		cnt = hDao.returnCnt(map);
+
+		System.out.println("cnt :" + cnt);
+		pageNum = req.getParameter("pageNum");
+		System.out.println("pageNum" + pageNum);
+
+		if (pageNum == null) {
+			pageNum = "1"; // 첫페이지를 1페이지로 설정
+		}
+		System.out.println("pageNum+Host service --> categoryList-->: " + pageNum);
+		currentPage = (Integer.parseInt(pageNum)); // 현재 페이지
+
+		// pageCnt = 12 / 5 + 1 // 나머지 2건이 1페이지로 할당되므로 3페이지
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);// 페이지 개수 + 나머지
+
+		// 1 = (1-1) * 5 + 1
+		// 6 = (2-1) * 5 + 1
+		// 11 = (3-1) * 5 + 1
+		// 21 = (5-1) * 5 + 1
+		start = (currentPage - 1) * pageSize + 1; // 현재페이지 시작번호
+
+		// 5 = 1 + 5 - 1;
+		// 10 = 6 + 5 - 1;
+		// 21 = 17 + 5 - 1;
+		end = start + pageSize - 1; // 현재페이지 끝번호
+
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
+
+		if (end > cnt)
+			end = cnt;
+
+		// 1 = 25 - (5-1) * 5;
+		number = cnt - (currentPage - 1) * pageSize; // 출력할 글번호..최신글(큰페이지)가 1p
+
+		System.out.println("number : " + number);
+		System.out.println("cnt : " + cnt);
+		System.out.println("currentPage : " + currentPage);
+		System.out.println("pageSize : " + currentPage);
+
+		if (cnt > 0) {
+			map.put("start", start);
+			map.put("end", end);
+			System.out.println("end !!!!!!!!!----->:" + end);
+			// 표 목록 조회
+			System.out.println("map" + map.get("start"));
+			ArrayList<TcatDiscBuyVO> dtos = hDao.returnList(map);
+			req.setAttribute("dtos", dtos); // 큰바구니 : 게시글 목록 cf)작은 바구니 : 게시글 1건
+		}
+
+		startPage = (currentPage / pageBlock) * pageBlock + 1; // (5/3) * 3 + 1 = 4
+		if (currentPage % pageBlock == 0)
+			startPage -= pageBlock; // (5%3) == 0
+
+		endPage = startPage + pageBlock - 1;// 4+3-1=6
+		if (endPage > pageCount)
+			endPage = pageCount;
+
+		model.addAttribute("category", category);
+		model.addAttribute("sDev", sDev);
+		model.addAttribute("keyword", keyword);
+
+		model.addAttribute("cnt", cnt); // cnt == 글 개수
+		model.addAttribute("Hcnt", Hcnt); // cnt == 글 개수
+		model.addAttribute("number", number); // number == 글번호
+		model.addAttribute("pageNum", pageNum); // pageNum 페이지 번호
+
+		if (cnt > 0) {
+			model.addAttribute("startPage", startPage); // startPage 시작페이지
+			model.addAttribute("endPage", endPage); // 마지막 페이지
+			model.addAttribute("pageBlock", pageBlock); // 출력할 페이지 개수
+			model.addAttribute("pageCount", pageCount); // 페이지 개수
+			model.addAttribute("currentPage", currentPage); // 현재 페이지
+
+		}
+
+	}
+
+	@Override
+	public void productReturnUpdateS(HttpServletRequest req, Model model) {
+		int returnUpdate = 0;
+
+		int disc_num = Integer.parseInt(req.getParameter("disc_num"));
+		returnUpdate = hDao.returnStoreOk(disc_num);
+		
+		model.addAttribute("returnUpdate", returnUpdate);
+	}
 }
 /////////////////////// 태성 1/21 end ///////////////////////////

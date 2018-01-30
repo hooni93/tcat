@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import spring.project.tcat.VO.TcatBoardVO;
+import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 import spring.project.tcat.config.Configuration;
 
@@ -228,7 +229,75 @@ public class MoGuestDAOImp implements MoGuestDAO{
 		return cnt;
 	}
 
+	//우선순위별 상품진열 갯수
+	@Override
+	public int firstGradeListCnt(String category) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		cnt=dao.firstGradeListCnt(category);
+		return cnt;
+	}
 
+	//우선순위별 상품 진열리스트
+	@Override
+	public ArrayList<TcatPerformanceVO> firstGradeList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatPerformanceVO> dtos=null;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 dtos=dao.firstGradeList(map);
+		return dtos;
+	}
+
+	//상품순위
+	@Override
+	public ArrayList<TcatPerformanceVO> performanceSaleRating(String category) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatPerformanceVO> dtos=null;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 dtos=dao.performanceSaleRating(category);
+		return dtos;
+	}
+	//스토어 핫리스트
+	@Override
+	public ArrayList<TcatDiscBuyVO> storeHotList() {
+		// TODO Auto-generated method stub
+		ArrayList<TcatDiscBuyVO> dtos=null;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 dtos=dao.storeHotList();
+		return dtos;
+	}
+
+	//스토어 순위
+	@Override
+	public ArrayList<TcatDiscBuyVO> storeSaleRating() {
+		// TODO Auto-generated method stub
+		ArrayList<TcatDiscBuyVO> dtos=null;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 dtos=dao.storeSaleRating();
+		return dtos;
+	}
+
+	//스토어 우선순위별 상품진열갯수
+	@Override
+	public int firstGradeStoreListCnt() {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 cnt=dao.firstGradeStoreListCnt();
+		return cnt;
+	}
+	//스토어 우선 순위별 상품 진열
+
+	@Override
+	public ArrayList<TcatDiscBuyVO> firstGradeStoreList(Map<String,Object> map) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatDiscBuyVO> dtos=null;
+		 MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		 dtos=dao.firstGradeStoreList(map);
+		return dtos;
+	}
+	
 	
 	
 	

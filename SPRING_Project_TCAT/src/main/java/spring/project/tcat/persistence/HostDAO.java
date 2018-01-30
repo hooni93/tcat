@@ -56,6 +56,39 @@ public interface HostDAO {
 	public int placeUpdate(TcatPerformanceVO vo);
 	//공연장 업데이트
 	public int hallModifyUpdate(TcatPerformanceVO vo);
+	//일별 결산 카운트
+	public ArrayList<TcatPerformanceVO> dayslseCount(Map<String,Object> map);
+	//일별 결산 금액정보
+	public ArrayList<TcatPerformanceVO> dayslsePerPrice(Map<String,Object> map);
+	//일별 결산 스토어 카운트
+	public ArrayList<TcatDiscBuyVO> dayStoreCount(Map<String,Object> map);
+	//일별 결산 스토어 금액정보
+	public ArrayList<TcatDiscBuyVO> dayStorePrice(Map<String,Object> map);
+	
+	//월별 결산 카운트
+	public ArrayList<TcatPerformanceVO> monthSalsePerCount(String dayStr);
+	//월별 결산 금액정보
+	public ArrayList<TcatPerformanceVO> monthSalsePerPrice(String dayStr);
+	//월별 결산 스토어 카운트
+	public ArrayList<TcatDiscBuyVO> monthSalseStoreCount(String dayStr);
+	//월별 결산 스토어 금액정보
+	public ArrayList<TcatDiscBuyVO> monthSalseStorePrice(String dayStr);
+	
+	//메인 정보 공연 오더 수량 파악
+	public int orderInfoMain(Map<String,Object> map);
+	//메인 정보 스토어 오더 수량 파악
+	public int orderStoreInfoMain(Map<String,Object> map);
+	//메인 정보 카트 수량 파악
+	public int cartMainInfoCount(String dayStr);
+	//메인 정보 게시판 수량 파악
+	public int boarderMainInfoCount(String dayStr);
+	//메인 정보 후기게시판 수량 파악
+	public int comentMainInfoCount(String dayStr);
+	//메인 정보 qna게시판 수량 파악
+	public int qnaMainInfoCount(String dayStr);
+	//메인 정보 1:1게시판 수량 파악
+	public int one_1MainInfoCount(String dayStr);
+	
 	
 	
 	
@@ -410,9 +443,41 @@ public interface HostDAO {
 	public int refundPerformanceCancel(int refundDown);
 	
 	// 환불 승인 - 스토어
-	public int refundStoreOk(int refundUpdateS);
+	public int refundStoreOk(Map<String, Object> map);
+	// 환불 승인시 - 수량 추가
+	public int refundCount(Map<String, Object> map);
 	// 환불 취소 - 스토어
 	public int refundStoreCancel(int refundDownS);
 	
 ///////////////////////  태성 1/21 end ///////////////////////////
+///////////////////////  태성 1/30 start ///////////////////////////
+	//사진게시판 게시글 개수
+	public int photoManagerCnt();
+	//사진게시판 게시글 목록
+	public ArrayList<TcatBoardVO> photoManagerList(Map<String,Object> map);
+	//사진게시판 답글 가져오기
+	public ArrayList<TcatBoardVO> photoManagerComment();
+	//사진게시판 수정
+	public int photoManagerNomoDao(TcatBoardVO vo);
+	//사진게시판 삭제
+	public int photoManagerDeleteDao(int notice_num);
+	
+	//영상게시판 게시글 개수
+	public int movieManagerCnt();
+	//영상게시판 게시글 목록
+	public ArrayList<TcatBoardVO> movieManagerList(Map<String,Object> map);
+	//영상게시판 답글 가져오기
+	public ArrayList<TcatBoardVO> movieManagerComment();
+	//영상게시판 수정
+	public int movieManagerNomoDao(TcatBoardVO vo);
+	//영상게시판 삭제
+	public int movieManagerDeleteDao(int notice_num);
+	//교환 목록 개수
+	public int returnCnt(Map<String,Object> map);
+	//교환 목록
+	public ArrayList<TcatDiscBuyVO> returnList(Map<String, Object> map);
+	//교환 승인
+	public int returnStoreOk(int returnUpdate);
+///////////////////////  태성 1/30 end ///////////////////////////
+	
 }

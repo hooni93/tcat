@@ -44,7 +44,7 @@
 				t.seat_num seat_num,t.ticket_step ticket_step,p.per_step per_step,
 				p.hall_id hall_id  
 				 from performanceinfo p join ticketing t on p.per_id=t.per_id
-				 where per_step != 4 AND ticket_step != 7 AND ticket_step!=8
+				 where per_step != 4 AND ticket_step != 7 
 				  AND t.per_id=#{per_id} AND round = #{round} AND ticet_date=#{ticet_date} ]]>
    		</select>
    
@@ -158,7 +158,58 @@ select notice_title,writeDate,contents from notice where notice_div=1  order by 
  <select id="categoryListCnt" parameterType="int" resultType="int">
  	select count(*) from notice where notice_div=#{_parameter}
  </select>
-
+ 
+<!-- 우선순위별 상품진열 갯수 -->
+ <select id="firstGradeListCnt" parameterType="String" resultType="int">
+    select count(*) from performanceinfo p join category c on p.catenum=c.catenum where c.mDev=#{_parameter}
+ </select>
+ <!-- 우선순위별 상품 진열리스트  -->
+ <select id="firstGradeList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+   <![CDATA[select * from ( select 
+     per_id,perf_title,perf_Image,B_seatPrice,sDev,first_grade, rownum rNum
+      from ( select 
+        p.per_id per_id,p.perf_title perf_title,p.perf_Image perf_Image,p.B_seatPrice B_seatPrice,c.sDev sDev,p.first_grade first_grade
+         from performanceinfo p join category c on p.catenum=c.catenum where c.mDev=#{category} order by first_grade) )
+          where rNum>=#{start} AND rNum<=#{end}]]>
+ </select>
+ <!-- 상품순위 -->
+ <select id="performanceSaleRating" parameterType="String" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+        select per_id,perf_title,rNum from
+          (select t.count count,t.per_id per_id,pc.perf_title perf_title, rownum rNum from 
+          (select c.mDev mDev,p.per_id per_id,p.perf_title perf_title  from performanceInfo p JOIN category c ON p.cateNum=c.cateNum) pc 
+          JOIN
+          (select count(per_id) count ,per_id from Ticketing
+              group by per_id  order by count desc) t  ON pc.per_id=t.per_id where pc.mDev=#{category})
+          <![CDATA[ where rNum>=1 AND rNum<=5 ]]>
+ </select>
+ 
+ <!--  스토어 핫리스트 -->
+ <select id="storeHotList" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
+ 	 select * from perDisc where disc_step=2
+ </select>
+  <!--  스토어 상품순위 --> 
+ <select id="storeSaleRating" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
+ 	 	<![CDATA[select * from 
+           (select disc_code,count,disc_title,rownum rNum from 
+           (select b.disc_code disc_code,b.count count,p.disc_title disc_title from 
+           (select count(disc_code) count,disc_code from discBuy group by disc_code) b 
+            JOIN perDisc p 
+            ON b.disc_code=p.disc_code  order by count desc)
+            ) WHERE rNum>=1 AND rNum<=5]]>
+ </select> 
+ <!--  스토어 우선순위별 상품진열갯수 -->  
+ <select id="firstGradeStoreListCnt" resultType="int">
+ 	 select count(*) from perDisc
+ </select> 
+  <!-- 스토어 우선 순위별 상품 진열 -->
+ <select id="firstGradeStoreList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
+           	<![CDATA[ select * from 
+            (select disc_code,disc_title,disc_price,disc_image,first_grade,sDev,rownum rNum from 
+            (select p.disc_code disc_code,p.disc_title disc_title,p.disc_price disc_price,p.disc_image disc_image,p.first_grade first_grade ,c.sDev sDev from perDisc p JOIN category c ON 
+             p.cateNum=c.cateNum order By first_grade) ) where rNum>=#{start} AND rNum<=#{end}]]>
+ 
+ </select> 
+ 
  
  
  

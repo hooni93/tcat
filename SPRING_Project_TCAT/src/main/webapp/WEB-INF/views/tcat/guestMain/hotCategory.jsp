@@ -10,17 +10,62 @@
 function movieMainLoad(movieurl){
 	$("#movieMain_result").load("${pageContext.request.contextPath}/movieMain?movie_url="+movieurl );
 }
+
+//위시리스트 킬릭시
+$(".wish").click(function(){
+	if(${login_id == null}){
+		alert("로그인 후 이용해 주세요.");
+		return false;
+	}else{
+			var per_id = $(this).attr("name");
+			var formData = {"per_id":per_id};
+			var active = $(".wish").hasClass("active");
+			if(active){
+				$.ajax({
+					type : "POST",
+					url : "delWishList",
+					cache : false,
+					data : formData,
+					success : function() {
+						alert("위시리스트 추가하였습니다.");
+					},
+					error : function(){
+						alert("위시리스트 실패하였습니다.");
+					}
+				});
+			}else{
+				$.ajax({
+					type : "POST",
+					url : "addWishList",
+					cache : false,
+					data : formData,
+					success : function() {
+						alert("위시리스트 추가하였습니다.");
+					},
+					error : function(){
+						alert("위시리스트 실패하였습니다.");
+					}
+				});
+			}
+	}
+});
+
 </script>
 </head>
 <body>
     <div class="row">
     	<div class="col-md-12">
     	<div class="col-md-12 h20"></div>    	
-    	<div class="col-md-1"></div>
+    	<div class="col-md-1 hidden-md"></div>
+    	<% int i=0; %>
     	<c:forEach var="vo" items="${dtos}" >
-			<div class="col-sm-3 col-md-2">
+			<div class="col-md-3 col-lg-2
+			<%if(i==4){ %>
+				hidden-md<%}%>">
+			<%i++; 
+			System.out.println(i);%>
 				<div class="thumbnail" >
-					<div class="w100p h270 overflow">
+					<div class="w100p h260 overflow">
 					<a onclick="movieMainLoad('${vo.movie_url}');"><img src="${image}performance/${vo.perf_Image}" class="img-responsive"></a>
 					</div>
 					<div class="caption">
@@ -40,7 +85,7 @@ function movieMainLoad(movieurl){
 						</h6>
 					</div>
 					<div class="c m5">
-						<a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a> 
+						<a class="btn btn-primary btn-product wish" name="${vo.per_id}"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a> 
 						<c:if test="${sessionScope.login_id!=null}">
 							<a onclick="payPerformence('Ticketing?per_id=${vo.per_id}')" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> 예매</a>
 						</c:if>
@@ -53,7 +98,7 @@ function movieMainLoad(movieurl){
 		</c:forEach>
 		</div><!-- md12 -->
 
-        <div class="col-md-1"></div>
+        <div class="col-md-1 hidden-md"></div>
 	</div><!--row 끝  -->
 
 

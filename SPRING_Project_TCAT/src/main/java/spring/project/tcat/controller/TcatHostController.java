@@ -36,6 +36,9 @@ public class TcatHostController {
 	@RequestMapping("hostMain")
 	public String hostMain(HttpServletRequest req, Model model) {
 		System.out.println("hostMain");
+		hService.hostMainInfo(req, model);
+		hService.dayslse(req, model);
+		
 		return "tcat/hostMain/hostMain";
 	}
 
@@ -251,7 +254,45 @@ public class TcatHostController {
 		hService.hallModifyUpdate(req, model);
 		return "tcat/locationManager/hallModifyDB";
 	}
-
+	
+	//매출집계
+	@RequestMapping("salseGraph")
+	public String salseGraph(HttpServletRequest req, Model model) {
+		System.out.println("salseGraph");
+		hService.monthSalse(req, model);
+		hService.weekendSalse(req, model);
+		hService.dayslse(req, model);
+		return "tcat/salse/salseGraph";
+	}
+	//매출집계 사이드
+	@RequestMapping("salseGraph_side")
+	public String salseGraph_side(HttpServletRequest req, Model model) {
+		System.out.println("salseGraph_side");
+		return "tcat/salse/salseGraph_side";
+	}
+	//일별결산
+	@RequestMapping("daySalse")
+	public String daySalse(HttpServletRequest req, Model model) {
+		System.out.println("daySalse");
+		hService.dayslse(req, model);
+		return "tcat/salse/daySalse";
+	}
+	//주별결산
+	@RequestMapping("weekendSalse")
+	public String weekendSalse(HttpServletRequest req, Model model) {
+		System.out.println("weekendSalse");
+		hService.weekendSalse(req, model);
+		return "tcat/salse/weekendSalse";
+	}
+	//월별결산
+	@RequestMapping("monthSalse")
+	public String monthSalse(HttpServletRequest req, Model model) {
+		System.out.println("monthSalse");
+		hService.monthSalse(req, model);
+		return "tcat/salse/monthSalse";
+	}
+	
+	
 	//////////////////////////// 18.01.16 명훈
 	//////////////////////////// 시작////////////////////////////////////////////
 	// 스토어 구매승인 orderCon
@@ -1354,5 +1395,117 @@ public class TcatHostController {
 		return "tcat/productManager/productRefundS";
 	}
 	////////////////////// 태성 1/23 end////////////////////////////
+	///////////////////// 태성 1/30 start//////////////////////////
 
+	// 사진관리 게시판
+	@RequestMapping("photoManager")
+	public String photoManager(HttpServletRequest req, Model model) {
+
+		System.out.println("photoManager");
+
+		hService.photoManagerList(req, model);
+
+		return "tcat/borderManager/photoManager";
+
+	}
+
+	// 사진관리 게시판_side
+	@RequestMapping("photoManager_side")
+	public String photoManager_side(HttpServletRequest req, Model model) {
+		System.out.println("photoManager_side");
+		return "tcat/borderManager/photoManager_side";
+	}
+
+	// 사진관리 게시판 - 수정
+	@RequestMapping("photoManagerNomo")
+	public String photoManagerNomo(MultipartHttpServletRequest req, Model model) {
+
+		System.out.println("photoManagerNomo");
+
+		hService.photoManagerNomoService(req, model);
+		hService.photoManagerList(req, model);
+
+		return "tcat/borderManager/photoManager";
+
+	}
+
+	// 사진관리 게시판 - 삭제
+	@RequestMapping("photoManagerDelete")
+	public String photoManagerDelete(HttpServletRequest req, Model model) {
+
+		System.out.println("photoManagerDelete");
+
+		req.setAttribute("category", req.getParameter("category"));
+		hService.photoManagerDeleteService(req, model);
+		hService.photoManagerList(req, model);
+
+		return "tcat/borderManager/photoManager";
+
+	}
+
+	// 영상관리 게시판
+	@RequestMapping("movieManager")
+	public String movieManager(HttpServletRequest req, Model model) {
+
+		System.out.println("movieManager");
+		hService.movieManagerList(req, model);
+		
+		return "tcat/borderManager/movieManager";
+	}
+
+	// 영상관리 게시판 - side
+	@RequestMapping("movieManager_side")
+	public String movieManager_side(HttpServletRequest req, Model model) {
+
+		System.out.println("movieManager_side");
+
+		return "tcat/borderManager/movieManager_side";
+	}
+	// 영상관리 게시판 - 수정
+		@RequestMapping("movieManagerNomo")
+		public String movieManagerNomo(MultipartHttpServletRequest req, Model model) {
+
+			System.out.println("movieManagerNomo");
+
+			hService.movieManagerNomoService(req, model);
+			hService.movieManagerList(req, model);
+
+			return "tcat/borderManager/movieManager";
+
+		}
+
+		// 영상관리 게시판 - 삭제
+		@RequestMapping("movieManagerDelete")
+		public String movieManagerDelete(HttpServletRequest req, Model model) {
+
+			System.out.println("movieManagerDelete");
+
+			req.setAttribute("category", req.getParameter("category"));
+			hService.movieManagerDeleteService(req, model);
+			hService.movieManagerList(req, model);
+
+			return "tcat/borderManager/movieManager";
+
+		}
+		// 스토어 반품 - 목록
+		@RequestMapping("productReturn")
+		public String productReturn(HttpServletRequest req, Model model) {
+
+			System.out.println("productReturn");
+			hService.productReturn(req, model);
+
+			return "tcat/productManager/productReturn";
+		}
+
+		// 스토어 반품 - 승인
+		@RequestMapping("productReturnUpdateS")
+		public String productReturnUpdateS(HttpServletRequest req, Model model) {
+
+			System.out.println("productReturnUpdateS");
+			hService.productReturnUpdateS(req, model);
+			hService.productReturn(req, model);
+
+			return "tcat/productManager/productReturn";
+		}
+	///////////////////// 태성 1/30 end//////////////////////////
 }

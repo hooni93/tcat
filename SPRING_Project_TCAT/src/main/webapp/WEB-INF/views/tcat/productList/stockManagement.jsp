@@ -31,7 +31,7 @@ function stockManagement_modify(code){
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
 				<table
-					class="table table-hover table-bordered table-condensed c fs12">
+					class="table table-hover table-bordered table-condensed c fs11">
 					<tr class="warning">
 						<td><b>상품코드</b></td>
 						<td><b>상품이름</b></td>
