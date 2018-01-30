@@ -1227,7 +1227,7 @@
 		select * from member where member_id=#{member_id}
 	</select>
 
-	<update id="detailMember_update" parameterType="spring.project.tcat.VO.MemberVO">
+	<update id="detailMember_update" parameterType="java.util.Map">
 		update member set
 		member_pwd=#{member_pwd},member_hp=#{member_hp},member_email=#{member_email},
 		member_name=#{member_name},Rating=#{Rating},point=#{point},member_addr=#{member_addr}

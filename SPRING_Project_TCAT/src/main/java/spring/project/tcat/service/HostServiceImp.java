@@ -2715,7 +2715,6 @@ public class HostServiceImp implements HostService {
 		String member_id = req.getParameter("member_id");
 		MemberVO dto = new MemberVO();
 		dto = hDao.detailMember(member_id);
-
 		req.setAttribute("dto", dto);
 	}
 
@@ -2727,23 +2726,22 @@ public class HostServiceImp implements HostService {
 		String member_hp = req.getParameter("member_hp");
 		String member_email = req.getParameter("member_email");
 		String member_name = req.getParameter("member_name");
-		String rating = req.getParameter("Rating");
+		String Rating = req.getParameter("Rating");
 		int point = Integer.parseInt(req.getParameter("point"));
 		String member_addr = req.getParameter("member_addr");
-
-		MemberVO dto = new MemberVO();
-		dto.setMember_id(member_id);
-		dto.setMember_pwd(member_pwd);
-		dto.setMember_hp(member_hp);
-		dto.setMember_email(member_email);
-		dto.setMember_name(member_name);
-		dto.setRating(rating);
-		dto.setPoint(point);
-		dto.setMember_addr(member_addr);
-		System.out.println(dto.getMember_id());
-		int cnt = hDao.detailMember_update(dto);
-
-		req.setAttribute("cnt", cnt);
+		int updateCnt=0;
+		
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("member_id", member_id);
+		map.put("member_pwd", member_pwd);
+		map.put("member_hp", member_hp);
+		map.put("member_email", member_email);
+		map.put("member_name", member_name);
+		map.put("Rating", Rating);
+		map.put("point", point);
+		map.put("member_addr", member_addr);
+		updateCnt=hDao.detailMember_update(map);
+		model.addAttribute("updateCnt", updateCnt);
 	}
 
 	// 호스트 이메일 체크

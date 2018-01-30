@@ -848,10 +848,10 @@ public class HostDAOImp implements HostDAO {
 		}
 		
 		@Override
-		public int detailMember_update(MemberVO dto) {
+		public int detailMember_update(Map<String, Object> map) {
 			int cnt=0;
 			HostDAO dao=Configuration.getMapper(HostDAO.class);
-			cnt=dao.detailMember_update(dto);
+			cnt=dao.detailMember_update(map);
 			return cnt;
 		}
 		//2018-01-16--------------------------------------------------------

@@ -241,7 +241,7 @@ public interface HostDAO {
 	//고객정보 가져오기
 	public MemberVO detailMember(String member_id);
 	//고객정보 수정
-	public int detailMember_update(MemberVO dto);
+	public int detailMember_update(Map<String,Object> map);
 	//2018-01-16---------------------------------------------------------------------
 	//관리자 추가
 	public int HostPlus(Map<String,Object> map);

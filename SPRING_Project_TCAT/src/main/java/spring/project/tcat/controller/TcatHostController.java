@@ -765,23 +765,21 @@ public class TcatHostController {
 	@RequestMapping("detailMember")
 	public String detailMember(HttpServletRequest req, Model model) {
 		System.out.println("detailMember");
-
 		hService.detailMember(req, model);
-
 		return "tcat/memberManage/detailMember";
 	}
 
 	// 회원정보 상세페이지 [수정페이지]
 	@RequestMapping("detailMember_update")
-	public String detailMember_update(HttpServletRequest req, Model model) {
-		System.out.println("detailMember_update");
-		System.out.println("id:" + req.getParameter("member_id"));
+	   public String detailMember_update(HttpServletRequest req, Model model) {
+	      System.out.println("detailMember_update");
+	      System.out.println("id:" + req.getParameter("member_id"));
+	      System.out.println("pwd:"+req.getParameter("member_pwd"));
+	      hService.detailMember_update(req, model);
+	      hService.member_list(req, model);
 
-		hService.detailMember_update(req, model);
-		hService.detailMember(req, model);
-
-		return "tcat/memberManage/detailMember";
-	}
+	      return "tcat/memberManage/memberModified";
+	   }
 
 	// host이메일 체크
 	@RequestMapping("emailCheack")
@@ -1120,18 +1118,13 @@ return "tcat/borderManager/levelMember";
 }
 
 // 등급분석사이드
-@RequestMapping("infoLevel_side")
-public String infoLevel_side(HttpServletRequest req, Model model) {
+@RequestMapping("infoLevelMain_side")
+public String infoLevelMain_side(HttpServletRequest req, Model model) {
 System.out.println("infoLevel_side");
-return "tcat/memberAnalysis/infoLevel_side";
+return "tcat/memberAnalysis/infoLevelMain_side";
 }
 
-// 등급분석사이드
-@RequestMapping("infoLevel")
-public String infoLevel(HttpServletRequest req, Model model) {
-System.out.println("infoLevel");
-return "tcat/memberAnalysis/infoLevel";
-}
+
 
 /////////////////// HOST/상품관리/이벤트 상품 등록 수정-2018-01-22 성영민
 /////////////////// //////////////////////////////
