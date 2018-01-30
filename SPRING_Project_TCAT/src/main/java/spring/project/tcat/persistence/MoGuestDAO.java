@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import spring.project.tcat.VO.TcatBoardVO;
+import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
 
 public interface MoGuestDAO {
@@ -49,6 +50,21 @@ public interface MoGuestDAO {
 	//카테고리별 게시판 영상메뉴	
 		public ArrayList<TcatBoardVO> categoryMovieList(int category);
 		public int categoryListCnt(int category);
+	//우선순위별 상품진열 갯수
+		public int firstGradeListCnt(String category);
+	//우선순위별 상품 진열리스트
+		public ArrayList<TcatPerformanceVO> firstGradeList(Map<String,Object> map);
+	//상품순위
+		public ArrayList<TcatPerformanceVO> performanceSaleRating(String category);
+	//스토어 핫리스트
+		public ArrayList<TcatDiscBuyVO> storeHotList();
+	//스토어 순위
+		public ArrayList<TcatDiscBuyVO> storeSaleRating();
+	//스토어 우선순위별 상품진열갯수
+		public int firstGradeStoreListCnt();
+	//스토어 우선 순위별 상품 진열
+		public ArrayList<TcatDiscBuyVO> firstGradeStoreList(Map<String,Object> map);
+		
 		
 		
 }

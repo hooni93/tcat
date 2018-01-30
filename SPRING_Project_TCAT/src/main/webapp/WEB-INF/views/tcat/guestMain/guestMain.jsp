@@ -79,7 +79,6 @@ $(document).ready(function(){
 	<a class="btn btn-default" onclick="hotCategoryLoad('hotCategory?category=연극');" role="button">연극</a>
 	<a class="btn btn-default" onclick="hotCategoryLoad('hotCategory?category=클래식');" role="button">클래식</a>
 	<a class="btn btn-default" onclick="hotCategoryLoad('hotCategory?category=무용');" role="button">무용/발레</a>
-	<a class="btn btn-default" onclick="" role="button">스토어</a>
 </div>
 
 <!-- 핫리스트 -->

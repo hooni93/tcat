@@ -27,6 +27,16 @@ public interface HostService {
 	public void hallModifyDB(HttpServletRequest req, Model model);
 	//공연장 수정 데이터 업데이트
 	public void hallModifyUpdate(HttpServletRequest req, Model model);
+	//일별 결산
+	public void dayslse(HttpServletRequest req, Model model);
+	//주별 결산	
+	public void weekendSalse(HttpServletRequest req, Model model);
+	//월별 결산
+	public void monthSalse(HttpServletRequest req, Model model);
+	//메인인포정보
+	public void hostMainInfo(HttpServletRequest req, Model model);
+	
+	
 	
 
 	//////////////////////////////////////18.01.16 명훈//////////////////////////////////////////////////

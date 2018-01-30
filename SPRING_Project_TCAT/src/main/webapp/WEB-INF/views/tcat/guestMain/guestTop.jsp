@@ -190,6 +190,10 @@
 		$("#hotMainResult").load("${pageContext.request.contextPath}/" + url);
 	}
 	
+
+	
+	
+	
 </script>
 </head>
 <body>

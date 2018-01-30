@@ -35,8 +35,11 @@ public interface MoGuestService {
 	//메인화면 출력데이터 
 	public void guestMainList(HttpServletRequest req,Model model);
 	
-	//뮤지컬 메인리스트
-	public void musicalCategoryMainList(HttpServletRequest req,Model model);
+	// 메인리스트
+	public void categoryMainList(HttpServletRequest req,Model model);
+	//스토어메인리스트
+	public void storeCategoryMainList(HttpServletRequest req,Model model);
+	
 	
 	
 }

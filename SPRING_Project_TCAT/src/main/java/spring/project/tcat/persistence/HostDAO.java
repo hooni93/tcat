@@ -56,6 +56,39 @@ public interface HostDAO {
 	public int placeUpdate(TcatPerformanceVO vo);
 	//공연장 업데이트
 	public int hallModifyUpdate(TcatPerformanceVO vo);
+	//일별 결산 카운트
+	public ArrayList<TcatPerformanceVO> dayslseCount(Map<String,Object> map);
+	//일별 결산 금액정보
+	public ArrayList<TcatPerformanceVO> dayslsePerPrice(Map<String,Object> map);
+	//일별 결산 스토어 카운트
+	public ArrayList<TcatDiscBuyVO> dayStoreCount(Map<String,Object> map);
+	//일별 결산 스토어 금액정보
+	public ArrayList<TcatDiscBuyVO> dayStorePrice(Map<String,Object> map);
+	
+	//월별 결산 카운트
+	public ArrayList<TcatPerformanceVO> monthSalsePerCount(String dayStr);
+	//월별 결산 금액정보
+	public ArrayList<TcatPerformanceVO> monthSalsePerPrice(String dayStr);
+	//월별 결산 스토어 카운트
+	public ArrayList<TcatDiscBuyVO> monthSalseStoreCount(String dayStr);
+	//월별 결산 스토어 금액정보
+	public ArrayList<TcatDiscBuyVO> monthSalseStorePrice(String dayStr);
+	
+	//메인 정보 공연 오더 수량 파악
+	public int orderInfoMain(Map<String,Object> map);
+	//메인 정보 스토어 오더 수량 파악
+	public int orderStoreInfoMain(Map<String,Object> map);
+	//메인 정보 카트 수량 파악
+	public int cartMainInfoCount(String dayStr);
+	//메인 정보 게시판 수량 파악
+	public int boarderMainInfoCount(String dayStr);
+	//메인 정보 후기게시판 수량 파악
+	public int comentMainInfoCount(String dayStr);
+	//메인 정보 qna게시판 수량 파악
+	public int qnaMainInfoCount(String dayStr);
+	//메인 정보 1:1게시판 수량 파악
+	public int one_1MainInfoCount(String dayStr);
+	
 	
 	
 	

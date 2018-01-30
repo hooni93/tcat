@@ -7,7 +7,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -503,6 +505,336 @@ public class HostServiceImp implements HostService {
 
 	}
 
+	//일별 결산
+	@Override
+	public void dayslse(HttpServletRequest req, Model model) {
+		// TODO Auto-generated method stub
+		System.out.println("HostServiceImp - dayslse");
+		SimpleDateFormat date = new SimpleDateFormat("yy/MM/dd");
+		Date today = new Date();
+		Date yesterDay = new Date();		
+		today.setTime(today.getTime() - ((long) 1000 * 60 * 60 * 24 * 1)); // 작년 365
+		yesterDay.setTime(today.getTime() - ((long) 1000 * 60 * 60 * 24 * 6)); // 작년 365
+		String todayStr = date.format(today);
+		String yesterDayStr = date.format(yesterDay);
+		System.out.println(todayStr);
+		System.out.println(yesterDayStr);
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("today", todayStr);
+		map.put("yesterday", yesterDayStr);
+		ArrayList<TcatPerformanceVO> discbuyCountVo=null;
+		discbuyCountVo = hDao.dayslseCount(map);
+		ArrayList<TcatPerformanceVO> discbuyPriceVo=null;
+		discbuyPriceVo=hDao.dayslsePerPrice(map);
+		ArrayList<TcatDiscBuyVO> dayStoreCountVo=null;
+		dayStoreCountVo=hDao.dayStoreCount(map);
+		ArrayList<TcatDiscBuyVO> dayStorePriceVo=null;
+		dayStorePriceVo=hDao.dayStorePrice(map);
+		
+		ArrayList<SaleVO> dtos=new ArrayList<SaleVO>();
+		
+		for(int i=0;i<7;i++) {
+			SaleVO vo=new SaleVO();
+			System.out.println(yesterDayStr);
+			vo.setBuyDate(yesterDayStr);
+		for(int j=0;j<discbuyCountVo.size();j++) {
+			System.out.println("============"+discbuyCountVo.get(j).getBuydate());
+			if(yesterDayStr.equals(discbuyCountVo.get(j).getBuydate())) {
+				System.out.println("--------------"+discbuyCountVo.get(j).getCount());
+				vo.setPerCount(discbuyCountVo.get(j).getCount());
+				break;
+				}
+			}//for
+		int dayPerSumPrice=0;
+		for(int k=0;k<discbuyPriceVo.size();k++) {
+			if(yesterDayStr.equals(discbuyPriceVo.get(k).getBuydate())) {
+				if(discbuyPriceVo.get(k).getSeat_type().equals("VIP")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getVIP_seatPrice();
+				}
+				else if(discbuyPriceVo.get(k).getSeat_type().equals("R")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getR_seatPrice();
+				}
+				else if(discbuyPriceVo.get(k).getSeat_type().equals("S")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getS_seatPrice();
+				}
+				else if(discbuyPriceVo.get(k).getSeat_type().equals("A")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getA_seatPrice();
+				}
+				else if(discbuyPriceVo.get(k).getSeat_type().equals("B")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getB_seatPrice();
+				}
+				System.out.println(dayPerSumPrice);
+			}
+		}
+		vo.setPerPrice(dayPerSumPrice);
+		System.out.println("==============================");
+		System.out.println(dayPerSumPrice);
+		for(int m=0;m<dayStoreCountVo.size();m++) {
+			if(yesterDayStr.equals(dayStoreCountVo.get(m).getBuydate())) {
+				vo.setStoreCount(dayStoreCountVo.get(m).getCount());
+				break;
+			}
+		}
+		int dayStorePrice=0;
+		for(int n=0;n<dayStorePriceVo.size();n++) {
+			if(yesterDayStr.equals(dayStorePriceVo.get(n).getBuydate())) {
+				dayStorePrice+=dayStorePriceVo.get(n).getDisc_price();
+				break;
+			}
+		}
+		System.out.println(dayStorePrice);
+		vo.setStorePrice(dayStorePrice);
+		vo.setTotalPrice(dayPerSumPrice+dayStorePrice);
+		yesterDay.setTime(today.getTime() - ((long) 1000 * 60 * 60 * 24 * (6-(i+1))));
+		yesterDayStr = date.format(yesterDay);
+		System.out.println(yesterDayStr);
+		dtos.add(i, vo);
+		}//for
+		model.addAttribute("dtos",dtos);
+	}
+	
+	//주별 결산
+	@Override
+	public void weekendSalse(HttpServletRequest req, Model model) {
+		// TODO Auto-generated method stub
+		System.out.println("HostServiceImp - dayslse");
+		SimpleDateFormat date = new SimpleDateFormat("yy/MM/dd");
+		Date today = new Date();
+		Date yesterDay = new Date();		
+		Date yesterDay2 = new Date();		
+		today.setTime(today.getTime() - ((long) 1000 * 60 * 60 * 24 * 1)); // 작년 365
+		yesterDay.setTime(today.getTime() - ((long) 1000 * 60 * 60 * 24 * 6)); // 작년 365
+		yesterDay2.setTime(yesterDay2.getTime() - ((long) 1000 * 60 * 60 * 24 * 1));
+		
+		String todayStr = date.format(today);
+		String yesterDayStr = date.format(yesterDay);
+		String yesterDay2Str = date.format(yesterDay2);
+		
+		System.out.println(todayStr);
+		System.out.println(yesterDayStr);
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("today", todayStr);
+		map.put("yesterday", yesterDayStr);
+		ArrayList<TcatPerformanceVO> discbuyCountVo=null;
+		discbuyCountVo = hDao.dayslseCount(map);
+		ArrayList<TcatPerformanceVO> discbuyPriceVo=null;
+		discbuyPriceVo=hDao.dayslsePerPrice(map);
+		ArrayList<TcatDiscBuyVO> dayStoreCountVo=null;
+		dayStoreCountVo=hDao.dayStoreCount(map);
+		ArrayList<TcatDiscBuyVO> dayStorePriceVo=null;
+		dayStorePriceVo=hDao.dayStorePrice(map);
+		
+		ArrayList<SaleVO> dtos=new ArrayList<SaleVO>();
+		for(int w=0;w<4;w++) {
+		int weekPerCount=0;
+		int weekPerPrice=0;
+		int weekStoreCount=0;
+		int weekStorePrice=0;
+		int weekTotalPrice=0;
+		String weekDate="";
+		SaleVO vo=new SaleVO();
+		yesterDayStr = date.format(yesterDay);
+		yesterDay2Str = date.format(yesterDay2);
+		weekDate=yesterDayStr+" ~ "+yesterDay2Str;
+		vo.setBuyDate(weekDate);
+		System.out.println(weekDate);
+		for(int i=0;i<7;i++) {
+			System.out.println(yesterDayStr);
+			for(int j=0;j<discbuyCountVo.size();j++) {
+				System.out.println("============"+discbuyCountVo.get(j).getBuydate());
+				if(yesterDayStr.equals(discbuyCountVo.get(j).getBuydate())) {
+					System.out.println("--------------"+discbuyCountVo.get(j).getCount());
+					weekPerCount+=discbuyCountVo.get(j).getCount();
+					break;
+				}
+			}//for
+			int dayPerSumPrice=0;
+			for(int k=0;k<discbuyPriceVo.size();k++) {
+				if(yesterDayStr.equals(discbuyPriceVo.get(k).getBuydate())) {
+					if(discbuyPriceVo.get(k).getSeat_type().equals("VIP")) {
+						dayPerSumPrice+=discbuyPriceVo.get(k).getVIP_seatPrice();
+					}
+					else if(discbuyPriceVo.get(k).getSeat_type().equals("R")) {
+						dayPerSumPrice+=discbuyPriceVo.get(k).getR_seatPrice();
+					}
+					else if(discbuyPriceVo.get(k).getSeat_type().equals("S")) {
+						dayPerSumPrice+=discbuyPriceVo.get(k).getS_seatPrice();
+					}
+					else if(discbuyPriceVo.get(k).getSeat_type().equals("A")) {
+						dayPerSumPrice+=discbuyPriceVo.get(k).getA_seatPrice();
+					}
+					else if(discbuyPriceVo.get(k).getSeat_type().equals("B")) {
+						dayPerSumPrice+=discbuyPriceVo.get(k).getB_seatPrice();
+					}
+					System.out.println(dayPerSumPrice);
+				}
+			}
+			weekPerPrice+=dayPerSumPrice;
+			
+			for(int m=0;m<dayStoreCountVo.size();m++) {
+				if(yesterDayStr.equals(dayStoreCountVo.get(m).getBuydate())) {
+					weekStoreCount+=dayStoreCountVo.get(m).getCount();
+					break;
+				}
+			}
+			int dayStorePrice=0;
+			for(int n=0;n<dayStorePriceVo.size();n++) {
+				if(yesterDayStr.equals(dayStorePriceVo.get(n).getBuydate())) {
+					dayStorePrice+=dayStorePriceVo.get(n).getDisc_price();
+					break;
+				}
+			}
+			System.out.println(dayStorePrice);
+			weekStorePrice+=dayStorePrice;
+			weekTotalPrice+=dayPerSumPrice+dayStorePrice;
+			yesterDay.setTime(yesterDay2.getTime() - ((long) 1000 * 60 * 60 * 24 * (6-(i+1))));
+			yesterDayStr = date.format(yesterDay);
+			System.out.println(yesterDayStr);	
+		}//for
+		yesterDay2.setTime(today.getTime() - ((long) 1000 * 60 * 60 * 24 * (7*(w+1))));
+		yesterDay.setTime(yesterDay2.getTime() - ((long) 1000 * 60 * 60 * 24 * 6));
+		vo.setPerCount(weekPerCount);
+		vo.setPerPrice(weekPerPrice);
+		vo.setStoreCount(weekStoreCount);
+		vo.setStorePrice(weekStorePrice);
+		vo.setTotalPrice(weekTotalPrice);
+		dtos.add(w, vo);
+		}//for4
+		model.addAttribute("weekDtos",dtos);
+	}
+	
+	//월별 결산
+	@Override
+	public void monthSalse(HttpServletRequest req, Model model) {
+		// TODO Auto-generated method stub
+		System.out.println("HostServiceImp - dayslse");
+		
+
+		GregorianCalendar today = new GregorianCalendar ( );
+		today.setTime(new Date());
+		today.add(Calendar.MONTH, 0); // 한달을 더한다.
+		SimpleDateFormat date = new SimpleDateFormat("yy/MM");	
+		String dayStr=date.format(today.getTime());
+		System.out.println(dayStr);
+				
+		ArrayList<SaleVO> dtos=new ArrayList<SaleVO>();
+		for(int i=0;i<12;i++) {
+			today.add(Calendar.MONTH, -1); // 한달을 더한다.
+			dayStr=date.format(today.getTime());
+			SaleVO vo=new SaleVO();
+			vo.setBuyDate(dayStr);
+			String searchDate="%"+dayStr+"%";
+			System.out.println(searchDate);
+			ArrayList<TcatPerformanceVO> discbuyCountVo=null;
+			discbuyCountVo = hDao.monthSalsePerCount(searchDate);
+			ArrayList<TcatPerformanceVO> discbuyPriceVo=null;
+			discbuyPriceVo=hDao.monthSalsePerPrice(searchDate);
+			ArrayList<TcatDiscBuyVO> dayStoreCountVo=null;
+			dayStoreCountVo=hDao.monthSalseStoreCount(searchDate);
+			ArrayList<TcatDiscBuyVO> dayStorePriceVo=null;
+			dayStorePriceVo=hDao.monthSalseStorePrice(searchDate);
+			System.out.println(dayStr);
+			int perCount=0;
+			int dayPerSumPrice=0;
+		for(int j=0;j<discbuyCountVo.size();j++) {
+				perCount+=discbuyCountVo.get(j).getCount();
+			}//for
+		
+		for(int k=0;k<discbuyPriceVo.size();k++) {
+				if(discbuyPriceVo.get(k).getSeat_type().equals("VIP")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getVIP_seatPrice();
+				}
+				else if(discbuyPriceVo.get(k).getSeat_type().equals("R")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getR_seatPrice();
+				}
+				else if(discbuyPriceVo.get(k).getSeat_type().equals("S")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getS_seatPrice();
+				}
+				else if(discbuyPriceVo.get(k).getSeat_type().equals("A")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getA_seatPrice();
+				}
+				else if(discbuyPriceVo.get(k).getSeat_type().equals("B")) {
+					dayPerSumPrice+=discbuyPriceVo.get(k).getB_seatPrice();
+				}
+				System.out.println(dayPerSumPrice);
+			}
+		
+		int storeCount=0;
+		System.out.println("==============================");
+		for(int m=0;m<dayStoreCountVo.size();m++) {
+			storeCount+=dayStoreCountVo.get(m).getCount();
+		}
+		int dayStorePrice=0;
+		for(int n=0;n<dayStorePriceVo.size();n++) {
+				dayStorePrice+=dayStorePriceVo.get(n).getDisc_price();
+		}
+		System.out.println(dayStorePrice);
+		vo.setPerCount(perCount);
+		vo.setStoreCount(storeCount);
+		vo.setPerPrice(dayPerSumPrice);
+		vo.setStorePrice(dayStorePrice);
+		vo.setTotalPrice(dayPerSumPrice+dayStorePrice);
+		
+		dtos.add(i, vo);
+		
+		}//for
+		model.addAttribute("monDtos",dtos);
+	}
+	
+	//메인인포
+	@Override
+	public void hostMainInfo(HttpServletRequest req, Model model) {
+		// TODO Auto-generated method stub
+		System.out.println("HostServiceImp - hostMainInfo");
+		GregorianCalendar today = new GregorianCalendar ( );
+		today.setTime(new Date());
+		SimpleDateFormat date = new SimpleDateFormat("yy/MM/dd");	
+		String dayStr=date.format(today.getTime());
+		System.out.println(dayStr);
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("buydate", dayStr);
+		int[] orderPerInfoMain=new int[8];
+		int[] orderStoreInfoMain=new int[8];
+		int[] orderInfoMain=new int[8];
+		int cartMainInfoCount=0;
+		int boarderMainInfoCount=0;
+		int comentMainInfoCount=0;
+		int qnaMainInfoCount=0;
+		int one_1MainInfoCount=0;
+		for(int i=0;i<8;i++) {
+			map.put("ticket_step", i+1);
+			orderPerInfoMain[i]=hDao.orderInfoMain(map);
+			orderStoreInfoMain[i]=hDao.orderStoreInfoMain(map);
+			orderInfoMain[i]=orderPerInfoMain[i]+orderStoreInfoMain[i];
+		}
+		cartMainInfoCount=hDao.cartMainInfoCount(dayStr);
+		boarderMainInfoCount=hDao.boarderMainInfoCount(dayStr);
+		comentMainInfoCount=hDao.comentMainInfoCount(dayStr);
+		qnaMainInfoCount=hDao.qnaMainInfoCount(dayStr);
+		one_1MainInfoCount=hDao.one_1MainInfoCount(dayStr);
+		System.out.println(cartMainInfoCount);
+		System.out.println(boarderMainInfoCount);
+		System.out.println(comentMainInfoCount);
+		System.out.println(qnaMainInfoCount);
+		System.out.println(one_1MainInfoCount);
+		
+		model.addAttribute("orderInfoMain",orderInfoMain);
+		model.addAttribute("cartMainInfoCount",cartMainInfoCount);
+		model.addAttribute("boarderMainInfoCount",boarderMainInfoCount);
+		model.addAttribute("comentMainInfoCount",comentMainInfoCount);
+		model.addAttribute("qnaMainInfoCount",qnaMainInfoCount);
+		model.addAttribute("one_1MainInfoCount",one_1MainInfoCount);
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 	////////////////////////////////////// 18.01.16 명훈
 	////////////////////////////////////// 시작//////////////////////////////////////////////////
 	// 스토어 구매 승인
@@ -513,6 +845,7 @@ public class HostServiceImp implements HostService {
 		//구매승인
 		hDao.orderCon(disc_num);
 	}
+
 
 	// 상품목록 나열
 	@Override // 18.01.25 명훈 수정
@@ -1612,7 +1945,6 @@ public class HostServiceImp implements HostService {
 
 		}
 	}
-
 	//////////////////////////////////// 태성 1/9 end/ ///////////////////////////////
 
 	/////////////////////////////////// 태성 1/10 start /////////////////////////////
