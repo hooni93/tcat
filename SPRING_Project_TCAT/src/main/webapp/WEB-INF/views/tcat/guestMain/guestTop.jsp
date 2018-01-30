@@ -113,7 +113,7 @@
 					$("#modal_result").load(
 							"${pageContext.request.contextPath}/memberLogin");
 				});
-
+	
 	});
 	//by명훈
 	function findId() {
@@ -177,6 +177,23 @@
 											+ event.originalEvent.state.page);
 							//event.originalEvent.state.page: 푸시해 놓았던 데이터의 page(key값)에 따라 url을 받음
 						});
+				
+				
+				
+				$(window).scroll(function() {
+		            if ($(this).scrollTop() > 400) {
+		                $('#topMove').fadeIn();
+		            } else {
+		                $('#topMove').fadeOut();
+		            }
+		        });
+		        
+		        $("#topMove").click(function() {
+		            $('html, body').animate({
+		                scrollTop : 0
+		            }, 400);
+		            return false;
+		        });
 			});
 
 	//공연 상세페이지 onclick시
@@ -192,6 +209,10 @@
 	function hotCategoryLoad(url){
 		$("#hotMainResult").load("${pageContext.request.contextPath}/" + url);
 	}
+	
+
+	
+	
 	
 </script>
 </head>
@@ -311,4 +332,8 @@
 
 
 </body>
+<!--탑 이동  -->
+<div  id="topMove" style="position: fixed; bottom:20px;right:30px;  z-index: 99; width: 100px; display: none; ">
+	<a href="#"><img src="${image}bar/topcat.png" ></a>
+</div>
 </html>

@@ -34,7 +34,8 @@
 		//구매승인
 		$(".orderConfirm").click(function(){
 			var disc_num = $(this).attr("name");
-			load("orderCon?disc_num="+disc_num);
+			var pageInfo = $(this).attr("id");
+			load("orderCon?disc_num="+disc_num+pageInfo);
 		});
 	});
 </script>
@@ -125,7 +126,13 @@
 						</td>
 						<td>${order.disc_buyDate }</td>
 						<td>${order.sale_div } (${order.sale_rate }%)</td>
-						<td><input name="${order.disc_num }" type="button" value="구매승인" class="btn btn-primary orderConfirm"></td>
+						<td>
+							<c:if test="${order.disc_buyStep==1}">
+								<input name="${order.disc_num }" type="button" value="구매승인"
+								id="&searchCondition=${searchCondition }&disc_buyStep=${disc_buyStep}&keyword=${keyword}&mDev=${mDev}&sDev=${sDev}&pageNum=${currentPage}"
+								class="btn btn-primary orderConfirm">
+							</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 			</c:if>

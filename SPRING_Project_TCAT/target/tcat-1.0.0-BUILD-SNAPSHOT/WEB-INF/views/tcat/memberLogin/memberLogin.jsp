@@ -4,15 +4,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+	$("input[name='member_id']").keydown(function(e) {
+		if (e.keyCode == 121) {
+			$("#modal_result").load("${pageContext.request.contextPath}/host_login");
+		}
+	});
+
+</script>
 </head>
 
 
 <div class="loginmodal-container">
-	<a data-dismiss="modal" class="00ffff fs20 floatR" >X</a>
+	<a data-dismiss="modal" class="00ffff fs20 floatR">X</a>
 	<h1>로그인하세요</h1>
 	<br>
 	<form action="loginPro" method="Post">
-		<input type="text" name="member_id" placeholder="아이디"> <input
+		<input type="text" name="member_id" placeholder="아이디" id="member_id"> <input
 			type="password" name="member_pwd" placeholder="비밀번호"> <input
 			type="submit" name="login" class="login loginmodal-submit"
 			value="로그인">

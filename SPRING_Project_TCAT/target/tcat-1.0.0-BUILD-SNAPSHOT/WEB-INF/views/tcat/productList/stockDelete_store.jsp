@@ -106,8 +106,9 @@
 				</div>
 				<button type="button" class="btn btn-default"
 					onclick="ajaxSubmit('stockDelete_store')">검색</button>
+					
 			</form>
-
+</div>
 			</div>
 			<br>
 			<br>

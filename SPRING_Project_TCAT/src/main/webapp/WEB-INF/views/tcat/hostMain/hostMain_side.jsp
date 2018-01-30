@@ -10,14 +10,9 @@
 
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h50"></li>
-				<li class="b400040"><a href="#">상품목록</a></li>
-	            <li class="b400040"><a href="#">카테고리별 상품진열관리</a></li>
-	            <li class="b400040"><a href="#">핫카테고리 상품진열관리</a></li>
-	            <li class="b400040"><a href="#">상품등록</a></li>
-	            <li class="b400040"><a href="#">상품등록수정</a></li>
-	            <li class="b400040"><a href="#">상품삭제</a></li>
-	            <li class="b400040"><a href="#">상품재고관리</a></li>
-	            <li class="b400040"><a href="#">품절상품관리</a></li>
+				<li class="b400040"><a onclick="load('hostMain');">TCAT 현재상태</a></li>
+	            <li class="b400040"><a href="#">메인 화면설정</a></li>
+
 	            
 			</ul>
 

@@ -51,9 +51,12 @@ public class TcatDiscBuyVO {
  	//perDisc
  	String 		perf_title;
  	String 		disc_title;		//상품명
+ 	int rNum;
+ 	String movie_url; 
+ 	int count;
  	
  	
- 	//perDisc
+	//perDisc
     int disc_price;			//상품가격
     
 	
@@ -63,7 +66,34 @@ public class TcatDiscBuyVO {
     String first_grade;		//우선순위
     String disc_step; 		//상품 스텝
     int disc_count;			//상품수량
+    String buydate;
     
+
+	
+	public String getBuydate() {
+		return buydate;
+	}
+	public void setBuydate(String buydate) {
+		this.buydate = buydate;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+    public String getMovie_url() {
+		return movie_url;
+	}
+	public void setMovie_url(String movie_url) {
+		this.movie_url = movie_url;
+	}
+    public int getrNum() {
+		return rNum;
+	}
+	public void setrNum(int rNum) {
+		this.rNum = rNum;
+	}
     public int getDisc_price() {
 		return disc_price;
 	}

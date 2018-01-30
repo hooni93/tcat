@@ -201,6 +201,8 @@ height:auto
     font-weight:bold
 }
    .shophover:hover{color:red}
+   
+
 </style>
 <script type="text/javascript">
 $(document).ready(function(ev){
@@ -249,9 +251,49 @@ $(document).ready(function(ev){
     });
 });
 
+//위시리스트 킬릭시
+$(".wish").click(function(){
+	if(${login_id == null}){
+		alert("로그인 후 이용해 주세요.");
+		return false;
+	}else{
+			var per_id = $(this).attr("name");
+			var formData = {"per_id":per_id};
+			var active = $(".wish").hasClass("active");
+			if(active){
+				$.ajax({
+					type : "POST",
+					url : "delWishList",
+					cache : false,
+					data : formData,
+					success : function() {
+						alert("위시리스트 추가하였습니다.");
+					},
+					error : function(){
+						alert("위시리스트 실패하였습니다.");
+					}
+				});
+			}else{
+				$.ajax({
+					type : "POST",
+					url : "addWishList",
+					cache : false,
+					data : formData,
+					success : function() {
+						alert("위시리스트 추가하였습니다.");
+					},
+					error : function(){
+						alert("위시리스트 실패하였습니다.");
+					}
+				});
+			}
+	}
+});
+
 </script>
 </head>
 <body>
+<div class="conainter">
 <c:set var="image" value="/tcat/resources/image/"/>
 <div class="row">
 	<div class="col-md-1"></div>
@@ -317,11 +359,15 @@ $(document).ready(function(ev){
 			<div class="col-md-2 thumbnail h300">
 				<div class="list-group pt11">
 				  <div class="pt11"><p class="686868 b m10"><span class="glyphicon glyphicon-star"></span> 랭킹</p></div>
-				  <a href="#" class="list-group-item">1. 라이선스</a>
-				  <a href="#" class="list-group-item">2. 오리지널</a>
-				  <a href="#" class="list-group-item">3. 창작</a>
-				  <a href="#" class="list-group-item">4. 넌버벌</a>
-				  <a href="#" class="list-group-item">5. 넌버벌</a>
+					 <c:forEach var="voR" items="${ratingDtos}" >
+					  <a href="#" class="list-group-item">
+					  <table class="w100p" style="table-layout:fixed">
+					  	<tr>
+					  		<td style="text-overflow:ellipsis; overflow:hidden"><nobr>${voR.rNum}. ${voR.perf_title }</nobr></td>
+					  	</tr>
+					  </table>
+					  </a>
+					  </c:forEach>
 				</div>
 			</div>	
 			
@@ -329,11 +375,10 @@ $(document).ready(function(ev){
 	</div>
 	 <div class="col-md-1"></div>
 </div><!-- row end -->
+	 <!-- -------------------------------------------------------------------------------------------- -->
  <div class="row">
 	 <div class="col-md-1"></div>
 	 <div class="col-md-10">
-	 <!-- --------------------- -->
-
 	 <div class="col-md-6 thumbnail">
 	<div class="col-md-12 h25 bff3333 pt3"><span class="ffffff trgothic" onclick="load('photoBoarder?category=31');">뮤지컬 사진 게시판</span></div>		
 	<c:if test="${photoCnt!=0}">
@@ -482,11 +527,16 @@ $(document).ready(function(ev){
     	<div class="col-md-12 h20"></div>    	
     	<div class="col-md-12 h21"><div class="col-md-1"></div>  <span class="trgothic fs15 ffffff">핫카테고리</span></div>    	
     	<div class="col-md-12 h21"></div>    	
-    	<div class="col-md-1"></div>
+    	<div class="col-md-1 hidden-md"></div>
+    	<% int i=0; %>
     	<c:forEach var="vo" items="${dtos}" >
-			<div class="col-sm-3 col-md-2">
+			<div class="col-md-3 col-lg-2
+			<%if(i==4){ %>
+				hidden-md<%}%>">
+			<%i++; 
+			System.out.println(i);%>
 				<div class="thumbnail" >
-					<div class="w100p h270 overflow">
+					<div class="w100p h260 overflow">
 					<a onclick="movieMainLoad('${vo.movie_url}');"><img src="${image}performance/${vo.perf_Image}" class="img-responsive"></a>
 					</div>
 					<div class="caption bf0f0f0">
@@ -506,7 +556,7 @@ $(document).ready(function(ev){
 						</h6>
 					</div>
 					<div class="c m5">
-						<a class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a> 
+						<a class="btn btn-primary btn-product wish" name="${vo.per_id}"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a> 
 						<c:if test="${sessionScope.login_id!=null}">
 							<a onclick="payPerformence('Ticketing?per_id=${vo.per_id}')" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> 예매</a>
 						</c:if>
@@ -517,42 +567,45 @@ $(document).ready(function(ev){
 					</div><!-- outline -->
 				</div><!-- md2 -->
 		</c:forEach>
-        <div class="col-md-1"></div>
+        <div class="col-md-1 hidden-md"></div>
         <div class="col-md-12 h20"></div> 
 	</div><!--row 끝  -->
-		
+						
 			<div class="row">
+			<div class="col-md-12 h20"></div> 
+			<div class="col-md-12 h21"><div class="col-md-1"></div>  <span class="trgothic fs13">추천상품</span></div>    	
+			<div class="col-md-12 h21"></div> 	
 				<div class="col-md-1"></div>
 				<div class="col-md-10 mauto c" >
 			 		<c:if test="${cnt>0}">
 			 		<div class="">		
 				 		<c:forEach var="volist" items="${listdtos}">	
-					 		<a href="contentPage?pro_id=${volist.pro_id}"><div class="floatL h550 w300 m5 shophover">
+					 		<a onclick="contentPage(${volist.per_id});"><div class="floatL h350 w200 m5 shophover">
 							 		<div class="overlay">
-								 		<table class="w300 h550">
+								 		<table class="w200 h350" style="table-layout:fixed">
 								 			<tr>
 									 			<td>
-									 				<div class="w300 h450 overflow">
-									 					<img src="${image}performance/${volist.perf_Image}">
+									 				<div class="w200 h300 overflow">
+									 					<img src="${image}performance/${volist.perf_Image}" class="w100p">
 									 				</div>
 									 			</td>
 								 			</tr>
 								 			<tr>
-									 			<td class="fs10">
-									 			<!-- 	<c:if test="${volist.pro_new==1}">
-									 					<img src="${project}/image/new_product.png">
-									 				</c:if>
-									 				<c:if test="${volist.pro_new==2}">
-									 					<img src="${project}/image/sale_product.png">
-									 				</c:if>  -->
-									 					${volist.perf_title}
+									 			<td class="trgothic fs10">
+									 					${volist.sDev}
 									 			</td>
 								 			</tr>
 								 			<tr>
-									 			<td class="fs10 aaaaaa">${volist.B_seatPrice}</td>
+									 			<td class="trgothic fs11" style="text-overflow:ellipsis; overflow:hidden">
+									 					<nobr>${volist.perf_title}</nobr>
+									 			</td>
+								 			</tr>
+								 			<tr>
+									 			<td class="fs10 aaaaaa">~ ${volist.getB_seatPrice()}<span class="trgothic">원</span></td>
 								 			</tr>	 		
 								 		</table>
-								 	</div>	
+								 	</div>
+								 	<div class="w100p h25"></div>	
 							 	</div>
 						 	</a>
 					 	</c:forEach>
@@ -561,44 +614,14 @@ $(document).ready(function(ev){
 					<c:if test="${cnt==0}">
 						<h3><center>현재 준비되어 있는 제품이 없습니다.</center></h3>
 					</c:if>
-						<div class="w100p h50 c">
-							<table align="center">
-								<tr>
-									<td><br></td>
-								</tr>
-								<tr>
-									<td>
-										<c:if test="${cnt>0 }">
-											<!-- 처음[◀◀]/이전블록[◀] 특수문자 한자키 -->
-											<c:if test="${startPage>pageBlock }">
-												<a onclick="load('musicalMain');">[◀◀]</a>
-												<a onclick="load('musicalMain?pageNum=${startPage-pageBlock }');">[◀]</a>
-											</c:if>
-											<c:forEach var="i" begin="${startPage }" end="${endPage }">
-												<c:if test="${i==currentPage }">
-													<span><b>[${i }]</b></span>
-												</c:if>
-												
-												<c:if test="${i!=currentPage }">
-													<a onclick="load('musicalMain?pageNum=${i}');">[${i }]</a>
-												</c:if>
-											</c:forEach>
-											<!-- 다음블록[▶]/끝[▶▶] -->
-											<c:if test="${pageCount>endPage }">
-												<a onclick="load('musicalMain?pageNum=${startPage+pageBlock }');">[▶]</a>
-												<a href="load('musicalMain?pageNum=${pageCount}');">[▶▶]</a>
-											</c:if>
-										</c:if>
-									</td>	
-								</tr>
-							</table>
-						</div>
 					</div>
 				<div class="col-md-1"></div>
+				<div class="col-md-12 h60"></div>
+				
 			</div><!-- row -->
-		
+			
 	
 
-
+</div><!-- container -->
 </body>
 </html>

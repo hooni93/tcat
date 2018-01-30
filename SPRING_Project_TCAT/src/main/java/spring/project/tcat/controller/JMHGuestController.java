@@ -146,6 +146,9 @@ public class JMHGuestController {
 		mhService.getWishListIn(req, model);
 		//상품정보 가져오기
 		mhService.getContent(req, model);
+		//연령별, 성별별 선호도 가져오기
+		mhService.getFavorite(req,model);
+		
 		return "tcat/content/contentMain";
 	}
 	@RequestMapping("contentMain_store")
@@ -155,6 +158,8 @@ public class JMHGuestController {
 		mhService.getWishListIn(req, model);
 		//상품정보 가져오기
 		mhService.getContent_store(req, model);
+		//연령별, 성별별 선호도 가져오기
+		mhService.getFavorite_store(req,model);
 		return "tcat/content/contentMain_store";
 	}
 	
@@ -202,6 +207,13 @@ public class JMHGuestController {
 		mhService.perfRefund(req, model);
 		return "tcat/memberMyPage/perfRefundPro";
 	}
+	//perfChange 교환 요청
+	@RequestMapping("perfChange")
+	public String perfChange(HttpServletRequest req, Model model) {
+		System.out.println("perfChange");
+		mhService.perfChange(req, model);
+		return "tcat/memberMyPage/perfChangePro";
+	}
 	
 	//host 로그인
 	@RequestMapping("host_login")
@@ -234,4 +246,59 @@ public class JMHGuestController {
 		mhService.ticStepUpdate(req, model);
 		return "tcat/ticketCheck/ticStepUpdatePro";
 	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	//HOST 추가
+	//연령 성별 분석
+	@RequestMapping("ageAnalysis")
+	public String ageGenderAnalysis(HttpServletRequest req, Model model) {
+		System.out.println("ageAnalysis");
+		//데이터 가져오기
+		mhService.getAgeAnalysis(req,model);
+		return "tcat/guestAnalysis/ageAnalysis";
+	}
+	//분석 사이드
+	@RequestMapping("ageAnalysis_side")
+	public String ageGenderAnalysis_side(HttpServletRequest req, Model model) {
+		System.out.println("ageAnalysis_side");
+		return "tcat/guestAnalysis/ageAnalysis_side";
+	}
+	
+	//ageAnalysis_store 연령 분석 스토어
+	@RequestMapping("ageAnalysis_store")
+	public String ageAnalysis_store(HttpServletRequest req, Model model) {
+		System.out.println("ageAnalysis_store");
+		//데이터 가져오기
+		mhService.getAgeAnalysis_store(req,model);
+		return "tcat/guestAnalysis/ageAnalysis_store";
+	}
+	
+	//genderAnalysis 성별 예약 분석
+	@RequestMapping("genderAnalysis")
+	public String genderAnalysis(HttpServletRequest req, Model model) {
+		System.out.println("genderAnalysis");
+		//데이터 가져오기
+		mhService.getGenderAnalysis(req,model);
+		return "tcat/guestAnalysis/genderAnalysis";
+	}
+	
+	//genderAnalysis_store
+	@RequestMapping("genderAnalysis_store")
+	public String genderAnalysis_store(HttpServletRequest req, Model model) {
+		System.out.println("genderAnalysis_store");
+		//데이터 가져오기
+		mhService.getGenderAnalysis_store(req,model);
+		return "tcat/guestAnalysis/genderAnalysis_store";
+	}
+	
+	// 호스트 로그아웃
+	@RequestMapping("host_logout")
+	public String host_logout(HttpServletRequest req, Model model) {
+		System.out.println("host_logout");
+		req.getSession().removeAttribute("host_id");
+		//게스트 페이지로 이동
+		MoGuestContoroller moc = new MoGuestContoroller();
+		return moc.guestPage(req, model);
+	}
+	
 }

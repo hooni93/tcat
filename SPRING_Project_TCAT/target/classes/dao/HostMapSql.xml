@@ -196,7 +196,93 @@
 		B_seat=#{B_seat}, seat_line=#{seat_line} WHERE hall_id=#{hall_id}
 	</update>
 
-
+	<select id="dayslseCount" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+		  <![CDATA[select buydate,count(buydate) count from (select substr(ticet_buyDate,1,8) buydate,ticket_step from ticketing where ticket_step=5 ) where  buydate between #{yesterday} and #{today} group by buydate order by buydate]]>
+	</select>
+	
+	<select id="dayslsePerPrice" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+            <![CDATA[select pt.per_id per_id,pt.ticet_buyDate buyDate,pt.seat_type seat_type,pt.sale_div sale_div,s.sale_rate sale_rate,
+                pt.VIP_seatPrice VIP_seatPrice,pt.R_seatPrice R_seatPrice,pt.S_seatPrice S_seatPrice,pt.A_seatPrice A_seatPrice,
+                pt.B_seatPrice B_seatPrice from sale s JOIN      
+             (select t.per_id per_id,substr(t.ticet_buyDate,1,8) ticet_buyDate,t.seat_type seat_type,t.sale_div sale_div,
+                p.VIP_seatPrice VIP_seatPrice,p.R_seatPrice R_seatPrice,p.S_seatPrice S_seatPrice,p.A_seatPrice A_seatPrice,
+                p.B_seatPrice B_seatPrice
+             from ticketing t JOIN performanceinfo p ON t.per_id=p.per_id WHERE ticket_step=5 AND ticet_buyDate between #{yesterday} and #{today}) pt 
+              ON pt.sale_div=s.sale_div ]]>
+	</select>
+	
+	<select id="dayStoreCount" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
+		<![CDATA[select buydate,count(buydate) count from (select substr(disc_buyDate,1,8) buydate,disc_buyStep from DiscBuy where disc_buyStep=5 ) 
+             where  buydate between #{yesterday} and #{today} group by buydate order by buydate]]>
+	</select>
+	
+	<select id="dayStorePrice" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
+   <![CDATA[ select buydate,sum(price) disc_price from 
+    (select b.disc_code disc_code,b.buy_count buy_count,p.disc_price disc_price,b.buyDate buyDate,buy_count*disc_price price from 
+    (select substr(disc_buyDate,1,8) buydate, buy_count,disc_code,disc_buyStep from DiscBuy where disc_buyStep=5) b JOIN perDisc p ON b.disc_code=p.disc_code)
+    WHERE buydate between #{yesterday} AND #{today} group by buydate]]>
+	
+	</select>
+	
+	
+	
+	<select id="monthSalsePerCount" parameterType="String" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+		  <![CDATA[select buydate,count(buydate) count from (select substr(ticet_buyDate,1,8) buydate,ticket_step from ticketing where ticket_step=5 ) where  buydate LIKE #{_parameter} group by buydate order by buydate]]>
+	</select>
+	
+	<select id="monthSalsePerPrice" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+            <![CDATA[select pt.per_id per_id,pt.ticet_buyDate buyDate,pt.seat_type seat_type,pt.sale_div sale_div,s.sale_rate sale_rate,
+                pt.VIP_seatPrice VIP_seatPrice,pt.R_seatPrice R_seatPrice,pt.S_seatPrice S_seatPrice,pt.A_seatPrice A_seatPrice,
+                pt.B_seatPrice B_seatPrice from sale s JOIN      
+             (select t.per_id per_id,substr(t.ticet_buyDate,1,8) ticet_buyDate,t.seat_type seat_type,t.sale_div sale_div,
+                p.VIP_seatPrice VIP_seatPrice,p.R_seatPrice R_seatPrice,p.S_seatPrice S_seatPrice,p.A_seatPrice A_seatPrice,
+                p.B_seatPrice B_seatPrice
+             from ticketing t JOIN performanceinfo p ON t.per_id=p.per_id WHERE ticket_step=5 AND ticet_buyDate LIKE #{_parameter}) pt 
+              ON pt.sale_div=s.sale_div ]]>
+	</select>
+	
+	<select id="monthSalseStoreCount" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
+		<![CDATA[select buydate,count(buydate) count from (select substr(disc_buyDate,1,8) buydate,disc_buyStep from DiscBuy where disc_buyStep=5 ) 
+             where  buydate LIKE #{_parameter} group by buydate order by buydate]]>
+	</select>
+	
+	<select id="monthSalseStorePrice" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
+   <![CDATA[ select buydate,sum(price) disc_price from 
+    (select b.disc_code disc_code,b.buy_count buy_count,p.disc_price disc_price,b.buyDate buyDate,buy_count*disc_price price from 
+    (select substr(disc_buyDate,1,8) buydate, buy_count,disc_code,disc_buyStep from DiscBuy where disc_buyStep=5) b JOIN perDisc p ON b.disc_code=p.disc_code)
+    WHERE buydate LIKE #{_parameter} group by buydate]]>
+	
+	</select>
+	
+	<select id="orderInfoMain" parameterType="java.util.Map" resultType="int">
+		select count(*) from ticketing where ticket_step=#{ticket_step} AND ticet_buyDate=#{buydate}
+	</select>
+	
+	<select id="orderStoreInfoMain" parameterType="java.util.Map" resultType="int">
+		select count(*) from discbuy where disc_buyStep=#{ticket_step} AND disc_buyDate=#{buydate}
+	</select>
+	
+	<select id="cartMainInfoCount" parameterType="String" resultType="int">
+		select count(*) from cart where cart_inDate=#{_parameter}
+	</select>
+	
+	<select id="boarderMainInfoCount" parameterType="String" resultType="int">
+		select count(*) from notice where notice_div in (21,31,22,32,23,33,24,34,25,35,26,36) AND writeDate=#{_parameter}
+	</select>
+	
+	<select id="comentMainInfoCount" parameterType="String" resultType="int">
+		select count(*) from notice where notice_div=4 AND writeDate=#{_parameter}
+	</select>
+	
+	<select id="qnaMainInfoCount" parameterType="String" resultType="int">
+		 select count(*) from service where NOT(service_div LIKE '1:1게시판') AND writeDate=#{_parameter}
+	</select>
+	<select id="one_1MainInfoCount" parameterType="String" resultType="int">
+		select count(*) from service where service_div LIKE '1:1게시판' AND writeDate=#{_parameter}
+	</select>
+	
+	
+	
 
 	<!--/////////////////////////////// 18.01.16 명훈 시작///////////////////////////////////////////////// -->
 	<!-- 스토어 구매승인 -->
@@ -497,29 +583,28 @@
 	<select id="getProductRank_storeCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM(
-		SELECT per.disc_code,COUNT(*) sellCnt, per.disc_title
-		FROM perDisc per
-		JOIN DiscBuy dis
-		ON per.disc_code = dis.disc_code
-		WHERE dis.disc_buyStep =5
-		GROUP BY per.disc_code, per.disc_title
-		ORDER BY sellCnt desc
+			SELECT      per.disc_code,per.disc_title,SUM(dis.buy_count) sellCnt
+			FROM        DiscBuy dis
+			JOIN        perDisc per
+			ON          per.disc_code = dis.disc_code
+			GROUP BY    per.disc_code, per.disc_title
+			ORDER BY    sellCnt desc
 		)
 	</select>
 	<!--스토어 판매분석 -->
 	<select id="productRank_store" resultType="spring.project.tcat.VO.ProductRankVO">
 		SELECT *
 		FROM(
-		SELECT disc_code, sellCnt,disc_title, rownum rNum
-		FROM(
-		SELECT per.disc_code,COUNT(*) sellCnt, per.disc_title
-		FROM perDisc per
-		JOIN DiscBuy dis
-		ON per.disc_code = dis.disc_code
-		WHERE dis.disc_buyStep =5
-		GROUP BY per.disc_code, per.disc_title
-		ORDER BY sellCnt desc
-		)
+			SELECT disc_code, sellCnt, disc_title, rownum rNum
+			FROM(
+				SELECT      per.disc_code,per.disc_title,SUM(dis.buy_count) sellCnt
+				FROM        DiscBuy dis
+				JOIN        perDisc per
+				ON          per.disc_code = dis.disc_code
+				WHERE 		dis.disc_buyStep = 5
+				GROUP BY    per.disc_code, per.disc_title
+				ORDER BY    sellCnt desc
+			)
 		)
 		WHERE rNum &gt;= 1 AND rNum &lt;=#{_parameter}
 	</select>
@@ -529,61 +614,57 @@
 	<select id="mDevRank" resultType="spring.project.tcat.VO.ProductRankVO">
 		SELECT mDev,sellCnt,rowNum rNum
 		FROM(
-		SELECT cat.mDev mDev ,COUNT(*) sellCnt
-		FROM performanceInfo per
-		JOIN Ticketing tic
-		ON per.per_id = tic.per_id
-		JOIN category cat
-		ON
-		cat.cateNum = per.cateNum
-		WHERE tic.ticket_step =5
-		GROUP BY cat.mDev
-		ORDER BY sellCnt desc
+			SELECT cat.mDev mDev ,COUNT(*) sellCnt
+			FROM performanceInfo per
+			JOIN Ticketing tic
+			ON per.per_id = tic.per_id
+			JOIN category cat
+			ON
+			cat.cateNum = per.cateNum
+			WHERE tic.ticket_step =5
+			GROUP BY cat.mDev
+			ORDER BY sellCnt desc
 		)
 	</select>
 	<!--소분류 판매 랭크 -->
 	<select id="sDevRank" resultType="spring.project.tcat.VO.ProductRankVO">
-		SELECT cat.sDev sDev ,COUNT(*)
-		sellCnt
-		FROM performanceInfo per
-		JOIN Ticketing tic
-		ON per.per_id = tic.per_id
-		JOIN category cat
-		ON
-		cat.cateNum = per.cateNum
-		WHERE tic.ticket_step =5
-		AND mDev =
-		#{_parameter}
+		SELECT 	cat.sDev sDev ,COUNT(*) sellCnt
+		FROM 	performanceInfo per
+				JOIN Ticketing tic
+				ON per.per_id = tic.per_id
+				JOIN category cat
+				ON
+				cat.cateNum = per.cateNum
+		WHERE 	tic.ticket_step =5
+		AND mDev = #{_parameter}
 		GROUP BY cat.sDev
 		ORDER BY sellCnt desc
 	</select>
-
 	<!--스토어 중분류 분석 -->
 	<select id="mDevRank_store" resultType="spring.project.tcat.VO.ProductRankVO">
-		SELECT
-		mDev,sellCnt,rownum rNum
+		SELECT	mDev,sellCnt,rownum rNum
 		FROM(
-		SELECT cat.mDev, COUNT(*) sellCnt
-		FROM perDisc per
-		JOIN DiscBuy dis
-		ON per.disc_code = dis.disc_code
-		JOIN category cat
-		ON cat.cateNum = per.cateNum
-		WHERE dis.disc_buyStep = 5
-		GROUP BY cat.mDev
-		ORDER BY sellCnt desc
+				SELECT cat.mDev, SUM(buy_count) sellCnt
+				FROM perDisc per
+				JOIN DiscBuy dis
+				ON per.disc_code = dis.disc_code
+				JOIN category cat
+				ON cat.cateNum = per.cateNum
+				WHERE dis.disc_buyStep = 5
+				GROUP BY cat.mDev
+				ORDER BY sellCnt desc
 		)
 	</select>
 	<!--소분류 판매 랭크 -->
 	<select id="sDevRank_store" resultType="spring.project.tcat.VO.ProductRankVO">
-		SELECT cat.sDev, COUNT(*) sellCnt
-		FROM perDisc per
-		JOIN DiscBuy dis
-		ON per.disc_code = dis.disc_code
-		JOIN category cat
-		ON cat.cateNum = per.cateNum
-		WHERE dis.disc_buyStep = 5
-		AND mDev = #{_parameter}
+		SELECT 	cat.sDev, SUM(buy_count) sellCnt
+		FROM 	perDisc per
+		JOIN 	DiscBuy dis
+		ON 		per.disc_code = dis.disc_code
+		JOIN 	category cat
+		ON 		cat.cateNum = per.cateNum
+		WHERE 	dis.disc_buyStep = 5
+		AND 	mDev = #{_parameter}
 		GROUP BY cat.sDev
 		ORDER BY sellCnt desc
 	</select>
@@ -594,44 +675,44 @@
 	<select id="returnRank_perfCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM(
-		SELECT per.per_id,COUNT(ticket_num) saleCnt
-		FROM performanceInfo per
-		JOIN Ticketing tic
-		ON per.per_id = tic.per_id
-		WHERE tic.ticket_step = 7
-		GROUP BY per.per_id
-		ORDER BY saleCnt desc
+				SELECT 	per.per_id,COUNT(ticket_num) saleCnt
+				FROM 	performanceInfo per
+				JOIN 	Ticketing tic
+				ON 		per.per_id = tic.per_id
+				WHERE 	tic.ticket_step = 7
+				GROUP BY per.per_id
+				ORDER BY saleCnt desc
 		)
 	</select>
 	<select id="returnRank_perf" resultType="spring.project.tcat.VO.ProductRankVO">
 		SELECT *
 		FROM(
-		SELECT per_id, sellCnt,perf_title, rownum rNum
-		FROM(
-		SELECT per.per_id, COUNT(ticket_num) sellCnt, per.perf_title
-		FROM performanceInfo per
-		JOIN Ticketing tic
-		ON per.per_id = tic.per_id
-		WHERE tic.ticket_step = 7
-		GROUP BY per.per_id, per.perf_title
-		ORDER BY sellCnt desc
-		)
+			SELECT per_id, sellCnt,perf_title, rownum rNum
+			FROM(
+					SELECT per.per_id, COUNT(ticket_num) sellCnt, per.perf_title
+					FROM performanceInfo per
+					JOIN Ticketing tic
+					ON per.per_id = tic.per_id
+					WHERE tic.ticket_step = 7
+					GROUP BY per.per_id, per.perf_title
+					ORDER BY sellCnt desc
+			)
 		)
 		WHERE rNum &gt;= 1 AND rNum &lt;=#{_parameter}
 	</select>
 
 
-	<!--스토어 랭크 총갯수 -->
+	<!--스토어 환불 총갯수 -->
 	<select id="returnRank_storeCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM(
-		SELECT per.disc_code,COUNT(*) sellCnt, per.disc_title
-		FROM perDisc per
-		JOIN DiscBuy dis
-		ON per.disc_code = dis.disc_code
-		WHERE dis.disc_buyStep =7
-		GROUP BY per.disc_code, per.disc_title
-		ORDER BY sellCnt desc
+				SELECT 	per.disc_code,SUM(buy_count) sellCnt, per.disc_title
+				FROM 	perDisc per
+				JOIN 	DiscBuy dis
+				ON 		per.disc_code = dis.disc_code
+				WHERE 	dis.disc_buyStep =7
+				GROUP BY per.disc_code, per.disc_title
+				ORDER BY sellCnt desc
 		)
 	</select>
 	<!--스토어 판매분석 -->
@@ -640,7 +721,7 @@
 		FROM(
 		SELECT disc_code, sellCnt,disc_title, rownum rNum
 		FROM(
-		SELECT per.disc_code,COUNT(*) sellCnt, per.disc_title
+		SELECT per.disc_code,SUM(buy_count) sellCnt, per.disc_title
 		FROM perDisc per
 		JOIN DiscBuy dis
 		ON per.disc_code = dis.disc_code
@@ -657,7 +738,7 @@
 	<select id="cartRankCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM (
-		SELECT per.disc_code, COUNT(*) sellCnt, per.disc_title
+		SELECT per.disc_code,sum(cart_count) sellCnt, per.disc_title
 		FROM perDisc per
 		JOIN cart car
 		ON per.disc_code = car.disc_code
@@ -670,12 +751,12 @@
 		FROM(
 		SELECT disc_code, sellCnt, disc_title, rownum rNum
 		FROM (
-		SELECT per.disc_code, COUNT(*) sellCnt, per.disc_title
-		FROM perDisc per
-		JOIN cart car
-		ON per.disc_code = car.disc_code
-		GROUP BY per.disc_code, per.disc_title
-		ORDER BY sellCnt desc
+				SELECT 	per.disc_code, sum(cart_count) sellCnt, per.disc_title
+				FROM 	perDisc per
+				JOIN 	cart car
+				ON 		per.disc_code = car.disc_code
+				GROUP BY per.disc_code, per.disc_title
+				ORDER BY sellCnt desc
 		)
 		)
 		WHERE rNum &gt;= 1 AND rNum &lt;=#{_parameter}
@@ -684,27 +765,27 @@
 	<select id="wishListRank_perfCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM (
-		SELECT per.per_id,per.perf_title,COUNT(*) sellCnt
-		FROM performanceInfo per
-		JOIN wishList wis
-		ON per.per_id = wis.per_id
-		GROUP BY per.per_id, per.perf_title
-		ORDER BY sellCnt desc
+			SELECT per.per_id,per.perf_title,COUNT(*) sellCnt
+			FROM performanceInfo per
+			JOIN wishList wis
+			ON per.per_id = wis.per_id
+			GROUP BY per.per_id, per.perf_title
+			ORDER BY sellCnt desc
 		)
 
 	</select>
 	<select id="wishListRank_perf" resultType="spring.project.tcat.VO.ProductRankVO">
 		SELECT *
 		FROM(
-		SELECT per_id,perf_title,sellCnt,rownum rNum
-		FROM (
-		SELECT per.per_id,per.perf_title,COUNT(*) sellCnt
-		FROM performanceInfo per
-		JOIN wishList wis
-		ON per.per_id = wis.per_id
-		GROUP BY per.per_id, per.perf_title
-		ORDER BY sellCnt desc
-		)
+				SELECT per_id,perf_title,sellCnt,rownum rNum
+				FROM (
+						SELECT per.per_id,per.perf_title,COUNT(*) sellCnt
+						FROM performanceInfo per
+						JOIN wishList wis
+						ON per.per_id = wis.per_id
+						GROUP BY per.per_id, per.perf_title
+						ORDER BY sellCnt desc
+				)
 		)
 		WHERE rNum &gt;= 1 AND rNum &lt;=#{_parameter}
 	</select>
@@ -712,12 +793,12 @@
 	<select id="wishListRank_storeCnt" resultType="int">
 		SELECT COUNT(*)
 		FROM (
-		SELECT per.disc_code, per.disc_title,COUNT(*) sellCnt
-		FROM perDisc per
-		JOIN wishList wis
-		ON per.disc_code = wis.disc_code
-		GROUP BY per.disc_code, per.disc_title
-		ORDER BY sellCnt desc
+			SELECT per.disc_code, per.disc_title,COUNT(*) sellCnt
+			FROM perDisc per
+			JOIN wishList wis
+			ON per.disc_code = wis.disc_code
+			GROUP BY per.disc_code, per.disc_title
+			ORDER BY sellCnt desc
 		)
 	</select>
 	<select id="wishListRank_store" resultType="spring.project.tcat.VO.ProductRankVO">
@@ -773,6 +854,9 @@
 			<when test="sDev==3">
 				AND per_step LIKE '${keyword}'
 			</when>
+			<when test="sDev==4">
+				AND sDev LIKE '%${keyword}%'
+			</when>
 			<otherwise></otherwise>
 		</choose>
 		<if test="mDev != null">
@@ -799,6 +883,9 @@
 			<when test="sDev==3">
 				AND disc_step LIKE '${keyword}'
 			</when>
+				<when test="sDev==4">
+				AND sDev LIKE '%${keyword}%'
+			</when>
 			<otherwise></otherwise>
 		</choose>
 		<if test="mDev != null">
@@ -812,7 +899,7 @@
 		SELECT *
 		FROM (select per.per_id, per.perf_title,
 		per.startDate,per.endDate,per.first_grade
-		,per.per_step,ca.CATEGORY,ROWNUM rnum
+		,per.per_step,ca.CATEGORY,ca.mDev,ca.sDev,ROWNUM rnum
 		from performanceInfo per,category ca
 		where per.CATENUM=ca.CATENUM and MDEV=#{s}
 		<choose>
@@ -824,6 +911,9 @@
 			</when>
 			<when test="sDev==3">
 				AND per_step LIKE '${keyword}'
+			</when>
+				<when test="sDev==4">
+				AND sDev LIKE '%${keyword}%'
 			</when>
 			<otherwise></otherwise>
 		</choose>
@@ -845,7 +935,7 @@
 		FROM (select perD.disc_code, perD.disc_title,
 		perD.disc_price,perD.disc_step,
 		perD.cateNum, perD.first_grade
-		,ca.CATEGORY,ROWNUM rnum
+		,ca.CATEGORY,ca.mDev, ca.sDev, ROWNUM rnum
 		from perDisc perD,category ca
 		where
 		perD.CATENUM=ca.CATENUM and category=#{s}
@@ -858,6 +948,9 @@
 			</when>
 			<when test="sDev==3">
 				AND disc_step LIKE '${keyword}'
+			</when>
+				<when test="sDev==4">
+				AND sDev LIKE '%${keyword}%'
 			</when>
 			<otherwise></otherwise>
 		</choose>
@@ -1954,10 +2047,10 @@
 <select id="refundListB" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
 	select *
 	from(
-	select disc_num,disc_title,member_id, disc_buyDate, buy_count, del_num,rownum
+	select disc_code,disc_num,disc_title,member_id, disc_buyDate, buy_count, del_num,rownum
 	rnum
 	from(
-	select disc.disc_num, perD.disc_title, disc.member_id, disc.disc_buyDate,
+	select perD.disc_code, disc.disc_num, perD.disc_title, disc.member_id, disc.disc_buyDate,
 	disc.buy_count, disc.del_num
 	from DiscBuy disc, perDisc perD
 	where DISC_BUYSTEP = 6
@@ -1995,15 +2088,183 @@
 <update id="refundPerformanceCancel" parameterType="int">
 	update Ticketing set ticket_step='5' where ticket_num= #{ticket_num}
 </update>
+
+
+
 <!-- 환불 승인 - 스토어 -->
 <update id="refundStoreOk" parameterType="int">
 	update DiscBuy set DISC_BUYSTEP='7' where disc_num= #{disc_num}
 </update>
+
+
+<!-- 환불 승인시 수량 추가 - 스토어 -->
+<update id="refundCount" parameterType="int">
+	update perDisc set disc_count = disc_count +#{buy_count} where disc_code= #{disc_code}
+</update>
+
+
+
 <!-- 환불 취소 - 스토어 -->
 <update id="refundStoreCancel" parameterType="int">
 	update DiscBuy set DISC_BUYSTEP='5' where disc_num= #{disc_num}
 </update>
 <!-- ~18.01.24 태성 수정 끝 -->
 
-</mapper>
 
+<!-- 18.01.30 태성 수정 시작  -->
+
+<!-- 사진게시판 게시글 개수 가져오기 -->
+   		<select id="photoManagerCnt" parameterType="int" resultType="int">
+   			select count(*) from Notice WHERE
+   			 notice_div=31 
+   			 or notice_div=32
+   			 or notice_div=33 
+   			 or notice_div=34 
+   			 or notice_div=35 
+   			 or notice_div=36 
+   			 	
+   		</select>
+   <!-- 사진게시판 게시글  -->
+   	<select id="photoManagerList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatBoardVO">
+   		<![CDATA[select * from 
+		 (select notice_num,notice_title,writeDate,contents,notice_image,notice_div,member_id,rownum rNum from 
+		 (select * from notice order by notice_num desc)
+			where notice_div=31  or notice_div=32
+			 or notice_div=33 or notice_div=34 or notice_div=35 
+   			 or notice_div=36 )  WHERE rNum>=#{start} AND rNum<=#{end} ]]>
+   	</select>
+  <!--사진게시판 답글 가져오기  -->
+   <select id="photoManagerComment" parameterType="int" resultType="spring.project.tcat.VO.TcatBoardVO">
+   		select notice_num,notice_title,writeDate,contents,member_id from notice where notice_div=311 
+   			 or notice_div=321
+   			 or notice_div=331 
+   			 or notice_div=341 
+   			 or notice_div=351 
+   			 or notice_div=361  order by notice_num
+   </select>
+	<!-- 사진게시판 게시글 수정 -->
+	  <update id="photoManagerNomoDao">
+   		UPDATE notice SET notice_title=#{notice_title},contents=#{contents}
+   		<if test="notice_image!=null">
+   			,notice_image=#{notice_image}
+   		</if>
+   		where notice_num=#{notice_num}
+   </update>
+
+  <!-- 사진게시판 삭제 -->
+   <delete id="photoManagerDeleteDao" parameterType="int">
+   		DELETE FROM notice WHERE notice_num=#{_parameter}
+   </delete>
+   
+   <!-- 영상게시판 게시글 개수 가져오기 -->
+   		<select id="movieManagerCnt" parameterType="int" resultType="int">
+   			select count(*) from Notice WHERE
+   			 notice_div=21 
+   			 or notice_div=22
+   			 or notice_div=23 
+   			 or notice_div=24 
+   			 or notice_div=25 
+   			 or notice_div=26 
+   			 	
+   		</select>
+   <!-- 영상게시판 게시글  -->
+   	<select id="movieManagerList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatBoardVO">
+   		<![CDATA[select * from 
+		 (select notice_num,notice_title,writeDate,contents,notice_addfile,notice_div,member_id,rownum rNum from 
+		 (select * from notice order by notice_num desc)
+			where notice_div=21  or notice_div=22
+			 or notice_div=23 or notice_div=24 or notice_div=25 
+   			 or notice_div=26 )  WHERE rNum>=#{start} AND rNum<=#{end} ]]>
+   	</select>
+  <!--영상게시판 답글 가져오기  -->
+   <select id="movieManagerComment" parameterType="int" resultType="spring.project.tcat.VO.TcatBoardVO">
+   		select notice_num,notice_title,writeDate,contents,member_id from notice where notice_div=211 
+   			 or notice_div=221
+   			 or notice_div=231 
+   			 or notice_div=241 
+   			 or notice_div=251 
+   			 or notice_div=261  order by notice_num
+   </select>
+<!-- 영상게시판 게시글 수정 -->
+	  <update id="movieManagerNomoDao">
+   		UPDATE notice SET notice_title=#{notice_title},contents=#{contents}
+   			,notice_addfile=#{notice_addfile}
+   		where notice_num=#{notice_num}
+   </update>
+
+  <!-- 영상게시판 삭제 -->
+   <delete id="movieManagerDeleteDao" parameterType="int">
+   		DELETE FROM notice WHERE notice_num=#{_parameter}
+   </delete>
+
+<!-- 18.01.30 태성 수정 끝  -->
+
+
+<!-- 교환 목록 개수 - 스토어 -->
+<select id="returnCnt" resultType="int">
+	select count(*)
+	from DiscBuy disc, perDisc perD
+	where DISC_BUYSTEP = 8
+	and disc.disc_code = perD.disc_code
+	<choose>
+		<when test="sDev==1">
+			AND disc_num LIKE '${keyword}'
+		</when>
+		<when test="sDev==2">
+			AND disc_code LIKE '%${keyword}%'
+		</when>
+		<when test="sDev==3">
+			AND member_id LIKE '%${keyword}%'
+		</when>
+		<when test="sDev==4">
+			AND buy_count LIKE '${keyword}'
+		</when>
+
+		<otherwise></otherwise>
+	</choose>
+</select>
+<!-- 교환 목록 - 스토어 -->
+<select id="returnList" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
+	select *
+	from(
+	select disc_num,disc_title,member_id, disc_buyDate, buy_count, del_num,rownum
+	rnum
+	from(
+	select disc.disc_num, perD.disc_title, disc.member_id, disc.disc_buyDate,
+	disc.buy_count, disc.del_num
+	from DiscBuy disc, perDisc perD
+	where DISC_BUYSTEP = 8
+	and disc.disc_code = perD.disc_code
+
+	<choose>
+		<when test="sDev==1">
+			AND disc_num LIKE '${keyword}'
+		</when>
+		<when test="sDev==2">
+			AND disc_code LIKE '%${keyword}%'
+		</when>
+		<when test="sDev==3">
+			AND per_id LIKE '%${keyword}%'
+		</when>
+		<when test="sDev==4">
+			AND member_id LIKE '%${keyword}%'
+		</when>
+		<when test="sDev==5">
+			AND buy_count LIKE '%${keyword}%'
+		</when>
+		<otherwise></otherwise>
+	</choose>
+	order by disc_num desc
+	))
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+</select>
+
+
+<!-- 교환 승인 - 스토어 -->
+<update id="returnStoreOk" parameterType="int">
+	update DiscBuy set DISC_BUYSTEP='5' where disc_num= #{disc_num}
+</update>
+
+</mapper>

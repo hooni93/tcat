@@ -158,10 +158,23 @@
 		});
 
 	});
+	//결제취소
+	function buyCancel(disc_num){
+		var bool = confirm("결제취소 하시겠습니까?");
+		if(bool){//결제취소
+			load("buyCancel?disc_num="+disc_num);
+		}
+	}
+	//환불요청
+	function perfRefund(disc_num){
+		var bool = confirm("환불요청 하시겠습니까?");
+		if(bool){//결제취소
+			load("perfRefund?disc_num="+disc_num);
+		}
+	}
 </script>
 </head>
 
-<!--/////////////////////////////////////////// 각 구매내역 상태에따른 갯수 랑 회원 정보 보냄  -->
 <!--  회원등급  -->
 <div class="row">
 	<!--  -->
@@ -197,7 +210,7 @@
 			<div class="btn-group" role="group">
 				<div class="w100p c pt3" style="border: solid 1px #d0d0d0;">
 					<span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
-					<div class="hidden-xs">${myPageInfo.member_hp }</div>
+					<div class="hidden-xs">${myPageInfo.member_hp}</div>
 				</div>
 			</div>
 		</div>
@@ -242,7 +255,7 @@
 			<div class="stepwizard-step w18p">
 				<a class="btn btn-default btn-circle" data-toggle="tab"
 					href="#step3">${step3}</a>
-				<p>배송시작</p>
+				<p>상품준비</p>
 			</div>
 
 			<div class="stepwizard-step">
@@ -286,27 +299,44 @@
 		<div class="tab-pane fade in" id="step1">
 			<!--  리스트 시작 -->
 			<div class="list-group">
+				<!--결제완료  -->
 				<c:if test="${listStep1.size()==0}">
-				<div class="c h70 pt30">결제완료인 상품이 없습니다.</div>	
+					<div class="c h70 pt30">결제완료인 상품이 없습니다.</div>
 				</c:if>
 				<c:forEach var="list" items="${listStep1 }">
-					<div class="media col-md-3 ">
-						<div>주문번호: ${list.del_num}</div>
-						<figure class="pull-left"> <img
-							class="media-object img-rounded img-responsive"
-							src="${image }store/${list.disc_image}"> </figure>
-					</div>
-					<div class="col-md-6">
-						<h4 class="list-group-item-heading">${list.disc_title}</h4>
-						<p class="list-group-item-text">
-							구입날짜: <fmt:formatDate value="${list.disc_buyDate}" pattern="yyyy년 MM월 dd일"/>
-						</p>
-						<p class="list-group-item-text" style="color: red;">결제완료</p>
-					</div>
-					<div class="col-md-3 text-center">
-						<h2>
-							${list.disc_price }<small> 원 </small>
-						</h2>
+					<div class="col-md-12">
+						<div class="media col-md-3 ">
+							<div>주문번호: ${list.disc_num}</div>
+							<figure class="pull-left"> <img
+								class="media-object img-rounded img-responsive"
+								src="${image }store/${list.disc_image}" width="100px"> </figure>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<h4 class="list-group-item-heading">${list.disc_title}</h4>
+							</div>
+							<div class="list-group-item-text col-md-12" style="padding: 0;">
+								<div class="col-md-3">구입날짜:</div>
+								<div class="col-md-8">
+									<fmt:formatDate value="${list.disc_buyDate}"
+										pattern="yyyy년 MM월 dd일" />
+								</div>
+							</div>
+
+							<div class="list-group-item-text col-md-12" style="padding: 0;">
+								<div class="col-md-3">배송지:</div>
+								<div class="col-md-8">${list.del_addr }</div>
+							</div>
+
+							<div class="list-group-item-text col-md-12" style="color: red;">결제완료</div>
+						</div>
+						<div class="col-md-3 text-center">
+							<input class="btn btn-danger btn-xl w80p" type="button"
+								value="결제취소" onclick="return buyCancel(${list.disc_num})">
+							<h2>
+								${list.disc_price*list.buy_count }<small> 원 </small>
+							</h2>
+						</div>
 					</div>
 				</c:forEach>
 			</div>
@@ -318,26 +348,42 @@
 			<!--  리스트 시작 -->
 			<div class="list-group">
 				<c:if test="${listStep2.size()==0}">
-				<div class="c h70 pt30">구매승인 중인 상품이 없습니다.</div>	
+					<div class="c h70 pt30">구매승인 중인 상품이 없습니다.</div>
 				</c:if>
 				<c:forEach var="list" items="${listStep2 }">
-					<div class="media col-md-3 ">
-						<div>주문번호: ${list.del_num}</div>
-						<figure class="pull-left"> <img
-							class="media-object img-rounded img-responsive"
-							src="${image }store/${list.disc_image}"> </figure>
-					</div>
-					<div class="col-md-6">
-						<h4 class="list-group-item-heading">${list.disc_title}</h4>
-						<p class="list-group-item-text">
-							구입날짜: <fmt:formatDate value="${list.disc_buyDate}" pattern="yyyy년 MM월 dd일"/>
-						</p>
-						<p class="list-group-item-text" style="color: red;">결제완료</p>
-					</div>
-					<div class="col-md-3 text-center">
-						<h2>
-							${list.disc_price }<small> 원 </small>
-						</h2>
+					<div class="col-md-12">
+						<div class="media col-md-3 ">
+							<div>주문번호: ${list.disc_num}</div>
+							<figure class="pull-left"> <img
+								class="media-object img-rounded img-responsive"
+								src="${image }store/${list.disc_image}"> </figure>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<h4 class="list-group-item-heading">${list.disc_title}</h4>
+							</div>
+							<div class="list-group-item-text col-md-12" style="padding: 0;">
+								<div class="col-md-3">구입날짜:</div>
+								<div class="col-md-8">
+									<fmt:formatDate value="${list.disc_buyDate}"
+										pattern="yyyy년 MM월 dd일" />
+								</div>
+							</div>
+
+							<div class="list-group-item-text col-md-12" style="padding: 0;">
+								<div class="col-md-3">배송지:</div>
+								<div class="col-md-8">${list.del_addr }</div>
+							</div>
+
+							<div class="list-group-item-text col-md-12" style="color: red;">구매승인</div>
+						</div>
+						<div class="col-md-3 text-center">
+							<input class="btn btn-danger btn-xl w80p" type="button"
+								onclick="perfRefund(${list.disc_num})" value="환불요청">
+							<h2>
+								${list.disc_price*list.buy_count }<small> 원 </small>
+							</h2>
+						</div>
 					</div>
 				</c:forEach>
 			</div>
@@ -347,26 +393,43 @@
 			<!--  리스트 시작 -->
 			<div class="list-group">
 				<c:if test="${listStep3.size()==0}">
-				<div class="c h70 pt30">배송시작 중인 상품이 없습니다.</div>	
+					<div class="c h70 pt30">상품준비 중인 상품이 없습니다.</div>
 				</c:if>
 				<c:forEach var="list" items="${listStep3 }">
-					<div class="media col-md-3 ">
-						<div>주문번호: ${list.del_num}</div>
-						<figure class="pull-left"> <img
-							class="media-object img-rounded img-responsive"
-							src="${image }store/${list.disc_image}"> </figure>
-					</div>
-					<div class="col-md-6">
-						<h4 class="list-group-item-heading">${list.disc_title}</h4>
-						<p class="list-group-item-text">
-							구입날짜: <fmt:formatDate value="${list.disc_buyDate}" pattern="yyyy년 MM월 dd일"/>
-						</p>
-						<p class="list-group-item-text" style="color: red;">결제완료</p>
-					</div>
-					<div class="col-md-3 text-center">
-						<h2>
-							${list.disc_price }<small> 원 </small>
-						</h2>
+					<div class="col-md-12">
+						<div class="media col-md-3 ">
+							<div>주문번호: ${list.disc_num}</div>
+							<figure class="pull-left"> <img
+								class="media-object img-rounded img-responsive"
+								src="${image }store/${list.disc_image}"> </figure>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<h4 class="list-group-item-heading">${list.disc_title}</h4>
+							</div>
+							<div class="list-group-item-text col-md-12" style="padding: 0;">
+								<div class="col-md-3">구입날짜:</div>
+								<div class="col-md-8">
+									<fmt:formatDate value="${list.disc_buyDate}"
+										pattern="yyyy년 MM월 dd일" />
+								</div>
+							</div>
+
+							<div class="list-group-item-text col-md-12" style="padding: 0;">
+								<div class="col-md-3">배송지:</div>
+								<div class="col-md-8">${list.del_addr }</div>
+							</div>
+
+							<div class="list-group-item-text col-md-12" style="color: red;">상품준비
+								중</div>
+						</div>
+						<div class="col-md-3 text-center">
+							<input class="btn btn-danger btn-xl w80p" type="button"
+								onclick="perfRefund(${list.disc_num})" value="환불요청">
+							<h2>
+								${list.disc_price*list.buy_count }<small> 원 </small>
+							</h2>
+						</div>
 					</div>
 				</c:forEach>
 			</div>
@@ -376,26 +439,42 @@
 			<!--  리스트 시작 -->
 			<div class="list-group">
 				<c:if test="${listStep4.size()==0}">
-				<div class="c h70 pt30">배송 중인 상품이 없습니다.</div>	
+					<div class="c h70 pt30">배송 중인 상품이 없습니다.</div>
 				</c:if>
 				<c:forEach var="list" items="${listStep4 }">
-					<div class="media col-md-3 ">
-						<div>주문번호: ${list.del_num}</div>
-						<figure class="pull-left"> <img
-							class="media-object img-rounded img-responsive"
-							src="${image }store/${list.disc_image}"> </figure>
-					</div>
-					<div class="col-md-6">
-						<h4 class="list-group-item-heading">${list.disc_title}</h4>
-						<p class="list-group-item-text">
-							구입날짜: <fmt:formatDate value="${list.disc_buyDate}" pattern="yyyy년 MM월 dd일"/>
-						</p>
-						<p class="list-group-item-text" style="color: red;">결제완료</p>
-					</div>
-					<div class="col-md-3 text-center">
-						<h2>
-							${list.disc_price }<small> 원 </small>
-						</h2>
+					<div class="col-md-12">
+						<div class="media col-md-3 ">
+							<div>주문번호: ${list.disc_num}</div>
+							<figure class="pull-left"> <img
+								class="media-object img-rounded img-responsive"
+								src="${image }store/${list.disc_image}"> </figure>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<h4 class="list-group-item-heading">${list.disc_title}</h4>
+							</div>
+							<div class="list-group-item-text col-md-12" style="padding: 0;">
+								<div class="col-md-3">구입날짜:</div>
+								<div class="col-md-8">
+									<fmt:formatDate value="${list.disc_buyDate}"
+										pattern="yyyy년 MM월 dd일" />
+								</div>
+							</div>
+
+							<div class="list-group-item-text col-md-12" style="padding: 0;">
+								<div class="col-md-3">배송지:</div>
+								<div class="col-md-8">${list.del_addr }</div>
+							</div>
+
+							<div class="list-group-item-text col-md-12" style="color: red;">배송중</div>
+						</div>
+						<div class="col-md-3 text-center">
+							<input class="btn btn-danger btn-xl w80p" type="button"
+								onclick="perfRefund(${list.disc_num})" value="환불요청">
+							<h2>
+								${list.disc_price*list.buy_count }<small> 원 </small>
+							</h2>
+						</div>
 					</div>
 				</c:forEach>
 			</div>
@@ -405,26 +484,42 @@
 			<!--  리스트 시작 -->
 			<div class="list-group">
 				<c:if test="${listStep5.size()==0}">
-				<div class="c h70 pt30">배송완료인 상품이 없습니다.</div>	
+					<div class="c h70 pt30">배송완료인 상품이 없습니다.</div>
 				</c:if>
 				<c:forEach var="list" items="${listStep5 }">
-					<div class="media col-md-3 ">
-						<div>주문번호: ${list.del_num}</div>
-						<figure class="pull-left"> <img
-							class="media-object img-rounded img-responsive"
-							src="${image }store/${list.disc_image}"> </figure>
-					</div>
-					<div class="col-md-6">
-						<h4 class="list-group-item-heading">${list.disc_title}</h4>
-						<p class="list-group-item-text">
-							구입날짜: <fmt:formatDate value="${list.disc_buyDate}" pattern="yyyy년 MM월 dd일"/>
-						</p>
-						<p class="list-group-item-text" style="color: red;">결제완료</p>
-					</div>
-					<div class="col-md-3 text-center">
-						<h2>
-							${list.disc_price }<small> 원 </small>
-						</h2>
+					<div class="col-md-12">
+						<div class="media col-md-3 ">
+							<div>주문번호: ${list.disc_num}</div>
+							<figure class="pull-left"> <img
+								class="media-object img-rounded img-responsive"
+								src="${image }store/${list.disc_image}"> </figure>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<h4 class="list-group-item-heading">${list.disc_title}</h4>
+							</div>
+							<div class="list-group-item-text col-md-12" style="padding: 0;">
+								<div class="col-md-3">구입날짜:</div>
+								<div class="col-md-8">
+									<fmt:formatDate value="${list.disc_buyDate}"
+										pattern="yyyy년 MM월 dd일" />
+								</div>
+							</div>
+
+							<div class="list-group-item-text col-md-12" style="padding: 0;">
+								<div class="col-md-3">배송지:</div>
+								<div class="col-md-8">${list.del_addr }</div>
+							</div>
+
+							<div class="list-group-item-text col-md-12" style="color: red;">배송완료</div>
+						</div>
+						<div class="col-md-3 text-center">
+							<input class="btn btn-danger btn-xl w80p" type="button"
+								onclick="perfRefund(${list.disc_num})" value="환불요청">
+							<h2>
+								${list.disc_price*list.buy_count }<small> 원 </small>
+							</h2>
+						</div>
 					</div>
 				</c:forEach>
 			</div>
@@ -441,43 +536,92 @@
 <!--환불 정보  -->
 <div class="row" style="border: 1px solid #d0d0d0">
 
-	<div>
-		<div class="col-sm-12 c">
-			<div class="col-sm-6">
-			현재 예매 가능한 뮤지컬이 총 00개 있습니다.
-			</div>	
-			<div class="col-sm-5">
-			등록순 종료임박순 상품명순 주간랭킹순
-			</div>
-			<div class="col-sm-1">
-			<input>
-			</div>
-		</div>
-		<div class="col-sm-12 c h25 bf0f0f0 tm" style="border:1px solid #d0d0d0; border-top: 2px solid blue;">
-			<div class="col-sm-8">
-				<b>공연명</b>
-			</div>
-			<div class="col-sm-2">
-				<b>일시</b>
-			</div>
-			<div class="col-sm-2">
-				<b>장소</b>
-			</div>
-		</div>
-		<div class="col-sm-12 c" style="border-bottom: 1px solid #d0d0d0">
-			<div class="col-sm-8">
-				공연명
-			</div>
-			<div class="col-sm-2">
-				0000.00.00~
-					0000.00.00
-			</div>
-			<div class="col-sm-2">
-				성남아트센터 오페라 하우스
-			</div>
+	<div class="col-sm-12 c">
+		<h3>취소·환불·교환내역</h3>
+		<hr>
+	</div>
+	<div class="col-sm-12 c">
+		<div class="list-group">
+			<!-- 환불요청 -->
+			<c:if test="${listStep6.size()==0}">
+				<div class="c h70 pt30">환불요청 중인 상품이 없습니다.</div>
+			</c:if>
+			<c:forEach var="list" items="${listStep6 }">
+				<div class="col-md-12">
+					<div class="media col-md-3 ">
+						<div>주문번호: ${list.disc_num}</div>
+						<figure class="pull-left"> <img
+							class="media-object img-rounded img-responsive"
+							src="${image }store/${list.disc_image}"> </figure>
+					</div>
+					<div class="col-md-6">
+						<h4 class="list-group-item-heading">${list.disc_title}</h4>
+						<p class="list-group-item-text">
+							구입날짜:
+							<fmt:formatDate value="${list.disc_buyDate}"
+								pattern="yyyy년 MM월 dd일" />
+						</p>
+						<p class="list-group-item-text" style="color: red;">환불/반품 요청</p>
+					</div>
+					<div class="col-md-3 text-center">
+						<h2>
+							${list.disc_price*list.buy_count }<small> 원 </small>
+						</h2>
+					</div>
+				</div>
+			</c:forEach>
+			<!--환불승인  -->
+			<c:forEach var="list" items="${listStep7}">
+				<div class="col-md-12">
+					<div class="media col-md-3 ">
+						<div>주문번호: ${list.disc_num}</div>
+						<figure class="pull-left"> <img
+							class="media-object img-rounded img-responsive"
+							src="${image }store/${list.disc_image}"> </figure>
+					</div>
+					<div class="col-md-6">
+						<h4 class="list-group-item-heading">${list.disc_title}</h4>
+						<p class="list-group-item-text">
+							구입날짜:
+							<fmt:formatDate value="${list.disc_buyDate}"
+								pattern="yyyy년 MM월 dd일" />
+						</p>
+						<p class="list-group-item-text" style="color: red;">환불승인</p>
+					</div>
+					<div class="col-md-3 text-center">
+						<h2>
+							${list.disc_price*list.buy_count }<small> 원 </small>
+						</h2>
+					</div>
+				</div>
+			</c:forEach>
+			<!--교환  -->
+			<c:forEach var="list" items="${listStep8 }">
+				<div class="col-md-12">
+					<div class="media col-md-3 ">
+						<div>주문번호: ${list.disc_num}</div>
+						<figure class="pull-left"> <img
+							class="media-object img-rounded img-responsive"
+							src="${image }store/${list.disc_image}"> </figure>
+					</div>
+					<div class="col-md-6">
+						<h4 class="list-group-item-heading">${list.disc_title}</h4>
+						<p class="list-group-item-text">
+							구입날짜:
+							<fmt:formatDate value="${list.disc_buyDate}"
+								pattern="yyyy년 MM월 dd일" />
+						</p>
+						<p class="list-group-item-text" style="color: red;">교환완료</p>
+					</div>
+					<div class="col-md-3 text-center">
+						<h2>
+							${list.disc_price*list.buy_count}<small> 원 </small>
+						</h2>
+					</div>
+				</div>s
+			</c:forEach>
 		</div>
 	</div>
-
 </div>
 
 

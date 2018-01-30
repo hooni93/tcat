@@ -23,6 +23,10 @@ public interface JMHGuestService {
 	public void  getContent(HttpServletRequest req,Model model);
 	//스토어 상세정보
 	public void  getContent_store(HttpServletRequest req,Model model);
+	//getFavorite 연령,성별 선호도
+	public void  getFavorite(HttpServletRequest req,Model model);
+	//연령별, 성별별 선호도 가져오기
+	public void  getFavorite_store(HttpServletRequest req,Model model);
 	
 	//위시 리스트
 	public void getWishList(HttpServletRequest req,Model model);
@@ -37,6 +41,8 @@ public interface JMHGuestService {
 	public void buyCancel(HttpServletRequest req,Model model);
 	//perfRefund 환불요청
 	public void perfRefund(HttpServletRequest req,Model model);
+	//perfChange 교환요청
+	public void perfChange(HttpServletRequest req,Model model);
 	
 	//호스트 로그인
 	public void host_loginPro(HttpServletRequest req,Model model);
@@ -45,4 +51,15 @@ public interface JMHGuestService {
 	public void getTicketInfo(HttpServletRequest req,Model model);
 	//예매취소 ticCancel
 	public void ticStepUpdate(HttpServletRequest req,Model model);
+	
+	/////////////////////////////////////////////////////////////////
+	//HOST
+	//getAgeAnalysis 연령별 분석
+	public void  getAgeAnalysis(HttpServletRequest req,Model model);
+	// 연령별 분석 스토어
+	public void  getAgeAnalysis_store(HttpServletRequest req,Model model);
+	//getGenderAnalysis 성별 예약 분석
+	public void  getGenderAnalysis(HttpServletRequest req,Model model);
+	//getGenderAnalysis_store 성별 스토어 분석
+	public void  getGenderAnalysis_store(HttpServletRequest req,Model model);
 }

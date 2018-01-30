@@ -66,37 +66,6 @@
 		</div>
 		<div class="col-md-1"></div>
 	</div>
-	<%-- <!-- 페이지 컨트롤 -->
-	<table style="width: 1000px" align="center">
-		<tr>
-			<th align="center"><c:if test="${cnt > 0}">
-					<!-- 처음[◀◀] / 이전 블록[◀] -->
-					<c:if test="${startPage > pageBlock}">
-						<a href="stockManagement_modify&disc_code=${disc_code}">[◀◀]</a>
-						<a href="stockManagement_modify?pageNum=${startPage - pageBlock}&disc_code=${disc_code}">[◀]</a>
-					</c:if>
-
-
-					<c:forEach var="i" begin="${startPage}" end="${endPage}">
-						<c:if test="${i == currentPage}">
-							<span><b>[${i}]</b></span>
-						</c:if>
-
-						<c:if test="${i != currentPage}">
-							<a href="stockManagement_modify?pageNum=${i}&disc_code=${disc_code}">[${i}]</a>
-						</c:if>
-					</c:forEach>
-
-					<!-- 다음[▶] / 끝[▶▶] -->
-					<c:if test="${pageCount > endPage}">
-						<a
-							href="stockManagement_modify?pageNum=${startPage + pageBlock}&disc_code=${disc_code}">[▶]</a>
-						<a
-							href="stockManagement_modify?pageNum=${pageCount}&disc_code=${disc_code}">[▶▶]</a>
-					</c:if>
-				</c:if></th>
-		</tr>
-	</table> --%>
-
+<center><input type="button" value="창닫기" onclick="javascript:self.close();"></center>
 </body>
 </html>

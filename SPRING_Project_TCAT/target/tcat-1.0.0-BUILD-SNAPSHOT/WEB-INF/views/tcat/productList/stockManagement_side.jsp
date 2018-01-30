@@ -13,7 +13,7 @@
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h50"></li>
 				<li class="b400040"><a
-					onclick="load('categoryList?category=스토어');">스토어</a></li>
+					href="#">스토어</a></li>
 			</ul>
 		</div>
 		</div>

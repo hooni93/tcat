@@ -34,39 +34,16 @@
 	
 		<button type="button" class="btn btn-warning"
 			onclick="load('categoryList?category=스토어');">스토어</button>
-
+	<div class="col-md-1"></div>
 	</div>
 	<br>
-	
+	<div class="col-md-12 h25"></div>
 	<c:if test="${category=='뮤지컬'}">
-	  <!--검색  -->
-            <form class="navbar-form navbar-center" role="search"
-               id="ajaxSubmitForm" onsubmit="return false">
-               <input type="hidden" name="category" value=${category}>
-            
-               <!--카테고리  -->
-               <select id="sDev" name="sDev" class="m10 p5">
-                  <option value="0">분류</option>
-                  <option value="1">공연번호</option>
-                  <option value="2">제목</option>
-                  <option value="3">스텝</option>
-               </select>
-
-               <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Search"
-                     name="keyword">
-               </div>
-               <button type="button" class="btn btn-default"
-                  onclick="ajaxSubmit('categoryList')">검색</button>
-               <!-- stocksearch(); -->
-            </form>
 		<!-- 뮤지컬 -->
 		<div class="row">
 			<div class="col-md-1"></div>
-
 			<div class="col-md-10">
-				<table
-					class="table table-hover table-bordered table-condensed c fs10">
+				<table class="table table-hover table-bordered table-condensed c fs13">
 					<tr class="bg-primary">
 						<td><b>공연번호(뮤지컬)</b></td>
 						<td><b>제목</b></td>
@@ -75,7 +52,6 @@
 						<td><b>카테고리</b></td>
 						<td><b>우선순위</b></td>
 						<td><b>공연스텝</b></td>
-
 					</tr>
 					<c:forEach var="dto" items="${dtos}">
 						<tr>
@@ -108,10 +84,16 @@
 					</c:forEach>
 
 				</table>
-			</div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+			
 			<div class="col-md-1"></div>
-		</div>
+		<br>
 	<!-- 페이지 컨트롤 -->
+	<div class="col-md-5"></div>
+		<div class="col-md-6">
 		<table style="width: 1000px" align="center">
 			<tr>
 				<th align="center"><c:if test="${cnt > 0}">
@@ -141,26 +123,19 @@
 					</c:if></th>
 			</tr>
 		</table>
-		
-	</c:if>
-
-	<!-- class="active" --회색
-	class="info" --파란색
-	class="success" --풀색(연두색)
-	class="warning" --연노란색
-	class="danger" --빨간색(다홍색) -->
-	<c:if test="${category=='연극'}">
-	 <!--검색  -->
-            <form class="navbar-form navbar-center" role="search"
+		</div>
+		<div class="col-md-1"></div>
+		  <!--검색  -->
+            <form class="navbar-form navbar-right" role="search"
                id="ajaxSubmitForm" onsubmit="return false">
-                <input type="hidden" name="category" value=${category}>
+               <input type="hidden" name="category" value=${category}>
+            
                <!--카테고리  -->
                <select id="sDev" name="sDev" class="m10 p5">
                   <option value="0">분류</option>
                   <option value="1">공연번호</option>
                   <option value="2">제목</option>
-                    <option value="3">스텝</option>
-                
+                  <option value="3">스텝</option>
                </select>
 
                <div class="form-group">
@@ -170,20 +145,22 @@
                <button type="button" class="btn btn-default"
                   onclick="ajaxSubmit('categoryList')">검색</button>
                <!-- stocksearch(); -->
-               
             </form>
+            <div class="col-md-1"></div>
+            </div></div>
+	</c:if>
+
+	<!-- class="active" --회색
+	class="info" --파란색
+	class="success" --풀색(연두색)
+	class="warning" --연노란색
+	class="danger" --빨간색(다홍색) -->
+	<c:if test="${category=='연극'}">
 		<!-- 연극 -->
 		<div class="row">
 			<div class="col-md-1"></div>
-
 			<div class="col-md-10">
-			<%-- 	<%
-					ArrayList<TcatPerformanceVO> dtos=(ArrayList<TcatPerformanceVO>)request.getAttribute("dtos");
-					
-				%>
-				<%=dtos.get(0).getPer_id()%> --%>
-				<table
-					class="table table-hover table-bordered table-condensed c fs10">
+				<table class="table table-hover table-bordered table-condensed c fs13">
 					<tr class="success">
 						<td><b>공연번호(연극)</b></td>
 						<td><b>제목</b></td>
@@ -222,10 +199,15 @@
 						</tr>
 					</c:forEach>
 				</table>
-			</div>
-			<div class="col-md-1"></div>
-		</div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+		<div class="col-md-1"></div>
+		<br>
 	<!-- 페이지 컨트롤 -->
+	<div class="col-md-5"></div>
+				<div class="col-md-6">
 		<table style="width: 1000px" align="center">
 			<tr>
 				<th align="center"><c:if test="${cnt > 0}">
@@ -255,16 +237,9 @@
 					</c:if></th>
 			</tr>
 		</table>
-		
-	</c:if>
-	<!-- class="active" --회색
-	class="info" --파란색
-	class="success" --풀색(연두색)
-	class="warning" --연노란색
-	class="danger" --빨간색(다홍색) -->
-	<c:if test="${category=='콘서트'}">
-	 <!--검색  -->
-            <form class="navbar-form navbar-center" role="search"
+		</div>
+		 <!--검색  -->
+            <form class="navbar-form navbar-right" role="search"
                id="ajaxSubmitForm" onsubmit="return false">
                 <input type="hidden" name="category" value=${category}>
                <!--카테고리  -->
@@ -284,13 +259,22 @@
                   onclick="ajaxSubmit('categoryList')">검색</button>
                <!-- stocksearch(); -->
             </form>
+            <div class="col-md-1"></div>
+            </div></div>
+	</c:if>
+	<!-- class="active" --회색
+	class="info" --파란색
+	class="success" --풀색(연두색)
+	class="warning" --연노란색
+	class="danger" --빨간색(다홍색) -->
+	<c:if test="${category=='콘서트'}">
+	
 		<!-- 콘서트 -->
 		<div class="row">
 			<div class="col-md-1"></div>
-
 			<div class="col-md-10">
 				<table
-					class="table table-hover table-bordered table-condensed c fs10">
+					class="table table-hover table-bordered table-condensed c fs13">
 					<tr class="danger">
 						<td><b>공연번호(콘서트)</b></td>
 						<td><b>제목</b></td>
@@ -329,10 +313,16 @@
 					</c:forEach>
 
 				</table>
-			</div>
 			<div class="col-md-1"></div>
-		</div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+			
+			<div class="col-md-1"></div>
+		<br>
 <!-- 페이지 컨트롤 -->
+<div class="col-md-5"></div>
+				<div class="col-md-6">
 		<table style="width: 1000px" align="center">
 			<tr>
 				<th align="center"><c:if test="${cnt > 0}">
@@ -362,25 +352,18 @@
 					</c:if></th>
 			</tr>
 		</table>
-	
-	</c:if>
-	<!-- class="active" --회색
-	class="info" --파란색
-	class="success" --풀색(연두색)
-	class="warning" --연노란색
-	class="danger" --빨간색(다홍색) -->
-	<c:if test="${category=='스토어'}">
+	</div>
 	 <!--검색  -->
-            <form class="navbar-form navbar-center" role="search"
+            <form class="navbar-form navbar-right" role="search"
                id="ajaxSubmitForm" onsubmit="return false">
                 <input type="hidden" name="category" value=${category}>
-             
                <!--카테고리  -->
                <select id="sDev" name="sDev" class="m10 p5">
                   <option value="0">분류</option>
-                  <option value="1">상품코드</option>
-                  <option value="2">상품이름</option>
+                  <option value="1">공연번호</option>
+                  <option value="2">제목</option>
                     <option value="3">스텝</option>
+                
                </select>
 
                <div class="form-group">
@@ -391,13 +374,22 @@
                   onclick="ajaxSubmit('categoryList')">검색</button>
                <!-- stocksearch(); -->
             </form>
+            <div class="col-md-1"></div>
+            </div></div>
+	</c:if>
+	<!-- class="active" --회색
+	class="info" --파란색
+	class="success" --풀색(연두색)
+	class="warning" --연노란색
+	class="danger" --빨간색(다홍색) -->
+	<c:if test="${category=='스토어'}">
+	
 		<!-- 스토어 -->
 		<div class="row">
 			<div class="col-md-1"></div>
-
 			<div class="col-md-10">
 				<table
-					class="table table-hover table-bordered table-condensed c fs10">
+					class="table table-hover table-bordered table-condensed c fs13">
 					
 					<tr class="warning">
 						<td><b>상품코드</b></td>
@@ -436,10 +428,16 @@
 					</c:forEach>
 
 				</table>
-			</div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+			
 			<div class="col-md-1"></div>
-		</div>
+		<br>
 		<!-- 페이지 컨트롤 -->
+		<div class="col-md-5"></div>
+				<div class="col-md-6">
 		<table style="width: 1000px" align="center">
 			<tr>
 				<th align="center"><c:if test="${cnt > 0}">
@@ -470,6 +468,30 @@
 					</c:if></th>
 			</tr>
 		</table>
+		</div>
+		 <!--검색  -->
+            <form class="navbar-form navbar-right" role="search"
+               id="ajaxSubmitForm" onsubmit="return false">
+                <input type="hidden" name="category" value=${category}>
+             
+               <!--카테고리  -->
+               <select id="sDev" name="sDev" class="m10 p5">
+                  <option value="0">분류</option>
+                  <option value="1">상품코드</option>
+                  <option value="2">상품이름</option>
+                    <option value="3">스텝</option>
+               </select>
+
+               <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search"
+                     name="keyword">
+               </div>
+               <button type="button" class="btn btn-default"
+                  onclick="ajaxSubmit('categoryList')">검색</button>
+               <!-- stocksearch(); -->
+            </form>
+              <div class="col-md-1"></div>
+            </div></div>
 	</c:if>
 </body>
 </html>

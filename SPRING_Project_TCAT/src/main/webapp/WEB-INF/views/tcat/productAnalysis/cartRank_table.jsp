@@ -10,7 +10,7 @@
 <br>
 <br>
 <br>
-<table class="table table-inbox table-hover">
+<table class="table table-inbox table-hover fs12px">
 	<tbody>
 	<c:forEach var="rank" items="${ranks }">
 		<c:if test="${rank.rNum > 5 }"><tr onclick="detailOpen('store','${rank.disc_code}')"></c:if>

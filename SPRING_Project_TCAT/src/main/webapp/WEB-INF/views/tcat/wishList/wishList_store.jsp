@@ -139,27 +139,16 @@ function setDisc_code(wish_num){
 					<div class="col-md-4">
 						<div class="ui centered fluid card"
 							style="border: 1px solid #d0d0d0; border-radius: 5px; margin-bottom: 20px;">
-							<div class="image">
-								<%-- <c:choose>
-									<c:when test="${wish.mDev.equals('뮤지컬') }">
-										<c:set var="folder" value="musical/" />
-									</c:when>
-									<c:when test="${wish.mDev.equals('콘서트') }">
-										<c:set var="folder" value="concert/" />
-									</c:when>
-									<c:when test="${wish.mDev.equals('연극') }">
-										<c:set var="folder" value="drama/" />
-									</c:when>
-									<c:when test="${wish.mDev.equals('클래식') }">
-										<c:set var="folder" value="classic/" />
-									</c:when>
-								</c:choose> --%>
+							<div class="image overflow w100p"  style="height: 200px">
 								<a onclick="contentMain_store(${wish.disc_code})"> <img
-									src="${image}${folder}${wish.disc_image}" />
+									src="${image}store/${wish.disc_image}"  />
 								</a>
 							</div>
 							<div class="content">
-								<a class="header" onclick="contentMain_store(${wish.disc_code})">${wish.disc_title }</a>
+								<div class="content overflow h15"
+									style="text-overflow: ellipsis; height: 15px">
+									<a class="header w100" onclick="contentPage(${wish.disc_code})">${wish.disc_title }</a>
+								</div>
 								<div class="meta">
 									<span class="date"> 
 										<fmt:formatNumber value="${wish.disc_price }" pattern="#.###"/>원

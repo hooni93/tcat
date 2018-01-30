@@ -200,7 +200,7 @@
 					<input type="hidden" value="0" name="hiddenId">
 					<!-- 아이디 -------------------------------------------------------------------------------- -->
 					<div class="form-group">
-<<<<<<< HEAD
+
 						<label for="username"><span style="color:red;">*</span> 아이디 입력 </label>
 						<div class="input-group">
 							<input type="text" class="form-control" id="member_id" name="member_id"
@@ -311,26 +311,10 @@
 						</button>
 					</div>
 				</form>
-=======
-				<label><span style="color:red;">*</span> 생년월일 </label>
-				 <input
-						type="text" class="form-control" name="member_birth" id="member_birth"
-						placeholder="ex)920503"><span
-					style="display: none; color: red;" id="birthError">필수입력입니다.</span>
-				
+
 			</div>		
 			
-			<!-- 생년월일 -------------------------------------------------------------------------------- -->
-			<div class="form-group">
-				<label>약관 동의</label>
-				<div data-toggle="buttons">
-					<label class="btn btn-primary active"> 
-					<span class="fa fa-check"></span> <input id="agree" type="checkbox"
-						autocomplete="off" checked>
-					</label><a href="#">이용약관</a>에 동의합니다.
-				</div>
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
-			</div>
+		
 		</div>
 	<div class="col-md-1"></div>
 </div>

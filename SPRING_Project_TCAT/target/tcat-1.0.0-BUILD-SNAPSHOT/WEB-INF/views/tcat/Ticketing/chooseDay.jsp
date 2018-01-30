@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../setting.jsp"%>
@@ -15,251 +16,214 @@
 
 <title>Insert title here</title>
 <style type="text/css">
-body{ 
-    margin-top:40px; 
+.roundButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));
+	background:-moz-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-webkit-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-o-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-ms-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0);
+	background-color:#ffffff;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Arial;
+	font-size:10px;
+	font-weight:bold;
+	padding:6px 67px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+.roundButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, #ffffff));
+	background:-moz-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-webkit-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-o-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-ms-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0);
+	background-color:#f6f6f6;
+}
+.roundButton:active {
+	position:relative;
+	top:1px;
+}
+.chooseTb {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #050505), color-stop(1, #050405));
+	background:-moz-linear-gradient(top, #050505 5%, #050405 100%);
+	background:-webkit-linear-gradient(top, #050505 5%, #050405 100%);
+	background:-o-linear-gradient(top, #050505 5%, #050405 100%);
+	background:-ms-linear-gradient(top, #050505 5%, #050405 100%);
+	background:linear-gradient(to bottom, #050505 5%, #050405 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#050505', endColorstr='#050405',GradientType=0);
+	background-color:#050505;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:15px;
+	font-weight:bold;
+	padding:13px 32px;
+	text-decoration:none;
 }
 
-.stepwizard-step p {
-    margin-top: 10px;
-}
+.ui-datepicker { width: 17em; padding: .2em .2em 0; display: none; font-size: 20px;}
 
-.stepwizard-row {
-    display: table-row;
-}
-
-.stepwizard {
-    display: table;
-    width: 100%;
-    position: relative;
-}
-
-.stepwizard-step button[disabled] {
-    opacity: 1 !important;
-    filter: alpha(opacity=100) !important;
-}
-
-.stepwizard-row:before {
-    top: 14px;
-    bottom: 0;
-    position: absolute;
-    content: " ";
-    width: 100%;
-    height: 1px;
-    background-color: #ccc;
-    z-order: 0;
-
-}
-
-.stepwizard-step {
-    display: table-cell;
-    text-align: center;
-    position: relative;
-}
-
-.btn-circle {
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 12px;
-  line-height: 1.428571429;
-  border-radius: 15px;
-}
 </style>
 <script type="text/javascript">
-$(function() {
-
-	$('#datepicker').datepicker({
-		dateFormat: 'yy-mm-dd',//데이터 형식 변경
-		dayNamesShort:["일","월","화","수","목","금","토"],
-		 changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
-		  changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
-		monthNames:[ "1월", "2월", "3월", "4월", "5월", "6월","7월", "8월", "9월", "10월", "11월", "12월"],
-	    onSelect: function(dateText, inst) { //선택한 데이터를 input박스에 넣기
-	      $("input[name='something']").val(dateText);
-	    }
-	});
-});
-$(document).ready(function () {
+function roundBt(round,form,per_id){
+ 	var ticet_date=form.ticet_date.value;
+ 	var sysday=ticet_date.split("-");
 	
-    var navListItems = $('div.setup-panel div a'),//메인 스텝 1,2,3의 a태그 정보
-            allWells = $('.setup-content'), //밑에 뿌려줄 1,2,3의 정보
-            allNextBtn = $('.nextBtn'); //밑의 뿌려주는 부분의 다음 버튼 1,2
+	
+	 var date=new Date();
+	var dateDay=date.getDate();
+	var dateHours=date.getHours();
+	
+	 
+	var split1=round.split('/');
+	var split2=split1[1].split(':');
+	if(ticet_date=="0"){
+		alert("날짜를 먼저 선택해주세요!");
+	}else if(sysday[2]==dateDay&&dateHours>=split2[0]){
+		alert("마감되었습니다!");
+		$("#RemainingSeats").load("${pageContext.request.contextPath}/fake");
+	}else{
 
-    allWells.hide(); //밑의 정보들을 숨겨놓기
+		$("input[name='round']").val(round);
+		
+		var url="RemainingSeats?round="+round+"&ticet_date="+form.ticet_date.value+"&per_id="+per_id;
+		$("#RemainingSeats").load("${pageContext.request.contextPath}/"+ url);	
+	}
+}
 
-    navListItems.click(function (e) { //메인 스텝 1,2,3a태그가 클릭되면
-        e.preventDefault();//a태그의 이벤트를 정지시킨다
-        var $target = $($(this).attr('href')), //클릭된  a태그 버튼의 href의 정보를 가져와서 target에 저장
-                $item = $(this);//클릭된 a태그버튼정보 저장
-
-        if (!$item.hasClass('disabled')) {//클릭된 a태그버튼정보가 활성화되어있지 않으면
-            navListItems.removeClass('btn-primary').addClass('btn-default'); //모든 a태그 버튼을 btn-primary 클래스를 지우고 btn-default 클래스를 추가한다
-            $item.addClass('btn-primary'); //클릭한 a태그 버튼의 클래스에 btn-primary를 추가한다.
-            allWells.hide(); //모든 밑의 정보를 숨기기
-            $target.show(); //a태그에 저장되있는 href연결되있는 부분을 보여준다.
-            $target.find('input:eq(0)').focus(); //a태그에 저장되있는 href연결되있는 부분의 첫번째 input에 focus를 준다.
-        }
+//날짜 캘린더 출력하기
+jQuery(function($){
+    $.datepicker.regional['ko'] = {
+   		closeText: '닫기',
+   		prevText: '이전달',
+   		nextText: '다음달',
+   		currentText: '오늘',
+   		monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)','7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
+   		monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+   		dayNames: ['일','월','화','수','목','금','토'],
+   		dayNamesShort: ['일','월','화','수','목','금','토'],
+   		dayNamesMin: ['일','월','화','수','목','금','토'],
+   		weekHeader: 'Wk',dateFormat: 'yy-mm-dd',
+   		firstDay: 0,
+   		isRTL: false,
+   		showMonthAfterYear: true,
+   		yearSuffix: ''
+   	};
+    $.datepicker.setDefaults($.datepicker.regional['ko']);
+    //달력 날짜 뿌려줄때 시작날짜,종료날짜 안의 날짜 외에는 막기
+    $('#datepicker').datepicker({
+    	showOn: 'both',
+    	buttonText: "달력",
+    	changeMonth: true,
+    	changeYear: true,
+    	showButtonPanel:true,
+    	yearRange: 'c-99:c+99',
+    	constrainInput: true,
+    	maxDate: '+1y',
+    	beforeShowDay: noSundays,
+   		onSelect: function(dateText, inst) { //선택한 데이터를 input박스에 넣기
+    		$("input[name='ticet_date']").val(dateText);
+   			
+   		}
     });
-
-    allNextBtn.click(function(){ //다음 버튼이 클릭되었을때
-        var curStep = $(this).closest(".setup-content"),// carStep에 지금있는 정
-            curStepBtn = curStep.attr("id"),
-            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-            curInputs = curStep.find("input[type='text'],input[type='url']"),
-            isValid = true;
-
-        $(".form-group").removeClass("has-error");
-        for(var i=0; i<curInputs.length; i++){
-            if (!curInputs[i].validity.valid){
-                isValid = false;
-                $(curInputs[i]).closest(".form-group").addClass("has-error");
-            }
-        }
-
-        if (isValid)
-            nextStepWizard.removeAttr('disabled').trigger('click');
-    });
-
-    $('div.setup-panel div a.btn-primary').trigger('click');
 });
+// 일요일만 선택 막기
+function noSundays(date) {
+	 var startDate='${vo.startDate}';
+	 var endDate='${vo.endDate}';
+	 var sDate=startDate.split(" ");
+	 var eDate=endDate.split(" ");
+	 var ssDate=sDate[0].split("-");
+	 var eeDate=eDate[0].split("-");
+	 var sssDate=new Date(ssDate[0], (ssDate[1]*1)-1, ssDate[2]);
+	 var eeeDate=new Date(eeDate[0], (eeDate[1]*1)-1, eeDate[2]);
+	 var sysdate=new Date();
+	 if(date<new Date()&&date.getDate()!=sysdate.getDate()||date<sssDate||date>eeeDate){
+			 return[false];
+	 }
+	 return [true];
+}
+		 
+	
 </script>
 </head>
-<body>
-<div class="container">
+<body style="background-color:white;">
+<br><br>
+<div class="row">
 
-<div class="stepwizard">
-    <div class="stepwizard-row setup-panel">
-	
-		        <div class="stepwizard-step">
-		            <a href="#step-1" type="button" class="btn btn-primary ">1</a>
-		            <p>Step 1</p>
-		        </div>
+	<div class="col-md-11">
+	<form action="" name="chooseDayForm">
+		<table class="table-bordered" style="margin:20px;">
+			<tr>
+				<th class="chooseTb" style="width:35%; padding:5px;">관람일 선택</th>
+				<th class="chooseTb" style="padding:5px;">회차 선택</th>
+			</tr>
+			<tr>
+				<th><div id="datepicker"></div>
+				<td>
+					<br>
+					<b style="margin-left:15px;">선택날짜&nbsp</b><input style="padding:2px 10px;background-color:#eeeeee;color:red;border:none" type="text" value="0" name="ticet_date">
+					<table style="margin:10px;">
+						<tr>
+							<th style="width:20%; padding:5px;"><b>회차선택</b></th>
+							<th>&nbsp&nbsp&nbsp</th>
+							<th style="width:70%; padding:5px;" ><b>좌석등급/잔여석</b></th>
+						</tr>
+						<tr>
+							<td>
+								<div style="border:1px solid #dddddd; height:200px;" id="round">
+									<c:set var="round" value="${fn:split(vo.remain_round,',')}"/>
+									<c:forEach var="remain_round" items="${round}">
+											<input type="button" class="roundButton" style="margin:1.5px 10px;" value="${remain_round}" onclick="roundBt(this.value,this.form,'${vo.per_id}')"><br>
+									</c:forEach>
+								</div>
+							</td>
+							<td>
+								&nbsp
+							</td>
+							<td>
+								<div id="RemainingSeats" style="border:1px solid #dddddd; height:200px; width:300px;">
+							
+								
+								</div>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		</form>
+		<table  class="table-bordered" style="margin:20px;">
+			<tr>
+				<th class="chooseTb" style="padding:0 10px;">
+				유<br>
+				의<br>
+				사<br>
+				항
+				</th>
+				<td style="padding:10px;">
+					-장애인,국가유공자,학생 할인 등 증빙서류가 필요한 경우 현장수령만 가능하며, 현장에서 증빙서류 미지참 시 차액 지불하셔야 합니다.<br>
+					-쿠폰을 사용하더나 복합결제를 한 경우 부분취소가 불가합니다. 고객센터로 문의해주시기 바랍니다.<br>
+					-관람 당일 공연 예매 시에는 변경/취소/환불이 불가합니다.<br>
+					-경우에 따라 ATM 기기에서 가상계좌 입금이 안 될 수 있으니 가급적 인터넷/폰뱅킹 등을 이용하여주시기 바랍니다.<br>
+					-예매 취소 시 예매수수료는 예매 당일 밤 12시 이전까지 환불되며, 그 이후 기간에는 환불되지 않습니다.<br>
+					-예매 취소 시점에 따라 취소수수료가 부과될 수 있습니다. 예매 후 취소마감시간과 함께 취소수수료를 꼭 확인해주시기 바랍니다.<br>
+				</td>
+			</tr>
+		</table>
+	</div>
 
-
-		        <div class="stepwizard-step">
-		            <a href="#step-2" type="button" class="btn btn-default " disabled="disabled">2</a>
-		            <p>Step 2</p>
-		        </div>
-
-
-		        <div class="stepwizard-step">
-		            <a href="#step-3" type="button" class="btn btn-default " disabled="disabled">3</a>
-		            <p>Step 3</p>
-		        </div>
-		        
-		        <div class="stepwizard-step">
-		            <a href="#step-4" type="button" class="btn btn-default " disabled="disabled">4</a>
-		            <p>Step 4</p>
-		        </div>
-		        
-		        <div class="stepwizard-step">
-		            <a href="#step-5" type="button" class="btn btn-default " disabled="disabled">5</a>
-		            <p>Step 5</p>
-		        </div>
-
-    </div>
 </div>
-<form role="form">
-
-	<!-- 관람일 회차선택 -->
-    <div class="row setup-content" id="step-1">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <h3> Step 1</h3>
-                <div class="form-group">
-                    <label class="control-label">First Name</label>
-                    <input  maxlength="100" type="text" required="required" class="form-control" placeholder="Enter First Name"  />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Last Name</label>
-                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Last Name" />
-                </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="row setup-content" id="step-2">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <h3> Step 2</h3>
-                <div class="form-group">
-                    <label class="control-label">Company Name</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">Company Address</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address"  />
-                </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="row setup-content" id="step-3">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <h3> Step 3</h3>
-                <div class="form-group">
-                    <label class="control-label">aaae</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">sss</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address"  />
-                </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="row setup-content" id="step-4">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <h3> Step 4</h3>
-                <div class="form-group">
-                    <label class="control-label">adfs</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">asdf</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address"  />
-                </div>
-                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
-            </div>
-        </div>
-    </div>
-    
-    
-       <div class="row setup-content" id="step-5">
-        <div class="col-xs-12">
-            <div class="col-md-12">
-                <h3> Step 5</h3>
-                <button class="btn btn-success btn-lg pull-right" type="submit">Finish!</button>
-            </div>
-        </div>
-    </div>
-</form>
-</div>
-
-<div>
-	<ul class="nav nav-tabs">
-	  <li role="presentation" class="active"><a href="#">Home</a></li>
-	  <li role="presentation"><a href="#">Profile</a></li>
-	  <li role="presentation"><a href="#">Messages</a></li>
-	</ul>
-</div>
-
-<!-- 이거바꾸면 됩니까? -->
-
-<div id="datepicker"></div>
-<input type="text" name="something">
-
-
-
 </body>
+
 </html>

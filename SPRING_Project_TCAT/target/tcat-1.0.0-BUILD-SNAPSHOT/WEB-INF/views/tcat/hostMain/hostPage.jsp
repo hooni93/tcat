@@ -7,12 +7,7 @@
 <title>Insert title here</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
-<c:if test="${sessionScope.page!=null}">
-	<body onload="load('${sessionScope.page}');" class="b400040">
-</c:if>
-<c:if test="${sessionScope.page==null}">
-	<body onload="load('hostMain');" class="b400040">
-</c:if> 
+	<body class="b400040">
 
 
 	<%@include file="HostTop.jsp" %>
