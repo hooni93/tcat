@@ -18,7 +18,6 @@ $("#login2").click(function(){
 	$("#modal_result").load("${pageContext.request.contextPath}/memberLogin");
 });
 function payPerformence(url){
-	alert("url:"+url);
     window.open(url, "confirm", "menubar=no, width=1400, height=830");
 }
 $(document).ready(function(){

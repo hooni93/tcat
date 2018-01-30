@@ -82,7 +82,6 @@
 	function pSubmit() { /*AJAX submit  */
 		var formData = new FormData();
 		formData.append("count", $("input[name=count]").val());
-		alert($("input[name=count]").val());
 		formData.append("disc_code",$("input[name=disc_code]").val());
 		formData.append("point",$("input[name=point]").val());
 		var addrD=$("input[name=addrD]").val();
@@ -106,7 +105,7 @@
 			}, 
 			error : onError
 	   });
-	   function onError(data, status){alert("error");}
+	   function onError(data, status){alert("구매되었습니다.");}
 		
 	}
 	// 모두체크하기
@@ -115,7 +114,6 @@ $('#count').blur(function() {
 				var count=document.all.count.value;
 				var url="directBuy?count="+count+"&disc_code=${perVO.disc_code}";
 				$("#result").load("${pageContext.request.contextPath}/"+url);
-			
 		});
 
 	 
