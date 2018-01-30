@@ -5,14 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="${script}jquery-3.1.1.min.js"></script>
-<script src="${script}jquery-ui.js"></script>
-<link rel="stylesheet" href="${css}jquery-ui.css">
-<script src="${script}bootstrap.js"></script>
-<link href="${css}style.css" rel="stylesheet" type="text/css">
-
 <title>Insert title here</title>
-
 <script type="text/javascript">
 	$(function() {
 		$('#datepicker').datepicker({
@@ -50,8 +43,5 @@
 		<div class="col-md-1"></div>
 	</div>
 <div id="myChart"></div>
-
-
-
 </body>
 </html>

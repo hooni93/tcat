@@ -6,16 +6,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- 설정파일 연결 3개 -->
-<script src="${script}jquery-3.1.1.min.js"></script>
-<script src="${script}jquery-ui.js"></script>
-<link rel="stylesheet" href="${css}jquery-ui.css">
-<script src="${script}bootstrap.js"></script>
-<link href="${css}style.css" rel="stylesheet" type="text/css">
-<link href="${css}bootstrap_tcatMain.css" rel="stylesheet">
 <script type="text/javascript">
 	$(function() {
-		$(".dayList").load("${pageContext.request.contextPath}/dayList");
+		var d=new Date();
+		var y=d.getFullYear();
+		var m=d.getMonth()+1;
+		var dt=d.getDate();
+		
+		if((m*1)<10){
+			date=y+"-0"+m+"-"+dt;
+		}else{
+			date=y+"-"+m+"-"+dt;
+		} 
+
+		$(".dayList").load("${pageContext.request.contextPath}/daySearch?date="+date);
+		
 	});
 </script>
 <script type="text/javascript">
@@ -30,6 +35,7 @@
 		});
 	});
 	function dayList(url){
+		
 		$( ".dayList" ).load( "${pageContext.request.contextPath}/"+url);
 	}
 </script>
@@ -40,7 +46,7 @@
 		<div class="col-md-10">
 			<div class="row">
 				<div class="col-md-2" style="border:1px solid #dddddd; margin-top:10px; padding:5px;">
-					<h3 align="center">날짜선택</h3>
+				
 					<hr style="border:2px solid #dddddd">
 					<div id="datepicker" align="center"></div>
 				</div>

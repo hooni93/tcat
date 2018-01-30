@@ -2,16 +2,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ include file="../setting.jsp" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="${css}style.css" rel="stylesheet" type="text/css">
- <link href="${css}bootstrap_tcatMain.css" rel="stylesheet">
-<script src="${script}ajax/request.js"></script>
-<script src="${script}jquery-3.1.1.min.js"></script>
-<script src="${script}bootstrap.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
 .xBtn {
@@ -89,11 +83,6 @@ function changeCount(count,disc_code){
 	$( "#result" ).load( "${pageContext.request.contextPath}/changeCount?count="+count+"&disc_code="+disc_code);
 }
 </script>
-<style type="text/css">
-body {
-	margin-top: 20px;
-}
-</style>
 </head>
 <body>
 <c:if test="${pay==1}">

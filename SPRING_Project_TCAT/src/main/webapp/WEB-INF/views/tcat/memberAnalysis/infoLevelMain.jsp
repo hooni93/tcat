@@ -6,13 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="${script}jquery-3.1.1.min.js"></script>
-<script src="${script}jquery-ui.js"></script>
-<link rel="stylesheet" href="${css}jquery-ui.css">
-<script src="${script}bootstrap.js"></script>
-<link href="${css}style.css" rel="stylesheet" type="text/css">
- <link href="${css}bootstrap_tcatMain.css" rel="stylesheet">
-<script src="${script}ajax/request.js"></script>
 <script type="text/javascript">
 	function rating(value){
 		if(value==0){

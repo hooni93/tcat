@@ -5,12 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="${css}style.css" rel="stylesheet" type="text/css">
-<link href="${css}bootstrap_tcatMain.css" rel="stylesheet">
-<script src="${script}ajax/request.js"></script>
-<script src="${script}jquery-3.1.1.min.js"></script>
-<script src="${script}bootstrap.js"></script>
-
 <title>Insert title here</title>
 <script type="text/javascript">
 	$(function() {

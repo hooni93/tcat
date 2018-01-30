@@ -6,18 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- 설정파일 연결 3개 -->
-<script src="${script}jquery-3.1.1.min.js"></script>
-<script src="${script}jquery-ui.js"></script>
-<link rel="stylesheet" href="${css}jquery-ui.css">
-<script src="${script}bootstrap.js"></script>
-<link href="${css}style.css" rel="stylesheet" type="text/css">
- <link href="${css}bootstrap_tcatMain.css" rel="stylesheet">
-<script src="${script}ajax/request.js"></script>
 </head>
 <body>
 <!--리스트 시작  -->
-<!-- ss -->
 			<div class="col-sm-12 c bf0f0f0 pt5"
 				style="border: 1px solid #d0d0d0; border-top: 2px solid #534556; height: 30px;">
 				<div class="col-sm-8 ">
@@ -56,7 +47,7 @@
 
 			<!--페이지 컨트롤러  -->
 			<div class="col-sm-12 c">
-
+				
 				<ul class="pagination">
 					<c:if test="${currentPage!=1}">
 						<li><a onclick="dayList('daySearch?date=${date}&pageNum=1');">《</a></li>
