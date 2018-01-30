@@ -34,37 +34,57 @@ public class MoGuestContoroller {
 		System.out.println("musicalMain");
 		req.setAttribute("moviecategory", "21");
 		req.setAttribute("photocategory", "31");
-		MGService.musicalCategoryMainList(req, model);
+		req.setAttribute("category", "뮤지컬");
+		MGService.categoryMainList(req, model);
 		return "tcat/musical/musicalMain";
 	}
 	//콘서트 전체 메인 리스트 페이지 
 	@RequestMapping("concertMain")
 	public String concertMain(HttpServletRequest req,Model model) {
 		System.out.println("concertMain");
+		req.setAttribute("moviecategory", "22");
+		req.setAttribute("photocategory", "32");
+		req.setAttribute("category", "콘서트");
+		MGService.categoryMainList(req, model);
 		return "tcat/concert/concertMain";
 	}
 	//연극 전체 메인 리스트 페이지 
 	@RequestMapping("dramaMain")
 	public String dramaMain(HttpServletRequest req,Model model) {
 		System.out.println("dramaMain");
+		req.setAttribute("moviecategory", "23");
+		req.setAttribute("photocategory", "33");
+		req.setAttribute("category", "연극");
+		MGService.categoryMainList(req, model);
 		return "tcat/drama/dramaMain";
 	}
 	//클래식 전체 메인 리스트 페이지 
 	@RequestMapping("classicMain")
 	public String classicMain(HttpServletRequest req,Model model) {
 		System.out.println("classicMain");
+		req.setAttribute("moviecategory", "24");
+		req.setAttribute("photocategory", "34");
+		req.setAttribute("category", "클래식");
+		MGService.categoryMainList(req, model);
 		return "tcat/classic/classicMain";
 	}
 	//무용 전체 메인 리스트 페이지 
 	@RequestMapping("danceMain")
 	public String danceMain(HttpServletRequest req,Model model) {
 		System.out.println("danceMain");
+		req.setAttribute("moviecategory", "25");
+		req.setAttribute("photocategory", "35");
+		req.setAttribute("category", "무용");
+		MGService.categoryMainList(req, model);
 		return "tcat/dance/danceMain";
 	}
 	//스토어 전체 메인 리스트 페이지 
 	@RequestMapping("storeMain")
 	public String storeMain(HttpServletRequest req,Model model) {
 		System.out.println("storeMain");
+		req.setAttribute("moviecategory", "26");
+		req.setAttribute("photocategory", "36");
+		MGService.storeCategoryMainList(req, model);
 		return "tcat/store/storeMain";
 	}
 	//좌석 정보 가져오기

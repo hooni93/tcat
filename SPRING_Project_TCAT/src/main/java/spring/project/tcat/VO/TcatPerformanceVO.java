@@ -97,21 +97,56 @@ public class TcatPerformanceVO {
     int refNum;				//조회수
     String per_ex;			//상품상세소개
     String Detail_Image; 	//추가 이미지
-
-   //ticketing
+    int rNum;
+ 
+	//ticketing
     int round;
     Timestamp ticet_date;
     String seat_type;
     String seat_num;
     String ticet_max;  //영민 핫리스트 판매량 
-
-    public String getTicet_max() {
+    int sale_rate;
+    String sale_div;
+    String buydate;
+    int count;
+    //get,setter
+ 
+    public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getSale_rate() {
+		return sale_rate;
+	}
+	public void setSale_rate(int sale_rate) {
+		this.sale_rate = sale_rate;
+	}
+	public String getSale_div() {
+		return sale_div;
+	}
+	public void setSale_div(String sale_div) {
+		this.sale_div = sale_div;
+	}
+	public String getBuydate() {
+		return buydate;
+	}
+	public void setBuydate(String buydate) {
+		this.buydate = buydate;
+	}
+	public String getTicet_max() {
 		return ticet_max;
+	}
+	public int getrNum() {
+		return rNum;
+	}
+	public void setrNum(int rNum) {
+		this.rNum = rNum;
 	}
 	public void setTicet_max(String ticet_max) {
 		this.ticet_max = ticet_max;
 	}
-	//get,setter
     public String getMovie_url() {
 		return movie_url;
 	}

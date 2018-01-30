@@ -92,7 +92,9 @@ function MovieBoarderCommentWrite(member_id,notice_num,form,category){
     			<input type="button" data-toggle="modal" data-target="#insert-modal" class="btn btn-primary w170" value="게시글 작성">
     		</c:if>
     	</div>
-    		
+    		<c:if test="${dtos==null }">
+    		<input type="hidden" name="categoryNum" value="${categoryNum}">
+    		</c:if>
     <div class="col-md-10">
     	 <c:forEach var="vo" items="${dtos}" > 
 			<div class="col-sm-10 col-md-10">
@@ -111,7 +113,9 @@ function MovieBoarderCommentWrite(member_id,notice_num,form,category){
 						<h6 class="floatL"><label>내용 : </label> ${vo.contents}</h6>
 					</div>
 					<hr>
+					<c:if test="${dtos!=null }">
 					<input type="hidden" name="categoryNum"	value="${vo.notice_div}">
+					</c:if>
 					<div class="m5 bf0f0f0">
 						 <c:forEach var="vo2" items="${dtos2}" >
 						 	<c:if test="${vo2.notice_title==vo.notice_num}"> 

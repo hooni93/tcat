@@ -201,9 +201,160 @@ public class HostDAOImp implements HostDAO {
 		cnt=dao.hallModifyUpdate(vo);
 		return cnt;
 	}
+	//스토어 상품 주문목록 갯수
+	@Override
+	public int orderList_storeCnt(Map<String, Object> map) {
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		int cnt = dao.orderList_storeCnt(map);
+		return cnt;
+	}
+	//스토어 상품 주문목록
+	@Override
+	public ArrayList<TcatDiscBuyVO> orderList_store(Map<String, Object> map){
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		ArrayList<TcatDiscBuyVO> orders = dao.orderList_store(map);
+		return orders;
+	}
+	//일별 결산 카운트
+	@Override
+	public ArrayList<TcatPerformanceVO> dayslseCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatPerformanceVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos = dao.dayslseCount(map);
+		return dtos;
+	}
+	//일별 결산 공연 금액
+	@Override
+	public ArrayList<TcatPerformanceVO> dayslsePerPrice(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatPerformanceVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos = dao.dayslsePerPrice(map);
+		return dtos;
+	}
+	//일별 결산 스토어 카운트
+	@Override
+	public ArrayList<TcatDiscBuyVO> dayStoreCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatDiscBuyVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos = dao.dayStoreCount(map);
+		return dtos;
+	}
+	//일별 결산 스토어 금액
+	@Override
+	public ArrayList<TcatDiscBuyVO> dayStorePrice(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatDiscBuyVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos = dao.dayStorePrice(map);
+		return dtos;
+	}
+
+	//월별 결산 카운트
+	@Override
+	public ArrayList<TcatPerformanceVO> monthSalsePerCount(String dayStr) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatPerformanceVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos = dao.monthSalsePerCount(dayStr);
+		return dtos;
+	}
+	//월별 결산 금액정보
+	@Override
+	public ArrayList<TcatPerformanceVO> monthSalsePerPrice(String dayStr) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatPerformanceVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos = dao.monthSalsePerPrice(dayStr);
+		return dtos;
+	}
+	//월별 결산 스토어 카운트
+	@Override
+	public ArrayList<TcatDiscBuyVO> monthSalseStoreCount(String dayStr) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatDiscBuyVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos = dao.monthSalseStoreCount(dayStr);
+		return dtos;
+	}
+	//월별 결산 스토어 금액정보
+	@Override
+	public ArrayList<TcatDiscBuyVO> monthSalseStorePrice(String dayStr) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatDiscBuyVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos = dao.monthSalseStorePrice(dayStr);
+		return dtos;
+	}
+	
+	//메인 정보 공연 오더 수량 파악
+	@Override
+	public int orderInfoMain(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.orderInfoMain(map);
+		return cnt;
+	}
+	//메인 정보 스토어 오더 수량 파악
+	@Override
+	public int orderStoreInfoMain(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.orderStoreInfoMain(map);
+		return cnt;
+	}	
+		//메인 정보 카트 수량 파악
+		@Override
+	public int cartMainInfoCount(String dayStr) {
+		// TODO Auto-generated method stub
+			int cnt=0;
+			HostDAO dao = Configuration.getMapper(HostDAO.class);
+			cnt=dao.cartMainInfoCount(dayStr);
+			return cnt;
+	}
+		//메인 정보 게시판 수량 파악
+	@Override
+	public int boarderMainInfoCount(String dayStr) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.boarderMainInfoCount(dayStr);
+		return cnt;
+	}
+	//메인 정보 후기게시판 수량 파악
+	@Override
+	public int comentMainInfoCount(String dayStr) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.comentMainInfoCount(dayStr);
+		return cnt;
+	}
+	//메인 정보 qna게시판 수량 파악
+	@Override
+	public int qnaMainInfoCount(String dayStr) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.qnaMainInfoCount(dayStr);
+		return cnt;
+	}
+	//메인 정보 1:1게시판 수량 파악
+	@Override
+	public int one_1MainInfoCount(String dayStr) {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.one_1MainInfoCount(dayStr);
+		return cnt;
+	}
 	
 	
-	//////////////////////////////////////18.01.16 명훈//////////////////////////////////////////////////
+		//////////////////////////////////////18.01.16 명훈//////////////////////////////////////////////////
 	//스토어 구매스인
 		public void orderCon(String disc_num) {
 			HostDAO dao = Configuration.getMapper(HostDAO.class);
@@ -266,20 +417,7 @@ public class HostDAOImp implements HostDAO {
 		ArrayList<TcatTicketingVO> orders = dao.orderList(map);
 		return orders;
 	}
-	//스토어 상품 주문목록 갯수
-	@Override
-	public int orderList_storeCnt(Map<String, Object> map) {
-		HostDAO dao = Configuration.getMapper(HostDAO.class);
-		int cnt = dao.orderList_storeCnt(map);
-		return cnt;
-	}
-	//스토어 상품 주문목록
-	@Override
-	public ArrayList<TcatDiscBuyVO> orderList_store(Map<String, Object> map){
-		HostDAO dao = Configuration.getMapper(HostDAO.class);
-		ArrayList<TcatDiscBuyVO> orders = dao.orderList_store(map);
-		return orders;
-	}
+
 	//////////////////////////////////////18.01.16 명훈 끝//////////////////////////////////////////////////
 	//////////////////////////////////////18.01. 명훈 시작 미완//////////////////////////////////////////////////
 	//상품 랭크 getProductRank_perfCnt
@@ -289,6 +427,7 @@ public class HostDAOImp implements HostDAO {
 		int cnt = dao.getProductRank_perfCnt();
 		return cnt;
 	}
+
 	//상품 랭크 getProductRank_perfCnt
 	@Override
 	public ArrayList<ProductRankVO > productRank_perf(int productNum){

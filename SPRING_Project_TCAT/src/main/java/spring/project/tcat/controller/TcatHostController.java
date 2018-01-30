@@ -36,6 +36,9 @@ public class TcatHostController {
 	@RequestMapping("hostMain")
 	public String hostMain(HttpServletRequest req, Model model) {
 		System.out.println("hostMain");
+		hService.hostMainInfo(req, model);
+		hService.dayslse(req, model);
+		
 		return "tcat/hostMain/hostMain";
 	}
 
@@ -251,7 +254,45 @@ public class TcatHostController {
 		hService.hallModifyUpdate(req, model);
 		return "tcat/locationManager/hallModifyDB";
 	}
-
+	
+	//매출집계
+	@RequestMapping("salseGraph")
+	public String salseGraph(HttpServletRequest req, Model model) {
+		System.out.println("salseGraph");
+		hService.monthSalse(req, model);
+		hService.weekendSalse(req, model);
+		hService.dayslse(req, model);
+		return "tcat/salse/salseGraph";
+	}
+	//매출집계 사이드
+	@RequestMapping("salseGraph_side")
+	public String salseGraph_side(HttpServletRequest req, Model model) {
+		System.out.println("salseGraph_side");
+		return "tcat/salse/salseGraph_side";
+	}
+	//일별결산
+	@RequestMapping("daySalse")
+	public String daySalse(HttpServletRequest req, Model model) {
+		System.out.println("daySalse");
+		hService.dayslse(req, model);
+		return "tcat/salse/daySalse";
+	}
+	//주별결산
+	@RequestMapping("weekendSalse")
+	public String weekendSalse(HttpServletRequest req, Model model) {
+		System.out.println("weekendSalse");
+		hService.weekendSalse(req, model);
+		return "tcat/salse/weekendSalse";
+	}
+	//월별결산
+	@RequestMapping("monthSalse")
+	public String monthSalse(HttpServletRequest req, Model model) {
+		System.out.println("monthSalse");
+		hService.monthSalse(req, model);
+		return "tcat/salse/monthSalse";
+	}
+	
+	
 	//////////////////////////// 18.01.16 명훈
 	//////////////////////////// 시작////////////////////////////////////////////
 	// 스토어 구매승인 orderCon

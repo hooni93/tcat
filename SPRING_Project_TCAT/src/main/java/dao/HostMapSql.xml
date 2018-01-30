@@ -196,7 +196,93 @@
 		B_seat=#{B_seat}, seat_line=#{seat_line} WHERE hall_id=#{hall_id}
 	</update>
 
-
+	<select id="dayslseCount" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+		  <![CDATA[select buydate,count(buydate) count from (select substr(ticet_buyDate,1,8) buydate,ticket_step from ticketing where ticket_step=5 ) where  buydate between #{yesterday} and #{today} group by buydate order by buydate]]>
+	</select>
+	
+	<select id="dayslsePerPrice" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+            <![CDATA[select pt.per_id per_id,pt.ticet_buyDate buyDate,pt.seat_type seat_type,pt.sale_div sale_div,s.sale_rate sale_rate,
+                pt.VIP_seatPrice VIP_seatPrice,pt.R_seatPrice R_seatPrice,pt.S_seatPrice S_seatPrice,pt.A_seatPrice A_seatPrice,
+                pt.B_seatPrice B_seatPrice from sale s JOIN      
+             (select t.per_id per_id,substr(t.ticet_buyDate,1,8) ticet_buyDate,t.seat_type seat_type,t.sale_div sale_div,
+                p.VIP_seatPrice VIP_seatPrice,p.R_seatPrice R_seatPrice,p.S_seatPrice S_seatPrice,p.A_seatPrice A_seatPrice,
+                p.B_seatPrice B_seatPrice
+             from ticketing t JOIN performanceinfo p ON t.per_id=p.per_id WHERE ticket_step=5 AND ticet_buyDate between #{yesterday} and #{today}) pt 
+              ON pt.sale_div=s.sale_div ]]>
+	</select>
+	
+	<select id="dayStoreCount" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
+		<![CDATA[select buydate,count(buydate) count from (select substr(disc_buyDate,1,8) buydate,disc_buyStep from DiscBuy where disc_buyStep=5 ) 
+             where  buydate between #{yesterday} and #{today} group by buydate order by buydate]]>
+	</select>
+	
+	<select id="dayStorePrice" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
+   <![CDATA[ select buydate,sum(price) disc_price from 
+    (select b.disc_code disc_code,b.buy_count buy_count,p.disc_price disc_price,b.buyDate buyDate,buy_count*disc_price price from 
+    (select substr(disc_buyDate,1,8) buydate, buy_count,disc_code,disc_buyStep from DiscBuy where disc_buyStep=5) b JOIN perDisc p ON b.disc_code=p.disc_code)
+    WHERE buydate between #{yesterday} AND #{today} group by buydate]]>
+	
+	</select>
+	
+	
+	
+	<select id="monthSalsePerCount" parameterType="String" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+		  <![CDATA[select buydate,count(buydate) count from (select substr(ticet_buyDate,1,8) buydate,ticket_step from ticketing where ticket_step=5 ) where  buydate LIKE #{_parameter} group by buydate order by buydate]]>
+	</select>
+	
+	<select id="monthSalsePerPrice" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+            <![CDATA[select pt.per_id per_id,pt.ticet_buyDate buyDate,pt.seat_type seat_type,pt.sale_div sale_div,s.sale_rate sale_rate,
+                pt.VIP_seatPrice VIP_seatPrice,pt.R_seatPrice R_seatPrice,pt.S_seatPrice S_seatPrice,pt.A_seatPrice A_seatPrice,
+                pt.B_seatPrice B_seatPrice from sale s JOIN      
+             (select t.per_id per_id,substr(t.ticet_buyDate,1,8) ticet_buyDate,t.seat_type seat_type,t.sale_div sale_div,
+                p.VIP_seatPrice VIP_seatPrice,p.R_seatPrice R_seatPrice,p.S_seatPrice S_seatPrice,p.A_seatPrice A_seatPrice,
+                p.B_seatPrice B_seatPrice
+             from ticketing t JOIN performanceinfo p ON t.per_id=p.per_id WHERE ticket_step=5 AND ticet_buyDate LIKE #{_parameter}) pt 
+              ON pt.sale_div=s.sale_div ]]>
+	</select>
+	
+	<select id="monthSalseStoreCount" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
+		<![CDATA[select buydate,count(buydate) count from (select substr(disc_buyDate,1,8) buydate,disc_buyStep from DiscBuy where disc_buyStep=5 ) 
+             where  buydate LIKE #{_parameter} group by buydate order by buydate]]>
+	</select>
+	
+	<select id="monthSalseStorePrice" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
+   <![CDATA[ select buydate,sum(price) disc_price from 
+    (select b.disc_code disc_code,b.buy_count buy_count,p.disc_price disc_price,b.buyDate buyDate,buy_count*disc_price price from 
+    (select substr(disc_buyDate,1,8) buydate, buy_count,disc_code,disc_buyStep from DiscBuy where disc_buyStep=5) b JOIN perDisc p ON b.disc_code=p.disc_code)
+    WHERE buydate LIKE #{_parameter} group by buydate]]>
+	
+	</select>
+	
+	<select id="orderInfoMain" parameterType="java.util.Map" resultType="int">
+		select count(*) from ticketing where ticket_step=#{ticket_step} AND ticet_buyDate=#{buydate}
+	</select>
+	
+	<select id="orderStoreInfoMain" parameterType="java.util.Map" resultType="int">
+		select count(*) from discbuy where disc_buyStep=#{ticket_step} AND disc_buyDate=#{buydate}
+	</select>
+	
+	<select id="cartMainInfoCount" parameterType="String" resultType="int">
+		select count(*) from cart where cart_inDate=#{_parameter}
+	</select>
+	
+	<select id="boarderMainInfoCount" parameterType="String" resultType="int">
+		select count(*) from notice where notice_div in (21,31,22,32,23,33,24,34,25,35,26,36) AND writeDate=#{_parameter}
+	</select>
+	
+	<select id="comentMainInfoCount" parameterType="String" resultType="int">
+		select count(*) from notice where notice_div=4 AND writeDate=#{_parameter}
+	</select>
+	
+	<select id="qnaMainInfoCount" parameterType="String" resultType="int">
+		 select count(*) from service where NOT(service_div LIKE '1:1게시판') AND writeDate=#{_parameter}
+	</select>
+	<select id="one_1MainInfoCount" parameterType="String" resultType="int">
+		select count(*) from service where service_div LIKE '1:1게시판' AND writeDate=#{_parameter}
+	</select>
+	
+	
+	
 
 	<!--/////////////////////////////// 18.01.16 명훈 시작///////////////////////////////////////////////// -->
 	<!-- 스토어 구매승인 -->
@@ -773,6 +859,9 @@
 			<when test="sDev==3">
 				AND per_step LIKE '${keyword}'
 			</when>
+			<when test="sDev==4">
+				AND sDev LIKE '%${keyword}%'
+			</when>
 			<otherwise></otherwise>
 		</choose>
 		<if test="mDev != null">
@@ -799,6 +888,9 @@
 			<when test="sDev==3">
 				AND disc_step LIKE '${keyword}'
 			</when>
+				<when test="sDev==4">
+				AND sDev LIKE '%${keyword}%'
+			</when>
 			<otherwise></otherwise>
 		</choose>
 		<if test="mDev != null">
@@ -812,7 +904,7 @@
 		SELECT *
 		FROM (select per.per_id, per.perf_title,
 		per.startDate,per.endDate,per.first_grade
-		,per.per_step,ca.CATEGORY,ROWNUM rnum
+		,per.per_step,ca.CATEGORY,ca.mDev,ca.sDev,ROWNUM rnum
 		from performanceInfo per,category ca
 		where per.CATENUM=ca.CATENUM and MDEV=#{s}
 		<choose>
@@ -824,6 +916,9 @@
 			</when>
 			<when test="sDev==3">
 				AND per_step LIKE '${keyword}'
+			</when>
+				<when test="sDev==4">
+				AND sDev LIKE '%${keyword}%'
 			</when>
 			<otherwise></otherwise>
 		</choose>
@@ -845,7 +940,7 @@
 		FROM (select perD.disc_code, perD.disc_title,
 		perD.disc_price,perD.disc_step,
 		perD.cateNum, perD.first_grade
-		,ca.CATEGORY,ROWNUM rnum
+		,ca.CATEGORY,ca.mDev, ca.sDev, ROWNUM rnum
 		from perDisc perD,category ca
 		where
 		perD.CATENUM=ca.CATENUM and category=#{s}
@@ -858,6 +953,9 @@
 			</when>
 			<when test="sDev==3">
 				AND disc_step LIKE '${keyword}'
+			</when>
+				<when test="sDev==4">
+				AND sDev LIKE '%${keyword}%'
 			</when>
 			<otherwise></otherwise>
 		</choose>
