@@ -61,7 +61,7 @@
 						new Chart(document.getElementById(${index}),{
 							"type":"doughnut",
 							"data":{
-									"labels":["뮤지컬OST", "콘서트LIVE", "클래식LIVE", "전시컬렉션"],
+									"labels":["뮤지컬OST", "전시컬렉션", "콘서트LIVE", "클래식LIVE"],
 									"datasets":[{	"label":"My First Dataset",
 													"data":[${ageGenre.get("뮤지컬OST")},
 															${ageGenre.get("전시컬렉션")},
