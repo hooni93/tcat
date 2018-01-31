@@ -262,17 +262,17 @@
    		
    		<select id="searchStoreList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerDiscVO">
    		<![CDATA[
-   		select * 
+		select *
    		from
    		(
-			select * 
+			select disc_code,disc_title,disc_price,disc_image,disc_con,cateNum,category,mDev,sDev,first_grade,disc_step,disc_count,detail_num,rownum rNum
 			from
 			(
-				select p.disc_code,p.disc_title,p.disc_price,p.disc_image,p.disc_con,p.cateNum,c.category,c.mDev,c.sDev,p.first_grade,p.disc_step,p.disc_count,p.detail_num,rownum rNum
+				select p.disc_code,p.disc_title,p.disc_price,p.disc_image,p.disc_con,p.cateNum,c.category,c.mDev,c.sDev,p.first_grade,p.disc_step,p.disc_count,p.detail_num
 				from perDisc p,category c
 				where p.cateNum=c.cateNum
 			)
-			where disc_title like #{search} or disc_con like #{search} or category like #{search} or mDev like #{search} or sDev like #{search}
+			where disc_title like #{search} or disc_con like #{search}  or category like #{search}  or mDev like #{search}  or sDev like #{search}
 		)
 		where rNum>=#{start} and rNum<=#{end}
    		]]>

@@ -144,7 +144,7 @@ $('#count').blur(function() {
 								
 									<tr>
 										<td>
-											<img src="${image}/store/${perVO.disc_image}">
+											<img src="${image}/store/${perVO.disc_image}" style="width:100px">
 										</td>
 										<td>
 										    ${perVO.disc_title}

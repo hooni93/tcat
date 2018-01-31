@@ -50,7 +50,7 @@
 					<tr>
 						<td>TCAT포인트</td>
 						<td align="right">0 원</td>
-						<td><input type="button" value="YES머니로 환전"> TCAT포인트 5,000원 이상이면 TCAT머니로 환전가능</td>
+						<td><input type="button" value="TCAT머니로 환전"> TCAT포인트 5,000원 이상이면 TCAT머니로 환전가능</td>
 					</tr>
 					<tr>
 						<td>예치금</td>
@@ -71,7 +71,19 @@
 			</td>
 		</tr>
 		<tr>
-			<th><hr><th>
+			<td>
+			<table style="width:450px">
+				<tr>
+					<th>결제방법 선택</th>
+					<td>신용카드 <input type="checkbox"></td>
+					<td>계좌이체 <input type="checkbox"></td>
+					<td>무통장입금 <input type="checkbox"></td>
+				</tr>
+			</table>
+			<td>
+		</tr>
+		<tr>
+			<td><img src="${image}/예매시 주의.png" style="width:100%">
 		</tr>
 	</table>
 </body>

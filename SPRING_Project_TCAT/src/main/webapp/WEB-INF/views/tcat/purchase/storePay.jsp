@@ -2,6 +2,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ include file="../setting.jsp"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -145,7 +146,7 @@
 											<input type="checkbox" name="disc_code" value="${vo.disc_code}" checked>
 										</td>
 										<td>
-											<img src="${image}/store/${vo.disc_image}">
+											<img src="${image}/store/${vo.disc_image}" style="width:100px">
 										</td>
 										<td>
 										    ${vo.disc_title}
