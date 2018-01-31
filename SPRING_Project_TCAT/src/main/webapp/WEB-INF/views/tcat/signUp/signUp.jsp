@@ -189,7 +189,7 @@
 	<div class="col-md-1"></div>
 		<div class="col-md-10">		
 			<div class="page-header">
-				<h1>
+				<h1 style="margin-left:50px;">
 					회원가입 <small>Guest</small>
 				</h1>
 			</div>

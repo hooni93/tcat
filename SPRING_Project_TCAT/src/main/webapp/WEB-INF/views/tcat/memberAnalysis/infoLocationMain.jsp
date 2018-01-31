@@ -9,14 +9,14 @@
 <script type="text/javascript">
 	$(function() {
 		var result = document.getElementById("Map");
-		$(".a").load("${pageContext.request.contextPath}/infoLocation?place=경기");
+		$(".location").load("${pageContext.request.contextPath}/infoLocation?place=경기");
 		var msg="";
 		msg="<img src='${image}/place/경기.PNG'>"
 		result.innerHTML=msg;
 	});
 	function place(url,place){
 		var result = document.getElementById("Map");
-		$( ".a" ).load( "${pageContext.request.contextPath}/"+url );
+		$( ".location" ).load( "${pageContext.request.contextPath}/"+url );
 		var msg="";
 		msg="<img src='${image}/place/"+place+".PNG'>"
 		result.innerHTML=msg;
@@ -54,7 +54,7 @@
 					
 				</div>
 				<div class="col-md-10" style="margin-top:10px">
-					<div class="a"></div>
+					<div class="location"></div>
 				</div>
 			</div>
 		</div>

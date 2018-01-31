@@ -19,7 +19,7 @@
 	function searchPerList(url){
 		$("#searchPerList").load("${pageContext.request.contextPath}/"+url);
 	}
-	function searchList(url){
+	function searchStoreList(url){
 		$("#searchStoreList").load("${pageContext.request.contextPath}/"+url);
 	}
 	

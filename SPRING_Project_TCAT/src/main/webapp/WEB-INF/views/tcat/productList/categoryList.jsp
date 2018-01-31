@@ -16,7 +16,14 @@
 <fmt:formatDate var="newFormattedDateString" value="${endDate}" pattern="yyyy-MM-dd"/>
 <fmt:parseDate var="parsedDate" value="${startDate}" pattern="dd-MM-yyyy HH:mm:ss"/>
 <fmt:parseDate var="parsedDate" value="${endDate}" pattern="dd-MM-yyyy HH:mm:ss"/> --%>
-​
+​<div class="row">
+	<div class="col-md-12 h21"></div>
+	<div class="col-md-1"></div>
+	<div class="col-md-11 h21"><div><h4 class="trgothic">카테고리별 상품진열관리</h4></div></div>
+	<div class="col-md-12 h21"></div>
+
+</div>
+
 	<!--  18.01.11 태성!!  -->
 	<!-- 	<h3 align="center">카테고리별 상품 나열 및 우선순위</h3> -->
 	<br>
@@ -43,7 +50,7 @@
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
-				<table class="table table-hover table-bordered table-condensed c fs13">
+				<table class="table table-hover table-bordered table-condensed c fs11">
 					<tr class="bg-primary">
 						<td><b>공연번호(뮤지컬)</b></td>
 						<td><b>제목</b></td>
@@ -166,7 +173,7 @@
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
-				<table class="table table-hover table-bordered table-condensed c fs13">
+				<table class="table table-hover table-bordered table-condensed c fs11">
 					<tr class="bg-primary">
 						<td><b>공연번호(연극)</b></td>
 						<td><b>제목</b></td>
@@ -286,7 +293,7 @@
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
 				<table
-					class="table table-hover table-bordered table-condensed c fs13">
+					class="table table-hover table-bordered table-condensed c fs11">
 					<tr class="danger">
 						<td><b>공연번호(콘서트)</b></td>
 						<td><b>제목</b></td>
@@ -403,7 +410,7 @@
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
 				<table
-					class="table table-hover table-bordered table-condensed c fs13">
+					class="table table-hover table-bordered table-condensed c fs11">
 					<tr class="danger">
 						<td><b>공연번호(클래식)</b></td>
 						<td><b>제목</b></td>
@@ -521,7 +528,7 @@
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
 				<table
-					class="table table-hover table-bordered table-condensed c fs13">
+					class="table table-hover table-bordered table-condensed c fs11">
 					<tr class="success">
 						<td><b>공연번호(무용)</b></td>
 						<td><b>제목</b></td>
@@ -645,7 +652,7 @@
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
 				<table
-					class="table table-hover table-bordered table-condensed c fs13">
+					class="table table-hover table-bordered table-condensed c fs11">
 					
 					<tr class="warning">
 						<td><b>상품코드</b></td>

@@ -947,7 +947,7 @@ public class HSGuestServiceImp implements HSGuestService{
 			req.setAttribute("search", search);
 			search="%"+search+"%";
 			cnt = HSDao.searchStoreCnt(search);
-			System.out.println("cnt:" + cnt);
+			System.out.println("StoreCnt:" + cnt);
 
 			pageNum = req.getParameter("pageNum");
 

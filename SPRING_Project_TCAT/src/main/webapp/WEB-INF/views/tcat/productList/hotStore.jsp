@@ -19,8 +19,7 @@
 				<div class="col-md-1"></div>
 				<div class="col-md-10">
 
-					<h4>
-						<b>Hot스토어</b>
+					<h4 class="trgothic">Hot스토어
 					</h4>
 					<div>
 						<hr>
@@ -57,7 +56,7 @@
 					</div>
 
 					<br> <br> <br>
-					<h3>스토어 전체리스트</h3>
+					<h4 class="trgothic">스토어 전체리스트</h4>
 					<div>
 						<hr>
 						<!-- 스토어전체리스트 -->

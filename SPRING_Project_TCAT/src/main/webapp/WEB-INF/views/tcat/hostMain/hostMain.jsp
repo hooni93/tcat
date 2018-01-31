@@ -216,17 +216,11 @@ new Chart(document.getElementById("dayCount"),
                <div role="tabpanel" class="tab-pane ${storeActive }" id="store">
                   <!--리스트 시작  -->
                   <div class="row">
+                     <div class="col-md-12 h25"></div>
                      <div class="col-md-1"></div>
                      <div class="col-md-10">
-                        
-                    <body class="b400040">
 
-	<div class="row mt50">
-		<div class="col-md-1"></div>
-		<div class="col-md-10">
-			<div class="row">
 					<h4><b>주문목록</b></h4>
-					
 					<hr>
 					<div>
 						<table
@@ -273,31 +267,14 @@ new Chart(document.getElementById("dayCount"),
 			</div>
 		</div>
                     
-                    
-                    
-                    
-                     </div><!-- 10end -->
-                     <div class="col-md-1"></div>
-                     <!--리스트 시작  -->
-                  </div>
-               </div><!-- store end -->
-               
-               
-               
-                              <!--공연 출력  #myTab a[href="#store"]-->
+
+                 <!--공연 출력  #myTab a[href="#store"]-->
                <div role="tabpanel" class="tab-pane ${newMemberInfoActive }" id="newMemberInfo">
                   <!--리스트 시작  -->
                   <div class="row">
+                     <div class="col-md-12 h25"></div>
                      <div class="col-md-1"></div>
                      <div class="col-md-10">
-                        
-                    <body class="b400040">
-
-	<div class="row mt50">
-		<div class="col-md-1"></div>
-		<div class="col-md-10">
-			<div class="row">
-
 					<h4><b>최근 가입회원</b></h4>
 					<hr>
 			           <table class="table table-hover table-bordered table-condensed c fs10">
@@ -334,13 +311,6 @@ new Chart(document.getElementById("dayCount"),
 			</div>
 		</div>
 
-                     </div><!-- 10end -->
-                     <div class="col-md-1"></div>
-                     <!--리스트 시작  -->
-                  </div>
-               </div><!-- store end -->
-               
-               
                
                
                

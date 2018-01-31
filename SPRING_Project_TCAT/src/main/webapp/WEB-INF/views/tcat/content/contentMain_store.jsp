@@ -177,7 +177,7 @@ function commentListS(url) {
 									<b>구매수량</b>
 								</div>
 								<div class="col-md-9">
-									<input type="number" name="count" value="0">
+									<input type="number" name="count" min="0" value="0">
 								</div>
 							</div>
 
@@ -204,7 +204,7 @@ function commentListS(url) {
 							<c:if test="${sessionScope.login_id!=null}">
 								<img src="/tcat/resources/image/cart_icon.png"
 									onclick="insertCart(document.all.count.value,'${str.disc_code}');"
-									style="width: 50px">+
+									style="width: 50px">
                      
                      
 						</div>

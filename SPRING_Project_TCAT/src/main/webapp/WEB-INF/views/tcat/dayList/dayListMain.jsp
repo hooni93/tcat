@@ -41,12 +41,12 @@
 </script>
 </head>
 <body>
-
-	<div id="datepicker" align="center" style="margin-left:20px;float:left;border:1px solid #dddddd; margin-top:10px; padding:5px;"></div>				
-
 	<div class="row" >
-		<div class="col-md-1"></div>
+	<div class="col-md-2"></div>
 		<div class="col-md-10">
+	<div id="datepicker" align="center" style="margin-left:20px;float:left;border:1px solid #dddddd; margin-top:10px; padding:5px;"></div>				
+	<div class="row" >
+		<div class="col-md-8">
 			<div class="row">
 				
 				<div class="col-md-10" style="margin-top:10px">
@@ -54,7 +54,10 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-1"></div>
+
+	</div>
+	
+	</div>
 	</div>
 </body>
 </html>

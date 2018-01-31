@@ -241,7 +241,8 @@ public class HSGuestController {
 		System.out.println("deleteCart");
 		
 		HSGservice.deleteCart(req,model);
-	
+		HSGservice.cartList(req,model);
+		
 		return "tcat/purchase/cart";
 	}
 	
