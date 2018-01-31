@@ -139,6 +139,24 @@ public class HostDAOImp implements HostDAO {
 		dtos=dao.hallDelete(map);
 		return dtos;
 	}
+	//홀리스트
+	@Override
+	public int hallListCnt() {
+		// TODO Auto-generated method stub
+		int cnt=0;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		cnt=dao.hallListCnt();
+		return cnt;
+	}
+	
+	@Override
+	public ArrayList<TcatPerformanceVO> hallList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		ArrayList<TcatPerformanceVO> dtos=null;
+		HostDAO dao = Configuration.getMapper(HostDAO.class);
+		dtos=dao.hallList(map);
+		return dtos;
+	}
 	
 	@Override
 	public ArrayList<TcatPerformanceVO> hallSerchList(Map<String, Object> map) {

@@ -115,12 +115,23 @@
 	</insert>
 
 	<select id="hallDeleteCnt" resultType="int">
-		select count(*) from hallInfo h join place p on h.place_num=p.place_num
+	 select count(*) from (select * from hallInfo  where not(
+        hall_id IN (select hall_id from performanceInfo where per_step!=4)) ) h join place p on h.place_num=p.place_num 
 	</select>
 
 	<select id="hallDelete" resultType="spring.project.tcat.VO.TcatPerformanceVO">
    		<![CDATA[select * from ( select hall_id,hall_name,place_num, province,city,postNum,address, rownum rNum 
-   		 from (select  h.hall_id hall_id,h.hall_name hall_name,p.place_num place_num, p.province province,p.city city,p.postNum postNum,p.address address from hallInfo h join place p on h.place_num=p.place_num order by hall_id desc )
+   		 from (select  h.hall_id hall_id,h.hall_name hall_name,p.place_num place_num, p.province province,p.city city,p.postNum postNum,p.address address from (select * from hallInfo  where not(
+        hall_id IN (select hall_id from performanceInfo where per_step!=4)) ) h join place p on h.place_num=p.place_num order by hall_id desc )
+   		) WHERE rNum >= #{start} AND rNum <= #{end}  ]]>
+	</select>
+	<select id="hallListCnt" resultType="int">
+	 select count(*) from hallInfo h join place p on h.place_num=p.place_num 
+	</select>
+
+	<select id="hallList" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+   		<![CDATA[select * from ( select hall_id,hall_name,place_num,hall_step, province,city,postNum,address, rownum rNum 
+   		 from (select  h.hall_id hall_id,h.hall_name hall_name,h.hall_step hall_step,p.place_num place_num, p.province province,p.city city,p.postNum postNum,p.address address from hallInfo h join place p on h.place_num=p.place_num order by hall_id desc )
    		) WHERE rNum >= #{start} AND rNum <= #{end}  ]]>
 	</select>
 
@@ -1750,7 +1761,7 @@
 	<!-- 상품전체리스트 -->
 	<select id="getPerfoDeleteList" parameterType="java.util.Map"
 		resultMap="perfolist">
-		SELECT *
+		<![CDATA[SELECT *
 		FROM(
 		SELECT per.per_id per_id, per.perf_title perf_title, per.cateNum cateNum, 
 			per.perf_Image perf_Image, per.startDate startDate, per.endDate endDate, 
@@ -1764,12 +1775,14 @@
 			hall.A_seat A_seat, hall.B_seat B_seat,
 			pla.province province, pla.city city, pla.postNum postNum, pla.address address, 
 			rownum rNum
-		FROM performanceInfo per
+		FROM (select * from performanceInfo p where not(per_id in (select per_id from ticketing where ticet_date>=sysdate))) per
 		JOIN category cat ON per.cateNum = cat.cateNum
 		JOIN hallInfo hall ON per.hall_id = hall.hall_id
 		JOIN place pla ON pla.place_num = hall.place_num
 		WHERE
-			NOT(per_step LIKE '4')
+		
+		
+			NOT(per_step LIKE '4')]]>
 		<if test="keyword!=null">
 			<choose>
 				<when test="sDev==1">

@@ -15,6 +15,8 @@ public interface HostService {
 	public void sleepMemberPro(HttpServletRequest req,Model model);
 	//회원검색리스트
 	public void memberManagerSerchList(HttpServletRequest req,Model model);
+	//공연장 리스트
+	public void hallList(HttpServletRequest req, Model model);
 	//공연장 인서트
 	public void insertHall(HttpServletRequest req,Model model);
 	//공연장 삭제리스트
@@ -25,6 +27,8 @@ public interface HostService {
 	public void hallDeletePro(HttpServletRequest req, Model model);
 	//공연장 수정 데이터 가져오기
 	public void hallModifyDB(HttpServletRequest req, Model model);
+	//공연장 리스트
+	public void hallLIstDB(HttpServletRequest req, Model model);
 	//공연장 수정 데이터 업데이트
 	public void hallModifyUpdate(HttpServletRequest req, Model model);
 	//일별 결산
