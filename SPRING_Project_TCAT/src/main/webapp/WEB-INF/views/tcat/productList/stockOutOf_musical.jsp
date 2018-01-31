@@ -38,13 +38,12 @@ function perfsale_stopRelease(per_id, url){
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
 	 		<br>
-			<h4>
-				<b>공연품절상품관리</b>
+			<h4 class="trgothic">공연품절 상품관리
 			</h4>
 			<hr>
 			<div>
 				<table
-					class="table table-hover table-bordered table-condensed c fs12">
+					class="table table-hover table-bordered table-condensed c fs11">
 					<tr class="bg-primary">
 						<td><b>공연번호</b></td>
 						<td style="width: 15%"><b>이미지<b></td>

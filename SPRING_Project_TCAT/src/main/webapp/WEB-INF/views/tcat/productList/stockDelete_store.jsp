@@ -20,7 +20,7 @@
 			<hr>
 			<div>
 				<table
-				class="table table-hover table-bordered table-condensed c fs12">
+				class="table table-hover table-bordered table-condensed c fs11">
 				<tr class="bg-primary">
 					<td><b>상품코드</b></td>
 					<td style="width: 15%"><b>상품이름<b></td>

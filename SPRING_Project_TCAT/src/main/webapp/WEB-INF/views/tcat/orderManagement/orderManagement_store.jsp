@@ -52,7 +52,7 @@
 	<div class="col-md-1"></div>
 	<div class="col-md-10">
 		<br>
-		<div class="fs25 blue">스토어 배송관리</div>
+		<h4 class="trgothic">스토어 배송관리</h4>
 		<br>
 		<div>
 			<!--검색  -->

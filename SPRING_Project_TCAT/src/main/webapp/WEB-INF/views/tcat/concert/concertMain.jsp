@@ -362,7 +362,7 @@ $(".wish").click(function(){
 				  <a href="#" class="list-group-item">
 				  <table class="w100p" style="table-layout:fixed">
 				  	<tr>
-				  		<td style="text-overflow:ellipsis; overflow:hidden"><nobr>${voR.rNum}. ${voR.perf_title }</nobr></td>
+				  		<td style="text-overflow:ellipsis; overflow:hidden" onclick="contentPage('${voR.per_id}');"><nobr>${voR.rNum}. ${voR.perf_title }</nobr></td>
 				  	</tr>
 				  </table>
 				  </a>

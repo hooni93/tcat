@@ -45,7 +45,7 @@
 	<div class="col-md-1"></div>
 	<div class="col-md-10">
 		<br>
-		<div class="fs25 blue">스토어 구입목록</div>
+		<h4 class="trgothic">스토어 구입목록</h4>
 		<br>
 		<div>
 			<!--검색  -->

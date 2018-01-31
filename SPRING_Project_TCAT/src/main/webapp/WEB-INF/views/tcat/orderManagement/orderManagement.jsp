@@ -50,7 +50,7 @@
 	<div class="col-md-1"></div>
 	<div class="col-md-10">
 		<br>
-		<div class="fs25 blue">전체 예매 목록</div>
+		<h4 class="trgothic">전체 예매 목록</h4>
 		<br>
 		<div>
 			<!--검색  -->

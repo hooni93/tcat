@@ -37,7 +37,7 @@ $("#photoManagerNomo").click(function(){
 <body>
 <div class="container">
     <div class="row">
-    <div class="col-md-12 h25"></div>
+    <div class="col-md-12 h50"></div>
     <h4><b>공연 사진관리 게시판</b></h4>
 			<hr>
     <div class="col-md-10">

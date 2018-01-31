@@ -13,17 +13,23 @@ function stockManagement_modify(code){
 </script>
 </head>
 <body>
+
+<div class="col-md-12">
+<div class="col-md-12 h25"></div>
+<div class="col-md-1"></div>
+<div class="col-md-10">
+	<hr>
+	<h4 class="trgothic">스토어 재고 확인 및 변경</h4>
+	<h5 class="trgothic">(수량변경할 상품을 클릭하세요!)</h5>
+	<hr>
+</div>
+<div class="col-md-1"></div>
+</div>
 <div class="col-md-1"></div>
 	<br>
-	<hr>
-	<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;스토어 재고 확인 및 변경</h3>
-	<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(수량변경할 상품을 클릭하세요!)</h5>
-	<hr>
-	<!-- <div class="catagory" align="center">
-		<button type="button" class="btn btn-warning"
-			onclick="productGet('stockManagement','스토어');">스토어</button>
-	</div> -->
-	<br>
+	
+
+
 	<div class="col-md-12 h25"></div>
 	<c:if test="${category=='스토어'}">
 		<!-- 스토어 -->

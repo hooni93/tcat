@@ -31,16 +31,16 @@
 		
 		<div class="col-md-6">
 		<hr>
-			<h4><b>주문 관리</b></h4><p class="fs8">당일 자료</p>
+			<h4><b>주문 관리</b></h4><p class="fs8">실시간 자료</p>
 			<table  class="h165 table-bordered c table-hover1 hand">
 				<tr>
-					<td><div class="h100p pt15">장바구니담김 <span class="badge">${cartMainInfoCount}</span></div></td>
+					<td><div class="h100p pt15">장바구니담김 <p class="fs8">당일 자료</p><span class="badge">${cartMainInfoCount}</span></div></td>
 					<td><div class="h100p pt15"><a onclick="load('provalMain')">입금대기 <span class="badge">${orderInfoMain[0]}</span></a></div></td>
 					<td><div class="h100p pt15"><a onclick="load('orderManagement')">결제완료 <span class="badge">${orderInfoMain[1]}</span></a></div></td>
 					<td><div class="h100p pt15"><a onclick="load('orderManagement')">배송중 <span class="badge">${orderInfoMain[3]}</span></a></div></td>
 				</tr>
 				<tr>
-					<td><div class="h100p pt15"><a onclick="load('orderManagement')">배송완료/구매완료 <span class="badge">${orderInfoMain[4]}</span></a></div></td>
+					<td><div class="h100p pt15"><a onclick="load('orderManagement')">배송완료/구매완료 <p class="fs8">당일 자료</p><span class="badge">${orderInfoMain[4]}</span></a></div></td>
 					<td><div class="h100p pt15"><a onclick="load('productRefund')">환불접수 <span class="badge">${orderInfoMain[5]}</span></a></div></td>
 					<td><div class="h100p pt15"><a onclick="load('productRefund')">환불완료 <span class="badge">${orderInfoMain[6]}</span></a></div></td>
 					<td><div class="h100p pt15"><a onclick="load('productRefund')">교환접수 <span class="badge">${orderInfoMain[7]}</span></a></div></td>

@@ -30,8 +30,7 @@ function qnawrite(){
 	<div ><!--  class="col-md-9 " thumbnail mr15 h300 -->
 			<div>
 				<br>
-				<h4>
-					<b>공지사항 게시판</b>
+				<h4 class="trgothic">공지사항 게시판
 				</h4>
 				<hr>
 				<b>공지사항 게시판입니다.</b><br>
@@ -44,7 +43,7 @@ function qnawrite(){
 					        onclick="checkid('qnaWriteForm');">
 				</div> -->
 				<table
-					class="table table-hover table-bordered table-condensed c fs12">
+					class="table table-hover table-bordered table-condensed c fs11">
 					<tr class="bg-primary">
 						<td><b>번호</b></td>
 						<td style="width: 15%"><b>제목<b></td>
@@ -61,8 +60,10 @@ function qnawrite(){
 								<td>${dto.notice_num}</td>
 								<td><a onclick="loadBoard('noticeContent?notice_num=${dto.notice_num}');">${dto.notice_title}</a></td>
 							    <td>
-								    <img src="/tcat/resources/image/Boarder/${dto.notice_image}" 
-								         style="width: 200px; height: 200px;">
+							    <div class="w200 h170 overflow">
+								<img src="/tcat/resources/image/Boarder/${dto.notice_image}" 
+								     style="width: 100%;">
+								</div>
 							    </td>
 								
 								<%-- 

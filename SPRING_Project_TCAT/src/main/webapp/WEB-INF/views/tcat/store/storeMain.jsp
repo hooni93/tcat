@@ -364,7 +364,7 @@ $(".wish").click(function(){
 					  <a href="#" class="list-group-item">
 					  <table class="w100p" style="table-layout:fixed">
 					  	<tr>
-					  		<td style="text-overflow:ellipsis; overflow:hidden"><nobr>${voR.rNum}. ${voR.disc_title }</nobr></td>
+					  		<td style="text-overflow:ellipsis; overflow:hidden" onclick="contentMain_store('${voR.disc_code}');"><nobr>${voR.rNum}. ${voR.disc_title }</nobr></td>
 					  	</tr>
 					  </table>
 					  </a>

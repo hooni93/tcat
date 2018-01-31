@@ -126,9 +126,9 @@
 	<div class="col-md-1"></div>
 		<div class="col-md-10">		
 			<div class="page-header">
-				<h3>
+				<h4 class="trgothic">
 				공연장 등록
-				</h3>
+				</h4>
 			</div>
 				<form action="" role="form" method="post" id="hallAddForm"
 					name="hallAddForm">

@@ -47,19 +47,19 @@ $(document).ready(function(){
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img src="${image}guestMain/A_1.jpg"  width="100%" height="500px" alt="A_1">
+      <img src="${image}guestMain/A_1.jpg" class="hand" onclick="contentPage('1');" width="100%" height="500px" alt="A_1">
       <div class="carousel-caption">
 
       </div>
     </div>
     <div class="item">
-      <img src="${image}guestMain/A_2.jpg" width="100%" height="500px" alt="A_2">
+      <img src="${image}guestMain/A_2.jpg" class="hand" onclick="contentPage('16');" width="100%" height="500px" alt="A_2">
       <div class="carousel-caption">
 
       </div>
     </div>
     <div class="item">
-      <img src="${image}guestMain/A_3.jpg" width="100%" height="500px" alt="A_3">
+      <img src="${image}guestMain/A_3.jpg" class="hand" onclick="contentPage('32');" width="100%" height="500px" alt="A_3">
       <div class="carousel-caption">
 
       </div>

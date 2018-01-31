@@ -44,7 +44,7 @@ function qnawrite(){
 					        onclick="checkid('qnaWriteForm');">
 				</div>
 				<table
-					class="table table-hover table-bordered table-condensed c fs12">
+					class="table table-hover table-bordered table-condensed c fs11">
 					<tr class="bg-primary">
 						<td><b>번호</b></td>
 						<td><b>구분<b></td>
