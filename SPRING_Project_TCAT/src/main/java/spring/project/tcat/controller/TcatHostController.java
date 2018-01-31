@@ -778,7 +778,7 @@ public class TcatHostController {
 	      hService.detailMember_update(req, model);
 	      hService.member_list(req, model);
 
-	      return "tcat/memberManage/memberModified";
+	      return "tcat/memberManage/detailMember";
 	   }
 
 	// host이메일 체크

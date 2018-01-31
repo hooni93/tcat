@@ -35,31 +35,6 @@ function page(url, pageNum) {
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
 					<h3 align="center">호스트 멤버 탈퇴</h3>
-					<!-- 페이지 컨트롤 -->
-					<table style="width: 1000px" align="center">
-						<th align="center"><c:if test="${cnt>0}">
-								<!-- 처음[◀◀]/이전블록[◀] 특수문자 :ㅁ한자키 -->
-								<c:if test="${startPage>pageBlock}">
-									<a onclick="page('hostMemberRetire')">[◀◀]</a>
-									<a onclick="page('hostMemberRetire','${startPage-pageBlock}')">[◀]</a>
-								</c:if>
-
-								<c:forEach var="i" begin="${startPage}" end="${endPage}">
-									<c:if test="${i==currentPage}">
-										<span><b>[${i}]</b></span>
-									</c:if>
-									<c:if test="${i!=currentPage}">
-										<a onclick="page('hostMemberRetire','${i}')">[${i}]</a>
-									</c:if>
-								</c:forEach>
-
-								<!-- 다음블록[▶]/끝[▶▶] -->
-								<c:if test="${pageCount > endPage}">
-									<a onclick="page('hostMemberRetire','${startPage+pageBlock}')">[▶]</a>
-									<a onclick="page('hostMemberRetire','${pageCount}')">[▶▶]</a>
-								</c:if>
-							</c:if></th>
-					</table>
 					<table
 						class="table table-hover table-bordered table-condensed c fs10">
 						<tr class="bg-primary">
@@ -99,6 +74,23 @@ function page(url, pageNum) {
 							</tr>
 						</c:if>
 					</table>
+					<!--페이지 컨트롤러  -->
+				<div class="col-sm-12 c">
+					
+					<ul class="pagination">
+						<c:if test="${currentPage!=1}">
+							<li><a onclick="page('hostMemberRetire')">《</a></li>
+							<li><a onclick="page('hostMemberRetire','${startPage-pageBlock}')">〈</a></li>
+						</c:if>
+						<c:forEach var="i" begin="${startPage}" end="${endPage}">
+							<li id="${i}"><a onclick="page('hostMemberRetire','${i}')">${i}</a></li>
+						</c:forEach>
+						<c:if test="${currentPage!=pageCnt}">
+							<li><a onclick="page('hostMemberRetire','${startPage+pageBlock}')">〉</a></li>
+							<li><a onclick="page('hostMemberRetire','${pageCount}')">》</a></li>
+						</c:if>
+					</ul>
+				</div>
 		</div>
 		<div class="col-md-1"></div>
 
