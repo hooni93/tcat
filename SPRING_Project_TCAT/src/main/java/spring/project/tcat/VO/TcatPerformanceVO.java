@@ -68,7 +68,7 @@ public class TcatPerformanceVO {
     String remain_round;	//회차(하루간 공연회차)    
     int possible_age; 		//관람가능연령
     String movie_url;
-
+    
 	//category
     String category;		//카테고리(스토어,공연)
     String mDev;			//중분류
@@ -87,6 +87,7 @@ public class TcatPerformanceVO {
     String A_seat;			//A물리번호
     String B_seat;			//B물리번호
     String seat_line;
+    int hall_step;
     //place
     String province ;		//도
     String city;			//시
@@ -111,8 +112,16 @@ public class TcatPerformanceVO {
     int count;
     //get,setter
  
+    
+    
     public int getCount() {
 		return count;
+	}
+	public int getHall_step() {
+		return hall_step;
+	}
+	public void setHall_step(int hall_step) {
+		this.hall_step = hall_step;
 	}
 	public void setCount(int count) {
 		this.count = count;

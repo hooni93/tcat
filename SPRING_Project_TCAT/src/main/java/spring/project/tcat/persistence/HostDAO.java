@@ -42,6 +42,10 @@ public interface HostDAO {
 	public int hallDeleteCnt();
 	//공연장 삭제 리스트
 	public ArrayList<TcatPerformanceVO> hallDelete(Map<String,Object> map);
+	//공연장 리스트 숫자
+	public int hallListCnt();
+	//공연장 리스트
+	public ArrayList<TcatPerformanceVO> hallList(Map<String,Object> map);
 	//공연장서치
 	public ArrayList<TcatPerformanceVO> hallSerchList(Map<String,Object> map);
 	//공연장 서치 숫자

@@ -34,7 +34,14 @@ function page(url, pageNum) {
 <div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
+<<<<<<< HEAD
 					<h3 align="center">호스트 멤버 탈퇴</h3>
+=======
+				<div class="col-md-12 h50"></div>
+			
+					<h4 class="trgothic">호스트 멤버 탈퇴</h4>
+				
+>>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 					<table
 						class="table table-hover table-bordered table-condensed c fs10">
 						<tr class="bg-primary">
@@ -92,8 +99,35 @@ function page(url, pageNum) {
 					</ul>
 				</div>
 		</div>
-		<div class="col-md-1"></div>
+		<div class="col-md-5"></div>
+		<div class="col-md-5">
+				<!-- 페이지 컨트롤 -->
+					<table style="width: 1000px" align="center">
+						<th align="center"><c:if test="${cnt>0}">
+								<!-- 처음[◀◀]/이전블록[◀] 특수문자 :ㅁ한자키 -->
+								<c:if test="${startPage>pageBlock}">
+									<a onclick="page('hostMemberRetire')">[◀◀]</a>
+									<a onclick="page('hostMemberRetire','${startPage-pageBlock}')">[◀]</a>
+								</c:if>
 
+								<c:forEach var="i" begin="${startPage}" end="${endPage}">
+									<c:if test="${i==currentPage}">
+										<span><b>[${i}]</b></span>
+									</c:if>
+									<c:if test="${i!=currentPage}">
+										<a onclick="page('hostMemberRetire','${i}')">[${i}]</a>
+									</c:if>
+								</c:forEach>
+
+								<!-- 다음블록[▶]/끝[▶▶] -->
+								<c:if test="${pageCount > endPage}">
+									<a onclick="page('hostMemberRetire','${startPage+pageBlock}')">[▶]</a>
+									<a onclick="page('hostMemberRetire','${pageCount}')">[▶▶]</a>
+								</c:if>
+							</c:if></th>
+					</table>
+		
+		</div>
 	</div>
 </body>
 </html>

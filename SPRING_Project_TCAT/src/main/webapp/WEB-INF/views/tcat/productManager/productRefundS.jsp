@@ -20,19 +20,21 @@ function productRefundCancelS(disc_num,url){
 </script>
 </head>
 <body class="b400040">
-	
-	
-					
-					<h4><b>스토어 - 환불관리</b></h4>
+		<div class="row">
+ 	<div class="col-md-12 h25"></div>
+ 	<div class="col-md-1"></div>
+ 	<div class="col-md-11">
+					<h4 class="trgothic">스토어 - 환불관리
+					</h4>
 					<hr>
-
- 
+	</div>
+ 	</div>
 <div class="col-md-12 h25"></div>
 		<div class="row">
 			<div class="col-md-1"></div>
 
 			<div class="col-md-10">
-				<table class="table table-hover table-bordered table-condensed c fs13">
+				<table class="table table-hover table-bordered table-condensed c fs11">
 					<tr class="warning">
 						<td><b>상품구입번호 </b></td>
 						<td><b>상품명</b></td>

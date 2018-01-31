@@ -59,12 +59,52 @@ public class TcatTicketingVO {
     String A_seat;			//A물리번호
     String B_seat;			//B물리번호
     String seat_line;
+ 	String buyDate;
+ 	int perCount;
+ 	int storeCount;
+ 	int totalPrice;
+ 	int perPrice;
+ 	int storePrice;
  	
  	
  	
- 	
- 	
- 	public String getHall_name() {
+ 	public int getStorePrice() {
+		return storePrice;
+	}
+	public void setStorePrice(int storePrice) {
+		this.storePrice = storePrice;
+	}
+	public int getPerPrice() {
+		return perPrice;
+	}
+	public void setPerPrice(int perPrice) {
+		this.perPrice = perPrice;
+	}
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public int getStoreCount() {
+		return storeCount;
+	}
+	public void setStoreCount(int storeCount) {
+		this.storeCount = storeCount;
+	}
+	public int getPerCount() {
+		return perCount;
+	}
+	public void setPerCount(int perCount) {
+		this.perCount = perCount;
+	}
+	public String getBuyDate() {
+		return buyDate;
+	}
+	public void setBuyDate(String buyDate) {
+		this.buyDate = buyDate;
+	}
+	public String getHall_name() {
 		return hall_name;
 	}
 	public void setHall_name(String hall_name) {

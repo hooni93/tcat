@@ -170,13 +170,15 @@
 	<div class="col-md-12 bffffff">
 		<c:if test="${item!=1}">
 			<div class="row">
+				
+				<div class="col-md-12 h25"></div>
 				<div class="col-md-1"></div>
 				<div class="col-md-10">
 
 					<form action="insertPerformance" id="registItemForm" method="post"
 						enctype="multipart/form-data">
 						<input type="hidden" name="per_step" value="1">
-						<h3>공연정보 추가</h3>
+						<h4 class="trgothic">공연정보 추가</h4>
 						<table
 							class="table table-hover table-bordered table-condensed c fs10">
 							<tr class="bg-primary">
@@ -259,7 +261,7 @@
 						</table>
 					</form>
 
-					<h3 align="center">공연정보 리스트</h3>
+					<h4 class="trgothic c">공연정보 리스트</h4>
 					<table
 						class="table table-hover table-bordered table-condensed c fs10">
 						<tr class="bg-primary">
@@ -344,12 +346,13 @@
 		</c:if>
 
 		<c:if test="${item==1}">
-			<div class="row">
+			<div class="row">			
+				<div class="col-md-12 h25"></div>
 				<div class="col-md-1"></div>
 				<div class="col-md-10">
 					<form action="insertStore" name="StoreForm" method="post"
 						enctype="multipart/form-data">
-						<h3>스토어 상품 추가</h3>
+						<h4 class="trgothic">스토어 상품 추가</h4>
 						<table
 							class="table table-hover table-bordered table-condensed c fs10">
 							<tr class="bg-primary">
@@ -403,7 +406,7 @@
 						</table>
 
 					</form>
-					<h3 align="center">스토어 상품 리스트</h3>
+					<h4 class="trgothic c">스토어 상품 리스트</h4>
 					
 					<table
 						class="table table-hover table-bordered table-condensed c fs10">

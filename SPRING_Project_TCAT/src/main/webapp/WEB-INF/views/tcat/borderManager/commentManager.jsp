@@ -9,9 +9,12 @@
 </script>
 </head>
 <body>
-	<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;관람/상품 후기 관리 게시판</h2>
+<div class="col-md-12 h50"></div>
+<div class="col-md-1"></div>
+<div class="col-md-10">
+	<h4 class="trgothic">관람/상품 후기 관리 게시판</h4>
 <hr>
-<br>
+</div>
 <div class="col-md-12 h25"></div>
 <c:if test="${commentManagerCate=='공연'}">
 		<div class="row">

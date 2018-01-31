@@ -35,7 +35,7 @@
 	<div class="col-md-1"></div>
 	<div class="col-md-10">
 		<br>
-		<div class="fs25 blue">공연 상품 리스트</div>
+		<div><h4 class="trgothic">공연 상품 리스트</h4></div>
 		<br>
 		<div>
 			<!--검색  -->

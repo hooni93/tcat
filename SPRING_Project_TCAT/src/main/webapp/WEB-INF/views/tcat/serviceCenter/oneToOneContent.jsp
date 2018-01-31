@@ -90,7 +90,7 @@ function qnacomment(service_num,service_div,service_title,member_id,QuestionCon,
 		<div><span>1:1게시판 '${dto.service_title}' 의 상세 정보</span></div>
 		<hr><br>
 		
-		<table class="table table-hover table-bordered table-condensed c fs12">
+		<table class="table table-hover table-bordered table-condensed c fs11">
 		
 			<tr>
 				<td class="bg-primary"><b>번호</b></td>

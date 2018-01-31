@@ -12,14 +12,15 @@
 <body>
 	<!--리스트목록  -->
 	<div class="row">
+		<div class="col-md-12 h25"></div>
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
 			<br>
-			<h4><b>공지사항 게시판 관리</b></h4>
+			<h4 class="trgothic">공지사항 게시판 관리</h4>
 			<hr>
 			<div>
 				<table
-				class="table table-hover table-bordered table-condensed c fs12">
+				class="table table-hover table-bordered table-condensed c fs11">
 				<tr class="bg-primary">
 					<td><b>번호</b></td>
 					<td style="width: 15%"><b>제목<b></td>
@@ -36,8 +37,10 @@
 							<td>${dto.notice_num}</td>
 							<td><a onclick="load('noticeManagerContent?notice_num=${dto.notice_num}');">${dto.notice_title}</a></td>
 							<td>
+								<div class="w200 h170 overflow">
 								<img src="/tcat/resources/image/Boarder/${dto.notice_image}" 
-								     style="width: 200px; height: 200px;">
+								     style="width: 100%;">
+								</div>
 							</td>
 							<td>${dto.contents}</td>
 							<td>${dto.refNum}</td>

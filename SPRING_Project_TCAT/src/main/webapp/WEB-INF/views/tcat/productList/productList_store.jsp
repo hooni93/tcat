@@ -29,7 +29,7 @@ $(document).ready(function(){
 	<div class="col-md-1"></div>
 	<div class="col-md-10">
 		<br>
-		<div class="fs25 blue">스토어 상품 리스트</div>
+		<div><h4 class="trgothic">스토어 상품 리스트</h4></div>
 		<br>
 		<div>
 			<!--검색  -->

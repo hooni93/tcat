@@ -9,7 +9,9 @@
 </head>
 <body>
 	<div class="row">
-		<div class="col-md-6">
+	
+		<div class="col-md-1"></div>
+		<div class="col-md-11">
 			
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h20"></li>

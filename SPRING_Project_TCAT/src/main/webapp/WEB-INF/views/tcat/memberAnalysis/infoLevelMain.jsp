@@ -20,6 +20,7 @@
 </script>
 </head>
 <body>
+
 	<div class="row">
 		<div class="col-md-2" style="border:2px solid #dddddd;padding:10px; background-color:black">
 		<span style="color:white;margin-left:20px;">등급 지정 :</span>

@@ -40,7 +40,7 @@
 				var data1=new Array;
 				var data2=new Array;
 			</script>
-			<c:forEach var="vo" items="${dtos}">
+			<c:forEach var="vo" items="${ddtos}">
 			<script type="text/javascript">
 				labels.push("${vo.buyDate}");
 				data.push("${vo.perCount}");

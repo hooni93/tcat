@@ -29,7 +29,8 @@ $(function() {
 </head>
 <body class="b400040">
 
-	<div class="row mt50">
+	<div class="row">
+				<div class="col-md-12 h25"></div>
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
 			<div class="row">
@@ -47,17 +48,17 @@ $(function() {
 							<table
 							class="table table-hover table-bordered table-condensed c fs10">
 							<tr class="bg-primary">
-								<th colspan="2"><h4><center>할인등록</center></h4></th>
+								<th colspan="2"><h5><center>할인등록</center></h5></th>
 							</tr>
 							<tr>
-								<th><h4><center>혜택정보</center></h4></th>
+								<th><h5><center>혜택정보</center></h5></th>
 								<td>
 								<input type="text" name="sale_div" class="form-control"
 									maxlength="50">
 								</td>
 							</tr>
 							<tr>
-								<th><h4><center>혜택률</center></h4></th>
+								<th><h5><center>혜택률</center></h5></th>
 								<td>
 								<input type="number" name="sale_rate" class="form-control"
 									maxlength="50">
@@ -74,10 +75,10 @@ $(function() {
 						<table
 							class="table table-hover table-bordered table-condensed c fs10">
 							<tr class="bg-primary">
-								<td><h5><b>혜택정보</b></h5></td>
-								<td><h5><b>혜택률(%)</b></h5></td>
-								<td><h5><b>혜택수정</b></h5></td>
-								<td><h5><b>혜택삭제</b></h5></td>
+								<td><h6><b>혜택정보</b></h6></td>
+								<td><h6><b>혜택률(%)</b></h6></td>
+								<td><h6><b>혜택수정</b></h6></td>
+								<td><h6><b>혜택삭제</b></h6></td>
 							</tr>
 							<c:if test="${cnt > 0}">
 								<c:forEach var="dto" items="${dtos}">

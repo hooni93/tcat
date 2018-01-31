@@ -774,7 +774,7 @@ public class HSGuestServiceImp implements HSGuestService{
 			
 			map.put("del_num", del_num);
 			if(mem.getRating().equals("D")) {
-				map.put("Rating", "없음");
+				map.put("Rating", "D");
 			}else {
 				map.put("Rating", mem.getRating());
 			}

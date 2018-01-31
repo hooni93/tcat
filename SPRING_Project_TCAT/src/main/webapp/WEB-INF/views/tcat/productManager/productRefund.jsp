@@ -22,18 +22,20 @@ function productRefundCancel(ticket_num,url){
 </script>
 </head>
 <body class="b400040">
-	
-					
-					<h4>
-					<b>공연 - 환불관리</b>
+	<div class="row">
+ 	<div class="col-md-12 h25"></div>
+ 	<div class="col-md-1"></div>
+ 	<div class="col-md-11">
+					<h4 class="trgothic">공연 - 환불관리
 					</h4>
 					<hr>
- 	<div class="col-md-12 h25"></div>
+	</div>
+ 	</div>
 	<div class="row">
 			<div class="col-md-1"></div>
 
 			<div class="col-md-10">
-				<table class="table table-hover table-bordered table-condensed c fs13">
+				<table class="table table-hover table-bordered table-condensed c fs11">
 					<tr class="danger">
 						<td><b>예매 번호</b></td>
 						<td><b>구매자 id</b></td>

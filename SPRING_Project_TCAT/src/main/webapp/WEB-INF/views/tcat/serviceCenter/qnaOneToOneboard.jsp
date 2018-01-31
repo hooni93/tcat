@@ -24,8 +24,7 @@ function OneToOneBoardSearch() {
 	<div ><!--  class="col-md-9 " thumbnail mr15 h300 -->
 			<div>
 				<br>
-				<h4>
-					<b>1:1게시판</b>
+				<h4 class="trgothic">1:1게시판
 				</h4>
 				<hr>
 				<b>1:1게시판입니다!</b><br>
@@ -37,7 +36,7 @@ function OneToOneBoardSearch() {
 					        onclick="checkid('oneToOneWriteForm');">
 				</div>
 				<table
-					class="table table-hover table-bordered table-condensed c fs12">
+					class="table table-hover table-bordered table-condensed c fs11">
 					<tr class="bg-primary">
 						<td><b>번호</b></td>
 						<td><b>구분<b></td>

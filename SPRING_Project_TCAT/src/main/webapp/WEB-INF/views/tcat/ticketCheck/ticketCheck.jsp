@@ -179,7 +179,8 @@
 					</div>
 				</div>
 				<div class="check">
-					<div class="big">${ticket.perf_title}
+					<div class="big w70p" style="text-overflow:ellipsis; overflow:hidden; height:30px ">
+						 <nobr>${ticket.perf_title}</nobr>
 					</div>
 					<div class="big">
 						<br>
@@ -191,7 +192,7 @@
 					<div class="number">${futureTicket.get(index).size()}매</div>
 					<div class="info">
 						<section>
-						<div class="title">${ticket.remain_round.split("/")[0]}</div>
+						<div class="title" style="text-overflow:ellipsis; overflow:hidden"><nobr>${ticket.remain_round.split("/")[0]}</nobr></div>
 						<div>${ticket.remain_round.split("/")[1]}</div>
 						</section>
 						<br>
@@ -205,7 +206,7 @@
 						</section>
 						<section>
 						<div class="title">좌석</div>
-						<div>
+						<div style="text-overflow:ellipsis; overflow:scroll; max-height: 60px; s" >
 							<c:forEach var="tic" items="${futureTicket.get(index)}">
 							${tic.seat_type} - ${tic.seat_num}<br>
 							</c:forEach>

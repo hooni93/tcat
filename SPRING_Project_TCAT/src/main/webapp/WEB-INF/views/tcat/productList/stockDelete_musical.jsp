@@ -1,4 +1,4 @@
-ㄴㄴ<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../setting.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -22,7 +22,7 @@
 			<hr>
 			<div>
 				<table
-					class="table table-hover table-bordered table-condensed c fs12">
+					class="table table-hover table-bordered table-condensed c fs11">
 					<tr class="bg-primary">
 						<td><b>공연번호</b></td>
 						<td style="width: 20%"><b>이미지<b></td>

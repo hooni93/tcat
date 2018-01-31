@@ -198,10 +198,15 @@
 		</script>
 	</c:if>
 
-	<div class="page-header">
-		<h1>
+	<div class="row">
+		<div class="col-md-12 h25"></div>
+		<div class="col-md-2"></div>
+		<div class="col-md-10">
+		<h4 class="trgothic">
 			회원가입 <small>HOST</small>
-		</h1>
+		</h4>
+		<div class="col-md-12 h50"></div>
+		</div>
 	</div>
 	<div class="col-md-6 col-md-offset-3">
 		<form action="HostPlus" role="form" method="post" id="JoinForm"

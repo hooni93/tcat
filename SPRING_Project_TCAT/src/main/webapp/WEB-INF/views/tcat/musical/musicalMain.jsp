@@ -323,19 +323,19 @@ $(".wish").click(function(){
 				  <!-- Wrapper for slides -->
 				  <div class="carousel-inner" role="listbox">
 				    <div class="item active">
-				      <img src="${image}musicalMain/A_1.jpg"  width="100%" height="300px" alt="A_1">
+				      <img src="${image}musicalMain/A_1.jpg" class="hand" onclick="contentPage('1');" width="100%" height="300px" alt="A_1">
 				      <div class="carousel-caption">
 				
 				      </div>
 				    </div>
 				    <div class="item">
-				      <img src="${image}musicalMain/A_2.jpg" width="100%" height="300px" alt="A_2">
+				      <img src="${image}musicalMain/A_2.jpg" class="hand" onclick="contentPage('16');" width="100%" height="300px" alt="A_2">
 				      <div class="carousel-caption">
 				
 				      </div>
 				    </div>
 				    <div class="item">
-				      <img src="${image}musicalMain/A_3.jpg" width="100%" height="300px" alt="A_3">
+				      <img src="${image}musicalMain/A_3.jpg" class="hand" onclick="contentPage('32');" width="100%" height="300px" alt="A_3">
 				      <div class="carousel-caption">
 				
 				      </div>
@@ -363,7 +363,7 @@ $(".wish").click(function(){
 					  <a href="#" class="list-group-item">
 					  <table class="w100p" style="table-layout:fixed">
 					  	<tr>
-					  		<td style="text-overflow:ellipsis; overflow:hidden"><nobr>${voR.rNum}. ${voR.perf_title }</nobr></td>
+					  		<td style="text-overflow:ellipsis; overflow:hidden" onclick="contentPage('${voR.per_id}');"><nobr>${voR.rNum}. ${voR.perf_title }</a></nobr></td>
 					  	</tr>
 					  </table>
 					  </a>

@@ -38,7 +38,8 @@ public class TcatHostController {
 		System.out.println("hostMain");
 		hService.hostMainInfo(req, model);
 		hService.dayslse(req, model);
-		
+		hService.provalHost(req, model);
+		hService.join_retireMember(req, model);
 		return "tcat/hostMain/hostMain";
 	}
 
@@ -183,10 +184,10 @@ public class TcatHostController {
 	}
 
 	// 공연장등록사이드
-	@RequestMapping("hallAdd_side")
-	public String hallAdd_side(HttpServletRequest req, Model model) {
-		System.out.println("hallAdd_side");
-		return "tcat/locationManager/hallAdd_side";
+	@RequestMapping("hallList_side")
+	public String hallList_side(HttpServletRequest req, Model model) {
+		System.out.println("hallList_side");
+		return "tcat/locationManager/hallList_side";
 	}
 
 	// 공연장 수정
@@ -205,6 +206,23 @@ public class TcatHostController {
 		}
 
 		return "tcat/locationManager/hallModify";
+	}
+	// 공연장 리스트
+	@RequestMapping("hallList")
+	public String hallList(HttpServletRequest req, Model model) {
+		System.out.println("hallList");
+		String s = null;
+		s = req.getParameter("search");
+		if (s == null) {
+			s = "a";
+		}
+		if (s.equals("a")) {
+			hService.hallList(req, model);
+		} else {
+			hService.hallSerchList(req, model);
+		}
+		
+		return "tcat/locationManager/hallList";
 	}
 
 	// 공연장 삭제
@@ -240,6 +258,13 @@ public class TcatHostController {
 		System.out.println("hallModifyDB");
 		hService.hallModifyDB(req, model);
 		return "tcat/locationManager/hallModifyDB";
+	}
+	// 공연장 수정 데이터 가져오기
+	@RequestMapping("hallLIstDB")
+	public String hallLIstDB(HttpServletRequest req, Model model) {
+		System.out.println("hallLIstDB");
+		hService.hallLIstDB(req, model);
+		return "tcat/locationManager/hallLIstDB";
 	}
 
 	// 공연장 수정 데이터 가져오기

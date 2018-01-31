@@ -19,13 +19,11 @@
 				<div class="col-md-1"></div>
 				<div class="col-md-10">
 
-					<h4>
-						<b>Hot카테고리</b>
-					</h4>
-					<div>
+					<div><h4 class="trgothic">Hot카테고리</h4></div>
+						<div>
 						<hr>
 						<table
-							class="table table-hover table-bordered table-condensed c fs10">
+							class="table table-hover table-bordered table-condensed c fs11">
 							<tr class="bg-primary">
 								<td><b>공연번호</b></td>
 								<td><b>공연제목</b></td>
@@ -57,7 +55,7 @@
 					</div>
 
 					<br> <br> <br>
-					<h3>뮤지컬 전체리스트</h3>
+					<h4 class="trgothic">뮤지컬 전체리스트</h4>
 					<div>
 						<hr>
 						<!-- 뮤지컬전체리스트 -->

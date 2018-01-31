@@ -26,11 +26,11 @@ function oneManagerDel(service_num){
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
 			<br>
-			<h4><b>1:1 게시판 관리</b></h4>
+			<h4 class="trgothic">1:1 게시판 관리</h4>
 			<hr>
 			<div>
 				<table
-				class="table table-hover table-bordered table-condensed c fs12">
+				class="table table-hover table-bordered table-condensed c fs11">
 				<tr class="bg-primary">
 					<td><b>번호</b></td>
 					<td style="width: 10%"><b>구분<b></td>

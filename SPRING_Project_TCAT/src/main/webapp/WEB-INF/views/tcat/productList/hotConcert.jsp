@@ -19,8 +19,7 @@
 				<div class="col-md-1"></div>
 				<div class="col-md-10">
 
-					<h4>
-						<b>Hot카테고리</b>
+					<h4 class="trgothic">Hot카테고리
 					</h4>
 					<div>
 						<hr>
@@ -57,7 +56,7 @@
 					</div>
 
 					<br> <br> <br>
-					<h3>콘서트 전체리스트</h3>
+					<h4 class="trgothic">콘서트 전체리스트</h4>
 					<div>
 						<hr>
 						<!-- 뮤지컬전체리스트 -->

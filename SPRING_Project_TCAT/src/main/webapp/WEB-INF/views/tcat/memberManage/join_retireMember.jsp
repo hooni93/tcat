@@ -35,7 +35,7 @@ $(document).ready(function(){
                               <td><b>등급</b></td>
                               <td><b>가입일자</b></td>
                            </tr>
-                           <c:forEach var="vo" items="${dtos}"> 
+                           <c:forEach var="vo" items="${mdtos}"> 
                               <tr>
                                   <td>${vo.member_id}</td>
                                 <td>${vo.member_name}</td>
@@ -68,7 +68,7 @@ $(document).ready(function(){
                  <div class="col-md-1">
                  <table class="c" style="width: 1000px" align="center">
 						<tr>
-						<th><c:if test="${cnt > 0}">
+						<th><c:if test="${mcnt > 0}">
 						<!-- 처음[◀◀] / 이전 블록[◀] -->
 						<c:if test="${startPage > pageBlock}">
 							<a onclick="load('join_retireMember');">[◀◀]</a>

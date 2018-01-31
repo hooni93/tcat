@@ -46,9 +46,9 @@
 	<div class="col-md-1"></div>
 
 	<div class="col-md-10">
-		<h1><center>Q&A게시글 작성 </center></h1>
+		<h4 class="trgothic"> 1:1 게시글 작성 </h4>
 		<hr><br>
-		<table class="table table-hover table-bordered table-condensed c fs12">
+		<table class="table table-hover table-bordered table-condensed c fs11">
 			<tr>
 				<td class="bg-primary"><b>작성자</b></td>
 				<td ><!-- id="login_id" name="login_id" -->
