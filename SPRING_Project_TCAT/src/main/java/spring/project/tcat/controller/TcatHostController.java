@@ -38,7 +38,8 @@ public class TcatHostController {
 		System.out.println("hostMain");
 		hService.hostMainInfo(req, model);
 		hService.dayslse(req, model);
-		
+		hService.provalHost(req, model);
+		hService.join_retireMember(req, model);
 		return "tcat/hostMain/hostMain";
 	}
 

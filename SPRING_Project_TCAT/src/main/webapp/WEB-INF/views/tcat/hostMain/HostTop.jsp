@@ -530,8 +530,6 @@ location.reload();
 						<li><a onclick="load('orderManagement')">배송관리</a></li>
 						<li class="divider"></li>
 						<li><a onclick="load('productRefund')">환불/반품관리</a></li>
-						<li class="divider"></li>
-						<li><a href="#">자동입금확인 관리</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false">고객관리<span
@@ -553,7 +551,6 @@ location.reload();
 					<ul class="dropdown-menu" role="menu">
 						<li><a onclick="load('noticeManager');">공지사항 게시판관리</a></li>
 						<li><a onclick="load('eventHost');">이벤트 게시판관리</a></li>
-						<li><a href="#">SNS후기 게시판관리</a></li>
 						<li class="divider"></li>
 						<li><a onclick="load('qnaManager');">QnA 게시판관리</a></li>
 						<li><a onclick="load('oneManager');">1 : 1 게시판관리</a></li>
@@ -576,13 +573,10 @@ location.reload();
 				</a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a onclick="load('useDateMain');">요일별분석</a></li>
-						<li><a href="#">시간별분석</a></li>
+						<li><a onclick="load('infoLocationMain');">지역별분석</a></li>
 						<li class="divider"></li>
 						<li><a onclick="load('infoLevelMain');">등급별분석</a></li>
 						<li class="divider"></li>
-						<li><a onclick="load('infoLocationMain');">지역별분석</a></li>
-						<li><a href="#">성별분석</a></li>
-						<li><a href="#">연령분석</a></li>
 						<li><a onclick="load('ageAnalysis')">성별.연령별분석</a></li>
 					</ul></li>
 			</ul>

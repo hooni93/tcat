@@ -79,7 +79,7 @@
 				wdata2.push("${vo.totalPrice}");
 			</script>
 			</c:forEach>
-			<c:forEach var="vo" items="${dtos}">
+			<c:forEach var="vo" items="${ddtos}">
 			<script type="text/javascript">
 				labels.push("${vo.buyDate}");
 				data.push("${vo.perCount}");

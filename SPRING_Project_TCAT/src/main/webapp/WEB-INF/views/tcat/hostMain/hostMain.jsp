@@ -11,6 +11,7 @@
    /*탭 스크립트  */
    $('#myTab a[href="#performance"]').tab('show') // 공연상품 탭 클릭시 #myTab a[href="#performance"] 보여줌
    $('#myTab a[href="#store"]').tab('show') // Select tab by name
+   $('#myTab a[href="#newMemberInfo"]').tab('show') // Select tab by name
 
   	 var labels=new Array;
 	var data=new Array;
@@ -30,19 +31,19 @@
 		
 		<div class="col-md-6">
 		<hr>
-			<h4><b>주문 관리</b></h4>
+			<h4><b>주문 관리</b></h4><p class="fs8">당일 자료</p>
 			<table  class="h165 table-bordered c table-hover1 hand">
 				<tr>
 					<td><div class="h100p pt15">장바구니담김 <span class="badge">${cartMainInfoCount}</span></div></td>
-					<td><div class="h100p pt15">입금대기 <span class="badge">${orderInfoMain[0]}</span></div></td>
-					<td><div class="h100p pt15">결제완료 <span class="badge">${orderInfoMain[1]}</span></div></td>
-					<td><div class="h100p pt15">배송중 <span class="badge">${orderInfoMain[3]}</span></div></td>
+					<td><div class="h100p pt15"><a onclick="load('provalMain')">입금대기 <span class="badge">${orderInfoMain[0]}</span></a></div></td>
+					<td><div class="h100p pt15"><a onclick="load('orderManagement')">결제완료 <span class="badge">${orderInfoMain[1]}</span></a></div></td>
+					<td><div class="h100p pt15"><a onclick="load('orderManagement')">배송중 <span class="badge">${orderInfoMain[3]}</span></a></div></td>
 				</tr>
 				<tr>
-					<td><div class="h100p pt15">배송완료/구매완료 <span class="badge">${orderInfoMain[4]}</span></div></td>
-					<td><div class="h100p pt15">환불접수 <span class="badge">${orderInfoMain[5]}</span></div></td>
-					<td><div class="h100p pt15">환불완료 <span class="badge">${orderInfoMain[6]}</span></div></td>
-					<td><div class="h100p pt15">교환접수 <span class="badge">${orderInfoMain[7]}</span></div></td>
+					<td><div class="h100p pt15"><a onclick="load('orderManagement')">배송완료/구매완료 <span class="badge">${orderInfoMain[4]}</span></a></div></td>
+					<td><div class="h100p pt15"><a onclick="load('productRefund')">환불접수 <span class="badge">${orderInfoMain[5]}</span></a></div></td>
+					<td><div class="h100p pt15"><a onclick="load('productRefund')">환불완료 <span class="badge">${orderInfoMain[6]}</span></a></div></td>
+					<td><div class="h100p pt15"><a onclick="load('productRefund')">교환접수 <span class="badge">${orderInfoMain[7]}</span></a></div></td>
 				</tr>
 			</table>
 		</div>
@@ -50,11 +51,12 @@
 		<div class="col-md-4">
 			<hr>
 			<h4><b>문의/답변관리</b></h4>
+			<p class="fs8">당일 자료</p>
 			<div class="list-group">
-			  <a href="#" class="list-group-item">사진/영상 게시판 <span class="badge">${boarderMainInfoCount}</span></a>
-			  <a href="#" class="list-group-item">관람/상품 후기 <span class="badge">${comentMainInfoCount}</span></a>
-			  <a href="#" class="list-group-item">QnA 게시판 <span class="badge">${qnaMainInfoCount}</span></a>
-			  <a href="#" class="list-group-item">1 : 1 게시판 <span class="badge">${one_1MainInfoCount}</span></a>
+			  <a onclick="load('photoManager');" class="list-group-item">사진/영상 게시판 <span class="badge">${boarderMainInfoCount}</span></a>
+			  <a onclick="load('commentManager');" class="list-group-item">관람/상품 후기 <span class="badge">${comentMainInfoCount}</span></a>
+			  <a onclick="load('qnaManager');" class="list-group-item">QnA 게시판 <span class="badge">${qnaMainInfoCount}</span></a>
+			  <a onclick="load('oneManager');" class="list-group-item">1 : 1 게시판 <span class="badge">${one_1MainInfoCount}</span></a>
 			</div>
 		</div>		
 		
@@ -76,10 +78,10 @@
                   onclick="#">최근매출 </a></li>
                <li role="presentation" class="${storeActive}"><a
                   href="#store" aria-controls="profile" role="tab" data-toggle="tab"
-                onclick="#">최근주문 <span class="badge">42</span></a></li>
+                onclick="#">최근주문 <span class="badge">${cnt}</span></a></li>
                <li role="presentation" class="${storeActive}"><a
-                  href="#store" aria-controls="profile" role="tab" data-toggle="tab"
-                  onclick="#">최근신규회원 <span class="badge">42</span></a></li>
+                  href="#newMemberInfo" aria-controls="profile" role="tab" data-toggle="tab"
+                  onclick="#">최근신규회원 <span class="badge">${mcnt}</span></a></li>
             </ul>
 
             <!-- 탭시 출력 -->
@@ -108,7 +110,7 @@
 									<td><b>스토어판매금액</b></td>
 									<td><b>총판매금액</b></td>
 								</tr>
-								<c:forEach var="vo" items="${dtos}">
+								<c:forEach var="vo" items="${ddtos}">
 								<script type="text/javascript">
 									labels.push("${vo.buyDate}");
 									data.push("${vo.perCount}");
@@ -134,63 +136,7 @@
                      </div>
                   </div>
                </div>
-               
-               
-               <!--공연 출력  #myTab a[href="#store"]-->
-               <div role="tabpanel" class="tab-pane ${storeActive }" id="store">
-                  <!--리스트 시작  -->
-                  <div class="row">
-                     <div class="col-md-1"></div>
-                     <div class="col-md-10">
-                        
-                        <table class="table table-hover table-bordered table-condensed c fs10">
-                           <tr class="bg-primary">
-                              <td><b>상품코드</b></td>
-                              <td><b>상품명</b></td>
-                              <td><b>카테고리</b></td>
-                              <td><b>이미지 유,무</b></td>
-                              <td><b>가격</b></td>
-                              <td><b>할인조건</b></td>
-                           </tr>
-                           <c:forEach var="performance" items="performances">
-                              <tr>
-                                 <td>afasdsa</td>
-                                 <td>2</td>
-                                 <td>3</td>
-                                 <td>4</td>
-                                 <td>5</td>
-                                 <td>6</td>
-                              </tr>
-                           </c:forEach>
-                        </table>
-                        <div class="row">
-                         
-                        </div>
-                     </div>
-                     <div class="col-md-1"></div>
-                     <!--리스트 시작  -->
-                  </div>
-               </div>
-               
-               
-            </div>
-         </div>
-      </div>
-         <div class="col-md-1"></div>
-	</div>	
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<!-- ------------------------------------------------------- -->
+               	<!-- ------------------------------------------------------- -->
 <script type="text/javascript">
 new Chart(document.getElementById("dayCount"),
         {
@@ -265,6 +211,150 @@ new Chart(document.getElementById("dayCount"),
 
 
 </script>
+               
+               <!--공연 출력  #myTab a[href="#store"]-->
+               <div role="tabpanel" class="tab-pane ${storeActive }" id="store">
+                  <!--리스트 시작  -->
+                  <div class="row">
+                     <div class="col-md-1"></div>
+                     <div class="col-md-10">
+                        
+                    <body class="b400040">
+
+	<div class="row mt50">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="row">
+					<h4><b>주문목록</b></h4>
+					
+					<hr>
+					<div>
+						<table
+							class="table table-hover table-bordered table-condensed c fs10">
+							<tr class="bg-primary">
+								<td><h5><b>예매번호</b></h5></td>
+								<td><h5><b>구매자id</b></h5></td>
+								<td><h5><b>공연번호</b></h5></td>
+								<td><h5><b>공연날짜</b></h5></td>
+								<td><h5><b>좌석</b></h5></td>
+								<td><h5><b>좌석번호</b></h5></td>
+								<td><h5><b>구매상태</b></h5></td>
+								<td><h5><b>구매요청</b></h5></td>
+							</tr>
+							<c:if test="${cnt > 0}">
+								<c:forEach var="dto" items="${dtos}">
+									<tr>
+										<td><h5>${dto.ticket_num}</h5></td>
+										<td><h5>${dto.member_id}</h5></td>
+										<td><h5>${dto.per_id}</h5></td>
+										<td><h5>${dto.ticet_date}</h5></td>
+										<td><h5>${dto.seat_type}</h5></td>
+										<td><h5>${dto.seat_num}</h5></td>
+										<td><h5>${dto.ticket_step}</h5></td>
+										<td>
+											<button type="button" class="btn btn-primary"
+											onclick="return provalUpdate('${dto.ticket_num}','provalUpdate')">승인</button>
+										</td>
+									</tr>
+								</c:forEach>
+							</c:if>
+							<c:if test="${cnt==0}">
+								<tr>
+									<td colspan="7" align="center">구매완료 상품이 없습니다.</td>
+								</tr>
+							</c:if>
+						</table>
+
+					</div>
+				</div>
+				<div class="col-md-1"></div>
+				<!--리스트목록 끝  -->
+
+			</div>
+		</div>
+                    
+                    
+                    
+                    
+                     </div><!-- 10end -->
+                     <div class="col-md-1"></div>
+                     <!--리스트 시작  -->
+                  </div>
+               </div><!-- store end -->
+               
+               
+               
+                              <!--공연 출력  #myTab a[href="#store"]-->
+               <div role="tabpanel" class="tab-pane ${newMemberInfoActive }" id="newMemberInfo">
+                  <!--리스트 시작  -->
+                  <div class="row">
+                     <div class="col-md-1"></div>
+                     <div class="col-md-10">
+                        
+                    <body class="b400040">
+
+	<div class="row mt50">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="row">
+
+					<h4><b>최근 가입회원</b></h4>
+					<hr>
+			           <table class="table table-hover table-bordered table-condensed c fs10">
+                           <tr class="bg-primary">
+                              <td><b>아이디</b></td>
+                              <td><b>이름</b></td>
+                              <td><b>생년월일</b></td>
+                              <td><b>성별</b></td>
+                              <td><b>연락처</b></td>
+                              <td><b>이메일</b></td>
+                              <td><b>등급</b></td>
+                              <td><b>가입일자</b></td>
+                           </tr>
+                           <c:forEach var="vo" items="${mdtos}"> 
+                              <tr>
+                                  <td>${vo.member_id}</td>
+                                <td>${vo.member_name}</td>
+                                 <td>${vo.member_birth}</td>
+                                 <td>
+                                 <c:if test="${vo.member_gender==1}">남자</c:if>
+                                 <c:if test="${vo.member_gender==2}">여자</c:if>
+                                 </td>
+                                 <td>${vo.member_hp}</td>
+                                 <td>${vo.member_email}</td>
+                                 <td>${vo.getRating()}</td>
+                                 <td>${vo.member_joindate}</td>  
+                              </tr>
+                           </c:forEach>
+                        </table>
+				</div>
+				<div class="col-md-1"></div>
+				<!--리스트목록 끝  -->
+
+			</div>
+		</div>
+
+                     </div><!-- 10end -->
+                     <div class="col-md-1"></div>
+                     <!--리스트 시작  -->
+                  </div>
+               </div><!-- store end -->
+               
+               
+               
+               
+               
+            </div><!-- tab -->
+         </div><!-- tab 판넬 -->
+      </div><!-- 10end -->
+         <div class="col-md-1"></div>
+	</div>
+	
+	
+	
+		
+
+
 
 
 </body>

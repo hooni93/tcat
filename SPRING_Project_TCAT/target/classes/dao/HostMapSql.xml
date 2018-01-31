@@ -255,11 +255,17 @@
 	</select>
 	
 	<select id="orderInfoMain" parameterType="java.util.Map" resultType="int">
-		select count(*) from ticketing where ticket_step=#{ticket_step} AND ticet_buyDate=#{buydate}
+		select count(*) from ticketing where ticket_step=#{ticket_step} 
+		<if test="ticket_step==5">
+		AND ticet_buyDate=#{buydate}
+		</if>
 	</select>
 	
 	<select id="orderStoreInfoMain" parameterType="java.util.Map" resultType="int">
-		select count(*) from discbuy where disc_buyStep=#{ticket_step} AND disc_buyDate=#{buydate}
+		select count(*) from discbuy where disc_buyStep=#{ticket_step} 
+		<if test="ticket_step==5">
+		AND disc_buyDate=#{buydate}
+		</if>
 	</select>
 	
 	<select id="cartMainInfoCount" parameterType="String" resultType="int">

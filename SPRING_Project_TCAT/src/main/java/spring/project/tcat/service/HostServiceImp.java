@@ -79,7 +79,7 @@ public class HostServiceImp implements HostService {
 		int startPage = 0; // 시작페이지
 		int endPage = 0; // 마지막 페이지
 
-		model.addAttribute("cnt", cnt);
+		model.addAttribute("mcnt", cnt);
 
 		pageNum = req.getParameter("pageNum");
 
@@ -99,7 +99,7 @@ public class HostServiceImp implements HostService {
 			map.put("start", start);
 			map.put("end", end);
 			ArrayList<MemberVO> dtos = hDao.latelyJoinMember(map);
-			model.addAttribute("dtos", dtos);
+			model.addAttribute("mdtos", dtos);
 			System.out.println("=================================");
 		}
 
@@ -112,7 +112,7 @@ public class HostServiceImp implements HostService {
 			endPage = pageCount;
 		}
 
-		model.addAttribute("cnt", cnt);
+		model.addAttribute("mcnt", cnt);
 		model.addAttribute("number", number);
 		model.addAttribute("pageNum", pageNum);
 
@@ -590,7 +590,7 @@ public class HostServiceImp implements HostService {
 		System.out.println(yesterDayStr);
 		dtos.add(i, vo);
 		}//for
-		model.addAttribute("dtos",dtos);
+		model.addAttribute("ddtos",dtos);
 	}
 	
 	//주별 결산
