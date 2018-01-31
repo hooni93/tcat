@@ -25,14 +25,8 @@
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
-<<<<<<< HEAD
-				<h3 align="center">고객 리스트</h3>
-=======
-				<div class="col-md-12 h50"></div>
 				<h4 class="trgothic">고객 리스트</h4>
 				<div class="col-md-12 h25"></div>
-				
->>>>>>> branch 'master' of https://github.com/tcatProject/tcat.git
 				<table
 					class="table table-hover table-bordered table-condensed c fs10">
 					<tr class="bg-primary">
