@@ -119,5 +119,6 @@
 		</div>
 		<div class="col-md-1"></div>
 		<!--리스트목록 끝  -->
+			<div class="col-md-12 h250"></div>
 </body>
 </html>

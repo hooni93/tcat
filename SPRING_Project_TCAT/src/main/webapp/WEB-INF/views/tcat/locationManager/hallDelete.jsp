@@ -101,7 +101,8 @@ $(document).ready(function(){
                              </div>
                               <button type="button" class="btn btn-default" onclick="ajaxSubmit('hallDelete')">검색</button>
                          </form>
-				 </div> 
+				 </div>
+				 <div class="col-md-12 h400"></div> 
 				</div>
 		
 	</div>

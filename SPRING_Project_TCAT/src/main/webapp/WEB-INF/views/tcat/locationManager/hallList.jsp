@@ -111,6 +111,7 @@ $(document).ready(function(){
                               <button type="button" class="btn btn-default" onclick="ajaxSubmit('hallList')">검색</button>
                          </form>
 				 </div> 
+				 	<div class="col-md-12 h100"></div>
 				</div>
 		
 	</div>

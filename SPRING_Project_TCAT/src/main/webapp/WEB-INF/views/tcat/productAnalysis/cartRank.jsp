@@ -66,6 +66,7 @@
 			</script>
 		</div>
 	</div>
+			<div class="col-md-12 h250"></div>
 </div>
 <br>
 <br>

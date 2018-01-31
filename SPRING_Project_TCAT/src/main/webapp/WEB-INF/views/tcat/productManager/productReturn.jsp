@@ -6,11 +6,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>교환 관리</title>
+<title>반품 관리</title>
 <script type="text/javascript">
-/* 상품 교환 승인 */
+/* 상품 반품 승인 */
 function productReturnUpdateS(disc_num,url){
-	 alert("교환이 승인되었습니다");
+	 alert("반품이 승인되었습니다");
 	load('productReturnUpdateS?disc_num='+disc_num+'&url='+url);
 }
 </script>
@@ -20,7 +20,7 @@ function productReturnUpdateS(disc_num,url){
  	<div class="col-md-12 h25"></div>
  	<div class="col-md-1"></div>
  	<div class="col-md-11">
-					<h4 class="trgothic">스토어 - 교환관리
+					<h4 class="trgothic">스토어 - 반품관리
 					</h4>
 					<hr>
 	</div>

@@ -128,6 +128,7 @@ function oneManagerDel(service_num){
 			<br>
 		</div>
 		<div class="col-md-1"></div>
+			<div class="col-md-12 h250"></div>
 		<!--리스트목록 끝  -->
 </body>
 </html>

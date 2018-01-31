@@ -23,6 +23,7 @@
 	<div class="col-md-12 bffffff">
 
 		<div class="row">
+		<div class="col-md-12 h50"></div>
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
 				<h4 class="trgothic">고객 리스트</h4>
@@ -42,10 +43,10 @@
 					<c:if test="${cnt>0}">
 						<c:forEach var="dto" items="${dtos}">
 							<!-- items : dtos(ArrayList)의 배열만큼 반복된다. -->
-							<tr onclick="detailMember('${dto.member_id}');">
+							<tr onclick="detailMember('${dto.member_id}');" class="hand">
 								<td>${number}<c:set var="number" value="${number-1}" /></td>
 								<td>${dto.member_id}</td>
-								<td>${dto.member_name}</td>
+								<td >${dto.member_name}</td>
 								<td>${dto.member_gender}</td>
 								<td>${dto.member_birth}</td>
 								<td>${dto.lastDate}</td>
@@ -80,6 +81,7 @@
 				</div>
 			</div>
 			<div class="col-md-1"></div>
+			<div class="col-md-12 h100"></div>
 		</div>
 	</div>
 </body>

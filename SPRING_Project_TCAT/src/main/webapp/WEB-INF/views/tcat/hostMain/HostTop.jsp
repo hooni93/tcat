@@ -60,45 +60,7 @@
         }).open();
     }
 </script>
-<script>
-var ctx = document.getElementById("myChart").getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
-</script>
+
 <script>
 /*0125 장명훈  */
 $(document).ready(function(){
@@ -368,7 +330,6 @@ function qnaManagerDel(service_num){
  /* 영민이 제작 */
 	//핫리스트 삭제
 	 function hotDelete(hotListSize, per_id,url){
-		 alert(url);
 		 if(hotListSize>1){
 			 load('hotMenuDelete?Hcnt='+per_id+'&url='+url);
 		 }else{
@@ -379,7 +340,6 @@ function qnaManagerDel(service_num){
 	 }
 	//핫리스트 업데이트
 	 function hotUpdate(hotListSize, per_id,url){
-		 alert(url);
 		 if(hotListSize<5){
 			 load('hotMenuUpdate?Hcnt='+per_id+'&url='+url);
 		 }else{
@@ -391,7 +351,6 @@ function qnaManagerDel(service_num){
 	//////////////////////////
 	//핫스토어 삭제
 	 function hotStoreDelete(hotListSize, disc_code,url){
-		 alert(url);
 		 if(hotListSize>1){
 			 load('hotStoreMenuDelete?disc_code='+disc_code+'&url='+url);
 		 }else{
@@ -402,7 +361,6 @@ function qnaManagerDel(service_num){
 	 }
 	//핫스토어 업데이트
 	 function hotStoreUpdate(hotListSize, disc_code,url){
-		 alert(url);
 		 if(hotListSize<5){
 			 load('hotStoreMenuUpdate?disc_code='+disc_code+'&url='+url);
 		 }else{
@@ -414,43 +372,40 @@ function qnaManagerDel(service_num){
 	//////////////////////////
 	//이벤트 삭제
 	function eventDelete(notice_num,url){
-		 alert(url);
 		load('eventDelete?notice_num='+notice_num+'&url='+url);
 	 }
 	//이벤트 수정상세
 	function eventUpdate(notice_num,url){
-		 alert(url);
+		 
 		load('eventUpdate?notice_num='+notice_num+'&url='+url);
 	 }
 	//이벤트 수정
 	function eventUpdateList(notice_num,contents,notice_title,notice_image,url){
-		 alert(url);
+		 
 		load('eventUpdateList?notice_num='+notice_num+'&notice_title='+notice_title+'&contents='+contents+'&notice_image='+notice_image+'&url='+url);
 	 }
 
 	//구매요청
 	 function provalUpdate(ticket_num,url){
-		 alert(url);
 		load('provalUpdate?ticket_num='+ticket_num+'&url='+url);
 	 }
 	//이벤트 삭제
 	function levelDelete(sale_div,url){
-		alert(url);
+		
 		load('levelDelete?sale_div='+sale_div+'&url='+url);
 	}
 	//이벤트 상세
 	function levelMemberForm(sale_div,url){
-		alert(url);
 		load('levelMemberForm?sale_div='+sale_div+'&url='+url);
 	}
 	//수정 상세
 	function hostProForm(per_id,url){
-		alert(url);
+		
 		load('hostProForm?per_id='+per_id+'&url='+url);
 	}
 	//스토어수정 상세
 	function hostProStoreForm(disc_code,url){
-		alert(url);
+		
 		load('hostProStoreForm?disc_code='+disc_code+'&url='+url);
 	}
 	 /* 영민이 제작 */

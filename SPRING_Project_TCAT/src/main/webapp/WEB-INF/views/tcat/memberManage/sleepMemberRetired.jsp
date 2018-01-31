@@ -114,7 +114,7 @@ $(document).ready(function(){
                          </form>
 				 </div> 
 				</div>
-		
+			 <div class="col-md-12 h400"></div>
 	</div>
 </body>
 </html>

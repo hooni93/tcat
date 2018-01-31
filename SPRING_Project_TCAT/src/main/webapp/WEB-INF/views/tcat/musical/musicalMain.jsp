@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="spring.project.tcat.VO.TcatBoardVO" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -601,7 +602,9 @@ $(".wish").click(function(){
 									 			</td>
 								 			</tr>
 								 			<tr>
-									 			<td class="fs10 aaaaaa">~ ${volist.getB_seatPrice()}<span class="trgothic">원</span></td>
+									 			<td class="fs10 aaaaaa">~ 
+									 			<fmt:formatNumber value="${volist.getB_seatPrice()}" pattern="#,###"/>
+									 			<span class="trgothic">원</span></td>
 								 			</tr>	 		
 								 		</table>
 								 	</div>

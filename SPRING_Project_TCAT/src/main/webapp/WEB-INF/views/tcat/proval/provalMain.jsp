@@ -60,6 +60,8 @@
 								</tr>
 							</c:if>
 						</table>
+						<div class="col-md-5"></div>
+						<div class="col-md-6">
 						<table style="width: 1000px" align="center">
 							<tr>
 								<th align="center"><c:if test="${cnt > 0}">

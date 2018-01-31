@@ -3,6 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="spring.project.tcat.VO.TcatBoardVO" %>
 <%@ include file="../setting.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -547,7 +548,9 @@ $(".wish").click(function(){
 							</tr>
 						</table>
 						<h6 class="c">${vo.disc_title}</h6>
-						<h6 class="c">${vo.disc_price} </h6>
+						<h6 class="c">
+						<fmt:formatNumber value="${vo.disc_price}" pattern="#,###"/><span class="trgothic">원</span>
+						</h6>
 					</div>
 					<div class="c m5">
 						<a class="btn btn-primary btn-product wish" name="${vo.disc_code}"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a> 
@@ -590,7 +593,10 @@ $(".wish").click(function(){
 									 			</td>
 								 			</tr>
 								 			<tr>
-									 			<td class="fs11 aaaaaa"> ${volist.disc_price}<span class="trgothic">원</span></td>
+									 			<td class="fs11 aaaaaa"> 
+									 			<fmt:parseNumber var = "i" type = "number" value = "${volist.disc_price}" />
+									 			<fmt:formatNumber value="${i}" pattern="#,###"/>
+									 			<span class="trgothic">원</span></td>
 								 			</tr>	 		
 								 		</table>
 								 	</div>

@@ -147,7 +147,7 @@ function qnawrite(){
 			</div>
 			
 			</div>
-			
+		
 			<!-- <div class="col-md-2 thumbnail">
 			</div> -->
 </body>
