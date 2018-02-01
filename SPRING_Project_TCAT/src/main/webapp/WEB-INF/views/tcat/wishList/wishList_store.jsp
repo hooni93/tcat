@@ -147,7 +147,7 @@ function setDisc_code(wish_num){
 							<div class="content">
 								<div class="content overflow h15"
 									style="text-overflow: ellipsis; height: 15px">
-									<a class="header w100" onclick="contentPage(${wish.disc_code})">${wish.disc_title }</a>
+									<a class="header w100" onclick="contentMain_store(${wish.disc_code})">${wish.disc_title }</a>
 								</div>
 								<div class="meta">
 									<span class="date"> 
