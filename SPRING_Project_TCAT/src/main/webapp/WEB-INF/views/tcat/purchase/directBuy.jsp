@@ -4,6 +4,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<%@ include file="../setting.jsp"%>
 <html>
@@ -153,7 +154,7 @@ $('#count').blur(function() {
 											<input type="number" name="count" value="${count}" id="count" min="1">개
 										</td>
 										<td>
-											${perVO.disc_price*count}원
+											<fmt:formatNumber value="${perVO.disc_price*count}" pattern="#,###"/>원
 										</td>
 									</tr>	
 							</table>
@@ -181,7 +182,7 @@ $('#count').blur(function() {
 						</td>
 						<td valign=middle>
 							<c:if test="${perVO.getDisc_price()*count<15000}">
-								3000원
+								3,00원
 							</c:if>
 							<c:if test="${perVO.getDisc_price()*count>=15000}">
 								무료
@@ -195,27 +196,27 @@ $('#count').blur(function() {
 						<td valign=middle>
 							<%if(memVO.getRating().equals("VIP")){
 							%>
-								<%=Math.round(perVO.getDisc_price()*count*0.85)%>원
+								<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count*0.85)%>" pattern="#,###"/>원
 							<%
 							}else if(memVO.getRating().equals("S")){
 							%>
-								<%=Math.round(perVO.getDisc_price()*count*0.80)%>원
+								<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count*0.80)%>" pattern="#,###"/>원
 							<%	
 							}else if(memVO.getRating().equals("A")){
 							%>
-								<%=Math.round(perVO.getDisc_price()*count*0.85)%>원
+								<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count*0.85)%>" pattern="#,###"/>원
 							<%	
 							}else if(memVO.getRating().equals("B")){
 							%>
-								<%=Math.round(perVO.getDisc_price()*count*0.90)%>원
+								<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count*0.90)%>" pattern="#,###"/>원
 							<%
 							}else if(memVO.getRating().equals("C")){
 							%>
-								<%=Math.round(perVO.getDisc_price()*count*0.95)%>원
+								<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count*0.95)%>" pattern="#,###"/>원
 							<%
 							}else if(memVO.getRating().equals("D")){
 							%>
-								<%=perVO.getDisc_price()*count%>원
+								<fmt:formatNumber value="<%=perVO.getDisc_price()*count%>" pattern="#,###"/>원
 							<%
 							}
 							%>
@@ -270,7 +271,7 @@ $('#count').blur(function() {
 							<b>포인트 사용</b>
 							<input type="text" value="0"><input type="button" value="전액사용">
 							<ul>
-								<li>현재 사용가능 포인트 : ${memVO.getPoint()}</li>
+								<li>현재 사용가능 포인트 : <fmt:formatNumber value="${memVO.getPoint()}" pattern="#,###"/></li>
 							</ul>
 						</td>
 					</tr>
@@ -312,27 +313,27 @@ $('#count').blur(function() {
 									<th style="color:orange">총 상품금액</th>
 									<th style="color:orange"><%if(memVO.getRating().equals("VIP")){
 										%>
-											<%=Math.round(perVO.getDisc_price()*count*0.85)%>원
+											<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count*0.85)%>" pattern="#,###"/>원
 										<%
 										}else if(memVO.getRating().equals("S")){
 										%>
-											<%=Math.round(perVO.getDisc_price()*count*0.80)%>원
+											<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count*0.80)%>" pattern="#,###"/>원
 										<%	
 										}else if(memVO.getRating().equals("A")){
 										%>
-											<%=Math.round(perVO.getDisc_price()*count*0.85)%>원
+											<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count*0.85)%>" pattern="#,###"/>원
 										<%	
 										}else if(memVO.getRating().equals("B")){
 										%>
-											<%=Math.round(perVO.getDisc_price()*count*0.90)%>원
+											<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count*0.90)%>" pattern="#,###"/>원
 										<%
 										}else if(memVO.getRating().equals("C")){
 										%>
-											<%=Math.round(perVO.getDisc_price()*count*0.95)%>원
+											<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count*0.95)%>" pattern="#,###"/>원
 										<%
 										}else if(memVO.getRating().equals("D")){
 										%>
-											<%=perVO.getDisc_price()*count%>원
+											<fmt:formatNumber value="<%=perVO.getDisc_price()*count%>" pattern="#,###"/>원
 										<%
 										}
 										%></th>
@@ -341,7 +342,7 @@ $('#count').blur(function() {
 									<th>배송비</th>
 									<th>
 										<%if(perVO.getDisc_price()*count<15000){%>
-											3000원
+											3,000원
 										<%} %>
 										<%if(perVO.getDisc_price()*count>=15000){%>
 											무료
@@ -352,27 +353,27 @@ $('#count').blur(function() {
 									<th>할인금액</th>
 									<th><%if(memVO.getRating().equals("VIP")){
 										%>
-											<%=Math.round(perVO.getDisc_price()*count-perVO.getDisc_price()*count*0.85)%>원
+											<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count-perVO.getDisc_price()*count*0.85)%>" pattern="#,###"/>원
 										<%
 										}else if(memVO.getRating().equals("S")){
 										%>
-											<%=Math.round(perVO.getDisc_price()*count-perVO.getDisc_price()*count*0.80)%>원
+											<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count-perVO.getDisc_price()*count*0.80)%>" pattern="#,###"/>원
 										<%
 										}else if(memVO.getRating().equals("A")){
 										%>
-											<%=Math.round(perVO.getDisc_price()*count-perVO.getDisc_price()*count*0.85)%>원
+											<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count-perVO.getDisc_price()*count*0.85)%>" pattern="#,###"/>원
 										<%	
 										}else if(memVO.getRating().equals("B")){
 										%>
-											<%=Math.round(perVO.getDisc_price()*count-perVO.getDisc_price()*count*0.90)%>원
+											<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count-perVO.getDisc_price()*count*0.90)%>" pattern="#,###"/>원
 										<%
 										}else if(memVO.getRating().equals("C")){
 										%>
-											<%=Math.round(perVO.getDisc_price()*count-perVO.getDisc_price()*count*0.95)%>원
+											<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count-perVO.getDisc_price()*count*0.95)%>" pattern="#,###"/>원
 										<%
 										}else if(memVO.getRating().equals("D")){
 										%>
-											<%=Math.round(perVO.getDisc_price()*count)%>원
+											<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count)%>" pattern="#,###"/>원
 										<%
 										}
 										%></th>
@@ -381,32 +382,32 @@ $('#count').blur(function() {
 									<th>올라가는 포인트(0.5%)</th>
 									<th><%if(memVO.getRating().equals("VIP")){
 										%>
-											<%=Math.round(perVO.getDisc_price()*count*0.85*0.05)%>원
+										<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count*0.85*0.05)%>" pattern="#,###"/>원
 											<input type="hidden" value="<%=Math.round(perVO.getDisc_price()*0.85*0.05)%>" name="point">
 										<%
 										}else if(memVO.getRating().equals("S")){
 										%>
-											<%=Math.round(perVO.getDisc_price()*count*0.80*0.05)%>원
+										<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count*0.80*0.05)%>" pattern="#,###"/>원
 											<input type="hidden" value="<%=Math.round(perVO.getDisc_price()*0.80*0.05)%>" name="point">
 										<%	
 										}else if(memVO.getRating().equals("A")){
 										%>
-											<%=Math.round(perVO.getDisc_price()*count*0.85*0.05)%>원
+										<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count*0.85*0.05)%>" pattern="#,###"/>원
 											<input type="hidden" value="<%=Math.round(perVO.getDisc_price()*0.85*0.05)%>" name="point">
 										<%	
 										}else if(memVO.getRating().equals("B")){
 										%>
-											<%=Math.round(perVO.getDisc_price()*count*0.90*0.05)%>원
+										    <fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count*0.90*0.05)%>" pattern="#,###"/>원
 											<input type="hidden" value="<%=Math.round(perVO.getDisc_price()*0.90*0.05)%>" name="point">
 										<%
 										}else if(memVO.getRating().equals("C")){
 										%>
-											<%=Math.round(perVO.getDisc_price()*count*0.95*0.05)%>원
+											<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count*0.95*0.05)%>" pattern="#,###"/>원
 											<input type="hidden" value="<%=Math.round(perVO.getDisc_price()*0.95*0.05)%>" name="point">
 										<%
 										}else if(memVO.getRating().equals("D")){
 										%>
-											<%=Math.round(perVO.getDisc_price()*count*0.05)%>원
+											<fmt:formatNumber value="<%=Math.round(perVO.getDisc_price()*count*0.05)%>" pattern="#,###"/>원
 											<input type="hidden" value="<%=Math.round(perVO.getDisc_price()*0.05)%>" name="point">
 										<%
 										}

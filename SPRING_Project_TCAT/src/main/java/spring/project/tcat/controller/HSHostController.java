@@ -54,6 +54,7 @@ public class HSHostController {
 		
 		return "tcat/memberAnalysis/infoLocationMain";
 	}
+	
 	@RequestMapping("infoLocation")
 	public String infoLocation(HttpServletRequest req, Model model) {
 		System.out.println("infoLocation");
