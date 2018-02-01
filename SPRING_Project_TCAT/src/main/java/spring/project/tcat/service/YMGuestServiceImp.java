@@ -254,7 +254,7 @@ public class YMGuestServiceImp implements YMGuestService {
 	public void eventUpdateList(MultipartHttpServletRequest req, Model model) {
 	
 		MultipartFile file = req.getFile("notice_image");
-		String realDir = "C:\\Dev\\TCATworkspace\\git\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\eventList\\";
+		String realDir = "C:\\Dev\\TCATworkspace\\git\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\eventList\\";
 		String saveDir = req.getRealPath("/resources/image/eventList/");
 		
 		try {

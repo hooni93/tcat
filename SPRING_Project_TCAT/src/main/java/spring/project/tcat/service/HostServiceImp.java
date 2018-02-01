@@ -3066,7 +3066,7 @@ public class HostServiceImp implements HostService {
 		
 			MultipartFile file = req.getFile("Detail_Image");
 	
-			String realDir = "E:\\Team_project\\projectGit\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\performance\\";
+			String realDir = "C:\\Dev\\TCATworkspace\\git\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\performance\\";
 			String saveDir = req.getRealPath("/resources/image/performance/");
 			try {
 
@@ -3493,7 +3493,7 @@ public void hostProUpdate(MultipartHttpServletRequest req, Model model) {
 MultipartFile file = req.getFile("perf_Image");
 
 
-String realDir = "C:\\Dev\\TCATworkspace\\git\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\performance\\";
+String realDir = "C:\\Dev\\TCATworkspace\\git\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\performance\\";
 String saveDir = req.getRealPath("/resources/image/performance/");
 try {
 
@@ -3583,7 +3583,7 @@ public void hostProStoreForm(HttpServletRequest req, Model model) {
 public void hostProStoreUpdate(MultipartHttpServletRequest req, Model model) {
 	MultipartFile file = req.getFile("disc_image");
 
-	String realDir = "C:\\Dev\\TCATworkspace\\git\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\store\\";
+	String realDir = "C:\\Dev\\TCATworkspace\\git\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\store\\";
 	String saveDir = req.getRealPath("/resources/image/store/");
 	try {
 
@@ -5326,7 +5326,7 @@ System.out.println("댓글삭제성공!");
 					file = req.getFile("HnoMoboard_Image");
 					
 					if(file!=null) {
-					String realDir = "C:\\Dev\\TCATworkspace\\git\\tcat\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\Boarder\\";
+					String realDir = "C:\\Dev\\TCATworkspace\\git\\SPRING_Project_TCAT\\src\\main\\webapp\\resources\\image\\Boarder\\";
 					      
 					String saveDir = req.getRealPath("/resources/image/Boarder/");
 					try {
