@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-
+ 
   //ajax
     function memberSubmit(url){   /* AJAX submit */  
        var result = document.getElementById("result");

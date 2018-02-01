@@ -112,6 +112,7 @@
    		<insert id="insertdelevaryInfo" parameterType="java.util.Map">
    			insert into delevaryInfo values(delevaryInfo_SEQ.nextval,#{member_name},#{member_addr},#{member_hp})
    		</insert>
+   		
    		<select id="maxdel_num" resultType="int">
    			select max(del_num) from delevaryInfo
    		</select>
@@ -120,7 +121,9 @@
 			select * 
 			from
 			(
-			    select p.per_id,p.perf_title,p.cateNum,p.R_seatPrice,p.VIP_seatPrice,p.S_seatPrice,p.A_seatPrice,p.B_seatPrice,c.category,c.mDev,c.sDev,pl.city,pl.postNum,pl.address,pl.province,p.perf_Image,p.startdate,p.enddate,p.hall_id,h.hall_name,h.VIP_seat,h.R_seat,h.S_seat,h.A_seat,h.B_seat,p.first_grade,p.per_step,p.remain_round,p.possible_age,rownum rNum
+			    select p.per_id,p.perf_title,p.cateNum,p.R_seatPrice,p.VIP_seatPrice,p.S_seatPrice,p.A_seatPrice,p.B_seatPrice,c.category,c.mDev,
+			    c.sDev,pl.city,pl.postNum,pl.address,pl.province,p.perf_Image,p.startdate,p.enddate,p.hall_id,h.hall_name,h.VIP_seat,h.R_seat,
+			    h.S_seat,h.A_seat,h.B_seat,p.first_grade,p.per_step,p.remain_round,p.possible_age,rownum rNum
 			    from (select * from performanceInfo order by per_id desc) p,category c,hallInfo h,place pl
 			    where p.cateNum=c.cateNum and p.hall_id = h.hall_id and c.category='공연' and h.place_num=pl.place_num
 			)
@@ -165,9 +168,12 @@
    		</insert>
    		
    		<insert id="insertTicket" parameterType="java.util.Map">
-   			insert into Ticketing(ticket_num,member_id,per_id,ticet_date,seat_type,seat_num,sale_div,del_num,ticket_step,round)
-   						values(Ticketing_SEQ.nextval,#{member_id},#{per_id},#{ticet_date},#{seat_type},#{seat_num},#{sale_div},#{del_num},#{ticket_step},#{round})
+   			insert into Ticketing(ticket_num,member_id,per_id,ticet_date,seat_type,seat_num,
+   						sale_div,del_num,ticket_step,round)
+   						values(Ticketing_SEQ.nextval,#{member_id},#{per_id},#{ticet_date},
+   						#{seat_type},#{seat_num},#{sale_div},#{del_num},#{ticket_step},#{round})
    		</insert>
+   		
    		<!-- 스토어 제품정보 가져오기 -->
    		<select id="DiscInfo" parameterType="int" resultType="spring.project.tcat.VO.TcatPerDiscVO">
    			select * from perDisc where disc_code=#{disc_code}

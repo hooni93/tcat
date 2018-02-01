@@ -2,6 +2,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <%@ include file="../setting.jsp" %>
 <html>
 <head>
@@ -137,7 +138,7 @@ function changeCount(count,disc_code){
 						</div>
 						<div class="col-xs-5">
 							<div class="col-xs-6 text-right">
-								<h6><strong>${vo.disc_price} <span class="text-muted">x</span></strong></h6>
+								<h6><strong><fmt:formatNumber value="${vo.disc_price}" pattern="#,###"/> <span class="text-muted">x</span></strong></h6>
 							</div>
 							<div class="col-xs-4">
 								<input type="number" onclick="changeCount(this.value,'${vo.disc_code}')" min="1" class="form-control input-sm" id="cart_count" value="${vo.cart_count}">
@@ -178,7 +179,7 @@ function changeCount(count,disc_code){
 								price+=(count*price2);
 								}
 							}%>
-							<%=price%>
+							<fmt:formatNumber value="<%=price%>" pattern="#,###"/>
 							</strong></h4>
 						</div>
 						<div class="col-xs-3">
