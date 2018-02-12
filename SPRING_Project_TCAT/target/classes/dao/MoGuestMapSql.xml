@@ -210,16 +210,7 @@ select notice_title,writeDate,contents from notice where notice_div=1  order by 
  
  </select> 
  
- <!-- 안드로이드 로그인 -->
-  <select id="confirmIdPwdAN" parameterType="java.util.Map" resultType="int">
- 		<![CDATA[ select count(*) from member WHERE member_id=#{member_id} AND member_pwd=#{member_pwd} ]]>
- </select>
 
-  <select id="mypageAn" parameterType="String" resultType="spring.project.tcat.VO.MemberVO">
- 	<![CDATA[ select * from member WHERE member_id=#{_parameter} ]]>
- </select>   
-   
- 
    </mapper>
    
    

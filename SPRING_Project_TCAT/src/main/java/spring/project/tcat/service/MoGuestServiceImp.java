@@ -688,33 +688,7 @@ public class MoGuestServiceImp implements MoGuestService {
 			
 			
 		}
-		//안드로이드 서비스
-		@Override
-		public int androidIdCheck(HttpServletRequest req, Model model) {
-			// TODO Auto-generated method stub
-				 String id=req.getParameter("id");
-	             String pwd=req.getParameter("pwd");
-	             System.out.println(id);
-	             System.out.println(pwd);
-	             Map<String, String> in=new HashMap<String,String>();
-	             in.put("member_id", id);
-	             in.put("member_pwd", pwd);
-	             System.out.println("======================");
-	             int cnt=MGDao.confirmIdPwdAN(in);
-	             System.out.println(cnt);
-	             req.setAttribute("id", id);
-	             return cnt;
-		}
-		@Override
-		public void androidVOresult(HttpServletRequest req, Model model) {
-			// TODO Auto-generated method stub
-			  String id=req.getParameter("id");
-	         MemberVO vo=MGDao.mypageAn(id);
-	         req.setAttribute("vo", vo);
-	             
-		}
-		
-		
+
 		
 		
 		

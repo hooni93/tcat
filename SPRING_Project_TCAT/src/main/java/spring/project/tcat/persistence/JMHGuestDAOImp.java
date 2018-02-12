@@ -320,5 +320,62 @@ public class JMHGuestDAOImp implements JMHGuestDAO {
 		ArrayList<ContentFavoriteVO> fav = dao.getGenderPerf_store(gender);
 		return fav;
 	}
+	
+	
+	//////////////////////////////////////////////////////////////////////
+	//안드로이드
+	//아이디확인(존재여부)
+	public int and_idChk(Map<String,Object> map) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		int rs = dao.and_idChk(map);
+		return rs;
+	}
+	//로그인(존재여부)
+	public int and_login(Map<String,Object> map) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		int rs = dao.and_login(map);
+		return rs;
+	}
+	//getAnd_perfInfo 비콘 접근 해당 공연정보
+	public TcatPerformanceVO getAnd_perfInfo(Map<String,Object> map) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		TcatPerformanceVO rs = dao.getAnd_perfInfo(map);
+		return rs;
+	}
+	//getAnd_ticketingNow 비콘 접근 해당 예매정보
+	public ArrayList<TcatTicketingVO> getAnd_ticketingNow(Map<String,Object> map){
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		ArrayList<TcatTicketingVO> rs = dao.getAnd_ticketingNow(map);
+		return rs;
+	}
+	//getPer_id
+	public String getPer_id(String hall_id) {
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		String rs = dao.getPer_id(hall_id);
+		return rs;
+	}
+
+	//현석이형
+	@Override
+	public ArrayList<TcatTicketingVO> searchTcat01(Map<String,String> map) {
+		ArrayList<TcatTicketingVO> dtos=null;
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		dtos=dao.searchTcat01(map);
+		//System.out.println("ticet_date:"+dtos.get(0).getTicet_date());
+		return dtos;
+
+	}
+	
+	//dk android
+	@Override
+	public TcatPerformanceVO and_perf(Map<String,Object> map) {
+		TcatPerformanceVO dto = null;
+		
+		JMHGuestDAO dao = Configuration.getMapper(JMHGuestDAO.class);
+		dto = dao.and_perf(map);
+		
+		return dto;
+	}
+
 
 }

@@ -1,8 +1,12 @@
 package spring.project.tcat.service;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
+
+import spring.project.tcat.VO.TcatPerformanceVO;
 
 public interface JMHGuestService {
 	
@@ -62,4 +66,19 @@ public interface JMHGuestService {
 	public void  getGenderAnalysis(HttpServletRequest req,Model model);
 	//getGenderAnalysis_store 성별 스토어 분석
 	public void  getGenderAnalysis_store(HttpServletRequest req,Model model);
+	
+	//////안드로이드
+	public Map<String, Object> and_login(HttpServletRequest req,Model model);
+	
+	//beacon_react
+	public Map<String, Object> beacon_react(HttpServletRequest req,Model model);
+	
+	//공연 아이디 가져오기
+	public String getPer_id(HttpServletRequest req);
+	//현석이형
+	//안드로이드 통신[예매정보 가져오기]
+	public void Tcat_android01(HttpServletRequest req);
+	
+	//dk android
+	public TcatPerformanceVO and_content(HttpServletRequest req,Model model);
 }

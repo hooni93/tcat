@@ -1,12 +1,19 @@
 package spring.project.tcat.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import spring.project.tcat.VO.TcatPerformanceVO;
+import spring.project.tcat.VO.TcatTicketingVO;
 import spring.project.tcat.service.JMHGuestService;
 
 @Controller
@@ -300,5 +307,202 @@ public class JMHGuestController {
 		MoGuestContoroller moc = new MoGuestContoroller();
 		return moc.guestPage(req, model);
 	}
+	
+	//////////////////////////////////////////////////////
+	// 안드로이드 통신
+	/* 안드로이드 통신관련 */
+	@RequestMapping("and_login")
+	@ResponseBody
+	public Map<String, Object> androidTestWithRequestAndResponse(HttpServletRequest req, Model model){
+		System.out.println("접속"+ req.getParameter("id"));
+		return mhService.and_login(req, model);
+	}
+	
+	//공연정보 및 예매 정보 가져오기
+	@RequestMapping("beacon_react")
+	@ResponseBody
+	public Map<String, Object> beacon_react(HttpServletRequest req, Model model){
+		System.out.println("접속"+ req.getParameter("id")+"/공연장 정보: "+req.getParameter("hall_id"));
+		return mhService.beacon_react(req, model);
+	}
+	
+	//현석이형꺼
+	@RequestMapping("Tcat_android")
+    @ResponseBody
+    public Map<String, String> Tcat_android(HttpServletRequest req) {
+    	System.out.println("Tcat_android");
+    	Map<String, String> result = new HashMap<String, String>();
+    	java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
+    	String ticet_date="";
+    	String seat_type="";
+    	String seat_num="";
+    	String perf_title="";
+    	String perf_image="";
+    	String round="";
+    	String possible_age="";
+    	String hall_name="";
+    	String price="";
+    	String per_id="";
+    	String cnt;
+    	
+    	mhService.Tcat_android01(req);
+    	
+    	ArrayList<TcatTicketingVO> dtos=(ArrayList<TcatTicketingVO>)req.getAttribute("dtos");
+    	cnt= String.valueOf(dtos.size());    	
+    	System.out.println("cnt: "+cnt);
+    	for(int i=0;i<dtos.size();i++) {
+    		String remain_round=dtos.get(i).getRemain_round();
+			String remR[]=remain_round.split(",");
+    		
+			ticet_date+=","+formatter.format(dtos.get(i).getTicet_date());
+			seat_type+=","+dtos.get(i).getSeat_type();
+			seat_num+=","+dtos.get(i).getSeat_num();
+			perf_title+=","+dtos.get(i).getPerf_title();
+			perf_image+=","+dtos.get(i).getPerf_Image();
+			switch(dtos.get(i).getRound()) {
+			case 1:
+				round+=","+remR[0];
+				break;
+			case 2:
+				round+=","+remR[1];
+				break;
+			case 3:
+				round+=","+remR[2];
+				break;
+			case 4:
+				round+=","+remR[3];
+				break;
+			case 5:
+				round+=","+remR[4];
+				break;
+			case 6:
+				round+=","+remR[5];
+				break;
+			}
+			possible_age+=","+dtos.get(i).getPossible_age();
+			hall_name+=","+dtos.get(i).getHall_name();
+			if(dtos.get(i).getSeat_type().equals("VIP")) {
+				price+=","+dtos.get(i).getVIP_seatPrice();
+			}else if(dtos.get(i).getSeat_type().equals("R")) {
+				price+=","+dtos.get(i).getR_seatPrice();
+			}else if(dtos.get(i).getSeat_type().equals("S")) {
+				price+=","+dtos.get(i).getS_seatPrice();
+			}else if(dtos.get(i).getSeat_type().equals("A")) {
+				price+=","+dtos.get(i).getA_seatPrice();
+			}else if(dtos.get(i).getSeat_type().equals("B")) {
+				price+=","+dtos.get(i).getB_seatPrice();
+			}
+			int pi=dtos.get(i).getPer_id();
+			per_id+=","+pi;
+    			
+    	}
+    	//perf_type
+    	String hall_id = req.getParameter("hall_id");
+    	String per_id_origin="";
+    	if(hall_id!=null) {
+    		per_id_origin = mhService.getPer_id(req);
+    	}
+    	
+    	
+    	result.put("per_id_origin", per_id_origin);
+    	result.put("ticet_date", ticet_date);
+    	result.put("seat_type", seat_type);
+		result.put("seat_num", seat_num);
+		result.put("perf_title", perf_title);
+		result.put("perf_image", perf_image);
+		result.put("round", round);
+		result.put("possible_age", possible_age);
+		result.put("hall_name", hall_name);
+		result.put("price", price);
+		result.put("per_id", per_id);
+		result.put("cnt", cnt);
+		System.out.println(
+				"ticet_date : "+ticet_date+"\n"+
+				"seat_type : "+seat_type+"\n"+
+				"seat_num : "+seat_num+"\n"+
+				"perf_title : "+perf_title+"\n"+
+				"perf_image : "+perf_image+"\n"+
+				"round : "+round+"\n"+
+				"possible_age : "+possible_age+"\n"+
+				"hall_name : "+hall_name+"\n"+
+				"price : "+price+"\n"+
+				"per_id:"+per_id
+		);
+        return result;
+    }
+	
+	
+	@RequestMapping("and_content")
+	@ResponseBody
+	public  Map<String, String> androidTestContent(HttpServletRequest req, Model model){
+		System.out.println("and_content");
+		String perf_title="";
+		String perf_Image="";
+		String startDate="";
+		String endDate="";
+		String remain_round="";
+		String possible_age="";
+		String VIP_seatPrice="";
+		String R_seatPrice="";
+		String S_seatPrice="";
+		String A_seatPrice="";
+		String B_seatPrice="";
+		String hall_name="";
+		String province="";
+		String city="";
+		String postNum="";
+		String address="";
+		String per_ex="";
+		String Detail_Image="";
+		TcatPerformanceVO vo =mhService.and_content(req, model);
+		java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
+		perf_title=vo.getPerf_title();
+		perf_Image=vo.getPerf_Image();
+		startDate=formatter.format(vo.getStartDate());
+		endDate=formatter.format(vo.getEndDate());
+		remain_round=vo.getRemain_round();
+		possible_age=""+vo.getPossible_age();
+		VIP_seatPrice=""+vo.getVIP_seatPrice();
+		R_seatPrice=""+vo.getR_seatPrice();
+		S_seatPrice=""+vo.getS_seatPrice();
+		A_seatPrice=""+vo.getA_seatPrice();
+		B_seatPrice=""+vo.getA_seatPrice();
+		hall_name=vo.getHall_name();
+		province=vo.getProvince();
+		city=vo.getCity();
+		postNum=vo.getPostNum();
+		address=vo.getAddress();
+		per_ex=vo.getPer_ex();
+		Detail_Image=vo.getDetail_Image();
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("perf_title", perf_title);
+		map.put("perf_Image", perf_Image);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		map.put("remain_round", remain_round);
+		map.put("possible_age", possible_age);
+		map.put("VIP_seatPrice", VIP_seatPrice);
+		map.put("R_seatPrice", R_seatPrice);
+		map.put("S_seatPrice", S_seatPrice);
+		map.put("S_seatPrice", S_seatPrice);
+		map.put("S_seatPrice", S_seatPrice);
+		map.put("A_seatPrice", A_seatPrice);
+		map.put("B_seatPrice", B_seatPrice);
+		map.put("hall_name", hall_name);
+		map.put("province", province);
+		map.put("city", city);
+		map.put("postNum", postNum);
+		map.put("address", address);
+		map.put("per_ex", per_ex);
+		map.put("Detail_Image", Detail_Image);
+		
+		System.out.println("-----------0"+perf_Image);
+		return map;
+	}
+	
+	
+	
+	
 	
 }

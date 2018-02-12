@@ -430,7 +430,7 @@
 		tic.ticket_num,
 		tic.member_id, tic.per_id,
 		tic.ticet_date, tic.seat_type, tic.seat_num,
-		tic.sale_div,
+		tic.sale_div,tic.round,
 		tic.del_num, tic.ticket_step,
 		per.perf_title,
 		per.perf_Image, per.startDate,
@@ -708,4 +708,99 @@
 		)
 		WHERE rownum &gt;=1 AND rownum &lt;=5
 	</select>
+	
+		<!--\안드로이드  -->
+	
+	<!--아이디체크  -->
+	<select id="and_idChk" resultType="int">
+		SELECT COUNT(*) FROM member WHERE member_id = #{member_id}
+	</select>
+	
+	<!--로그인  -->
+	<select id="and_login" resultType="int">
+		SELECT COUNT(*) FROM member WHERE member_id = #{member_id} AND member_pwd = #{member_pwd}
+	</select>
+	<!-- 비콘 접근시 해당 공연 정보 -->
+	<select id="getAnd_perfInfo" resultType="spring.project.tcat.VO.TcatPerformanceVO">
+		SELECT 	per.per_id, per.perf_title, per.cateNum,
+				per.perf_Image, per.startDate, per.endDate, per.hall_id,
+				cat.category,
+				cat.mDev, cat.sDev,
+				hal.hall_name, hal.place_num, per.VIP_seatPrice,
+				per.R_seatPrice, per.S_seatPrice, per.A_seatPrice, per.B_seatPrice,
+				hal.VIP_seat, hal.R_seat, hal.S_seat, hal.A_seat, hal.B_seat,
+				hal.seat_line,
+				pla.province, pla.city, pla.postNum, pla.address
+		FROM 	performanceInfo per
+		JOIN 	category cat 	ON per.cateNum = cat.cateNum
+		JOIN 	hallInfo hal 	ON per.hall_id = hal.hall_id
+		JOIN 	place pla 		ON hal.place_num = pla.place_num
+		WHERE 	NOT(per.per_step LIKE 4)<!--판매중지 제외 -->
+		AND		per.hall_id = #{hall_id}
+		AND    	TO_CHAR(SYSDATE,'yy/MM/dd') &gt;=per.startDate
+		AND		TO_CHAR(SYSDATE,'yy/MM/dd') &lt;=per.endDate
+	</select>
+	
+	<!--해당 비콘 공연티켓 유무  -->
+	<select id="getAnd_ticketingNow" resultType="spring.project.tcat.VO.TcatTicketingVO">
+		SELECT	tic.ticket_num, tic.member_id, tic.per_id,
+				tic.ticet_date, tic.seat_type, tic.seat_num,
+				tic.sale_div,	tic.del_num, tic.ticket_step, tic.round,
+				per.perf_title,	per.perf_Image, <!-- per.startDate, per.endDate, --> per.hall_id,
+				per.first_grade, per.per_step, per.remain_round, per.possible_age, h.hall_name, h.place_num,
+				h.VIP_seat, h.R_seat, h.S_seat, h.A_seat, h.B_seat, h.seat_line
+		FROM	Ticketing tic
+		JOIN 	performanceInfo per ON tic.per_id = per.per_id
+		JOIN 	sale s				ON s.sale_div = tic.sale_div
+		JOIN	hallInfo h			ON h.hall_id = per.hall_id
+		WHERE 	tic.ticket_step = 5
+		AND		tic.member_id = #{member_id}
+		AND		per.hall_id = #{hall_id}
+        AND     ticet_date = TO_CHAR(SYSDATE,'yy/MM/dd')
+	</select>
+	<!-- 공연장 정보에 의한 공연정보 가져오기 -->
+	<select id="getPer_id" resultType="String">
+		SELECT 	per.per_id
+		FROM 	performanceInfo per
+		JOIN 	hallInfo hal 	ON per.hall_id = hal.hall_id
+		WHERE 	NOT(per.per_step LIKE 4)<!--판매중지 제외 -->
+		AND		per.hall_id = #{hall_id}
+		AND    	TO_CHAR(SYSDATE,'yy/MM/dd') &gt;=per.startDate
+		AND		TO_CHAR(SYSDATE,'yy/MM/dd') &lt;=per.endDate
+	</select>
+	
+	
+	<select id="searchTcat01" parameterType="String" resultType="spring.project.tcat.VO.TcatTicketingVO">
+			
+			select *
+   			from(
+				select t.ticket_num,t.member_id,p.per_id,p.perf_title,p.perf_image,p.possible_age,p.VIP_seatPrice,p.R_seatPrice,p.remain_round,
+						p.S_seatPrice,p.A_seatPrice,p.B_seatPrice,h.hall_name,h.hall_id,pl.province,pl.city,pl.postNum,pl.address,t.ticet_date,t.seat_type,
+						t.seat_num,t.round,t.del_num,t.ticet_buyDate
+				from Ticketing t,performanceInfo p,hallInfo h,place pl
+				where t.per_id=p.per_id and p.hall_id=h.hall_id and h.place_num =pl.place_num and t.ticket_step!= 6 and t.ticket_step!= 7 and t.ticket_step!= 8 
+				)
+			where member_id=#{member_id} 
+			<if test="hall_id != null">
+				AND hall_id = #{hall_id}
+				AND	ticet_date = TO_CHAR(SYSDATE,'yy/MM/dd')
+			</if>
+			<if test="hall_id == null">
+			and ticet_date &gt;= TO_CHAR(SYSDATE,'yy/MM/dd')
+			</if>
+   	</select>
+   	
+   		  	<!-- 상세페이지 -->
+	<select id="and_perf" resultType="spring.project.tcat.VO.TcatPerformanceVO" parameterType="java.util.Map">
+		
+		SELECT p.per_id,p.perf_title,p.perf_Image,p.startDate,p.endDate,p.remain_round,p.possible_age,
+		p.VIP_seatPrice,p.R_seatPrice,p.S_seatPrice
+		,p.A_seatPrice,p.B_seatPrice,h.hall_name,pl.province,pl.city,pl.postNum,pl.address,d.per_ex,d.Detail_Image
+		from performanceInfo p,hallInfo h,place pl,DetailPage d
+		where p.hall_id=h.hall_id and h.place_num = pl.place_num and p.per_id=#{per_id} and p.detail_num=d.detail_num
+		
+	</select>
+   	
+ 
+	
 </mapper>

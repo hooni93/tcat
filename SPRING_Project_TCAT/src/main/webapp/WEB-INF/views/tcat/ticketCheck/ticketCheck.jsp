@@ -187,13 +187,15 @@
 						<fmt:formatDate
 							value="${ticket.ticet_date}"
 							pattern="yyyy년 MM월 dd일" />
-						${ticket.remain_round.split("/")[1]}
+						${ticket.remain_round.split(",")[ticket.round-1]}
 					</div>
 					<div class="number">${futureTicket.get(index).size()}매</div>
 					<div class="info">
 						<section>
-						<div class="title" style="text-overflow:ellipsis; overflow:hidden"><nobr>${ticket.remain_round.split("/")[0]}</nobr></div>
-						<div>${ticket.remain_round.split("/")[1]}</div>
+						<div class="title" style="text-overflow:ellipsis; overflow:hidden"><nobr>회차정보</nobr></div>
+						<div>
+						${ticket.remain_round.split(",")[ticket.round-1]}
+						</div>
 						</section>
 						<br>
 						<section>
@@ -278,13 +280,13 @@
 						<br>
 						<fmt:formatDate value="${pTicket.ticet_date}"
 							pattern="yyyy년 MM월 dd일" />
-						${pTicket.remain_round.split("/")[1]}
+						${pTicket.remain_round.split(",")[ticket.round-1]}
 					</div>
 					<div class="number">${pastTicket.get(index).size()}매</div>
 					<div class="info">
 						<section>
-						<div class="title">${pTicket.remain_round.split("/")[0]}</div>
-						<div>${pTicket.remain_round.split("/")[1]}</div>
+						<div class="title">회차정보</div>
+						<div>${pTicket.remain_round.split(",")[pTicket.round-1]}</div>
 						</section>
 						<br>
 						<section>

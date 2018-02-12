@@ -997,4 +997,108 @@ public class JMHGuestServiceImp implements JMHGuestService {
 		model.addAttribute("agePerf10", agePerf10);
 		model.addAttribute("agePerf20", agePerf20);
 	}
+	
+	////// 안드로이드
+	public Map<String, Object> and_login(HttpServletRequest req, Model model) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		//ArrayList<MemberVO> member = mhDAO.getAndroid();
+		String id = req.getParameter("id");
+		String pwd = req.getParameter("pwd");
+		int login_result = 0;
+		/*for(int i=0;i<member.size();i++) {
+			id += member.get(i).getMember_id()+",";
+			name += member.get(i).getMember_name()+",";
+		}*/
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("member_id", id);
+		map.put("member_pwd" , pwd);
+		//아이디 확인
+		login_result = mhDAO.and_idChk(map);
+		//비밀번호 확인
+		if(login_result==1) {
+			login_result  = mhDAO.and_login(map);
+			if(login_result == 0) {
+				login_result = 2;
+			}
+		}
+		result.put("login_result", login_result);
+		return result;
+	}
+	
+
+	//beacon_react
+	public Map<String, Object> beacon_react(HttpServletRequest req,Model model){
+		//안드로이드로 보낼 맵 만들기
+		int ticketing_cnt=0;
+		Map<String, Object> result = new HashMap<String, Object>();
+		//안드로이드 에서 보낸 정보 받기
+		String member_id =req.getParameter("id");
+		String hall_id_str = req.getParameter("hall_id");
+		
+		//DAO에 보낼 맵
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("member_id", member_id);
+		map.put("hall_id", Integer.parseInt(hall_id_str));
+		
+		//공연정보 가져오기
+		TcatPerformanceVO performance = mhDAO.getAnd_perfInfo(map);
+		//해당하는 시간대 해당하는 공연티켓 예매확인
+		ArrayList<TcatTicketingVO> tickets = mhDAO.getAnd_ticketingNow(map);
+		
+		
+		if(tickets.size()>0) {
+			ticketing_cnt =  tickets.size();//티켓 갯수
+		}
+		
+		//결과 담기
+		//result.put("performance", performance);
+		//result.put("tickets", tickets);
+		result.put("perf_image", performance.getPerf_Image());
+		result.put("perf_title", performance.getPerf_title());
+		result.put("hall_name", performance.getHall_name());
+		//result.put("start_end", performance.getStartDate()+"-"+performance.getEndDate());
+		
+		result.put("ticketing_cnt", ticketing_cnt);
+		System.out.println("tic: "+ticketing_cnt);
+		System.out.println("performance: "+performance.getPerf_title());
+		return result;
+	}
+	//공연 아이디 가져오기
+	public String getPer_id(HttpServletRequest req) {
+		String hall_id = req.getParameter("hall_id");
+		String per_id = mhDAO.getPer_id(hall_id);
+		
+		return per_id;
+	}
+	
+	//현석이형
+	@Override
+	public void Tcat_android01(HttpServletRequest req) {
+		String member_id=req.getParameter("member_id");
+		String hall_id=req.getParameter("hall_id");
+		System.out.println("member_id");
+		System.out.println("hall_id: "+hall_id);
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("member_id", member_id);
+		map.put("hall_id", hall_id);
+		ArrayList<TcatTicketingVO> dtos=mhDAO.searchTcat01(map);
+		req.setAttribute("dtos", dtos);			
+	}
+	
+	//dk android
+	@Override
+	public TcatPerformanceVO and_content(HttpServletRequest req, Model model) {
+		TcatPerformanceVO perfoVO = new TcatPerformanceVO();
+		int per_id = Integer.parseInt(req.getParameter("per_id"));
+		String login_id = req.getParameter("login_id");
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("per_id", per_id);
+		map.put("login_id", login_id);
+		
+		perfoVO = mhDAO.and_perf(map);
+		
+		
+		return perfoVO;
+	}
 }

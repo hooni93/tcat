@@ -3009,6 +3009,7 @@ public class HostServiceImp implements HostService {
 
 		detailPageVO dto = new detailPageVO();
 		dto = hDao.detaillist(detail_num);
+		
 
 		model.addAttribute("dto", dto);
 		model.addAttribute("detail_num", detail_num);

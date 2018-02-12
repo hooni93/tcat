@@ -130,4 +130,28 @@ public interface JMHGuestDAO {
 	public ArrayList<ContentFavoriteVO> getGenderGenre_store();
 	// 성별 스토어 선호 제품
 	public ArrayList<ContentFavoriteVO>  getGenderPerf_store(int gender);
+	
+	
+	//////////////////////////////////////////////////////////////////////
+	//안드로이드
+	//아이디확인(존재여부)
+	public int and_idChk(Map<String,Object> map);
+	//로그인(존재여부)
+	public int and_login(Map<String,Object> map);
+	
+	//getAnd_perfInfo 비콘 접근 해당 공연정보
+	public TcatPerformanceVO getAnd_perfInfo(Map<String,Object> map);
+	//getAnd_ticketingNow 비콘 접근 해당 예매정보
+	public ArrayList<TcatTicketingVO> getAnd_ticketingNow(Map<String,Object> map);
+	
+	//getPer_id
+	public String getPer_id(String hall_id);
+	
+	//현석이형
+	//예매정보 가져오기 [안드로이드]
+	public ArrayList<TcatTicketingVO> searchTcat01(Map<String,String> map);
+	
+	//dk android
+	public TcatPerformanceVO and_perf(Map<String,Object> map);
+	
 }
