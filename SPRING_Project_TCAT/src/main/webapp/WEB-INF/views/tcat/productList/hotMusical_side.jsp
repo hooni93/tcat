@@ -15,13 +15,13 @@
 
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h50 c"><span class="fs15 aaaaaa trgothic">공연</span></li>
-	            <li class="b400040"><a onclick="load('hotMusical');">뮤지컬</a></li>
-				<li class="b400040"><a onclick="load('hotConcert');">콘서트</a></li>
-	            <li class="b400040"><a onclick="load('hotDrama');">연극</a></li>
-	            <li class="b400040"><a onclick="load('hotClassic');">클래식</a></li>
-	            <li class="b400040"><a onclick="load('hotDance');">무용</a></li>
+	            <li class="b400040"><a onclick="load('hotMusical');" class="ffffff">뮤지컬</a></li>
+				<li class="b400040"><a onclick="load('hotConcert');" class="ffffff">콘서트</a></li>
+	            <li class="b400040"><a onclick="load('hotDrama');" class="ffffff">연극</a></li>
+	            <li class="b400040"><a onclick="load('hotClassic');" class="ffffff">클래식</a></li>
+	            <li class="b400040"><a onclick="load('hotDance');" class="ffffff">무용</a></li>
 	            <li class="b400040 h50 c"><span class="fs15 aaaaaa trgothic">스토어</span></li>
-	            <li class="b400040"><a onclick="load('hotStore');">스토어</a></li>
+	            <li class="b400040"><a onclick="load('hotStore');" class="ffffff">스토어</a></li>
 			</ul>
 	    </div>          
 	</div>

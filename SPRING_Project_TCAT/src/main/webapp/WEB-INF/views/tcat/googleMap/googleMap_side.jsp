@@ -12,7 +12,7 @@
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h50"></li>
 				<li class="b400040"><a
-					onclick="#">오시는 길</a></li>
+					onclick="#" class="ffffff">오시는 길</a></li>
 			</ul>
 		</div>
 	</div>

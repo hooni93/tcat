@@ -10,10 +10,10 @@
 <body>
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h50"></li>
-				<li class="b400040"><a onclick="load('join_retireMember');">최근 가입회원 관리</a></li>
-				<li class="b400040"><a onclick="load('retireMemberRecuvery?Hcnt=3');">탈퇴회원 복구</a></li>
-	            <li class="b400040"><a onclick="load('hostMemberJoin');">호스트 멤버 가입관리</a></li>
-	            <li class="b400040"><a onclick="load('hostMemberRetire');">호스트 멤버 탈퇴관리</a></li>
+				<li class="b400040"><a onclick="load('join_retireMember');" class="ffffff">최근 가입회원 관리</a></li>
+				<li class="b400040"><a onclick="load('retireMemberRecuvery?Hcnt=3');" class="ffffff">탈퇴회원 복구</a></li>
+	            <li class="b400040"><a onclick="load('hostMemberJoin');" class="ffffff">호스트 멤버 가입관리</a></li>
+	            <li class="b400040"><a onclick="load('hostMemberRetire');" class="ffffff">호스트 멤버 탈퇴관리</a></li>
 					<li class="b400040 h50"></li>
 			</ul>
 </body>

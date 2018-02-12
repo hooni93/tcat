@@ -13,7 +13,7 @@
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h50"></li>
 				<li class="b400040"><a
-					href="#">스토어</a></li>
+					href="#" class="ffffff">스토어</a></li>
 			</ul>
 		</div>
 		</div>

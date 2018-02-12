@@ -40,6 +40,10 @@ public interface MoGuestService {
 	//스토어메인리스트
 	public void storeCategoryMainList(HttpServletRequest req,Model model);
 	
+	//안드로이드 
+	public int androidIdCheck(HttpServletRequest req,Model model);
+	public void androidVOresult(HttpServletRequest req,Model model);
+	
 	
 	
 }

@@ -13,7 +13,7 @@
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h50"></li>
 				<li class="b400040"><a
-					href="#">사진관리 게시판</a></li>
+					href="#" class="ffffff">사진관리 게시판</a></li>
 			</ul>
 		</div>
 		</div>

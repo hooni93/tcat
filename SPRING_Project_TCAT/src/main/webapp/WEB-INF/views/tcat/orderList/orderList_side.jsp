@@ -10,8 +10,8 @@
 	<ul class="nav nav-pills nav-stacked">
 		<li class="b400040 h20"></li>
 		<li class="b400040 h50 c"><span class="fs15 aaaaaa">전체 주문목록</span></li>
-		<li class="b400040"><a onclick="load('orderList');">공연상품</a></li>
-		<li class="b400040"><a onclick="load('orderList_store');">스토어 상품</a></li>
+		<li class="b400040"><a onclick="load('orderList');" class="ffffff">공연상품</a></li>
+		<li class="b400040"><a onclick="load('orderList_store');" class="ffffff">스토어 상품</a></li>
 	</ul>
 
 </body>

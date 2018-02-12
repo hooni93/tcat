@@ -131,7 +131,8 @@
 
 	<select id="hallList" resultType="spring.project.tcat.VO.TcatPerformanceVO">
    		<![CDATA[select * from ( select hall_id,hall_name,place_num,hall_step, province,city,postNum,address, rownum rNum 
-   		 from (select  h.hall_id hall_id,h.hall_name hall_name,h.hall_step hall_step,p.place_num place_num, p.province province,p.city city,p.postNum postNum,p.address address from hallInfo h join place p on h.place_num=p.place_num order by hall_id desc )
+   		 from (select  h.hall_id hall_id,h.hall_name hall_name,h.hall_step hall_step,p.place_num place_num, p.province province,
+   		 p.city city,p.postNum postNum,p.address address from hallInfo h join place p on h.place_num=p.place_num order by hall_id desc )
    		) WHERE rNum >= #{start} AND rNum <= #{end}  ]]>
 	</select>
 

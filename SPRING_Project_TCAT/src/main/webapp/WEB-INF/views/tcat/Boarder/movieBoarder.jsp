@@ -204,7 +204,7 @@ function MovieBoarderCommentWrite(member_id,notice_num,form,category){
 						<!-- 처음[◀◀] / 이전 블록[◀] -->
 						<c:if test="${startPage > pageBlock}">
 							<a onclick="load('movieBoarder');">[◀◀]</a>
-							<a onclick="load('movieBoarder?pageNum=${startPage - pageBlock}');">[◀]</a>
+							<a onclick="load('movieBoarder?pageNum=${startPage - pageBlock}&category=${categoryNum}');">[◀]</a>
 						</c:if>
 
 						<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -213,14 +213,14 @@ function MovieBoarderCommentWrite(member_id,notice_num,form,category){
 							</c:if>
 
 							<c:if test="${i != currentPage}">
-								<a onclick="load('movieBoarder?pageNum=${i}');">[${i}]</a>
+								<a onclick="load('movieBoarder?pageNum=${i}&category=${categoryNum}');">[${i}]</a>
 							</c:if>
 						</c:forEach>
 
 						<!-- 다음[▶] / 끝[▶▶] -->
 						<c:if test="${pageCount > endPage}">
-							<a onclick="load('movieBoarder?pageNum=${startPage + pageBlock}');">[▶]</a>
-							<a onclick="load('movieBoarder?pageNum=${pageCount}');">[▶▶]</a>
+							<a onclick="load('movieBoarder?pageNum=${startPage + pageBlock}&category=${categoryNum}');">[▶]</a>
+							<a onclick="load('movieBoarder?pageNum=${pageCount}&category=${categoryNum}');">[▶▶]</a>
 						</c:if>
 					</c:if></th>
 					</tr>

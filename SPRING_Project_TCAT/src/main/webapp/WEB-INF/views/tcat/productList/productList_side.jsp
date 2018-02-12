@@ -13,8 +13,8 @@
 	<ul class="nav nav-pills nav-stacked">
 		<li class="b400040 h20"></li>
 		<li class="b400040 h50 c"><span class="fs15 aaaaaa trgothic">전체 상품 목록</span></li>
-		<li class="b400040"><a onclick="load('productList?category=공연');">공연 상품</a></li>
-		<li class="b400040"><a onclick="load('productList_store?category=스토어');">스토어 상품</a></li>
+		<li class="b400040"><a onclick="load('productList?category=공연');" class="ffffff">공연 상품</a></li>
+		<li class="b400040"><a onclick="load('productList_store?category=스토어');" class="ffffff">스토어 상품</a></li>
 	</ul>
 </body>
 </html>

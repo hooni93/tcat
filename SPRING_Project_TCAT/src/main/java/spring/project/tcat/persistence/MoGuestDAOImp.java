@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.TcatBoardVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
@@ -298,7 +299,25 @@ public class MoGuestDAOImp implements MoGuestDAO{
 		return dtos;
 	}
 	
-	
+	//안드로이드 로그인
+	@Override
+	public int confirmIdPwdAN(Map<String,String> in) {
+		int cnt=0;
+		MoGuestDAO dao = Configuration.getMapper(MoGuestDAO.class);
+		System.out.println("dao :"+ in);
+		cnt=dao.confirmIdPwdAN(in);
+		System.out.println(cnt);
+		return cnt;
+	}
+
+	//마이페이지 정보 가져오기 
+	@Override
+	public MemberVO mypageAn(String id) {
+		MemberVO vo=null;
+		MoGuestDAO dao= Configuration.getMapper(MoGuestDAO.class);
+		vo=dao.mypageAn(id);
+		return vo;
+	}
 	
 	
 	

@@ -10,7 +10,7 @@
 
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h50"></li>
-				<li class="b400040"><a onclick="load('hostMain');">TCAT 현재상태</a></li>
+				<li class="b400040"><a onclick="load('hostMain');" class="ffffff">TCAT 현재상태</a></li>
 	           <!--  <li class="b400040"><a href="#">메인 화면설정</a></li> -->
 
 	            

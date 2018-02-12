@@ -9,7 +9,7 @@
 <body>
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h50"></li>
-	            <li class="b400040"><a onclick="load('levelMember');">회원혜택관리</a></li>
+	            <li class="b400040"><a onclick="load('levelMember');" class="ffffff">회원혜택관리</a></li>
 	            <li class="b400040 h50"></li>
 			</ul>
 </body>

@@ -12,11 +12,11 @@
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h50"></li>
 				<li class="b400040"><a
-					onclick="#">관람/상품 후기 게시판 관리</a></li>
+					onclick="#" class="aaaaaa b">관람/상품 후기 게시판 관리</a></li>
 					<li class="b400040"><a
-					onclick="load('commentManager?commentManagerCate=공연');">공연</a></li>
+					onclick="load('commentManager?commentManagerCate=공연');" class="ffffff">공연</a></li>
 					<li class="b400040"><a
-					onclick="load('commentManager?commentManagerCate=스토어');">스토어</a></li>
+					onclick="load('commentManager?commentManagerCate=스토어');" class="ffffff">스토어</a></li>
 			</ul>
 		</div>
 	</div>

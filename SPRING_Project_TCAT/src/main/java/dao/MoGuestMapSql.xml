@@ -161,7 +161,7 @@ select notice_title,writeDate,contents from notice where notice_div=1  order by 
  
 <!-- 우선순위별 상품진열 갯수 -->
  <select id="firstGradeListCnt" parameterType="String" resultType="int">
-    select count(*) from performanceinfo p join category c on p.catenum=c.catenum where c.mDev=#{_parameter}
+    select count(*) from performanceinfo p join category c on p.catenum=c.catenum where c.mDev=#{_parameter} AND per_step!='4' AND per_step!='3' 
  </select>
  <!-- 우선순위별 상품 진열리스트  -->
  <select id="firstGradeList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatPerformanceVO">
@@ -169,7 +169,7 @@ select notice_title,writeDate,contents from notice where notice_div=1  order by 
      per_id,perf_title,perf_Image,B_seatPrice,sDev,first_grade, rownum rNum
       from ( select 
         p.per_id per_id,p.perf_title perf_title,p.perf_Image perf_Image,p.B_seatPrice B_seatPrice,c.sDev sDev,p.first_grade first_grade
-         from performanceinfo p join category c on p.catenum=c.catenum where c.mDev=#{category} order by first_grade) )
+         from performanceinfo p join category c on p.catenum=c.catenum where c.mDev=#{category} AND per_step!='4' AND per_step!='3' order by first_grade) )
           where rNum>=#{start} AND rNum<=#{end}]]>
  </select>
  <!-- 상품순위 -->
@@ -199,19 +199,26 @@ select notice_title,writeDate,contents from notice where notice_div=1  order by 
  </select> 
  <!--  스토어 우선순위별 상품진열갯수 -->  
  <select id="firstGradeStoreListCnt" resultType="int">
- 	 select count(*) from perDisc
+ 	 select count(*) from perDisc WHERE disc_step!='3' AND disc_step!='4' 
  </select> 
   <!-- 스토어 우선 순위별 상품 진열 -->
  <select id="firstGradeStoreList" parameterType="java.util.Map" resultType="spring.project.tcat.VO.TcatDiscBuyVO">
            	<![CDATA[ select * from 
             (select disc_code,disc_title,disc_price,disc_image,first_grade,sDev,rownum rNum from 
             (select p.disc_code disc_code,p.disc_title disc_title,p.disc_price disc_price,p.disc_image disc_image,p.first_grade first_grade ,c.sDev sDev from perDisc p JOIN category c ON 
-             p.cateNum=c.cateNum order By first_grade) ) where rNum>=#{start} AND rNum<=#{end}]]>
+             p.cateNum=c.cateNum WHERE disc_step!='3' AND disc_step!='4' order By first_grade) ) where rNum>=#{start} AND rNum<=#{end}]]>
  
  </select> 
  
- 
- 
+ <!-- 안드로이드 로그인 -->
+  <select id="confirmIdPwdAN" parameterType="java.util.Map" resultType="int">
+ 		<![CDATA[ select count(*) from member WHERE member_id=#{member_id} AND member_pwd=#{member_pwd} ]]>
+ </select>
+
+  <select id="mypageAn" parameterType="String" resultType="spring.project.tcat.VO.MemberVO">
+ 	<![CDATA[ select * from member WHERE member_id=#{_parameter} ]]>
+ </select>   
+   
  
    </mapper>
    

@@ -10,7 +10,7 @@
 	<ul class="nav nav-pills nav-stacked">
 		<li class="b400040 h20"></li>
 		<li class="b400040 h50 c"><span class="fs15 aaaaaa">구매승인</span></li>
-		<li class="b400040"><a onclick="load('provalMain');">구매승인</a></li>
+		<li class="b400040"><a onclick="load('provalMain');" class="ffffff">구매승인</a></li>
 	
 	</ul>
 

@@ -10,8 +10,8 @@
 
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h50"></li>
-				<li class="b400040"><a onclick="load('registItem');">공연정보 추가</a></li>
-				<li class="b400040"><a onclick="load('storeItem');">스토어 재고 추가</a></li>
+				<li class="b400040"><a onclick="load('registItem');" class="ffffff">공연정보 추가</a></li>
+				<li class="b400040"><a onclick="load('storeItem');" class="ffffff">스토어 추가</a></li>
 			</ul>
 		
 		

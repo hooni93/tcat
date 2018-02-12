@@ -10,8 +10,8 @@
 	<ul class="nav nav-pills nav-stacked">
 		<li class="b400040 h20"></li>
 		<li class="b400040 h50 c"><span class="fs15 aaaaaa">공지사항 게시판</span></li>
-		<li class="b400040"><a onclick="load('noticeManager');">공지사항 게시판관리</a></li>
-		<li class="b400040"><a onclick="load('noticeManagerWrite');">공지사항 게시글작성</a></li>
+		<li class="b400040"><a onclick="load('noticeManager');" class="ffffff">공지사항 게시판관리</a></li>
+		<li class="b400040"><a onclick="load('noticeManagerWrite');" class="ffffff">공지사항 게시글작성</a></li>
 	</ul>
 </body>
 </html>

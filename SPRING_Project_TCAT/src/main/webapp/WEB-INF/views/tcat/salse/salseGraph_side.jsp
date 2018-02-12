@@ -9,10 +9,10 @@
 <body>
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h50"></li>
-				<li class="b400040"><a onclick="load('salseGraph');">매출집계</a></li>
-				<li class="b400040"><a onclick="load('daySalse');">일별매출</a></li>
-	            <li class="b400040"><a onclick="load('weekendSalse');">주별매출</a></li>
-	            <li class="b400040"><a onclick="load('monthSalse');">월별매출</a></li>
+				<li class="b400040"><a onclick="load('salseGraph');" class="ffffff">매출집계</a></li>
+				<li class="b400040"><a onclick="load('daySalse');" class="ffffff">일별매출</a></li>
+	            <li class="b400040"><a onclick="load('weekendSalse');" class="ffffff">주별매출</a></li>
+	            <li class="b400040"><a onclick="load('monthSalse');" class="ffffff">월별매출</a></li>
 				<li class="b400040 h50"></li>
 			</ul>
 </body>

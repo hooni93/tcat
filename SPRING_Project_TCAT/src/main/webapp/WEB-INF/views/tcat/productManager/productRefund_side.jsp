@@ -16,10 +16,10 @@
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h20"></li>
 				<li class="b400040 h50 c"><span class="fs15 aaaaaa">환불관리</span></li>
-				<li class="b400040"><a onclick="load('productRefund')">공연환불 관리</a></li>
-				<li class="b400040"><a onclick="load('productRefundS')">상품환불 관리</a></li>
+				<li class="b400040"><a onclick="load('productRefund')" class="ffffff">공연환불 관리</a></li>
+				<li class="b400040"><a onclick="load('productRefundS')" class="ffffff">상품환불 관리</a></li>
 				
-				<li class="b400040"><a onclick="load('productReturn')">반품 관리</a></li>
+				<li class="b400040"><a onclick="load('productReturn')" class="ffffff">반품 관리</a></li>
 			</ul>
 		</div>
 	</div>

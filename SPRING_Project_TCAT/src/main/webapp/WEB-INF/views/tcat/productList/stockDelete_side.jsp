@@ -18,8 +18,8 @@
 				<li class="b400040 h50"></li>
 				
 				
-	            <li class="b400040"><a onclick="productGet('stockDelete_perf')">공연상품삭제</a></li>
-	            <li class="b400040"><a onclick="productGet('stockDelete_store')">스토어상품삭제</a></li>
+	            <li class="b400040"><a onclick="productGet('stockDelete_perf')" class="ffffff">공연상품삭제</a></li>
+	            <li class="b400040"><a onclick="productGet('stockDelete_store')" class="ffffff">스토어상품삭제</a></li>
 			</ul>
 		</div>
 			<div class="col-md-10 bffffff" id="result"></div>

@@ -16,8 +16,8 @@
 		<li class="b400040"><a onclick="load('stockOutOf_drama');">연극품절상품관리</a></li>
 		<li class="b400040"><a onclick="load('stockOutOf_classic');">클래식품절상품관리</a></li> -->
 		
-		<li class="b400040"><a onclick="load('stockOutOf_musical');">공연품절상품관리</a></li>
-        <li class="b400040"><a onclick="load('stockOutOf_store');">스토어품절상품관리</a></li>
+		<li class="b400040"><a onclick="load('stockOutOf_musical');" class="ffffff">공연품절상품관리</a></li>
+        <li class="b400040"><a onclick="load('stockOutOf_store');" class="ffffff">스토어품절상품관리</a></li>
 		<li class="b400040 h50"></li>
 		
 		<!-- <li class="b400040"><a onclick="load('stockOutOf_musical');">뮤지컬판매중단해제</a></li>

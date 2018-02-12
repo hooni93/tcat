@@ -10,11 +10,11 @@
 	<ul class="nav nav-pills nav-stacked">
 		<li class="b400040 h20"></li>
 		<li class="b400040 h50 c"><span class="fs15 aaaaaa">상품분석</span></li>
-		<li class="b400040"><a onclick="perf_load('productRank_perf');  store_load('productRank_store');">판매상품순위</a></li>
-		<li class="b400040"><a onclick="perf_load('categoryRank_perf'); store_load('categoryRank_store');">카테고리순위</a></li>
-		<li class="b400040"><a onclick="perf_load('returnRank_perf'); store_load('returnRank_store');">취소/반품순위</a></li>
-		<li class="b400040"><a onclick="perf_load('cartRank'); store_load('cartRank_table');">장바구니 분석</a></li>
-		<li class="b400040"><a onclick="perf_load('wishListRank_perf'); store_load('wishListRank_store');">위시리스트 분석</a></li>
+		<li class="b400040"><a onclick="perf_load('productRank_perf');  store_load('productRank_store');" class="ffffff">판매상품순위</a></li>
+		<li class="b400040"><a onclick="perf_load('categoryRank_perf'); store_load('categoryRank_store');" class="ffffff">카테고리순위</a></li>
+		<li class="b400040"><a onclick="perf_load('returnRank_perf'); store_load('returnRank_store');" class="ffffff">취소/반품순위</a></li>
+		<li class="b400040"><a onclick="perf_load('cartRank'); store_load('cartRank_table');" class="ffffff">장바구니 분석</a></li>
+		<li class="b400040"><a onclick="perf_load('wishListRank_perf'); store_load('wishListRank_store');" class="ffffff">위시리스트 분석</a></li>
 	</ul>
 
 </body>

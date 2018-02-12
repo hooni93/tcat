@@ -10,10 +10,10 @@
 
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h50"></li>
-				<li class="b400040"><a onclick="load('hallList');">공연장 리스트</a></li>
-				<li class="b400040"><a onclick="load('hallAdd');">공연장 등록</a></li>
-	            <li class="b400040"><a onclick="load('hallModify');">공연장 수정</a></li>
-	            <li class="b400040"><a onclick="load('hallDelete');">공연장 삭제</a></li>
+				<li class="b400040"><a onclick="load('hallList');" class="ffffff">공연장 리스트</a></li>
+				<li class="b400040"><a onclick="load('hallAdd');" class="ffffff">공연장 등록</a></li>
+	            <li class="b400040"><a onclick="load('hallModify');" class="ffffff">공연장 수정</a></li>
+	            <li class="b400040"><a onclick="load('hallDelete');" class="ffffff">공연장 삭제</a></li>
 			</ul>
 
 

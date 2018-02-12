@@ -9,11 +9,11 @@
 <body>
 	<ul class="nav nav-pills nav-stacked">
 		<li class="b400040 h50"></li>
-		<li class="b400040"><a onclick="load('stockDelete_musical');">뮤지컬상품삭제</a></li>
-		<li class="b400040"><a onclick="load('stockDelete_concert');">콘서트상품삭제</a></li>
-		<li class="b400040"><a onclick="load('stockDelete_drama');">연극상품삭제</a></li>
-		<li class="b400040"><a onclick="load('stockDelete_classic');">클래식상품삭제</a></li>
-        <li class="b400040"><a onclick="load('stockDelete_store');">스토어상품삭제</a></li>
+		<li class="b400040"><a onclick="load('stockDelete_musical');" class="ffffff">뮤지컬상품삭제</a></li>
+		<li class="b400040"><a onclick="load('stockDelete_concert');" class="ffffff">콘서트상품삭제</a></li>
+		<li class="b400040"><a onclick="load('stockDelete_drama');" class="ffffff">연극상품삭제</a></li>
+		<li class="b400040"><a onclick="load('stockDelete_classic');" class="ffffff">클래식상품삭제</a></li>
+        <li class="b400040"><a onclick="load('stockDelete_store');" class="ffffff">스토어상품삭제</a></li>
 		<li class="b400040 h50"></li>
 	</ul>	
 </body>

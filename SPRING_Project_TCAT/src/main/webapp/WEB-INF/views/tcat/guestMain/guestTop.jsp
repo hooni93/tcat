@@ -257,26 +257,23 @@
 		</div>
 
 		<div class="row  bff3333">
-			<div class="col-md-1"></div>
-			<div class="col-md-1">
-
+			<div class="col-md-2 col-lg-3">
+				<div class="col-lg-2"></div>
 				<div class="container1">
-					<!-- Brand and toggle get grouped for better mobile display -->
-
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed"
+					<div class="navbar-header ">
+							<a onclick="load('guestMain');"><img alt="main" src="${image}main/webmainICON.PNG" 
+								onmouseover="this.src='${image}main/inWebmainICON.PNG'"
+								onmouseout="this.src='${image}main/webmainICON.PNG'"	
+							class="h45 w110 m2 ml30"></a>
+						<button type="button" id="headermenu" class="btn btn-navbar collapsed floatR w60 m10 "
 							data-toggle="collapse" data-target="#navbar-collapse-1">
-							<span class="sr-only">Toggle navigation</span> <span
-								class="icon-bar"></span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span>
+							<span class="glyphicon glyphicon-list"></span>
 						</button>
-
-						<a class="navbar-brand b fontAchive ffff80"
-							onclick="load('guestMain');">TCAT</a>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-7">
+			
+			<div class="col-md-7 col-lg-6">
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse pt17" id="navbar-collapse-1">
 

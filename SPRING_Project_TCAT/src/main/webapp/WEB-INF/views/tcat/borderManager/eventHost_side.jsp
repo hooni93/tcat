@@ -13,7 +13,7 @@
 	<ul class="nav nav-pills nav-stacked">
 		<li class="b400040 h20"></li>
 		<li class="b400040 h50 c"><span class="fs15 aaaaaa">이벤트 게시판</span></li>
-		<li class="b400040"><a onclick="load('eventHost');">이벤트 관리</a></li>
+		<li class="b400040"><a onclick="load('eventHost');" class="ffffff">이벤트 관리</a></li>
 		
 	</ul>
 </body>

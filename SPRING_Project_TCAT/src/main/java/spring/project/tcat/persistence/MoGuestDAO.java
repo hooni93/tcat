@@ -3,6 +3,7 @@ package spring.project.tcat.persistence;
 import java.util.ArrayList;
 import java.util.Map;
 
+import spring.project.tcat.VO.MemberVO;
 import spring.project.tcat.VO.TcatBoardVO;
 import spring.project.tcat.VO.TcatDiscBuyVO;
 import spring.project.tcat.VO.TcatPerformanceVO;
@@ -65,6 +66,9 @@ public interface MoGuestDAO {
 	//스토어 우선 순위별 상품 진열
 		public ArrayList<TcatDiscBuyVO> firstGradeStoreList(Map<String,Object> map);
 		
+		//안드로이드 로그인
+		public int confirmIdPwdAN(Map<String,String> in);
 		
-		
+		//마이페이지 정보 가져오기 
+		public MemberVO mypageAn(String id);
 }

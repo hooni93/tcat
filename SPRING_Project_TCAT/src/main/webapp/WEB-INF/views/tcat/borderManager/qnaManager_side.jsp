@@ -10,7 +10,7 @@
 	<ul class="nav nav-pills nav-stacked">
 		<li class="b400040 h20"></li>
 		<li class="b400040 h50 c"><span class="fs15 aaaaaa">Q&A게시판 관리</span></li>
-		<li class="b400040"><a onclick="load('qnaManager');">Q&A게시판관리</a></li>
+		<li class="b400040"><a onclick="load('qnaManager');" class="ffffff">Q&A게시판관리</a></li>
 		
 	</ul>
 </body>

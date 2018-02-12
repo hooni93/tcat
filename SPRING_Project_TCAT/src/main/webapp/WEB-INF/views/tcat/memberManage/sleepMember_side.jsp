@@ -9,9 +9,9 @@
 <body>
 			<ul class="nav nav-pills nav-stacked">
 				<li class="b400040 h50"></li>
-				<li class="b400040"><a onclick="load('sleepMember?Hcnt=1');">휴면회원 등록</a></li>
-	            <li class="b400040"><a onclick="load('sleepMemberCancer?Hcnt=2');">휴면회원 해제</a></li>
-	            <li class="b400040"><a onclick="load('sleepMemberRetired?Hcnt=2');">휴면회원 탈퇴</a></li>
+				<li class="b400040"><a onclick="load('sleepMember?Hcnt=1');" class="ffffff">휴면회원 등록</a></li>
+	            <li class="b400040"><a onclick="load('sleepMemberCancer?Hcnt=2');" class="ffffff">휴면회원 해제</a></li>
+	            <li class="b400040"><a onclick="load('sleepMemberRetired?Hcnt=2');" class="ffffff">휴면회원 탈퇴</a></li>
 	            <li class="b400040 h50"></li>
 			</ul>
 </body>

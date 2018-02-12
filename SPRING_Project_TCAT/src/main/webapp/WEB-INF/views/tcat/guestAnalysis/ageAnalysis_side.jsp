@@ -10,10 +10,10 @@
 	<ul class="nav nav-pills nav-stacked">
 		<li class="b400040 h20"></li>
 		<li class="b400040 h50 c"><span class="fs15 aaaaaa">연령/성별별 분석</span></li>
-		<li class="b400040"><a onclick="load('ageAnalysis');">연령별 예매순위</a></li>
-		<li class="b400040"><a onclick="load('ageAnalysis_store');">연령별 판매순위</a></li>
-		<li class="b400040"><a onclick="load('genderAnalysis');">성별별 예매순위</a></li>
-		<li class="b400040"><a onclick="load('genderAnalysis_store');">성별별 판매순위</a></li>
+		<li class="b400040"><a onclick="load('ageAnalysis');" class="ffffff">연령별 예매순위</a></li>
+		<li class="b400040"><a onclick="load('ageAnalysis_store');" class="ffffff">연령별 판매순위</a></li>
+		<li class="b400040"><a onclick="load('genderAnalysis');" class="ffffff">성별별 예매순위</a></li>
+		<li class="b400040"><a onclick="load('genderAnalysis_store');" class="ffffff">성별별 판매순위</a></li>
 	</ul>
 
 </body>

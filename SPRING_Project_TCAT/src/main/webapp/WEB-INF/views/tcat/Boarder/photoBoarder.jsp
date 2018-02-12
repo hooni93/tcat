@@ -199,7 +199,7 @@ function photoBoarderCommentWrite(member_id,notice_num,form,category){
 						<!-- 처음[◀◀] / 이전 블록[◀] -->
 						<c:if test="${startPage > pageBlock}">
 							<a onclick="load('photoBoarder');">[◀◀]</a>
-							<a onclick="load('photoBoarder?pageNum=${startPage - pageBlock}');">[◀]</a>
+							<a onclick="load('photoBoarder?pageNum=${startPage - pageBlock}&category=${categoryNum}');">[◀]</a>
 						</c:if>
 
 						<c:forEach var="i" begin="${startPage}" end="${endPage}">
@@ -208,14 +208,14 @@ function photoBoarderCommentWrite(member_id,notice_num,form,category){
 							</c:if>
 
 							<c:if test="${i != currentPage}">
-								<a onclick="load('photoBoarder?pageNum=${i}');">[${i}]</a>
+								<a onclick="load('photoBoarder?pageNum=${i}&category=${categoryNum}');">[${i}]</a>
 							</c:if>
 						</c:forEach>
 
 						<!-- 다음[▶] / 끝[▶▶] -->
 						<c:if test="${pageCount > endPage}">
-							<a onclick="load('photoBoarder?pageNum=${startPage + pageBlock}');">[▶]</a>
-							<a onclick="load('photoBoarder?pageNum=${pageCount}');">[▶▶]</a>
+							<a onclick="load('photoBoarder?pageNum=${startPage + pageBlock}&category=${categoryNum}');">[▶]</a>
+							<a onclick="load('photoBoarder?pageNum=${pageCount}&category=${categoryNum}');">[▶▶]</a>
 						</c:if>
 					</c:if></th>
 					</tr>

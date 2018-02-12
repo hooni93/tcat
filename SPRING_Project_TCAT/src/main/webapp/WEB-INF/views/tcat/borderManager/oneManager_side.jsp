@@ -10,7 +10,7 @@
 	<ul class="nav nav-pills nav-stacked">
 		<li class="b400040 h20"></li>
 		<li class="b400040 h50 c"><span class="fs15 aaaaaa">1:1게시판 관리</span></li>
-		<li class="b400040"><a onclick="load('oneManager');">1:1게시판관리</a></li>
+		<li class="b400040"><a onclick="load('oneManager');" class="ffffff">1:1게시판관리</a></li>
 		
 	</ul>
 </body>
